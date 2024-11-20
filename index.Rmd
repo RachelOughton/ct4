@@ -78,23 +78,19 @@ library(RColorBrewer)
 
 # Welcome to Clinical Trials 4H! {-}
 
-This page contains the notes for Clinical Trials IV. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
+This page contains the notes for Clinical Trials IV 2024-25. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
 
-In case you're reading the PDF, the notes are best viewed in HTML (the link is [https://racheloughton.github.io/clinicaltrials/](https://racheloughton.github.io/clinicaltrials/)). The PDF will be up-to-date, but the formatting is designed for HTML.
+In case you're reading the PDF, the notes are best viewed in HTML (the link is [https://racheloughton.github.io/ct4/](https://racheloughton.github.io/ct4/)). The PDF will be up-to-date, but the formatting is designed for HTML.
 
 ## Practical details {-}
 
 ### Lectures {-}
 
-Our lectures are 12 noon on Mondays and 9am on Wednesdays, all in ES231. This is in the Earth Sciences / Arthur Holmes building, which is behind (almost surrounding) the Calman Learning Centre. The door of this room is actually labelled 'Teaching Room 4'.
+Our lectures are 9am on Wednesdays in W007 (this is the Appleby Building, between Pysics and the main library), and 3pm on Fridays in PCL 048 (this is in the ground floor of the Palatine Centre). 
 
 ### Computer classes {-}
 
-We have two 2-hour practicals for this module. They are 11am - 1pm on the Fridays of weeks 14 and 19 (2nd February and 8th March). These classes are in RH-0003. This is Rowan House, which is in Upper Mountjoy, across the pond from the MCS building. 
-
-```{r}
-knitr::include_graphics("images/rowanhouse_map.png")
-```
+We have four computer practicals for this module. They are 1-2pm on the Mondays of weeks 13, 15, 17 and 19. These classes are in MCS 3098.
 
 ### Office Hour {-}
 
@@ -102,13 +98,15 @@ The office hour will be every Monday, 3-4pm, in MCS 2091 (this is a meeting room
 
 ### Assessment {-}
 
-This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February, the second on Wednesday 13th March.
+This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February, the second on Wednesday 19th March.
 
 There will also be some formative assignments throughout the course. More details on these to follow.
 
 ### Books {-}
 
 The main reference for the first half of the course is @matthews2006introduction. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are @hulley2013designing, @hayes2017cluster. You shouldn't need to use any of these books, but of course you're welcome to if you want to read further.
+
+I will share links along the way for relevant resources like podcast episodes and articles.
 
 ## What to expect from this module {-}
 
@@ -127,7 +125,7 @@ This means that your experience of it might be different from what you're used t
 
 Because we will be covering quite a lot of different areas within statistics, there may be some things that you haven't seen before (or can't remember very well). I will try my best to explain them as clearly as I can, but there isn't time to go into the nuts and bolts of everything we come across. Therefore, if you do feel a bit rusty on some area, you may need to read up on that a bit, so that you're happy with it. I am very happy to suggest resources from time to time, and you're welcome to come to the office hour to talk about such things.
 
-This is the first year this course is running, and so I would also really appreciate your feedback. I may not be able to address everything (or I may only be able to implement things for following years), but if I can act on it quickly then I will!
+This course is in its infancy, and so I would also really appreciate your feedback. I may not be able to address everything (or I may only be able to implement things for following years), but if I can act on it quickly then I will!
   
 
 
