@@ -1,0 +1,759 @@
+---
+always_allow_html: true
+---
+
+
+# Analyzing RCT data {#rct-analysis}
+
+We're now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation $\tau$ to denote the treatment effect.
+
+In this chapter we'll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we'll go on to look at other types of data.
+
+::: {.example #captopril1} 
+To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
+
+The baseline and outcome blood pressure measurements (in mmHg) are shown in Table \@ref(tab:captoprildata). We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. @hommel1986effect say that the patients were 'randomly allocated' to their group.
+
+
+```{r captoprildata}
+df_hommel = data.frame(
+  patient = c(1:9, 1:7),
+  baseline = c(147, 129, 158, 164, 134, 155, 151, 141, 153, 133, 129, 152, 161, 154, 141, 156),
+  outcome = c(137, 120, 141, 137, 140, 144, 134, 123, 142, 139, 134, 136, 151, 147, 137, 149),
+  arm = c(rep("Captopril", 9), rep("Placebo", 7))
+)
+df_hommel$arm = as.factor(df_hommel$arm)
+df_hommel_print = df_hommel
+names(df_hommel_print) = c("Patient (ID)", "Baseline (B)", "Outcome at 1 week (X)", "Trial Arm")
+
+knitr::kable(df_hommel_print,  
+             booktabs = TRUE, 
+             caption = "Data for the Captopril trial from @hommel1986effect.")
+
+```
+
+
+This is very small dataset, and so in that respect it is quite unusual, but its structure is similar to many other trials.
+
+:::
+  
+  We will build up from the simplest type of analysis to some more complicated / sophisticated approaches.
+
+## Confidence intervals and P-values {#ttest}
+
+Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (often referred to as $X$) between the groups.
+
+::: {.example #captopril2}
+Summary statistics of the outcome for each group are shown below.
+
+```{r}
+df_hommel1 = data.frame(
+  Sam = c(9,7),
+  Mean = c(
+    mean(df_hommel$outcome[df_hommel$arm=="Captopril"]),
+    mean(df_hommel$outcome[df_hommel$arm=="Placebo"])),
+  SD = c(
+    sd(df_hommel$outcome[df_hommel$arm=="Captopril"]),
+    sd(df_hommel$outcome[df_hommel$arm=="Placebo"]))
+)
+df_hommel1$SEmean = df_hommel1$SD / sqrt(df_hommel1$Sam) 
+df_hommel1_print=  round(df_hommel1,2)
+names(df_hommel1_print) = c("Sample Size", "Mean (mmHg)", "SD (mmHg)", "SE of mean (mmHg)")
+row.names(df_hommel1_print) = c("Captopril", "Placebo")
+
+knitr::kable(df_hommel1_print, caption = "Summary statistics for each group.")
+
+```
+
+We see that the difference in mean outcome (systolic blood pressure) between the two groups is $141.86 - 135.33 = 6.53 \text{mmHg}$. Clearly overall there has been some reduction in systolic blood pressure for those in the Captopril arm, but how statistically sound is this as evidence? It could be that really (for the hypothetical population) there is no reduction, and we have just been 'lucky'. 
+
+The variances within the two groups are fairly close, so we can use the pooled estimate of standard deviation:
+  
+$$
+  s_p = \sqrt{\frac{\sum\limits_{i=1}^N\left(n_i-1\right)s_i^2}{\sum\limits_{i-1}^N\left(n_i-1\right)}}.
+$$
+  
+  In our case 
+
+$$ 
+  \begin{aligned}
+s_p&= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
+& = 7.82\text{ mmHg.}
+\end{aligned}
+$$
+  This enables us to do an independent two-sample $t$-test, and we can find the $t$ statistic
+
+$$
+  \begin{aligned}
+t & = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
+& = \frac{6.53}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \\
+& = 1.65.
+\end{aligned}
+$$
+Note that here the placebo group is group $C$, and the Captopril group is group $T$.
+
+  Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a $t$ distribution with 14 degrees of freedom ($n_i-1$ for each group). 
+
+```{r ttestcapt, fig.cap = "The distribution $t_{14}$, with $t=1.65$ shown by the dashed line and the 'more extreme' areas shaded. "}
+x1 = seq(-4, -1.65, by=0.01)
+px1 = dt(x1, df=14)
+x2 = seq(1.65,4, by=0.01)
+px2 = dt(x2, df=14)
+
+ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
+  stat_function(fun=dt, args=list(df=14))+
+  geom_ribbon(data=data.frame(x=x1, y=px1), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + 
+  geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) +xlab("Test statistic (t)") + ylab("Density") +
+  geom_vline(xintercept = 1.65, lty=2) + theme_bw()
+```
+
+The dashed line in Figure \@ref(fig:ttestcapt) is at $t=1.65$, and the red shaded areas show anywhere 'at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by 
+```{r echo=T}
+2*(1-pt(1.65, df=14))
+```
+This is the value we know as 'the P value'. We see that in this case our results are not statistically significant (at the 0.10 level), under this model.
+:::
+  
+### What do we do with this outcome?
+  
+  The outcome of this Captopril study is in some ways the worst case scenario. The difference in means is large enough to be compelling, but our dataset is too small for it to be statistically significant, and so we can't confidently conclude that Captopril has any effect on blood pressure. However, we also can't say that there is no effect. This is exactly the sort of scenario we hoped to avoid when planning our study.
+
+One way to reframe the question is to consider the range of treatment effects that are compatible with our trial data. That is, we find the set
+
+$$\left\lbrace \tau \mid \frac{\lvert \bar{x}_C - \bar{x}_T - \tau \rvert}{s\sqrt{n_C^{-1} + n_T^{-1}}} \leq t_{n_C+n_T-2;\,0.975} \right\rbrace, $$
+which contains all possible values of treatment effect $\tau$ that are compatible with our data. That is, suppose the true treatment effect is  $\tau^*$, and we test the hypothesis that $\tau = \tau^*$. For all values of $\tau^*$ inside this range, our data are not sufficiently unlikely to reject the hypothesis at the 0.05 level. However, for all values of $\tau^*$ outside this range, our data are sufficiently unlikely to reject that hypothesis. We can rearrange this to give a 95% confidence interval for $\tau$,
+
+$$\left\lbrace \tau \mid \bar{x}_C - \bar{x}_T - t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}} \leq \tau \leq \bar{x}_C - \bar{x}_T + t_{n_C+n_T-2;\,0.975}\,s\sqrt{n_C^{-1} + n_T^{-1}}  \right\rbrace $$
+
+::: {.example}
+
+Continuing our example, we have
+
+$$\left\lbrace \tau \mid \frac{\lvert 6.53 - \tau \rvert}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \leq t_{14;0.975} = 2.145 \right\rbrace $$
+  
+  Here, $t_{14;0.975} = 2.145$ is the $t$-value for a significance level of $0.05$, so if we were working to a different significance level we would change this.
+
+Rearranging as above, this works out to be the interval
+
+$$
+-1.92 \leq  \tau \leq 14.98.
+$$
+
+Notice that zero is in this interval, consistent with the fact that we failed to reject the null hypothesis.
+:::
+
+Some things to note
+
+  * We can compute this confidence interval whether or not we failed to reject the null hypothesis that $\tau=0$, and for significance levels other than 0.05.
+  * In most cases, reporting the confidence interval is much more informative than simply reporting the $P$-value. In our Captopril example, we found that a negative treatment effect (ie. Captopril reducing blood pressure less than the placebo) of more than 2 mmHg was very unlikely, whereas a positive effective (Captopril reducing blood pressure) of up to 15 mmHg was plausible. If Captopril were inexpensive and had very limited side effects (sadly neither of which is true) it may still be an attractive drug.
+  * These confidence intervals are exactly the same as you have learned before, but we emphasise them because they are very informative in randomised controlled trials (but not so often used!).
+
+At the post trial stage, when we have data, the confidence interval is the most useful link to the concept of *power*, which we thought about at the planning stage. Remember that the power function is defined as 
+
+$$\psi \left(\tau\right) = P\left(\text{Reject }H_0\mid \tau\neq 0\right),$$ that is, the probability that we successfully reject $H_0$ (that $\tau=0$) given that there is a non-zero treatment effect $\tau\neq 0$. This was calculated in terms of the theoretical model of the trial, and in terms of some minimum detectable effect size $\tau_M$ that we wanted to be able to correctly detect with probability $1-\beta$ (the power). Sometimes people attempt to re-calculate the power after the trial, to detect whether the trial was underpowered. However, now we have actual data. If we failed to reject $H_0$ and $\tau_M$ is in the confidence interval for $\tau$, then that is a good indication that our trial was indeed underpowered.
+
+## Using baseline values {#baseline}
+
+In our example above, our primary outcome variable $X$ was the systolic blood pressure of each participant at the end of the intervention period. However, we see in Table \@ref(tab:captoprildata) that we also have *baseline* measurements: measurements of systolic blood pressure for each patient from before the intervention period. Baseline measurements are useful primarily for two reasons:
+
+  1. They can be used to assess the balance of the design. 
+  2. They can be used in the analysis.
+  
+We will demonstrate these by returning to our Captopril example.
+
+::: {.example}
+
+Firstly, we use the baseline systolic blood pressure to assess balance. The placebo group has a mean of 146.6 mmHg and an SD of 12.3 mmHg, whereas the Captopril group has mean 148.0 mmHg, SD 11.4 mmHg. While these aren't identical, they are sufficiently similar not to suspect any systematic imbalance. In a study this small there is likely to be some difference.
+
+Secondly, since we are interested in whether the use of Captopril has reduced blood pressure for each individual, and these individuals had different baseline values, it makes sense to compare not just the outcome but the difference from baseline to outcome for each individual. We can see individual data in Table \@ref(tab:captoprildiff) and summary statistics in Table \@ref(tab:captoprildiffsumm).
+
+```{r captoprildiff}
+df_hommel_diff = df_hommel
+df_hommel_diff$diff = df_hommel_diff$outcome - df_hommel_diff$baseline
+df_hommel_diff_print = df_hommel_diff
+names(df_hommel_diff_print) = c("Patient (ID)", "Baseline (B)", "Outcome at 1 week (X)", "Trial Arm", "Difference")
+
+knitr::kable(df_hommel_diff_print, caption = "Data for the Captopril trial, with differences shown.")
+```
+
+```{r captoprildiffsumm}
+df_hommel2 = data.frame(
+  Sam = c(9,7),
+  Mean = c(
+    mean(df_hommel_diff$diff[df_hommel_diff$arm=="Captopril"]),
+    mean(df_hommel_diff$diff[df_hommel_diff$arm=="Placebo"])),
+  SD = c(
+    sd(df_hommel_diff$diff[df_hommel_diff$arm=="Captopril"]),
+    sd(df_hommel_diff$diff[df_hommel_diff$arm=="Placebo"]))
+)
+df_hommel2$SEmean = df_hommel2$SD / sqrt(df_hommel2$Sam) 
+df_hommel2_print=  round(df_hommel2,2)
+names(df_hommel2_print) = c("Sample Size", "Mean (mmHg)", "SD (mmHg)", "SE of mean (mmHg)")
+row.names(df_hommel2_print) = c("Captopril", "Placebo")
+
+knitr::kable(df_hommel2_print, caption = "Summary statistics for each group.")
+```
+
+Now we can perform our test as before, in which case we find
+
+$$ t = \frac{-4.71 - (-12.67)}{8.54\sqrt{\frac{1}{7}+\frac{1}{9}}} = 1.850 $$
+where 8.54 is the pooled standard deviation (as before). Under the null distribution of no difference, this has a $t$-distribution with 14 degrees of freedom, and so we have a $P$-value of 0.086. Our 0.95 confidence interval is 
+
+$$ -4.71 - (-12.67) \pm t_{14;\,0.975}\times 8.54\sqrt{\frac{1}{7}+\frac{1}{9}} = \left[-1.3,\,17.2\right].$$
+We see that taking into account the baseline values in this way has slightly reduced the $P$-value and shifted the confidence interval slightly higher. Though at the $\alpha = 0.05$ level we still don't have significance.
+:::
+
+We will now look into why the confidence interval and $P$-value changed in this way, before going on to another way of taking into account the baseline value.
+
+Let's label the baseline measurement for each group $B_C$ and $B_T$, and the outcome measurements $X_C,\,X_T$, where we will take group $C$ to be the placebo/control group and group $T$ to be the treatment group. Because all participants have been randomised from the same population, we have 
+
+$$\operatorname{E}\left(B_C\right) = \operatorname{E}\left(B_T\right) = \mu_B.$$
+Assuming some treatment effect $\tau$ (which could still be zero) we have
+
+$$
+\begin{aligned}
+\operatorname{E}\left(X_C\right) & = \mu\\
+\operatorname{E}\left(X_T\right) & = \mu + \tau.
+\end{aligned}
+$$
+Usually we will assume that
+
+$$\operatorname{Var}\left(X_C\right) = \operatorname{Var}\left(X_T\right) = \operatorname{Var}\left(B_C\right) = \operatorname{Var}\left(B_T\right) = \sigma^2,$$
+and this is generally fairly reasonable in practice. 
+
+Notice that for the two analyses we have performed so far (comparing outcomes and comparing differences) we have
+
+$$
+\begin{aligned}
+\operatorname{E}\left(X_T\right) - \operatorname{E}\left(X_C\right) & = \left(\mu + \tau\right) - \mu = \tau\\
+\operatorname{E}\left(X_T - B_T\right) - \operatorname{E}\left(X_C - B_C\right) & = \left(\mu - \mu_B + \tau\right) - \left(\mu - \mu_B\right) = \tau,
+\end{aligned}
+$$
+that is, both are unbiased estimators of $\tau$.
+
+However, whereas the first is based on data with variance $\sigma^2$, the second has
+
+$$
+\begin{aligned}
+\operatorname{Var}\left(X_T-B_T\right) & = \operatorname{Var}\left(X_T\right) + \operatorname{Var}\left(B_T\right) - 2\operatorname{cov}\left(X_T,B_T\right)\\
+& = \sigma^2 + \sigma^2 - 2\rho\sigma^2 \\
+& = 2\sigma^2\left(1-\rho\right),
+\end{aligned}
+$$
+where $\rho$ is the true correlation between $X$ and $B$, and is assumed to be the same in either group. Similarly, 
+
+$$\operatorname{var}\left(X_C-B_C\right) = 2\sigma^2\left(1-\rho\right).$$
+Using this to work out the variance of the estimator $\hat{\tau}$ we find that for comparing means, assuming two equally sized groups of size $N$, we have
+
+$$\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left(\bar{x}_T - \bar{x}_C\right) = \frac{2\sigma^2}{N}.$$
+
+whereas for comparing differences from baseline
+
+$$\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left[\left(\overline{X_T-B_T}\right) - \left(\overline{X_C - B_C}\right)\right] = 2\left(1-\rho\right)\left(\frac{2\sigma^2}{N}\right).$$
+
+
+
+Therefore, if $\frac{1}{2}<\rho\leq 1$ there will be a smaller variance when comparing differences. However, if $0\leq\rho<\frac{1}{2}$, the variance will be smaller when comparing outcome variables.
+
+Intuitively, this seems reasonable: if the correlation between baseline and outcome measurements is very strong, then we can remove some of the variability between participants by taking into account their baseline measurement. However, if the correlation is weak, then by including the baseline in the analysis we are essentially just introducing noise.
+
+For our Captopril example, the sample correlation between baseline and outcome is 0.63 in the Captopril group and 0.80 in the Placebo group. This fits with the $P$-value having reduced slightly.
+
+### A dodgy way to use baseline variables 
+
+Sometimes the analysis performed on a dataset is rather spurious, but it isn't always immediately obvious why. We'll look at one example now, because it is done sometimes.
+
+This approach involves looking at each group separately, and determining whether there has been a significant change in the outcome variable (note that this only 'works' if $\mu_B = \mu$).
+
+For example, with our Captopril data, we could perform a paired $t$-test on the difference between baseline $B$ and outcome $X$ for each patient, for each group.
+
+If we do this, we find the summary statistics in Table \@ref(tab:ttestdodge).
+
+```{r ttestdodge}
+df_dodge = data.frame(
+  t_stat = c(4.23, 1.58),
+  df = c(8,6),
+  p_value = c(0.003, 0.17)
+  )
+row.names(df_dodge) = c("Captopril", "Placebo")
+names(df_dodge) = c("T statistic", "Deg of freedom", "P-value")
+
+knitr::kable(df_dodge, caption = "Summary statistics for the dodgy analysis")
+
+```
+
+From this we see that there is strong evidence for a change in blood pressure for the Captopril patients (group $T$), which isn't surprising, and no such evidence for the placebo patients. Can we therefore conclude that Captopril is significantly better than the placebo? No! The analysis is flawed:
+
+  * The $p$-value of 0.17 in the control group doesn't show that the null hypothesis (no treatment effect for the control group) is true, just that we can't reject the null hypothesis. It is quite possible that there is a difference in the control group, and that numerically it could even be comparable to that in the treatment group, so although we can say that there is a significant reduction in blood pressure for the captopril group, we can't conclude that Captopril is better than the placebo.
+  * Having set up the experiment as a randomised controlled trial, with a view to comparing the two groups, it seems strange to then deal with them separately.
+
+
+## Analysis of covariance (ANCOVA)
+
+In the previous section we based our analysis on the baseline values being statistically identical draws from the underlying distribution, and therefore having the same expectation and variance. 
+
+However, although this is theoretically true, in real life trials there will be some imbalance in the baseline measurements for the different treatment arms. We can see this in our Captopril example, in Figure \@ref(fig:hommel).
+
+
+```{r hommel, echo=F, fig.cap = "Baseline measurements from the Captopril trial."}
+
+ggplot(data = df_hommel, aes(x=baseline, fill = arm))+ geom_boxplot() + 
+  ylab("Group")+ xlab("Baseline blood pressure (mmHg)")+
+  theme_bw() + scale_y_continuous(breaks=c(-0.2,0.2), labels = c("Captopril", "Placebo")) +
+  theme(legend.position = "none", aspect.ratio=0.25)
+
+```
+
+The baseline measurements are not identical in each group. Indeed, we saw earlier that the means differ by 1.4 mmHg. Although this isn't a clinically significant difference, or a large enough difference to make us doubt the randomisation procedure, it is still a difference. 
+
+The basic principle of ANCOVA is that if there is some correlation between the baseline and outcome measurements, then if the baseline measurements differ, one would expect the outcome measurements to differ, even if there is no treatment effect (ie. if $\tau=0$). Indeed, how do we decide how much of the difference in outcome is down to the treatment itself, and how much is simply the difference arising from different samples? 
+
+This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements. 
+
+### The theory {#ancovatheory}
+
+Suppose the outcome for a clinical trial is $X$ and the baseline is $B$. $X$ has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the test group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
+
+The same quantity is measured at the start of the trial, and this is the baseline $B$, which we can assume to have true mean $\mu_B$ in both groups (because of randomisation) and variance $\sigma^2$. We also assume that the true correlation between $B$ and $X$ is $\rho$ in each group. Finally, we assume that both treatment groups are of size $N$.
+
+We therefore have $2N$ patients, and so we observe baseline measurements $b_1,\,b_2,\ldots,b_{2N}$. Given these values, we have
+
+$$
+\begin{aligned}
+\operatorname{E}\left(X_i\mid{b_i}\right) &= \mu + \rho\left(b_i - \mu_B\right)\text{ in the control group}\\
+\operatorname{E}\left(X_i\mid{b_i}\right) &= \mu +\tau + \rho\left(b_i - \mu_B\right)\text{ in the test group.}
+\end{aligned}
+$$
+
+From this, we find that
+
+\begin{equation}
+\operatorname{E}\left(\bar{X}_T - \bar{X}_C\mid{\bar{b}_T,\,\bar{b}_C}\right) = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right). 
+(\#eq:diffexp)
+\end{equation}
+That is, if there is a difference in the baseline mean between the control and test groups, then the difference in outcome means is not an unbiased estimator of the treatment effect $\tau$. Assuming $\rho>0$ (which is almost always the case) then if $\bar{b}_T>\bar{b}_C$ the difference in outcome means overestimates $\tau$. Conversely, if $\bar{b}_T<\bar{b}_C$, the difference in outcome means underestimates $\tau$. The only situation in which the difference in outcome means is an unbiased estimator is when $\rho=0$, however this is not common in practice.
+
+Comparing the difference between outcome and baseline, as we did in \@ref(baseline), does not solve this problem, since we have
+
+$$\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),$$ 
+which is similarly biased (unless $\rho=1$, which is never the case).
+
+Notice, however, that if we use as our estimator 
+
+\begin{equation}
+\hat{\tau} = \left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)
+(\#eq:ancovaest)
+\end{equation}
+
+then, following from Equation \@ref(eq:diffexp) we have
+
+$$
+\operatorname{E}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho \left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)- \rho\left(\bar{b}_T - \bar{b}_C\right) = \tau. $$
+
+#### What's the variance of this estimator? {#ancova-var}
+
+To work out the variance of $\hat{\tau}$ in Equation \@ref(eq:ancovaest) we need to think about bivariate normal variables.
+
+Let's suppose that random variables $X$ and $Y$ are jointly normally distributed with correlation $\rho$
+
+\begin{equation}
+\begin{pmatrix}
+X\\
+Y
+\end{pmatrix} \sim N\left(
+\begin{pmatrix}
+\mu_X\\
+\mu_Y
+\end{pmatrix},\;
+\begin{pmatrix}
+\sigma^2_X & \rho\sigma_X\sigma_Y \\
+\rho\sigma_X\sigma_Y & \sigma^2_Y
+\end{pmatrix}
+\right).
+(\#eq:bvn)
+\end{equation}
+
+From Equation \@ref(eq:bvn), we know that $\operatorname{E}\left(Y\right) = \mu_Y$.
+
+But, if we have observed $X=x$, this gives us some information about likely values of $Y$: if $\rho>0$ then a lower value of $x$ should lead us to expect a lower value of $Y$, for example. Figure \@ref(fig:bvnplot) shows 
+
+\begin{equation}
+\begin{pmatrix}
+X\\
+Y
+\end{pmatrix} \sim N\left(
+\begin{pmatrix}
+0\\
+0
+\end{pmatrix},\;
+\begin{pmatrix}
+2 & 1.5 \\
+1.5 & 3
+\end{pmatrix}
+\right).
+(\#eq:bvneg)
+\end{equation}
+
+
+```{r bvnplot, fig.cap = "A bivariate normal density."}
+nres=101
+xvec = seq(-4,4, length=nres)
+yvec = seq(-4,4, length=nres)
+
+xcol = rep(xvec, nres)
+ycol = rep(yvec, rep(nres, nres))
+
+
+mvn_df = data.frame(x=xcol, y=ycol)
+covmat = matrix(
+  c(2,1.5, 1.5, 3), byrow=T, ncol=2
+)
+
+dcol = rep(NA, nres*nres)
+
+for (i in 1:nrow(mvn_df)){
+  dcol[i] = dmvnorm(c(xcol[i], ycol[i]), mean=c(0,0), sigma = covmat)
+}
+mvn_df$dens = dcol
+
+ggplot(data=mvn_df, aes(x=x, y=y, z=dens)) + geom_contour() + theme_bw() +
+  geom_vline(xintercept=c(-2,1.6), lty=2) + theme(aspect.ratio=1) +
+  xlab("X") + ylab("Y")
+
+```
+
+The higher the value of $\rho$ (in magnitude), the more the conditional distribution of $Y$ given an observed value of $x$ deviates from the marginal distribution of $Y$ (in our example, $N\left(0,\;3\right)$). In particular, $$\operatorname{E}\left(Y\mid{X=x}\right)\neq{\operatorname{E}\left(Y\right)}.$$ 
+
+If we have another random variable, $W$, that is independent of $Y$ (and note that if two normally distributed variables are uncorrelated, they are also independent), then observing $W=w$ doens't give us any information about the distribution of $Y$, so we have 
+
+$$ \operatorname{E}\left(Y\mid{W=w}\right)={\operatorname{E}\left(Y\right)}. $$
+We can combine this information to work out $\operatorname{E}\left(Y\mid{X=x}\right)$. Firstly, we'll calculate the covariance of $X$ and $Y-kX$, for some constant $k$. We can find this by
+
+$$
+\begin{aligned}
+\operatorname{cov}\left(X,\,Y-kX\right) &= \operatorname{E}\left[\left(X-\mu_X\right)\left(Y-kX - \mu_Y + k\mu_X\right)\right]\\
+&\text{ (using that }\operatorname{cov\left(X,Y\right)=\operatorname{E}\left[\left(X-\operatorname{E}\left(X\right)\right)\left(Y-\operatorname{E}\left(Y\right)\right)\right]}\\
+& = \operatorname{E}\left[\left(X-\mu_X\right)\left(Y-\mu_Y\right) - k\left(X-\mu_X\right)^2\right]\\
+& = \rho \sigma_X\sigma_Y - k\sigma_X^2.
+\end{aligned}
+$$
+If we set 
+
+$$k = \beta = \frac{\rho\sigma_Y}{\sigma_X} $$
+then $\operatorname{cov}\left(X,\,Y-\beta X\right)=0$, and since $Y-\beta X$ is also normally distributed, this means that $X$ and $Y-\beta X$ are independent. Therefore we have
+
+$$\operatorname{E}\left(Y-\beta X \mid X=x\right) = \operatorname{E}\left(Y-\beta X\right) = \mu_Y - \beta \mu_X.$$
+However, since we're conditioning on an observed value of $X=x$ we can take $X$ to be fixed at this value, and so $\operatorname{E}\left(\beta X\mid{X=x}\right) = \beta x$. Finally, this allows us to calculate
+
+$$
+\begin{aligned}
+\operatorname{E}\left(Y\mid{X=x}\right) & = \operatorname{E}\left(\beta X\mid{X=x}\right) + \mu_Y - \beta\mu_X\\
+& = \mu_Y + \beta\left(x - \mu_X\right).
+\end{aligned}
+$$
+
+We can use the same idea to find $\operatorname{var}\left(Y\mid{X=x}\right)$.
+
+Recall that $\operatorname{var}\left(Y\right) = \operatorname{E}\left[Y^2\right] - \left[\operatorname{E}\left(Y\right)\right]^2$, and so
+
+\begin{equation}
+\operatorname{var}\left(Y\mid{X=x}\right) = \operatorname{E}\left(Y^2\mid{X=x}\right) - \left[\operatorname{E}\left(Y\mid{X=x}\right)\right]^2. 
+(\#eq:vary2)
+\end{equation}
+
+We already know the second term, and we can find the first term using the same idea as before, this time noting that $X$ and $\left(Y-\beta X\right)^2$ are independent. 
+
+From this, and using the fact that (for example)
+
+$$
+\begin{aligned}
+\operatorname{var}\left(X\right) & = \operatorname{E}\left(X^2\right) - \left[\operatorname{E}\left(X\right)\right]^2\\
+\text{and therefore} & \\
+\operatorname{E}\left(X^2\right)  &= \sigma_X^2 + \mu_X^2,
+\end{aligned}
+$$
+
+we find that
+
+\begin{equation}
+\operatorname{E}\left[\left(Y-\beta X\right)^2 \mid X=x\right] = \operatorname{E}\left[\left(Y-\beta X\right)^2\right] =S^2 + \left(\mu_Y - \beta \mu_X\right)^2,
+(\#eq:evary1)
+\end{equation}
+
+where $S^2 = \sigma^2_Y + \beta^2\sigma^2_X - 2\beta\rho\sigma_X\sigma_Y = \sigma^2_Y\left(1-\rho^2\right)$ (by plugging in $\beta = \frac{\rho\sigma_Y}{\sigma_X}$).
+
+If we multiply out the left-hand side of Equation \@ref(eq:evary1), we find that this is the same as
+
+$$\operatorname{E}\left[Y^2\mid{X=x}\right] - 2\beta\operatorname{E}\left(Y\mid{X=x}\right) + \beta^2 x^2 = \operatorname{E}\left[Y^2\mid{X=x}\right] - 2\beta x\left(\mu_Y - \beta\mu_X\right) - \beta^2 x^2.$$
+Equating this with Equation \@ref(eq:evary1) and rearranging, we find
+
+$$\operatorname{E}\left[Y^2\mid{X=x}\right] = S^2 + \left(\mu_Y - \beta\mu_X\right)^2 + 2\beta x\left(\mu_Y - \beta \mu_X\right) + \beta^2x^2.$$
+Now we can expand out 
+$$\operatorname{E}\left(Y\mid{X=x}\right) = \mu_Y + \beta\left(x-\mu_X\right) = \left(\mu_Y - \beta\mu_X\right) +\beta x$$ 
+to find
+
+$$\left[\operatorname{E}\left(Y\mid{X=x}\right) \right]^2  = \left(\mu_Y - \beta\mu_X\right)^2 + 2\beta x \left(\mu_Y - \beta\mu_X\right) + \beta^2 x^2.$$
+Finally (!) we can use these two expressions to find 
+
+$$
+\begin{aligned}
+\operatorname{var}\left(Y\mid{X=x}\right) & = \operatorname{E}\left[Y^2\mid{X=x}\right] - \left[\operatorname{E}\left(Y\mid{X=x}\right)\right]^2\\
+& = S^2 \\
+& = \sigma_Y^2\left(1-\rho^2\right).
+\end{aligned}
+$$
+One thing to notice is that this conditional variance of doesn't depend on the observed value of $X=x$. It can also never exceed $\sigma^2_Y$, and is only equal to $\sigma^2_Y$ if $X$ and $Y$ are uncorrelated.
+
+#### Back to our estimator! {-}
+
+Recall that in ANCOVA our estimator of the treatment effect $\tau$ is
+
+$$ \hat{\tau} = \left(\bar{X}_T - \bar{X}_C\right) - \rho\left(\bar{b}_T - \bar{b}_C\right)$$ 
+and that we have
+
+$$\operatorname{cor}\left(\bar{X}_T - \bar{X}_C,\; \bar{b}_T - \bar{b}_C\right) = \rho.$$
+Therefore, using the result we just found, 
+
+$$
+\begin{aligned}
+\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left[\left(\bar{X}_T - \bar{X}_C\right) - \rho\left(\bar{b}_T - \bar{b}_C\right)\mid{\bar{b}_T,\bar{b}_C}\right] &= \operatorname{var}\left[\left(\bar{X}_T - \bar{X}_C\right) \mid{\bar{b}_T,\bar{b}_C}\right]\\
+& = \operatorname{var}\left(\bar{X}_T - \bar{X}_C\right)\left(1-\rho^2\right)\\
+& = \frac{2\sigma^2}{N}\left(1-\rho^2\right).
+\end{aligned}
+$$
+Notice that unlike our first estimator that used baseline values, in Section \@ref(baseline), the variance of the ANCOVA estimate can never exceed $\frac{2\sigma^2}{N}$; if the baseline and outcome are uncorrelated, ANCOVA will perform as well as the $t$-tests we covered in Sections \@ref(ttest) and \@ref(baseline).
+
+@borm2007simple discuss how this reduction in $\operatorname{var\left(\hat{\tau}\right)}$ can impact our sample size calculations.
+ 
+### The practice {#ancova-practice}
+
+In the previous section we established an unbiased estimate of the treatment effect that takes into account the baseline measurements. However, we can't use it as a model, because there are a few practical barriers:
+
+  * Our estimate for $\tau$ relies on the correlation $\rho$, which is unknown
+  * In real life, the groups are unlikely to have equal size and variance, so ideally we'd lose these constraints
+  
+We can solve both of these by fitting the following statistical model to the observed outcomes $x_i$:
+
+$$
+\begin{aligned}
+x_i & = \mu + \gamma b_i + \epsilon_i & \text{ in group C}\\
+x_i & = \mu + \tau + \gamma b_i + \epsilon_i & \text{ in group T}&.
+\end{aligned}
+$$
+Here, the $\epsilon_i$ are independent errors with distribution $N\left(0,\,\sigma^2_\epsilon\right)$, the $b_i$ are the baseline measurements for $i=1,\ldots,N_T+N_C$, for groups $T$ and $C$ with sizes $N_T$ and $N_C$ respectively. Sometimes this is written instead in the form 
+
+$$ x_i = \mu + \tau G_i+ \gamma b_i + \epsilon_i $$
+where $G_i$ is 1 if participant $i$ is in group $T$ and 0 if they're in group $C$. This is a factor variable, which you may remember from Stats Modelling II (if you took it). If $G_i=1$ (ie. participant $i$ is in group $T$) then $\tau$ is added. If $G_i=0$ (ie. participant $i$ is in group $C$) then it isn't. Notice that $\mu$ is no longer the mean outcome in any meaningful sense, but is the intercept of the linear model. 
+
+We now have four parameters to estimate: $\mu,\,\tau,\,\gamma$ and $\sigma^2_\epsilon$. For the first three we can use least squares (as you have probably seen for linear regression). Our aim is to minimise the sum of squares
+
+$$S\left(\mu,\, \tau,\,\gamma\right) = \sum\limits_{i\text{ in }T} \left(x_i - \mu - \tau - \gamma b_i\right)^2 + \sum\limits_{i\text{ in }C} \left(x_i - \mu - \gamma b_i\right)^2.$$
+
+This leads to estimates $\hat{\mu},\, \hat{\tau}$ and $\hat{\gamma}$. We won't worry about how this sum is minimised, since we'll always be using pre-written R functions. We can use the estimates $\hat{\mu},\, \hat{\tau}$ and $\hat{\gamma}$ to estimate $\sigma^2_\epsilon$, using
+
+$$\hat{\sigma_\epsilon}^2 = \frac{S\left(\hat{\mu},\hat{\tau}, \hat{\gamma}\right)}{N_T + N_C -3}.$$
+The general form for this is 
+
+$$ \hat{\sigma_\epsilon}^2 = \frac{SSE}{n-p},$$
+where $SSE$ is the residual sum of squares, $n$ is the number of data points and $p$ the number of parameters (apart from $\sigma_\epsilon^2$) being estimated. If you want to know why that is, you can find out [here](https://pages.stern.nyu.edu/~wgreene/MathStat/GreeneChapter4.pdf) (look particularly at page 62), but we will just take it as given!
+
+As well as generating a fitted value $\hat{\tau}$, we (or rather R!) will also find the standard error of $\hat\tau$, and we can use this to generate a confidence interval for the treatment effect $\tau$.
+
+The technique described above is a well-established statistical method known as **ANCOVA** (short for the **An**alysis of **Cova**riance), which can be implemented in R and many other statistical software packages. Notice that it is really just a linear model (the like of which you have seen many times) with at least one factor variable, and with a particular focus (application-wise) on the coefficient of the treatment group variable.
+
+::: {.example}
+Let's now implement ANCOVA on our Captopril data in R.
+We do this by first fitting a linear model using 'lm', with baseline measurement and arm as predictor variables and outcome as the predictand. 
+```{r, echo=T}
+
+lm_capt = lm(outcome ~ baseline + arm, data = df_hommel)
+summary(lm_capt)
+```
+
+The variable 'arm' here is being included as a factor variable, so it behaves like
+
+$$
+\text{arm}_i =
+\begin{cases}
+0 & \text{ if participant }i\text{ is assigned Captopril}\\
+1 & \text{ if participant }i\text{ is assigned Placebo}.
+\end{cases}
+$$
+Therefore, for a patient assigned Placebo, a value of 7.1779 is added, as well as the intercept and baseline term. This results in a model with two parallel fitted lines.
+
+```{r}
+ggplot(data=df_hommel, aes(x=baseline, y=outcome, col = arm)) + 
+  geom_point() +
+  geom_abline(
+    slope = coef(lm_capt)[["baseline"]],
+    intercept = coef(lm_capt)[["(Intercept)"]],
+    colour = "red") +
+  geom_abline(
+    slope = coef(lm_capt)[["baseline"]],
+    intercept = coef(lm_capt)[["(Intercept)"]] + coef(lm_capt)[["armPlacebo"]],
+    colour = "darkturquoise")+theme_bw()
+```
+
+For our previous methods we have calculated a confidence interval for the treatment effect $\tau$, and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of $\hat{\tau}$ is 2.9636. Therefore, to construct a 95/% confidence interval for $\hat{\tau}$, we use (to 3 decimal places)
+
+$7.178\; \pm\; t_{0.975;13}\times{2.964}  = \left(0.775,\; 13.580\right).$
+
+The model has $n-p=13$ degrees of freedom because there are $n=16$ data points and we are estimating $p=3$ parameters. 
+Notice that unlike our previous confidence intervals, this doesn't contain zero, and so our analysis has enabled us to conclude that there is a significant reduction in blood pressure with Captopril. You can also see this in that $p=0.03079<0.05$. However, you can tell from the width of the interval (and the fact that $p$ is still quite close to 0.05) that there is still a lot of uncertainty about $\tau$.
+
+The 'Residual standard error' term near the bottom of the linear model summary is the estimate of $\hat{\sigma_\epsilon}$, so here we have $\hat{\sigma_\epsilon}^2 = 5.869^2 = 34.44.$
+
+As with any fitted model, we should check the residuals.
+
+```{r, echo=T}
+resid_capt = resid(lm_capt)
+df_hommel$resid= resid_capt
+
+ggplot(data = df_hommel, aes(x=baseline, y=resid, col=arm)) + 
+  geom_point() +
+  geom_hline(yintercept=0)+
+  xlab("Baseline")+
+  ylab("Residual")+theme_bw()
+```
+
+These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it's difficult really to assess the fit of the model. 
+
+:::
+
+## Some follow-up questions....
+
+This might have raised a few questions, so we will address those now.
+
+### Didn't we say that $X_T - X_C$ was an unbiased estimator of $\tau$?
+
+In Sections \@ref(ttest) and \@ref(baseline) we used both $\bar{X}_T - \bar{X}_C$ and $\left(\bar{X}_T - \bar{B}_T\right) - \left(\bar{X}_C - \bar{B}_C\right)$ as unbiased estimators of $\tau$.
+Then, in Section \@ref(ancovatheory) we showed that 
+
+$$
+\begin{aligned}
+\operatorname{E}\left(\bar{X}_T - \bar{X}_C\mid{\bar{b}_T,\;\bar{b}_C}\right)& = \tau + \rho\left(\bar{b}_T - \bar{b}_C\right)\\
+\operatorname{E}\left[\left(\bar{X}_T - \bar{b}_T\right) - \left(\bar{X}_C - \bar{b}_C\right)\mid{\bar{b}_T,\,\bar{b}_C}\right] &= \tau + \left(\rho-1\right)\left(\bar{b}_T - \bar{b}_C\right),
+\end{aligned}
+$$
+that is, neither of these quantities are unbiased estimators of $\tau$ (except in very specific circumstances). 
+
+Is this a contradiction? 
+
+You'll be relieved to hear (and may already have realised) that it isn't; the first pair of equations are blind to the baseline values $B_T$ and $B_C$, and are using their statistical properties. Because of the randomisation procedure, a priori they can be treated the same. However, once we have observed values for the baseline, $b_T$ and $b_C$, they are very unlikely to be exactly the same. They are also (along with all other baseline measurements, often things like age, sex, height etc.) definitely not affected by the trial, since they are taken before any placebo or treatment has been administered, and often even before allocation. However, conditioning on their observed values can reduce the variance of our estimate of $\tau$, as we have seen.
+
+In this sense, the observed baseline means $\bar{b}_T$ and $\bar{b}_C$ are known as **ancillary statistics**; they contain no direct information about the parameter we are interested in (in this case the treatment effect $\tau$), but our inferences can be improved by conditioning on the observed values of the ancillary statistics.
+
+
+### What if the lines shouldn't be parallel? The unequal slopes model
+
+In the analysis above, we have assumed that the coefficient $\gamma$ of baseline (the estimate of the correlation between outcome and baseline) is the same in both groups; we have fitted an **equal slopes model**. It isn't obvious that this should be the case, and indeed we can test for it.
+
+Allowing each group to have a different slope means including an interaction term between baseline and treatment group, 
+
+$$ x_i = \mu + \tau G_i+ \gamma b_i + \lambda b_i G_i + \epsilon_i . $$
+The term $\lambda b_i G_i$ is 0 if participant $i$ is in group $C$ and $\lambda b_i$ if participant $i$ is in group $T$. Therefore, for participants in group $C$, the gradient is still $\gamma$, but for participants in group $T$ it is now $\gamma + \lambda$. We can test whether this interaction term should be included (that is, whether we should fit an unequal slopes model) by including it in a model and analysing the results.
+
+:::{.example}
+
+Continuing once again with the Captopril dataset, we now fit the model
+
+```{r, echo=T}
+lm_capt_int = lm(outcome ~ arm + baseline + baseline:arm, data = df_hommel)
+summary(lm_capt_int)
+```
+We see that the $p$-value for the coefficient $\lambda$ (seen in the `arm:baseline` row) is not at all significant (0.97). Therefore we can be confident that there is no need to fit unequal slopes for this dataset. This fits with our earlier conclusion (from inspecting the residuals) that just including first order terms is fine.
+:::
+
+
+
+### Can we include any other baseline covariates?
+
+In Section \@ref(baseline) when our estimated treatment effect was $\hat\tau = \left(\bar{x}_T - \bar{b}_T\right) - \left(\bar{x}_C - \bar{b}_C\right)$, the only other variable we could take into account was the baseline measurement, because it is on the same scale as the outcome $X$. However, in ANCOVA, our treatment effect is 
+
+$$ \hat\tau = \left(\bar{x}_T - \bar{x}_C\right) - \hat\gamma\left(\bar{b}_T - \bar{b}_C\right), $$
+and the inclusion of the coefficient $\gamma$ means that we can include other covariates on different scales too. The key issue is that we can only include as covariates things that were already known before allocation (hence they are sometimes known as *baseline covariates*, not to be confused with 'the baseline', which would generally mean the same measurement as the primary outcome, but before treatment). This is because they cannot, at that point, have been affected by the treatment, or have had an influence on the post-trial outcome measurement. Indeed, as a rule, any variable that was used in the randomisation procedure (this particularly applies to minimisation and stratified sampling) should be included in the analysis.
+
+::: {.example}
+The data for this example is taken from @datarium. In this study, 60 patients take part in a trial investigating the effect of a new treatment and exercise on their stress score, after adjusting for age.
+There are two treatment levels (yes or no) and three exercise levels (low, moderate and high) and 10 participants for each combination of treatment and exercise levels. Because in ANCOVA we fit a coefficient to every covariate, we can include exercise (another factor variable) and age (a continuous variable) in this analysis.
+
+```{r}
+library(datarium)
+library(rmarkdown)
+paged_table(stress)
+```
+
+Table \@ref(tab:sumstress) shows the mean and standard deviation of age for each combination of treatment and exercise level. If we were being picky / thorough, we might note that (perhaps unsurprisingly!) the mean and standard deviation of age are both lower in the high exercise groups. This might well affect our analysis, but we won't go into this now.
+
+```{r sumstress}
+library(dplyr)
+summary_stress = stress %>% group_by(treatment, exercise) %>% dplyr::summarize(mean = mean(age), sd= sd(age))
+knitr::kable(summary_stress, caption = "Summary of the stress dataset", col.names = c("Treatment", "Exercise", "Mean age", "SD age"))
+```
+
+Fitting a linear model, we see that treatment, high levels of exercise and age each have a significant effect on stress.
+
+```{r, echo=T}
+lm_stresslin = lm(score ~ treatment + exercise + age, data = stress)
+summary(lm_stresslin)
+
+```
+
+In particular, taking a high level of exercise reduced participants' stress scores by around 9.6, and the treatment reduced stress scores by around 4.3. Participants' stress scores increased slightly with age (just under half a point per year!). 
+
+We can plot the residuals to check that the model is a reasonable fit
+
+```{r}
+stress_sum = data.frame(
+  resid = resid(lm_stresslin),
+  fitted = fitted(lm_stresslin),
+  treatment = stress$treatment
+)
+ggplot(data=stress_sum, aes(x=fitted, y=resid, col=treatment)) +
+  geom_point() +
+  xlab("Fitted value") +
+  ylab("Residual")+
+  geom_hline(yintercept=0, lty=2)+theme_bw()
+
+
+```
+
+The first thing we notice is that the data are sort of 'clumped'. This is common in factor models, especially where one or more factors is highly influential. Working from right to left (higher fitted stress score to lower), the highest clump (in blue) are those who do moderate or low levels of exercise and didn't receive the treatment. The next clump (in red) are those who do moderate or low levels of exercise and did receive the treatment (their stress score is around 4.3 points lower, for the same age). The next clump, in blue, are those who do high levels of exercise and didn't receive the treatment. Their scores are around 9.6 points lower than the low/moderate exercise groups who didn't receive treatment. Finally, the lowest scoring group are those who do high levels of exercise and did receive the treatment. We see that some clumps aren't really centred around zero, and this should raise alarm bells. 
+
+We could also test for interactions, firstly across all factors:
+
+```{r}
+lm_stressint = lm(score ~ (treatment + exercise + age):(treatment + exercise + age), data = stress)
+summary(lm_stressint)
+
+
+```
+
+and then restricted to the interactions that seem important:
+
+```{r}
+lm_stressint2 = lm(score ~ treatment + exercise + age + treatment:exercise, data=stress)
+summary(lm_stressint2)
+
+```
+
+
+Notice that now, the effect of the treatment on its own is not significant. Also notice that for both the linear exercise terms and the interactions between the exercise and treatment, the effects of moderate and low exercise are very similar. 
+Combining the coefficients, someone who does a high level of exercise:
+
+  * is likely to reduce their stress score by 13.7 if they receive the treatment
+  * is likely to reduce their stress score by $13.7 - 8.2 = 5.5$ if they don't receive the treatment
+
+Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.
+
+:::
+
+### An important caution! {-}
+
+As you'll have seen if you read @kendall2003designing (for formative assignment 1), we should have everything in place, including a statistical analysis plan, **before** the trial. We should already know which covariates we plan to include in our model, and how. 'Trawling' for the best possible model by trying lots of different things (and inevitably settling on the one that leads to the most significant conclusion) is poor practice, and can increase the type I error rate ($\alpha$). 
+
+I realise that is sort of what we've done in this Section on Analysis, but that was to demonstrate and compare the different methods. Proceeding in the way we have, trying lots of different models, when analysing and writing up a trial would be very poor practice!
+
+There's another excellent episode of the JAMA Evidence podcast, with a focus on adjusting for covariates, that talks about this issue (you can find it [here](https://edhub.ama-assn.org/jn-learning/audio-player/18836864) and linked from Ultra). 
+
+That draws to a close our work with continuous outcome variables. In the next lecture, we'll start thinking about binary outcome variables.
