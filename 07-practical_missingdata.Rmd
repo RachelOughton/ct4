@@ -1,0 +1,1052 @@
+# (APPENDIX) Computer practicals {-} 
+
+# Computer Practical 1 - Missing data {-}
+
+In this computer practical we focus on an important issue in clinical trials (and most real world projects!): **missing data**. There will be a bit more reading than in future practicals, to give you the necessary theory and background. We will only have time to skim the surface of working with missing data. If you want to find out more, some good references are @little2019statistical and chapter 17 of @gelman2021regression. 
+
+
+Consider it a sort of informal formative assignment to finish this practical in your own time if you don't in class. Or, at the very least, you might need to return to it while working on future assignments. **For this reason, it would be sensible to keep track of everything you do in an .R file that you can return to in the future**.
+
+There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you're not sure how to do something, please ask!
+
+**In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.**
+
+### R practicalities {-}
+  
+There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
+
+```{r, eval=F, echo=T}
+install.packages("<packagename>")
+```
+
+and to then load the package (it doesn't load automatically on install) enter
+
+```{r, eval=F, echo=T}
+library(<packagename>)
+```
+
+
+If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III. 
+
+An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
+
+Codespace requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
+
+
+[Direct link to codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&reserved=0)
+
+[Instructions for how to use codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&reserved=0)
+
+
+## Missing data
+
+In [almost] any real-world study or trial, there will be some missing data. This can happen for a whole host of reasons: perhaps some participants dropped out completely, or couldn't make some appointments. Perhaps some data were lost or corrupted. Perhaps some participants decided not to provide certain details, or didn't comply properly with the study. 
+
+Why does this matter? Or, why do we need to think properly about this? Well, a huge amount of work in the planning and design of an RCT goes into the random allocation: we want to eliminate all sources of bias (including those we can't observe, or aren't even aware of) by randomly balancing the participants between the trial arms. If some of these participants' data are missing, we can no longer be confident that we still have this balance. 
+
+Dealing with missing data boils down to two main tasks:
+
+  - Understanding the pattern(s) of missingness
+  - Processing the data to mitigate against the effect of the missingness
+
+so this is what we'll be working on now. Before that though, we need some data to work with!
+
+### Datasets
+
+The datasets we'll work with come from the packages `medicaldata` and `smdi`, so you'll need to install those if you don't have them. We'll also be using the packages `naniar` and `visdat`, which contain lots of methods for handling missing data, and `rstanarm`, which will enable us to easily sample from regression models. Other packages are available, as you can see from [the CRAN task view on Missing Data](https://cran.r-project.org/web/views/MissingData.html). We'll also use `tidyverse` for various plotting and data handling tasks.
+
+```{r, echo=T}
+require(medicaldata)
+library(naniar)
+library(smdi)
+library(tidyverse)
+library(visdat)
+library(rstanarm)
+```
+
+Throughout this practical we'll work with three datasets.
+
+#### Supraclavicular
+
+The first dataset is the `supraclavicular` data. This is a fairly simple data set (at least in terms of missingness) which I'll use to to demonstrate techniques before asking you to work on the more complex data!
+
+::: {.exercise}
+Load the `supraclavicular` data.
+  - What is the study about?
+  - What is the primary outcome?
+  - What are the baseline covariates (remember these must be measured **before** allocation)
+Create a data frame containing just the baseline covariates, the allocation and the primary outcome variable. Make sure these are of the correct type.
+:::
+
+<details><summary> Click for solution </summary>
+
+::: {.solution}
+The details of the study can be found using `?supraclavicular`.
+
+The primary outcome variable is time to 4-nerve sensory block, which has the column name `onset_sensory`.
+
+The baseline covariates are gender, BMI and age. To create our data frame, we need
+
+```{r, echo=T}
+sup_df = supraclavicular[ ,c(2:5, 9)]
+sup_df = sup_df%>% mutate(across(c(group, gender), factor))
+```
+:::
+
+</details>
+
+#### Lung cancer dataset
+
+This is the `smdi_data` dataset from the package `smdi`. The intervention group variable is `exposure`. The outcome data are survival (or 'time-to-event') data: in this study, the 'event' is death and the follow-up period is five (probably years, but it doesn't say!). Some participants are still alive at the end of the follow-up period (so they have `status=0`) and the data are therefore *right censored*. We will learn more about this type of data later in the course. 
+
+For now, the only preparation to do is to convert `status` to a factor variable:
+
+```{r, echo=T}
+smdi_data$status = factor(smdi_data$status)
+```
+
+This is a synthetic (or possibly synthetically altered) dataset designed for use with missing data exploration, so we have the advantage that the help file tells about the missingness mechanisms (more on that soon).
+
+#### Obstetrics and Periodontal Therapy
+
+The final dataset we'll work with is `opt`, which is about the treatment of maternal periodontal disease and its effect on birthweight and term. 
+
+::: {.exercise}
+
+Use `?opt` to find out about this trial. 
+
+:::
+
+There are a lot of columns here, but we won't keep all of them. Our dataset (for now) will be 
+
+```{r, echo=T}
+opt_df = opt[ ,c(1:4, 10:22, 72)]
+```
+
+which retains most of the baseline covariates, intervention group and outcome variable (birthweight). There is some 'messiness' in the data, for example for some variables missing values are recorded as `""`, rather than `NA`. We'll sort that now by running the following command
+
+```{r, echo=T}
+opt_df = opt_df %>% 
+  mutate(across(c(Use.Tob, Use.Alc, Drug.Add), 
+                gsub, pattern = "^ +$", replacement = NA))%>%
+  mutate(across(c(Use.Tob, Use.Alc, Drug.Add), factor))
+```
+
+## Understanding the patterns of missingness
+
+The first thing we'll do is explore the data to find out what the pattern of missingness is. First of all, we can visualise which data are missing. 
+
+### Visualising missingness
+
+::: {.technique}
+The function `vis_dat` (from `visdat`) gives an excellent first look at a dataset, colouring data by type (and missing data in grey). The default is to sort the columns by type, but you can see below that I've made it keep to the origianl order.
+
+```{r, echo=T}
+vis_dat(sup_df, sort_type=F)
+```
+
+The functions `gg_miss_var`, `gg_miss_case` and `gg_miss_upset` (all from `naniar`) allow us to quickly see how much missing data there is, either by variable, by case or by intersection. Look at the help files to find out what the arguments do. 
+We see that in `supraclavicular` there are three missing entries for BMI, and all other variables are complete.
+
+```{r, echo=T}
+gg_miss_var(sup_df)
+```
+
+Plotting by cases shows that each of these missing data are associated with a different participant, so there are three participants with one missing item each. 
+
+```{r, echo=T}
+gg_miss_case(sup_df)
+md.pattern(sup_df)
+```
+
+:::
+
+::: {.exercise}
+
+Make these plots for the remaining datasets, `smdi_data` and `opt_df`. How does the missingness compare? Which plots do you find more useful and why?
+:::
+
+<details><summary> Click for solution </summary>
+
+::: {.solution}
+
+**Lung cancer**
+
+We see there is missingness for three variables:
+
+```{r, echo=T}
+vis_dat(smdi_data)
+```
+
+The `naniar` functions can show us how this is spread across the variables and participants.
+
+```{r, echo=T}
+gg_miss_var(smdi_data, show_pct=T)
+gg_miss_case(smdi_data, order_cases = T)
+
+```
+
+The function `md.pattern` shows us how many participants have each combination of missing data:
+
+```{r, echo=T}
+md.pattern(smdi_data, rotate.names = T)
+```
+
+**Obstetrics and Periodontal Therapy**
+Using `vis_dat` we see that there is a lot of missing data in the `opt` dataset, and that some variables are particularly badly affected.
+
+```{r, echo=T}
+vis_dat(opt_df)
+```
+
+Now the `naniar` functions really do help us to understand what we're dealing with!
+
+```{r, echo=T}
+gg_miss_var(opt_df, show_pct=T)
+gg_miss_case(opt_df, order_cases = T, show_pct=T)
+
+```
+
+Not many individual participants have more than about 25% of their data missing, but there are some variables that are missing for nearly all participants (more on this later).
+
+:::
+
+</details>
+
+### Summary tables
+
+We may also want to visualise or summarise missingness in a table, and there are various ways to do this, for example `miss_case_summary`, `miss_var_summary` and `miss_var_summary`. 
+
+::: {.exercise}
+Use the three table generating functions listed above on our datasets. Do they give you any new information compared to the plots? 
+:::
+
+
+<details><summary> Click for solution </summary>
+
+::: {.solution}
+
+Working through the list of functions (just for `opt_df`), we have:
+
+```{r, echo=T}
+miss_case_summary(opt_df)
+```
+This shows how many variables (both in number and as a percentage of the total number of variables) are missing, for each case (in decreasing order of missingness).
+
+```{r, echo=T}
+miss_case_table(opt_df)
+```
+`miss_case_table` tabulates the number of cases with $n$ missing variables, for $n=1,\ldots$.
+
+The remaining functions look at things from the point of view of variables:
+
+```{r, echo=T}
+miss_var_summary(opt_df)
+```
+Now we see how many (and what percentage) of cases are missing for each variable.
+
+:::
+
+</details>
+
+There are many, many possible ways to visualise or tabulate missing data, and we have used but a few. If you want to find more, you can look in the help file for `naniar`, or indeed at another package designed for working with missing data.
+
+### Mechanisms of missingness
+
+So far, things have been a bit ad-hoc. We may have noticed some patterns or trends, but we haven't subjected these to any scrutiny, or used any statistical methodology to understand the missingness. 
+
+When working with missing data, it's important to think about the *mechanism* that is causing some data to be missing. Is there some systematic reason why some variables are missing? 
+
+Broadly speaking, there are three types of missing data. These were first coined by Rubin in 1976 @rubin1976inference.
+
+#### Missing completely at random (MCAR)
+
+If data are MCAR, then the probability of missingness is the same for all units: missingness is statistically independent of all covariates (observed and unobserved), of the treatment and of the outcome. If each participant decided whether or not to provide a certain piece of information by rolling a dice (eg. 1 = don't provide), then the resulting missingness would be MCAR.
+
+This type of missingness is the simplest to deal with, because removing the missing units doesn't incur any bias. However, it's extremely rare in real life, and it's difficult to even think of an example where it would hold!
+
+#### Missing at random (MAR)
+
+For data to be MAR, the probability of missingness must depend only on **available** information. 
+
+In this case, we can use the available information to model the missingness.
+
+MAR data are somewhat more common (or at least the mechanism is more commonly assumed than MCAR), and is thankfully still moderately simple to deal with. If missingness is 'at random', then adjusting for the relevant covariates in the analysis will avoid bias.
+
+#### Missing not at random (MNAR)
+
+This is the trickiest (and probably most common) mechanism, in which the missingness depends on **unobserved** data. It is likely then that the unobserved (and therefore unavailable) information also predicts the value that is missing, and possibly also the outcome.
+
+For example, suppose that the treatment in a clinical trial causes some unwanted side effect, such as pain. In this case, a participant in the intervention group is more likely to drop out of the study than a participant in the control group. Unless we measure this side effect (for example, a pain score), the resulting missingness is not at random.
+
+The most difficult case of MNAR is when the missingness depends on the (potentially missing) variable itself. For example, in a trial of a weight loss intervention, participants with greater weights might be more reticent to reveal them, especially if they feel the trial is going badly.
+
+MNAR mechanisms can be [imperfectly] modelled, or else mitigated by including more covariates in the data, which brings the mechanism closer to MAR. It is vital to work with the subject experts, who will have a much better idea of the sorts of mechanisms that might be causing missingness in their study. 
+
+We can never **prove** which of these is the case, since by definition we don't have the information we would need to establish that the mechanism is (or isn't) MNAR. All we can do is study patterns in the data and find evidence one way or the other.
+
+## Exploring the relationship between missingness and other variables
+
+In a clinical trial, ultimately what we care about is whether the missingness has changed our understanding of the outcome variable(s). This is most likely to happen if the missingness is related to the outcome variable. This could happen either directly, or because the missingness is linked to something that is correlated to a variable that affects the outcome. 
+
+Again, we will explore things visually before using some more rigorous methods. Now, instead of simply understanding how much missing data there is, and which variables and/or cases are involved, we want to look at the relationships between missingness and the values of the other variables.
+
+::: {.technique}
+In the package `naniar` you can create a copy of the data frame containing just `NA` and `!NA`, indexing exactly where the missing values are.
+
+```{r, eval=F, echo=T}
+as_shadow(sup_df)
+```
+
+```{r, echo=T}
+sup_shadow = as_shadow(sup_df)
+kable(sup_shadow)%>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "200px")
+```
+
+To avoid duplication of the original names, the column names are suffixed by '_NA'. This means it can be appended to the original data frame to create what the authors of `naniar` call a `nabular` object.
+
+```{r, eval=F, echo=T}
+nabular(sup_df)
+```
+
+```{r, echo=T}
+sup_nab = nabular(sup_df)
+kable(sup_nab)%>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "200px")
+```
+
+This is useful because we can investigate the values of the actual data while conditioning on the missingness. We can summarize the outcome distribution according to whether a variable is missing or observed:
+
+```{r, echo=T}
+sup_nab %>%
+  group_by(bmi_NA) %>%
+  summarise_at(.vars = "onset_sensory",
+               .funs = c("mean", "sd", "var", "min", "max"),
+               na.rm = TRUE)
+
+```
+
+and visualise the outcome distribution for missing and non-missing values of a covariate:
+
+```{r, echo=T}
+ggplot(sup_nab,
+       aes(x = onset_sensory,
+           fill = bmi_NA)) + 
+  geom_histogram()
+```
+
+We could also explore whether the missingness is related to the values of the other covariates, for example gender (in this data 0=female, 1=male)
+
+```{r, echo=T}
+ggplot(sup_nab,
+       aes(x = gender,
+           fill = bmi_NA)) + 
+  geom_bar()
+```
+
+This isn't a great example because there are only three missing BMI values, but you can probably guess what you'll be doing next...
+
+:::
+
+::: {.exercise}
+
+For the lung cancer and obstetric periodontal treatment datasets, investigate whether / how the outcome distribution appears to be affected by the missing values. 
+
+  - For the `smdi_data` dataset, remember that the outcome variable is the combination of `eventtime` and `status`. Can you think of a way to visualise the data that combines these pieces of information?
+  - For `opt`, ignore the variables `BL.Diab.Type`, `BL.Cig.Day`, `BL.Cig.Day` and `N.prev.preg`. You can create a temporary `opt` data frame to work with
+  
+```{r, echo=T}
+opt_tmp = opt_df[ ,-c(9,12,14,17)]
+```
+  
+**There are many, many plots you could make here, but try not to spend too long on this - why not divide up tasks between you and your neighbours?**
+  
+:::
+
+<details><summary> Click for solution </summary>
+
+::: {.solution}
+
+We'll look here in some detail about the **lung cancer** dataset (`smdi_data`) - these aren't really *solutions* as such, just some more detail of things you could do.
+
+```{r, echo=T}
+smdi_nab = nabular(smdi_data)
+```
+
+First by `ecog_cat`. Since there is a lot more missing data here, I've chosen to compare the distributions side-by-side using `facet_wrap`. This also allows me to colour by `status` (although it is sort of obvious from the large peak at `eventtime`=5 that those people are still alive). Setting `scales = "free_y"` makes it easier to compare the overall shape of the distribution. You may have found a different way to display the data that may be equally (or more!) informative - if so that's fine!
+
+```{r, echo=T}
+smdi_nab %>%
+  group_by(ecog_cat) %>%
+  summarise_at(.vars = "eventtime",
+               .funs = c("mean", "sd", "var", "min", "max"),
+               na.rm = TRUE)
+
+ggplot(smdi_nab,
+       aes(x = eventtime,
+           fill = status)) + 
+  geom_histogram() + facet_wrap(~ecog_cat_NA, scales = "free_y")
+
+```
+
+Next by `egfr_cat`:
+
+```{r, echo=T}
+smdi_nab %>%
+  group_by(egfr_cat) %>%
+  summarise_at(.vars = "eventtime",
+               .funs = c("mean", "sd", "var", "min", "max"),
+               na.rm = TRUE)
+
+ggplot(smdi_nab,
+       aes(x = eventtime,
+           fill = status)) + 
+  geom_histogram() + facet_wrap(~egfr_cat_NA, scales = "free_y")
+
+```
+
+and finally by `pdl1_num`:
+
+```{r, echo=T}
+smdi_nab %>%
+  group_by(pdl1_num) %>%
+  summarise_at(.vars = "eventtime",
+               .funs = c("mean", "sd", "var", "min", "max"),
+               na.rm = TRUE)
+
+ggplot(smdi_nab,
+       aes(x = eventtime,
+           fill = status))+
+  geom_histogram() + facet_wrap(~pdl1_num_NA, scales = "free_y")
+
+```
+
+It appears that `pdl1_num` values are likely to be MNAR, since the outcome distribution looks different (proportionally more early deaths) for the missing values.
+
+We could make many more plots of this type: for example, by plotting the distributions of other variables rather than the outcome.
+
+For example, we could look at how the missingness of each variable relates to smoking category:
+
+```{r, echo=T}
+library(gridExtra)
+ecog_sm = ggplot(smdi_nab,
+       aes(x = smoking_cat,
+           fill = ecog_cat_NA))+
+  geom_bar() 
+
+
+egfr_sm = ggplot(smdi_nab,
+       aes(x = smoking_cat,
+           fill = egfr_cat_NA))+
+  geom_bar() 
+
+pdl1_sm = ggplot(smdi_nab,
+       aes(x = smoking_cat,
+           fill = pdl1_num_NA))+
+  geom_bar()
+
+grid.arrange(ecog_sm, egfr_sm, pdl1_sm, nrow=1)
+
+```
+
+So, it looks likely that the missingness of `egfr_cat` depends on smoking status, but less likely that the missingness of the other two variables does.
+
+:::
+
+</details>
+
+Looking into all the variables one by one like this would take a very long time, and wouldn't even allow us to many any (useful) conclusions. Really what we want to know is whether there is a significant difference in the observed data compared to the missing data. 
+
+### Statistical summaries of the effect of missingness {#sec-statsum}
+
+According to the framework Rubin devised @rubin1976inference, if the data are MAR (missing at random) then the missingness can be explained by (some of) the observed covariates. We would therefore expect the participant characteristics to be different between those with missing values and those without. If the missingness is MCAR (missing completely at random) we would expect no significant difference. Similarly, if the data are MNAR (missing not-at-random) due to some unobserved variable that is independent of all observed variables, we would expect no pattern. In reality this is almost never the case (the confounding variables are usually linked to some observed variables) and so really we are testing against the data being MCAR. 
+
+#### Hotelling's multivariate t-test
+
+This test examines the differences between those observations with an observation (of some partially observed variable) and those without. The test statistic is derived by assuming both groups are drawn from the same multivariate normal distribution, and so a high value of the test statistic (conversely a low p-value) suggests that there are significant differences between the groups. This test is from a generalisation of Student's $t$-test made by Hotelling in 1931 @hotelling1931generalization. 
+
+::: {.technique}
+
+To perform Hotelling's multivariate $t$-test on the `sup_df` data we enter
+
+```{r, echo=T}
+smdi_hotelling(sup_df)
+```
+
+For this data, we find that there is insufficient evidence to reject the hypothesis that the BMI data are MCAR. 
+
+:::
+
+::: {.exercise}
+
+Perform Hotelling's multivariate $t$-test on the other two datasets, `opt_tmp` and `smdi_data`. What do you find?
+
+:::
+
+<details><summary> Click for solution </summary>
+
+First we'll look at `smdi_data`.
+
+```{r, echo=T}
+smdi_hotelling(smdi_data)
+```
+It appears that `ecog_cat` may be MCAR, but for `egfr_cat` and `pdl1_num` there is sufficient evidence to suggest MAR or MNAR.
+
+Now for `opt_tmp`
+
+```{r, echo=T}
+smdi_hotelling(opt_tmp)
+```
+These all appear to have a significant departure from MCAR. 
+
+
+</details>
+
+**Caution**: The power of this test (and others like it) can be strongly influenced by sample size, so it is sensible to combine it with a more detailed approach. 
+
+
+#### Absolute standardised mean difference
+
+The **absolute standardised mean difference** (ASMD) gives a measure of how different the values of the observed covariates are for missing versus observed values of each partially observed covariate. For every partially observed covariate, there is an ASMD for each other covariate. 
+
+Label the partially observed covariate $X_M$, and suppose $X_1,\ldots,X_K$ are the other covariates. The dataset is split into those cases with $X_M$ observed and those with $X_M$ missing. For each covariate $X_1,\ldots,X_K$ we find the absolute value of the difference, and divide this by the standard deviation of that covariate. The ASMD is therefore always non-negative, and should not be affected by sample size.
+
+A general rule of thumb is that ASMD values over 0.1 are cause for concern.
+
+::: {.technique}
+The function `smdi_asmd` from `smdi` creates an `asmd` object, which has several parts to it. Note that we set `includeNA=T` so that we can see the effect of missingness, as well as observed values, of other variables. This won't make a difference for `sup_df`, but it will in the exercise.
+
+```{r, echo=T}
+asmd_sup = smdi_asmd(sup_df, includeNA=T)
+```
+
+Firstly there is a summary table, which shows the median, min and max of ASMD for each partially observed covariate.
+
+```{r, echo=T}
+asmd_sup
+```
+
+There is also a `Table 1`, so called because a summary table of this nature should always be included when summarising a dataset in terms of the difference between two groups. This is formatted a little strangely, as it is designed for use in printed works. This table includes the result of a statistical test (by default a chi-squared test) showing whether the differences are statistically significant. 
+
+```{r, echo=T}
+kable(asmd_sup$bmi$asmd_table1)
+```
+Finally there is a plot showing each ASMD
+
+```{r, echo=T}
+asmd_sup$bmi$asmd_plot
+```
+
+We see that although the ASMD values are quite large (much bigger than the advised 0.1), because there are a very small number of them they are not statistically significant. 
+
+:::
+
+::: {.exercise}
+
+Investigate the ASMD for our datasets `smdi_data` and `opt_tmp`. Of the partially observed covariates, which seem to be most strongly related to other covariates? Do any seem to be MCAR? 
+
+*Make sure you remove any participant ID variables, since we don't want to include those in our analysis!
+Again, it might be a good idea to pair up!* 
+:::
+
+<details> <summary> Click for solution </summary>
+
+::: {.solution}
+
+We will do this just for the `opt_tmp` data in the solutions.
+
+```{r, echo=T}
+asmd_opt = smdi_asmd(opt_tmp[ ,-1], includeNA=T)
+asmd_opt
+```
+
+These values are all well above 0.1, so it seems unlikely that the data are MCAR.
+
+We can look in a little more detail, first at BMI:
+
+```{r, echo=T}
+asmd_opt$BMI$asmd_plot
+kable(asmd_opt$BMI$asmd_table1)
+```
+
+We see that there appears to be a strong relationship between `clinic` and missingness of BMI. In particular, a disproportionately high number of missing BMI values seem to be from the New York (NY) clinic. There also appears to be less missingness for those with `public.asstce=1` (those for whom the government paid for the delivery).
+
+Next we look at `Use.Alc`
+
+```{r, echo=T}
+kable(asmd_opt$Use.Alc$asmd_table1)
+```
+
+```{r, echo=T}
+asmd_opt$Use.Alc$asmd_plot
+```
+
+This time the two most strongly related covariates are `Use.Tob` and `Drug.Add`. This is perhaps not surprising because they are quite similar variables. Notice that `clinic` still has a strong effect (the $x$-axis goes a lot higher on this plot than the one for BMI). From the table, we see that again a disproportionately high number of missing values come from the NY clinic, and that missingness in `Use.Alc` is much more likely if `Use.Tob` and/or `Drug.Add` are missing.
+
+:::
+
+</details>
+
+
+### Modelling missingness
+
+One of the most common ways to model missingness is using **logistic regression**. You might already have come across this in your degree, and we'll do more about it later, but for now the box below tells you all you need to know.
+
+::: {.technique}
+**Logistic regression** is a type of **generalised linear model** that is used to model a binary categorical variable $Y$ (often labelled `0` and `1`). In our cases the values are `NA` and `!NA` or 'missing' and 'not missing'. 
+
+The logistic regression model has the form
+
+$$ \operatorname{logit}\left(p\right) = \log \left(\frac{p}{1-p}\right) = \beta_0 + \beta_1 x_1 + \ldots + \beta_p x_p,$$
+where $p = p\left(Y=1\right)$ the $x_i$ are explanatory variables (in our case this will be the baseline covariates and the trial arm), the $\beta_i$ are coefficients and $p$ is the probability of an outcome of `1`. 
+
+The logit function rescales the probability (which can only be in $\left[0,1\right]$) to the real line, so that it works with linear combination on the right hand side. Conversely, applying the inverse logit function to the RHS gives a value in $\left[0,1\right]$. 
+
+Fitting a logistic regression model in R is very similar to fitting a linear regression. We use the function `glm`, which is a general function for generalised linear models. To specify that we want logistic regression, we must include the argument `family = binoial(link = "logit")`. 
+
+:::
+  
+We'll use our `nabular` objects for this, since we already have variables denoting missingness. For example, we can see whether missingness of BMI in the `supraclavicular` dataset relates to any of the other variables.
+
+```{r, echo=T}
+sup_nab = nabular(sup_df)
+sup_glm = glm(bmi_NA ~ group + gender + age + onset_sensory, 
+              data = sup_nab, 
+              family = binomial(link = "logit"))
+summary(sup_glm)
+```
+
+In this case none of the other variables are significant, so it would be reasonable to proceed as though the missingness of BMI is MCAR (unless there is expert knowledge to suggest that missingness might be linked to some other observed factor). This agrees with what we found in Section \@ref(sec-statsum)
+
+**A word of caution**: the default in most R functions, particularly for plotting or fitting models, is to remove all rows with any missingness. In a situation where there are missing values for multiple variables, particularly if the missingness is related, this could in itself introduce bias.
+
+::: {.exercise}
+
+Model the patterns of missingness for `smdi` and `opt` (use the `opt_tmp` data for this, without the severely missing variables). What do you find?
+
+:::
+
+::: {.hint}
+
+To avoid typing out all the column names for the formula, you can copy and paste the output from
+
+```{r, eval=F, echo=T}
+paste(names(smdi_data), collapse = " + ")
+```
+
+and delete the terms you don't want.
+
+:::
+
+<details> <summary> Click for solution </summary>
+
+::: {.solution}
+
+**Lung cancer data**
+
+We can fit a few models, to see what we find. First we'll tackle `ecog_cat_NA`.
+
+Missingness in `ecog_cat` doesn't appear to be associated with any other baseline covariates:
+
+```{r, echo=T}
+ecog_NA_glm1 = glm(ecog_cat_NA ~ exposure + age_num + female_cat + smoking_cat + physical_cat + alk_cat + histology_cat + ses_cat + copd_cat, 
+                data=smdi_nab, family = binomial(link="logit"))
+summary(ecog_NA_glm1)
+```
+
+Now including the other variables with missing values:
+
+```{r, echo=T}
+ecog_NA_glm2 = glm(ecog_cat_NA ~ exposure + age_num + female_cat + smoking_cat + physical_cat + alk_cat + histology_cat + ses_cat + copd_cat + egfr_cat + pdl1_num, 
+                data=smdi_nab, family = binomial(link="logit"))
+summary(ecog_NA_glm2)
+```
+
+None of the variables are significant, so it is probably reasonable to suppose that `ecog_cat` is MCAR (indeed the help file tells us it is).
+
+Now for `egfr_cat`:
+
+```{r, echo=T}
+egfr_NA_glm1 = glm(egfr_cat_NA ~ exposure + age_num + female_cat + smoking_cat + physical_cat + alk_cat + histology_cat + ses_cat + copd_cat, 
+                data=smdi_nab, family = binomial(link="logit"))
+summary(egfr_NA_glm1)
+```
+```{r, echo=T}
+egfr_NA_glm2 = glm(egfr_cat_NA ~ exposure + age_num + female_cat + smoking_cat + physical_cat + alk_cat + histology_cat + ses_cat + copd_cat + ecog_cat + pdl1_num, 
+                data=smdi_nab, family = binomial(link="logit"))
+summary(egfr_NA_glm2)
+```
+
+This time there is a definite relationship between missingness and the values of the other covariates, suggesting an MAR or MNAR mechanism.
+
+Finally, let's model missingness in `pdl1_num`:
+
+```{r, echo=T}
+pdl1_NA_glm1 = glm(
+  pdl1_num_NA ~ exposure + age_num + female_cat + smoking_cat + physical_cat + 
+    alk_cat + histology_cat + ses_cat + copd_cat, 
+  data=smdi_nab, family = binomial(link="logit"))
+summary(pdl1_NA_glm1)
+
+```
+
+```{r, echo=T}
+pdl1_NA_glm2 = glm(pdl1_num_NA ~ exposure + age_num + female_cat + smoking_cat + physical_cat + alk_cat + histology_cat + ses_cat + copd_cat + ecog_cat + egfr_cat, 
+                data=smdi_nab, family = binomial(link="logit"))
+summary(pdl1_NA_glm2)
+
+```
+
+This time there are far fewer significantly related variables, but we can again be confident that the mechanism isn't MCAR.
+
+Frustratingly, the only way we could determine whether the mechanisms for `egfr_cat` and `pdl1_num` was MAR or MNAR would be to measure (or otherwise procure) some of the missing data. We simply do not have the necessary information to work out which is the case. If this were a real trial, we would now talk at length with the experts/clinicians, who will have a much better understanding of the probable causes of missingness.
+
+**opt**
+
+Now we'll do the same with `opt_tmp`. We have missingness in several variables: `BMI`, `Use.Tob`, `Use.Alc`, `Drug.Add`, `Birthweight`. A model fit to the data in R will remove cases with any of these missing (which for this dataset might mean a lot are removed!). So, as well as building models with all variables, we can build models using only the fully observed data, and use the `_NA` variables from `nabular` as covariates:
+
+```{r, echo=T}
+glm_opt_BMI_allvar = glm(
+  BMI_NA ~ Clinic + Group + Age +  
+    Education + Public.Asstce + Hypertension + Diabetes + Use.Tob + Use.Alc + Drug.Add + Prev.preg, 
+  data = nabular(opt_tmp),
+  family = binomial(link = "logit")) 
+summary(glm_opt_BMI_allvar)
+```
+Complete cases only:
+
+
+```{r, echo=T}
+glm_opt_BMI_comp = glm(
+  BMI_NA ~ Clinic + Group + Age +  
+    Education + Public.Asstce + Hypertension + Diabetes + Prev.preg, 
+  data = nabular(opt_tmp),
+  family = binomial(link = "logit")) 
+summary(glm_opt_BMI_comp)
+```
+
+Using missingness of incomplete variables in model:
+
+```{r, echo=T}
+glm_opt_BMI_NA = glm(
+  BMI_NA ~ Clinic + Group + Age +  
+    Education + Public.Asstce + Hypertension + Diabetes + Use.Tob_NA + Use.Alc_NA + Drug.Add_NA + Prev.preg, 
+  data = nabular(opt_tmp),
+  family = binomial(link = "logit")) 
+summary(glm_opt_BMI_NA)
+```
+
+From these three models is appears that BMI is much more likely to be missing for those from the NY clinic (we already knew this from our previous investigations!):
+
+```{r, echo=T}
+ggplot(data=nabular(opt_tmp), aes(x=Clinic, fill = BMI_NA)) +
+  geom_bar()
+```
+
+Perhaps the most concerning missing data in the `opt` dataset is in the outcome `Birthweight`.
+
+```{r, echo=T}
+glm_opt_BW_allvar = glm(
+  Birthweight_NA ~ Clinic + Group + Age +  
+    Education + Public.Asstce + Hypertension + Diabetes + BMI + Use.Tob + Use.Alc + Drug.Add + Prev.preg, 
+  data = nabular(opt_tmp),
+  family = binomial(link = "logit")) 
+summary(glm_opt_BW_allvar)
+```
+
+```{r, echo=T}
+glm_opt_BW_comp = glm(
+  Birthweight_NA ~ Clinic + Group + Age +  
+    Education + Public.Asstce + Hypertension + Diabetes + Prev.preg, 
+  data = nabular(opt_tmp),
+  family = binomial(link = "logit")) 
+summary(glm_opt_BW_comp)
+```
+
+```{r, echo=T}
+glm_opt_BW_NA = glm(
+  Birthweight_NA ~ Clinic + Group + Age +  
+    Education + Public.Asstce + Hypertension + Diabetes + BMI_NA + Use.Tob_NA + Use.Alc_NA + Drug.Add_NA + Prev.preg, 
+  data = nabular(opt_tmp),
+  family = binomial(link = "logit")) 
+summary(glm_opt_BW_NA)
+```
+
+It appears from this that missing valuse of Birthweight aren't associated with missingness in the other variables. Birthweight is more likely to be missing for patients with diabetes.
+
+```{r, echo=T}
+ggplot(data = nabular(opt_tmp), aes(x=Diabetes, fill = Birthweight_NA)) +
+  geom_bar()
+
+```
+
+
+:::
+
+</details>
+
+
+## What to do about missing data?!
+
+Having established that missing data can be a problem, we now need to do something about it. Methods for handling missing data fall into one of two categories:
+
+  1. Discard some (non-missing) data
+  2. Add in ('impute') some synthetic data
+  
+We'll look at a few versions of these methods now, and use them on our practice datasets.
+
+### Discarding some (non-missing) data
+
+#### Complete case analysis
+
+The very simplest thing we can do is to discard the data for any participant who has some missing data. This is called a **complete-case** analysis, because we only analyse data for participants whose data are complete. 
+
+There are two main problems with this:
+
+  - If the missing data are **not** MCAR, then this can induce bias.
+  - This approach can drastically reduce the amount of data
+  
+::: {.exercise}
+For each of our datasets, how many complete cases are there? Would you recommend a complete case analysis for any of these datasets?
+*Hint: you can use `na.omit` to remove all rows with at least one `NA` from a data frame*.
+
+:::
+
+<details><summary> Click for solution </summary>
+::: {.solution}
+
+All we need to do is find the number of complete rows in each dataset, and compare it to the number of participants.
+
+```{r, echo=T}
+nrow(na.omit(sup_df))
+nrow(sup_df)
+```
+
+If we perform a complete case analysis on the `sup_df` data, we lose data from three participants.
+
+```{r, echo=T}
+nrow(na.omit(smdi_data))
+nrow(smdi_data)
+```
+A complete case analysis of the `smdi_data` would leave us with only 795 (about 32%!) of the participants.
+
+```{r, echo=T}
+nrow(na.omit(opt_tmp))
+nrow(opt_tmp)
+```
+
+If we use a complete case analysis on `opt_tmp` (remember we're ignoring some of the most missing variables for now!) we'd lose 113 cases (out of 823).
+
+:::
+</details>
+
+There are some other methods that involve discarding some data, but for the remainder of this practical we'll focus on methods that involve imputing synthetic data.
+
+### Imputing data
+
+In order to keep all the data we have, even for those cases with some missing variables, we will need to impute (add in) some new data. Let's assume we have no way of actually measuring the true value now, and our only option is to choose some value that seems appropriate. 
+
+One of our main reasons for imputing data is to avoid the bias that would result from discarding incomplete cases, but we could inadvertently introduce bias if we aren't careful (or if we are careful and unlucky) while imputing synthetic data. 
+
+We'll look at a few methods, ranging from the very simple to the moderately complex.
+
+#### Mean imputation
+
+In this method we simply replace each missing value by the mean of the observed values for that variable. This method is not uncommon in practice, but it can have a number of undesirable effects:
+
+  - If the data are not MCAR, bias is introduced
+  - The sample standard deviation is reduced
+  - Relationships between this and other variables are distorted
+  
+#### Imputing using logic
+
+Sometimes there is missingness in a dataset that we can fill in using information about how that variable relates to other variables. For example, in the `opt` data, consider the two columns
+
+`Use.Tob
+Self-reported participant history of tobacco use, factor; Yes, No; Blank = Missing
+
+BL.Cig.Day
+Self-reported number of cigarettes per day for those with tobacco use history, numeric, range: 1-30; Blank = Missing (variable 16= Yes or blank) or non-smoker (variable 16 = No)`
+
+The first, `Use.Tob`, is a binary variable indicating whether or not the participant uses tobacco. The second, `BL.Cig.Day` is a numerical variable indicating how many cigarettes per day the participant smokes. As the data are now, there are a lot of missing values for `BL.Cig.Day`. However, if for a particular participant we have `Use.Tob = No` then we know that `BL.Cig.Day` is zero, and we can impute that value. 
+
+::: {.exercise}
+Using the information in the help file, impute values for the columns `BL.Cig.Day`, `BL.Drks.Day` and `N.prev.preg` in the `opt_df` data. Make a new version of `opt_df` so that we can compare before and after.
+
+**Note the annoying space in some of the responses - often we have `"No "`!**
+:::
+
+<details> <summary> Click for solution </summary>
+
+::: {.solution}
+One important thing to remember is that if the associated categorical variable is missing, then the value for the variable we're imputing will also be missing. We therefore need to condition on the 'parent' variable, rather than replace all missing values of the 'child' variable. For example:
+
+```{r, echo=T}
+opt_df_imp = opt_df
+opt_df_imp$BL.Cig.Day[opt_df_imp$Use.Tob=="No "] = 0
+```
+
+By doing this we have 'fixed' 704 missing values.
+
+Similarly we cand fix those for `BL.Drks.Day` and `N.prev.preg`:
+
+```{r, echo=T}
+opt_df_imp$BL.Drks.Day[opt_df_imp$Use.Alc=="No "] = 0
+opt_df_imp$N.prev.preg[opt_df_imp$Prev.preg=="No "] = 0
+```
+
+We can see that this has very much improved our situation!
+
+```{r, echo=T}
+vis_dat(opt_df, sort_type = F)
+vis_dat(opt_df_imp, sort_type = F)
+
+```
+
+:::
+
+</details>
+
+#### Imputation using a regression model
+
+::: {.technique}
+
+In this section we're going to use the STAN regression functions from the package `rstanarm`. The syntax is very similar to the base R regression and glm functions, but random sampling is much simpler. The `rstanarm` functions use MCMC to generate samples from the posterior distribution of the regression model. There is a lot of output about chains (which you can ignore, in this practical). There are no p-values associated with coefficients, 
+
+:::
+
+We've already looked at using logistic regression to understand patterns of missingness, and so it may not come as a surprise that we can use regression models to choose appropriate values for imputation. This won't be the same model, since we're now interested in the *value*, rather than the missingness. Which type of regression model we use depends on the type of the variable we're imputing values for. If the variable is continuous, linear regression is likely to work well. If the variable is binary, we should try logistic regression. There are plenty of other types of model we could use (as well as a whole host of machine learning type models!) but in this practical we'll stick to those two.
+
+
+Let's suppose we want to use regression to impute values for `pdl1_num`
+
+```{r, echo=T}
+pdl1_lm = stan_glm(
+  pdl1_num ~ exposure + age_num + female_cat + smoking_cat + physical_cat + alk_cat + 
+    histology_cat + ses_cat + copd_cat + eventtime + status + ecog_cat + egfr_cat, 
+  data = smdi_data
+  )
+summary(pdl1_lm)
+```
+
+
+
+
+::: {.exercise}
+
+This approach is going to fail! Can you tell why? Can you suggest what to do about it?
+
+:::
+
+<details> <summary> Click for solution </summary>
+
+::: {.solution}
+
+The model involves variables that also have missingness (`ecog_cat1` and `egfr_cat`), and so for any case with either of those missing, we won't be able to impute a value. 
+
+There are a couple of possibilities:
+
+  - Use the missingness of those values as an input (by creating a `nabular` object)
+  - Remove those variables from the model
+  
+Because all our investigations suggest that `ecog_cat1` is more-or-less unrelated to anything, we will remove it from the model. However, because `egfr_cat` is quite close to being significant in the model, we will keep it in but use missingness in the model.
+
+```{r, echo=T}
+smdi_nab = nabular(smdi_data)
+
+pdl1_lm2 = stan_glm(
+  pdl1_num ~ exposure + age_num + female_cat + smoking_cat + physical_cat + alk_cat + 
+    histology_cat + ses_cat + copd_cat + eventtime + status + egfr_cat_NA, 
+  data = smdi_nab
+  )
+summary(pdl1_lm2)
+```
+
+
+We can see from the means and standard deviations that most of the coefficients are not even close to 'significant', but if we want to investigate some more closely we can visualise them using the `plot` function (separately in this case because they are quite far apart numerically)
+
+```{r, echo=T}
+plot(pdl1_lm2, plotfun="areas", prob = 0.95, pars = c("exposure"))
+plot(pdl1_lm2, plotfun="areas", prob = 0.95, pars = c("age_num"))
+```
+
+We see that for both variables, zero is not in the central 95% of the distribution. This isn't directly relevant here but it's nice to know about!
+
+:::
+
+</details>
+
+We will now use this second model to impute values for `pdl1_num`. 
+
+
+
+```{r, echo=T}
+## Split the data according to whether egfr_cat is missing
+
+smdi_pdl1_comp = smdi_nab[!is.na(smdi_nab$pdl1_num),]
+smdi_pdl1_miss = smdi_nab[is.na(smdi_nab$pdl1_num),]
+
+## Use the GLM to fit values to egfr_cat
+
+pdl1_imp_lm = predict(pdl1_lm2, newdata = smdi_pdl1_miss)
+smdi_pdl1_miss$pdl1_num = pdl1_imp_lm
+
+## Join the data back together again (in a different order, but it doesn't matter)
+
+smdi_imp = rbind(smdi_pdl1_miss, smdi_pdl1_comp)
+```
+
+This might seem sensible, but actually it isn't a very realistic use of a regression model. 
+
+Compared to the observed values, the imputed values have a strong central tendency. This is because we have imputed the mean fitted value for each point, ignoring the measure of spread / uncertainty in the model. We can see this by comparing the observed values of `pdl1_num` to their fitted values (which we would have imputed had they been missing).
+
+```{r, echo=T}
+smdi_pdl1_comp$pdl1_imp = predict(pdl1_lm2, newdata = smdi_pdl1_comp)
+# The next line just recreates the imputataion so that we can bind the datasets together
+smdi_pdl1_miss$pdl1_imp = predict(pdl1_lm2, newdata = smdi_pdl1_miss)
+
+smdi_pdl1_imp = rbind(smdi_pdl1_comp, smdi_pdl1_miss)
+
+ggplot(data = smdi_pdl1_imp, aes(x=pdl1_imp, y=pdl1_num, col = pdl1_num_NA)) + 
+  geom_point() +
+  xlab("Regression fit") + 
+  ylab("Observed value / imputed value") +
+  theme_bw()
+```
+
+A more realistic approach would be to sample one value from the posterior distribution for each point (this is why we are using `rstanarm`!)
+
+```{r, echo=T}
+smdi_pdl1_comp$pdl1_imp_rand = smdi_pdl1_comp$pdl1_num
+
+## This time draw one point at random from the posterior distribution for each participant
+## The output is a 1xdraws matrix, which we'll convert to a vector
+pdl1_rand_draw = posterior_predict(pdl1_lm2, newdata = smdi_pdl1_miss, draws=1)
+smdi_pdl1_miss$pdl1_imp_rand = as.numeric(pdl1_rand_draw)
+
+## Now we can bind the two dataframes together and plot the randomly imputed / observed
+## data against the deterministically fitted data
+
+smdi_pdl1_imp = rbind(smdi_pdl1_comp, smdi_pdl1_miss)
+
+ggplot(data = smdi_pdl1_imp, aes(x=pdl1_imp, y=pdl1_imp_rand, col = pdl1_num_NA)) + 
+  geom_point() +
+  xlab("Regression fit") + 
+  ylab("Observed value / randomly imputed value") +
+  theme_bw()
+```
+This imputed data looks much more representative of the actual dataset.
+
+::: {.exercise}
+
+Use regression imputation to impute values for `BMI` in `opt_tmp`. 
+
+:::
+
+### Multiple imputation
+
+
+Having reached the point of acknowledging the randomness needed in imputation, a natural next step would be to draw multiple values from the posterior distribution, rather than just one. This leads to a method called *multiple imputation*, which is (arguably) the most widely used approach to imputing missing data, though sadly we don't have time to go into it in this practical. 

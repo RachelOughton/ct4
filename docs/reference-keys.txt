@@ -1,9 +1,0 @@
-exm:unlabeled-div-1
-exm:unlabeled-div-2
-exm:unlabeled-div-3
-rct-intro
-causal-inference-and-clinical-trials
-the-structure-of-a-clinical-trial
-primout
-ethical-issues
-phases-of-clinical-trials
