@@ -109,7 +109,9 @@ $$ F\left(-2, df=31\right) + \left[1 - F\left(2, df=31\right)\right] = 2\times{0
 and the result is no longer significant at the 0.05 level. Throughout this course, we will always assume two-tailed tests.
 
 ```{r starbucks, fig.cap = "A rather ubiquitous two-tailed mermaid"}
-knitr::include_graphics("images/starbucks.jpg")
+if(is_html_output()){
+  knitr::include_graphics("images/starbucks.jpg")
+}
 ```
 
 ## Constructing a measure of effect size {#sec-measDcont}
