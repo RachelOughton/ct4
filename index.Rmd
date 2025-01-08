@@ -94,25 +94,25 @@ We have four computer practicals for this module. They are 1-2pm on the Mondays 
 
 ### Office Hour {-}
 
-The office hour will be every Monday, 3-4pm, in MCS 2091 (this is a meeting room, not my office). If you walk up the stairs, keep straight on past the main maths office and computer room (MCS 2094), turn right and it's on your right through the double doors. Alternatively there are maps in the main areas!
+The office hour will be every Wednesday, 10-11am, in MCS 3077 (this is a bookable room, not my office).
 
 ### Assessment {-}
 
-This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February, the second on Wednesday 19th March.
+This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February (due 3rd March), the second on Wednesday 19th March (due 5th May).
 
-There will also be some formative assignments throughout the course. More details on these to follow.
+There will also be two formative assignments during the course. More details on these to follow.
 
-### Books {-}
+### Books and resources {-}
 
 The main reference for the first half of the course is @matthews2006introduction. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are @hulley2013designing, @hayes2017cluster. You shouldn't need to use any of these books, but of course you're welcome to if you want to read further.
 
-I will share links along the way for relevant resources like podcast episodes and articles.
+I will share links along the way for relevant resources like podcast episodes and articles, which I hope will help you to get a feel for the topic more generally.
 
 ## What to expect from this module {-}
 
 Clinical Trials IV is somewhat different from the majority of statistics modules, because
 
-  * It is more focussed on application than on methodology
+  * Its main focus is on application
   * It is assessed purely through coursework.
   
 This means that your experience of it might be different from what you're used to
