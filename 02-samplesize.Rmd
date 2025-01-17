@@ -43,14 +43,6 @@ The threshold for the P-value below which the results are considered 'significan
 
 This use of a significance level is (in part) a legacy from early days when computers were rare and values were looked up in $t$-tables (or similar). Now that it is very simple to find the exact P-value, it is becoming more and more common to report the actual number. Indeed, there is a big difference between $p=0.049$ and $p=0.000049$.
 
-### Insignificant results
-
-If our P-value is relatively large, say 0.3 or 0.5 (or really, greater than $\alpha$), then our result is not at all unlikely (or sufficiently unlikely) under the null hypothesis, and provides insufficient evidence to reject $H_0.$ However, it is not inconsistent with the existence of a treatment effect, so we don't say there is evidence to accept $H_0$. One can imagine that if the true treatment effect $\tau$ were tiny, many trials would fail to find evidence to reject $H_0$. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if $\tau$ is very large, even a relatively small sample size is likely to provide enough evidence to reject $H_0$. 
-
-A non-significant P-value means that our results are consistent with the null hypothesis $\tau=0$, but they are also consistent with some small treatment effect, and therefore we can't conclude very much. The key issue is, what size of treatment effect do we care about? We must ensure that our sample size is large enough to be sufficiently likely to detect a clinically meaningful treatment effect.
-
-We are being vague for now, but this is a key issue in determining an appropriate sample size.
-
 ### One-tailed or two-tailed?
 
 It is highly likely that the scientists running the trial will have a strong idea of the likely 'direction' of the treatment effect. Assuming that a larger value of the primary outcome variable $X$ is good, they will expect a positive value of the treatment effect $\tau$ (or be prepared to accept a possible value of zero for no effect). 
@@ -113,6 +105,14 @@ if(is_html_output()){
   knitr::include_graphics("images/starbucks.jpg")
 }
 ```
+
+### Insignificant results
+
+If our P-value is relatively large, say 0.3 or 0.5 (or really, greater than $\alpha$), then our result is not at all unlikely (or sufficiently unlikely) under the null hypothesis, and provides insufficient evidence to reject $H_0.$ However, it is not inconsistent with the existence of a treatment effect, so we don't say there is evidence to accept $H_0$. One can imagine that if the true treatment effect $\tau$ were tiny, many trials would fail to find evidence to reject $H_0$. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if $\tau$ is very large, even a relatively small sample size is likely to provide enough evidence to reject $H_0$. 
+
+A non-significant P-value means that our results are consistent with the null hypothesis $\tau=0$, but they are also consistent with some small treatment effect, and therefore we can't conclude very much. The key issue is, what size of treatment effect do we care about? We must ensure that our sample size is large enough to be sufficiently likely to detect a clinically meaningful treatment effect.
+
+We are being vague for now, but this is a key issue in determining an appropriate sample size.
 
 ## Constructing a measure of effect size {#sec-measDcont}
 
@@ -214,7 +214,9 @@ $$\left[-z_{\alpha/2}s\sqrt{\frac{1}{n} + \frac{1}{m}},\; z_{\alpha/2}s\sqrt{\fr
 
 #### Brief aside on notation {-}
 
-*We'll see a lot of the notation $z_{\alpha/2}$ and similar, so to clarify:*
+::: {.aside}
+
+We'll see a lot of the notation $z_{\alpha/2}$ and similar, so to clarify:
 
 ```{r}
 x2 = seq(1.96,3, by=0.01)
@@ -228,9 +230,10 @@ ggplot(data=data.frame(x=c(-3,3)), aes(x)) +
 
 ```
 
-*In R, we have $\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)$ and $z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)$. `qnorm` is the quantile and `pnorm` is the cumulative distribution function. So, for example*
+In R, we have $\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)$ and $z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)$. `qnorm` is the quantile and `pnorm` is the cumulative distribution function. So, for example
 $$\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)$$
 
+:::
 
 We have constructed our whole argument under the assumption that $H_0$ is true, and that the probability of such a value is therefore $\alpha$. We want this probability to be small, since it constitutes an error; $H_0$ is true, but our value of $D$ (or the difference in means) leads us to reject $H_0$. This is sometimes called the 'type I' error rate. But what if $H_0$ is false?
 
@@ -464,5 +467,7 @@ and Equation \@ref(eq:powerfun3) rearranges to
       
 and therefore we need at least 112 participants in each trial arm.
 :::
+
+
         
 

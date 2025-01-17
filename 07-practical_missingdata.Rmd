@@ -2,14 +2,16 @@
 
 # Computer Practical 1 - Missing data {-}
 
-In this computer practical we focus on an important issue in clinical trials (and most real world projects!): **missing data**. There will be a bit more reading than in future practicals, to give you the necessary theory and background. We will only have time to skim the surface of working with missing data. If you want to find out more, some good references are @little2019statistical and chapter 17 of @gelman2021regression. 
+MENTION SOMEWHERE ABOUT THIS TAKING PLACE AT THE ANALYSIS STAGE - DO SOMETHING SENSIBLE AT THE ALLOCATION STAGE.
+
+In this computer practical we focus on an important issue in clinical trials (and most real world projects!): **missing data**. There will be a bit more reading than in future practicals, to give you the necessary theory and background. We will only have time to skim the surface of working with missing data, but if you want to find out more, some good references are @little2019statistical and chapter 17 of @gelman2021regression. 
 
 
 Consider it a sort of informal formative assignment to finish this practical in your own time if you don't in class. Or, at the very least, you might need to return to it while working on future assignments. **For this reason, it would be sensible to keep track of everything you do in an .R file that you can return to in the future**.
 
 There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you're not sure how to do something, please ask!
 
-**In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.**
+<!-- **In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.** -->
 
 ### R practicalities {-}
   
@@ -257,19 +259,17 @@ So far, things have been a bit ad-hoc. We may have noticed some patterns or tren
 
 When working with missing data, it's important to think about the *mechanism* that is causing some data to be missing. Is there some systematic reason why some variables are missing? 
 
-Broadly speaking, there are three types of missing data. These were first coined by Rubin in 1976 @rubin1976inference.
+Broadly speaking, there are three types of missing data. These were first coined by @rubin1976inference.
 
 #### Missing completely at random (MCAR)
 
 If data are MCAR, then the probability of missingness is the same for all units: missingness is statistically independent of all covariates (observed and unobserved), of the treatment and of the outcome. If each participant decided whether or not to provide a certain piece of information by rolling a dice (eg. 1 = don't provide), then the resulting missingness would be MCAR.
 
-This type of missingness is the simplest to deal with, because removing the missing units doesn't incur any bias. However, it's extremely rare in real life, and it's difficult to even think of an example where it would hold!
+This type of missingness is the simplest to deal with, because removing the missing units is unlikely to cause any bias. However, it's extremely rare in real life, and it's difficult to even think of an example where it would definitely hold!
 
 #### Missing at random (MAR)
 
-For data to be MAR, the probability of missingness must depend only on **available** information. 
-
-In this case, we can use the available information to model the missingness.
+For data to be MAR, the probability of missingness must depend only on **available** information. In this case, we can use the available information to model the missingness.
 
 MAR data are somewhat more common (or at least the mechanism is more commonly assumed than MCAR), and is thankfully still moderately simple to deal with. If missingness is 'at random', then adjusting for the relevant covariates in the analysis will avoid bias.
 
@@ -287,7 +287,7 @@ We can never **prove** which of these is the case, since by definition we don't 
 
 ## Exploring the relationship between missingness and other variables
 
-In a clinical trial, ultimately what we care about is whether the missingness has changed our understanding of the outcome variable(s). This is most likely to happen if the missingness is related to the outcome variable. This could happen either directly, or because the missingness is linked to something that is correlated to a variable that affects the outcome. 
+In a clinical trial, ultimately what we care about is whether the missingness has changed our understanding of the outcome variable(s). This is most likely to happen if the missingness is related to the outcome variable. This could happen either directly, or because the missingness is correlated to a variable that affects the outcome. 
 
 Again, we will explore things visually before using some more rigorous methods. Now, instead of simply understanding how much missing data there is, and which variables and/or cases are involved, we want to look at the relationships between missingness and the values of the other variables.
 
@@ -298,7 +298,7 @@ In the package `naniar` you can create a copy of the data frame containing just 
 as_shadow(sup_df)
 ```
 
-```{r, echo=T}
+```{r, echo=F}
 sup_shadow = as_shadow(sup_df)
 kable(sup_shadow)%>%
   kable_paper() %>%
@@ -311,7 +311,7 @@ To avoid duplication of the original names, the column names are suffixed by '_N
 nabular(sup_df)
 ```
 
-```{r, echo=T}
+```{r, echo=F}
 sup_nab = nabular(sup_df)
 kable(sup_nab)%>%
   kable_paper() %>%
@@ -458,15 +458,15 @@ So, it looks likely that the missingness of `egfr_cat` depends on smoking status
 
 </details>
 
-Looking into all the variables one by one like this would take a very long time, and wouldn't even allow us to many any (useful) conclusions. Really what we want to know is whether there is a significant difference in the observed data compared to the missing data. 
+Looking into all the variables one by one like this would take a very long time, and wouldn't even allow us to make any (useful) conclusions. Really what we want to know is whether there is a significant difference in the observed data compared to the missing data. 
 
 ### Statistical summaries of the effect of missingness {#sec-statsum}
 
-According to the framework Rubin devised @rubin1976inference, if the data are MAR (missing at random) then the missingness can be explained by (some of) the observed covariates. We would therefore expect the participant characteristics to be different between those with missing values and those without. If the missingness is MCAR (missing completely at random) we would expect no significant difference. Similarly, if the data are MNAR (missing not-at-random) due to some unobserved variable that is independent of all observed variables, we would expect no pattern. In reality this is almost never the case (the confounding variables are usually linked to some observed variables) and so really we are testing against the data being MCAR. 
+According to the framework coined by @rubin1976inference, if the data are MAR (missing at random) then the missingness can be explained by (some of) the observed covariates. We would therefore expect the participant characteristics to be different between those with missing values and those without. If the missingness is MCAR (missing completely at random) we would expect no significant difference. Similarly, if the data are MNAR (missing not-at-random) due to some unobserved variable that is independent of all observed variables, we would expect no pattern. In reality this is almost never the case (the confounding variables are usually linked to some observed variables) and so really we are testing against the data being MCAR. 
 
 #### Hotelling's multivariate t-test
 
-This test examines the differences between those observations with an observation (of some partially observed variable) and those without. The test statistic is derived by assuming both groups are drawn from the same multivariate normal distribution, and so a high value of the test statistic (conversely a low p-value) suggests that there are significant differences between the groups. This test is from a generalisation of Student's $t$-test made by Hotelling in 1931 @hotelling1931generalization. 
+This test examines the differences between those observations with an observation (of some partially observed variable) and those without. The test statistic is derived by assuming both groups are drawn from the same multivariate normal distribution, and so a high value of the test statistic (conversely a low p-value) suggests that there are significant differences between the groups. This test is from a generalisation of Student's $t$-test made by @hotelling1931generalization. 
 
 ::: {.technique}
 
@@ -512,9 +512,9 @@ These all appear to have a significant departure from MCAR.
 
 The **absolute standardised mean difference** (ASMD) gives a measure of how different the values of the observed covariates are for missing versus observed values of each partially observed covariate. For every partially observed covariate, there is an ASMD for each other covariate. 
 
-Label the partially observed covariate $X_M$, and suppose $X_1,\ldots,X_K$ are the other covariates. The dataset is split into those cases with $X_M$ observed and those with $X_M$ missing. For each covariate $X_1,\ldots,X_K$ we find the absolute value of the difference, and divide this by the standard deviation of that covariate. The ASMD is therefore always non-negative, and should not be affected by sample size.
+Label the partially observed covariate $X_M$, and suppose $X_1,\ldots,X_K$ are the other covariates. The dataset is split into those cases with $X_M$ observed and those with $X_M$ missing. For each covariate $X_1,\ldots,X_K$ we find the absolute value of the difference in means, and divide this by the standard deviation of that covariate. The ASMD is therefore always non-negative, and should not be affected by sample size.
 
-A general rule of thumb is that ASMD values over 0.1 are cause for concern.
+A general rule of thumb is that ASMD values over 0.1 are cause for concern, though again this can be vulnerable to small sample sizes.
 
 ::: {.technique}
 The function `smdi_asmd` from `smdi` creates an `asmd` object, which has several parts to it. Note that we set `includeNA=T` so that we can see the effect of missingness, as well as observed values, of other variables. This won't make a difference for `sup_df`, but it will in the exercise.
@@ -629,7 +629,8 @@ Model the patterns of missingness for `smdi` and `opt` (use the `opt_tmp` data f
 
 :::
 
-::: {.hint}
+
+::: {.technique}
 
 To avoid typing out all the column names for the formula, you can copy and paste the output from
 
@@ -739,7 +740,7 @@ glm_opt_BMI_NA = glm(
 summary(glm_opt_BMI_NA)
 ```
 
-From these three models is appears that BMI is much more likely to be missing for those from the NY clinic (we already knew this from our previous investigations!):
+From these three models it appears that BMI is much more likely to be missing for those from the NY clinic (we already knew this from our previous investigations!):
 
 ```{r, echo=T}
 ggplot(data=nabular(opt_tmp), aes(x=Clinic, fill = BMI_NA)) +
@@ -863,13 +864,11 @@ In this method we simply replace each missing value by the mean of the observed 
   
 #### Imputing using logic
 
-Sometimes there is missingness in a dataset that we can fill in using information about how that variable relates to other variables. For example, in the `opt` data, consider the two columns
+Sometimes there is missingness in a dataset that we can fill in using information about how that variable relates to other variables. For example, in the `opt` data, consider the two columns `Use.Tob` and `BL.Cig.Day`:
 
-`Use.Tob
-Self-reported participant history of tobacco use, factor; Yes, No; Blank = Missing
+**Use.Tob**: Self-reported participant history of tobacco use, factor; Yes, No; Blank = Missing
 
-BL.Cig.Day
-Self-reported number of cigarettes per day for those with tobacco use history, numeric, range: 1-30; Blank = Missing (variable 16= Yes or blank) or non-smoker (variable 16 = No)`
+**BL.Cig.Day**: Self-reported number of cigarettes per day for those with tobacco use history, numeric, range: 1-30; Blank = Missing (variable 16= Yes or blank) or non-smoker (variable 16 = No)`
 
 The first, `Use.Tob`, is a binary variable indicating whether or not the participant uses tobacco. The second, `BL.Cig.Day` is a numerical variable indicating how many cigarettes per day the participant smokes. As the data are now, there are a lot of missing values for `BL.Cig.Day`. However, if for a particular participant we have `Use.Tob = No` then we know that `BL.Cig.Day` is zero, and we can impute that value. 
 
@@ -898,7 +897,7 @@ opt_df_imp$BL.Drks.Day[opt_df_imp$Use.Alc=="No "] = 0
 opt_df_imp$N.prev.preg[opt_df_imp$Prev.preg=="No "] = 0
 ```
 
-We can see that this has very much improved our situation!
+We can see that this has very much improved our situation! We could do something similar for `BL.Diab.Type` too since this is linked to `Diabetes`.
 
 ```{r, echo=T}
 vis_dat(opt_df, sort_type = F)
@@ -951,6 +950,7 @@ There are a couple of possibilities:
 
   - Use the missingness of those values as an input (by creating a `nabular` object)
   - Remove those variables from the model
+  - Work iteratively, generating temporary imputed values and cycling round the variables with missingness
   
 Because all our investigations suggest that `ecog_cat1` is more-or-less unrelated to anything, we will remove it from the model. However, because `egfr_cat` is quite close to being significant in the model, we will keep it in but use missingness in the model.
 
@@ -1038,6 +1038,7 @@ ggplot(data = smdi_pdl1_imp, aes(x=pdl1_imp, y=pdl1_imp_rand, col = pdl1_num_NA)
   ylab("Observed value / randomly imputed value") +
   theme_bw()
 ```
+
 This imputed data looks much more representative of the actual dataset.
 
 ::: {.exercise}

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>2 Sample size for a normally distributed primary outcome variable | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="2 Sample size for a normally distributed primary outcome variable | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-01-08" />
+<meta name="date" content="2025-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="rct-intro.html"/>
-<link rel="next" href="references.html"/>
+<link rel="next" href="alloc.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,8 +52,12 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 
 
 
@@ -141,12 +145,32 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
 <li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
-<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.2</b> One-tailed or two-tailed?</a></li>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.1</b> One-tailed or two-tailed?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.2</b> Insignificant results</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
 <li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
 <li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3.1</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.3.2" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.3.2</b> Minimization</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.4</b> Problems around allocation</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -197,14 +221,8 @@ div.csl-indent {
 <p><span id="def:unlabeled-div-6" class="definition"><strong>Definition 2.3  </strong></span>The threshold for the P-value below which the results are considered ‘significant’ is known as the <strong>significance level</strong> of the test, and is generally written <span class="math inline">\(\alpha\)</span> (as above).</p>
 </div>
 <p>This use of a significance level is (in part) a legacy from early days when computers were rare and values were looked up in <span class="math inline">\(t\)</span>-tables (or similar). Now that it is very simple to find the exact P-value, it is becoming more and more common to report the actual number. Indeed, there is a big difference between <span class="math inline">\(p=0.049\)</span> and <span class="math inline">\(p=0.000049\)</span>.</p>
-<div id="insignificant-results" class="section level3 hasAnchor" number="2.2.1">
-<h3><span class="header-section-number">2.2.1</span> Insignificant results<a href="rct-plan.html#insignificant-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>If our P-value is relatively large, say 0.3 or 0.5 (or really, greater than <span class="math inline">\(\alpha\)</span>), then our result is not at all unlikely (or sufficiently unlikely) under the null hypothesis, and provides insufficient evidence to reject <span class="math inline">\(H_0.\)</span> However, it is not inconsistent with the existence of a treatment effect, so we don’t say there is evidence to accept <span class="math inline">\(H_0\)</span>. One can imagine that if the true treatment effect <span class="math inline">\(\tau\)</span> were tiny, many trials would fail to find evidence to reject <span class="math inline">\(H_0\)</span>. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if <span class="math inline">\(\tau\)</span> is very large, even a relatively small sample size is likely to provide enough evidence to reject <span class="math inline">\(H_0\)</span>.</p>
-<p>A non-significant P-value means that our results are consistent with the null hypothesis <span class="math inline">\(\tau=0\)</span>, but they are also consistent with some small treatment effect, and therefore we can’t conclude very much. The key issue is, what size of treatment effect do we care about? We must ensure that our sample size is large enough to be sufficiently likely to detect a clinically meaningful treatment effect.</p>
-<p>We are being vague for now, but this is a key issue in determining an appropriate sample size.</p>
-</div>
-<div id="one-tailed-or-two-tailed" class="section level3 hasAnchor" number="2.2.2">
-<h3><span class="header-section-number">2.2.2</span> One-tailed or two-tailed?<a href="rct-plan.html#one-tailed-or-two-tailed" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="one-tailed-or-two-tailed" class="section level3 hasAnchor" number="2.2.1">
+<h3><span class="header-section-number">2.2.1</span> One-tailed or two-tailed?<a href="rct-plan.html#one-tailed-or-two-tailed" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>It is highly likely that the scientists running the trial will have a strong idea of the likely ‘direction’ of the treatment effect. Assuming that a larger value of the primary outcome variable <span class="math inline">\(X\)</span> is good, they will expect a positive value of the treatment effect <span class="math inline">\(\tau\)</span> (or be prepared to accept a possible value of zero for no effect).</p>
 <p>It would therefore be tempting to perform a one-sided test, with</p>
 <p><span class="math display">\[\begin{align*}
@@ -214,7 +232,7 @@ div.csl-indent {
 <p>For example, suppose our test statistic <span class="math inline">\(t\)</span> has a <span class="math inline">\(t\)</span> distribution with 31 degrees of freedom and we obtain a value of 2, as shown in Figure <a href="rct-plan.html#fig:t31-onesided">2.1</a>.
 In this case our P-value is <span class="math inline">\(1 - F_t\left(2, df=31\right)= 0.0272\)</span> (where <span class="math inline">\(F_t\left(\cdot\right)\)</span> is the cumulative distribution function of the <span class="math inline">\(t\)</span> distribution) , and the result would be considered significant at the 0.05 level.</p>
 <div class="figure"><span style="display:block;" id="fig:t31-onesided"></span>
-<img src="CT4H_notes_files/figure-html/t31-onesided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $t > 2$ shaded.” width=“672” /&gt;
+<img src="CT4H_notes_files/figure-html/t31-onesided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $t &gt; 2$ shaded." width="672" />
 <p class="caption">
 Figure 2.1: The distribution <span class="math inline">\(t_{31}\)</span>, with the area corresponding to <span class="math inline">\(t &gt; 2\)</span> shaded.
 </p>
@@ -227,7 +245,7 @@ Figure 2.1: The distribution <span class="math inline">\(t_{31}\)</span>, with t
 \end{align*}\]</span></p>
 <p>In this scenario, Figure <a href="rct-plan.html#fig:t31-onesided">2.1</a> is replaced by the plot shown in Figure <a href="rct-plan.html#fig:t31-twosided">2.2</a>, where values of <span class="math inline">\(t\)</span> with <span class="math inline">\(t&lt;-2\)</span> are considered ‘equivalent’ to those with <span class="math inline">\(t&gt;2\)</span>, in the sense of how unlikely they are under <span class="math inline">\(H_0\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:t31-twosided"></span>
-<img src="CT4H_notes_files/figure-html/t31-twosided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $|t| > 2$ shaded.” width=“672” /&gt;
+<img src="CT4H_notes_files/figure-html/t31-twosided-1.png" alt="The distribution $t_{31}$, with the area corresponding to $|t| &gt; 2$ shaded." width="672" />
 <p class="caption">
 Figure 2.2: The distribution <span class="math inline">\(t_{31}\)</span>, with the area corresponding to <span class="math inline">\(|t| &gt; 2\)</span> shaded.
 </p>
@@ -236,11 +254,17 @@ Figure 2.2: The distribution <span class="math inline">\(t_{31}\)</span>, with t
 <p><span class="math display">\[ F\left(-2, df=31\right) + \left[1 - F\left(2, df=31\right)\right] = 2\times{0.0272} = 0.0543\]</span>
 and the result is no longer significant at the 0.05 level. Throughout this course, we will always assume two-tailed tests.</p>
 <div class="figure"><span style="display:block;" id="fig:starbucks"></span>
-<img src="images/starbucks.jpg" alt="A rather ubiquitous two-tailed mermaid" width="320" />
+<img src="images/starbucks.jpg" alt="A rather ubiquitous two-tailed mermaid"  />
 <p class="caption">
 Figure 2.3: A rather ubiquitous two-tailed mermaid
 </p>
 </div>
+</div>
+<div id="insignificant-results" class="section level3 hasAnchor" number="2.2.2">
+<h3><span class="header-section-number">2.2.2</span> Insignificant results<a href="rct-plan.html#insignificant-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If our P-value is relatively large, say 0.3 or 0.5 (or really, greater than <span class="math inline">\(\alpha\)</span>), then our result is not at all unlikely (or sufficiently unlikely) under the null hypothesis, and provides insufficient evidence to reject <span class="math inline">\(H_0.\)</span> However, it is not inconsistent with the existence of a treatment effect, so we don’t say there is evidence to accept <span class="math inline">\(H_0\)</span>. One can imagine that if the true treatment effect <span class="math inline">\(\tau\)</span> were tiny, many trials would fail to find evidence to reject <span class="math inline">\(H_0\)</span>. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if <span class="math inline">\(\tau\)</span> is very large, even a relatively small sample size is likely to provide enough evidence to reject <span class="math inline">\(H_0\)</span>.</p>
+<p>A non-significant P-value means that our results are consistent with the null hypothesis <span class="math inline">\(\tau=0\)</span>, but they are also consistent with some small treatment effect, and therefore we can’t conclude very much. The key issue is, what size of treatment effect do we care about? We must ensure that our sample size is large enough to be sufficiently likely to detect a clinically meaningful treatment effect.</p>
+<p>We are being vague for now, but this is a key issue in determining an appropriate sample size.</p>
 </div>
 </div>
 <div id="sec-measDcont" class="section level2 hasAnchor" number="2.3">
@@ -308,10 +332,12 @@ where
 <p><span class="math display">\[\left[-z_{\alpha/2}s\sqrt{\frac{1}{n} + \frac{1}{m}},\; z_{\alpha/2}s\sqrt{\frac{1}{n} + \frac{1}{m}}  \right]. \]</span></p>
 <div id="brief-aside-on-notation" class="section level4 unnumbered hasAnchor">
 <h4>Brief aside on notation<a href="rct-plan.html#brief-aside-on-notation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p><em>We’ll see a lot of the notation <span class="math inline">\(z_{\alpha/2}\)</span> and similar, so to clarify:</em></p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p><em>In R, we have <span class="math inline">\(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\)</span> and <span class="math inline">\(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\)</span>. <code>qnorm</code> is the quantile and <code>pnorm</code> is the cumulative distribution function. So, for example</em>
+<div class="aside">
+<p>We’ll see a lot of the notation <span class="math inline">\(z_{\alpha/2}\)</span> and similar, so to clarify:</p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-406-1.png" width="672" /></p>
+<p>In R, we have <span class="math inline">\(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\)</span> and <span class="math inline">\(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\)</span>. <code>qnorm</code> is the quantile and <code>pnorm</code> is the cumulative distribution function. So, for example
 <span class="math display">\[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)\]</span></p>
+</div>
 <p>We have constructed our whole argument under the assumption that <span class="math inline">\(H_0\)</span> is true, and that the probability of such a value is therefore <span class="math inline">\(\alpha\)</span>. We want this probability to be small, since it constitutes an error; <span class="math inline">\(H_0\)</span> is true, but our value of <span class="math inline">\(D\)</span> (or the difference in means) leads us to reject <span class="math inline">\(H_0\)</span>. This is sometimes called the ‘type I’ error rate. But what if <span class="math inline">\(H_0\)</span> is false?</p>
 </div>
 </div>
@@ -426,7 +452,7 @@ Zhong, Baoliang. 2009. <span>“How to Calculate Sample Size in Randomized Contr
         </div>
       </div>
 <a href="rct-intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="alloc.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

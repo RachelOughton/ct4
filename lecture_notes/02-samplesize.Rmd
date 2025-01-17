@@ -53,20 +53,6 @@ The threshold for the p-value below which the results are considered 'significan
 
 \textit{This use of a significance level is (in part) a legacy from early days when computers were rare and values were looked up in $t$-tables (or similar). Now that it is very simple to find the exact P-value, it is becoming more and more common to report the actual number. Indeed, there is a big difference between $p=0.049$ and $p=0.000049$.}
 
-### Insignificant results
-
-If our P-value is large, say 0.3 or 0.5, then our result is not at all unlikely under the null hypothesis, and provides no evidence to reject $H_0$. However, it is not inconsistent with the existence of a treatment effect, so we don't say there is evidence to accept $H_0$. 
-
-\textit{If the true treatment effect $\tau$ were tiny, many trials would fail to find evidence to reject $H_0$. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if $\tau$ is very large, even a relatively small sample size is likely to provide enough evidence to reject $H_0$.}
-
-A non-significant P-value means our results are consistent with $H_0:\; \tau=0$, and also with some small treatment effect. 
-
-Key issue: what size of treatment effect do we care about? 
-
-Our sample size should be big enough to be sufficiently likely to detect a clinically meaningful treatment effect.
-
-\textit{We are being vague for now, but this is a key issue in determining an appropriate sample size.}
-
 ### One-sided or two-sided?
 
 The trial clinicians will have strong beliefs about the direction of the treatment effect. Assuming that a larger value of the primary outcome variable $X$ is good, they will expect $\tau>0$ (or be prepared to accept $\tau=0$, no effect). 
@@ -124,6 +110,20 @@ The P-value for the two-sided test as shown in Figure \@ref(fig:t31-twosided) is
 
 $$ F\left(-2, df=31\right) + \left[1 - F\left(2, df=31\right)\right] = 2\times{0.0272} = 0.0543$$
 and the result is no longer significant at the 0.05 level. Throughout this course, we will always use two-tailed tests.
+
+### Insignificant results
+
+If our P-value is large, say 0.3 or 0.5, then our result is not at all unlikely under the null hypothesis, and provides no evidence to reject $H_0$. However, it is not inconsistent with the existence of a treatment effect, so we don't say there is evidence to accept $H_0$. 
+
+\textit{If the true treatment effect $\tau$ were tiny, many trials would fail to find evidence to reject $H_0$. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if $\tau$ is very large, even a relatively small sample size is likely to provide enough evidence to reject $H_0$.}
+
+A non-significant P-value means our results are consistent with $H_0:\; \tau=0$, and also with some small treatment effect. 
+
+Key issue: what size of treatment effect do we care about? 
+
+Our sample size should be big enough to be sufficiently likely to detect a clinically meaningful treatment effect.
+
+\textit{We are being vague for now, but this is a key issue in determining an appropriate sample size.}
 
 ## Constructing a measure of effect size {#sec-measDcont}
 

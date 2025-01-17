@@ -287,6 +287,7 @@ Data from an educational trial, contained in `crtData` in the package `eefAnalyt
 We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.
 
 ```{r eeftab, fig.cap = "The eefAnalytics dataset."}
+data("crtData")
 crt_df = crtData[ ,-c(5,6)]
 crt_df$School = as.factor(crt_df$School)
 crt_df$Intervention = as.factor(crt_df$Intervention)

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>3 Allocation | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
-  <meta name="generator" content="bookdown 0.36 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
   <meta property="og:title" content="3 Allocation | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2024-11-20" />
+<meta name="date" content="2025-01-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="rct-plan.html"/>
-<link rel="next" href="rct-analysis.html"/>
+<link rel="next" href="references.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -52,79 +52,14 @@
 <link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
 <link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-<link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet" />
-<link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 <link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
 <script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
-<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
-<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {  background-color: #f8f8f8; }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ef2929; } /* Alert */
-code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #204a87; } /* Attribute */
-code span.bn { color: #0000cf; } /* BaseN */
-code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #8f5902; } /* Constant */
-code span.co { color: #8f5902; font-style: italic; } /* Comment */
-code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code span.dt { color: #204a87; } /* DataType */
-code span.dv { color: #0000cf; } /* DecVal */
-code span.er { color: #a40000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #204a87; font-weight: bold; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code span.ot { color: #8f5902; } /* Other */
-code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
-code span.ss { color: #4e9a06; } /* SpecialString */
-code span.st { color: #4e9a06; } /* String */
-code span.va { color: #000000; } /* Variable */
-code span.vs { color: #4e9a06; } /* VerbatimString */
-code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-</style>
 
 <style type="text/css">
   
@@ -175,7 +110,7 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books"><i class="fa fa-check"></i>Books</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books-and-resources"><i class="fa fa-check"></i>Books and resources</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
 <ul>
@@ -210,8 +145,8 @@ div.csl-indent {
 <li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
 <li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
 <ul>
-<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.1</b> Insignificant results</a></li>
-<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.2</b> One-tailed or two-tailed?</a></li>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.1</b> One-tailed or two-tailed?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.2</b> Insignificant results</a></li>
 </ul></li>
 <li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
 <li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
@@ -230,13 +165,14 @@ div.csl-indent {
 <li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
 <li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
 </ul></li>
-<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a></li>
-<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.4</b> Stratified sampling</a></li>
-<li class="chapter" data-level="3.5" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.5</b> Minimization</a>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a>
 <ul>
-<li class="chapter" data-level="3.5.1" data-path="alloc.html"><a href="alloc.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.5.1</b> Minimization algorithm</a></li>
+<li class="chapter" data-level="3.3.1" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3.1</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.3.2" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.3.2</b> Minimization</a></li>
 </ul></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.4</b> Problems around allocation</a></li>
 </ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
       </nav>
@@ -256,7 +192,7 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="alloc" class="section level1 hasAnchor" number="3">
 <h1><span class="header-section-number">3</span> Allocation<a href="alloc.html#alloc" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Once we’ve decided how many participants we need in our trial, and they’ve been recruited, we next need to determine which participants should be assigned to which trial arm. This is process is known as <strong>allocation</strong> (or sometimes as <strong>randomization</strong>). Before we think about methods for allocation, we are going to spend some time talking about bias.</p>
+<p>Once we’ve decided how many participants we need in our trial, we need to determine how they will each be assigned to a trial arm. This is process is known as <strong>allocation</strong> (or sometimes as <strong>randomization</strong>). Before we think about methods for allocation, we are going to spend some time talking about bias.</p>
 <div id="bias" class="section level2 hasAnchor" number="3.1">
 <h2><span class="header-section-number">3.1</span> Bias<a href="alloc.html#bias" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In statistics, <em>bias</em> is a systematic tendency for the results of our analysis to be different from the true value. We see this particularly when we are using sample data to estimate a parameter. We will revisit what we have learned in previous courses about bias before going on to see how it affects RCTs.</p>
@@ -267,7 +203,7 @@ div.csl-indent {
 <p><span class="math display">\[ s^2 = \frac{1}{n}\sum\limits_{i=1}^n\left(x_i - \bar{x}\right)^2 .\]</span></p>
 <p>In this case, <span class="math inline">\(E\left(s^2\right) \neq {\sigma^2}\)</span> (you’ve probably seen this proved so we’re not going to prove it now), and <span class="math inline">\(s^2\)</span> is a biased estimator of <span class="math inline">\(\sigma^2\)</span>. However, we know that</p>
 <p><span class="math display">\[E \left(\frac{n}{n-1}s^2\right) = \sigma^2,\]</span>
-and therefore we can apply this correction to the sample variance <span class="math inline">\(s^2\)</span> to produce an unbiased estimate of the population variance <span class="math inline">\(\sigma^2\)</span>.</p>
+and therefore we can apply this correction to the sample variance <span class="math inline">\(s^2\)</span> to produce an unbiased estimate of the population variance <span class="math inline">\(\sigma^2\)</span>. Here, the sample are representative of the population, but the size of the sample leads to some bias.</p>
 <p>Now, suppose our sample <span class="math inline">\(x_1,\ldots,x_n\)</span> were drawn from <span class="math inline">\(N\left(\mu,\sigma^2\right)\)</span>, but were <strong>not</strong> independent of one another. Then, neither our estimator <span class="math inline">\(s^2\)</span>, nor our bias-corrected estimator <span class="math inline">\(\frac{n}{n-1}s^2\)</span> would have expected value <span class="math inline">\(\sigma^2\)</span>. Furthermore, we cannot use our sample <span class="math inline">\(x_1,\ldots,x_n\)</span> to produce an unbiased estimator of <span class="math inline">\(\sigma^2\)</span>, or even of the mean <span class="math inline">\(\mu\)</span>.</p>
 <p>This scenario is much closer to what we mean when we talk about <em>bias</em> in a clinical trial setting. Suppose we are testing some new treatment <span class="math inline">\(T\)</span> against the standard <span class="math inline">\(C\)</span>. We measure some outcome <span class="math inline">\(X\)</span> for each patient, and our hypothesis is that <span class="math inline">\(X\)</span> behaves differently for those in the treatment group than for those in the control group. It is common practice to express this additively,
 <span class="math display">\[E\left(X\right) = \mu + \tau,\]</span>
@@ -277,6 +213,7 @@ where <span class="math inline">\(\tau\)</span> is our treatment effect, which w
 <p><span id="exm:unlabeled-div-12" class="example"><strong>Example 3.1  </strong></span>Historically, women and the elderly are underrepresented in clinical trials (<span class="citation">Cottingham and Fisher (<a href="#ref-cottingham2022gendered">2022</a>)</span>) and results are often translated from young or middle aged healthy men to these other groups (<span class="citation">Vitale et al. (<a href="#ref-vitale2017under">2017</a>)</span>). This isn’t reasonable, since women have very different hormonal activity from men, causing them to often react differently to drugs compared to men involved in the trial. The standard dose (based on trials with mostly male participants) can also be too high for many women. The complicated nature of women’s hormones is sometimes even given as a reason for not including them in the trial. Women and elderly people are also both more likely to have adverse effects to drugs in some fields.</p>
 <p>There are also ethical reasons behind the low numbers of women in trials, especially phase I and phase II trials. If a woman is possibly pregnant (and trials tend to be extremely cautious in deciding who might be pregnant!) then they are quite often excluded, in order to protect the (actual or hypothetical) fetus. Indeed, in 1977 the Food and Drug Administration (FDA) in the US recommended that women be excluded from phase I and II trials (<span class="citation">Health (<a href="#ref-nationalhistory">2023</a>)</span>) as a result of some severe cases of fetuses being harmed by drugs (especially Thalidamide) . This means that even some very mainstream drugs, for example antihistamines (<span class="citation">Kar et al. (<a href="#ref-kar2012review">2012</a>)</span>), haven’t been tested for safety/efficacy during pregnancy, as well as some (for example HIV treatments) that would be of huge benefit to many many pregnant women. <a href="https://www.politico.eu/article/telescope-hiv-aids-unitaid-gender-pregnant-trials/">This article</a> is an interesting read if you would like to know more.</p>
 </div>
+<p>In the above example, the trial cohort is very deliberately (and arguably sometimes defensibly) not representative of the target population. However, bias can creep into trials in a number of ways.</p>
 <div id="where-does-bias-come-from" class="section level3 hasAnchor" number="3.1.1">
 <h3><span class="header-section-number">3.1.1</span> Where does bias come from?<a href="alloc.html#where-does-bias-come-from" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Having established that bias is a serious issue in clinical trials, we will think about several sources of bias. Some of these we will elaborate on as we get to the relevant part of methodology. Most sources of bias creep in during the allocation or selection phase.</p>
@@ -285,8 +222,15 @@ where <span class="math inline">\(\tau\)</span> is our treatment effect, which w
 <p>Selection bias occurs when certain patients or subjects are systematically more (or less) likely be entered into the trial because of the treatment they will receive. In a properly run trial this isn’t possible, because it is only after a participant has been recruited that
 their treatment is chosen. If a medical professional is not comfortable with a particular patient potentially receiving one of the possible treatments, then that patient should not be entered into the trial at all. If there are many such [technically eligible] patients, then this might cause the estimated treatment effect to be worryingly far from the true population treatment effect, since the recruited group of participants would not be very representative of the true population (this is not technically selection bias, but it comes from the same problem).</p>
 <p>It may happen that the doctor knows which treatment a patient would be given, for example if the allocation follows some deterministic pattern, or is fully known to the doctor in advance. Consciously or subconsciously this knowledge may influence the description they give to potential participants, and this in turn may affect which patients sign up, and the balance of the groups. In practice there should be various safeguards against this situation.</p>
+</div>
+<div id="allocation-bias" class="section level4 unnumbered hasAnchor">
+<h4>Allocation bias<a href="alloc.html#allocation-bias" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Mathematically, allocation bias is similar to selection bias, but instead of coming from human ‘error’, it arises from the random process of allocation.</p>
+<p>Suppose a trial investigates a drug that is likely to have a much stronger effect on male patients than on female patients. The cohort of recruited participants are randomised into treatment and control groups, and it happens that there is a much smaller proportion of female patients in the treatment group than in the control group. This will distort the estimated treatment effect.</p>
+<p>We will investigate various strategies for randomization designed to address this issue for known factors.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 3.2  </strong></span>Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.</p>
+<p><span id="exm:unlabeled-div-13" class="example"><strong>Example 3.2  </strong></span><em>This example is framed in terms of selection bias, but applies equally to allocation bias</em></p>
+<p>Suppose we run a trial comparing a surgical (S) and a non-surgical (N) treatment for some condition. Patients who are eligible are given the opportunity to join the trial by a single doctor.</p>
 <p>The severity of the disease is graded as 1 (less serious) or 2 (more serious) for each patient. Across the full group of patients, proportion <span class="math inline">\(\lambda\)</span> have severity 1 and proportion <span class="math inline">\(1-\lambda\)</span> have severity 2.</p>
 <p>Our primary outcome is survival time, <span class="math inline">\(X\)</span>, which depends on the severity of disease:</p>
 <p><span class="math display">\[\begin{align*}
@@ -358,21 +302,15 @@ E\left(X\mid{A,N}\right) - E\left(X\mid{A,S}\right) &amp; = \tau_N - \tau_S + \l
 If <span class="math inline">\(N\)</span> is the better treatment, then <span class="math inline">\(\tau_N - \tau_S&gt;0\)</span> and the bias will cause the trial to underplay the treatment effect. Conversely, if <span class="math inline">\(S\)</span> is better, then <span class="math inline">\(\tau_N-\tau_S&lt;0\)</span> and the trial will exaggerate the treatment effect. Essentially, this is because more severely ill patients have been assigned to <span class="math inline">\(N\)</span> than to <span class="math inline">\(S\)</span>, which reduces the average survival time for those in group <span class="math inline">\(N\)</span>.</p>
 </div>
 </div>
-<div id="allocation-bias" class="section level4 unnumbered hasAnchor">
-<h4>Allocation bias<a href="alloc.html#allocation-bias" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Mathematically, allocation bias is similar to selection bias, but instead of coming from human ‘error’, it arises from the random process of allocation.</p>
-<p>Suppose a trial investigates a drug that is likely to have a much stronger effect on male patients than on female patients. The cohort of recruited participants are randomised into treatment and control groups, and it happens that there is a much smaller proportion of female patients in the treatment group than in the control group. This will distort the estimated treatment effect.</p>
-<p>We will investigate various strategies for randomization designed to address this issue for known factors.</p>
-</div>
 <div id="assessment-bias" class="section level4 unnumbered hasAnchor">
 <h4>Assessment bias<a href="alloc.html#assessment-bias" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>Measurements are made on participants throughout (and often during) the trial. These measurements will often be objective, for example the patients’ weight, or concentration of blood sugar. However, some types of measurement are much more subject to the individual practitioner assessing the patient. For example, many skin conditions are assessed visually, for example estimating the proportion of the body affected. Measuring quantities such as quality of life or psychological well-being involve many subjective judgements on the part of both patient and clinician.</p>
-<p>Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of (this is known as a <strong>double blind trial</strong>). For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial ‘blind’, and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware.</p>
+<p>Measurements are made on participants throughout the trial. These measurements will often be objective, for example the patients’ weight, or concentration of blood sugar. However, some types of measurement are much more subject to the individual practitioner assessing the patient. For example, many skin conditions are assessed visually, for example estimating the proportion of the body affected. Measuring quantities such as quality of life or psychological well-being involve many subjective judgements on the part of both patient and clinician.</p>
+<p>Clearly it is ideal for both the patient and the clinician not to know which arm of the trial the patient was part of (this is known as a <strong>double blind trial</strong>). For treatments involving drugs, this is usually straightforward. However, for surgical interventions it is often impossible to keep a trial ‘blind’, and for interventions involving therapy (for example cognitive behavioural therapy) it is impossible for the patient to be unaware. In this situation, it is possible for the patient or clinician’s judgement to be affected by their knowledge of the allocation, thus affecting the estimated treatment effect.</p>
 </div>
 <div id="slight-aside-publication-bias" class="section level4 unnumbered hasAnchor">
 <h4>Slight aside: publication bias<a href="alloc.html#slight-aside-publication-bias" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a [medical] journal. These are peer-reviewed, which means that experts from the relevant field are ask to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be published.</p>
-<p>It seems that papers reporting positive / conclusive results are more likely to be published than papers about [viable] trials that ultimately fail to reject the null hypothesis. As we know, in most cases if the null hypothesis is rejected this is indicative that there is a true treatment difference. However, sometimes by random chance a trial will detect a difference even when there isn’t one (approximately 5% of the time if <span class="math inline">\(\alpha=0.05\)</span>). If these papers are disproportionately likely to be published, the body of literature will not reflect the truth, and there may be serious implications for impact on practice.</p>
+<p>There is compelling evidence that papers reporting positive / conclusive results are more likely to be published than papers about [viable] trials that ultimately fail to reject the null hypothesis. As we know, in most cases if the null hypothesis is rejected this is indicative that there is a true treatment difference. However, sometimes by random chance a trial will detect a difference even when there isn’t one (approximately 5% of the time if <span class="math inline">\(\alpha=0.05\)</span>). If these papers are disproportionately likely to be published, the body of literature will not reflect the truth, and there may be serious implications for practice. This is a huge issue in the pharmaceutical industry, and one from which we can’t escape. If you’d like to learn more about it the book ‘Bad Pharma’ by <span class="citation">Goldacre (<a href="#ref-goldacre2012bad">2012</a>)</span> is an excellent source.</p>
 <p>Measures are being taken to prevent this: for example, leading medical journal <em>The Lancet</em> insists that any clinical trial related paper is registered with them before the first participant has been recruited, with details of the design and statistical analysis plan. This is then reviewed before the trial begins.</p>
 </div>
 </div>
@@ -396,7 +334,7 @@ If <span class="math inline">\(N\)</span> is the better treatment, then <span cl
 <div id="simple-random-allocation" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Simple random allocation<a href="alloc.html#simple-random-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Perhaps intuitively the most simple method is a ‘toin coss’, where each participant has a probability 0.5 of being placed in each group. As participants arrive, assignment <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span> is generated (with equal probability). Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn’t require a ‘master’ randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained.</p>
-<p>This method is, effectively, used in many large trials, but for small trials it can be statistically problematic. The main reason for this is chance imbalance of group sizes.</p>
+<p>This method is used effectively in many large trials, but for small trials it can be statistically problematic. The main reason for this is chance imbalance of group sizes.</p>
 <p>Suppose we have two groups, <span class="math inline">\(T\)</span> of size <span class="math inline">\(N_T\)</span> and <span class="math inline">\(C\)</span> of size <span class="math inline">\(N_C\)</span>, with <span class="math inline">\(N_T + N_C = 2n\)</span>. Patients are allocated independently with equal probability, which means</p>
 <p><span class="math display">\[N_C \sim \operatorname{Bi}\left(2n,\frac{1}{2}\right), \]</span>
 and similar for <span class="math inline">\(N_T\)</span>. If the two groups are of unequal size, the larger will be of some size <span class="math inline">\(N_{max}\)</span> between <span class="math inline">\(n\)</span> and <span class="math inline">\(2n\)</span>, such that for <span class="math inline">\(r = n+1,\,\ldots,\,2n,\)</span></p>
@@ -414,6 +352,9 @@ Figure 3.1: The probability distribution of largest group size for n=15.
 </p>
 </div>
 <p>As we have seen when thinking about sample sizes in Section <a href="rct-plan.html#sec-power">2.4</a>, this will reduce the power <span class="math inline">\(\Psi\)</span> of the trial, since it depends on <span class="math inline">\(\lambda\left(N_C,\,N_T\right) = \sqrt{\frac{1}{N_C} + \frac{1}{N_T}}\)</span>.</p>
+<div class="aside">
+<p>In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation.</p>
+</div>
 <p>For larger trials, this imbalance will be less pronounced, for example Figure <a href="alloc.html#fig:srsalloc200">3.2</a> shows the same for <span class="math inline">\(n=200\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:srsalloc200"></span>
 <img src="CT4H_notes_files/figure-html/srsalloc200-1.png" alt="The probability distribution of largest group size for n=200." width="672" />
@@ -421,7 +362,7 @@ Figure 3.1: The probability distribution of largest group size for n=15.
 Figure 3.2: The probability distribution of largest group size for n=200.
 </p>
 </div>
-<p>In this case the <span class="math inline">\(P\left(N_{max} \geq 220\right)=0.051\)</span>, so the chance of highly imbalanced groups is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.</p>
+<p>In this case <span class="math inline">\(P\left(N_{max} \geq 220\right)=0.051\)</span>, so the chance of highly imbalanced groups is much lower. However, we may want to achieve balance on some factor thought to be important, for example sex, age group or disease state, and in this case there may be small numbers even in a large trial.</p>
 <p>We saw in the sample size section that the greatest power is achieved when group sizes are equal, since this minimises the function</p>
 <p><span class="math display">\[\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}.\]</span>
 However, with simple random sampling we can’t guarantee equal group sizes.</p>
@@ -438,8 +379,9 @@ If the group sizes are 6 and 24, the power goes down to 59%.</p>
 </div>
 <div id="random-permuted-blocks" class="section level3 hasAnchor" number="3.2.2">
 <h3><span class="header-section-number">3.2.2</span> Random permuted blocks<a href="alloc.html#random-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>One commonly used method to randomly allocate participants while avoiding too much imbalance is to use <em>random permuted blocks</em> (RPBs). If the blocks have size <span class="math inline">\(2m\)</span>, and there are two groups then there are <span class="math display">\[\binom{2m}{m},\]</span> but this method can be adapted to more than two groups and to unequal group size.</p>
-<p>If we have two groups, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then there are six <em>blocks</em> of length 4 containing two <span class="math inline">\(A\)</span>s and two <span class="math inline">\(B\)</span>s</p>
+<p>One commonly used method to randomly allocate participants while avoiding imbalance is to use <em>random permuted blocks</em> (RPBs). With RPBs we randomly generate the allocation in <em>blocks</em> of some predetermined size. If the blocks have size <span class="math inline">\(2m\)</span>, and there are two groups then there are <span class="math display">\[\binom{2m}{m},\]</span> but this method can be adapted to more than two groups and to unequal group size.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 3.4  </strong></span>If we have two groups, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, then there are six <em>blocks</em> of length 4 containing two <span class="math inline">\(A\)</span>s and two <span class="math inline">\(B\)</span>s</p>
 <p><span class="math display">\[
 \begin{aligned}
 1.&amp; AABB\\
@@ -452,7 +394,8 @@ If the group sizes are 6 and 24, the power goes down to 59%.</p>
 \]</span></p>
 <p>We can also randomly generate a sequence of numbers from <span class="math inline">\(\left\lbrace 1, 2, 3, 4, 5, 6 \right\rbrace\)</span>, where each number has equal probability. This sequence will correspond to a sequence in <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span> with four times the length. In this method, each patient is equally likely to receive <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, but there will never be a difference of more than two between the size of the two groups.</p>
 <p>For example, suppose the sequence begins <span class="math inline">\(2,1,3,6,\ldots\)</span>. Replacing each number by its block, we have <span class="math inline">\(ABAB\;AABB\;ABBA\;BBAA\;\ldots\)</span>.</p>
-<p>One serious disadvantage of this method is that if the block size is fixed, and the doctors involved in the trial know which participants have received which treatments (which is unavoidable in cases such as surgery), then the allocation for some patients can be perfectly predicted. This is true for the fourth in every block, and for the third and fourth if the first two were the same. This means that selection bias may be a problem in more than 25% of participants, which is deemed unacceptable; indeed, it fails our second point about randomization.</p>
+</div>
+<p>One serious disadvantage of this method is that if the block size is fixed, and the doctors involved in the trial know which participants have received which treatments (which is unavoidable in cases such as surgery), then the allocation for some patients can be perfectly predicted. For blocks of size four this is true for the fourth in every block, and for the third and fourth if the first two were the same. This means that selection bias may be a problem in more than 25% of participants, which is deemed unacceptable; indeed, it fails our second point about randomization.</p>
 <div id="rpbs-with-random-block-length" class="section level4 hasAnchor" number="3.2.2.1">
 <h4><span class="header-section-number">3.2.2.1</span> RPBs with random block length<a href="alloc.html#rpbs-with-random-block-length" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The issue above can be circumvented by not only randomly choosing from a selection of blocks, but also randomly choosing the length of the block. For example, there are
@@ -469,7 +412,7 @@ possible blocks of size 6. Instead of always selecting from the six possible 4-b
 </div>
 <div id="bcurn" class="section level3 hasAnchor" number="3.2.3">
 <h3><span class="header-section-number">3.2.3</span> Biased coin designs and urn schemes<a href="alloc.html#bcurn" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>It may be that we prefer a method which achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse’s station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.</p>
+<p>It may be that we prefer a method that achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse’s station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.</p>
 <p>Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.</p>
 <div id="biased-coin-designs" class="section level4 hasAnchor" number="3.2.3.1">
 <h4><span class="header-section-number">3.2.3.1</span> Biased coin designs<a href="alloc.html#biased-coin-designs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -597,12 +540,11 @@ Figure 3.8: Four realisations of absolute imbalance for r=8, s=1, N=50.
 <h2><span class="header-section-number">3.3</span> Incorporating baseline measurements<a href="alloc.html#incorporating-baseline-measurements" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>At the start of the trial (ideally before allocation) various baseline measurements are usually taken. If the primary outcome variable is a continuous measurement (eg. blood pressure, weight,…) this same quantity will often be included, so that there is some measure of each participant’s condition/symptoms at the start of the trial. Factors such as age, sex, level of symptoms, things to do with treatment history and many others are included. Essentially, we include any variable we can that may lead to bias if not properly dealt with. The crucial thing is that none of these measurements (taken when they are) should be affected by the trial.</p>
 <p>Such baseline measurements can be used in allocation.</p>
-</div>
-<div id="stratified-sampling" class="section level2 hasAnchor" number="3.4">
-<h2><span class="header-section-number">3.4</span> Stratified sampling<a href="alloc.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="stratified-sampling" class="section level3 hasAnchor" number="3.3.1">
+<h3><span class="header-section-number">3.3.1</span> Stratified sampling<a href="alloc.html#stratified-sampling" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. Both the biased coin design and the urn design were intended for use in this way, adjusting in relation to imbalance within each stratum independently. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-15" class="example"><strong>Example 3.4  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
+<p><span id="exm:unlabeled-div-16" class="example"><strong>Example 3.5  </strong></span>Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.</p>
 <p>For sex, we use the levels ‘male’ and ‘female’, and for age we split the range into 50-65, 66-80 and 81 or over. We therefore have six strata, and we use an allocation strategy independently in each stratum. For example, below we have used randomly permuted blocks of length four.</p>
 <table>
 <thead>
@@ -657,13 +599,13 @@ ABBA BAAB …
 </div>
 <p>A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are <span class="math inline">\(3^4=81\)</span> strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic).</p>
 </div>
-<div id="minimization" class="section level2 hasAnchor" number="3.5">
-<h2><span class="header-section-number">3.5</span> Minimization<a href="alloc.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="minimization" class="section level3 hasAnchor" number="3.3.2">
+<h3><span class="header-section-number">3.3.2</span> Minimization<a href="alloc.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for use with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
 <p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-16" class="example"><strong>Example 3.5  </strong></span>The study by <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> investigates the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
-For their prognostic factors, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.</p>
+<p><span id="exm:unlabeled-div-17" class="example"><strong>Example 3.6  </strong></span>The study by <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> compares the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
+For their prognostic factors, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.</p>
 </div>
 <p>When a patient enters the trial, their level of each factor is listed. The patient is then allocated in such a way as to minimise any difference in these factors between the two groups. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
 <ul>
@@ -671,8 +613,8 @@ For their prognostic factors, <span class="citation">Kallis et al. (<a href="#re
 <li>Whether there is any randomness</li>
 </ul>
 <p>It is generally agreed that if the risk of selection bias cannot be avoided, there should be an element of randomness. It is also usually accepted that if a variable is included in the minimization, it should also be included in the statistical analysis.</p>
-<div id="minimization-algorithm" class="section level3 hasAnchor" number="3.5.1">
-<h3><span class="header-section-number">3.5.1</span> Minimization algorithm<a href="alloc.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="minimization-algorithm" class="section level4 hasAnchor" number="3.3.2.1">
+<h4><span class="header-section-number">3.3.2.1</span> Minimization algorithm<a href="alloc.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
 <p>Suppose there are several prognostic factors over which we require balance, and that these factors have <span class="math inline">\(I, J, K, ...\)</span> levels. In our example above, there would be <span class="math inline">\(I=2,\; J=2,\; K=3,\; L=2\)</span>. Note that this equates to 24 strata.</p>
 <p>At some point in the trial, suppose we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with levels <span class="math inline">\(i,\,j,\,k,\,l\)</span> of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, <span class="math inline">\(n^A_{ijkl}\)</span> have been assigned to treatment arm <span class="math inline">\(A\)</span>, and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>. So we have</p>
@@ -696,7 +638,7 @@ where <span class="math inline">\(b\)</span> is the block length. However, there
 where <span class="math inline">\(+\)</span> represents summation over the other factors, so that for example</p>
 <p><span class="math display">\[n^A_{++k+} = \sum\limits_{i,j,l}{n^A_{ijkl}}\]</span>
 is the total number of patients with level <span class="math inline">\(k\)</span> of that factor assigned to treatment arm <span class="math inline">\(A\)</span>.</p>
-<p>Therefore, instead of having <span class="math inline">\(IJKL\)</span> constraints constraints, as we would with using randomly permuted blocks within each stratum, we have <span class="math inline">\(I+J+K+L\)</span> constraints, one for each level of each factor. In our example this is 9 constraints rather than 24.</p>
+<p>Therefore, instead of having <span class="math inline">\(IJKL\)</span> constraints constraints, as we would with using randomly permuted blocks (or some other randomization method) within each stratum, we have <span class="math inline">\(I+J+K+L\)</span> constraints, one for each level of each factor. In our example this is 9 constraints rather than 24.</p>
 <p>In order to implement minimisation, we follow these steps:</p>
 <ol style="list-style-type: decimal">
 <li>Allocate the first patient by simple randomisation.</li>
@@ -709,166 +651,75 @@ is the total number of patients with level <span class="math inline">\(k\)</span
   \tag{3.1}
   \end{equation}\]</span></p>
 <ol start="5" style="list-style-type: decimal">
-<li>If the sum from step 4 is negative (that is, allocation to arm <span class="math inline">\(B\)</span> as dominated up to now) then we allocate the new patient to arm <span class="math inline">\(A\)</span> with probability <span class="math inline">\(P\)</span>, with <span class="math inline">\(P&gt;0.5\)</span>. If the sum is positive, they are allocated to arm <span class="math inline">\(B\)</span> with probability <span class="math inline">\(P\)</span>. If the sum is zero, they are allocated to arm <span class="math inline">\(A\)</span> with probability <span class="math inline">\(\frac{1}{2}\)</span>.</li>
+<li>If the sum from step 4 is negative (that is, allocation to arm <span class="math inline">\(B\)</span> has dominated up to now) then we allocate the new patient to arm <span class="math inline">\(A\)</span> with probability <span class="math inline">\(P\)</span>, with <span class="math inline">\(P&gt;0.5\)</span>. If the sum is positive, they are allocated to arm <span class="math inline">\(B\)</span> with probability <span class="math inline">\(P\)</span>. If the sum is zero, they are allocated to arm <span class="math inline">\(A\)</span> with probability <span class="math inline">\(\frac{1}{2}\)</span>.</li>
 </ol>
 <p>Some people set <span class="math inline">\(P=1\)</span>, whereas others would set <span class="math inline">\(\frac{1}{2}&lt;P&lt;1\)</span> to retain some randomness. Although setting <span class="math inline">\(P=1\)</span> makes the system deterministic, to predict the next allocation a doctor (or whoever) would need to know <span class="math inline">\(n^A_{i+++}\)</span> and so on. This is very unlikely unless they are deliberately seeking to disrupt the trial. However, generally the accepted approach is becoming to set <span class="math inline">\(P&lt;1\)</span>.</p>
 <div class="example">
-<p><span id="exm:mustine" class="example"><strong>Example 3.6  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
+<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 3.7  </strong></span>From <span class="citation">Altman (<a href="#ref-altman1990practical">1990</a>)</span> (citing <span class="citation">Fentiman, Rubens, and Hayward (<a href="#ref-fentiman1983control">1983</a>)</span>).
 In this trial, 46 patients with breast cancer were allocated to receive either Mustine (arm A) or Talc (arm B) as treatment for pleural effusions (fluid between the walls of the lung). They used four prognostic factors: age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), stage of disease (I or II, III or IV), time in months between diagnosis of breast cancer and diagnosis of pleural effusions (<span class="math inline">\(\leq{30}\)</span> or <span class="math inline">\(&gt;30\)</span>) and menopausal status (Pre or post).</p>
-<p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in Table <a href="alloc.html#tab:minimeg">3.1</a>.</p>
+<p>Let’s suppose that 15 patients have already been allocated. The totals of patients in each treatment arm in terms of each level of each prognostic factor are shown in the table below.</p>
 <table>
-<caption>
-<span id="tab:minimeg">Table 3.1: </span><span id="tab:minimeg">Table 3.2: </span>Allocations of first 15 patients, divided by diagnostic factor
-</caption>
 <thead>
-<tr>
-<th style="text-align:left;">
-factor
-</th>
-<th style="text-align:left;">
-level
-</th>
-<th style="text-align:right;">
-Mustine (A)
-</th>
-<th style="text-align:right;">
-Talc (B)
-</th>
+<tr class="header">
+<th align="left">factor</th>
+<th align="left">level</th>
+<th align="right">Mustine (A)</th>
+<th align="right">Talc (B)</th>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Age
-</td>
-<td style="text-align:left;">
-<ol style="list-style-type: decimal">
-<li>50 or younger
-</td>
-<td style="text-align:right;">
-3
-</td>
-<td style="text-align:right;">
-4
-</td>
+<tr class="odd">
+<td align="left">Age</td>
+<td align="left">1. 50 or younger</td>
+<td align="right">3</td>
+<td align="right">4</td>
 </tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Age
-</td>
-<td style="text-align:left;">
-<ol start="2" style="list-style-type: decimal">
-<li>&gt;50
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-4
-</td>
+<tr class="even">
+<td align="left">Age</td>
+<td align="left">2. &gt;50</td>
+<td align="right">4</td>
+<td align="right">4</td>
 </tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Stage
-</td>
-<td style="text-align:left;">
-<ol style="list-style-type: decimal">
-<li>I or II
-</td>
-<td style="text-align:right;">
-1
-</td>
-<td style="text-align:right;">
-2
-</td>
+<tr class="odd">
+<td align="left">Stage</td>
+<td align="left">1. I or II</td>
+<td align="right">1</td>
+<td align="right">2</td>
 </tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Stage
-</td>
-<td style="text-align:left;">
-<ol start="2" style="list-style-type: decimal">
-<li>III or IV
-</td>
-<td style="text-align:right;">
-6
-</td>
-<td style="text-align:right;">
-6
-</td>
+<tr class="even">
+<td align="left">Stage</td>
+<td align="left">2. III or IV</td>
+<td align="right">6</td>
+<td align="right">6</td>
 </tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Time interval
-</td>
-<td style="text-align:left;">
-<ol style="list-style-type: decimal">
-<li>30 months or less
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-2
-</td>
+<tr class="odd">
+<td align="left">Time interval</td>
+<td align="left">1. 30 months or less</td>
+<td align="right">4</td>
+<td align="right">2</td>
 </tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Time interval
-</td>
-<td style="text-align:left;">
-<ol start="2" style="list-style-type: decimal">
-<li>&gt;30 months
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-5
-</td>
+<tr class="even">
+<td align="left">Time interval</td>
+<td align="left">2. &gt;30 months</td>
+<td align="right">4</td>
+<td align="right">5</td>
 </tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Menopausal status
-</td>
-<td style="text-align:left;">
-<ol style="list-style-type: decimal">
-<li>Pre
-</td>
-<td style="text-align:right;">
-4
-</td>
-<td style="text-align:right;">
-3
-</td>
+<tr class="odd">
+<td align="left">Menopausal status</td>
+<td align="left">1. Pre</td>
+<td align="right">4</td>
+<td align="right">3</td>
 </tr>
-<tr>
-<td style="text-align:left;font-weight: bold;">
-Menopausal status
-</td>
-<td style="text-align:left;">
-<ol start="2" style="list-style-type: decimal">
-<li>Post
-</td>
-<td style="text-align:right;">
-5
-</td>
-<td style="text-align:right;">
-3
-</td>
+<tr class="even">
+<td align="left">Menopausal status</td>
+<td align="left">2. Post</td>
+<td align="right">5</td>
+<td align="right">3</td>
 </tr>
 </tbody>
 </table>
-Suppose our sixteenth patient is under 50, has disease at stage III, has less than 30 months between diagnoses and is pre-menopausal.
-Our calculation from step 4 of the minimisation algorithm is therefore</li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol></li>
-</ol>
+<p>Suppose our sixteenth patient is under 50, has disease at stage III, has less than 30 months between diagnoses and is pre-menopausal.
+Our calculation from step 4 of the minimisation algorithm is therefore</p>
 <p><span class="math display">\[
 \begin{aligned}
 \left(n^A_{1+++} - n^B_{1+++}\right) + \left(n^A_{+2++} - n^B_{+2++}\right) + \left(n^A_{++1+} \right.&amp; \left.- n^B_{++1+}\right) + \left(n^A_{+++1} - n^B_{+++1}\right) \\
@@ -878,10 +729,13 @@ Our calculation from step 4 of the minimisation algorithm is therefore</li>
 \end{aligned}
 \]</span>
 Since our sum is greater than zero, we allocate the new patient to arm B (talc) with some probability <span class="math inline">\(P\in\left(0.5,1\right)\)</span> and update the table before allocating patient 17.</p>
-<p>:::</p>
-<p>One shortcoming of minimisation is that the factors are equally weighted in the algorithm, regardless of the number of patients with that particular factor level. For example, suppose at some later stage of allocation in Example <a href="alloc.html#exm:mustine">3.6</a>, only four patients with stage I or II disease had been recruited, and that one of these had been allocated to group <span class="math inline">\(A\)</span> and three to group <span class="math inline">\(B\)</span>. At the same point, 18 of the recruited number were post-menopausal, and of these 10 had been allocated to group <span class="math inline">\(A\)</span> and 8 to group <span class="math inline">\(B\)</span>. The values contributed to the sum in Equation <a href="alloc.html#eq:minim">(3.1)</a> are <span class="math inline">\(+2\)</span> and <span class="math inline">\(-2\)</span>, so these imbalances effectively cancel one another out, but intuitively it would feel sensible to prioritise equal distribution within the stage I or II women, since proportionally this stratum is less balanced. <span class="citation">Wei (<a href="#ref-wei1978application">1978</a>)</span> proposed an extension of the Urn Design that does exactly this, but we won’t cover this method in our course.</p>
-<div id="problems-around-allocation" class="section level2 hasAnchor" number="3.6">
-<h2><span class="header-section-number">3.6</span> Problems around allocation<a href="alloc.html#problems-around-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+</div>
+<p>One shortcoming of minimisation is that the factors are equally weighted in the algorithm, regardless of the number of patients with that particular factor level. For example, suppose at some later stage of allocation in our Mustine example, only four patients with stage I or II disease had been recruited, and that one of these had been allocated to group <span class="math inline">\(A\)</span> and three to group <span class="math inline">\(B\)</span>. At the same point, 18 of the recruited number were post-menopausal, and of these 10 had been allocated to group <span class="math inline">\(A\)</span> and 8 to group <span class="math inline">\(B\)</span>. The values contributed to the sum in Equation <a href="alloc.html#eq:minim">(3.1)</a> are <span class="math inline">\(+2\)</span> and <span class="math inline">\(-2\)</span>, so these imbalances effectively cancel one another out, but intuitively it would feel sensible to prioritise equal distribution within the stage I or II women, since proportionally this stratum is less balanced. <span class="citation">Wei (<a href="#ref-wei1978application">1978</a>)</span> proposed an extension of the Urn Design that does exactly this, but we won’t cover this method in our course.</p>
+</div>
+</div>
+</div>
+<div id="problems-around-allocation" class="section level2 hasAnchor" number="3.4">
+<h2><span class="header-section-number">3.4</span> Problems around allocation<a href="alloc.html#problems-around-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>In clinical trials papers, the allocation groups are usually summarised in tables giving summary statistics (eg. mean and SD) of each characteristic for the control group and the intervention group. The aim of these is to show that the groups are similar enough for any difference in outcome to be attributed to the intervention itself. Figure <a href="alloc.html#fig:licorice-participants">3.9</a> shows an example, taken from <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:licorice-participants"></span>
 <img src="images/licorice.jpg" alt="Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized" width="60%" />
@@ -929,7 +783,7 @@ Intervention
 </tbody>
 </table>
 <p>This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-412-1.png" width="672" /></p>
 <p>If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.</p>
 <p>Although this example is highly manufactured and [hopefully!] unlikely to take place in real life, for clinical trials there are often many demographic variables and prognostic factors being taken into account. Achieving joint balance across all them is very difficult, and extremely unlikely to happen if it isn’t aimed for. <span class="citation">Treasure and MacRae (<a href="#ref-treasure1998minimisation">1998</a>)</span> give an example in relation to a hypothetical study on heart disease</p>
 <blockquote>
@@ -937,6 +791,7 @@ Intervention
 </blockquote>
 <p>However, this issue is rarely addressed in clinical trials: a lot of faith is placed (with reasonable justification) in the likely balance achieved by random sampling, whatever method is used. We will also see in the next Chapter that we can account for some degree of imbalance at the analysis stage.</p>
 
+</div>
 </div>
 <h3>References</h3>
 <div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
@@ -957,6 +812,9 @@ Fentiman, Ian S, Robert D Rubens, and John L Hayward. 1983. <span>“Control of 
 </div>
 <div id="ref-freedman1976use" class="csl-entry">
 Freedman, LS, and Susan J White. 1976. <span>“On the Use of Pocock and Simon’s Method for Balancing Treatment Numbers over Prognostic Factors in the Controlled Clinical Trial.”</span> <em>Biometrics</em>, 691–94.
+</div>
+<div id="ref-goldacre2012bad" class="csl-entry">
+Goldacre, B. 2012. <em>Bad Pharma: How Medicine Is Broken, and How We Can Fix It</em>. HarperCollins Publishers. <a href="https://books.google.co.uk/books?id=4amY1Q6Id4QC">https://books.google.co.uk/books?id=4amY1Q6Id4QC</a>.
 </div>
 <div id="ref-nationalhistory" class="csl-entry">
 Health, National Institute of. 2023. <span>“History of Women’s Participation in Clinical Research.”</span> Office of Research on Women’s Health. https://orwh. od. nih. gov/toolkit …. <a href="https://orwh.od.nih.gov/toolkit/recruitment/history">https://orwh.od.nih.gov/toolkit/recruitment/history</a>.
@@ -992,7 +850,7 @@ Wei, LJ. 1978. <span>“An Application of an Urn Model to the Design of Sequenti
         </div>
       </div>
 <a href="rct-plan.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="rct-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -1034,7 +892,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": null,
+"download": ["CT4H_notes.pdf"],
 "search": {
 "engine": "fuse",
 "options": null

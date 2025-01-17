@@ -3,7 +3,7 @@
 [Finished with sample size for now - check out JAMAevidence: JAMA Guide to Statistics and Methods
 Interviews about the statistical and methodological foundations of clinical research. Esp sample size, linked from Ultra]
 
-Once we've decided how many participants we need in our trial, and they've been recruited, we next need to determine which participants should be assigned to which trial arm. This is process is known as **allocation** (or sometimes as **randomization**). 
+Once we've decided how many participants we need in our trial, we need to determine how they will each be assigned to a trial arm. This is process is known as **allocation** (or sometimes as **randomization**). 
 
 *Before we think about methods for allocation, we are going to spend some time talking about bias.*
 
@@ -203,7 +203,7 @@ Clinical trials haven't always used random allocation to assign participants to 
 *Given the need for contemporary control participants, the question becomes how to assign participants to each group. If the clinician is able to choose who receives which treatment, or if each patient is allowed to choose or refuse certain treatments, this is almost certain to introduce bias. This is avoided by using random allocation.*
 
 
-[ASSIGNMENT! Explain details a bit, deadline is Monday 29th Jan. ]
+[ASSIGNMENT! Explain details a bit, deadline is Monday 5th Feb. ]
 
 ## (Lecture 5) Allocation methods {#sec-allocation}
 
@@ -326,9 +326,16 @@ powerfun = function(n,m){
 :::
 
 
+::: {.aside}
+In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation. 
+:::
+
+
 ### Random permuted blocks
 
 Very commonly used method to randomly allocate participants while avoiding too much imbalance is to use *random permuted blocks* (RPBs). If the blocks have size $2m$, and there are two groups then there are $$\binom{2m}{m},$$ but this method can be adapted to more than two groups and to unequal group size.
+
+::: {.allocation}
 
 If we have two groups, $A$ and $B$, then there are six *blocks* of length 4 containing two $A$s and two $B$s
 
@@ -345,6 +352,8 @@ $$
 
 Randomly generate a sequence from $\left\lbrace 1, 2, 3, 4, 5, 6 \right\rbrace$, with equal probability. This sequence will correspond to a sequence in $A$ and $B$ with four times the length.
 For example, suppose the sequence begins $2,1,3,6,\ldots$. Replacing each number by its block, we have $ABAB\;AABB\;ABBA\;BBAA\;\ldots$. 
+
+:::
 
 Advantages:
 
@@ -707,7 +716,7 @@ Baseline measurements can be used in allocation, eg.
   * baseline value of $X$, age, sex, condition specifics,...
   * Must **not** be affected by the trial
 
-## Stratified sampling
+### Stratified sampling
 
 *The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.*
 
@@ -742,13 +751,13 @@ Difficulty:
   * Very likely to have v small numbers in some strata
 
 
-## Minimization
+### Minimization
 
 *Minimization was first proposed by @taves1974minimization, then shortly after by @pocock1975sequential and @freedman1976use. The aim of minimization is to minimize the difference between the two groups ($T$ and $C$). It was developed for use with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.*
 
 Aims to achieve balance between groups $T$ and $C$, taking prognostic factors into account. Has become more popular recently, because of computing availability.
 
-*To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, @kallis1994pre chose age ($\leq{50}$ or $50$), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).*
+*To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome. As an example, in a study comparing aspirin to a placebo preceding coronary artery surgery, @kallis1994pre chose age ($\leq{50}$ or $>50$), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2).*
 
 When a patient enters the trial, these factors are listed. The patient is then allocated in such a way as to minimise any difference in these factors between the two groups. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
 

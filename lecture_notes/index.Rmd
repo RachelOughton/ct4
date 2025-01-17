@@ -50,6 +50,7 @@ library(rstatix)
 library(mvtnorm)
 library(pROC)
 library(survival)
+library(eefAnalytics)
 ```
 
 
