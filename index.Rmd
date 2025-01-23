@@ -64,6 +64,8 @@ library(rstatix)
 library(survival)
 library(mvtnorm)
 library(randomizeR)
+library(Minirand)
+require(blockrand)
 library(cvcrand)
 #library(eefAnalytics)
 library(shiny)
@@ -73,7 +75,10 @@ library(HSAUR3)
 library(sjPlot)
 library(lme4)
 library(GGally)
+library(gganimate)
+library(gtsummary)
 library(RColorBrewer)
+library(jtools)
 ```
 
 # Welcome to Clinical Trials 4H! {-}
@@ -94,7 +99,7 @@ We have four computer practicals for this module. They are 1-2pm on the Mondays 
 
 ### Office Hour {-}
 
-The office hour will be every Wednesday, 10-11am, in MCS 3077 (this is a bookable room, not my office).
+The office hour will be every Wednesday, 10-11am, in the Calman Learning Centre cafe. 
 
 ### Assessment {-}
 

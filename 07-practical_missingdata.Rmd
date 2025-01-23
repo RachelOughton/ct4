@@ -1,6 +1,6 @@
 # (APPENDIX) Computer practicals {-} 
 
-# Computer Practical 1 - Missing data {-}
+# Computer Practical 1 - Missing data
 
 MENTION SOMEWHERE ABOUT THIS TAKING PLACE AT THE ANALYSIS STAGE - DO SOMETHING SENSIBLE AT THE ALLOCATION STAGE.
 
