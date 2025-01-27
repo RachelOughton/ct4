@@ -287,30 +287,6 @@ div.csl-indent {
 <li class="chapter" data-level="A.4.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#multiple-imputation"><i class="fa fa-check"></i><b>A.4.3</b> Multiple imputation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Allocation &amp; Analysis</a>
-<ul>
-<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
-<ul>
-<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
-<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#r-practicalities-1"><i class="fa fa-check"></i>R practicalities</a></li>
-</ul></li>
-<li class="chapter" data-level="B.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1allocation"><i class="fa fa-check"></i><b>B.1</b> Allocation</a>
-<ul>
-<li class="chapter" data-level="B.1.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>B.1.1</b> Licorice gargle dataset</a></li>
-<li class="chapter" data-level="B.1.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#allocmethods"><i class="fa fa-check"></i><b>B.1.2</b> Allocation methods</a></li>
-<li class="chapter" data-level="B.1.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>B.1.3</b> Stratifying the dataset</a></li>
-<li class="chapter" data-level="B.1.4" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#minimisation"><i class="fa fa-check"></i><b>B.1.4</b> Minimisation</a></li>
-</ul></li>
-<li class="chapter" data-level="B.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.2</b> Analysis</a>
-<ul>
-<li class="chapter" data-level="B.2.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.2.1</b> Polyps data</a></li>
-</ul></li>
-<li class="chapter" data-level="B.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#extension-problems"><i class="fa fa-check"></i><b>B.3</b> Extension problems</a>
-<ul>
-<li class="chapter" data-level="B.3.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#a-simulation-experiment"><i class="fa fa-check"></i><b>B.3.1</b> A simulation experiment!</a></li>
-<li class="chapter" data-level="B.3.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
-</ul></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -452,9 +428,9 @@ div.csl-indent {
 <h2><span class="header-section-number">4.1</span> Confidence intervals and P-values<a href="rct-analysis.html#ttest" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (which we’ll still denote <span class="math inline">\(X\)</span>) between the groups.</p>
 <div class="example">
-<p><span id="exm:captopril2" class="example"><strong>Example 4.2  </strong></span>Summary statistics of the outcome for each group are shown below.</p>
+<p><span id="exm:captopril2" class="example"><strong>Example 4.2  </strong></span>Summary statistics of the outcome for each group are shown in Table <a href="rct-analysis.html#tab:outsumhommel">4.2</a>.</p>
 <table>
-<caption><span id="tab:unnamed-chunk-22">Table 4.2: </span>Summary statistics for each group.</caption>
+<caption><span id="tab:outsumhommel">Table 4.2: </span>Summary statistics for each group.</caption>
 <thead>
 <tr class="header">
 <th align="left"></th>
@@ -820,7 +796,7 @@ Figure 4.2: Baseline measurements from the Captopril trial.
 <p>This issue arises in many trials, particularly where there is a strong correlation between baseline and outcome measurements.</p>
 <div id="ancovatheory" class="section level3 hasAnchor" number="4.3.1">
 <h3><span class="header-section-number">4.3.1</span> The theory<a href="rct-analysis.html#ancovatheory" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Suppose the outcome for a clinical trial is <span class="math inline">\(X\)</span> and the baseline is <span class="math inline">\(B\)</span>. <span class="math inline">\(X\)</span> has mean <span class="math inline">\(\mu\)</span> in the control group (C) and mean <span class="math inline">\(\mu+\tau\)</span> in the test group (T), and as usual our aim is to determine the extent of <span class="math inline">\(\tau\)</span>, the treatment effect. We suppose also that <span class="math inline">\(X\)</span> has variance <span class="math inline">\(\sigma^2\)</span> in both groups.</p>
+<p>Suppose the outcome for a clinical trial is <span class="math inline">\(X\)</span>, which has mean <span class="math inline">\(\mu\)</span> in the control group (C) and mean <span class="math inline">\(\mu+\tau\)</span> in the test group (T), and as usual our aim is to determine the extent of <span class="math inline">\(\tau\)</span>, the treatment effect. We suppose also that <span class="math inline">\(X\)</span> has variance <span class="math inline">\(\sigma^2\)</span> in both groups.</p>
 <p>The same quantity is measured at the start of the trial, and this is the baseline <span class="math inline">\(B\)</span>, which we can assume to have true mean <span class="math inline">\(\mu_B\)</span> in both groups (because of randomisation) and variance <span class="math inline">\(\sigma^2\)</span>. We also assume that the true correlation between <span class="math inline">\(B\)</span> and <span class="math inline">\(X\)</span> is <span class="math inline">\(\rho\)</span> in each group. Finally, we assume that both treatment groups are of size <span class="math inline">\(N\)</span>. We therefore have <span class="math inline">\(2N\)</span> patients, and so we observe baseline measurements <span class="math inline">\(b_1,\,b_2,\ldots,b_{2N}\)</span>.</p>
 <p>Our first step is to find an estimator for <span class="math inline">\(\tau\)</span> that uses this information.</p>
 <div id="finding-an-estimator" class="section level4 hasAnchor technique" number="4.3.1.1">
@@ -1055,7 +1031,7 @@ We do this by first fitting a linear model using ‘lm’, with baseline measure
 \end{cases}
 \]</span>
 Therefore, for a patient assigned Placebo, a value of 7.18 is added, as well as the intercept and baseline term. This results in a model with two parallel fitted lines.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>For our previous methods we have calculated a confidence interval for the treatment effect <span class="math inline">\(\tau\)</span>, and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of <span class="math inline">\(\hat{\tau}\)</span> is 2.96. Therefore, to construct a 95/% confidence interval for <span class="math inline">\(\hat{\tau}\)</span>, we use (to 2 decimal places)</p>
 <p><span class="math inline">\(7.18\; \pm\; t_{0.975;13}\times{2.96}  = \left(0.78,\; 13.57\right).\)</span></p>
 <p>The model has <span class="math inline">\(n-p=13\)</span> degrees of freedom because there are <span class="math inline">\(n=16\)</span> data points and we are estimating <span class="math inline">\(p=3\)</span> parameters.
@@ -1070,7 +1046,7 @@ Notice that unlike our previous confidence intervals, this doesn’t contain zer
 <span id="cb9-6"><a href="rct-analysis.html#cb9-6" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept=</span><span class="dv">0</span>)<span class="sc">+</span></span>
 <span id="cb9-7"><a href="rct-analysis.html#cb9-7" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Baseline&quot;</span>)<span class="sc">+</span></span>
 <span id="cb9-8"><a href="rct-analysis.html#cb9-8" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Residual&quot;</span>)<span class="sc">+</span><span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it’s difficult really to assess the fit of the model.</p>
 </div>
 </div>
@@ -1096,7 +1072,7 @@ that is, neither of these quantities are unbiased estimators of <span class="mat
 </div>
 <div id="what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model" class="section level3 hasAnchor" number="4.4.2">
 <h3><span class="header-section-number">4.4.2</span> What if the lines shouldn’t be parallel? The unequal slopes model<a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>In the analysis above, we have assumed that the coefficient <span class="math inline">\(\gamma\)</span> of baseline (the estimate of the correlation between outcome and baseline) is the same in both groups; we have fitted an <strong>equal slopes model</strong>. It isn’t obvious that this should be the case, and indeed we can test for it.</p>
+<p>In the analysis above, we have assumed that the coefficient <span class="math inline">\(\gamma\)</span> of baseline is the same in both groups; we have fitted an <strong>equal slopes model</strong>. It isn’t obvious that this should be the case, and indeed we can test for it.</p>
 <p>Allowing each group to have a different slope means including an interaction term between baseline and treatment group,</p>
 <p><span class="math display">\[ x_i = \mu + \tau G_i+ \gamma b_i + \lambda b_i G_i + \epsilon_i . \]</span>
 The term <span class="math inline">\(\lambda b_i G_i\)</span> is 0 if participant <span class="math inline">\(i\)</span> is in group <span class="math inline">\(C\)</span> and <span class="math inline">\(\lambda b_i\)</span> if participant <span class="math inline">\(i\)</span> is in group <span class="math inline">\(T\)</span>. Therefore, for participants in group <span class="math inline">\(C\)</span>, the gradient is still <span class="math inline">\(\gamma\)</span>, but for participants in group <span class="math inline">\(T\)</span> it is now <span class="math inline">\(\gamma + \lambda\)</span>. We can test whether this interaction term should be included (that is, whether we should fit an unequal slopes model) by including it in a model and analysing the results.</p>
@@ -1737,8 +1713,8 @@ Figure 4.5: Residuals from the stress data model with the interaction between in
 </div>
 <p>Combining the coefficients, someone who does a high level of exercise:</p>
 <ul>
-<li>is likely to reduce their stress score by 13.7 if they receive the treatment</li>
-<li>is likely to reduce their stress score by <span class="math inline">\(13.7 - 8.2 = 5.5\)</span> if they don’t receive the treatment</li>
+<li>is likely to reduce their stress score by around 13.7 if they receive the treatment</li>
+<li>is likely to reduce their stress score by around <span class="math inline">\(13.7 - 8.2 = 5.5\)</span> if they don’t receive the treatment</li>
 </ul>
 <p>Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.</p>
 </div>

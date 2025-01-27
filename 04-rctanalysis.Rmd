@@ -326,7 +326,7 @@ This issue arises in many trials, particularly where there is a strong correlati
 
 ### The theory {#ancovatheory}
 
-Suppose the outcome for a clinical trial is $X$ and the baseline is $B$. $X$ has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the test group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
+Suppose the outcome for a clinical trial is $X$, which has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the test group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
 
 The same quantity is measured at the start of the trial, and this is the baseline $B$, which we can assume to have true mean $\mu_B$ in both groups (because of randomisation) and variance $\sigma^2$. We also assume that the true correlation between $B$ and $X$ is $\rho$ in each group. Finally, we assume that both treatment groups are of size $N$. We therefore have $2N$ patients, and so we observe baseline measurements $b_1,\,b_2,\ldots,b_{2N}$.
 
@@ -712,7 +712,7 @@ In this sense, the observed baseline means $\bar{b}_T$ and $\bar{b}_C$ are known
 
 ### What if the lines shouldn't be parallel? The unequal slopes model
 
-In the analysis above, we have assumed that the coefficient $\gamma$ of baseline (the estimate of the correlation between outcome and baseline) is the same in both groups; we have fitted an **equal slopes model**. It isn't obvious that this should be the case, and indeed we can test for it.
+In the analysis above, we have assumed that the coefficient $\gamma$ of baseline is the same in both groups; we have fitted an **equal slopes model**. It isn't obvious that this should be the case, and indeed we can test for it.
 
 Allowing each group to have a different slope means including an interaction term between baseline and treatment group, 
 
@@ -825,8 +825,8 @@ ggplot(data=stress_sum2, aes(x=fitted, y=resid, col=treatment)) +
 
 Combining the coefficients, someone who does a high level of exercise:
 
-  * is likely to reduce their stress score by 13.7 if they receive the treatment
-  * is likely to reduce their stress score by $13.7 - 8.2 = 5.5$ if they don't receive the treatment
+  * is likely to reduce their stress score by around 13.7 if they receive the treatment
+  * is likely to reduce their stress score by around $13.7 - 8.2 = 5.5$ if they don't receive the treatment
 
 Returning to our initial look at the dataset, the fact that age is a factor, and high levels of exercise are clearly very important should worry us slightly, since there are very few older people doing high levels of exercise. This may mean our model is inaccurate.
 

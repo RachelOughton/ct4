@@ -527,7 +527,7 @@ Firstly there is a summary table, which shows the median, min and max of ASMD fo
 asmd_sup
 ```
 
-There is also a `Table 1`, so called because a summary table of this nature should always be included when summarising a dataset in terms of the difference between two groups. This is formatted a little strangely, as it is designed for use in printed works. This table includes the result of a statistical test (by default a chi-squared test) showing whether the differences are statistically significant. 
+There is also a `Table 1`, so called because a summary table of this nature should always be included when summarising a dataset in terms of the difference between two groups. This is formatted a little strangely, as it is designed for use in printed works. This table includes the result of a statistical test (by default a chi-squared test) showing whether the differences are statistically significant. (The function `kable` here is to do with formatting the table for HTML, not to do with missing data).
 
 ```{r, echo=T}
 kable(asmd_sup$bmi$asmd_table1)
