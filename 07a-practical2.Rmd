@@ -1,4 +1,4 @@
-# Computer Practical 2
+# Computer Practical 2 - Allocation & Analysis
 
 This computer practical will cover two main parts:
 
@@ -9,11 +9,6 @@ This computer practical will cover two main parts:
 
 This practical, particularly the allocation section, is designed to help you investigate the behaviour of the various methods we've been looking at. There are lots of things we do here that you couldn't do in a real trial. For example, you wouldn't be able to plot the baseline covariates, since you wouldn't have them all at the start of the allocation process. You also wouldn't be re-do the allocation lots of times, because in most cases the participants join the trial (and are allocated) sequentially. 
 
-The main aims of this practical are:
-
-  - To learn how to implement various allocation methods
-  - To investigate the statistical properties of the various methods
-  
 ### Preliminaries {-}
   
 The idea is that you spend roughly half the time on each part, but there is probably more content for allocation. It might be sensible to work through some of the allocation exercises, jump ahead to analysis after a while, then go back to allocation if you have time. 
@@ -53,7 +48,7 @@ We'll make use of several packages in this section. Installing them all now shou
 **Notice that where there are code snippets like this one that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
 
 ```{r, eval=F, echo=T}
-install.packages(c("medicaldata", "ggplot2", "Minirand", 
+install.packages(c("medicaldata", "ggplot2", "gtsummary", "Minirand", 
                    "blockrand", "dplyr", "randomizeR"))
 ```
 
@@ -72,7 +67,7 @@ You can find out about the dataset by looking at the help file
 ?licorice_gargle
 ```
 
-and at [this website](https://www.causeweb.org/tshs/licorice-gargle/), and if you're feeling really keen you can even read the original paper: @ruetzler2013randomized.
+and at [this website](https://www.causeweb.org/tshs/licorice-gargle/), and if you're feeling really keen you can even read the original paper: @ruetzler2013randomized (but please don't do any of that now!).
 
 :::{.exercise}
 Of the 19 columns, how many are baseline characteristics that we could use in the allocation?
@@ -82,7 +77,7 @@ Of the 19 columns, how many are baseline characteristics that we could use in th
 
 :::{.solution}
 
-In this dataset the baseline characteristics are helpfully prefixed by `preOp`, so there are seven baseline characteristics.
+In this dataset the baseline characteristics are helpfully prefixed by `preOp`, so there are seven baseline characteristics. 
 
 ```{r}
 grep("preOp_", names(licorice_gargle), value=T)
@@ -92,7 +87,7 @@ grep("preOp_", names(licorice_gargle), value=T)
 
 </details>
 
-In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure `str(licorice_gargle)` that all columns are numeric to begin with).
+In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure `str(licorice_gargle)` that all columns are numeric to begin with), so run the following code to convert the necessary columns to factors, and to restrict the dataset to only the columns we're interested in.
 
 ```{r, echo=T}
 lic_garg = licorice_gargle[ ,1:8]
@@ -106,38 +101,14 @@ lic_garg[cols] <- lapply(lic_garg[cols], factor)
 str(lic_garg)
 ```
 
-
-It's also useful to get some idea of how the data are distributed. 
-
-:::{.exercise}
-Plot the data in various different ways. For example, 
-
-```{r, eval=F, echo=T}
-library(ggplot2)
-ggplot(data=lic_garg, aes(x=preOp_pain, fill=preOp_gender)) + 
-  geom_bar(col=1) + 
-  facet_wrap(~preOp_smoking, nrow=1) +
-  theme(legend.position = "bottom")
-```
-
-will generate bar charts of pre-operative pain (0=No, 1=Yes) coloured by gender (0=Male, 1=Female), for each smoking category (1=Current, 2=Past, 3=Never).
-
-Are there any ways in which you think this data set would be particularly vulnerable to leading to a biased trial? 
-:::
-
-
 #### Demographic tables
 
-For every allocation, we'll want to see a summary table of how the patients are distributed between the groups. In this practical we'll use a relatively simple method, detailed [here](https://www.rdocumentation.org/packages/Minirand/versions/0.1.3/topics/randbalance) from the package `Minirand`, which is designed to output a table in the R console.
+For every allocation, we'll want to see a summary table of how the patients are distributed between the groups. In this practical we'll use the function `tbl_summary` from `gtsummary`, but there are plenty of other ways to create nice tables around clinical trials (for example the package `table1` and `atable`).
 
-```{r, echo=T, results='hide'}
-library(Minirand)
+Notice that the licorice gargle data contains the allocation used in the trial, so we can create a table summarising the participants in each group.
 
-randbalance(
-  trt = lic_garg$treat, 
-  covmat = lic_garg[,-8], 
-  ntrt=2, 
-  trtseq = c("0", "1"))
+```{r, echo=T}
+tbl_summary(lic_garg, by = "treat")
 ```
 
 Notice that we can also save this as an object and access the individual sub-tables, for example
@@ -154,12 +125,18 @@ There are also packages with functions to output these demographic tables format
 
 #### Binning continuous variables
 
-Looking at the output above, it's clear that the two numeric variables `preOp_age` and `preOp_calcBMI` are going to complicate things. 
+Before we can use any of our allocation methods, we're going to need to bin the two numeric variables `preOp_age` and `preOp_calcBMI`. The sort of information we'd be likely to get pre-trial (the point at which we need to decide on the bins) would be
+
+  - The study was open to all adults (aged 18+), but `preOp_age` was likely to centre around aged 60.
+  - `preOp_BMI` was expected to have mean 26 and standard deviation around 4.5.
+
 
 :::{.exercise}
 Bin the two variables `preOp_age` and `preOp_calcBMI` to convert them into factor variables `BMI` and `age`. 
 
-Create a new data frame `lg_df` with the two new factor variables you just created instead of the original two numeric variables.
+Investigate how the bins you have chosen split the actual data - are you pleased with your choices?
+
+*In the solutions we'll create a new data frame `lg_df` with the two new factor variables instead of the original two numeric variables. It might be helpful to you if you make sure your objects and columns are named the same (or else you may need to alter code further into the practical)*
 :::
 
 <details><summary>Click for solution</summary>
@@ -168,29 +145,36 @@ Create a new data frame `lg_df` with the two new factor variables you just creat
 
 These solutions show you one way to create such factor variables, but if you choose different bins that's fine!
 
-One approach is to look at the distribution of the variables. For example for age:
-
-```{r, echo=T}
-ggplot(data=lic_garg) + geom_histogram(aes(x=preOp_age), binwidth=5)
-```
-
-Based on this, one reasonable split would be $<50,\;50-70$ and $>70$, in which case we could do
+Based on the information given, one reasonable split for `preOp_age` would be $<50,\;50-70$ and $>70$, in which case we could do
 
 ```{r, echo=T}
 lic_garg$age[lic_garg$preOp_age < 50] <- "Under 50"
 lic_garg$age[lic_garg$preOp_age >= 50 & lic_garg$preOp_age < 70] <- "50 to 70"
 lic_garg$age[lic_garg$preOp_age >= 70] <- "70 plus"
-lic_garg$age = as.factor(lic_garg$age)
+lic_garg$age = factor(lic_garg$age, levels = c("Under 50", "50 to 70", "70 plus"))
 ```
 
-Another approach is to bin the variable according to pre-defined categories, which we could do with BMI, for example
+We can see how the data fall into these categories:
+
+```{r}
+table(lic_garg$age)
+```
+These aren't equal but we have a decent number in each group.
+
+With the BMI measurement, we know that there are predefined boundaries between categories, so it might be sensible to use those. The boundary between 'medium' and 'high' is usually given as 25, so since that is near our given mean we could use that as the boundary. 
 
 ```{r, echo=T}
-lic_garg$BMI[lic_garg$preOp_calcBMI < 18.5] <- "low"
-lic_garg$BMI[lic_garg$preOp_calcBMI >= 18.5 & lic_garg$preOp_calcBMI < 25] <- "medium"
+lic_garg$BMI[lic_garg$preOp_calcBMI < 25] <- "medium_or_low"
 lic_garg$BMI[lic_garg$preOp_calcBMI >= 25] <- "high"
-lic_garg$BMI = as.factor(lic_garg$BMI)
+lic_garg$BMI = factor(lic_garg$BMI, levels = c("medium_or_low", "high"))
 ```
+
+Again, we can see how the participants fall into these bins
+
+```{r}
+table(lic_garg$BMI)
+```
+and the split is fairly even.
 
 Finally, we can select the columns we want from `lic_garg` to create `lg_df`
 
@@ -291,12 +275,7 @@ lg_srs = srs(
 And to display the balance table
 
 ```{r, echo=T}
-rb_tab = randbalance(
-  trt = lg_srs$treat, 
-  covmat = lg_srs[,-8], 
-  ntrt=2, 
-  trtseq = c("T", "C"))
-
+tbl_summary(lg_srs, by = "treat")
 ```
 
 To find the imbalance, the command is
@@ -304,6 +283,8 @@ To find the imbalance, the command is
 ```{r, echo=T}
 imbalance(lg_srs, alloc = "treat")
 ```
+
+Since this uses the `sample` function, and we didn't set a seed, you may well have got a different allocation (and therefore imbalance).
 
 :::
 
@@ -360,11 +341,13 @@ lg_rpb$treat = rpb_lg$treatment[1:235]
 Then we can generate the demographic table as before:
 
 ```{r, echo=T, eval=F}
-randbalance(
-  trt = lg_rpb$treat, 
-  covmat = lg_rpb[,-8], 
-  ntrt=2, 
-  trtseq = c("T", "C"))
+tbl_summary(lg_rpb, by = "treat")
+```
+
+and calculate the imbalance
+
+```{r}
+imbalance(lg_rpb, alloc = "treat")
 ```
 
 :::
@@ -428,11 +411,7 @@ lg_bc1 = biased_coin(
 and to produce a balance table:
 
 ```{r, echo=T, eval=F}
-randbalance(
-  trt = lg_bc1$treat, 
-  covmat = lg_bc1[,-8], 
-  ntrt=2, 
-  trtseq = c("T", "C"))
+tbl_summary(lg_bc1, by = "treat")
 ```
 
 Finally we can find the imbalance:
@@ -493,14 +472,14 @@ The argument `r` allows you to generate `r` sequences, in which case the matrix 
 
 ### Stratifying the dataset
 
-The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataste one stratum might contain only women, aged 50-65, with a history of smoking.
+The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataset one stratum might contain only women, aged 50-65, with a history of smoking.
 
 Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate 'mini-trials'.
 
 An obvious problem with applying stratification to this dataset is the number of strata. We have (if you have the same numbers of levels for `age` and `BMI` as I do)
 
-$$2\times{3}\times{4}\times{3}\times{2}\times{3}\times{3} = 1296 $$
-strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will choose just a couple of covariates to stratify by. For example, 
+$$2\times{3}\times{4}\times{3}\times{2}\times{3}\times{2} = 864 $$
+strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will choose just a couple of covariates to stratify by. For example, gender and smoking status:
 
 ```{r, echo=T}
 library(dplyr)
@@ -699,35 +678,6 @@ lg_df$treat = res
 </details>
 
 
-### A simulation experiment!
-
-In the above, we've used each method once and produced summaries like the marginal imbalance. Because they are inherently random, to understand the general behaviour of each method, we'll conduct a simulation experiment.
-
-The general process for this is:
-
-  1. Choose a numerical summary (probably either the imbalance or the marginal imbalance) 
-  2. Choose some large number $n_{sim}$ and create a vector of zeroes or NAs that length
-  3. Run through the following process $n_{sim}$ times: 
-      
-       * Perform the allocation
-       * Find the numerical summary 
-       * Store the numerical summary in the vector you created in step 2.
-
-  4. Plot (or otherwise summarise) the vector of summaries.
-  
-:::{.exercise}
-
-Perform the simulation experiment for some of the methods above. Make sure you store the summary vectors by different (and intelligible!) names.
-
-Based on your results, comment on how plausible it is that @ruetzler2013randomized used each method in their trial.
-
-*Hint: think of the simulated summaries as approximations of probability distributions*
-
-:::
-
-
-
-For the licorice dataset, @ruetzler2013randomized say that "Randomization (1:1) to licorice or placebo was assigned by a Web-based system that was accessed just before treatment by an independent researcher who was not involved in data collection; no stratification was used."
 
 ## Analysis {#cp1analysis}
 
@@ -848,7 +798,7 @@ Either way, our 95% confidence interval is \left(-1.226,\;-0.368\right) (to 3 d.
 Therefore, the confidence interval for $\frac{X_T}{X_C}$ is
 
 $$\left(10^{-1.226},\;10^{-0.368}\right) =  \left(0.0594,\;0.429\right).$$
-That is, the number of polyps at 12 months is likely to be somewhere between $0.0594 X_C$ and $0.429 X_C$.
+That is, the number of polyps at 12 months for someone in group $T$ is likely to be somewhere between $0.0594 X_C$ and $0.429 X_C$.
 
 :::
 
@@ -899,7 +849,7 @@ t.test(
 
 </details>
 
-Finally we can try fitting an ANCOVA model to the data, using the function `lm`. Remember that the general model function for ANCOVA is....
+Finally we can try fitting an ANCOVA model to the data, using the function `lm`. 
 
 :::{.exercise}
 Fit an ANCOVA model to the licorice data, and interpret your results. If you aren't familiar with the function `lm`, it might be a good idea to look at the solutions.
@@ -922,6 +872,15 @@ Based on this, the effect of the drug sulindac is significant ($p=0.00595$, lowe
 ```{r, echo=T}
 c(-0.7046 - qt(0.975, df=17)*0.1675, -0.7046 + qt(0.975, df=17)*0.1675 ) 
 ```
+
+
+We could create a nicer-looking table of the coefficients using `tbl_regression` (from `gtsummary`):
+
+```{r}
+tbl_regression(lm_polyp1)
+```
+
+but note that this doesn't show all the information that `summary` does.
 
 :::
 
@@ -950,8 +909,7 @@ In this case it appears that the other two baseline covariates, age and sex, don
 
 
 :::{.exercise}
-Inspect some plots of the residuals, to check whether these models have any systematic 
-problems.
+Inspect some plots of the residuals, to check whether these models have any systematic problems. Does there appear to be any multicollinearity in the data?
 :::
 
 <details><summary>Click for solution</summary>
@@ -971,33 +929,57 @@ ggplot(data=polyps_df, aes(x=resid1, fill=treatment)) + geom_histogram(bins=20)
 
 None of these ring huge alarm bells, but because the dataset is so small it's quite hard to tell! Arguably the residuals for the `sulindac` group are more spread out than those for the plaecbo, but there are no obvious systematic trends.
 
+We can find the variance inflation factor by 
+
+```{r, echo=T}
+vif(lm_polyp1)
+```
+
+and it indicates no problems. Another sign that the ANCOVA model is well-fitted is that the standard errors of the coefficients are all reasonably small. If there was a problem, for example multicollinearity, some of these would blow up.
+
 :::
 
 </details>
 
+## Extension problems
 
-### Treatment for maternal periodontal disease
+If you have time to spare, or want to look a bit deeper into things after the practical, these exercises are here for you! 
 
-This trial is reported in @michalowicz2006treatment. The data are in `opt`, which is in the package `medicaldata`, which you should already have loaded.
+### A simulation experiment!
 
+In the allocation section we used each method once and produced summaries like the marginal imbalance. Because they are inherently random, to understand the general behaviour of each method, we'll conduct a simulation experiment.
+
+The general process for this is:
+
+  1. Choose a numerical summary (probably either the imbalance or the marginal imbalance) 
+  2. Choose some large number $n_{sim}$ and create a vector of zeroes or NAs that length
+  3. Run through the following process $n_{sim}$ times: 
+      
+       * Perform the allocation
+       * Find the numerical summary 
+       * Store the numerical summary in the vector you created in step 2.
+
+  4. Plot (or otherwise summarise) the vector of summaries.
+  
 :::{.exercise}
-Read the help file for this dataset. What does the study aim to investigate? What are the treatment groups? How many participants are there? How many variables are there? Which are the outcome variables?
+
+Perform the simulation experiment for some of the methods above. Make sure you store the summary vectors by different (and intelligible!) names.
+
+Based on your results, comment on how plausible it is that @ruetzler2013randomized used each method in their trial.
+
+*Hint: think of the simulated summaries as approximations of probability distributions*
 
 :::
 
 
-<details><summary>Click for solution</summary>
 
-:::{.solution}
+For the licorice dataset, @ruetzler2013randomized say that "Randomization (1:1) to licorice or placebo was assigned by a Web-based system that was accessed just before treatment by an independent researcher who was not involved in data collection; no stratification was used."
 
-We can find this information using commands such as 
 
-```{r, echo=T}
-data(opt)
-dim(opt)
-str(opt)
-?opt
-```
+
+### Treatment for maternal periodontal disease
+
+We looked at the `opt` dataset in the last practical in the context of missing data, but now we're going to look at it for analysis. The `opt` data are in the package `medicaldata`, which you should already have loaded.
 
 The aim of the study is to find out whether treating women for periodontal disease during the first 21 weeks of pregnancy resulted in a low birth weight or pre-term birth.
 
@@ -1009,10 +991,6 @@ The groups are stored in the `group` variable
 There are 823 participants and 171 variables - many of these are baseline covariates, but there are also quite a few interim measurements.
 
 The study's primary outcome variable is gestational age at end of pregnancy, but birth weight was also measured, as well as some clinical measures of periodontal disease and some microbiological and immunological outcomes.
-
-:::
-
-</details>
 
 To make this more managable, we will concentrate on the outcome `Birthweight`.
 
@@ -1036,8 +1014,11 @@ This data looks very nice and normal (although there is a bit of a fat tail to t
 
 </details>
 
+You'll remember that there were lots of issues with the `opt` data.
 
-We'll reduce the dataset to a more managable size, by removing all outcomes except `Birthweight` and reducing the number of covariates. We'll also alter a couple of factor levels to make the data work with the linear model (the main source of difficulty is that lots of variables are coded `NA` when really there is information).
+We'll reduce the dataset to a more managable size, by removing all outcomes except `Birthweight` and reducing the number of covariates. We'll also impute the variables that we can do logically, eg. `BL.Cig.day`, as we did in computer practical 1. 
+
+If you still have your version of `opt` after performing regression imputation on the `BMI` variable you could use that!
 
 ```{r, echo=T}
 opt_red = opt[ ,c(1:22,72)] 
@@ -1113,8 +1094,6 @@ Before fitting the model, think about what you expect to find. Bear in mind:
   * the description of risk factors of preterm birth / low birth weight in the help file for `opt`
   * which variables you will include in your model
 
-You might want to explore some correlations in the data set
-  
 :::
 
 
@@ -1129,14 +1108,6 @@ The help file says (under 'Background'):
 > Many risk factors for preterm birth have already been identified, including maternal age, drug use, and diabetes. However, such factors are exhibited in only about half of preterm birth mothers, highlighting a need to expand our understanding of what contributes to preterm birth risk.
 
 Therefore, if we include related factors in our model (many of which we have in our dataset) we should expect to see significant coefficients. But, it sounds like there is a lot that isn't well understood, so our model is likely not to explain a huge proportion of the variance.
-
-If you wanted to explore correlations, you could for example try 
-
-```{r, echo=T}
-cor(opt_red$Birthweight, opt_red$Age, use = "complete.obs")
-```
-
-though this will only work with numerical variables.
 
 :::
 
@@ -1168,7 +1139,7 @@ lm_eg = lm(Birthweight ~ Group + Age + Hypertension, data=opt_red)
 ```
 
 
-We see that, as we expected, the `Group` variable is not significant ($p=0.5644$). However, some terms are significant, for example whether or not the participant has diabetes, and how many cigarettes a mother smokes per day.
+We see that, as we expected, the `Group` variable is not significant ($p=0.5644$). However, some terms are significant, for example whether or not the participant has diabetes, and how many cigarettes a mother smokes per day - this isn't surprising given the contextual information we had.
 
 :::
 
@@ -1182,7 +1153,10 @@ Perform some diagnostic checks on your model. Do you have any reason to suspect 
 
 :::{.solution}
 
-There are lots of checks we can do, and we will focus on studying the residuals. If the residuals of our model appear to be homoskedastic, approximately normal with mean 0, and we can't find any trends, then our model is OK.
+
+One thing to notice from the linear model summary is that many coefficients have proportionally quite large standard errors. This could be because of a lack of data (eg. if there are very few participants in some category) or because of multicollinearity (in which case the model cannot know which of the linked variables to attribute the effect to). Combining some categories or carefully removing some covariates could help improve the model.
+
+We can also study the residuals of our model, to check that they appear to be homoskedastic and approximately normal with mean 0.
 
 The first step is to extract the residuals and the fitted values (which are also useful). We will create a new data frame called `opt_diag` with these in, so that we can plot things easily but don't pollute our original dataset (in case we want to fit any more models)
 
@@ -1204,25 +1178,6 @@ ggplot(data=opt_diag, aes(x=fitted, y=resid, col=Group)) + geom_point()
 ```
 
 
-We could also see if there are any patterns in the data that weren't included in the model, because one or more entries were `NA`
-
-```{r, echo=T}
-exc_ind = !(opt_red$PID %in% opt_diag$PID)
-
-opt_exc = opt_red[exc_ind, ]
-# we can check this has worked by doing
-nrow(opt_exc) # should be the difference between nrow(opt_red) and nrow(opt_diag)
-na.omit(opt_exc) # should be empty, since each row should have at least one NA
-```
-
-For example, by comparing summary statistics
-
-```{r, echo=T}
-summary(opt_diag$Birthweight)
-summary(opt_exc$Birthweight)
-sd(opt_exc$Birthweight, na.rm=T)
-sd(opt_diag$Birthweight, na.rm=T)
-```
 
 :::
 

@@ -2,8 +2,6 @@
 
 # Computer Practical 1 - Missing data
 
-MENTION SOMEWHERE ABOUT THIS TAKING PLACE AT THE ANALYSIS STAGE - DO SOMETHING SENSIBLE AT THE ALLOCATION STAGE.
-
 In this computer practical we focus on an important issue in clinical trials (and most real world projects!): **missing data**. There will be a bit more reading than in future practicals, to give you the necessary theory and background. We will only have time to skim the surface of working with missing data, but if you want to find out more, some good references are @little2019statistical and chapter 17 of @gelman2021regression. 
 
 

@@ -44,9 +44,9 @@ This is very small dataset, and so in that respect it is quite unusual, but its 
 Because the randomization process should produce groups that are comparable, we should in principle be able to compare the primary outcome (which we'll still denote $X$) between the groups.
 
 ::: {.example #captopril2}
-Summary statistics of the outcome for each group are shown below.
+Summary statistics of the outcome for each group are shown in Table \@ref(tab:outsumhommel).
 
-```{r}
+```{r outsumhommel}
 df_hommel1 = data.frame(
   Sam = c(9,7),
   Mean = c(
@@ -595,6 +595,31 @@ As well as generating a fitted value $\hat{\tau}$, we (or rather R!) will also f
 
 The technique described above is a well-established statistical method known as **ANCOVA** (short for the **An**alysis of **Cova**riance), which can be implemented in R and many other statistical software packages. Notice that it is really just a linear model (the like of which you have seen many times) with at least one factor variable, and with a particular focus (application-wise) on the coefficient of the treatment group variable.
 
+#### Some cautions {-}
+
+As with any linear model, we need to ensure that it is appropriate for our dataset. Two key things we need to check for are:
+
+  * **linear effect across the range of the dataset**: a linear model is based on the assumption that the effect of the independent variables is the same across the whole range of the data. This is not always the case. For example, the rate of deterioration with age can be more at older ages. This can be dealt with either by binning age into categories, or by using a transformation, eg. age$^2$. Note that this would still be a linear model, because it is linear in the coefficients.
+  * **Multicollinearity**: we should make sure that none of the independent variables are highly correlated. This is not uncommon in clinical datasets, since measurements are sometimes strongly related. Sometimes therefore, this can mean choosing only one out of a collection of two or more strongly related variables. We can check this by finding the correlation matrix of the data (excluding the output). If there is multicollinearity in the data, we would expect to see a very high standard error for the coefficients of the affected variables.
+  
+::: {.definition}
+In a linear regression model the variance of the fitted coefficient $\hat\beta_j$ is
+
+$$\operatorname{var}\left(\hat\beta_j\right) = \frac{\sigma^2}{1-\mathbf{R}^2_j},$$
+
+where $\mathbf{R}^2_j$ is the squared multiple correlation for the regression of $x_j$ on all the other covariates. The **variance inflation factor** is given by
+
+$$\operatorname{VIF}\left(\hat\beta_j\right) = \frac{1}{1-\mathbf{R}^2_j}.$$
+If $\operatorname{VIF}=1$ then $x_j$ is orthogonal to all other covariates. Large values of $\operatorname{VIF}$ indicate potential problems.
+
+
+:::
+
+  
+  
+
+
+
 ::: {.example}
 Let's now implement ANCOVA on our Captopril data in R.
 We do this by first fitting a linear model using 'lm', with baseline measurement and arm as predictor variables and outcome as the predictand. 
@@ -603,6 +628,13 @@ We do this by first fitting a linear model using 'lm', with baseline measurement
 lm_capt = lm(outcome ~ baseline + arm, data = df_hommel)
 summary(lm_capt) 
 ```
+
+We can find the variance inflation factor and see that there appear to be no problems with collinearity:
+
+```{r, echo=T}
+vif(lm_capt)
+```
+
 
 The variable 'arm' here is being included as a factor variable, so it behaves like
 
@@ -732,6 +764,14 @@ lm_stresslin = lm(score ~ treatment + exercise + age, data = stress)
 summary(lm_stresslin)
 
 ```
+
+We can calculate the variance inflation factor for this model
+
+```{r, echo=T}
+vif(lm_stresslin)
+```
+
+and see that values are fairly close to one.
 
 In particular, taking a high level of exercise reduced participants' stress scores by around 9.6, and the treatment reduced stress scores by around 4.3. Participants' stress scores increased slightly with age (just under half a point per year!). 
 

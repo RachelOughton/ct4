@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>7 (lecture 15) Working with time-to-event data | Clinical Trials 4H - lecture notes</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="7 (lecture 15) Working with time-to-event data | Clinical Trials 4H - lecture notes" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="7 (lecture 15) Working with time-to-event data | Clinical Trials 4H - lecture notes" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2025-01-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="lecture-11-analysis-for-binary-outcomes.html"/>
+<link rel="next" href="lecture-16-comparing-survival-curves.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> (Lecture 2) Sample size</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#one-sided-or-two-sided"><i class="fa fa-check"></i><b>2.2.1</b> One-sided or two-sided?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.2</b> Insignificant results</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-plan.html"><a href="rct-plan.html#brief-aside-on-notation"><i class="fa fa-check"></i>Brief aside on notation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="lecture-3.html"><a href="lecture-3.html"><i class="fa fa-check"></i>Lecture 3</a>
+<ul>
+<li class="chapter" data-level="2.4" data-path="lecture-3.html"><a href="lecture-3.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="lecture-3.html"><a href="lecture-3.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html"><i class="fa fa-check"></i><b>3</b> (Lecture 4) Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#sources-of-bias"><i class="fa fa-check"></i><b>3.1.1</b> Sources of bias</a></li>
+<li class="chapter" data-level="3.1.2" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> (Lecture 5) Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#biased-coin-designs-and-urn-schemes"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#lecture-6-incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> (Lecture 6) Incorporating baseline measurements</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3.1</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.3.2" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#minimization"><i class="fa fa-check"></i><b>3.3.2</b> Minimization</a></li>
+<li class="chapter" data-level="3.3.3" data-path="lecture-4-allocation.html"><a href="lecture-4-allocation.html#minimization-algorithm"><i class="fa fa-check"></i><b>3.3.3</b> Minimization algorithm</a></li>
+</ul></li>
+</ul></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H - lecture notes</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="lecture-15-working-with-time-to-event-data" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">7</span> (lecture 15) Working with time-to-event data<a href="lecture-15-working-with-time-to-event-data.html#lecture-15-working-with-time-to-event-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p><strong>time to event data</strong> / survival data - the amount of time that elapses before a particular event happens.</p>
+<p><em>As a sub-field of statistics, survival analysis has been around for a long time, as people have thought about and worked data like mortality records (<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/1740-9713.01421">most notably John Graunt, who used the ‘Bills of Mortality’ during the 1600s to better understand the plague and other causes of death</a>). However, it developed rapidly during the many cancer related clinical trials of the 1960s and 1970s.</em></p>
+<p>IN clinical trials, the event is very often death, and so the language of ‘death’ and ‘survival’ pervade the field. However, the event can be other things, and can indeed be positive.</p>
+<p>*why this branch of statistics came to be known as **survival analysis*.</p>
+<p><em>Time-to-event data also appears in other applications, such as engineering (eg. monitoring the reliability of a machine) and marketing (eg. thinking of the time-to-purchase). As well as the books already mentioned, this chapter makes use of <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>.</em></p>
+<p><em>Usually, survival data is given in terms of time, but it can also be the number of times something happens (for example, the number of clinic appointments attended) before the event in question occurs.</em></p>
+<p>Time to event data is tricky because:</p>
+<ul>
+<li>skewed - can’t use normal dist</li>
+<li>censored - we don’t usually observe the full dataset</li>
+</ul>
+<div id="censored-times" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Censored times<a href="lecture-15-working-with-time-to-event-data.html#censored-times" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For some participants, we won’t observe the event:</p>
+<ul>
+<li>it may not happen to them in the lifetime of the trial</li>
+<li>they may exit the trial early for some reason</li>
+<li>they may be lost to follow-up</li>
+</ul>
+<p>We know these people hadn’t experienced the event up to some time <span class="math inline">\(t\)</span>, but we don’t know what happened next. All we know is that their time-to-event or <strong>survival time</strong> is greater than that time <span class="math inline">\(t\)</span>. These partial observations are known as <strong>censored</strong> times, and in particular as <strong>right-censored</strong> times, because the event happens <em>after</em> the censored time.</p>
+<p><em>It is possible (but less common) to have left-censored or interval-censored data, but in this course we will deal only with right-censoring.</em></p>
+<div class="figure"><span style="display:block;" id="fig:censor"></span>
+<img src="CT4H_lecture_notes_files/figure-html/censor-1.png" alt="An example of some censored data." width="672" />
+<p class="caption">
+Figure 7.1: An example of some censored data.
+</p>
+</div>
+<p>Possible options:</p>
+<ul>
+<li><p>Treat censored times as observations, ie. as though the event had happened at time <span class="math inline">\(t\)</span> - bias the results of the trial. <em>The survival times reported would be systematically shorter than the true ones. For example, in the dataset shown in Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:censor">7.1</a>, we would estimate the survival probability at time 10 as 0.2, since only two of the 10 participants were still in the trial after time 10. But it may well be that some of the participants whose observations were censored before <span class="math inline">\(t=10\)</span> were still alive at <span class="math inline">\(t=10\)</span>.</em></p></li>
+<li><p>Remove the censored times, and only analyse complete observations - losing data and therefore valuable information. <em>This approach may well also lead to bias, for example if some subset of patients died quite soon into the trial, but the remainder lived a long time (past the end of the trial). If our analysis ignores the survivors, we are likely to underestimate the general survival time. In the dataset in Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:censor">7.1</a> there are five participants (3,6,7,8,10) whom we are no longer able to observe at time 10, but of whom none had experienced the event by the point at which they were censored.</em></p></li>
+</ul>
+<p>So we know that we need to somehow include these censored times in our analysis. How we do so will depend on our approach.</p>
+</div>
+<div id="survhaz" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> The Survival Curve and the Hazard function<a href="lecture-15-working-with-time-to-event-data.html#survhaz" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><em>The field of survival analysis is relatively unusual in statistics, in that it isn’t treated predominantly parametrically.</em></p>
+<p><em>For most continuous data, it is overwhelmingly common to work with the normal distribution and its friends (eg. the student’s t distribution).</em></p>
+<p><em>Similarly binary data is dominated by the binomial distribution. Inference is therefore often focussed on the parameters <span class="math inline">\(\mu,\;\sigma\)</span> or <span class="math inline">\(p\)</span>, as an adequate summary of the truth given whatever parameteric assumption has been made. </em></p>
+<p><em>However, in survival analysis, it is often the case that we focus on the whole shape of the data; there isn’t an accepted dominating approach.</em></p>
+<p>We need to introduce some key ways of working with such data.</p>
+<p>The <strong>survival time</strong> (or time-to-event) <span class="math inline">\(t\)</span> for a particular individual can be thought of as the value of a random variable <span class="math inline">\(T\)</span>, which can take any non-negative value. We can think in terms of a probability distribution over the range of <span class="math inline">\(T\)</span>. If <span class="math inline">\(T\)</span> has a probability distribution with underlying <em>probability density function</em> <span class="math inline">\(f\left(t\right)\)</span>, then the <em>cumulative distribution function</em> is given by</p>
+<p><span class="math display">\[F\left(t\right) = P\left(T&lt;t\right) = \int\limits_0^t f\left(u\right)du, \]</span>
+and this gives us the probability that the survival time is less than <span class="math inline">\(t\)</span>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-34" class="definition"><strong>Definition 7.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
+Conventionally we plot <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> against <span class="math inline">\(t\)</span> and this gives us a <strong>survival curve</strong>.</p>
+</div>
+<p>We can immediately say two things about survival curves:</p>
+<ol style="list-style-type: decimal">
+<li>All participants must be alive at the start of the trial <span class="math inline">\(\implies\operatorname{S}\left(0\right)=1\)</span>.</li>
+<li>It’s impossible to survive past <span class="math inline">\(t_2&gt;t_1\)</span> but not past time <span class="math inline">\(t_1\)</span> <span class="math inline">\(\implies\frac{d\operatorname{S}\left(t\right)}{dt}\leq{0}\)</span>, ie. <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> is non-increasing.</li>
+</ol>
+<p>Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:egsurvival">7.2</a> shows two survival curves, comparing different therapies. We see that the hormonal therapy reduces the survival time slightly compared to no hormonal therapy.</p>
+<div class="figure"><span style="display:block;" id="fig:egsurvival"></span>
+<img src="images/survival_eg.png" alt="An example of two survival curves, taken from @syriopoulou2022standardised."  />
+<p class="caption">
+Figure 7.2: An example of two survival curves, taken from <span class="citation">Syriopoulou et al. (<a href="#ref-syriopoulou2022standardised">2022</a>)</span>.
+</p>
+</div>
+<p>Following on from the survival function, we have the <strong>Hazard function</strong> <span class="math inline">\(h\left(t\right)\)</span>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-35" class="definition"><strong>Definition 7.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous probability of death (or <em>experiencing the event</em>) at time <span class="math inline">\(t\)</span>.</p>
+</div>
+<p>If we use <span class="math inline">\(T\)</span> to denote the random variable of survival time (or time-to-event) then <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> and <span class="math inline">\(h(t)\)</span> are defined by</p>
+<p><span class="math display">\[
+\begin{aligned}
+\operatorname{S}\left(t\right)&amp;= \operatorname{Pr}\left(T&gt;t\right)\\
+h\left(t\right) &amp; = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\left(t&lt;T&lt;t+s\mid{T&gt;t}\right)}{s}.
+\end{aligned}
+\]</span>
+Using the definition of conditional probability, we can rewrite <span class="math inline">\(h(t)\)</span> as</p>
+<p><span class="math display">\[
+\begin{aligned}
+h\left(t\right) &amp; = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\left(t&lt;T&lt;t+s\mid{T&gt;t}\right)}{s} \\
+&amp; = \lim\limits_{s\rightarrow{0+}}\left[\frac{1}{\operatorname{Pr}\left(T&gt;t\right)}\cdot\frac{\operatorname{Pr}\left(\left(t&lt;T&lt;t+s\right)\cap\left(T&gt;t\right)\right)}{s}\right] \\
+&amp; = \lim\limits_{s\rightarrow{0+}}\left[\frac{1}{\operatorname{Pr}\left(T&gt;t\right)}\cdot\frac{\operatorname{Pr}\left(t&lt;T&lt;t+s\right)}{s}\right]\\
+&amp; = \frac{f\left(t\right)}{\operatorname{S}\left(t\right)},
+\end{aligned}
+\]</span>
+where <span class="math inline">\(f\left(\cdot\right)\)</span> is the probability density of <span class="math inline">\(T\)</span>. The hazard function can take any positive value (unlike the survival function), and for this reason <span class="math inline">\(\log\left(h\left(t\right)\right)\)</span> is often used to transform it to the real line.</p>
+<p>The hazard function can also be called the ‘hazard rate’, the ‘instantaneous death rate’, the ‘intensity rate’ or the ‘force of mortality’.</p>
+<p><em>As we hinted before, there are fundamentally two ways to deal with survival data: we can go about things either parametrically or non-parametrically. Unusually for statistics in general, the non-parametric paradigm is prevalent in survival analysis. We will consider some methods from both paradigms.</em></p>
+<p>We will look at parametric and non-parametric ways to estimate these.</p>
+<div id="the-kaplan-meier-estimator" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> The Kaplan-Meier estimator<a href="lecture-15-working-with-time-to-event-data.html#the-kaplan-meier-estimator" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The <strong>Kaplan-Meier estimator</strong> is a non-parametric estimate of <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, originally presented in <span class="citation">Kaplan and Meier (<a href="#ref-kaplan1958nonparametric">1958</a>)</span>. The idea behind it is to divide the interval <span class="math inline">\(\left[0,\;t\right]\)</span> into many short consecutive intervals,</p>
+<p><span class="math display">\[\left[0,\,t\right] = \bigcup\limits_{k=0}^K \left[s_k,\,s_{k+1}\right],\]</span>
+where <span class="math inline">\(s_k&lt;s_{k+1}\;\forall{k}\)</span>, <span class="math inline">\(s_0=0\)</span> and <span class="math inline">\(s_{K+1}=t\)</span>.</p>
+<p>We then estimate the probability of surviving past some time <span class="math inline">\(t\)</span> by multiplying together the probabilities of surviving the successive intervals up to time <span class="math inline">\(t\)</span>. No distributional assumptions are made, and the probability of surviving interval <span class="math inline">\(\left[s_k,\,s_{k+1}\right]\)</span> is estimated by <span class="math inline">\(1-Q\)</span>, where</p>
+<p><span class="math display">\[Q = \frac{\text{Number who die in that interval}}{\text{Number at risk of death in that interval}}.\]</span>
+Let’s say that deaths are observed at times <span class="math inline">\(t_1&lt;t_2&lt;\ldots &lt; t_n\)</span>, and that the number of deaths at time <span class="math inline">\(t_i\)</span> is <span class="math inline">\(d_i\)</span> out of a possible <span class="math inline">\(n_i\)</span>. Then for some time <span class="math inline">\(t\in\left[t_J,\,t_{J+1}\right)\)</span>, the Kaplan-Meier estimate of <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> is</p>
+<p><span class="math display">\[\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - d_j\right)}{n_j}.\]</span></p>
+<p>The number of people at risk at time <span class="math inline">\(t_{j+1}\)</span>, <span class="math inline">\(n_{j+1}\)</span>, will be the number of people at risk at time <span class="math inline">\(t_j\)</span> (which was <span class="math inline">\(n_j\)</span>), minus any who died at time <span class="math inline">\(t_j\)</span> (which we write as <span class="math inline">\(d_j\)</span>) and any who were censored in the interval <span class="math inline">\(\left[t_j,\,t_{j+1}\right)\)</span>.</p>
+<p><em>The Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.</em></p>
+<div class="example">
+<p><span id="exm:surveg1" class="example"><strong>Example 7.1  </strong></span><span class="citation">Edmonson et al. (<a href="#ref-edmonson1979prognosis">1979</a>)</span> conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group <span class="math inline">\(C\)</span>) with a mixture of cyclophosphamide and adriamycin (group <span class="math inline">\(T\)</span>). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation.</p>
+<table>
+<caption><span id="tab:ovdata">Table 7.1: </span>Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">FU_time</th>
+<th align="right">FU_status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">1</td>
+<td align="right">59</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">2</td>
+<td align="right">115</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">3</td>
+<td align="right">156</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">22</td>
+<td align="right">268</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">23</td>
+<td align="right">329</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">24</td>
+<td align="right">353</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">25</td>
+<td align="right">365</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">26</td>
+<td align="right">377</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="right">421</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="right">431</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="right">448</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="right">464</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="right">475</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="right">477</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="right">563</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="right">638</td>
+<td align="right">1</td>
+</tr>
+<tr class="odd">
+<td align="left">12</td>
+<td align="right">744</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">13</td>
+<td align="right">769</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">14</td>
+<td align="right">770</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">15</td>
+<td align="right">803</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">16</td>
+<td align="right">855</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">17</td>
+<td align="right">1040</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">18</td>
+<td align="right">1106</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">19</td>
+<td align="right">1129</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">20</td>
+<td align="right">1206</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">21</td>
+<td align="right">1227</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p>There are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
+Table <a href="lecture-15-working-with-time-to-event-data.html#tab:ovkm">7.2</a></p>
+<p><em>The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve.</em></p>
+<table>
+<caption>
+<span id="tab:ovkm">Table 7.2: </span><span id="tab:ovkm">Table 7.3: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.
+</caption>
+<thead>
+<tr>
+<th style="text-align:right;">
+time
+</th>
+<th style="text-align:right;">
+n_risk
+</th>
+<th style="text-align:right;">
+n_event
+</th>
+<th style="text-align:right;">
+n_cens
+</th>
+<th style="text-align:right;">
+survival
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+59
+</td>
+<td style="text-align:right;">
+26
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.9615385
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+115
+</td>
+<td style="text-align:right;">
+25
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.9230769
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+156
+</td>
+<td style="text-align:right;">
+24
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.8846154
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+268
+</td>
+<td style="text-align:right;">
+23
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.8461538
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+329
+</td>
+<td style="text-align:right;">
+22
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.8076923
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+353
+</td>
+<td style="text-align:right;">
+21
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.7692308
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+365
+</td>
+<td style="text-align:right;">
+20
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.7307692
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+431
+</td>
+<td style="text-align:right;">
+17
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.6877828
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+464
+</td>
+<td style="text-align:right;">
+15
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.6419306
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+475
+</td>
+<td style="text-align:right;">
+14
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.5960784
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+563
+</td>
+<td style="text-align:right;">
+12
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.5464052
+</td>
+</tr>
+<tr>
+<td style="text-align:right;font-weight: bold;">
+638
+</td>
+<td style="text-align:right;">
+11
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;font-weight: bold;">
+0.4967320
+</td>
+</tr>
+</tbody>
+</table>
+<p>To demonstrate the effect of including (and correctly treating) the censored data, we can do the same thing, but this time (1) leaving out all censored data and (2) treating all censored data times as deaths. Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:kmov">7.3</a> shows the resulting survival curve estimates.</p>
+<div class="figure"><span style="display:block;" id="fig:kmov"></span>
+<img src="CT4H_lecture_notes_files/figure-html/kmov-1.png" alt="Kaplan-Meier estimate of survival curve for ovarian cancer data, with two incorrect estiamtes also shown." width="672" />
+<p class="caption">
+Figure 7.3: Kaplan-Meier estimate of survival curve for ovarian cancer data, with two incorrect estiamtes also shown.
+</p>
+</div>
+<p><em>Leaving out the censored observations entirely is the most problematic approach, since it causes a serious underestimate, and in this case behaves as though there are no survivors after <span class="math inline">\(t=638\)</span>.</em></p>
+<p><em>Treating the censored data as deaths also leads to an underestimate of the survival probability, and notably creates a rather spurious curve past the last real death observation.</em></p>
+<p><em>The ‘correct’ Kaplan-Meier estimate may seem a bit disatisfying, since it stops at <span class="math inline">\(t=638\)</span> with a probabiilty of <span class="math inline">\(0.497\)</span>. However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at <span class="math inline">\(t=638\)</span>, and some of the other censored participants may also have been.</em></p>
+</div>
+<p>For a clinical trial, we want to plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we’ll talk about this later).</p>
+<div class="example">
+<p><span id="exm:veteranmyeloid" class="example"><strong>Example 7.2  </strong></span>Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:ovarian">7.4</a> shows the Kaplan Meier plots for the ovarian cancer data from Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:kmov">7.3</a>, this time split by treatment group. <em>We will also use functions from the package <code>survival</code>, which avoids doing all the calculations ourselves.</em></p>
+<div class="figure"><span style="display:block;" id="fig:ovarian"></span>
+<img src="CT4H_lecture_notes_files/figure-html/ovarian-1.png" alt="Kaplan Meier curves for the ovarian cancer data, split by treatment. Red is for group T (mixture of cyclophosphamide and adriamycin), black for group C (cyclophosphamide only)." width="672" />
+<p class="caption">
+Figure 7.4: Kaplan Meier curves for the ovarian cancer data, split by treatment. Red is for group T (mixture of cyclophosphamide and adriamycin), black for group C (cyclophosphamide only).
+</p>
+</div>
+<p>The second dataset we will use throughout this chapter has been simulated based on a trial of acute myeloid leukemia (<span class="citation">Le-Rademacher et al. (<a href="#ref-le2018application">2018</a>)</span>) and is from the <code>survival</code> package <span class="citation">Therneau (<a href="#ref-survival-package">2024</a>)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:myeloid"></span>
+<img src="CT4H_lecture_notes_files/figure-html/myeloid-1.png" alt="Kaplan Meier curves for the Myeloid data, split by treatment. Red is for group T, black for group C (placebo)." width="672" />
+<p class="caption">
+Figure 7.5: Kaplan Meier curves for the Myeloid data, split by treatment. Red is for group T, black for group C (placebo).
+</p>
+</div>
+</div>
+</div>
+<div id="a-parametric-approach" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> A parametric approach<a href="lecture-15-working-with-time-to-event-data.html#a-parametric-approach" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Assume the survival time <span class="math inline">\(T\)</span> follows some probability distribution, up to unknown parameters which we will estimate from the data.</p>
+<p>The simplest distribution for time-to-event data is the <em>exponential distribution</em>, which has density</p>
+<p><span class="math display">\[f\left(t\right) = \lambda e^{-\lambda t} \text{ for }t&gt;0,\]</span></p>
+<p>survival function</p>
+<p><span class="math display">\[\operatorname{S}\left(t\right) = 1- \int\limits_{0}^t{\lambda e^{-\lambda t}} = e^{-\lambda t}, \]</span>
+and mean survival time <span class="math inline">\(\frac{1}{\lambda}\)</span>. The hazard function is therefore</p>
+<p><span class="math display">\[h\left(t\right) = \frac{f\left(t\right)}{S\left(t\right)} = \lambda, \]</span>
+that is, the hazard is constant.</p>
+<p>Given some dataset, we want to be able to find an estimate for <span class="math inline">\(\lambda\)</span> (or the parameters of our distribution of choice).</p>
+<div id="expll" class="section level4 hasAnchor" number="7.2.2.1">
+<h4><span class="header-section-number">7.2.2.1</span> Maximum likelihood for time-to-event data<a href="lecture-15-working-with-time-to-event-data.html#expll" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Suppose our dataset has <span class="math inline">\(n\)</span> times <span class="math inline">\(t_1,\,t_2,\,\ldots,t_n\)</span>. Of these, <span class="math inline">\(m\)</span> are fully observed and <span class="math inline">\(n-m\)</span> are censored. We also have indicators <span class="math inline">\(\delta_1,\ldots,\delta_n\)</span>, where</p>
+<p><span class="math display">\[
+\delta_i=
+\begin{cases}
+1\; \text{ if observation }i\text{ is fully observed}\\
+0\;\text{ if observation }i\text{ is censored}
+\end{cases}
+\]</span>
+Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, <span class="math inline">\(f\left(t_i\mid{\text{params}}\right)\)</span>.</p>
+<p>However, for our censored times (<span class="math inline">\(\delta_i=0\)</span>) we only know that the time-to-event is greater than <span class="math inline">\(t_i\)</span>.</p>
+<p>For these observations, it is the survival function (remember that this is <span class="math inline">\(p\left(T&gt;t\right)\)</span>) that contributes what we need to the likelihood function.</p>
+<p>Therefore (for any probability distribution) we have</p>
+<p><span class="math display" id="eq:lfunsurv">\[\begin{equation}
+L = \prod\limits_{i=1}^n f\left(t_i\right)^\delta_i S\left(t_i\right)^{1-\delta_i}.
+\tag{7.1}
+\end{equation}\]</span></p>
+<p>If we have <span class="math inline">\(T\sim Exp\left(\lambda\right)\)</span> then the log-likelihood is</p>
+<p><span class="math display">\[
+\begin{aligned}
+\ell &amp;= \sum\limits_{i=1}^n \delta_i\left(\log\lambda - \lambda t_i\right) - \sum\limits_{i=1}^n\left(1-\delta_i\right)\lambda t_i \\
+&amp; =  m\log\lambda - \lambda\sum\limits_{i=1}^n t_i.
+\end{aligned}
+\]</span></p>
+<p>From this we can find the maximum likelihood estimator (MLE)</p>
+<p><span class="math display">\[\hat{\lambda} = \frac{m}{\sum\limits_{i=1}^n t_i}.\]</span>
+The variance of the MLE is</p>
+<p><span class="math display" id="eq:lambdavar">\[\begin{equation}
+\operatorname{var}\left(\hat\lambda\right) = \frac{\lambda^2}{m},
+\tag{7.2}
+\end{equation}\]</span></p>
+<p>which we can approximate by</p>
+<p><span class="math display">\[\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.\]</span></p>
+<p><em>Notice that the numerator in Equation <a href="lecture-15-working-with-time-to-event-data.html#eq:lambdavar">(7.2)</a> is <span class="math inline">\(m\)</span>, the number of complete observations (rather than <span class="math inline">\(n\)</span> the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored. </em></p>
+<div class="example">
+<p><span id="exm:unlabeled-div-36" class="example"><strong>Example 7.3  </strong></span>Returning to the dataset from Example <a href="lecture-15-working-with-time-to-event-data.html#exm:surveg1">7.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\lambda}_C &amp;= \frac{m_C}{\sum\limits_{i=1}^{n_C} t_i}\\
+&amp; =\frac{7}{6725}\\
+&amp; = 0.00104
+\end{aligned}
+\]</span>
+and</p>
+<p><span class="math display">\[
+\begin{aligned}
+\hat{\lambda}_T &amp;= \frac{m_T}{\sum\limits_{i=1}^{n_T} t_i}\\
+&amp; =\frac{5}{8863}\\
+&amp; = 0.00056
+\end{aligned}
+\]</span></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="lecture-15-working-with-time-to-event-data.html#cb50-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb50-2"><a href="lecture-15-working-with-time-to-event-data.html#cb50-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
+<span id="cb50-3"><a href="lecture-15-working-with-time-to-event-data.html#cb50-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb50-4"><a href="lecture-15-working-with-time-to-event-data.html#cb50-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
+<span id="cb50-5"><a href="lecture-15-working-with-time-to-event-data.html#cb50-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
+<span id="cb50-6"><a href="lecture-15-working-with-time-to-event-data.html#cb50-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
+<span id="cb50-7"><a href="lecture-15-working-with-time-to-event-data.html#cb50-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
+<span id="cb50-8"><a href="lecture-15-working-with-time-to-event-data.html#cb50-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:ovplotlr"></span>
+<img src="CT4H_lecture_notes_files/figure-html/ovplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<p class="caption">
+Figure 7.6: Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
+</p>
+</div>
+<p>We can do the same for the <code>myeloid</code> data. Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:myplotlr">7.7</a> shows the fitted curves, using <span class="math inline">\(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\)</span> for group <span class="math inline">\(X\)</span>.</p>
+<div class="figure"><span style="display:block;" id="fig:myplotlr"></span>
+<img src="CT4H_lecture_notes_files/figure-html/myplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<p class="caption">
+Figure 7.7: Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="the-weibull-distribution" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> The Weibull distribution<a href="lecture-15-working-with-time-to-event-data.html#the-weibull-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well (like with the Myeloid data). A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
+<div class="definition">
+<p><span id="def:unlabeled-div-37" class="definition"><strong>Definition 7.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span class="math display">\[
+f\left(x\mid \lambda,\,k\right) =
+\begin{cases}
+\lambda\gamma t^{\gamma-1}\exp\left[{-\lambda t^{\gamma}}\right] &amp; \text{for }t\geq{0}\\
+0 &amp; \text{otherwise}.
+\end{cases}
+\]</span></p>
+<p>Here, <span class="math inline">\(\gamma\)</span> is the <em>shape</em> parameter, and <span class="math inline">\(\lambda\)</span> is the <em>scale</em> parameter.</p>
+<p>If <span class="math inline">\(\gamma=1\)</span> then this reduces to an exponential distribution. You can read more about it, should you choose to, in <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>.</p>
+</div>
+<p>For the Weibull distribution, we have</p>
+<p><span class="math display">\[\operatorname{S}\left(t\right) = \exp\left(-\lambda t^{\gamma}\right). \]</span></p>
+<p>As with the exponential distribution, we can use Equation <a href="lecture-15-working-with-time-to-event-data.html#eq:lfunsurv">(7.1)</a> for the likelihood. For the Weibull distribution this becomes</p>
+<p><span class="math display">\[\begin{align*}
+L\left(\lambda,\gamma\mid{\text{data}}\right) &amp; = \prod\limits_{i=1}^n\left\lbrace \lambda \gamma t_i^{\gamma-1}\exp\left(-\lambda t_i^{\gamma}\right) \right\rbrace^{\delta_i} \left\lbrace \exp\left[-\lambda t_i^{\gamma}\right] \right\rbrace ^{1-\delta_i}\\
+&amp; = \prod\limits_{i=1}^n \left\lbrace \lambda\gamma t_i^{\gamma-1} \right\rbrace^{\delta_i} \exp\left(-\lambda t_i^{\gamma}\right)
+\end{align*}\]</span></p>
+<p>and therefore</p>
+<p><span class="math display">\[\begin{align*}
+\ell\left(\lambda,\gamma\mid{\text{data}}\right) &amp; = \sum\limits_{i=1}^n \delta_i \log\left(\lambda\gamma\right) + \left(\gamma-1\right)\sum\limits_{i=1}^n\delta_i \log{t_i} - \lambda \sum\limits_{i=1}^n t_i^{\gamma}\\
+&amp; = r\log\left(\lambda\gamma\right) + \left(\gamma-1\right)\sum\limits_{i=1}^n \delta_i\log t_i - \lambda\sum\limits_{i=1}^n t_i^{\gamma}.
+\end{align*}\]</span></p>
+<p>For the maximum likelihood estimators, we differentiate (separately) with respect to <span class="math inline">\(\lambda\)</span> and <span class="math inline">\(\gamma\)</span> and equate to zero, to solve for the estimators <span class="math inline">\(\hat\lambda\)</span> and <span class="math inline">\(\hat\gamma\)</span>.</p>
+<p>The equations we end up with are</p>
+<p><span class="math display" id="eq:ll2" id="eq:ll1">\[\begin{align}
+\frac{r}{\hat{\lambda}} - \sum\limits_{i=1}^n t_i^{\hat\gamma} &amp; = 0 \tag{7.3}\\
+\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \hat{\lambda}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i &amp;=0 \tag{7.4}.
+\end{align}\]</span></p>
+<p>We can rearrange Equation <a href="lecture-15-working-with-time-to-event-data.html#eq:ll1">(7.3)</a> to</p>
+<p><span class="math display">\[\hat{\lambda} = \frac{r}{\sum\limits_{i=1}^n t_i^{\hat\gamma}},\]</span>
+and substitute this into Equation <a href="lecture-15-working-with-time-to-event-data.html#eq:ll2">(7.4)</a> to find</p>
+<p><span class="math display">\[\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \frac{r}{\sum\limits_{i=1}^n t_i^{\gamma}}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i=0. \]</span>
+This second equation is analytically intractable, so numerical methods are used to find <span class="math inline">\(\hat\gamma\)</span>, and then this value can be used to find <span class="math inline">\(\hat\lambda\)</span>.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-38" class="example"><strong>Example 7.4  </strong></span>We can fit Weibull distributions to our <code>myeloid</code> dataset, as shown in Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:weibmy">7.8</a>.</p>
+<p><span class="math display">\[S\left(t\right) = \exp\left(-\lambda t^{\gamma}\right).\]</span></p>
+<div class="figure"><span style="display:block;" id="fig:weibmy"></span>
+<img src="CT4H_lecture_notes_files/figure-html/weibmy-1.png" alt="Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C." width="672" />
+<p class="caption">
+Figure 7.8: Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C.
+</p>
+</div>
+<p>We see that there is some improvement compared to the exponential fit in Figure <a href="lecture-15-working-with-time-to-event-data.html#fig:myplotlr">7.7</a></p>
+</div>
+</div>
+<div id="aside-sample-size-calculations-for-time-to-event-data" class="section level3 unnumbered hasAnchor">
+<h3>Aside: Sample size calculations for time-to-event data<a href="lecture-15-working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are implications here for sample size calculations, which must take into account the duration of a trial; it is important that trials monitor patients until a sufficient proportion have experienced the event (whatever it is). Sample size calculations for time-to-event data therefore have two components:</p>
+<ol style="list-style-type: decimal">
+<li>The power of the trial can first be expressed in terms of <span class="math inline">\(m\)</span>, the number of complete observations.</li>
+<li>A separate calculation is needed to estimate the number of participants needing to be recruited, and length of trial, to be sufficiently likely to achieve that value of <span class="math inline">\(m\)</span>.</li>
+</ol>
+<p>Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).</p>
+<p>We will think more about how this can be used in the next section, when we come to compare treatment effects.</p>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-collett_surv" class="csl-entry">
+———. 2003b. <em>Modelling Survival Data in Medical Research</em>. 2nd ed. Texts in Statistical Science. Chapman &amp; Hall.
+</div>
+<div id="ref-edmonson1979prognosis" class="csl-entry">
+Edmonson, John H, Thomas R Fleming, David G Decker, George D Malkasian, Edward O Jorgensen, John A Jefferies, Maurice J Webb, and Larry K Kvols. 1979. <span>“Prognosis in Advanced Ovarian Carcinoma Versus Minimal Residual.”</span> <em>Cancer Treatment Reports</em> 63 (2): 241–47.
+</div>
+<div id="ref-kaplan1958nonparametric" class="csl-entry">
+Kaplan, Edward L, and Paul Meier. 1958. <span>“Nonparametric Estimation from Incomplete Observations.”</span> <em>Journal of the American Statistical Association</em> 53 (282): 457–81.
+</div>
+<div id="ref-le2018application" class="csl-entry">
+Le-Rademacher, Jennifer G, Ryan A Peterson, Terry M Therneau, Ben L Sanford, Richard M Stone, and Sumithra J Mandrekar. 2018. <span>“Application of Multi-State Models in Cancer Clinical Trials.”</span> <em>Clinical Trials</em> 15 (5): 489–98.
+</div>
+<div id="ref-syriopoulou2022standardised" class="csl-entry">
+Syriopoulou, Elisavet, Tove Wästerlid, Paul C Lambert, and Therese M-L Andersson. 2022. <span>“Standardised Survival Probabilities: A Useful and Informative Tool for Reporting Regression Models for Survival Data.”</span> <em>British Journal of Cancer</em> 127 (10): 1808–15.
+</div>
+<div id="ref-survival-package" class="csl-entry">
+Therneau, Terry M. 2024. <em>A Package for Survival Analysis in r</em>. <a href="https://CRAN.R-project.org/package=survival">https://CRAN.R-project.org/package=survival</a>.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="lecture-11-analysis-for-binary-outcomes.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="lecture-16-comparing-survival-curves.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CT4H_lecture_notes.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
