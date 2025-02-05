@@ -103,7 +103,7 @@ str(lic_garg)
 
 #### Demographic tables
 
-For every allocation, we'll want to see a summary table of how the patients are distributed between the groups. In this practical we'll use the function `tbl_summary` from `gtsummary`, but there are plenty of other ways to create nice tables around clinical trials (for example the package `table1` and `atable`).
+For every allocation, we'll want to see a summary table of how the patients are distributed between the groups. In this practical we'll use the function `tbl_summary` from `gtsummary`, but there are plenty of other ways to create nice tables around clinical trials (for example the packages `table1` and `atable`).
 
 Notice that the licorice gargle data contains the allocation used in the trial, so we can create a table summarising the participants in each group.
 
@@ -681,11 +681,11 @@ lg_df$treat = res
 
 ## Analysis {#cp1analysis}
 
-For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we've covered in lectures. Both of these data sets are slightly awkward, as you will see, but that's perhaps good practice for the real world!
+For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we've covered in lectures. As we haven't quite finished the analysis section in lectures yet (specifically the section on ANCOVA), you might want to look back at this after our next lecture. 
 
 ### Polyps data
 
-The first dataset concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in @giardiello1993treatment.
+The dataset we'll use concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in @giardiello1993treatment.
 
 :::{.exercise}
 First of all let's explore the dataset:

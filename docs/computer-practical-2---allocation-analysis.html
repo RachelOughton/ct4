@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-01-27" />
+<meta name="date" content="2025-02-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,8 +56,6 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -380,8 +378,8 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-49" class="solution"><em>Solution</em>. </span>In this dataset the baseline characteristics are helpfully prefixed by <code>preOp</code>, so there are seven baseline characteristics.</p>
-<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;       
-## [5] &quot;preOp_mallampati&quot; &quot;preOp_smoking&quot;    &quot;preOp_pain&quot;</code></pre>
+<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;        &quot;preOp_mallampati&quot;
+## [6] &quot;preOp_smoking&quot;    &quot;preOp_pain&quot;</code></pre>
 </div>
 </details>
 <p>In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure <code>str(licorice_gargle)</code> that all columns are numeric to begin with), so run the following code to convert the necessary columns to factors, and to restrict the dataset to only the columns we’re interested in.</p>
@@ -405,7 +403,7 @@ Click for solution
 ##  $ treat           : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 2 2 2 2 2 2 2 2 2 ...</code></pre>
 <div id="demographic-tables" class="section level4 hasAnchor" number="6.1.1.1">
 <h4><span class="header-section-number">B.1.1.1</span> Demographic tables<a href="computer-practical-2---allocation-analysis.html#demographic-tables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>For every allocation, we’ll want to see a summary table of how the patients are distributed between the groups. In this practical we’ll use the function <code>tbl_summary</code> from <code>gtsummary</code>, but there are plenty of other ways to create nice tables around clinical trials (for example the package <code>table1</code> and <code>atable</code>).</p>
+<p>For every allocation, we’ll want to see a summary table of how the patients are distributed between the groups. In this practical we’ll use the function <code>tbl_summary</code> from <code>gtsummary</code>, but there are plenty of other ways to create nice tables around clinical trials (for example the packages <code>table1</code> and <code>atable</code>).</p>
 <p>Notice that the licorice gargle data contains the allocation used in the trial, so we can create a table summarising the participants in each group.</p>
 <div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="computer-practical-2---allocation-analysis.html#cb142-1" tabindex="-1"></a><span class="fu">tbl_summary</span>(lic_garg, <span class="at">by =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
 <div id="qdvxesvwhc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
@@ -1725,12 +1723,11 @@ Click for solution
 <span id="cb169-3"><a href="computer-practical-2---allocation-analysis.html#cb169-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
 <p>The allocation vector is stored as a row in the matrix <code>M</code> which is a slot in the <code>genSeq</code> object (part of the object). You can access it by</p>
 <div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="computer-practical-2---allocation-analysis.html#cb170-1" tabindex="-1"></a>seq_ud31<span class="sc">$</span>M[<span class="dv">1</span>,]</span></code></pre></div>
-<pre><code>##   [1] 1 0 1 1 0 0 0 1 0 0 0 1 1 0 1 1 0 1 0 1 0 0 0 1 0 0 1 1 1 1 0 0 0 0 0 1 0 0 1 1 1
-##  [42] 1 0 1 0 1 1 0 0 0 1 1 0 1 1 1 0 1 1 1 0 1 1 1 1 0 0 0 0 0 1 1 1 1 0 1 0 0 1 0 1 1
-##  [83] 0 1 1 0 1 0 0 0 1 1 0 1 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 0 0 1 0 1
-## [124] 1 1 1 0 0 0 1 0 1 1 0 1 1 1 1 1 1 1 1 0 1 0 0 0 1 1 1 0 0 1 1 0 1 1 0 0 0 0 0 0 1
-## [165] 1 0 0 0 0 1 1 0 0 0 0 0 1 1 0 1 0 0 1 0 0 1 0 1 1 1 0 0 1 0 0 1 1 0 1 0 1 1 0 0 0
-## [206] 0 1 0 1 1 1 0 0 1 0 0 1 1 0 0 0 0 1 1 1 0 0 0 0 0 1 0 1 1 0</code></pre>
+<pre><code>##   [1] 1 0 1 1 0 0 0 1 0 0 0 1 1 0 1 1 0 1 0 1 0 0 0 1 0 0 1 1 1 1 0 0 0 0 0 1 0 0 1 1 1 1 0 1 0 1 1
+##  [48] 0 0 0 1 1 0 1 1 1 0 1 1 1 0 1 1 1 1 0 0 0 0 0 1 1 1 1 0 1 0 0 1 0 1 1 0 1 1 0 1 0 0 0 1 1 0 1
+##  [95] 0 1 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 1 0 0 1 0 1 1 1 1 0 0 0 1 0 1 1 0 1 1 1 1 1 1 1
+## [142] 1 0 1 0 0 0 1 1 1 0 0 1 1 0 1 1 0 0 0 0 0 0 1 1 0 0 0 0 1 1 0 0 0 0 0 1 1 0 1 0 0 1 0 0 1 0 1
+## [189] 1 1 0 0 1 0 0 1 1 0 1 0 1 1 0 0 0 0 1 0 1 1 1 0 0 1 0 0 1 1 0 0 0 0 1 1 1 0 0 0 0 0 1 0 1 1 0</code></pre>
 <p>The argument <code>r</code> allows you to generate <code>r</code> sequences, in which case the matrix <code>M</code> has <code>r</code> rows.</p>
 </div>
 </details>
@@ -1820,20 +1817,19 @@ Click for solution
 <span id="cb178-10"><a href="computer-practical-2---allocation-analysis.html#cb178-10" tabindex="-1"></a><span class="co"># re-order according to ID variable</span></span>
 <span id="cb178-11"><a href="computer-practical-2---allocation-analysis.html#cb178-11" tabindex="-1"></a>alloc_full[<span class="fu">order</span>(alloc_full<span class="sc">$</span>ID),]</span></code></pre></div>
 <pre><code>## # A tibble: 235 × 9
-##    preOp_gender preOp_asa preOp_mallampati preOp_smoking preOp_pain age      BMI   treat
-##    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;            &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt; &lt;fct&gt;
-##  1 0            3         2                1             0          50 to 70 high  0    
-##  2 0            2         2                2             0          70 plus  medi… 0    
-##  3 0            2         2                1             0          50 to 70 high  0    
-##  4 0            2         2                1             0          50 to 70 high  1    
-##  5 0            1         1                2             0          70 plus  high  0    
-##  6 0            2         3                1             0          50 to 70 high  1    
-##  7 0            3         1                1             0          50 to 70 high  1    
-##  8 0            2         2                1             0          50 to 70 high  1    
-##  9 0            3         1                1             0          70 plus  medi… 1    
-## 10 0            3         2                3             0          50 to 70 high  0    
-## # ℹ 225 more rows
-## # ℹ 1 more variable: ID &lt;int&gt;</code></pre>
+##    preOp_gender preOp_asa preOp_mallampati preOp_smoking preOp_pain age      BMI        treat    ID
+##    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;            &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt; &lt;int&gt;
+##  1 0            3         2                1             0          50 to 70 high       0         1
+##  2 0            2         2                2             0          70 plus  medium_or… 0         2
+##  3 0            2         2                1             0          50 to 70 high       0         3
+##  4 0            2         2                1             0          50 to 70 high       1         4
+##  5 0            1         1                2             0          70 plus  high       0         5
+##  6 0            2         3                1             0          50 to 70 high       1         6
+##  7 0            3         1                1             0          50 to 70 high       1         7
+##  8 0            2         2                1             0          50 to 70 high       1         8
+##  9 0            3         1                1             0          70 plus  medium_or… 1         9
+## 10 0            3         2                3             0          50 to 70 high       0        10
+## # ℹ 225 more rows</code></pre>
 <p>It would be silly though to do this with SRS - why?</p>
 <p>Once you’ve performed the allocation, you can find the demographic tables, imbalance and marginal imbalance as before (with <code>alloc_full</code>, or whatever your is called, as the data frame)</p>
 </div>
@@ -1944,10 +1940,10 @@ Click for solution
 </div>
 <div id="cp1analysis" class="section level2 hasAnchor" number="6.2">
 <h2><span class="header-section-number">B.2</span> Analysis<a href="computer-practical-2---allocation-analysis.html#cp1analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we’ve covered in lectures. Both of these data sets are slightly awkward, as you will see, but that’s perhaps good practice for the real world!</p>
+<p>For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we’ve covered in lectures. As we haven’t quite finished the analysis section in lectures yet (specifically the section on ANCOVA), you might want to look back at this after our next lecture.</p>
 <div id="polyps-data" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">B.2.1</span> Polyps data<a href="computer-practical-2---allocation-analysis.html#polyps-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The first dataset concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in <span class="citation">Giardiello et al. (<a href="#ref-giardiello1993treatment">1993</a>)</span>.</p>
+<p>The dataset we’ll use concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in <span class="citation">Giardiello et al. (<a href="#ref-giardiello1993treatment">1993</a>)</span>.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-69" class="exercise"><strong>Exercise B.12  </strong></span>First of all let’s explore the dataset:</p>
 <ul>
@@ -1968,9 +1964,9 @@ Click for solution
 <p>We have the baseline number of polyps for each patient in the column <code>baseline</code>, and a sensible column to use for the outcome would be <code>number12m</code>. Other baseline variables are <code>sex</code> and <code>age</code>.</p>
 <p>To plot the baseline and outcome variables we can do</p>
 <div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="computer-practical-2---allocation-analysis.html#cb186-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>baseline)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-131-1.png" width="672" /></p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="computer-practical-2---allocation-analysis.html#cb187-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>number12m)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-143-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-131-2.png" width="672" /></p>
 <p>These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you’d prefer to use natural logs that’s fine, some of your numbers will be different.</p>
 <div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="computer-practical-2---allocation-analysis.html#cb188-1" tabindex="-1"></a>polyps<span class="sc">$</span>log_baseline <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>baseline)</span>
 <span id="cb188-2"><a href="computer-practical-2---allocation-analysis.html#cb188-2" tabindex="-1"></a>polyps<span class="sc">$</span>log_number12m <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>number12m)</span></code></pre></div>
@@ -2048,11 +2044,11 @@ Click for solution
 <p><span id="unlabeled-div-74" class="solution"><em>Solution</em>. </span>The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences</p>
 <div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="computer-practical-2---allocation-analysis.html#cb197-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff <span class="ot">=</span> polyps_df<span class="sc">$</span>number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>baseline</span>
 <span id="cb197-2"><a href="computer-practical-2---allocation-analysis.html#cb197-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
 <p>But the outliers look potentially problematic, and the central bulk of each distribution doesn’t look very normal. We could also try the difference of the logged measurements:</p>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="computer-practical-2---allocation-analysis.html#cb198-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff_log <span class="ot">=</span> polyps_df<span class="sc">$</span>log_number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>log_baseline</span>
 <span id="cb198-2"><a href="computer-practical-2---allocation-analysis.html#cb198-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff_log, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-139-1.png" width="672" /></p>
 <p>This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won’t have a nice normal curve.</p>
 <p>To do a t-test, we can use R’s in-built function</p>
 <div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="computer-practical-2---allocation-analysis.html#cb199-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
@@ -2075,7 +2071,7 @@ Click for solution
 ## -0.58476481  0.05627565</code></pre>
 </div>
 </details>
-<p>Finally we can try fitting an ANCOVA model to the data, using the function <code>lm</code>. Remember that the general model function for ANCOVA is….</p>
+<p>Finally we can try fitting an ANCOVA model to the data, using the function <code>lm</code>.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-75" class="exercise"><strong>Exercise B.15  </strong></span>Fit an ANCOVA model to the licorice data, and interpret your results. If you aren’t familiar with the function <code>lm</code>, it might be a good idea to look at the solutions.</p>
 </div>
@@ -2647,11 +2643,11 @@ First of all, we can add columns with the residuals and fitted values from the m
 <div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="computer-practical-2---allocation-analysis.html#cb207-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>resid1 <span class="ot">=</span> <span class="fu">resid</span>(lm_polyp1)</span>
 <span id="cb207-2"><a href="computer-practical-2---allocation-analysis.html#cb207-2" tabindex="-1"></a>polyps_df<span class="sc">$</span>fitted1 <span class="ot">=</span> <span class="fu">fitted</span>(lm_polyp1)</span>
 <span id="cb207-3"><a href="computer-practical-2---allocation-analysis.html#cb207-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>fitted1, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-145-1.png" width="672" /></p>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="computer-practical-2---allocation-analysis.html#cb208-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>log_baseline, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-157-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-145-2.png" width="672" /></p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="computer-practical-2---allocation-analysis.html#cb209-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>resid1, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-157-3.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-145-3.png" width="672" /></p>
 <p>None of these ring huge alarm bells, but because the dataset is so small it’s quite hard to tell! Arguably the residuals for the <code>sulindac</code> group are more spread out than those for the plaecbo, but there are no obvious systematic trends.</p>
 <p>We can find the variance inflation factor by</p>
 <div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="computer-practical-2---allocation-analysis.html#cb210-1" tabindex="-1"></a><span class="fu">vif</span>(lm_polyp1)</span></code></pre></div>
@@ -2709,7 +2705,7 @@ Click for solution
 <div class="solution">
 <p><span id="unlabeled-div-83" class="solution"><em>Solution</em>. </span></p>
 <div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="computer-practical-2---allocation-analysis.html#cb212-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt, <span class="fu">aes</span>(<span class="at">x=</span>Birthweight, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-159-1.png" width="672" />
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-147-1.png" width="672" />
 This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won’t transform it.</p>
 </div>
 </details>
@@ -2881,9 +2877,9 @@ Click for solution
 <span id="cb223-3"><a href="computer-practical-2---allocation-analysis.html#cb223-3" tabindex="-1"></a>opt_diag<span class="sc">$</span>fitted <span class="ot">=</span> <span class="fu">fitted</span>(lm_full)</span></code></pre></div>
 <p>Some examples of plots are</p>
 <div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="computer-practical-2---allocation-analysis.html#cb224-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>resid, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-165-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="computer-practical-2---allocation-analysis.html#cb225-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>fitted, <span class="at">y=</span>resid, <span class="at">col=</span>Group)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-165-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-153-2.png" width="672" /></p>
 </div>
 </details>
 <div class="exercise">
