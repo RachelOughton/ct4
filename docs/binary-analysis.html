@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-03" />
+<meta name="date" content="2025-02-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -338,6 +338,29 @@ div.csl-indent {
 <li class="chapter" data-level="B.3.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="C" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html"><i class="fa fa-check"></i><b>C</b> Computer Practical 3 - Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#cp2sim"><i class="fa fa-check"></i><b>C.1</b> Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="C.1.1" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>C.1.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="C.1.2" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>C.1.2</b> Power simulation for ANCOVA</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html"><i class="fa fa-check"></i><b>D</b> Computer practical 4 - Analysis for Binary and Survival data</a>
+<ul>
+<li class="chapter" data-level="D.0.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#confidence-intervals"><i class="fa fa-check"></i><b>D.0.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="D.0.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2logreg"><i class="fa fa-check"></i><b>D.0.2</b> Logistic regression</a></li>
+<li class="chapter" data-level="D.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2-surv"><i class="fa fa-check"></i><b>D.1</b> Analysis for Survival data</a>
+<ul>
+<li class="chapter" data-level="D.1.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>D.1.1</b> Fitting a survival curve</a></li>
+<li class="chapter" data-level="D.1.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#comparing-survival-curves"><i class="fa fa-check"></i><b>D.1.2</b> Comparing survival curves</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>D.2</b> Extension problem: Sample size by simulation (part II)</a>
+<ul>
+<li class="chapter" data-level="D.2.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>D.2.1</b> Minimum detectable effect size</a></li>
+<li class="chapter" data-level="D.2.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#censoring"><i class="fa fa-check"></i><b>D.2.2</b> Censoring</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -584,7 +607,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{0.187}\right) = \left(1.85,\; 5.33 \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
 </div>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
@@ -635,8 +658,8 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-186"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-186-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
 <p class="caption">
 Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
 </p>
@@ -686,8 +709,8 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.57 0.81</code></pre>
 <p>We can see this graphically</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-190"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-190-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.3: As before, dashed for Wilson, dotted for standard
 </p>
@@ -698,8 +721,8 @@ Figure 6.3: As before, dashed for Wilson, dotted for standard
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.20 0.45</code></pre>
 <p>Again, we can see this graphically.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-193"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-193-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.4: As before, dashed for Wilson, dotted for standard
 </p>
@@ -1174,8 +1197,8 @@ Figure 6.5: ROC curve for our logistic regression model of the indo RCT data (so
 <span id="cb53-16"><a href="binary-analysis.html#cb53-16" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>risk, <span class="at">xend=</span>risk, <span class="at">y=</span>fit<span class="fl">-1.96</span><span class="sc">*</span>fit_se, <span class="at">yend=</span>fit<span class="fl">+1.96</span><span class="sc">*</span>fit_se))<span class="sc">+</span></span>
 <span id="cb53-17"><a href="binary-analysis.html#cb53-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb53-18"><a href="binary-analysis.html#cb53-18" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">&quot;site&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-46-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-202"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-202-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
 <p class="caption">
 Figure 6.6: Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).
 </p>

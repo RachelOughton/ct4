@@ -476,6 +476,11 @@ The first way we thought about to account for baseline measurements was to use s
 
 Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate 'mini-trials'.
 
+It's not uncommon for some of the baseline data to be missing, in which case the following algorithms won't work without some adjustment. Two possible approaches in that case would be
+
+  - to impute a 'dummy' value for missing data, chosen using some available information about likely values
+  - to not involve that covariate in the allocation method (especially if it's thought not to be likely to be informative).
+
 An obvious problem with applying stratification to this dataset is the number of strata. We have (if you have the same numbers of levels for `age` and `BMI` as I do)
 
 $$2\times{3}\times{4}\times{3}\times{2}\times{3}\times{2} = 864 $$
@@ -676,6 +681,8 @@ lg_df$treat = res
 :::
 
 </details>
+
+
 
 
 

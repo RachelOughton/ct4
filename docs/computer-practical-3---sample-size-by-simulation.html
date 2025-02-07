@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>B Computer Practical 3 - Sample size by simulation | Clinical Trials 4H</title>
+  <title>C Computer Practical 3 - Sample size by simulation | Clinical Trials 4H</title>
   <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="B Computer Practical 3 - Sample size by simulation | Clinical Trials 4H" />
+  <meta property="og:title" content="C Computer Practical 3 - Sample size by simulation | Clinical Trials 4H" />
   <meta property="og:type" content="book" />
   
   <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="B Computer Practical 3 - Sample size by simulation | Clinical Trials 4H" />
+  <meta name="twitter:title" content="C Computer Practical 3 - Sample size by simulation | Clinical Trials 4H" />
   
   <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
   
@@ -23,14 +23,14 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-01-29" />
+<meta name="date" content="2025-02-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="computer-practical-1---missing-data.html"/>
+<link rel="prev" href="computer-practical-2---allocation-analysis.html"/>
 <link rel="next" href="computer-practical-4---analysis-for-binary-and-survival-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -56,8 +56,6 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
-<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
-<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -261,6 +259,35 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
 </ul></li>
 </ul></li>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="binary-analysis.html"><a href="binary-analysis.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="binary-analysis.html"><a href="binary-analysis.html#bin-point-est"><i class="fa fa-check"></i><b>6.1</b> Point estimates and Hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="binary-analysis.html"><a href="binary-analysis.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="binary-analysis.html"><a href="binary-analysis.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="binary-analysis.html"><a href="binary-analysis.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#logreg"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diaglogreg"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
+<li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
 <li class="chapter" data-level="A" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1 - Missing data</a>
 <ul>
@@ -287,27 +314,51 @@ div.csl-indent {
 <li class="chapter" data-level="A.4.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#multiple-imputation"><i class="fa fa-check"></i><b>A.4.3</b> Multiple imputation</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 3 - Sample size by simulation</a>
+<li class="chapter" data-level="B" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Allocation &amp; Analysis</a>
 <ul>
-<li class="chapter" data-level="B.1" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#cp2sim"><i class="fa fa-check"></i><b>B.1</b> Sample size by simulation (part I)</a>
+<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
 <ul>
-<li class="chapter" data-level="B.1.1" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>B.1.1</b> Power simulation for a t-test</a></li>
-<li class="chapter" data-level="B.1.2" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>B.1.2</b> Power simulation for ANCOVA</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#r-practicalities-1"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
+<li class="chapter" data-level="B.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1allocation"><i class="fa fa-check"></i><b>B.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>B.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="B.1.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#allocmethods"><i class="fa fa-check"></i><b>B.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="B.1.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>B.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="B.1.4" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#minimisation"><i class="fa fa-check"></i><b>B.1.4</b> Minimisation</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.2.1</b> Polyps data</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#extension-problems"><i class="fa fa-check"></i><b>B.3</b> Extension problems</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#a-simulation-experiment"><i class="fa fa-check"></i><b>B.3.1</b> A simulation experiment!</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="C" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html"><i class="fa fa-check"></i><b>C</b> Computer practical 4 - Analysis for Binary and Survival data</a>
+<li class="chapter" data-level="C" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html"><i class="fa fa-check"></i><b>C</b> Computer Practical 3 - Sample size by simulation</a>
 <ul>
-<li class="chapter" data-level="C.0.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#confidence-intervals"><i class="fa fa-check"></i><b>C.0.1</b> Confidence Intervals</a></li>
-<li class="chapter" data-level="C.0.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2logreg"><i class="fa fa-check"></i><b>C.0.2</b> Logistic regression</a></li>
-<li class="chapter" data-level="C.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2-surv"><i class="fa fa-check"></i><b>C.1</b> Analysis for Survival data</a>
+<li class="chapter" data-level="C.1" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#cp2sim"><i class="fa fa-check"></i><b>C.1</b> Sample size by simulation</a>
 <ul>
-<li class="chapter" data-level="C.1.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>C.1.1</b> Fitting a survival curve</a></li>
-<li class="chapter" data-level="C.1.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#comparing-survival-curves"><i class="fa fa-check"></i><b>C.1.2</b> Comparing survival curves</a></li>
+<li class="chapter" data-level="C.1.1" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>C.1.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="C.1.2" data-path="computer-practical-3---sample-size-by-simulation.html"><a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>C.1.2</b> Power simulation for ANCOVA</a></li>
 </ul></li>
-<li class="chapter" data-level="C.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>C.2</b> Sample size by simulation (part II)</a>
+</ul></li>
+<li class="chapter" data-level="D" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html"><i class="fa fa-check"></i><b>D</b> Computer practical 4 - Analysis for Binary and Survival data</a>
 <ul>
-<li class="chapter" data-level="C.2.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>C.2.1</b> Minimum detectable effect size</a></li>
-<li class="chapter" data-level="C.2.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#censoring"><i class="fa fa-check"></i><b>C.2.2</b> Censoring</a></li>
+<li class="chapter" data-level="D.0.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#confidence-intervals"><i class="fa fa-check"></i><b>D.0.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="D.0.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2logreg"><i class="fa fa-check"></i><b>D.0.2</b> Logistic regression</a></li>
+<li class="chapter" data-level="D.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2-surv"><i class="fa fa-check"></i><b>D.1</b> Analysis for Survival data</a>
+<ul>
+<li class="chapter" data-level="D.1.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>D.1.1</b> Fitting a survival curve</a></li>
+<li class="chapter" data-level="D.1.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#comparing-survival-curves"><i class="fa fa-check"></i><b>D.1.2</b> Comparing survival curves</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>D.2</b> Extension problem: Sample size by simulation (part II)</a>
+<ul>
+<li class="chapter" data-level="D.2.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>D.2.1</b> Minimum detectable effect size</a></li>
+<li class="chapter" data-level="D.2.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#censoring"><i class="fa fa-check"></i><b>D.2.2</b> Censoring</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
@@ -328,20 +379,14 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="computer-practical-3---sample-size-by-simulation" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">B</span> Computer Practical 3 - Sample size by simulation<a href="computer-practical-3---sample-size-by-simulation.html#computer-practical-3---sample-size-by-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>In this practical, we will focus on two main areas:</p>
-<ul>
-<li>Simulation methods for power analysis/determining sample size</li>
-<li>Analysis methods for Binary and Survival data</li>
-</ul>
-<p>We’ll start with simulation for sample size, and apply that to a continuous outcome trial. We’ll then look at some analysis methods for binary and survival outcome data. Finally, we’ll use the the simulation method to determine an appropriate sample size for a survival outcome trial (more pertinent, since we wimped out of tackling that problem in lectures!).</p>
+<div id="computer-practical-3---sample-size-by-simulation" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">C</span> Computer Practical 3 - Sample size by simulation<a href="computer-practical-3---sample-size-by-simulation.html#computer-practical-3---sample-size-by-simulation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
 <details>
 <summary>
 <strong>R practicalities - click here</strong>
 </summary>
 <p>There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do</p>
-<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb135-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb264-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
 <p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III.</p>
 <p>An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
 <p>This requires you to have a github account (you can sign up for free <a href="https://github.com/">here</a>) and there is a short guide to creating a github account <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&amp;reserved=0">here</a>.</p>
@@ -350,9 +395,9 @@ div.csl-indent {
 </details>
 <p>We’ll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We’ll load them as we go along.</p>
 <p><strong>Notice that where there are code snippets that you want to copy directly, you can hover your cursor in the top right of the code box and a ‘copy’ icon will appear.</strong></p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb136-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;HSAUR&quot;</span>, <span class="st">&quot;HSAUR3&quot;</span>, <span class="st">&quot;pROC&quot;</span>, <span class="st">&quot;survival&quot;</span>, <span class="st">&quot;ggfortify&quot;</span>))</span></code></pre></div>
-<div id="cp2sim" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">B.1</span> Sample size by simulation (part I)<a href="computer-practical-3---sample-size-by-simulation.html#cp2sim" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb265-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;HSAUR&quot;</span>, <span class="st">&quot;HSAUR3&quot;</span>, <span class="st">&quot;pROC&quot;</span>, <span class="st">&quot;survival&quot;</span>, <span class="st">&quot;ggfortify&quot;</span>))</span></code></pre></div>
+<div id="cp2sim" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">C.1</span> Sample size by simulation<a href="computer-practical-3---sample-size-by-simulation.html#cp2sim" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required. We can estimate the power by the proportion of simulated trials in which the null hypothesis was rejected.</p>
 <p>Because the code necessarily works by fixing the number of participants and investigating the effect on the power of the trial, this is often referred to as <em>power-calculation</em>, but it is the same sample size issue, approached from a different angle. <span class="citation">Arnold et al. (<a href="#ref-arnold2011simulation">2011</a>)</span> gives a thorough, readable and interesting case study of the use of power simulation in a cluster randomised trial investigating different sanitation-related interventions in rural communities in Bangladesh.</p>
 <p>The simulation approach has the following advantages over the formula-based methods presented in Section <a href="rct-plan.html#rct-plan">2</a>:</p>
@@ -362,8 +407,8 @@ div.csl-indent {
 <li><strong>Practice</strong>: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the statistical analysis plan.</li>
 </ol>
 <p>Arguably the first and third advantages could also be true (though aren’t automatically) of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.</p>
-<div id="power-simulation-for-a-t-test" class="section level3 hasAnchor" number="6.1.1">
-<h3><span class="header-section-number">B.1.1</span> Power simulation for a t-test<a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-a-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="power-simulation-for-a-t-test" class="section level3 hasAnchor" number="9.1.1">
+<h3><span class="header-section-number">C.1.1</span> Power simulation for a t-test<a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-a-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p><strong>Note: really we should be using more than 100 simulations, but so that the code runs in a sensible amount of time I’ve reduced the number. Feel free to increase it if you want to, but you’ll have to wait a little while for it to run.</strong></p>
 <p>We’ll start by taking a simulation approach to recreate the most ‘vanilla’ scenario, where we have a continuous outcome <span class="math inline">\(Y\)</span> and wish to conduct a <span class="math inline">\(t\)</span>-test on the outcome.</p>
 <p>Recall that the sample size formula we found was Equation <a href="rct-plan.html#eq:sscont">(2.4)</a>, shown again below:</p>
@@ -376,19 +421,19 @@ Y_i= \sim
 N\left(\mu,\;\sigma^2\right)&amp;\;\text{ if participant }i\text{ is in group }C\\
 N\left(\mu + \tau_M,\;\sigma^2\right)&amp;\;\text{ if participant }i\text{ is in group }T.
 \end{cases}
-\tag{B.1}
+\tag{C.1}
 \end{equation}\]</span></p>
 <p>Therefore, to simulate data from a trial like this, we need to specify values for <span class="math inline">\(\mu,\;\tau_M\)</span> and <span class="math inline">\(\sigma^2\)</span>. We also need to specify the number of participants.</p>
 <p>The steps for each simulation will be</p>
 <ol style="list-style-type: decimal">
-<li>Simulate trial data using the distribution in Equation <a href="computer-practical-3---sample-size-by-simulation.html#eq:simdist">(B.1)</a></li>
+<li>Simulate trial data using the distribution in Equation <a href="computer-practical-3---sample-size-by-simulation.html#eq:simdist">(C.1)</a></li>
 <li>Conduct an un-paired, two-tailed <span class="math inline">\(t\)</span>-test on the data</li>
 <li>Note whether <span class="math inline">\(H_0:\;\tau_M=0\)</span> is rejected</li>
 </ol>
 <p>Having done this for some number <span class="math inline">\(n_{sim}\)</span> of simulations, we return the proportion of simulations in which <span class="math inline">\(H_0\)</span> was rejected, and this is our power estimate.</p>
 <p>If the power estimate is smaller than we would like, we increase the number of participants in our simulated trial data and try again. Conversely, we decrease the number of participants if the power estimate is larger than we need.</p>
 <div class="exercise">
-<p><span id="exr:ex1sim" class="exercise"><strong>Exercise B.1  </strong></span>By generating data for group <span class="math inline">\(C\)</span> and group <span class="math inline">\(T\)</span> according to the distributions in Equation <a href="computer-practical-3---sample-size-by-simulation.html#eq:simdist">(B.1)</a>, conduct a power simulation for the trial scenario described in Example <a href="rct-plan.html#exm:sseg1">2.1</a>, with the aim of finding the number <span class="math inline">\(N\)</span> of participants required in each arm for a power of 0.9 (<span class="math inline">\(\beta=0.1\)</span>) and a confidence level of <span class="math inline">\(\alpha=0.05\)</span>.</p>
+<p><span id="exr:ex1sim" class="exercise"><strong>Exercise C.1  </strong></span>By generating data for group <span class="math inline">\(C\)</span> and group <span class="math inline">\(T\)</span> according to the distributions in Equation <a href="computer-practical-3---sample-size-by-simulation.html#eq:simdist">(C.1)</a>, conduct a power simulation for the trial scenario described in Example <a href="rct-plan.html#exm:sseg1">2.1</a>, with the aim of finding the number <span class="math inline">\(N\)</span> of participants required in each arm for a power of 0.9 (<span class="math inline">\(\beta=0.1\)</span>) and a confidence level of <span class="math inline">\(\alpha=0.05\)</span>.</p>
 <ul>
 <li>How consistent are your results with the method we derived in Chapter <a href="rct-plan.html#rct-plan">2</a>?</li>
 <li>What issues does this raise around choosing a sample size?</li>
@@ -399,55 +444,55 @@ N\left(\mu + \tau_M,\;\sigma^2\right)&amp;\;\text{ if participant }i\text{ is in
 Click to reveal solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-48" class="solution"><em>Solution</em>. </span>The sensible first thing to do is to write a function that does this for general <span class="math inline">\(n_{sim},\,N,\,\mu,\,\sigma^2\)</span> and <span class="math inline">\(\tau_M\)</span>. The very simplest way would be the following, where we generate <span class="math inline">\(N\)</span> participants per arm, and their data.</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-1" tabindex="-1"></a>ttest_sim <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb137-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb137-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb137-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb137-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb137-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-6" tabindex="-1"></a>    sd     <span class="co"># sd of outcome</span></span>
-<span id="cb137-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-7" tabindex="-1"></a>){</span>
-<span id="cb137-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-8" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb137-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-9" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb137-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-10" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sd)</span>
-<span id="cb137-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-11" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sd)</span>
-<span id="cb137-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-12" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
-<span id="cb137-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-13" tabindex="-1"></a>      out_groupC, out_groupT, </span>
-<span id="cb137-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-14" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
-<span id="cb137-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-15" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb137-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-16" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb137-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-17" tabindex="-1"></a>  }</span>
-<span id="cb137-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-18" tabindex="-1"></a>  </span>
-<span id="cb137-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-19" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb137-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-20" tabindex="-1"></a>  power.est</span>
-<span id="cb137-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb137-21" tabindex="-1"></a>}</span></code></pre></div>
+<p><span id="unlabeled-div-108" class="solution"><em>Solution</em>. </span>The sensible first thing to do is to write a function that does this for general <span class="math inline">\(n_{sim},\,N,\,\mu,\,\sigma^2\)</span> and <span class="math inline">\(\tau_M\)</span>. The very simplest way would be the following, where we generate <span class="math inline">\(N\)</span> participants per arm, and their data.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-1" tabindex="-1"></a>ttest_sim <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb266-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb266-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb266-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb266-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb266-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-6" tabindex="-1"></a>    sd     <span class="co"># sd of outcome</span></span>
+<span id="cb266-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-7" tabindex="-1"></a>){</span>
+<span id="cb266-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-8" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb266-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-9" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb266-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-10" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sd)</span>
+<span id="cb266-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-11" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sd)</span>
+<span id="cb266-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-12" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
+<span id="cb266-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-13" tabindex="-1"></a>      out_groupC, out_groupT, </span>
+<span id="cb266-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-14" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
+<span id="cb266-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-15" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb266-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-16" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb266-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-17" tabindex="-1"></a>  }</span>
+<span id="cb266-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-18" tabindex="-1"></a>  </span>
+<span id="cb266-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-19" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb266-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-20" tabindex="-1"></a>  power.est</span>
+<span id="cb266-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb266-21" tabindex="-1"></a>}</span></code></pre></div>
 <p>For a sanity check, we can put in the number we got from the equation in Section <a href="rct-plan.html#rct-plan">2</a>. To generate the data we need to specify a mean <span class="math inline">\(\mu\)</span>, but it doesn’t matter what it is (in this formulation at least!), so the number below is arbitrary.</p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb138-1" tabindex="-1"></a><span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span></code></pre></div>
-<pre><code>## [1] 0.72</code></pre>
+<div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb267-1" tabindex="-1"></a><span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.79</code></pre>
 <p>and this is close to what we expect from the formula approach.
 To see how consistent this result is, we can see what happens over many sets of simulations</p>
-<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb140-1" tabindex="-1"></a>sim_vec1 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb140-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb140-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb140-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb140-3" tabindex="-1"></a>  sim_vec1[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
-<span id="cb140-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb140-4" tabindex="-1"></a>}</span>
-<span id="cb140-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb140-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb269-1" tabindex="-1"></a>sim_vec1 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb269-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb269-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb269-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb269-3" tabindex="-1"></a>  sim_vec1[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
+<span id="cb269-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb269-4" tabindex="-1"></a>}</span>
+<span id="cb269-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb269-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:histsim1"></span>
 <img src="CT4H_notes_files/figure-html/histsim1-1.png" alt="Histogram of estimated powers from 100 lots of 100 simulations with N=113." width="672" />
 <p class="caption">
-Figure B.1: Histogram of estimated powers from 100 lots of 100 simulations with N=113.
+Figure C.1: Histogram of estimated powers from 100 lots of 100 simulations with N=113.
 </p>
 </div>
 <p>So although the mean power is around 0.8, as we expect, there is some variation.</p>
 <p>To achieve <span class="math inline">\(1-\beta=0.9\)</span> we need to increase <span class="math inline">\(N\)</span>. It turns out that around 155 participants in each arm gives a mean power of around 0.9.</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb141-1" tabindex="-1"></a>sim_vec2 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb141-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb141-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb141-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb141-3" tabindex="-1"></a>  sim_vec2[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
-<span id="cb141-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb141-4" tabindex="-1"></a>}</span>
-<span id="cb141-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb141-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb270-1" tabindex="-1"></a>sim_vec2 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb270-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb270-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb270-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb270-3" tabindex="-1"></a>  sim_vec2[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
+<span id="cb270-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb270-4" tabindex="-1"></a>}</span>
+<span id="cb270-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb270-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:histsim2"></span>
 <img src="CT4H_notes_files/figure-html/histsim2-1.png" alt="Histogram of estimated powers from 100 lots of 100 simulations with N=155." width="672" />
 <p class="caption">
-Figure B.2: Histogram of estimated powers from 100 lots of 100 simulations with N=155.
+Figure C.2: Histogram of estimated powers from 100 lots of 100 simulations with N=155.
 </p>
 </div>
 <p>It is reasonable however, to choose a number such that we are more than 50% confident of our study having the power we require. We may for example choose <span class="math inline">\(N\)</span> so that the estimated power is at least 0.9 in some high proportion (say 90%) of the simulations.</p>
@@ -455,70 +500,70 @@ Figure B.2: Histogram of estimated powers from 100 lots of 100 simulations with 
 </details>
 <p>A useful feature of the simulation approach is that it’s much easier to investigate what happens if the real data deviate in some way from the assumptions we’ve made.</p>
 <div class="exercise">
-<p><span id="exr:sim-uneqsd" class="exercise"><strong>Exercise B.2  </strong></span>Adapt your code (or my code) from Exercise <a href="computer-practical-3---sample-size-by-simulation.html#exr:ex1sim">B.1</a> to take into account the possibility of the outcome variance being different in the two groups. What is the effect on the estimated power if the outcome standard deviation in group <span class="math inline">\(T\)</span> is 25% larger than the standard deviation in group <span class="math inline">\(C\)</span>? What about if the outcome standard deviation is <span class="math inline">\(25\%\)</span> smaller in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>?</p>
+<p><span id="exr:sim-uneqsd" class="exercise"><strong>Exercise C.2  </strong></span>Adapt your code (or my code) from Exercise <a href="computer-practical-3---sample-size-by-simulation.html#exr:ex1sim">C.1</a> to take into account the possibility of the outcome variance being different in the two groups. What is the effect on the estimated power if the outcome standard deviation in group <span class="math inline">\(T\)</span> is 25% larger than the standard deviation in group <span class="math inline">\(C\)</span>? What about if the outcome standard deviation is <span class="math inline">\(25\%\)</span> smaller in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>?</p>
 </div>
 <details>
 <summary>
 Click to reveal solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-49" class="solution"><em>Solution</em>. </span>The change we need to make is to include a variance parameter for each group, rather than a common one. Note that we aren’t changing the <code>t.test</code> function to use unequal variances, as it is common practice to keep assuming equal variances, and actually these variances still aren’t <em>that</em> different.</p>
-<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-1" tabindex="-1"></a>ttest_sim2 <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb142-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb142-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb142-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb142-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb142-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-6" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
-<span id="cb142-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-7" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
-<span id="cb142-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-8" tabindex="-1"></a>){</span>
-<span id="cb142-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-9" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb142-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb142-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-11" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
-<span id="cb142-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-12" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sdT)</span>
-<span id="cb142-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-13" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
-<span id="cb142-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-14" tabindex="-1"></a>      out_groupC, out_groupT, </span>
-<span id="cb142-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-15" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
-<span id="cb142-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-16" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb142-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-17" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb142-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-18" tabindex="-1"></a>  }</span>
-<span id="cb142-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-19" tabindex="-1"></a>  </span>
-<span id="cb142-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-20" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb142-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-21" tabindex="-1"></a>  power.est</span>
-<span id="cb142-22"><a href="computer-practical-3---sample-size-by-simulation.html#cb142-22" tabindex="-1"></a>}</span></code></pre></div>
+<p><span id="unlabeled-div-109" class="solution"><em>Solution</em>. </span>The change we need to make is to include a variance parameter for each group, rather than a common one. Note that we aren’t changing the <code>t.test</code> function to use unequal variances, as it is common practice to keep assuming equal variances, and actually these variances still aren’t <em>that</em> different.</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-1" tabindex="-1"></a>ttest_sim2 <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb271-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb271-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb271-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb271-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb271-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-6" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb271-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-7" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb271-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-8" tabindex="-1"></a>){</span>
+<span id="cb271-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-9" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb271-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb271-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-11" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
+<span id="cb271-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-12" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sdT)</span>
+<span id="cb271-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-13" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
+<span id="cb271-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-14" tabindex="-1"></a>      out_groupC, out_groupT, </span>
+<span id="cb271-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-15" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
+<span id="cb271-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-16" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb271-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-17" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb271-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-18" tabindex="-1"></a>  }</span>
+<span id="cb271-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-19" tabindex="-1"></a>  </span>
+<span id="cb271-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-20" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb271-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-21" tabindex="-1"></a>  power.est</span>
+<span id="cb271-22"><a href="computer-practical-3---sample-size-by-simulation.html#cb271-22" tabindex="-1"></a>}</span></code></pre></div>
 <p>If the variances are equal, this gives the same as before (approximately)</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb143-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">8</span>)</span></code></pre></div>
-<pre><code>## [1] 0.88</code></pre>
+<div class="sourceCode" id="cb272"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb272-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb272-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.89</code></pre>
 <p>However, if we increase the outcome variance in group <span class="math inline">\(T\)</span> by 25%, things change:</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb145-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## [1] 0.78</code></pre>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb147-1" tabindex="-1"></a>sim_vec3 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb147-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb147-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb147-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb147-3" tabindex="-1"></a>  sim_vec3[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
-<span id="cb147-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb147-4" tabindex="-1"></a>}</span>
-<span id="cb147-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb147-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec3)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb274"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb274-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb274-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.8</code></pre>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb276-1" tabindex="-1"></a>sim_vec3 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb276-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb276-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb276-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb276-3" tabindex="-1"></a>  sim_vec3[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
+<span id="cb276-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb276-4" tabindex="-1"></a>}</span>
+<span id="cb276-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb276-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec3)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:sim2n"></span>
 <img src="CT4H_notes_files/figure-html/sim2n-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD in group T." width="672" />
 <p class="caption">
-Figure B.3: Power estimates for 100 sets of 100 simulations with larger outcome SD in group T.
+Figure C.3: Power estimates for 100 sets of 100 simulations with larger outcome SD in group T.
 </p>
 </div>
 <p>By contrast, if the outcome variance is lower (this is much less likely) then the power will be higher than calculated:</p>
-<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb148-1" tabindex="-1"></a>sim_vec4 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb148-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb148-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb148-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb148-3" tabindex="-1"></a>  sim_vec4[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">6</span>)</span>
-<span id="cb148-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb148-4" tabindex="-1"></a>}</span>
-<span id="cb148-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb148-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec4)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-99"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-99-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb277-1" tabindex="-1"></a>sim_vec4 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb277-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb277-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb277-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb277-3" tabindex="-1"></a>  sim_vec4[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">6</span>)</span>
+<span id="cb277-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb277-4" tabindex="-1"></a>}</span>
+<span id="cb277-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb277-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec4)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-342"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-342-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
 <p class="caption">
-Figure B.4: Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T
+Figure C.4: Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T
 </p>
 </div>
 </div>
 </details>
 <p>When using simulation in earnest, it is best to recreate as many features of the trial as we can, and this includes the allocation. If we were using a method that guaranteed [close to] exactly equal groups, then the above method is OK. However, this is not always the case. We will explore this in a fairly simple way.</p>
 <div class="exercise">
-<p><span id="exr:srsttest" class="exercise"><strong>Exercise B.3  </strong></span>Recreate the function from Exercise <a href="computer-practical-3---sample-size-by-simulation.html#exr:sim-uneqsd">B.2</a>, where the two groups have different variances. This time, simulate the data sequentially, using simple random sampling as the allocation method.</p>
+<p><span id="exr:srsttest" class="exercise"><strong>Exercise C.3  </strong></span>Recreate the function from Exercise <a href="computer-practical-3---sample-size-by-simulation.html#exr:sim-uneqsd">C.2</a>, where the two groups have different variances. This time, simulate the data sequentially, using simple random sampling as the allocation method.</p>
 <ul>
 <li>What happens to the power distribution for the scenario we considered in that question?</li>
 <li>What happens for a much smaller <span class="math inline">\(N\)</span>, say <span class="math inline">\(N=25\)</span>?</li>
@@ -529,76 +574,76 @@ Figure B.4: Power estimates for 100 sets of 100 simulations with smaller outcome
 Click for solutions
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-50" class="solution"><em>Solution</em>. </span>For this method, we work through all <span class="math inline">\(2N\)</span> participants sequentially, allocating them with equal probability to group <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>. For readability, in these solutions the simulation of one trial is written as its own function, which is then implemented <code>nsim</code> times.</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-1" tabindex="-1"></a>one_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb149-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-2" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb149-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-3" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb149-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-4" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb149-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-5" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
-<span id="cb149-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-6" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
-<span id="cb149-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-7" tabindex="-1"></a>){</span>
-<span id="cb149-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-8" tabindex="-1"></a>  <span class="do">## Create empty vectors to contain output for groups C and T</span></span>
-<span id="cb149-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-9" tabindex="-1"></a>  outC <span class="ot">=</span> <span class="fu">integer</span>()</span>
-<span id="cb149-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-10" tabindex="-1"></a>  outT <span class="ot">=</span> <span class="fu">integer</span>()</span>
-<span id="cb149-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-11" tabindex="-1"></a>  </span>
-<span id="cb149-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-12" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
-<span id="cb149-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-13" tabindex="-1"></a>    <span class="co"># allocate using SRS</span></span>
-<span id="cb149-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-14" tabindex="-1"></a>    arm <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="at">size=</span><span class="dv">1</span>)</span>
-<span id="cb149-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-15" tabindex="-1"></a>    <span class="co"># generate outcome according to groups&#39; distributions</span></span>
-<span id="cb149-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-16" tabindex="-1"></a>    <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
-<span id="cb149-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-17" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
-<span id="cb149-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-18" tabindex="-1"></a>      outC <span class="ot">=</span> <span class="fu">c</span>(outC, outi)</span>
-<span id="cb149-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-19" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
-<span id="cb149-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-20" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu<span class="sc">+</span>tm, <span class="at">sd=</span>sdT)</span>
-<span id="cb149-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-21" tabindex="-1"></a>      outT <span class="ot">=</span> <span class="fu">c</span>(outT, outi)</span>
-<span id="cb149-22"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-22" tabindex="-1"></a>    }</span>
-<span id="cb149-23"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-23" tabindex="-1"></a>  }</span>
-<span id="cb149-24"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-24" tabindex="-1"></a>  <span class="co"># conduct t-test for this trial</span></span>
-<span id="cb149-25"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-25" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">x=</span>outC, <span class="at">y=</span>outT, </span>
-<span id="cb149-26"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-26" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">paired=</span>F, </span>
-<span id="cb149-27"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-27" tabindex="-1"></a>         <span class="at">var.equal=</span>T, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span>
-<span id="cb149-28"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-28" tabindex="-1"></a>}</span>
-<span id="cb149-29"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-29" tabindex="-1"></a></span>
-<span id="cb149-30"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-30" tabindex="-1"></a>ttest_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb149-31"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-31" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb149-32"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-32" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb149-33"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-33" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb149-34"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-34" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb149-35"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-35" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
-<span id="cb149-36"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-36" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
-<span id="cb149-37"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-37" tabindex="-1"></a>){</span>
-<span id="cb149-38"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-38" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb149-39"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-39" tabindex="-1"></a>  </span>
-<span id="cb149-40"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-40" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb149-41"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-41" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">one_trial_srs</span>(N, mu, tm, sdC, sdT)</span>
-<span id="cb149-42"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-42" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb149-43"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-43" tabindex="-1"></a>  }</span>
-<span id="cb149-44"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-44" tabindex="-1"></a>  </span>
-<span id="cb149-45"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-45" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb149-46"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-46" tabindex="-1"></a>  power.est</span>
-<span id="cb149-47"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-47" tabindex="-1"></a>}</span>
-<span id="cb149-48"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-48" tabindex="-1"></a></span>
-<span id="cb149-49"><a href="computer-practical-3---sample-size-by-simulation.html#cb149-49" tabindex="-1"></a><span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
+<p><span id="unlabeled-div-110" class="solution"><em>Solution</em>. </span>For this method, we work through all <span class="math inline">\(2N\)</span> participants sequentially, allocating them with equal probability to group <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>. For readability, in these solutions the simulation of one trial is written as its own function, which is then implemented <code>nsim</code> times.</p>
+<div class="sourceCode" id="cb278"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb278-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-1" tabindex="-1"></a>one_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb278-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-2" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb278-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-3" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb278-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-4" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb278-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-5" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb278-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-6" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb278-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-7" tabindex="-1"></a>){</span>
+<span id="cb278-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-8" tabindex="-1"></a>  <span class="do">## Create empty vectors to contain output for groups C and T</span></span>
+<span id="cb278-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-9" tabindex="-1"></a>  outC <span class="ot">=</span> <span class="fu">integer</span>()</span>
+<span id="cb278-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-10" tabindex="-1"></a>  outT <span class="ot">=</span> <span class="fu">integer</span>()</span>
+<span id="cb278-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-11" tabindex="-1"></a>  </span>
+<span id="cb278-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-12" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
+<span id="cb278-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-13" tabindex="-1"></a>    <span class="co"># allocate using SRS</span></span>
+<span id="cb278-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-14" tabindex="-1"></a>    arm <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb278-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-15" tabindex="-1"></a>    <span class="co"># generate outcome according to groups&#39; distributions</span></span>
+<span id="cb278-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-16" tabindex="-1"></a>    <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
+<span id="cb278-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-17" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
+<span id="cb278-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-18" tabindex="-1"></a>      outC <span class="ot">=</span> <span class="fu">c</span>(outC, outi)</span>
+<span id="cb278-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-19" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
+<span id="cb278-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-20" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu<span class="sc">+</span>tm, <span class="at">sd=</span>sdT)</span>
+<span id="cb278-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-21" tabindex="-1"></a>      outT <span class="ot">=</span> <span class="fu">c</span>(outT, outi)</span>
+<span id="cb278-22"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-22" tabindex="-1"></a>    }</span>
+<span id="cb278-23"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-23" tabindex="-1"></a>  }</span>
+<span id="cb278-24"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-24" tabindex="-1"></a>  <span class="co"># conduct t-test for this trial</span></span>
+<span id="cb278-25"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-25" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">x=</span>outC, <span class="at">y=</span>outT, </span>
+<span id="cb278-26"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-26" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">paired=</span>F, </span>
+<span id="cb278-27"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-27" tabindex="-1"></a>         <span class="at">var.equal=</span>T, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span>
+<span id="cb278-28"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-28" tabindex="-1"></a>}</span>
+<span id="cb278-29"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-29" tabindex="-1"></a></span>
+<span id="cb278-30"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-30" tabindex="-1"></a>ttest_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb278-31"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-31" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb278-32"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-32" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb278-33"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-33" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb278-34"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-34" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb278-35"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-35" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb278-36"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-36" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb278-37"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-37" tabindex="-1"></a>){</span>
+<span id="cb278-38"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-38" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb278-39"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-39" tabindex="-1"></a>  </span>
+<span id="cb278-40"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-40" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb278-41"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-41" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">one_trial_srs</span>(N, mu, tm, sdC, sdT)</span>
+<span id="cb278-42"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-42" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb278-43"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-43" tabindex="-1"></a>  }</span>
+<span id="cb278-44"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-44" tabindex="-1"></a>  </span>
+<span id="cb278-45"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-45" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb278-46"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-46" tabindex="-1"></a>  power.est</span>
+<span id="cb278-47"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-47" tabindex="-1"></a>}</span>
+<span id="cb278-48"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-48" tabindex="-1"></a></span>
+<span id="cb278-49"><a href="computer-practical-3---sample-size-by-simulation.html#cb278-49" tabindex="-1"></a><span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
 <pre><code>## [1] 0.84</code></pre>
 <p>To see the distribution for many simulations, we can do</p>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb151-1" tabindex="-1"></a>sim_vec5 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb151-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb151-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb151-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb151-3" tabindex="-1"></a>  sim_vec5[i] <span class="ot">=</span> <span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
-<span id="cb151-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb151-4" tabindex="-1"></a>}</span>
-<span id="cb151-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb151-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec5)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-101"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-101-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb280-1" tabindex="-1"></a>sim_vec5 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb280-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb280-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb280-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb280-3" tabindex="-1"></a>  sim_vec5[i] <span class="ot">=</span> <span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
+<span id="cb280-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb280-4" tabindex="-1"></a>}</span>
+<span id="cb280-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb280-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec5)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-344"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-344-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
 <p class="caption">
-Figure B.5: Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation.
+Figure C.5: Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation.
 </p>
 </div>
-<p>and we see that the spread is much higher than when we had two exactly equal groups, as in Figure <a href="computer-practical-3---sample-size-by-simulation.html#fig:sim2n">B.3</a>.</p>
+<p>and we see that the spread is much higher than when we had two exactly equal groups, as in Figure <a href="computer-practical-3---sample-size-by-simulation.html#fig:sim2n">C.3</a>.</p>
 <p>If <span class="math inline">\(N\)</span> is smaller, the variance in the power estimates will be higher, because the potential for imbalance will be greater.</p>
 </div>
 </details>
 </div>
-<div id="power-simulation-for-ancova" class="section level3 hasAnchor" number="6.1.2">
-<h3><span class="header-section-number">B.1.2</span> Power simulation for ANCOVA<a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="power-simulation-for-ancova" class="section level3 hasAnchor" number="9.1.2">
+<h3><span class="header-section-number">C.1.2</span> Power simulation for ANCOVA<a href="computer-practical-3---sample-size-by-simulation.html#power-simulation-for-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Thinking of a somewhat more complex model, we might want to perform a power simulation for an ANCOVA model.</p>
 <p>We’ll write our data-generating model for the outcome <span class="math inline">\(X_i\)</span> as</p>
 <p><span class="math display">\[
@@ -609,7 +654,7 @@ x_i &amp; = \mu + \tau + \rho \left(b_i - \mu_B\right) + \epsilon_i &amp; \text{
 \]</span>
 where <span class="math inline">\(\epsilon_i\sim N\left(0,\,\sigma^2_{\epsilon}\right)\)</span>. Now, we need to generate a value of the baseline measurement <span class="math inline">\(b_i\)</span> for each patient, and specify values for <span class="math inline">\(\mu\)</span> (the mean outcome in group C / under <span class="math inline">\(H_0\)</span>), <span class="math inline">\(\mu_B\)</span> (the mean baseline measurement), <span class="math inline">\(\tau_M\)</span> (the minimum detectable effect size, taking the place of <span class="math inline">\(\tau\)</span> in the above equation), <span class="math inline">\(\rho\)</span> (the correlation between baseline and outcome measurement) and <span class="math inline">\(\sigma^2_{\epsilon}\)</span>. Some of these are quantities that might be well-understood from the literature, but others are more speculative.</p>
 <div class="exercise">
-<p><span id="exr:srsancova" class="exercise"><strong>Exercise B.4  </strong></span>Conduct a power simulation by simulating 100 participants in each group with the distributions above, where</p>
+<p><span id="exr:srsancova" class="exercise"><strong>Exercise C.4  </strong></span>Conduct a power simulation by simulating 100 participants in each group with the distributions above, where</p>
 <ul>
 <li><span class="math inline">\(b_i\sim N\left(\mu_B,\,8^2\right)\)</span> for all <span class="math inline">\(i\)</span></li>
 <li><span class="math inline">\(\epsilon_i\sim N\left(0,\,6^2\right)\)</span> for all <span class="math inline">\(i\)</span></li>
@@ -618,78 +663,78 @@ where <span class="math inline">\(\epsilon_i\sim N\left(0,\,\sigma^2_{\epsilon}\
 <li><span class="math inline">\(\mu_B = 50\)</span></li>
 <li><span class="math inline">\(\tau_M = 3\)</span></li>
 </ul>
-<p>For now, assume that the participants are allocated by simple random sampling. How do your results compare with the results from Exercise <a href="computer-practical-3---sample-size-by-simulation.html#exr:srsttest">B.3</a>, and why?</p>
+<p>For now, assume that the participants are allocated by simple random sampling. How do your results compare with the results from Exercise <a href="computer-practical-3---sample-size-by-simulation.html#exr:srsttest">C.3</a>, and why?</p>
 </div>
 <details>
 <summary>
 Click for solutions
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-51" class="solution"><em>Solution</em>. </span>Now that we have a baseline variable to keep track of, we should create a data frame of participants as we generate them.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-1" tabindex="-1"></a><span class="do">## Function to simulate one trial (with ANCOVA analysis)</span></span>
-<span id="cb152-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-2" tabindex="-1"></a>ancova_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb152-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-3" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
-<span id="cb152-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-4" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
-<span id="cb152-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-5" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
-<span id="cb152-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-6" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
-<span id="cb152-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-7" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
-<span id="cb152-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-8" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
-<span id="cb152-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-9" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
-<span id="cb152-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-10" tabindex="-1"></a>){</span>
-<span id="cb152-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-11" tabindex="-1"></a>  <span class="do">## Empty data frame for trial data</span></span>
-<span id="cb152-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-12" tabindex="-1"></a>  trial_mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow=</span><span class="dv">2</span><span class="sc">*</span>N)</span>
-<span id="cb152-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-13" tabindex="-1"></a>  trial_df <span class="ot">=</span> <span class="fu">data.frame</span>(trial_mat)</span>
-<span id="cb152-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-14" tabindex="-1"></a>  <span class="fu">names</span>(trial_df) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;arm&quot;</span>, <span class="st">&quot;outcome&quot;</span>)</span>
-<span id="cb152-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-15" tabindex="-1"></a>  </span>
-<span id="cb152-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-16" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
-<span id="cb152-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-17" tabindex="-1"></a>    bas_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu_B, <span class="at">sd=</span>sd_B)</span>
-<span id="cb152-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-18" tabindex="-1"></a>    trial_df<span class="sc">$</span>baseline[i] <span class="ot">=</span> bas_i</span>
-<span id="cb152-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-19" tabindex="-1"></a>    alloc_i <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="dv">1</span>) <span class="co"># Using SRS in this function</span></span>
-<span id="cb152-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-20" tabindex="-1"></a>    trial_df<span class="sc">$</span>arm[i] <span class="ot">=</span> alloc_i</span>
-<span id="cb152-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-21" tabindex="-1"></a>    eps_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span>sd_eps)</span>
-<span id="cb152-22"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-22" tabindex="-1"></a>    <span class="cf">if</span>(alloc_i <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
-<span id="cb152-23"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-23" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
-<span id="cb152-24"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-24" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (alloc_i <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
-<span id="cb152-25"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-25" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> tm <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
-<span id="cb152-26"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-26" tabindex="-1"></a>    }</span>
-<span id="cb152-27"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-27" tabindex="-1"></a>    trial_df<span class="sc">$</span>outcome[i] <span class="ot">=</span> out_i</span>
-<span id="cb152-28"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-28" tabindex="-1"></a>  }</span>
-<span id="cb152-29"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-29" tabindex="-1"></a>  model.fit <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> baseline <span class="sc">+</span> arm, <span class="at">data=</span>trial_df)</span>
-<span id="cb152-30"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-30" tabindex="-1"></a>  <span class="fu">summary</span>(model.fit)</span>
-<span id="cb152-31"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-31" tabindex="-1"></a>}</span>
-<span id="cb152-32"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-32" tabindex="-1"></a></span>
-<span id="cb152-33"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-33" tabindex="-1"></a><span class="do">## Function to simulate many trials (with ANCOVA analysis)</span></span>
-<span id="cb152-34"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-34" tabindex="-1"></a></span>
-<span id="cb152-35"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-35" tabindex="-1"></a>ancova_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb152-36"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-36" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb152-37"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-37" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
-<span id="cb152-38"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-38" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
-<span id="cb152-39"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-39" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
-<span id="cb152-40"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-40" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
-<span id="cb152-41"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-41" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
-<span id="cb152-42"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-42" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
-<span id="cb152-43"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-43" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
-<span id="cb152-44"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-44" tabindex="-1"></a>){</span>
-<span id="cb152-45"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-45" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb152-46"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-46" tabindex="-1"></a>  </span>
-<span id="cb152-47"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-47" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb152-48"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-48" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">ancova_trial_srs</span>(N, mu_B, mu, rho, tm, sd_eps, sd_B)</span>
-<span id="cb152-49"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-49" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb152-50"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-50" tabindex="-1"></a>  }</span>
-<span id="cb152-51"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-51" tabindex="-1"></a>  </span>
-<span id="cb152-52"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-52" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb152-53"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-53" tabindex="-1"></a>  power.est</span>
-<span id="cb152-54"><a href="computer-practical-3---sample-size-by-simulation.html#cb152-54" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb153-1" tabindex="-1"></a>sim_vec6 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb153-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb153-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb153-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb153-3" tabindex="-1"></a>  sim_vec6[i] <span class="ot">=</span> <span class="fu">ancova_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">90</span>, <span class="at">mu_B=</span><span class="dv">50</span>, <span class="at">mu=</span><span class="dv">60</span>, </span>
-<span id="cb153-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb153-4" tabindex="-1"></a>                                  <span class="at">rho=</span><span class="fl">0.65</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd_eps=</span><span class="dv">6</span>, <span class="at">sd_B =</span> <span class="dv">8</span>)</span>
-<span id="cb153-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb153-5" tabindex="-1"></a>}</span>
-<span id="cb153-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb153-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec6)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-103"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-103-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
+<p><span id="unlabeled-div-111" class="solution"><em>Solution</em>. </span>Now that we have a baseline variable to keep track of, we should create a data frame of participants as we generate them.</p>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-1" tabindex="-1"></a><span class="do">## Function to simulate one trial (with ANCOVA analysis)</span></span>
+<span id="cb281-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-2" tabindex="-1"></a>ancova_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb281-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-3" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
+<span id="cb281-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-4" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
+<span id="cb281-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-5" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
+<span id="cb281-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-6" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
+<span id="cb281-7"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-7" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
+<span id="cb281-8"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-8" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
+<span id="cb281-9"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-9" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
+<span id="cb281-10"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-10" tabindex="-1"></a>){</span>
+<span id="cb281-11"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-11" tabindex="-1"></a>  <span class="do">## Empty data frame for trial data</span></span>
+<span id="cb281-12"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-12" tabindex="-1"></a>  trial_mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow=</span><span class="dv">2</span><span class="sc">*</span>N)</span>
+<span id="cb281-13"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-13" tabindex="-1"></a>  trial_df <span class="ot">=</span> <span class="fu">data.frame</span>(trial_mat)</span>
+<span id="cb281-14"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-14" tabindex="-1"></a>  <span class="fu">names</span>(trial_df) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;arm&quot;</span>, <span class="st">&quot;outcome&quot;</span>)</span>
+<span id="cb281-15"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-15" tabindex="-1"></a>  </span>
+<span id="cb281-16"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-16" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
+<span id="cb281-17"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-17" tabindex="-1"></a>    bas_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu_B, <span class="at">sd=</span>sd_B)</span>
+<span id="cb281-18"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-18" tabindex="-1"></a>    trial_df<span class="sc">$</span>baseline[i] <span class="ot">=</span> bas_i</span>
+<span id="cb281-19"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-19" tabindex="-1"></a>    alloc_i <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="dv">1</span>) <span class="co"># Using SRS in this function</span></span>
+<span id="cb281-20"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-20" tabindex="-1"></a>    trial_df<span class="sc">$</span>arm[i] <span class="ot">=</span> alloc_i</span>
+<span id="cb281-21"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-21" tabindex="-1"></a>    eps_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span>sd_eps)</span>
+<span id="cb281-22"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-22" tabindex="-1"></a>    <span class="cf">if</span>(alloc_i <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
+<span id="cb281-23"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-23" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
+<span id="cb281-24"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-24" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (alloc_i <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
+<span id="cb281-25"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-25" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> tm <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
+<span id="cb281-26"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-26" tabindex="-1"></a>    }</span>
+<span id="cb281-27"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-27" tabindex="-1"></a>    trial_df<span class="sc">$</span>outcome[i] <span class="ot">=</span> out_i</span>
+<span id="cb281-28"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-28" tabindex="-1"></a>  }</span>
+<span id="cb281-29"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-29" tabindex="-1"></a>  model.fit <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> baseline <span class="sc">+</span> arm, <span class="at">data=</span>trial_df)</span>
+<span id="cb281-30"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-30" tabindex="-1"></a>  <span class="fu">summary</span>(model.fit)</span>
+<span id="cb281-31"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-31" tabindex="-1"></a>}</span>
+<span id="cb281-32"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-32" tabindex="-1"></a></span>
+<span id="cb281-33"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-33" tabindex="-1"></a><span class="do">## Function to simulate many trials (with ANCOVA analysis)</span></span>
+<span id="cb281-34"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-34" tabindex="-1"></a></span>
+<span id="cb281-35"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-35" tabindex="-1"></a>ancova_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb281-36"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-36" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb281-37"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-37" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
+<span id="cb281-38"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-38" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
+<span id="cb281-39"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-39" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
+<span id="cb281-40"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-40" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
+<span id="cb281-41"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-41" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
+<span id="cb281-42"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-42" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
+<span id="cb281-43"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-43" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
+<span id="cb281-44"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-44" tabindex="-1"></a>){</span>
+<span id="cb281-45"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-45" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb281-46"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-46" tabindex="-1"></a>  </span>
+<span id="cb281-47"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-47" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb281-48"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-48" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">ancova_trial_srs</span>(N, mu_B, mu, rho, tm, sd_eps, sd_B)</span>
+<span id="cb281-49"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-49" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb281-50"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-50" tabindex="-1"></a>  }</span>
+<span id="cb281-51"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-51" tabindex="-1"></a>  </span>
+<span id="cb281-52"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-52" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb281-53"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-53" tabindex="-1"></a>  power.est</span>
+<span id="cb281-54"><a href="computer-practical-3---sample-size-by-simulation.html#cb281-54" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb282"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb282-1"><a href="computer-practical-3---sample-size-by-simulation.html#cb282-1" tabindex="-1"></a>sim_vec6 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb282-2"><a href="computer-practical-3---sample-size-by-simulation.html#cb282-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb282-3"><a href="computer-practical-3---sample-size-by-simulation.html#cb282-3" tabindex="-1"></a>  sim_vec6[i] <span class="ot">=</span> <span class="fu">ancova_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">90</span>, <span class="at">mu_B=</span><span class="dv">50</span>, <span class="at">mu=</span><span class="dv">60</span>, </span>
+<span id="cb282-4"><a href="computer-practical-3---sample-size-by-simulation.html#cb282-4" tabindex="-1"></a>                                  <span class="at">rho=</span><span class="fl">0.65</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd_eps=</span><span class="dv">6</span>, <span class="at">sd_B =</span> <span class="dv">8</span>)</span>
+<span id="cb282-5"><a href="computer-practical-3---sample-size-by-simulation.html#cb282-5" tabindex="-1"></a>}</span>
+<span id="cb282-6"><a href="computer-practical-3---sample-size-by-simulation.html#cb282-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec6)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-346"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-346-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
 <p class="caption">
-Figure B.6: Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with <span class="math inline">\(N=75\)</span>, assuming an ANCOVA analysis.
+Figure C.6: Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with <span class="math inline">\(N=75\)</span>, assuming an ANCOVA analysis.
 </p>
 </div>
 </div>
@@ -715,7 +760,7 @@ Arnold, Benjamin F, Daniel R Hogan, John M Colford, and Alan E Hubbard. 2011. <s
           </div>
         </div>
       </div>
-<a href="computer-practical-1---missing-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computer-practical-2---allocation-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="computer-practical-4---analysis-for-binary-and-survival-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
