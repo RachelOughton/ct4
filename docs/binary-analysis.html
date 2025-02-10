@@ -419,7 +419,7 @@ p_T &amp; \sim N\left(\pi_T,\, \frac{\pi_T\left(1-\pi_T\right)}{n_T}\right).
 <p>This means we can test the null hypothesis that <span class="math inline">\(\pi_C = \pi_T\)</span> by referring our observed value of <span class="math inline">\(p_T - p_C\)</span> to a normal distribution with mean 0 and variance</p>
 <p><span class="math display">\[ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\pi_C\right)}{n_C},\]</span></p>
 <p>which we can approximate by substituting in <span class="math inline">\(p_C\)</span> and <span class="math inline">\(p_T\)</span>.</p>
-<p>However, since under the null hypothesis <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, it would be more appropriate to use this as the common variance. In this case, the variance of <span class="math inline">\(p_T - p_C\)</span> becomes</p>
+<p>However, since under the null hypothesis <span class="math inline">\(\pi_C = \pi_T = \pi\)</span>, it would be more appropriate to use this for the common variance. In this case, the variance of <span class="math inline">\(p_T - p_C\)</span> becomes</p>
 <p><span class="math display">\[\pi\left(1-\pi\right)\left(\frac{1}{n_C} + \frac{1}{n_T}\right), \]</span>
 and in calculations we replace <span class="math inline">\(\pi\)</span> with <span class="math inline">\(p = r/n\)</span>.</p>
 <p>Putting all this together, our test statistic is</p>
@@ -486,7 +486,7 @@ Z &amp; = \frac{0.691 - 0.327}{\sqrt{0.514\left(1-0.514\right)\left(\frac{1}{52}
 </div>
 <div id="likelihood-a-more-rigorous-way" class="section level3 hasAnchor" number="6.1.2">
 <h3><span class="header-section-number">6.1.2</span> Likelihood: A more rigorous way<a href="binary-analysis.html#likelihood-a-more-rigorous-way" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.</p>
+<p>Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelihood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.</p>
 <p>Earlier we set up notation <span class="math inline">\(y_{iC}\)</span> to be outcome variable (0 or 1, in this case) of the <span class="math inline">\(i\)</span>-th participant in the control group (and so on), and we will use that here.</p>
 <p>The contribution of the <span class="math inline">\(i\)</span>-th patient in group <span class="math inline">\(C\)</span> to the likelihood is</p>
 <p><span class="math display">\[\pi_C^{y_{iC}}\left(1 - \pi_C\right)^{1-y_{iC}} \]</span>
@@ -497,7 +497,7 @@ where <span class="math inline">\(r_C\)</span> is the number of ‘successes’ 
 Gathering these terms together we can find the complete likelihood function</p>
 <p><span class="math display">\[
 \begin{aligned}
-L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) &amp;
+L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) &amp; =
   L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
   &amp; = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
 \end{aligned}
@@ -584,7 +584,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{0.187}\right) = \left(1.85,\; 5.33 \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 </div>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
@@ -635,8 +635,8 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-30"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-30-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-39"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-39-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
 <p class="caption">
 Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
 </p>
@@ -686,8 +686,8 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.57 0.81</code></pre>
 <p>We can see this graphically</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-34"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-34-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-43"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-43-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.3: As before, dashed for Wilson, dotted for standard
 </p>
@@ -698,8 +698,8 @@ Figure 6.3: As before, dashed for Wilson, dotted for standard
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.20 0.45</code></pre>
 <p>Again, we can see this graphically.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-37"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-37-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-46-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.4: As before, dashed for Wilson, dotted for standard
 </p>
@@ -1178,7 +1178,7 @@ Figure 6.7: ROC curve for our logistic regression model of the indo RCT data (so
 </div>
 <div id="calibration" class="section level3 hasAnchor" number="6.4.2">
 <h3><span class="header-section-number">6.4.2</span> Calibration<a href="binary-analysis.html#calibration" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, ‘correct’ or ‘accurate’. One intuitive way to do this is to work through different ‘types’ of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.</p>
+<p>In this section we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, ‘correct’ or ‘accurate’. One intuitive way to do this is to work through different ‘types’ of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.</p>
 <p>If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-40" class="example"><strong>Example 6.13  </strong></span>This example uses the model fitted in Example <a href="binary-analysis.html#exm:logregeg1">6.10</a>.</p>
@@ -1201,8 +1201,8 @@ Figure 6.7: ROC curve for our logistic regression model of the indo RCT data (so
 <span id="cb59-16"><a href="binary-analysis.html#cb59-16" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>risk, <span class="at">xend=</span>risk, <span class="at">y=</span>fit<span class="fl">-1.96</span><span class="sc">*</span>fit_se, <span class="at">yend=</span>fit<span class="fl">+1.96</span><span class="sc">*</span>fit_se))<span class="sc">+</span></span>
 <span id="cb59-17"><a href="binary-analysis.html#cb59-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb59-18"><a href="binary-analysis.html#cb59-18" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">&quot;site&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-46"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-46-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-55"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-55-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
 <p class="caption">
 Figure 6.8: Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).
 </p>

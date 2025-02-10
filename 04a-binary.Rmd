@@ -186,7 +186,7 @@ $$ \frac{\pi_T\left(1-\pi_T\right)}{n_T} + \frac{\pi_C\left(1-\pi_C\right)}{n_C}
 
 which we can approximate by substituting in $p_C$ and $p_T$.
 
-However, since under the null hypothesis $\pi_C = \pi_T = \pi$, it would be more appropriate to use this as the common variance. In this case, the variance of $p_T - p_C$ becomes
+However, since under the null hypothesis $\pi_C = \pi_T = \pi$, it would be more appropriate to use this for the common variance. In this case, the variance of $p_T - p_C$ becomes
 
 $$\pi\left(1-\pi\right)\left(\frac{1}{n_C} + \frac{1}{n_T}\right), $$
 and in calculations we replace $\pi$ with $p = r/n$.
@@ -286,7 +286,7 @@ sqrt(sum_chi_sq)
 
 ### Likelihood: A more rigorous way
 
-Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelhood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.
+Our method above was quite informal, and also made heavy use of the central limit theorem. We can use maximum likelihood to derive a more formally justified test for binary outcomes. This also lays a good foundation for more complex situations.
 
 Earlier we set up notation $y_{iC}$ to be outcome variable (0 or 1, in this case) of the $i$-th participant in the control group (and so on), and we will use that here.
 
@@ -303,7 +303,7 @@ Gathering these terms together we can find the complete likelihood function
 
 $$
 \begin{aligned}
-L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) &
+L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) & =
   L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
   & = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
 \end{aligned}
@@ -1273,7 +1273,7 @@ So we see that our model is better than random guessing, but really not all that
 
 ### Calibration
 
-Now we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, 'correct' or 'accurate'. One intuitive way to do this is to work through different 'types' of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.
+In this section we are thinking of the model as actually predicting probabilities, and therefore we want to determine whether these probabilities are, in some sense, 'correct' or 'accurate'. One intuitive way to do this is to work through different 'types' of patient (by which we mean different combinations of baseline covariate values) and see whether the proportions of ones in the data broadly match the probability given by the model.
 
 If the explanatory variables are factors, and we have repeated observations for the different combinations of factor levels, then for each combination we can estimate the probability of success (or whatever our outcome variable is) using the data, and compare this to the fitted model value.
 
