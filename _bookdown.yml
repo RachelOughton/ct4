@@ -5,7 +5,7 @@ rmd_files:
     html: ["index.Rmd", "01-rctbackground.Rmd",
      "02-samplesize.Rmd", 
      "03-allocation.Rmd",  "04-rctanalysis.Rmd",
-   #  "04a-binary.Rmd", # "05-survival.Rmd", "05a-survival.Rmd",
+     "04a-binary.Rmd", # "05-survival.Rmd", "05a-survival.Rmd",
     # "06-furtherdesigns.Rmd", "06b-crossover.Rmd", #"06c-missing.Rmd",
     #  "06d-bayesian.Rmd",
      "07-practical_missingdata.Rmd",  "07a-practical2.Rmd" ,
@@ -15,7 +15,7 @@ rmd_files:
     latex: ["index.Rmd", "01-rctbackground.Rmd",
     "02-samplesize.Rmd", 
      "03-allocation.Rmd",  "04-rctanalysis.Rmd", 
-   #  "04a-binary.Rmd", # "05-survival.Rmd", "05a-survival.Rmd",
+     "04a-binary.Rmd", # "05-survival.Rmd", "05a-survival.Rmd",
     #     "06-furtherdesigns.Rmd",  "06b-crossover.Rmd", #"06c-missing.Rmd",
     #     "06d-bayesian.Rmd",
  

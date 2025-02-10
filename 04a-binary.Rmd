@@ -836,7 +836,7 @@ did for continuous outcome variables.
 
 ## Accounting for baseline observations: logistic regression {#logreg}
 
-We saw with the continuous outcomes that it is often advantageous to include baseline measurements of the outcome (if they are known) in our analysis, and this is the same for binary outcomes. 
+We saw with the continuous outcomes that it is often advantageous to include baseline measurements of the outcome (if they are known) in our analysis, and this is no less true for binary outcomes. 
 
 In this section we use the term 'baseline observations' to mean any measurement that was known before the trial started. Unlike with continuous measurements, with a binary outcome, there is not usually a pre-trial value of the primary outcome. A binary outcome is often already relative to pre-trial (for example 'Have the patient's symptoms improved?') or refers to an event that definitely wouldn't have happened pre-trial (for example 'Did the patient die within the next 6 months?' or 'Was the patient cured?'). However, as we saw with ANCOVA, we can include other sorts of covariates in a linear model, so this is fine.
 
@@ -894,22 +894,23 @@ That is, $\tau$ is the log of the odds ratio, or $e^\tau$ is the odds ratio adju
 
 ### Fitting a logistic regression model 
 
-Logistic regression models are generally fitted using *maximum likelihood*. In the notation of Equation \@ref(eq:logreg1), the parameters we need to fit are the coefficients $\mu,\;\tau$ and $\beta_1,\ldots,\beta_p$. To ease notation, we will collect these into a vector $\boldsymbol\beta$, with $\beta_0=\mu$, $\beta_1=\tau$ and $\beta_2,\ldots,\beta_{p+1}$ the original $\beta_1,\ldots,\beta_p$. Sorry this is confusing - we won't really use the vector $\boldsymbol\beta$ after this, or think about the parameters individually (apart from $\tau$).
+Logistic regression models are generally fitted using *maximum likelihood*. In the notation of Equation \@ref(eq:logreg1), the parameters we need to fit are the coefficients $\mu,\;\tau$ and $\beta_1,\ldots,\beta_p$. To ease notation for this section we will collect these into a vector $\boldsymbol\beta$, with $\beta_0=\mu$ and $\beta_{p+1}=\tau$, so that our $G$ variable is now $x_{p+1}$. 
 
 This notation allows us to write the linear function on the RHS of Equation \@ref(eq:logreg1) for participant $i$ as 
 
-$$x_i^T\boldsymbol\beta = \sum\limits_{j=0}^{q} x_{ij}\beta_j, $$
+$$x_i^T\boldsymbol\beta = \sum\limits_{j=0}^{p+2} x_{ij}\beta_j, $$
 where 
 
   * $x_{i0}=1$ (so that $\beta_0$ is the intercept $\mu$)
-  * $x_{i1}=
+  * $x_{i1},\ldots,x_{ip}$ are the baseline covariates.
+  * $x_{i,p+1}=
   \begin{cases}
   0\text{ if participant }i\text{ is in group }C\\
   1\text{ if participant }i\text{ is in group }T
   \end{cases}$
-  * $x_{i2},\ldots,x_{iq}$ are the baseline covariates.
+
   
-If $\pi_i$ is the probability that the outcome for participant $i$ is 1, where $i=1,\ldots,n$, then the logistic model specifies these $n$ parameters through the $q+1$ parameters $\beta_j$, via the $n$ expressions 
+If $\pi_i$ is the probability that the outcome for participant $i$ is 1, where $i=1,\ldots,n$, then the logistic model specifies these $n$ parameters through the $p+2$ parameters $\beta_j$, via the $n$ expressions 
 
 \begin{equation}
 \operatorname{logit}\left(\pi_i\right) = x_i^T\boldsymbol\beta.
@@ -951,13 +952,14 @@ Note: an obvious one to include would be `gender`, but I tried it and it is not 
 data("indo_rct")
 summary(indo_rct[ ,c(1,2,3,4,6,32)])
 ## Some things to note:
-# There are very few patients in group 4, and not many in group 3
+# There are very few patients from site 4, and not many from site 3
 # The age range goes from 19 to 90 
 # 'rx' is the group variable
 
 ## Checking for collinearity with factor variables
+## We will also use the variance inflation factor
 
-# No consistent patterns between age and site or risk and site
+# No obvious patterns between age and site or risk and site
 indo_rct%>%
   group_by(site) %>% 
   summarise(
@@ -973,7 +975,9 @@ glm_indo_agesq = glm(outcome ~ I(age^2) + site + risk + rx, data=indo_rct,
                      family = binomial(link = "logit"))
 
 summary(glm_indo_agelin)
+vif(glm_indo_agelin)
 summary(glm_indo_agesq)
+vif(glm_indo_agesq)
 
 ```
 
@@ -982,6 +986,7 @@ Since neither `age` nor `age^2` appear influential, we'll remove it and keep the
 ```{r, echo=T}
 glm_indo = glm(outcome ~ site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
 summary(glm_indo)
+vif(glm_indo)
 ```
 
 From the summary we see that $\hat\tau = -0.752$, with a standard error of 0.261. A 95% CI for $\tau$ is therefore 
@@ -1050,7 +1055,7 @@ df_indo_round2
 
 :::
 
-#### Some cautions {-}
+#### Reminder {-}
 
 As with any linear model, we need to ensure that it is appropriate for our dataset. Two key things we need to check for are:
 
@@ -1064,13 +1069,13 @@ As with any linear model, we need to ensure that it is appropriate for our datas
 
 There are many diagnostic techniques for binomial data (see eg. @collett_bin) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of `1`, we can't conclude that their probability should have been high. If the 'true' probability of $X=1$ for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have $X=0$. 
 
-This makes diagnostics somewhat trickier.
+This makes assessing logistic regression models somewhat tricky.
 
 Diagnostics for logistic regression fall into two categories: **discrimination** and **calibration**. We will look at each of these in turn, though by no means exhaustively.
 
 ### Discrimination
 
-Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the $\operatorname{logit}\left(p\right)$ scale. If that value is below some threshold, we classify that participant as 0 If the value is above the threshold, we classify them as 1. Here, we are slightly abandoning the notion that the model is predicting probabilities, and instead testing whether the model can successfully order the patients correctly. Can we set some threshold on the model output that (almost) separates the cohort into its ones and zeros?
+Here we are thinking of the logistic regression model as a classifier: for each participant the model outputs some value, on the $\operatorname{logit}\left(p\right)$ scale. If that value is below some threshold, we classify that participant as 0. If the value is above the threshold, we classify them as 1. We are slightly abandoning the notion that the model is predicting probabilities, and instead testing whether the model can successfully order the patients correctly. Can we set some threshold on the model output that (almost) separates the cohort into its ones and zeros?
 
 A classic way to asses this is by using Receiver Operating Characteric (ROC) analysis. ROC analysis was developed during the second world war, as radar operators analysed their classification accuracy in distinguishing signal (eg. an enemy plane) from noise. It is still widely used in the field of statistical classification, including in medical diagnostics. ROC analysis can be applied to any binary classifier, not just logistic regression.
 
@@ -1101,15 +1106,134 @@ These are very commonly used for thinking about diagnostic tests and screening t
 
 The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the $t=0$, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set $t=0$, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a **ROC curve**. 
 
-The dashboard below shows the distributions of fitted values for patients with $X=0$ and $X=1$, with options for good, moderate and poor separation, and the corresponding ROC curve. You can move the threshold to see the sensitivity and specificity at that value. Also note the AUC (area under the curve) which is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
+The plots below shows the distributions of fitted values for patients with $X=0$ and $X=1$, for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.6, and so the Sensitivity and Specificity reflec that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
 
-If you're viewing this in PDF you'll just have a static image, but you can find the dashboard at \newline
-[https://racheloughton.shinyapps.io/ROCplots/](https://racheloughton.shinyapps.io/ROCplots/).
 
-```{r, eval=knitr::is_html_output()}
-knitr::include_app("https://racheloughton.shinyapps.io/ROCplots/", height="600px")
+```{r, echo=F}
+ROC_allT_plot = function(
+    pars,
+    highlight = NULL,
+    cutoff_tail = FALSE
+){
+  alpha0=pars[1]   # mean and SD for X=0
+  beta0=pars[2]
+  alpha1=pars[3]  # mean and SD for X=1
+  beta1=pars[4]
+  
+  thresh_vec = seq(0,1, by=0.01)
+  nt = length(thresh_vec)
+  
+  T = thresh_vec
+  Spec = sapply(1:nt, function(i){pbeta(thresh_vec[i], shape1 = alpha0, shape2=beta0)})
+  Sens = sapply(1:nt, function(i){1-pbeta(thresh_vec[i], shape1 = alpha1, shape2=beta1)})
+  dis_0 = sapply(1:nt, function(i){dbeta(thresh_vec[i], shape1 = alpha0, shape2=beta0)})
+  dis_1 = sapply(1:nt, function(i){dbeta(thresh_vec[i], shape1 = alpha1, shape2=beta1)})
+  
+  sum_df = data.frame(T=T, Spec=Spec, Sens=Sens, dis_0=dis_0, dis_1 = dis_1)
+  sum_df$oneMspec = 1-sum_df$Spec
+  
+  ## Calculate AUC using x and y coords:
+  AUC = 0
+  for (i in 1:(nt-1)){
+    # seems wrong way around but T is going from right to left
+    x_diff_i = sum_df$oneMspec[i] - sum_df$oneMspec[i+1] 
+    height_i = (sum_df$Sens[i] + sum_df$Sens[i+1])/2
+    #    height_i = sum_df$Sens[i]
+    area_i = height_i * x_diff_i
+    AUC = AUC + area_i
+  }
+  
+  sum_df_plot = sum_df
+  if (cutoff_tail == TRUE){
+    sum_df_plot = sum_df[(sum_df$Sens<=0.999)&(sum_df$Sens>0.001),]
+  }
+  
+  plot = ggplot(data=sum_df_plot, aes(x=oneMspec, y=Sens, col=T)) + geom_path() + 
+    xlab("1 - Specificity") + ylab("Sensitivity") + xlim(0,1) + ylim(0,1) +
+    scale_color_gradient2(
+      low = "orange", 
+      mid = "magenta",
+      high = "blue",
+      midpoint = mean(sum_df_plot$T)
+    ) + geom_abline(slope=1, lty=2) +
+    ggtitle(sprintf("AUC = %g (3 s.f.)", round(AUC, digits=3)))
+  if(is.numeric(highlight)){
+    plot = plot + geom_point(data= sum_df_plot[sum_df_plot$T == highlight,], aes(x=oneMspec, y=Sens), size=2, col="black") + theme_bw() + theme(legend.position="none")
+  } 
+  plot
+  
+}
+
+ROC_dist_plot = function(
+  pars,
+  thresh  # threshold for this plot
+){
+  alpha0=pars[1]   # mean and SD for X=0
+  beta0=pars[2]
+  alpha1=pars[3]  # mean and SD for X=1
+  beta1=pars[4]
+  
+  thresh_vec = seq(0,1, by=0.01)
+  nt = length(thresh_vec)
+  
+  T = thresh_vec
+  Spec = sapply(1:nt, function(i){pbeta(thresh_vec[i], shape1 = alpha0, shape2=beta0)})
+  Sens = sapply(1:nt, function(i){1-pbeta(thresh_vec[i], shape1 = alpha1, shape2=beta1)})
+  dis_0 = sapply(1:nt, function(i){dbeta(thresh_vec[i], shape1 = alpha0, shape2=beta0)})
+  dis_1 = sapply(1:nt, function(i){dbeta(thresh_vec[i], shape1 = alpha1, shape2=beta1)})
+  
+  sum_df = data.frame(T=T, Spec=Spec, Sens=Sens, dis_0=dis_0, dis_1 = dis_1)
+  sum_df$oneMspec = 1-sum_df$Spec
+  
+  subDF_0 = sum_df[sum_df$T <= thresh,]
+  subDF_1 = sum_df[sum_df$T >= thresh,]
+  
+  
+  dist_plot = ggplot() + xlim(0,1) +
+    geom_function(fun = dbeta, args=list(shape1 = alpha0, shape2 = beta0), 
+                  linewidth=0.75, col="turquoise4")  +
+    geom_function(fun = dbeta, args=list(shape1 = alpha1, shape2 = beta1), 
+                  linewidth=0.75, col="orangered2") +
+    annotate("text", x=c(0.2,0.8), y=c(0.25, 0.15), label = c("X=0", "X=1"), 
+             col = c("turquoise4", "orangered2"), size=4) +
+    geom_vline(aes(xintercept = thresh), linewidth=0.75) +
+    geom_ribbon(data = subDF_0, 
+                aes(x=T, ymin=0, ymax=dis_0), fill="turquoise3", alpha=0.3)+
+    geom_ribbon(data = subDF_1, 
+                aes(x=T, ymin=0, ymax=dis_1), fill="orangered", alpha=0.3)+
+    xlab("Fitted value p-hat") +
+    ggtitle(sprintf("Sensitivity = %g, Specificity = %g",
+                    round(sum_df$Sens[sum_df$T == thresh],3), 
+                    round(sum_df$Spec[sum_df$T == thresh],3))) +
+    theme_bw()
+  dist_plot
+}
+
+
+param_df = data.frame(
+  alpha0 = c(1.3, 2.2, 3),
+  beta0 = c(5.5, 4.1, 3.6),
+  alpha1 = c(5.5, 3.9, 2.2),
+  beta1 = c(1.3, 2.3, 1.3)
+)
 
 ```
+
+```{r rocgood, fig.cap = "ROC example with good separation."}
+
+gg_dist_good = ROC_dist_plot(as.numeric(param_df[1, ]), thresh=0.5)
+gg_roc_good = ROC_allT_plot(as.numeric(param_df[1, ]))
+grid.arrange(gg_dist_good, gg_roc_good, nrow=1)
+
+
+```
+
+```{r rocpoor, fig.cap = "ROC example with poor separation."}
+gg_dist_poor = ROC_dist_plot(as.numeric(param_df[3, ]), thresh=0.5)
+gg_roc_poor = ROC_allT_plot(as.numeric(param_df[3, ]))
+grid.arrange(gg_dist_poor, gg_roc_poor, nrow=1)
+```
+
 
 Note that I've used beta distributions for some hypothetical distributions of fitted values for the different groups, but this is just for convenience: ROC analysis makes no distributional assumptions.
 
