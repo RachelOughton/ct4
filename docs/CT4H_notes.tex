@@ -128,7 +128,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2025-02-10}
+\date{2025-02-12}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2072,9 +2072,9 @@ As with any linear model, we need to ensure that it is appropriate for our datas
 \begin{definition}
 In a linear regression model the variance of the fitted coefficient \(\hat\beta_j\) is
 
-\[\operatorname{var}\left(\hat\beta_j\right) = \frac{\sigma^2}{1-\mathbf{R}^2_j},\]
+\[\operatorname{var}\left(\hat\beta_j\right) = \frac{s^2}{1-\mathbf{R}^2_j},\]
 
-where \(\mathbf{R}^2_j\) is the squared multiple correlation for the regression of \(x_j\) on all the other covariates. The \textbf{variance inflation factor} is given by
+where \(s\) is the root mean-square error (RMSE) and \(\mathbf{R}^2_j\) is the squared multiple correlation for the regression of \(x_j\) on all the other covariates. The \textbf{variance inflation factor} is given by
 
 \[\operatorname{VIF}\left(\hat\beta_j\right) = \frac{1}{1-\mathbf{R}^2_j}.\]
 If \(\operatorname{VIF}=1\) then \(x_j\) is orthogonal to all other covariates. Large values of \(\operatorname{VIF}\) indicate potential problems.
