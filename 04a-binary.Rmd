@@ -20,11 +20,14 @@ Suppose we conduct a trial with a binary primary outcome variable and two groups
   Our null hypothesis now is therefore that $\pi_T = \pi_C$, ie. that the probability of success is the same in each group, and we will need enough participants to test this hypothesis with sufficient power. With the trial data we will be able to produce estimates
       
 \begin{align*}
-      p_T & = \frac{R_T}{n_T} \\
-      p_C & = \frac{R_C}{n_C}.
+      p_T & = \frac{r_T}{n_T} \\
+      p_C & = \frac{r_C}{n_C},
 \end{align*}
     
-  Recall that the variance of $p_X$ (where $X$ is $T$ or $C$) is $\frac{\pi_X\left(1-\pi_X\right)}{n_X}$, such that the variance depends on the mean. This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate values of $\pi_T$ and $\pi_C$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.
+    
+where $r_T,\,r_C$ are the obseved values of $R_T,\,R_C.$    
+
+Recall that the variance of $p_X$ (where $X$ is $T$ or $C$) is $\frac{\pi_X\left(1-\pi_X\right)}{n_X}$, such that the variance depends on the mean. This means there is no free parameter equivalent to $\sigma$ in the binary situation, and the number of participants required will depend on the approximate values of $\pi_T$ and $\pi_C$. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called *the delta method*.
       
 ## The Delta Method {#delta-method}
       
@@ -82,7 +85,7 @@ $$\left[f'\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .$$
     Finally, we can substitute this into Equation \@ref(eq:delta3), with $f\left(X\right) = \arcsin\left(\sqrt{X}\right)$ to find
   
   \begin{align*}
-  \operatorname{var}\left[f\left(X\right)\right] & \approx \sigma^2\left(\pi\right)\left[f'\left(\pi\right)\right]^2  \\
+  \operatorname{var}\left[f\left(\pi\right)\right] & \approx \sigma^2\left(\pi\right)\left[f'\left(\pi\right)\right]^2  \\
 & \approx{\frac{\pi\left(1-\pi\right)}{n}\cdot\frac{1}{4\pi\left(1-\pi\right)}}\\
 & \approx{\frac{1}{4n}},
 \end{align*}
@@ -195,7 +198,7 @@ Putting all this together, our test statistic is
 
 $$Z = \frac{p_T - p_C}{\sqrt{p\left(1-p\right)\left(\frac{1}{n_T} + \frac{1}{n_C}\right)}}.$$
 
-::: {.example}
+::: {.example #ex-bin1}
 
 The data in this example comes from @strep_tb, in which 109 patients with tuberculosis were assigned to either receive Streptomycin, or the control group. The primary outcome variable is whether or not the patient was improved after the treatment period. The data include several other covariates, including gender, baseline condition (good, fair or poor) and whether the patient had developed resistance to streptomycin after 6 months.
 

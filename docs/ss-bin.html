@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-12" />
+<meta name="date" content="2025-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -368,9 +368,10 @@ div.csl-indent {
 \end{align*}\]</span></p>
 <p>Our null hypothesis now is therefore that <span class="math inline">\(\pi_T = \pi_C\)</span>, ie. that the probability of success is the same in each group, and we will need enough participants to test this hypothesis with sufficient power. With the trial data we will be able to produce estimates</p>
 <p><span class="math display">\[\begin{align*}
-      p_T &amp; = \frac{R_T}{n_T} \\
-      p_C &amp; = \frac{R_C}{n_C}.
+      p_T &amp; = \frac{r_T}{n_T} \\
+      p_C &amp; = \frac{r_C}{n_C},
 \end{align*}\]</span></p>
+<p>where <span class="math inline">\(r_T,\,r_C\)</span> are the obseved values of <span class="math inline">\(R_T,\,R_C.\)</span></p>
 <p>Recall that the variance of <span class="math inline">\(p_X\)</span> (where <span class="math inline">\(X\)</span> is <span class="math inline">\(T\)</span> or <span class="math inline">\(C\)</span>) is <span class="math inline">\(\frac{\pi_X\left(1-\pi_X\right)}{n_X}\)</span>, such that the variance depends on the mean. This means there is no free parameter equivalent to <span class="math inline">\(\sigma\)</span> in the binary situation, and the number of participants required will depend on the approximate values of <span class="math inline">\(\pi_T\)</span> and <span class="math inline">\(\pi_C\)</span>. This makes the derivation of a sample size formula somewhat more complicated, and so we first of all make a transformation to remove the dependence of mean and variance. To do this we use an approximation technique called <em>the delta method</em>.</p>
 <div id="delta-method" class="section level2 hasAnchor" number="5.1">
 <h2><span class="header-section-number">5.1</span> The Delta Method<a href="ss-bin.html#delta-method" class="anchor-section" aria-label="Anchor link to header"></a></h2>
@@ -411,7 +412,7 @@ f\left(\pi\right) &amp; \propto \int^\pi{\frac{1}{\sqrt{w^2\left(1-w^2\right)}}2
 <p><span class="math display">\[\left[f&#39;\left(\pi\right)\right]^2 = \frac{1}{4\pi\left(1-\pi\right)} .\]</span>
 Finally, we can substitute this into Equation <a href="ss-bin.html#eq:delta3">(5.3)</a>, with <span class="math inline">\(f\left(X\right) = \arcsin\left(\sqrt{X}\right)\)</span> to find</p>
 <p><span class="math display">\[\begin{align*}
-  \operatorname{var}\left[f\left(X\right)\right] &amp; \approx \sigma^2\left(\pi\right)\left[f&#39;\left(\pi\right)\right]^2  \\
+  \operatorname{var}\left[f\left(\pi\right)\right] &amp; \approx \sigma^2\left(\pi\right)\left[f&#39;\left(\pi\right)\right]^2  \\
 &amp; \approx{\frac{\pi\left(1-\pi\right)}{n}\cdot\frac{1}{4\pi\left(1-\pi\right)}}\\
 &amp; \approx{\frac{1}{4n}},
 \end{align*}\]</span></p>

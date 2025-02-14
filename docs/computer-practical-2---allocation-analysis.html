@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-12" />
+<meta name="date" content="2025-02-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -399,14 +399,14 @@ div.csl-indent {
 <div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="computer-practical-2---allocation-analysis.html#cb182-1" tabindex="-1"></a>?licorice_gargle</span></code></pre></div>
 <p>and at <a href="https://www.causeweb.org/tshs/licorice-gargle/">this website</a>, and if you’re feeling really keen you can even read the original paper: <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span> (but please don’t do any of that now!).</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-62" class="exercise"><strong>Exercise B.1  </strong></span>Of the 19 columns, how many are baseline characteristics that we could use in the allocation?</p>
+<p><span id="exr:unlabeled-div-61" class="exercise"><strong>Exercise B.1  </strong></span>Of the 19 columns, how many are baseline characteristics that we could use in the allocation?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-63" class="solution"><em>Solution</em>. </span>In this dataset the baseline characteristics are helpfully prefixed by <code>preOp</code>, so there are seven baseline characteristics.</p>
+<p><span id="unlabeled-div-62" class="solution"><em>Solution</em>. </span>In this dataset the baseline characteristics are helpfully prefixed by <code>preOp</code>, so there are seven baseline characteristics.</p>
 <pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;        &quot;preOp_mallampati&quot;
 ## [6] &quot;preOp_smoking&quot;    &quot;preOp_pain&quot;</code></pre>
 </div>
@@ -988,7 +988,7 @@ N = 118</span><span class="gt_footnote_marks" style="white-space:nowrap;font-sty
 <li><code>preOp_BMI</code> was expected to have mean 26 and standard deviation around 4.5.</li>
 </ul>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-64" class="exercise"><strong>Exercise B.2  </strong></span>Bin the two variables <code>preOp_age</code> and <code>preOp_calcBMI</code> to convert them into factor variables <code>BMI</code> and <code>age</code>.</p>
+<p><span id="exr:unlabeled-div-63" class="exercise"><strong>Exercise B.2  </strong></span>Bin the two variables <code>preOp_age</code> and <code>preOp_calcBMI</code> to convert them into factor variables <code>BMI</code> and <code>age</code>.</p>
 <p>Investigate how the bins you have chosen split the actual data - are you pleased with your choices?</p>
 <p><em>In the solutions we’ll create a new data frame <code>lg_df</code> with the two new factor variables instead of the original two numeric variables. It might be helpful to you if you make sure your objects and columns are named the same (or else you may need to alter code further into the practical)</em></p>
 </div>
@@ -997,7 +997,7 @@ N = 118</span><span class="gt_footnote_marks" style="white-space:nowrap;font-sty
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-65" class="solution"><em>Solution</em>. </span>These solutions show you one way to create such factor variables, but if you choose different bins that’s fine!</p>
+<p><span id="unlabeled-div-64" class="solution"><em>Solution</em>. </span>These solutions show you one way to create such factor variables, but if you choose different bins that’s fine!</p>
 <p>Based on the information given, one reasonable split for <code>preOp_age</code> would be <span class="math inline">\(&lt;50,\;50-70\)</span> and <span class="math inline">\(&gt;70\)</span>, in which case we could do</p>
 <div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="computer-practical-2---allocation-analysis.html#cb189-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Under 50&quot;</span></span>
 <span id="cb189-2"><a href="computer-practical-2---allocation-analysis.html#cb189-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;50 to 70&quot;</span></span>
@@ -1039,14 +1039,14 @@ This is pretty simple to define in R:</p>
 <span id="cb194-9"><a href="computer-practical-2---allocation-analysis.html#cb194-9" tabindex="-1"></a>  <span class="fu">abs</span>(n1<span class="sc">-</span>n2)</span>
 <span id="cb194-10"><a href="computer-practical-2---allocation-analysis.html#cb194-10" tabindex="-1"></a>}</span></code></pre></div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-66" class="exercise"><strong>Exercise B.3  </strong></span>Use the <code>imbalance</code> function above to find the imbalance in the allocation recorded in the <code>lic_garg</code> dataset.</p>
+<p><span id="exr:unlabeled-div-65" class="exercise"><strong>Exercise B.3  </strong></span>Use the <code>imbalance</code> function above to find the imbalance in the allocation recorded in the <code>lic_garg</code> dataset.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-67" class="solution"><em>Solution</em>. </span></p>
+<p><span id="unlabeled-div-66" class="solution"><em>Solution</em>. </span></p>
 <div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="computer-practical-2---allocation-analysis.html#cb195-1" tabindex="-1"></a><span class="fu">imbalance</span>(<span class="at">df =</span> lic_garg, <span class="at">alloc =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 </div>
@@ -1076,7 +1076,7 @@ Click for solution
 <span id="cb197-14"><a href="computer-practical-2---allocation-analysis.html#cb197-14" tabindex="-1"></a>  df</span>
 <span id="cb197-15"><a href="computer-practical-2---allocation-analysis.html#cb197-15" tabindex="-1"></a>}</span></code></pre></div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-68" class="exercise"><strong>Exercise B.4  </strong></span>Use the function <code>srs</code> above to allocate the patients in the <code>licorice_gargle</code> dataset to groups T or C.</p>
+<p><span id="exr:unlabeled-div-67" class="exercise"><strong>Exercise B.4  </strong></span>Use the function <code>srs</code> above to allocate the patients in the <code>licorice_gargle</code> dataset to groups T or C.</p>
 <p>Generate the balance table and imbalance and comment on them.</p>
 </div>
 <details>
@@ -1084,7 +1084,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-69" class="solution"><em>Solution</em>. </span>To allocate the patients, use</p>
+<p><span id="unlabeled-div-68" class="solution"><em>Solution</em>. </span>To allocate the patients, use</p>
 <div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="computer-practical-2---allocation-analysis.html#cb198-1" tabindex="-1"></a>lg_srs <span class="ot">=</span> <span class="fu">srs</span>(</span>
 <span id="cb198-2"><a href="computer-practical-2---allocation-analysis.html#cb198-2" tabindex="-1"></a>  <span class="at">df =</span> lg_df[,<span class="sc">-</span><span class="dv">8</span>],</span>
 <span id="cb198-3"><a href="computer-practical-2---allocation-analysis.html#cb198-3" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
@@ -1651,7 +1651,7 @@ N = 130</span><span class="gt_footnote_marks" style="white-space:nowrap;font-sty
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="computer-practical-2---allocation-analysis.html#cb202-1" tabindex="-1"></a><span class="fu">library</span>(blockrand)</span></code></pre></div>
 <p>The function for generating RPB designs is also called <code>blockrand</code>. The default for the function <code>blockrand</code> is that it will randomly vary block length within <span class="math inline">\(\left\lbrace 2,\,4,\,6,\,8 \right\rbrace\)</span>.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-70" class="exercise"><strong>Exercise B.5  </strong></span>Try playing around with the function <code>blockrand</code>, for example starting with</p>
+<p><span id="exr:unlabeled-div-69" class="exercise"><strong>Exercise B.5  </strong></span>Try playing around with the function <code>blockrand</code>, for example starting with</p>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="computer-practical-2---allocation-analysis.html#cb203-1" tabindex="-1"></a><span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div>
 <p>Can you generate an allocation for the <code>licorice_gargle</code> data (remember our data frame is now <code>lg_df</code>) and produce the balance table?</p>
 </div>
@@ -1660,7 +1660,7 @@ N = 130</span><span class="gt_footnote_marks" style="white-space:nowrap;font-sty
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-71" class="solution"><em>Solution</em>. </span>There are 235 rows/participants in <code>lg_df</code>, and to keep consistency we would like the levels of our treatment to be <code>"T"</code> and <code>"C"</code>. Therefore we can do</p>
+<p><span id="unlabeled-div-70" class="solution"><em>Solution</em>. </span>There are 235 rows/participants in <code>lg_df</code>, and to keep consistency we would like the levels of our treatment to be <code>"T"</code> and <code>"C"</code>. Therefore we can do</p>
 <div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="computer-practical-2---allocation-analysis.html#cb204-1" tabindex="-1"></a>rpb_lg <span class="ot">=</span> <span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">235</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
 <p>Notice that this doesn’t have 235 rows: the <code>blockrand</code> function will always finish after a whole block.</p>
 <p>Let’s add this to our participant data to create a new data frame <code>lg_rpb</code>:</p>
@@ -1706,14 +1706,14 @@ Click for solution
 <span id="cb208-23"><a href="computer-practical-2---allocation-analysis.html#cb208-23" tabindex="-1"></a>  data</span>
 <span id="cb208-24"><a href="computer-practical-2---allocation-analysis.html#cb208-24" tabindex="-1"></a>}</span></code></pre></div>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-72" class="exercise"><strong>Exercise B.6  </strong></span>Use the function <code>biased_coin</code> above to allocate patients to the two groups. Produce the demographic table and calculate the imbalance. Try this for some different values of <code>p</code>.</p>
+<p><span id="exr:unlabeled-div-71" class="exercise"><strong>Exercise B.6  </strong></span>Use the function <code>biased_coin</code> above to allocate patients to the two groups. Produce the demographic table and calculate the imbalance. Try this for some different values of <code>p</code>.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-73" class="solution"><em>Solution</em>. </span>To create a biased coin design with <span class="math inline">\(p=0.9\)</span> (for example), we enter</p>
+<p><span id="unlabeled-div-72" class="solution"><em>Solution</em>. </span>To create a biased coin design with <span class="math inline">\(p=0.9\)</span> (for example), we enter</p>
 <div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="computer-practical-2---allocation-analysis.html#cb209-1" tabindex="-1"></a>lg_bc1 <span class="ot">=</span> <span class="fu">biased_coin</span>(</span>
 <span id="cb209-2"><a href="computer-practical-2---allocation-analysis.html#cb209-2" tabindex="-1"></a>  <span class="at">data=</span>lg_df[,<span class="sc">-</span><span class="dv">8</span>],</span>
 <span id="cb209-3"><a href="computer-practical-2---allocation-analysis.html#cb209-3" tabindex="-1"></a>  <span class="at">p=</span><span class="fl">0.9</span></span>
@@ -1734,11 +1734,11 @@ Click for solution
 <li><span class="math inline">\(s\)</span> is the number of balls added per treatment after each allocation</li>
 </ul>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-74" class="exercise"><strong>Exercise B.7  </strong></span>Look at the help file for <code>udPar</code>. Which arguments correspond to <span class="math inline">\(r\)</span> and <span class="math inline">\(s\)</span> (as we called them in Section <a href="alloc.html#bcurn">3.2.3</a>?</p>
+<p><span id="exr:unlabeled-div-73" class="exercise"><strong>Exercise B.7  </strong></span>Look at the help file for <code>udPar</code>. Which arguments correspond to <span class="math inline">\(r\)</span> and <span class="math inline">\(s\)</span> (as we called them in Section <a href="alloc.html#bcurn">3.2.3</a>?</p>
 </div>
 <p>The function <code>udPar</code> creates a model object, storing the parameters for the particular Urn design. To generate sequences of allocations, we use the function <code>genSeq</code></p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-75" class="exercise"><strong>Exercise B.8  </strong></span>Create an urn design object using <code>udPar</code> with <span class="math inline">\(r=3,\;s=1\)</span>, set to create enough allocations for the licorice gargle data.</p>
+<p><span id="exr:unlabeled-div-74" class="exercise"><strong>Exercise B.8  </strong></span>Create an urn design object using <code>udPar</code> with <span class="math inline">\(r=3,\;s=1\)</span>, set to create enough allocations for the licorice gargle data.</p>
 <p>Use the function <code>genSeq</code> to generate a sequence of allocations.</p>
 </div>
 <details>
@@ -1746,7 +1746,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-76" class="solution"><em>Solution</em>. </span></p>
+<p><span id="unlabeled-div-75" class="solution"><em>Solution</em>. </span></p>
 <div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="computer-practical-2---allocation-analysis.html#cb213-1" tabindex="-1"></a><span class="fu">library</span>(randomizeR)</span>
 <span id="cb213-2"><a href="computer-practical-2---allocation-analysis.html#cb213-2" tabindex="-1"></a>ud_31 <span class="ot">=</span> <span class="fu">udPar</span>(<span class="dv">235</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
 <span id="cb213-3"><a href="computer-practical-2---allocation-analysis.html#cb213-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
@@ -1782,14 +1782,14 @@ strata. Even by collecting levels together and so on, we are not going to get do
 <span id="cb216-6"><a href="computer-practical-2---allocation-analysis.html#cb216-6" tabindex="-1"></a>  <span class="fu">group_split</span>(preOp_gender, preOp_smoking) </span></code></pre></div>
 <p>will create a list of data frames, one for each combination of <code>preOp_gender</code> and <code>preOp_smoking</code>. In this case there are six data frames, and for example the first (accessed by <code>strat_gen_sm[[1]]</code> contains all participants with <code>preOp_gender</code>=0 and <code>preOp_smoking</code>=1. You can choose different factors to stratify by if you want to!</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-77" class="exercise"><strong>Exercise B.9  </strong></span>Split your group using the code above, choosing two factors to stratify by. How many participants are in each stratum?</p>
+<p><span id="exr:unlabeled-div-76" class="exercise"><strong>Exercise B.9  </strong></span>Split your group using the code above, choosing two factors to stratify by. How many participants are in each stratum?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-78" class="solution"><em>Solution</em>. </span>We’ll stick with the group as above. To find the numbers of participants in each group we do</p>
+<p><span id="unlabeled-div-77" class="solution"><em>Solution</em>. </span>We’ll stick with the group as above. To find the numbers of participants in each group we do</p>
 <div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="computer-practical-2---allocation-analysis.html#cb217-1" tabindex="-1"></a>group_sizes <span class="ot">=</span> <span class="fu">sapply</span>(</span>
 <span id="cb217-2"><a href="computer-practical-2---allocation-analysis.html#cb217-2" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strat_gen_sm),</span>
 <span id="cb217-3"><a href="computer-practical-2---allocation-analysis.html#cb217-3" tabindex="-1"></a>  <span class="cf">function</span>(i){</span>
@@ -1830,7 +1830,7 @@ Click for solution
 <pre><code>## [1] 20</code></pre>
 <p><strong>Note that the larger the total number of factor levels, the larger the marginal imbalance will be, so if you’re comparing between methods, make sure you’re including all the same factors!</strong></p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-79" class="exercise"><strong>Exercise B.10  </strong></span>Choose a couple of methods from Section <a href="computer-practical-2---allocation-analysis.html#allocmethods">B.1.2</a>, and use them with your stratified dataset.
+<p><span id="exr:unlabeled-div-78" class="exercise"><strong>Exercise B.10  </strong></span>Choose a couple of methods from Section <a href="computer-practical-2---allocation-analysis.html#allocmethods">B.1.2</a>, and use them with your stratified dataset.
 Use the <code>marg_imbalance</code> function to find the marginal imbalance. Try this for just the factors you stratified by, and for other collections of factors. What do you expect to see?</p>
 </div>
 <details>
@@ -1838,7 +1838,7 @@ Use the <code>marg_imbalance</code> function to find the marginal imbalance. Try
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-80" class="solution"><em>Solution</em>. </span>The code for this will vary, but the basic idea is to work through the individual data sets individually, and apply the functions from Section <a href="computer-practical-2---allocation-analysis.html#allocmethods">B.1.2</a>. One way to do this is by creating a for loop. The code below shows how this would work for simple random sampling, but you can change the function to use whichever method you prefer.</p>
+<p><span id="unlabeled-div-79" class="solution"><em>Solution</em>. </span>The code for this will vary, but the basic idea is to work through the individual data sets individually, and apply the functions from Section <a href="computer-practical-2---allocation-analysis.html#allocmethods">B.1.2</a>. One way to do this is by creating a for loop. The code below shows how this would work for simple random sampling, but you can change the function to use whichever method you prefer.</p>
 <div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="computer-practical-2---allocation-analysis.html#cb222-1" tabindex="-1"></a><span class="co"># This command creates an empty list, which we will fill with allocation data frames as we go through</span></span>
 <span id="cb222-2"><a href="computer-practical-2---allocation-analysis.html#cb222-2" tabindex="-1"></a>alloc_list <span class="ot">=</span> <span class="fu">list</span>()</span>
 <span id="cb222-3"><a href="computer-practical-2---allocation-analysis.html#cb222-3" tabindex="-1"></a><span class="co"># The loop works through the stratified data frames, applies SRS to allocate patients</span></span>
@@ -1944,14 +1944,14 @@ Click for solution
 <span id="cb226-3"><a href="computer-practical-2---allocation-analysis.html#cb226-3" tabindex="-1"></a><span class="at">ratio =</span> ratio, <span class="at">ntrt =</span> ntrt, <span class="at">trtseq =</span> trtseq, <span class="at">method =</span> <span class="st">&quot;Range&quot;</span>)</span></code></pre></div>
 <pre><code>## [1] 2.125</code></pre>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-81" class="exercise"><strong>Exercise B.11  </strong></span>Adapt the code above to apply the minimisation algorithm to the licorice gargle data. Investigate how balanced the data set is.</p>
+<p><span id="exr:unlabeled-div-80" class="exercise"><strong>Exercise B.11  </strong></span>Adapt the code above to apply the minimisation algorithm to the licorice gargle data. Investigate how balanced the data set is.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-82" class="solution"><em>Solution</em>. </span>Notice in the code above that we only need to start about half way down if we already have a dataset (which we do).</p>
+<p><span id="unlabeled-div-81" class="solution"><em>Solution</em>. </span>Notice in the code above that we only need to start about half way down if we already have a dataset (which we do).</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="computer-practical-2---allocation-analysis.html#cb228-1" tabindex="-1"></a>nsample <span class="ot">=</span> <span class="fu">nrow</span>(lg_df)</span>
 <span id="cb228-2"><a href="computer-practical-2---allocation-analysis.html#cb228-2" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsample)</span>
 <span id="cb228-3"><a href="computer-practical-2---allocation-analysis.html#cb228-3" tabindex="-1"></a>res[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)) </span>
@@ -1979,7 +1979,7 @@ Click for solution
 <h3><span class="header-section-number">B.2.1</span> Polyps data<a href="computer-practical-2---allocation-analysis.html#polyps-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The dataset we’ll use concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in <span class="citation">Giardiello et al. (<a href="#ref-giardiello1993treatment">1993</a>)</span>.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-83" class="exercise"><strong>Exercise B.12  </strong></span>First of all let’s explore the dataset:</p>
+<p><span id="exr:unlabeled-div-82" class="exercise"><strong>Exercise B.12  </strong></span>First of all let’s explore the dataset:</p>
 <ul>
 <li>Look at the help file for <code>polyps</code></li>
 <li>Which columns should you use for baseline and outcome variables?</li>
@@ -1991,16 +1991,16 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-84" class="solution"><em>Solution</em>. </span>First of all, to access the data, enter</p>
+<p><span id="unlabeled-div-83" class="solution"><em>Solution</em>. </span>First of all, to access the data, enter</p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="computer-practical-2---allocation-analysis.html#cb229-1" tabindex="-1"></a><span class="fu">data</span>(polyps, <span class="at">package =</span> <span class="st">&quot;medicaldata&quot;</span>)</span></code></pre></div>
 <p>You can then view the help file by entering <code>?polyps</code>.</p>
 <p>To investigate the columns in <code>polyps</code> we can use the structure function <code>str(polyps)</code></p>
 <p>We have the baseline number of polyps for each patient in the column <code>baseline</code>, and a sensible column to use for the outcome would be <code>number12m</code>. Other baseline variables are <code>sex</code> and <code>age</code>.</p>
 <p>To plot the baseline and outcome variables we can do</p>
 <div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="computer-practical-2---allocation-analysis.html#cb230-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>baseline)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-804-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="computer-practical-2---allocation-analysis.html#cb231-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>number12m)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-804-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-156-2.png" width="672" /></p>
 <p>These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you’d prefer to use natural logs that’s fine, some of your numbers will be different.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="computer-practical-2---allocation-analysis.html#cb232-1" tabindex="-1"></a>polyps<span class="sc">$</span>log_baseline <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>baseline)</span>
 <span id="cb232-2"><a href="computer-practical-2---allocation-analysis.html#cb232-2" tabindex="-1"></a>polyps<span class="sc">$</span>log_number12m <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>number12m)</span></code></pre></div>
@@ -2010,14 +2010,14 @@ Click for solution
 </details>
 <p>We will work through the tests as we did in lectures, to see how the results differ.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-85" class="exercise"><strong>Exercise B.13  </strong></span>Using just the outcome variable (which should be <code>log_number12m</code> or something similar, see solution above if you aren’t sure why), test the hypothesis that the Sulindac has had some effect.</p>
+<p><span id="exr:unlabeled-div-84" class="exercise"><strong>Exercise B.13  </strong></span>Using just the outcome variable (which should be <code>log_number12m</code> or something similar, see solution above if you aren’t sure why), test the hypothesis that the Sulindac has had some effect.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-86" class="solution"><em>Solution</em>. </span>We can either do this the long way or the short way! For sanity’s purposes, we’ll do it the long way once, then in subsequent questions I’ll only show the short way in the solutions.</p>
+<p><span id="unlabeled-div-85" class="solution"><em>Solution</em>. </span>We can either do this the long way or the short way! For sanity’s purposes, we’ll do it the long way once, then in subsequent questions I’ll only show the short way in the solutions.</p>
 <p><strong>The long way</strong></p>
 <p>The first thing to do is to calculate means for each group:</p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="computer-practical-2---allocation-analysis.html#cb233-1" tabindex="-1"></a>polyps_df <span class="ot">=</span> <span class="fu">na.omit</span>(polyps) <span class="co"># two participants (001 and 018) don&#39;t have data for 12m, so remove these</span></span>
@@ -2068,21 +2068,21 @@ That is, the number of polyps at 12 months for someone in group <span class="mat
 </details>
 <p>We’ll now move on to comparing the differences between baseline and outcome</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-87" class="exercise"><strong>Exercise B.14  </strong></span>Perform another <span class="math inline">\(t\)</span>-test, this time using the difference between outcome and baseline. <em>Hint: because we’ve taken logs, you’ll have to think about what variable to use and perhaps experiment with some possibilities</em></p>
+<p><span id="exr:unlabeled-div-86" class="exercise"><strong>Exercise B.14  </strong></span>Perform another <span class="math inline">\(t\)</span>-test, this time using the difference between outcome and baseline. <em>Hint: because we’ve taken logs, you’ll have to think about what variable to use and perhaps experiment with some possibilities</em></p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-88" class="solution"><em>Solution</em>. </span>The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences</p>
+<p><span id="unlabeled-div-87" class="solution"><em>Solution</em>. </span>The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences</p>
 <div class="sourceCode" id="cb241"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb241-1"><a href="computer-practical-2---allocation-analysis.html#cb241-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff <span class="ot">=</span> polyps_df<span class="sc">$</span>number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>baseline</span>
 <span id="cb241-2"><a href="computer-practical-2---allocation-analysis.html#cb241-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-811-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-163-1.png" width="672" /></p>
 <p>But the outliers look potentially problematic, and the central bulk of each distribution doesn’t look very normal. We could also try the difference of the logged measurements:</p>
 <div class="sourceCode" id="cb242"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb242-1"><a href="computer-practical-2---allocation-analysis.html#cb242-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff_log <span class="ot">=</span> polyps_df<span class="sc">$</span>log_number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>log_baseline</span>
 <span id="cb242-2"><a href="computer-practical-2---allocation-analysis.html#cb242-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff_log, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-812-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-164-1.png" width="672" /></p>
 <p>This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won’t have a nice normal curve.</p>
 <p>To do a t-test, we can use R’s in-built function</p>
 <div class="sourceCode" id="cb243"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb243-1"><a href="computer-practical-2---allocation-analysis.html#cb243-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
@@ -2107,14 +2107,14 @@ Click for solution
 </details>
 <p>Finally we can try fitting an ANCOVA model to the data, using the function <code>lm</code>.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-89" class="exercise"><strong>Exercise B.15  </strong></span>Fit an ANCOVA model to the licorice data, and interpret your results. If you aren’t familiar with the function <code>lm</code>, it might be a good idea to look at the solutions.</p>
+<p><span id="exr:unlabeled-div-88" class="exercise"><strong>Exercise B.15  </strong></span>Fit an ANCOVA model to the licorice data, and interpret your results. If you aren’t familiar with the function <code>lm</code>, it might be a good idea to look at the solutions.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-90" class="solution"><em>Solution</em>. </span>In the ANCOVA model we saw in lectures so far, we fit a linear model with the outcome as dependent / target variable, and the trial group and baseline as independent / explanatory variables.</p>
+<p><span id="unlabeled-div-89" class="solution"><em>Solution</em>. </span>In the ANCOVA model we saw in lectures so far, we fit a linear model with the outcome as dependent / target variable, and the trial group and baseline as independent / explanatory variables.</p>
 <div class="sourceCode" id="cb245"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb245-1"><a href="computer-practical-2---allocation-analysis.html#cb245-1" tabindex="-1"></a>lm_polyp1 <span class="ot">=</span> <span class="fu">lm</span>(log_number12m <span class="sc">~</span> treatment <span class="sc">+</span> log_baseline, <span class="at">data=</span>polyps_df)</span>
 <span id="cb245-2"><a href="computer-practical-2---allocation-analysis.html#cb245-2" tabindex="-1"></a><span class="fu">summary</span>(lm_polyp1)</span></code></pre></div>
 <pre><code>## 
@@ -2629,14 +2629,14 @@ Click for solution
 </details>
 <p>Unlike in the <span class="math inline">\(t\)</span>-test where we can only compare measurements like-for-like, in ANCOVA we fit a coefficient to the baseline covariate. This means we are no longer limited to comparing the outcome variable to variables on the same scale, but can also include other baseline variables.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-91" class="exercise"><strong>Exercise B.16  </strong></span>Fit another linear model, this time including the other baseline variables.</p>
+<p><span id="exr:unlabeled-div-90" class="exercise"><strong>Exercise B.16  </strong></span>Fit another linear model, this time including the other baseline variables.</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-92" class="solution"><em>Solution</em>. </span></p>
+<p><span id="unlabeled-div-91" class="solution"><em>Solution</em>. </span></p>
 <div class="sourceCode" id="cb249"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb249-1"><a href="computer-practical-2---allocation-analysis.html#cb249-1" tabindex="-1"></a>lm_polyp2 <span class="ot">=</span> <span class="fu">lm</span>(log_number12m <span class="sc">~</span> treatment <span class="sc">+</span> log_baseline <span class="sc">+</span> sex <span class="sc">+</span> age, <span class="at">data =</span> polyps_df)</span>
 <span id="cb249-2"><a href="computer-practical-2---allocation-analysis.html#cb249-2" tabindex="-1"></a><span class="fu">summary</span>(lm_polyp2)</span></code></pre></div>
 <pre><code>## 
@@ -2665,23 +2665,23 @@ Click for solution
 </div>
 </details>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-93" class="exercise"><strong>Exercise B.17  </strong></span>Inspect some plots of the residuals, to check whether these models have any systematic problems. Does there appear to be any multicollinearity in the data?</p>
+<p><span id="exr:unlabeled-div-92" class="exercise"><strong>Exercise B.17  </strong></span>Inspect some plots of the residuals, to check whether these models have any systematic problems. Does there appear to be any multicollinearity in the data?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-94" class="solution"><em>Solution</em>. </span>These solutions will demonstrate some methods with the first model.
+<p><span id="unlabeled-div-93" class="solution"><em>Solution</em>. </span>These solutions will demonstrate some methods with the first model.
 First of all, we can add columns with the residuals and fitted values from the model.</p>
 <div class="sourceCode" id="cb251"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb251-1"><a href="computer-practical-2---allocation-analysis.html#cb251-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>resid1 <span class="ot">=</span> <span class="fu">resid</span>(lm_polyp1)</span>
 <span id="cb251-2"><a href="computer-practical-2---allocation-analysis.html#cb251-2" tabindex="-1"></a>polyps_df<span class="sc">$</span>fitted1 <span class="ot">=</span> <span class="fu">fitted</span>(lm_polyp1)</span>
 <span id="cb251-3"><a href="computer-practical-2---allocation-analysis.html#cb251-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>fitted1, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-818-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
 <div class="sourceCode" id="cb252"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb252-1"><a href="computer-practical-2---allocation-analysis.html#cb252-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>log_baseline, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-818-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-170-2.png" width="672" /></p>
 <div class="sourceCode" id="cb253"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb253-1"><a href="computer-practical-2---allocation-analysis.html#cb253-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>resid1, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-818-3.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-170-3.png" width="672" /></p>
 <p>None of these ring huge alarm bells, but because the dataset is so small it’s quite hard to tell! Arguably the residuals for the <code>sulindac</code> group are more spread out than those for the plaecbo, but there are no obvious systematic trends.</p>
 <p>We can find the variance inflation factor by</p>
 <div class="sourceCode" id="cb254"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb254-1"><a href="computer-practical-2---allocation-analysis.html#cb254-1" tabindex="-1"></a><span class="fu">vif</span>(lm_polyp1)</span></code></pre></div>
@@ -2711,7 +2711,7 @@ First of all, we can add columns with the residuals and fitted values from the m
 <li><p>Plot (or otherwise summarise) the vector of summaries.</p></li>
 </ol>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-95" class="exercise"><strong>Exercise B.18  </strong></span>Perform the simulation experiment for some of the methods above. Make sure you store the summary vectors by different (and intelligible!) names.</p>
+<p><span id="exr:unlabeled-div-94" class="exercise"><strong>Exercise B.18  </strong></span>Perform the simulation experiment for some of the methods above. Make sure you store the summary vectors by different (and intelligible!) names.</p>
 <p>Based on your results, comment on how plausible it is that <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span> used each method in their trial.</p>
 <p><em>Hint: think of the simulated summaries as approximations of probability distributions</em></p>
 </div>
@@ -2730,16 +2730,16 @@ First of all, we can add columns with the residuals and fitted values from the m
 <p>The study’s primary outcome variable is gestational age at end of pregnancy, but birth weight was also measured, as well as some clinical measures of periodontal disease and some microbiological and immunological outcomes.</p>
 <p>To make this more managable, we will concentrate on the outcome <code>Birthweight</code>.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-96" class="exercise"><strong>Exercise B.19  </strong></span>Plot the variable <code>Birthweight</code>. Do we need to use any transformations before we model it?</p>
+<p><span id="exr:unlabeled-div-95" class="exercise"><strong>Exercise B.19  </strong></span>Plot the variable <code>Birthweight</code>. Do we need to use any transformations before we model it?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-97" class="solution"><em>Solution</em>. </span></p>
+<p><span id="unlabeled-div-96" class="solution"><em>Solution</em>. </span></p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="computer-practical-2---allocation-analysis.html#cb256-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt, <span class="fu">aes</span>(<span class="at">x=</span>Birthweight, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-820-1.png" width="672" />
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-172-1.png" width="672" />
 This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won’t transform it.</p>
 </div>
 </details>
@@ -2776,14 +2776,14 @@ This data looks very nice and normal (although there is a bit of a fat tail to t
 <span id="cb257-28"><a href="computer-practical-2---allocation-analysis.html#cb257-28" tabindex="-1"></a>opt_red<span class="sc">$</span>N.prev.preg <span class="ot">=</span> npp</span></code></pre></div>
 <p>When we use <code>lm</code> to fit an ANCOVA model, all rows with an <code>NA</code> in will be ignored. It’s therefore important to try to eradicate any <code>NA</code>s where we actually do know the value!</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-98" class="exercise"><strong>Exercise B.20  </strong></span>Perform a <span class="math inline">\(t\)</span>-test on the outcome <code>Birthweight</code>. What do you find? Can you also perform a <span class="math inline">\(t\)</span>-test using difference from baseline?</p>
+<p><span id="exr:unlabeled-div-97" class="exercise"><strong>Exercise B.20  </strong></span>Perform a <span class="math inline">\(t\)</span>-test on the outcome <code>Birthweight</code>. What do you find? Can you also perform a <span class="math inline">\(t\)</span>-test using difference from baseline?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-99" class="solution"><em>Solution</em>. </span>To perform the <span class="math inline">\(t\)</span>-test we can use the inbuilt R function</p>
+<p><span id="unlabeled-div-98" class="solution"><em>Solution</em>. </span>To perform the <span class="math inline">\(t\)</span>-test we can use the inbuilt R function</p>
 <div class="sourceCode" id="cb258"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb258-1"><a href="computer-practical-2---allocation-analysis.html#cb258-1" tabindex="-1"></a><span class="co"># Check SDs are fairly close before proceeding</span></span>
 <span id="cb258-2"><a href="computer-practical-2---allocation-analysis.html#cb258-2" tabindex="-1"></a><span class="fu">sd</span>(opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;T&quot;</span>], <span class="at">na.rm=</span>T)</span></code></pre></div>
 <pre><code>## [1] 636.82</code></pre>
@@ -2813,7 +2813,7 @@ Click for solution
 </details>
 <p>Now we will move on to ANCOVA.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-100" class="exercise"><strong>Exercise B.21  </strong></span>Before fitting the model, think about what you expect to find. Bear in mind:</p>
+<p><span id="exr:unlabeled-div-99" class="exercise"><strong>Exercise B.21  </strong></span>Before fitting the model, think about what you expect to find. Bear in mind:</p>
 <ul>
 <li>the result above</li>
 <li>the description of risk factors of preterm birth / low birth weight in the help file for <code>opt</code></li>
@@ -2825,7 +2825,7 @@ Click for solution
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-101" class="solution"><em>Solution</em>. </span>The <span class="math inline">\(p\)</span>-value from the <span class="math inline">\(t\)</span>-test was very high, so it seems unlikely that we’ll find a significant treatment effect using ANCOVA unless there are some significant interactions going on between covariates.</p>
+<p><span id="unlabeled-div-100" class="solution"><em>Solution</em>. </span>The <span class="math inline">\(p\)</span>-value from the <span class="math inline">\(t\)</span>-test was very high, so it seems unlikely that we’ll find a significant treatment effect using ANCOVA unless there are some significant interactions going on between covariates.</p>
 <p>The help file says (under ‘Background’):</p>
 <blockquote>
 <p>Many risk factors for preterm birth have already been identified, including maternal age, drug use, and diabetes. However, such factors are exhibited in only about half of preterm birth mothers, highlighting a need to expand our understanding of what contributes to preterm birth risk.</p>
@@ -2834,14 +2834,14 @@ Click for solution
 </div>
 </details>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-102" class="exercise"><strong>Exercise B.22  </strong></span>Fit an ANCOVA model. What do you find?</p>
+<p><span id="exr:unlabeled-div-101" class="exercise"><strong>Exercise B.22  </strong></span>Fit an ANCOVA model. What do you find?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-103" class="solution"><em>Solution</em>. </span>To fit a linear model including every variable as a covariate (apart from the target variable), we can do</p>
+<p><span id="unlabeled-div-102" class="solution"><em>Solution</em>. </span>To fit a linear model including every variable as a covariate (apart from the target variable), we can do</p>
 <div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="computer-practical-2---allocation-analysis.html#cb264-1" tabindex="-1"></a>lm_full <span class="ot">=</span> <span class="fu">lm</span>(Birthweight <span class="sc">~</span> ., <span class="at">data =</span> opt_red[ ,<span class="sc">-</span><span class="dv">1</span>]) <span class="co"># don&#39;t include the ID column!</span></span>
 <span id="cb264-2"><a href="computer-practical-2---allocation-analysis.html#cb264-2" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span></code></pre></div>
 <pre><code>## 
@@ -2896,14 +2896,14 @@ Click for solution
 </div>
 </details>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-104" class="exercise"><strong>Exercise B.23  </strong></span>Perform some diagnostic checks on your model. Do you have any reason to suspect it isn’t adequate?</p>
+<p><span id="exr:unlabeled-div-103" class="exercise"><strong>Exercise B.23  </strong></span>Perform some diagnostic checks on your model. Do you have any reason to suspect it isn’t adequate?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-105" class="solution"><em>Solution</em>. </span>One thing to notice from the linear model summary is that many coefficients have proportionally quite large standard errors. This could be because of a lack of data (eg. if there are very few participants in some category) or because of multicollinearity (in which case the model cannot know which of the linked variables to attribute the effect to). Combining some categories or carefully removing some covariates could help improve the model.</p>
+<p><span id="unlabeled-div-104" class="solution"><em>Solution</em>. </span>One thing to notice from the linear model summary is that many coefficients have proportionally quite large standard errors. This could be because of a lack of data (eg. if there are very few participants in some category) or because of multicollinearity (in which case the model cannot know which of the linked variables to attribute the effect to). Combining some categories or carefully removing some covariates could help improve the model.</p>
 <p>We can also study the residuals of our model, to check that they appear to be homoskedastic and approximately normal with mean 0.</p>
 <p>The first step is to extract the residuals and the fitted values (which are also useful). We will create a new data frame called <code>opt_diag</code> with these in, so that we can plot things easily but don’t pollute our original dataset (in case we want to fit any more models)</p>
 <div class="sourceCode" id="cb267"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb267-1"><a href="computer-practical-2---allocation-analysis.html#cb267-1" tabindex="-1"></a>opt_diag <span class="ot">=</span> <span class="fu">na.omit</span>(opt_red) <span class="co"># lm only fits where all variables are present</span></span>
@@ -2911,20 +2911,20 @@ Click for solution
 <span id="cb267-3"><a href="computer-practical-2---allocation-analysis.html#cb267-3" tabindex="-1"></a>opt_diag<span class="sc">$</span>fitted <span class="ot">=</span> <span class="fu">fitted</span>(lm_full)</span></code></pre></div>
 <p>Some examples of plots are</p>
 <div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="computer-practical-2---allocation-analysis.html#cb268-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>resid, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-826-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-178-1.png" width="672" /></p>
 <div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="computer-practical-2---allocation-analysis.html#cb269-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>fitted, <span class="at">y=</span>resid, <span class="at">col=</span>Group)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-826-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-178-2.png" width="672" /></p>
 </div>
 </details>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-106" class="exercise"><strong>Exercise B.24  </strong></span>Given the results of your ANCOVA model, what do you think the risks would be if the study had been much smaller, or if the allocation had not been well-balanced?</p>
+<p><span id="exr:unlabeled-div-105" class="exercise"><strong>Exercise B.24  </strong></span>Given the results of your ANCOVA model, what do you think the risks would be if the study had been much smaller, or if the allocation had not been well-balanced?</p>
 </div>
 <details>
 <summary>
 Click for solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-107" class="solution"><em>Solution</em>. </span>In this case, it would be possible for the baseline factors that did turn out to be significant to make it appear that the treatment had a significant effect. This wouldn’t be possible with ANCOVA, but it would with a <span class="math inline">\(t\)</span>-test in which the other covariates aren’t considered.</p>
+<p><span id="unlabeled-div-106" class="solution"><em>Solution</em>. </span>In this case, it would be possible for the baseline factors that did turn out to be significant to make it appear that the treatment had a significant effect. This wouldn’t be possible with ANCOVA, but it would with a <span class="math inline">\(t\)</span>-test in which the other covariates aren’t considered.</p>
 </div>
 </details>
 

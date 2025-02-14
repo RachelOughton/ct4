@@ -33,22 +33,22 @@ install.packages(c("ggplot2", "dplyr", "HSAUR", "HSAUR3", "pROC", "survival", "g
 
 
 
-## Sample size by simulation {#cp2sim}
-
 A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required. We can estimate the power by the proportion of simulated trials in which the null hypothesis was rejected. 
 
 Because the code necessarily works by fixing the number of participants and investigating the effect on the power of the trial, this is often referred to as *power-calculation*, but it is the same sample size issue, approached from a different angle. @arnold2011simulation gives a thorough, readable and interesting case study of the use of power simulation in a cluster randomised trial investigating different sanitation-related interventions in rural communities in Bangladesh.
 
-The simulation approach has the following advantages over the formula-based methods presented in Section \@ref(rct-plan):
+The simulation approach has the following advantages over the formula-based methods presented in Sections \@ref(rct-plan) and \@ref(ss-bin):
 
   1. **Transparency**: If the data generating mechanism is made clear, then the assumptions behind the trial are also clear, and the simulation can be replicated by anyone. Reproducibility is a big issue in clinical trials.
-  2. **Flexibility**: Whereas the methods in Section \@ref(rct-plan) are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials. We can also explore the implications of the decisions we'll have to make, such as how the allocation is made.
-  3. **Practice**: This process requires us to perform our planned analysis at the planning stage, thus raising any potential issues early enough to adapt the statistical analysis plan.
+  2. **Flexibility**: Whereas the methods in Sections \@ref(rct-plan) and \@ref(ss-bin) are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials. We can also explore the implications of the decisions we'll have to make, such as how the allocation is made.
+  3. **Practice**: This process requires us to perform our planned analysis at the planning stage (albeit likely in a simplified form), thus raising any potential issues early enough to adapt the statistical analysis plan.
   
 Arguably the first and third advantages could also be true (though aren't automatically) of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.
 
+For most of this practical we will focus on continuous outcome variables, but the method can be applied to binary, survival or other kinds of data.
 
-### Power simulation for a t-test
+
+## Power simulation for a t-test
 
 **Note: really we should be using more than 100 simulations, but so that the code runs in a sensible amount of time I've reduced the number. Feel free to increase it if you want to, but you'll have to wait a little while for it to run.**
 
@@ -75,7 +75,7 @@ Therefore, to simulate data from a trial like this, we need to specify values fo
 
 The steps for each simulation will be 
 
-  1. Simulate trial data using the distribution in Equation \@ref(eq:simdist)
+  1. Simulate trial data using the distribution in Equation \@ref(eq:simdist), for example using the function `rnorm`
   2. Conduct an un-paired, two-tailed $t$-test on the data
   3. Note whether $H_0:\;\tau_M=0$ is rejected
   
@@ -88,6 +88,8 @@ By generating data for group $C$ and group $T$ according to the distributions in
 
   * How consistent are your results with the method we derived in Chapter \@ref(rct-plan)? 
   * What issues does this raise around choosing a sample size?
+
+*If coding this up feels well outside your comfort zone, it's fine to look at the solutions to see how I've done it - if it isn't clear, please ask! Then you can try to adapt this approach in the future exercises*
 :::
 
 <details> <summary> Click to reveal solution </summary>
@@ -147,7 +149,7 @@ for (i in 1:100){
 ggplot(mapping = aes(sim_vec2)) + geom_histogram(bins=10)
 ```
 
-It is reasonable however, to choose a number such that we are more than 50% confident of our study having the power we require. We may for example choose $N$ so that the estimated power is at least 0.9 in some high proportion (say 90%) of the simulations.
+It is sensible to choose a number such that we are sufficiently confident of our study having the power we require. We may for example choose $N$ so that the estimated power is at least 0.9 in some high proportion (say 90%) of the simulations.
 :::
 
 </details>
@@ -202,7 +204,7 @@ ttest_sim2(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
 ```
 
 
-```{r sim2n, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD in group T."}
+```{r sim2n, echo=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD in group T."}
 sim_vec3 = rep(NA, 100)
 for (i in 1:100){
   sim_vec3[i] = ttest_sim2(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
@@ -212,7 +214,7 @@ ggplot(mapping = aes(sim_vec3)) + geom_histogram(bins=10)
 
 By contrast, if the outcome variance is lower (this is much less likely) then the power will be higher than calculated:
 
-```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T"}
+```{r, echo=T, fig.cap = "Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T"}
 sim_vec4 = rep(NA, 100)
 for (i in 1:100){
   sim_vec4[i] = ttest_sim2(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=6)
@@ -294,7 +296,7 @@ ttest_sim_srs(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
 
 To see the distribution for many simulations, we can do
 
-```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation."}
+```{r, echo=T, fig.cap = "Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation."}
 sim_vec5 = rep(NA, 100)
 for (i in 1:100){
   sim_vec5[i] = ttest_sim_srs(nsim=100, N=155, mu=5, tm=3, sdC=8, sdT=10)
@@ -310,9 +312,9 @@ If $N$ is smaller, the variance in the power estimates will be higher, because t
 
 </details>
 
-### Power simulation for ANCOVA
+## Power simulation for ANCOVA
 
-Thinking of a somewhat more complex model, we might want to perform a power simulation for an ANCOVA model.
+In our analysis section we learned that the ANCOVA model is much more efficient and flexible than a t-test, so now we'll simulate our data with that analysis method in mind.
 
 We'll write our data-generating model for the outcome $X_i$ as 
 
@@ -403,7 +405,7 @@ ancova_sim_srs = function(
 ```
 
 
-```{r, echo=T, cache=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis."}
+```{r, echo=T, fig.cap = "Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis."}
 sim_vec6 = rep(NA, 100)
 for (i in 1:100){
   sim_vec6[i] = ancova_sim_srs(nsim=100, N=90, mu_B=50, mu=60, 
@@ -411,6 +413,85 @@ for (i in 1:100){
 }
 ggplot(mapping = aes(sim_vec6)) + geom_histogram(bins=10)
 ```
+
+The power is much higher than for our t-test simulation with $N=100$. This is because the variance of the treatment effect estimate is lower for ANCOVA for the t-test (by a factor of $1-\rho^2$), as we saw in Section \@ref(ancova-var).
+
+:::
+
+</details>
+
+## Branching out into other types of data
+
+If you've found the above fairly simple, this will be a good exercise to stretch your muscles. If not, then please still give it some thought, but feel free to look at the solution to see the method applied to another approach.
+
+Before starting, look at the steps to the simulation method and consider what you've to do to complete the exercise.
+
+:::{.exercise}
+Use this sample size simulation method to find the appropriate size for a trial with a binary variable. You can assume that the proportion of 'successes' in the control group is 0.65, and that the least clinically significant proportion we'd like to be able to detect is a treatment group proportion of 0.8. The trial should have a significance level of $\alpha=0.05$ and a power of $1-\beta = 0.8$.
+
+For this exercise, use the very simplest binomial analysis method we've covered, as in Example \@ref(exm:ex-bin1)
+:::
+
+<details> <summary> Click for solution </summary>
+
+:::{.solution}
+
+The first thing we need to do is to simulate our data, for which we can use the function `rbinom`.
+
+```{r, echo=T}
+binom_sim = function(
+  nsim,    # Number of simulations
+  N,       # Number of participants in each arm
+  piC,     # Assumed proportion in control group
+  piT      # minimum detectably different proportion in treatment group
+){
+  H0_reject_vec = rep(NA, nsim) # to store 1 if H0 rejected, 0 if fail to reject H0
+  for (i in 1:nsim){
+    rC = rbinom(n=1, size=N, prob=piC) # generate numbers of successes
+    rT = rbinom(n=1, size=N, prob=piT)
+    
+    pC = rC/N # Find estimates of proportions
+    pT = rT/N
+    p_pooled = (rC+rT)/(2*N)
+    
+    z_stat = (pT - pC) / (sqrt(p_pooled*(1-p_pooled)*(1/N + 1/N)))
+    
+    p_val = 2*(1-pnorm(z_stat, mean=0, sd=1))
+    
+    H0_reject_vec[i] = ifelse(p_val<0.05, 1, 0)
+  }
+  
+  power.est = mean(H0_reject_vec)
+  power.est
+}
+```
+
+Let's now try this for $N=100$, as a base point
+
+```{r, echo=T}
+sim_vec7 = rep(NA, 100)
+for (i in 1:100){
+  sim_vec7[i] = binom_sim(nsim=100, N=100, piC=0.65, piT=0.8)
+}
+ggplot(mapping = aes(sim_vec7)) + geom_histogram(bins=10)
+
+```
+
+This is clearly too low so we can try a higher number - let's say $N=150$
+
+
+
+```{r, echo=T}
+sim_vec8 = rep(NA, 100)
+for (i in 1:100){
+  sim_vec8[i] = binom_sim(nsim=100, N=150, piC=0.65, piT=0.8)
+}
+ggplot(mapping = aes(sim_vec8)) + geom_histogram(bins=10)
+```
+
+This appears to be much closer - one could now finesse $N$ to fit some criteria on the proportion of simulations achieving the desired power.
+
+
 
 :::
 
