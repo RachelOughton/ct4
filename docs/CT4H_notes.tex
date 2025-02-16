@@ -128,7 +128,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2025-02-14}
+\date{2025-02-16}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2725,7 +2725,6 @@ In a chi-squared test, we first calculate the \textbf{expected} values \(\left(E
 Under the null hypothesis (that \(\pi_C = \pi_T\)) this has a \(\chi^2\) distribution with one degree of freedom. We see that the larger the differences between the observed and expected values, relative to the expected values, the larger the test statistic, and therefore the less probable it is under the \(\chi^2_1\) distribution.
 
 \begin{example}
-
 Applying this to our streptomycin example, we can calculate a table of expected values by observing that proportion \(p=0.514\) of the total number of patients were improved. There are 52 in the control group, therefore we expect \(0.514\times 52 = 26.73\) improved patients in the control group, and by the same logic \(0.514\times 55 = 28.27\) in the treatment group. Our expected table is therefore
 
 \begin{verbatim}
@@ -2766,20 +2765,7 @@ We can therefore calculate the \(\chi^2\) statistic by looping through the eleme
 ## [1] 0.0001664847
 \end{verbatim}
 
-and we have sufficient evidence to reject \(H_0\).
-
-In fact, these two tests are almost equivalent, and we have that \(\sqrt{X^2} = Z\):
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{sqrt}\NormalTok{(sum\_chi\_sq)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] 3.765097
-\end{verbatim}
-
+and we have sufficient evidence to reject \(H_0\) for \(\alpha=0.05\) (or indeed for many much lower values of \(\alpha\)).
 \end{example}
 
 \subsection{Likelihood: A more rigorous way}\label{likelihood-a-more-rigorous-way}
@@ -2803,7 +2789,7 @@ Gathering these terms together we can find the complete likelihood function
 \begin{aligned}
 L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) & =
   L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
-  & = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
+  & \propto \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
 \end{aligned}
 \]
 The log-likelihood is therefore
@@ -2933,7 +2919,7 @@ That is, we would expect to treat nearly three patients before one is improved (
 \[\left(\frac{1}{0.541},\; \frac{1}{0.187}\right) = \left(1.85,\; 5.33 \right).\]
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-27-1.pdf}
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-26-1.pdf}
 \end{example}
 
 \subsubsection{What if the difference is not significant?}\label{what-if-the-difference-is-not-significant}
@@ -2979,8 +2965,8 @@ The plot below shows relationship between ARD and NNT, with the intervals for ou
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-29-1.pdf}
-\caption{\label{fig:unnamed-chunk-29}The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.}
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf}
+\caption{\label{fig:unnamed-chunk-28}The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.}
 \end{figure}
 
 \citet{altman1998confidence} (\href{https://www.bmj.com/content/bmj/317/7168/1309.full.pdf}{available here}) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether you agree!
@@ -3024,7 +3010,7 @@ whereas the limits to the Wilson 95\% CI will be the roots of
 which work out to be
 
 \begin{verbatim}
-## [1] 0.0 0.1
+## [1] 0.004 0.105
 \end{verbatim}
 
 Visually, we can represent this as in Figure \ref{fig:newc1} by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows \(p_T\), the estimated proportion, the thinner dashed red lines show the Wilson 95\% CI and the dotted red lines show the standard 95\% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).
@@ -3059,11 +3045,11 @@ We can see this graphically
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-33-1.pdf}
-\caption{\label{fig:unnamed-chunk-33}As before, dashed for Wilson, dotted for standard}
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-32-1.pdf}
+\caption{\label{fig:unnamed-chunk-32}As before, dashed for Wilson, dotted for standard}
 \end{figure}
 
-Notice that the interval with the new method is now asymmetrical, which is more realistic.
+Notice that the Wilson interval is asymmetric, which is more realistic.
 
 Similarly for the control proportion \(\pi_C\), we have \(p_C = \frac{17}{52},\; n_C=52\), and our Wilson interval is
 
@@ -3081,8 +3067,8 @@ Again, we can see this graphically.
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-36-1.pdf}
-\caption{\label{fig:unnamed-chunk-36}As before, dashed for Wilson, dotted for standard}
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-35-1.pdf}
+\caption{\label{fig:unnamed-chunk-35}As before, dashed for Wilson, dotted for standard}
 \end{figure}
 
 \end{example}
@@ -3137,6 +3123,8 @@ Our \(95\%\) confidence interval is therefore
 This is skewed somewhat lower than our standard CI of \(\left(0.187,\;0.541\right).\)
 \end{example}
 
+Returning to our earlier material, we could invert this interval to find a confidence interval for the number needed to treat (NNT).
+
 \subsection{Risk Ratio (RR) and Odds ratio (OR)}\label{risk-ratio-rr-and-odds-ratio-or}
 
 The measures we have looked at so far, particularly the ARD, are quite analagous to the continuous normally distributed case. However, there are yet more commonly used measures of difference for proportions, which need to be dealt with differently, but also afford more opportunities for modelling.
@@ -3159,7 +3147,7 @@ which we say as ``1 to 4'' or 1:4. For every one time \(A\) occurs, we expect it
 
 The \textbf{odds ratio} compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).
 
-With the ARD, we knew that our confidence interval should always be in \(\left[-1,\,1\right]\), and that if we compare treatments in one direction (say \(p_T - p_C\)) we would obtain the negative of the interval for the other way (\(p_C - p_T\)). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction (\(p_T / p_C\)) will give the reciprocal of the other direction (\(p_C / p_T\)).
+With the ARD, if we compare treatments in one direction (say \(p_T - p_C\)) we would obtain the negative of the interval for the other way (\(p_C - p_T\)). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction (\(p_T / p_C\)) will give the reciprocal of the other direction (\(p_C / p_T\)).
 
 \begin{example}
 For our Streptomycin example, we estimated the ARD by
@@ -3384,35 +3372,6 @@ Note: an obvious one to include would be \texttt{gender}, but I tried it and it 
 \CommentTok{\# The age range goes from 19 to 90 }
 \CommentTok{\# \textquotesingle{}rx\textquotesingle{} is the group variable}
 
-\DocumentationTok{\#\# Checking for collinearity with factor variables}
-\DocumentationTok{\#\# We will also use the variance inflation factor}
-
-\CommentTok{\# No obvious patterns between age and site or risk and site}
-\NormalTok{indo\_rct}\SpecialCharTok{\%\textgreater{}\%}
-  \FunctionTok{group\_by}\NormalTok{(site) }\SpecialCharTok{\%\textgreater{}\%} 
-  \FunctionTok{summarise}\NormalTok{(}
-    \AttributeTok{meanage=}\FunctionTok{mean}\NormalTok{(age), }\AttributeTok{sdage=}\FunctionTok{sd}\NormalTok{(age),}
-    \AttributeTok{meanrisk =} \FunctionTok{mean}\NormalTok{(risk), }\AttributeTok{sdrisk=}\FunctionTok{sd}\NormalTok{(risk)}
-\NormalTok{    )}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{tabular}{l|r|r|r|r}
-\hline
-site & meanage & sdage & meanrisk & sdrisk\\
-\hline
-1\_UM & 47.21951 & 14.19930 & 2.064024 & 0.8881557\\
-\hline
-2\_IU & 44.44552 & 12.90537 & 2.520581 & 0.8455696\\
-\hline
-3\_UK & 45.90909 & 11.59191 & 2.227273 & 0.8961196\\
-\hline
-4\_Case & 47.33333 & 22.89833 & 1.666667 & 0.2886751\\
-\hline
-\end{tabular}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \DocumentationTok{\#\# We will try models with age and age\^{}2}
 
 \NormalTok{glm\_indo\_agelin }\OtherTok{=} \FunctionTok{glm}\NormalTok{(outcome }\SpecialCharTok{\textasciitilde{}}\NormalTok{ age }\SpecialCharTok{+}\NormalTok{ site }\SpecialCharTok{+}\NormalTok{ risk }\SpecialCharTok{+}\NormalTok{ rx, }\AttributeTok{data=}\NormalTok{indo\_rct, }
@@ -3420,7 +3379,7 @@ site & meanage & sdage & meanrisk & sdrisk\\
 \NormalTok{glm\_indo\_agesq }\OtherTok{=} \FunctionTok{glm}\NormalTok{(outcome }\SpecialCharTok{\textasciitilde{}} \FunctionTok{I}\NormalTok{(age}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}\NormalTok{ site }\SpecialCharTok{+}\NormalTok{ risk }\SpecialCharTok{+}\NormalTok{ rx, }\AttributeTok{data=}\NormalTok{indo\_rct, }
                      \AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{))}
 
-\FunctionTok{summary}\NormalTok{(glm\_indo\_agelin)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(glm\_indo\_agelin), }\AttributeTok{digits=}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3431,14 +3390,14 @@ site & meanage & sdage & meanrisk & sdrisk\\
 ##     data = indo_rct)
 ## 
 ## Coefficients:
-##                    Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)       -1.786293   0.641354  -2.785  0.00535 ** 
-## age               -0.008458   0.009921  -0.853  0.39390    
-## site2_IU          -1.229290   0.269258  -4.565 4.98e-06 ***
-## site3_UK          -1.127935   0.775917  -1.454  0.14603    
-## site4_Case       -13.864394 827.921132  -0.017  0.98664    
-## risk               0.561880   0.142342   3.947 7.90e-05 ***
-## rx1_indomethacin  -0.763269   0.261538  -2.918  0.00352 ** 
+##                  Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)       -1.7863     0.6414    -2.8    0.005 ** 
+## age               -0.0085     0.0099    -0.9    0.394    
+## site2_IU          -1.2293     0.2693    -4.6    5e-06 ***
+## site3_UK          -1.1279     0.7759    -1.5    0.146    
+## site4_Case       -13.8644   827.9211     0.0    0.987    
+## risk               0.5619     0.1423     3.9    8e-05 ***
+## rx1_indomethacin  -0.7633     0.2615    -2.9    0.004 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3446,7 +3405,7 @@ site & meanage & sdage & meanrisk & sdrisk\\
 ## 
 ##     Null deviance: 468.01  on 601  degrees of freedom
 ## Residual deviance: 427.07  on 595  degrees of freedom
-## AIC: 441.07
+## AIC: 441.1
 ## 
 ## Number of Fisher Scoring iterations: 14
 \end{verbatim}
@@ -3467,7 +3426,7 @@ site & meanage & sdage & meanrisk & sdrisk\\
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(glm\_indo\_agesq)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(glm\_indo\_agesq), }\AttributeTok{digits=}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3478,14 +3437,14 @@ site & meanage & sdage & meanrisk & sdrisk\\
 ##     data = indo_rct)
 ## 
 ## Coefficients:
-##                    Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)      -1.954e+00  4.930e-01  -3.963 7.39e-05 ***
-## I(age^2)         -9.388e-05  1.081e-04  -0.869  0.38498    
-## site2_IU         -1.231e+00  2.693e-01  -4.571 4.87e-06 ***
-## site3_UK         -1.135e+00  7.759e-01  -1.463  0.14355    
-## site4_Case       -1.385e+01  8.275e+02  -0.017  0.98664    
-## risk              5.593e-01  1.427e-01   3.919 8.88e-05 ***
-## rx1_indomethacin -7.617e-01  2.614e-01  -2.914  0.00357 ** 
+##                  Estimate Std. Error z value Pr(>|z|)    
+## (Intercept)      -2.0e+00    4.9e-01    -4.0    7e-05 ***
+## I(age^2)         -9.4e-05    1.1e-04    -0.9    0.385    
+## site2_IU         -1.2e+00    2.7e-01    -4.6    5e-06 ***
+## site3_UK         -1.1e+00    7.8e-01    -1.5    0.144    
+## site4_Case       -1.4e+01    8.3e+02     0.0    0.987    
+## risk              5.6e-01    1.4e-01     3.9    9e-05 ***
+## rx1_indomethacin -7.6e-01    2.6e-01    -2.9    0.004 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3493,7 +3452,7 @@ site & meanage & sdage & meanrisk & sdrisk\\
 ## 
 ##     Null deviance: 468.01  on 601  degrees of freedom
 ## Residual deviance: 427.03  on 595  degrees of freedom
-## AIC: 441.03
+## AIC: 441
 ## 
 ## Number of Fisher Scoring iterations: 14
 \end{verbatim}
@@ -3517,7 +3476,7 @@ Since neither \texttt{age} nor \texttt{age\^{}2} appear influential, we'll remov
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{glm\_indo }\OtherTok{=} \FunctionTok{glm}\NormalTok{(outcome }\SpecialCharTok{\textasciitilde{}}\NormalTok{ site }\SpecialCharTok{+}\NormalTok{ risk }\SpecialCharTok{+}\NormalTok{ rx, }\AttributeTok{data=}\NormalTok{indo\_rct, }\AttributeTok{family =} \FunctionTok{binomial}\NormalTok{(}\AttributeTok{link =} \StringTok{"logit"}\NormalTok{))}
-\FunctionTok{summary}\NormalTok{(glm\_indo)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(glm\_indo), }\AttributeTok{digits=}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3529,12 +3488,12 @@ Since neither \texttt{age} nor \texttt{age\^{}2} appear influential, we'll remov
 ## 
 ## Coefficients:
 ##                  Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)       -2.2307     0.3814  -5.848 4.97e-09 ***
-## site2_IU          -1.2204     0.2689  -4.539 5.66e-06 ***
-## site3_UK          -1.1289     0.7755  -1.456  0.14546    
-## site4_Case       -13.8400   833.2426  -0.017  0.98675    
-## risk               0.5846     0.1395   4.191 2.78e-05 ***
-## rx1_indomethacin  -0.7523     0.2610  -2.883  0.00395 ** 
+## (Intercept)         -2.23       0.38    -5.8    5e-09 ***
+## site2_IU            -1.22       0.27    -4.5    6e-06 ***
+## site3_UK            -1.13       0.78    -1.5    0.145    
+## site4_Case         -13.84     833.24     0.0    0.987    
+## risk                 0.58       0.14     4.2    3e-05 ***
+## rx1_indomethacin    -0.75       0.26    -2.9    0.004 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3542,7 +3501,7 @@ Since neither \texttt{age} nor \texttt{age\^{}2} appear influential, we'll remov
 ## 
 ##     Null deviance: 468.01  on 601  degrees of freedom
 ## Residual deviance: 427.81  on 596  degrees of freedom
-## AIC: 439.81
+## AIC: 439.8
 ## 
 ## Number of Fisher Scoring iterations: 14
 \end{verbatim}
@@ -3560,10 +3519,20 @@ Since neither \texttt{age} nor \texttt{age\^{}2} appear influential, we'll remov
 ## rx   1.005852  1        1.002922
 \end{verbatim}
 
+Notice that
+
+\begin{itemize}
+\tightlist
+\item
+  The estimate and standard error of \(\hat{\tau}\) (the coefficient of \texttt{rx}) haven't changed much at all (mainly because, as the VIF shows us, there are no issues with multicollinearity)
+\item
+  The standard error for the site 4 cases is enormous - this is because there are so few observations.
+\end{itemize}
+
 From the summary we see that \(\hat\tau = -0.752\), with a standard error of 0.261. A 95\% CI for \(\tau\) is therefore
 
 \[-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).\]
-This model supports the hypothesis that the treatment difference isn't zero. We do see however from the Null deviance and the Residual deviance that the model isn't explaining a huge proportion of the variation.
+This model supports the hypothesis that the log of the odds ratio isn't zero, and therefore we can reject \(H_0\).
 \end{example}
 
 We can also use the model to estimate the odds of `success' (the outcome 1) for different groups of patients, by fixing the values of the covariates. The linear expression \(x^T\hat{\boldsymbol\beta}\) for given values of \(x\) gives us as estimate of
@@ -3583,7 +3552,7 @@ For this we will make use of the summary table
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{summary}\NormalTok{(glm\_indo)}
+\FunctionTok{print}\NormalTok{(}\FunctionTok{summary}\NormalTok{(glm\_indo), }\AttributeTok{digits=}\DecValTok{2}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3595,12 +3564,12 @@ For this we will make use of the summary table
 ## 
 ## Coefficients:
 ##                  Estimate Std. Error z value Pr(>|z|)    
-## (Intercept)       -2.2307     0.3814  -5.848 4.97e-09 ***
-## site2_IU          -1.2204     0.2689  -4.539 5.66e-06 ***
-## site3_UK          -1.1289     0.7755  -1.456  0.14546    
-## site4_Case       -13.8400   833.2426  -0.017  0.98675    
-## risk               0.5846     0.1395   4.191 2.78e-05 ***
-## rx1_indomethacin  -0.7523     0.2610  -2.883  0.00395 ** 
+## (Intercept)         -2.23       0.38    -5.8    5e-09 ***
+## site2_IU            -1.22       0.27    -4.5    6e-06 ***
+## site3_UK            -1.13       0.78    -1.5    0.145    
+## site4_Case         -13.84     833.24     0.0    0.987    
+## risk                 0.58       0.14     4.2    3e-05 ***
+## rx1_indomethacin    -0.75       0.26    -2.9    0.004 ** 
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
@@ -3608,7 +3577,7 @@ For this we will make use of the summary table
 ## 
 ##     Null deviance: 468.01  on 601  degrees of freedom
 ## Residual deviance: 427.81  on 596  degrees of freedom
-## AIC: 439.81
+## AIC: 439.8
 ## 
 ## Number of Fisher Scoring iterations: 14
 \end{verbatim}
@@ -3677,19 +3646,6 @@ site & risk & rx & logodds & odds & prob\\
 
 \end{example}
 
-\subsubsection*{Reminder}\label{reminder}
-\addcontentsline{toc}{subsubsection}{Reminder}
-
-As with any linear model, we need to ensure that it is appropriate for our dataset. Two key things we need to check for are:
-
-\begin{itemize}
-\tightlist
-\item
-  \textbf{Collinearity}: we should make sure that none of the independent variables are highly correlated. This is not uncommon in clinical datasets, since measurements are sometimes strongly related. Sometimes therefore, this can mean choosing only one out of a collection of two or more strongly related variables.
-\item
-  \textbf{linear effect across the range of the dataset}: a linear model is based on the assumption that the effect of the independent variables is the same across the whole range of the data. This is not always the case. For example, the rate of deterioration with age can be more at older ages. This can be dealt with either by binning age into categories, or by using a transformation, eg. age\(^2\). Note that this would still be a linear model, because it is linear in the coefficients.
-\end{itemize}
-
 \section{Diagnostics for logistic regression}\label{diaglogreg}
 
 There are many diagnostic techniques for binomial data (see eg. \citet{collett_bin}) but we will only touch on a small number. Unlike with a linear regression model, we don't have residuals to analyse, because our model output is fundamentally different from our data: our model outputs are probabilities, but our data is all either 0 or 1. Just because a particular patient had an outcome of \texttt{1}, we can't conclude that their probability should have been high. If the `true' probability of \(X=1\) for some group of similar (in the baseline covariates sense) patients is 0.9, this means we should expect 1 in 10 of these patients to have \(X=0\).
@@ -3735,9 +3691,9 @@ We estimate these by the proportions within the dataset.
 
 These are very commonly used for thinking about diagnostic tests and screening tests, and in these contexts a `success' or `positive' is almost always the presence of some condition or disease. In our context, we need to be mindful that a 1 could be good or bad, depending on the trial.
 
-The core part of a ROC analysis is to plot \textbf{sensitivity} against \textbf{1-specificity} for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the \(t=0\), the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set \(t=0\), we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a \textbf{ROC curve}.
+The core part of a ROC analysis is to plot \textbf{sensitivity} against \textbf{1-specificity} for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the \(t=0\), the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set \(t=1\), we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a \textbf{ROC curve}.
 
-The plots below shows the distributions of fitted values for patients with \(X=0\) and \(X=1\), for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.6, and so the Sensitivity and Specificity reflec that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent.
+The plots below shows the distributions of fitted values for patients with \(X=0\) and \(X=1\), for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.5, and so the Sensitivity and Specificity reflec that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent.
 
 \begin{figure}
 \centering
@@ -3783,7 +3739,7 @@ With that object we can do various things, such as plot the ROC curve:
 \begin{figure}
 \centering
 \includegraphics{CT4H_notes_files/figure-latex/indoroc1-1.pdf}
-\caption{\label{fig:indoroc1}ROC curve for our logistic regression model of the indo RCT data (solid line). The dotted line shows the ROC curve we'd expect with random guessing.}
+\caption{\label{fig:indoroc1}ROC curve for our logistic regression model of the indo RCT data (solid line). The line y=x shows the ROC curve we'd expect with random guessing.}
 \end{figure}
 
 and find the area under the curve for the model
@@ -3837,8 +3793,8 @@ The trial has 602 participants and there are many fewer than 602 combinations of
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-45-1.pdf}
-\caption{\label{fig:unnamed-chunk-45}Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).}
+\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-44-1.pdf}
+\caption{\label{fig:unnamed-chunk-44}Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).}
 \end{figure}
 
 These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model.

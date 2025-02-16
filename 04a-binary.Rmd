@@ -237,12 +237,8 @@ for (i in 1:2){
 sum_chi_sq
 1-pchisq(sum_chi_sq, df=1)
 ```
-and we have sufficient evidence to reject $H_0$. 
+and we have sufficient evidence to reject $H_0$ for $\alpha=0.05$ (or indeed for many much lower values of $\alpha$). 
 
-In fact, these two tests are almost equivalent, and we have that $\sqrt{X^2} = Z$:
-```{r, echo=T}
-sqrt(sum_chi_sq)
-```
 :::
 
 
@@ -267,7 +263,7 @@ $$
 \begin{aligned}
 L\left(\pi_C,\pi_T \mid \left\lbrace y_{iC}\right\rbrace, \left\lbrace y_{iT}\right\rbrace \right) & =
   L\left( \pi_C,\pi_T \mid {n_C,n_T, r_C, r_T}\right)\\
-  & = \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
+  & \propto \pi_C^{r_C}\left(1-\pi_C\right)^{n_C - r_C}\pi_T^{r_T}\left(1-\pi_T\right)^{n_T - r_T}.
 \end{aligned}
 $$
 The log-likelihood is therefore
@@ -528,7 +524,7 @@ qf_eg = quad_fun(
   b = -2*peg - qnorm(0.975)^2/50,
   c = peg^2
 )
-round(qf_eg, 2)
+round(qf_eg, 3)
 ```
 
 Visually, we can represent this as in Figure \@ref(fig:newc1) by plotting the LHS (solid) and RHS (dashed for new method, dotted for standard method). The thick solid red line shows $p_T$, the estimated proportion, the thinner dashed red lines show the Wilson 95% CI and the dotted red lines show the standard 95% CI. Notice that the limits of each confidence interval are formed by the points at which the solid line (LHS) crosses the dashed / dotted lines (RHS).
@@ -595,7 +591,7 @@ ggplot() + geom_function(fun = fun_LHS) + xlim(0.4,0.9) +
 
 ```
 
-Notice that the interval with the new method is now asymmetrical, which is more realistic.
+Notice that the Wilson interval is asymmetric, which is more realistic.
 
 Similarly for the control proportion $\pi_C$, we have $p_C = \frac{17}{52},\; n_C=52$, and our Wilson interval is 
 
@@ -689,6 +685,8 @@ This is skewed somewhat lower than our standard CI of $\left(0.187,\;0.541\right
 
 :::
 
+Returning to our earlier material, we could invert this interval to find a confidence interval for the number needed to treat (NNT).
+
 ### Risk Ratio (RR) and Odds ratio (OR)
 
 The measures we have looked at so far, particularly the ARD, are quite analagous to the continuous normally distributed case. However, there are yet more commonly used measures of difference for proportions, which need to be dealt with differently,  but also afford more opportunities for modelling.
@@ -711,7 +709,7 @@ which we say as "1 to 4" or 1:4. For every one time $A$ occurs, we expect it not
 The **odds ratio** compares the odds of the outcome of interest in the Treament group with the odds of that event in the Control group. It tells us how the odds of the event are affected by the treatment (vs control).
 
 
-With the ARD, we knew that our confidence interval should always be in $\left[-1,\,1\right]$, and that if we compare treatments in one direction (say $p_T - p_C$) we would obtain the negative of the interval for the other way ($p_C - p_T$). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction ($p_T / p_C$) will give the reciprocal of the other direction ($p_C / p_T$).
+With the ARD, if we compare treatments in one direction (say $p_T - p_C$) we would obtain the negative of the interval for the other way ($p_C - p_T$). With the RR and OR, the discrepancy between two proportions is given by a ratio, and so comparing them in one direction ($p_T / p_C$) will give the reciprocal of the other direction ($p_C / p_T$).
 
 :::{.example}
 
@@ -918,17 +916,6 @@ summary(indo_rct[ ,c(1,2,3,4,6,32)])
 # The age range goes from 19 to 90 
 # 'rx' is the group variable
 
-## Checking for collinearity with factor variables
-## We will also use the variance inflation factor
-
-# No obvious patterns between age and site or risk and site
-indo_rct%>%
-  group_by(site) %>% 
-  summarise(
-    meanage=mean(age), sdage=sd(age),
-    meanrisk = mean(risk), sdrisk=sd(risk)
-    )
-
 ## We will try models with age and age^2
 
 glm_indo_agelin = glm(outcome ~ age + site + risk + rx, data=indo_rct, 
@@ -936,9 +923,9 @@ glm_indo_agelin = glm(outcome ~ age + site + risk + rx, data=indo_rct,
 glm_indo_agesq = glm(outcome ~ I(age^2) + site + risk + rx, data=indo_rct, 
                      family = binomial(link = "logit"))
 
-summary(glm_indo_agelin)
+print(summary(glm_indo_agelin), digits=2)
 vif(glm_indo_agelin)
-summary(glm_indo_agesq)
+print(summary(glm_indo_agesq), digits=2)
 vif(glm_indo_agesq)
 
 ```
@@ -947,14 +934,19 @@ Since neither `age` nor `age^2` appear influential, we'll remove it and keep the
 
 ```{r, echo=T}
 glm_indo = glm(outcome ~ site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
-summary(glm_indo)
+print(summary(glm_indo), digits=2)
 vif(glm_indo)
 ```
+
+Notice that
+
+  - The estimate and standard error of $\hat{\tau}$ (the coefficient of `rx`) haven't changed much at all (mainly because, as the VIF shows us, there are no issues with multicollinearity)
+  - The standard error for the site 4 cases is enormous - this is because there are so few observations.
 
 From the summary we see that $\hat\tau = -0.752$, with a standard error of 0.261. A 95% CI for $\tau$ is therefore 
 
 $$-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).$$
-This model supports the hypothesis that the treatment difference isn't zero. We do see however from the Null deviance and the Residual deviance that the model isn't explaining a huge proportion of the variation.
+This model supports the hypothesis that the log of the odds ratio isn't zero, and therefore we can reject $H_0$. 
 :::
 
 
@@ -973,7 +965,7 @@ Continuing with Example \@ref(exm:logregeg1), we can find estimates of the log o
 For this we will make use of the summary table
 
 ```{r, echo=T}
-summary(glm_indo)
+print(summary(glm_indo), digits=2)
 ```
 
 For example, a patient from site 1, with risk level 3, in the control group would have odds
@@ -1017,14 +1009,6 @@ df_indo_round2
 
 :::
 
-#### Reminder {-}
-
-As with any linear model, we need to ensure that it is appropriate for our dataset. Two key things we need to check for are:
-
-  * **Collinearity**: we should make sure that none of the independent variables are highly correlated. This is not uncommon in clinical datasets, since measurements are sometimes strongly related. Sometimes therefore, this can mean choosing only one out of a collection of two or more strongly related variables.
-  * **linear effect across the range of the dataset**: a linear model is based on the assumption that the effect of the independent variables is the same across the whole range of the data. This is not always the case. For example, the rate of deterioration with age can be more at older ages. This can be dealt with either by binning age into categories, or by using a transformation, eg. age$^2$. Note that this would still be a linear model, because it is linear in the coefficients.
-
-
 
 
 ## Diagnostics for logistic regression {#diaglogreg}
@@ -1066,9 +1050,9 @@ We estimate these by the proportions within the dataset.
 
 These are very commonly used for thinking about diagnostic tests and screening tests, and in these contexts a 'success' or 'positive' is almost always the presence of some condition or disease. In our context, we need to be mindful that a 1 could be good or bad, depending on the trial.
 
-The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the $t=0$, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set $t=0$, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a **ROC curve**. 
+The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the $t=0$, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set $t=1$, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a **ROC curve**. 
 
-The plots below shows the distributions of fitted values for patients with $X=0$ and $X=1$, for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.6, and so the Sensitivity and Specificity reflec that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
+The plots below shows the distributions of fitted values for patients with $X=0$ and $X=1$, for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.5, and so the Sensitivity and Specificity reflec that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
 
 
 ```{r, echo=F}
@@ -1218,7 +1202,7 @@ roc_indo = roc(data=roc_indo_df, response = out, predictor=fit)
 
 With that object we can do various things, such as plot the ROC curve:
 
-```{r indoroc1, echo=T, fig.cap = "ROC curve for our logistic regression model of the indo RCT data (solid line). The dotted line shows the ROC curve we'd expect with random guessing."}
+```{r indoroc1, echo=T, fig.cap = "ROC curve for our logistic regression model of the indo RCT data (solid line). The line y=x shows the ROC curve we'd expect with random guessing."}
 ggroc(roc_indo, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)
 
 ```

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-10" />
+<meta name="date" content="2025-02-16" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -267,9 +267,9 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="6" data-path="binary-analysis.html"><a href="binary-analysis.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="binary-analysis.html"><a href="binary-analysis.html#bin-point-est"><i class="fa fa-check"></i><b>6.1</b> Point estimates and Hypothesis tests</a>
+<li class="chapter" data-level="6.1" data-path="binary-analysis.html"><a href="binary-analysis.html#bin-point-est"><i class="fa fa-check"></i><b>6.1</b> Simple hypothesis tests</a>
 <ul>
-<li class="chapter" data-level="6.1.1" data-path="binary-analysis.html"><a href="binary-analysis.html#an-alternative-approach-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> An alternative approach: chi-squared</a></li>
+<li class="chapter" data-level="6.1.1" data-path="binary-analysis.html"><a href="binary-analysis.html#a-simple-method-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> A simple method: chi-squared</a></li>
 <li class="chapter" data-level="6.1.2" data-path="binary-analysis.html"><a href="binary-analysis.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
 </ul></li>
 <li class="chapter" data-level="6.2" data-path="binary-analysis.html"><a href="binary-analysis.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
@@ -405,7 +405,7 @@ Figure 7.1: An example of some censored data.
 <p><span class="math display">\[F\left(t\right) = P\left(T&lt;t\right) = \int\limits_0^t f\left(u\right)du, \]</span>
 and this gives us the probability that the survival time is less than <span class="math inline">\(t\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-41" class="definition"><strong>Definition 7.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
+<p><span id="def:unlabeled-div-40" class="definition"><strong>Definition 7.1  </strong></span>The <strong>survival function</strong>, <span class="math inline">\(\operatorname{S}\left(t\right)\)</span>, is the probability that some individual (in our context a participant) survives longer than time <span class="math inline">\(t\)</span>. Therefore <span class="math inline">\(\operatorname{S}\left(t\right) = 1 - F(t)\)</span>.
 Conventionally we plot <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> against <span class="math inline">\(t\)</span> and this gives us a <strong>survival curve</strong>.</p>
 </div>
 <p>We can immediately say two things about survival curves:</p>
@@ -422,7 +422,7 @@ Figure 7.2: An example of two survival curves, taken from <span class="citation"
 </div>
 <p>Following on from the survival function, we have another (slightly less intuitive) quantity: the <strong>Hazard function</strong> <span class="math inline">\(h\left(t\right)\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-42" class="definition"><strong>Definition 7.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous probability of death (or <em>experiencing the event</em>) at time <span class="math inline">\(t\)</span>.</p>
+<p><span id="def:unlabeled-div-41" class="definition"><strong>Definition 7.2  </strong></span>The <strong>Hazard function</strong> <span class="math inline">\(h(t)\)</span> is the probability that an individual who has survived up to time <span class="math inline">\(t\)</span> fails just after time <span class="math inline">\(t\)</span>; in other words, the instantaneous probability of death (or <em>experiencing the event</em>) at time <span class="math inline">\(t\)</span>.</p>
 </div>
 <p>If we use <span class="math inline">\(T\)</span> to denote the random variable of survival time (or time-to-event) then <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> and <span class="math inline">\(h(t)\)</span> are defined by</p>
 <p><span class="math display">\[
@@ -892,7 +892,7 @@ The variance of the MLE is</p>
 <p><span class="math display">\[\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.\]</span></p>
 <p>Notice that the numerator in Equation <a href="working-with-time-to-event-data.html#eq:lambdavar">(7.2)</a> is <span class="math inline">\(m\)</span>, the number of complete observations (rather than <span class="math inline">\(n\)</span> the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-43" class="example"><strong>Example 7.3  </strong></span>Returning to the dataset from Example <a href="working-with-time-to-event-data.html#exm:surveg1">7.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
+<p><span id="exm:unlabeled-div-42" class="example"><strong>Example 7.3  </strong></span>Returning to the dataset from Example <a href="working-with-time-to-event-data.html#exm:surveg1">7.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
 <p><span class="math display">\[
 \begin{aligned}
 \hat{\lambda}_C &amp;= \frac{m_C}{\sum\limits_{i=1}^{n_C} t_i}\\
@@ -908,14 +908,14 @@ and</p>
 &amp; = 0.00056
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="working-with-time-to-event-data.html#cb60-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
-<span id="cb60-2"><a href="working-with-time-to-event-data.html#cb60-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
-<span id="cb60-3"><a href="working-with-time-to-event-data.html#cb60-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
-<span id="cb60-4"><a href="working-with-time-to-event-data.html#cb60-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
-<span id="cb60-5"><a href="working-with-time-to-event-data.html#cb60-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
-<span id="cb60-6"><a href="working-with-time-to-event-data.html#cb60-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
-<span id="cb60-7"><a href="working-with-time-to-event-data.html#cb60-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
-<span id="cb60-8"><a href="working-with-time-to-event-data.html#cb60-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="working-with-time-to-event-data.html#cb58-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb58-2"><a href="working-with-time-to-event-data.html#cb58-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
+<span id="cb58-3"><a href="working-with-time-to-event-data.html#cb58-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb58-4"><a href="working-with-time-to-event-data.html#cb58-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
+<span id="cb58-5"><a href="working-with-time-to-event-data.html#cb58-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
+<span id="cb58-6"><a href="working-with-time-to-event-data.html#cb58-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
+<span id="cb58-7"><a href="working-with-time-to-event-data.html#cb58-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
+<span id="cb58-8"><a href="working-with-time-to-event-data.html#cb58-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ovplotlr"></span>
 <img src="CT4H_notes_files/figure-html/ovplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
 <p class="caption">
@@ -936,7 +936,7 @@ Figure 7.7: Kaplan Meier estimates of survival curves for the Myeloid data (soli
 <h3><span class="header-section-number">7.2.3</span> The Weibull distribution<a href="working-with-time-to-event-data.html#weibull" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Having only one parameter, the exponential distribution is not very flexible, and often doesn’t fit data at all well. A related, but more suitable distribution is the <strong>Weibull distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-44" class="definition"><strong>Definition 7.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
+<p><span id="def:unlabeled-div-43" class="definition"><strong>Definition 7.3  </strong></span>The probability density function of a <strong>Weibull</strong> random variable is</p>
 <p><span class="math display">\[
 f\left(x\mid \lambda,\,\gamma\right) =
 \begin{cases}
@@ -970,7 +970,7 @@ and substitute this into Equation <a href="working-with-time-to-event-data.html#
 <p><span class="math display">\[\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \frac{r}{\sum\limits_{i=1}^n t_i^{\gamma}}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i=0. \]</span>
 This second equation is analytically intractable, so numerical methods are used to find <span class="math inline">\(\hat\gamma\)</span>, and then this value can be used to find <span class="math inline">\(\hat\lambda\)</span>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-45" class="example"><strong>Example 7.4  </strong></span>We can fit Weibull distributions to our <code>myeloid</code> dataset, as shown in Figure <a href="working-with-time-to-event-data.html#fig:weibmy">7.8</a>.</p>
+<p><span id="exm:unlabeled-div-44" class="example"><strong>Example 7.4  </strong></span>We can fit Weibull distributions to our <code>myeloid</code> dataset, as shown in Figure <a href="working-with-time-to-event-data.html#fig:weibmy">7.8</a>.</p>
 <p><span class="math display">\[S\left(t\right) = \exp\left(-\lambda t^{\gamma}\right).\]</span></p>
 <div class="figure"><span style="display:block;" id="fig:weibmy"></span>
 <img src="CT4H_notes_files/figure-html/weibmy-1.png" alt="Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C." width="672" />
