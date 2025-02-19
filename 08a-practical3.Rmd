@@ -1,4 +1,4 @@
-# Computer Practical 3 - Sample size by simulation
+# Computer Practical 3 - Sample size by simulation {#cp3sim}
 
 <details> <summary> **R practicalities - click here** </summary>  
 
@@ -21,17 +21,6 @@ This requires you to have a github account (you can sign up for free [here](http
 [Instructions for how to use codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&reserved=0)
 
 </details>
-
-
-We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We'll load them as we go along.
-
-**Notice that where there are code snippets that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
-
-```{r, eval=F, echo=T}
-install.packages(c("ggplot2", "dplyr", "HSAUR", "HSAUR3", "pROC", "survival", "ggfortify"))
-```
-
-
 
 A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required. We can estimate the power by the proportion of simulated trials in which the null hypothesis was rejected. 
 
@@ -134,6 +123,7 @@ sim_vec1 = rep(NA, 100)
 for (i in 1:100){
   sim_vec1[i] = ttest_sim(nsim=100, N=113, mu=5, tm=3, sd=8)
 }
+require(ggplot2)
 ggplot(mapping = aes(sim_vec1)) + geom_histogram(bins=10)
 ```
 
@@ -420,86 +410,12 @@ The power is much higher than for our t-test simulation with $N=100$. This is be
 
 </details>
 
-## Branching out into other types of data
 
-If you've found the above fairly simple, this will be a good exercise to stretch your muscles. If not, then please still give it some thought, but feel free to look at the solution to see the method applied to another approach.
-
-Before starting, look at the steps to the simulation method and consider what you've to do to complete the exercise.
-
-:::{.exercise}
-Use this sample size simulation method to find the appropriate size for a trial with a binary variable. You can assume that the proportion of 'successes' in the control group is 0.65, and that the least clinically significant proportion we'd like to be able to detect is a treatment group proportion of 0.8. The trial should have a significance level of $\alpha=0.05$ and a power of $1-\beta = 0.8$.
-
-For this exercise, use the very simplest binomial analysis method we've covered, as in Example \@ref(exm:ex-bin1)
-:::
-
-<details> <summary> Click for solution </summary>
-
-:::{.solution}
-
-The first thing we need to do is to simulate our data, for which we can use the function `rbinom`.
-
-```{r, echo=T}
-binom_sim = function(
-  nsim,    # Number of simulations
-  N,       # Number of participants in each arm
-  piC,     # Assumed proportion in control group
-  piT      # minimum detectably different proportion in treatment group
-){
-  H0_reject_vec = rep(NA, nsim) # to store 1 if H0 rejected, 0 if fail to reject H0
-  for (i in 1:nsim){
-    rC = rbinom(n=1, size=N, prob=piC) # generate numbers of successes
-    rT = rbinom(n=1, size=N, prob=piT)
-    
-    pC = rC/N # Find estimates of proportions
-    pT = rT/N
-    p_pooled = (rC+rT)/(2*N)
-    
-    z_stat = (pT - pC) / (sqrt(p_pooled*(1-p_pooled)*(1/N + 1/N)))
-    
-    p_val = 2*(1-pnorm(z_stat, mean=0, sd=1))
-    
-    H0_reject_vec[i] = ifelse(p_val<0.05, 1, 0)
-  }
-  
-  power.est = mean(H0_reject_vec)
-  power.est
-}
-```
-
-Let's now try this for $N=100$, as a base point
-
-```{r, echo=T}
-sim_vec7 = rep(NA, 100)
-for (i in 1:100){
-  sim_vec7[i] = binom_sim(nsim=100, N=100, piC=0.65, piT=0.8)
-}
-ggplot(mapping = aes(sim_vec7)) + geom_histogram(bins=10)
-
-```
-
-This is clearly too low so we can try a higher number - let's say $N=150$
-
-
-
-```{r, echo=T}
-sim_vec8 = rep(NA, 100)
-for (i in 1:100){
-  sim_vec8[i] = binom_sim(nsim=100, N=150, piC=0.65, piT=0.8)
-}
-ggplot(mapping = aes(sim_vec8)) + geom_histogram(bins=10)
-```
-
-This appears to be much closer - one could now finesse $N$ to fit some criteria on the proportion of simulations achieving the desired power.
-
-
-
-:::
-
-</details>
+## Conclusion
 
 We could extend this in many ways to better understand the uncertainty around the power for a given sample size. For example:
 
   * Trying different allocation methods
   * Incorporating uncertainty around quantities like $\mu,\,\mu_B,\,\rho$ etc.
   
-But we don't have time in this practical!
+If you still have time you might like to look into these as an extension problem.

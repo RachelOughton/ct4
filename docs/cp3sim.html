@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>C Computer Practical 3 - Sample size by simulation | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="C Computer Practical 3 - Sample size by simulation | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="C Computer Practical 3 - Sample size by simulation | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2025-02-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="computer-practical-2---allocation-analysis.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books-and-resources"><i class="fa fa-check"></i>Books and resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.1</b> One-tailed or two-tailed?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.2</b> Insignificant results</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3.1</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.3.2" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.3.2</b> Minimization</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.4</b> Problems around allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-variance-of-the-treatment-effect-estimate"><i class="fa fa-check"></i><b>4.2.1</b> The variance of the treatment effect estimate</a></li>
+<li class="chapter" data-level="4.2.2" data-path="rct-analysis.html"><a href="rct-analysis.html#a-dodgy-way-to-use-baseline-variables"><i class="fa fa-check"></i><b>4.2.2</b> A dodgy way to use baseline variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="binary-analysis.html"><a href="binary-analysis.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="binary-analysis.html"><a href="binary-analysis.html#bin-point-est"><i class="fa fa-check"></i><b>6.1</b> Simple hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="binary-analysis.html"><a href="binary-analysis.html#a-simple-method-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> A simple method: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="binary-analysis.html"><a href="binary-analysis.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="binary-analysis.html"><a href="binary-analysis.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#logreg"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diaglogreg"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
+<li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1 - Missing data</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+<li class="chapter" data-level="A.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#missing-data"><i class="fa fa-check"></i><b>A.1</b> Missing data</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#datasets"><i class="fa fa-check"></i><b>A.1.1</b> Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="A.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#understanding-the-patterns-of-missingness"><i class="fa fa-check"></i><b>A.2</b> Understanding the patterns of missingness</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#visualising-missingness"><i class="fa fa-check"></i><b>A.2.1</b> Visualising missingness</a></li>
+<li class="chapter" data-level="A.2.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#summary-tables"><i class="fa fa-check"></i><b>A.2.2</b> Summary tables</a></li>
+<li class="chapter" data-level="A.2.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#mechanisms-of-missingness"><i class="fa fa-check"></i><b>A.2.3</b> Mechanisms of missingness</a></li>
+</ul></li>
+<li class="chapter" data-level="A.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#exploring-the-relationship-between-missingness-and-other-variables"><i class="fa fa-check"></i><b>A.3</b> Exploring the relationship between missingness and other variables</a>
+<ul>
+<li class="chapter" data-level="A.3.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#sec-statsum"><i class="fa fa-check"></i><b>A.3.1</b> Statistical summaries of the effect of missingness</a></li>
+<li class="chapter" data-level="A.3.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#modelling-missingness"><i class="fa fa-check"></i><b>A.3.2</b> Modelling missingness</a></li>
+</ul></li>
+<li class="chapter" data-level="A.4" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#what-to-do-about-missing-data"><i class="fa fa-check"></i><b>A.4</b> What to do about missing data?!</a>
+<ul>
+<li class="chapter" data-level="A.4.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#discarding-some-non-missing-data"><i class="fa fa-check"></i><b>A.4.1</b> Discarding some (non-missing) data</a></li>
+<li class="chapter" data-level="A.4.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#imputing-data"><i class="fa fa-check"></i><b>A.4.2</b> Imputing data</a></li>
+<li class="chapter" data-level="A.4.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#multiple-imputation"><i class="fa fa-check"></i><b>A.4.3</b> Multiple imputation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Allocation &amp; Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#r-practicalities-1"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
+<li class="chapter" data-level="B.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1allocation"><i class="fa fa-check"></i><b>B.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>B.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="B.1.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#allocmethods"><i class="fa fa-check"></i><b>B.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="B.1.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>B.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="B.1.4" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#minimisation"><i class="fa fa-check"></i><b>B.1.4</b> Minimisation</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.2.1</b> Polyps data</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#extension-problems"><i class="fa fa-check"></i><b>B.3</b> Extension problems</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#a-simulation-experiment"><i class="fa fa-check"></i><b>B.3.1</b> A simulation experiment!</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="C" data-path="cp3sim.html"><a href="cp3sim.html"><i class="fa fa-check"></i><b>C</b> Computer Practical 3 - Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="cp3sim.html"><a href="cp3sim.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>C.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="C.2" data-path="cp3sim.html"><a href="cp3sim.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>C.2</b> Power simulation for ANCOVA</a></li>
+<li class="chapter" data-level="C.3" data-path="cp3sim.html"><a href="cp3sim.html#conclusion"><i class="fa fa-check"></i><b>C.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cp3sim" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">C</span> Computer Practical 3 - Sample size by simulation<a href="cp3sim.html#cp3sim" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<details>
+<summary>
+<strong>R practicalities - click here</strong>
+</summary>
+<p>There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do</p>
+<div class="sourceCode" id="cb264"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb264-1"><a href="cp3sim.html#cb264-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
+<p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III.</p>
+<p>An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
+<p>This requires you to have a github account (you can sign up for free <a href="https://github.com/">here</a>) and there is a short guide to creating a github account <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&amp;reserved=0">here</a>.</p>
+<p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&amp;reserved=0">Direct link to codespace</a></p>
+<p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&amp;reserved=0">Instructions for how to use codespace</a></p>
+</details>
+<p>A method for sample size calculation that has become increasingly popular in recent years is to use simulation. In simple terms, we write code that runs the trial many, many times in order to determine how many participants we need to achieve the power required. We can estimate the power by the proportion of simulated trials in which the null hypothesis was rejected.</p>
+<p>Because the code necessarily works by fixing the number of participants and investigating the effect on the power of the trial, this is often referred to as <em>power-calculation</em>, but it is the same sample size issue, approached from a different angle. <span class="citation">Arnold et al. (<a href="#ref-arnold2011simulation">2011</a>)</span> gives a thorough, readable and interesting case study of the use of power simulation in a cluster randomised trial investigating different sanitation-related interventions in rural communities in Bangladesh.</p>
+<p>The simulation approach has the following advantages over the formula-based methods presented in Sections <a href="rct-plan.html#rct-plan">2</a> and <a href="ss-bin.html#ss-bin">5</a>:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Transparency</strong>: If the data generating mechanism is made clear, then the assumptions behind the trial are also clear, and the simulation can be replicated by anyone. Reproducibility is a big issue in clinical trials.</li>
+<li><strong>Flexibility</strong>: Whereas the methods in Sections <a href="rct-plan.html#rct-plan">2</a> and <a href="ss-bin.html#ss-bin">5</a> are limited to very specific circumstances, one can simulate arbitrarily complex or unusual trials. We can also explore the implications of the decisions we’ll have to make, such as how the allocation is made.</li>
+<li><strong>Practice</strong>: This process requires us to perform our planned analysis at the planning stage (albeit likely in a simplified form), thus raising any potential issues early enough to adapt the statistical analysis plan.</li>
+</ol>
+<p>Arguably the first and third advantages could also be true (though aren’t automatically) of a well-planned trial that used conventional sample size formulae, but the second is an advantage unique to simulation.</p>
+<p>For most of this practical we will focus on continuous outcome variables, but the method can be applied to binary, survival or other kinds of data.</p>
+<div id="power-simulation-for-a-t-test" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">C.1</span> Power simulation for a t-test<a href="cp3sim.html#power-simulation-for-a-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>Note: really we should be using more than 100 simulations, but so that the code runs in a sensible amount of time I’ve reduced the number. Feel free to increase it if you want to, but you’ll have to wait a little while for it to run.</strong></p>
+<p>We’ll start by taking a simulation approach to recreate the most ‘vanilla’ scenario, where we have a continuous outcome <span class="math inline">\(Y\)</span> and wish to conduct a <span class="math inline">\(t\)</span>-test on the outcome.</p>
+<p>Recall that the sample size formula we found was Equation <a href="rct-plan.html#eq:sscont">(2.4)</a>, shown again below:</p>
+<p><span class="math display">\[N = \frac{2\sigma^2\left(z_\beta + z_{\frac{\alpha}{2}}\right)^2}{\tau_M^2},\]</span>
+where <span class="math inline">\(N\)</span> is the number of participants required in each trial arm, <span class="math inline">\(\sigma^2\)</span> is the variance of the outcome <span class="math inline">\(Y\)</span> in each group, and <span class="math inline">\(\tau_M\)</span> is the minimum detectable effect size (or minimum clinically important difference), the smallest difference between <span class="math inline">\(\mu_C\)</span> and <span class="math inline">\(\mu_T\)</span> (the treatment arm means) that we want to be able to detect with significance level <span class="math inline">\(\alpha\)</span> and power <span class="math inline">\(1-\beta\)</span>.</p>
+<p>These variables give us all we need to simulate trial data. The model we will use here is</p>
+<p><span class="math display" id="eq:simdist">\[\begin{equation}
+Y_i= \sim
+\begin{cases}
+N\left(\mu,\;\sigma^2\right)&amp;\;\text{ if participant }i\text{ is in group }C\\
+N\left(\mu + \tau_M,\;\sigma^2\right)&amp;\;\text{ if participant }i\text{ is in group }T.
+\end{cases}
+\tag{C.1}
+\end{equation}\]</span></p>
+<p>Therefore, to simulate data from a trial like this, we need to specify values for <span class="math inline">\(\mu,\;\tau_M\)</span> and <span class="math inline">\(\sigma^2\)</span>. We also need to specify the number of participants.</p>
+<p>The steps for each simulation will be</p>
+<ol style="list-style-type: decimal">
+<li>Simulate trial data using the distribution in Equation <a href="cp3sim.html#eq:simdist">(C.1)</a>, for example using the function <code>rnorm</code></li>
+<li>Conduct an un-paired, two-tailed <span class="math inline">\(t\)</span>-test on the data</li>
+<li>Note whether <span class="math inline">\(H_0:\;\tau_M=0\)</span> is rejected</li>
+</ol>
+<p>Having done this for some number <span class="math inline">\(n_{sim}\)</span> of simulations, we return the proportion of simulations in which <span class="math inline">\(H_0\)</span> was rejected, and this is our power estimate.</p>
+<p>If the power estimate is smaller than we would like, we increase the number of participants in our simulated trial data and try again. Conversely, we decrease the number of participants if the power estimate is larger than we need.</p>
+<div class="exercise">
+<p><span id="exr:ex1sim" class="exercise"><strong>Exercise C.1  </strong></span>By generating data for group <span class="math inline">\(C\)</span> and group <span class="math inline">\(T\)</span> according to the distributions in Equation <a href="cp3sim.html#eq:simdist">(C.1)</a>, conduct a power simulation for the trial scenario described in Example <a href="rct-plan.html#exm:sseg1">2.1</a>, with the aim of finding the number <span class="math inline">\(N\)</span> of participants required in each arm for a power of 0.9 (<span class="math inline">\(\beta=0.1\)</span>) and a confidence level of <span class="math inline">\(\alpha=0.05\)</span>.</p>
+<ul>
+<li>How consistent are your results with the method we derived in Chapter <a href="rct-plan.html#rct-plan">2</a>?</li>
+<li>What issues does this raise around choosing a sample size?</li>
+</ul>
+<p><em>If coding this up feels well outside your comfort zone, it’s fine to look at the solutions to see how I’ve done it - if it isn’t clear, please ask! Then you can try to adapt this approach in the future exercises</em></p>
+</div>
+<details>
+<summary>
+Click to reveal solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-107" class="solution"><em>Solution</em>. </span>The sensible first thing to do is to write a function that does this for general <span class="math inline">\(n_{sim},\,N,\,\mu,\,\sigma^2\)</span> and <span class="math inline">\(\tau_M\)</span>. The very simplest way would be the following, where we generate <span class="math inline">\(N\)</span> participants per arm, and their data.</p>
+<div class="sourceCode" id="cb265"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb265-1"><a href="cp3sim.html#cb265-1" tabindex="-1"></a>ttest_sim <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb265-2"><a href="cp3sim.html#cb265-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb265-3"><a href="cp3sim.html#cb265-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb265-4"><a href="cp3sim.html#cb265-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb265-5"><a href="cp3sim.html#cb265-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb265-6"><a href="cp3sim.html#cb265-6" tabindex="-1"></a>    sd     <span class="co"># sd of outcome</span></span>
+<span id="cb265-7"><a href="cp3sim.html#cb265-7" tabindex="-1"></a>){</span>
+<span id="cb265-8"><a href="cp3sim.html#cb265-8" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb265-9"><a href="cp3sim.html#cb265-9" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb265-10"><a href="cp3sim.html#cb265-10" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sd)</span>
+<span id="cb265-11"><a href="cp3sim.html#cb265-11" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sd)</span>
+<span id="cb265-12"><a href="cp3sim.html#cb265-12" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
+<span id="cb265-13"><a href="cp3sim.html#cb265-13" tabindex="-1"></a>      out_groupC, out_groupT, </span>
+<span id="cb265-14"><a href="cp3sim.html#cb265-14" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
+<span id="cb265-15"><a href="cp3sim.html#cb265-15" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb265-16"><a href="cp3sim.html#cb265-16" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb265-17"><a href="cp3sim.html#cb265-17" tabindex="-1"></a>  }</span>
+<span id="cb265-18"><a href="cp3sim.html#cb265-18" tabindex="-1"></a>  </span>
+<span id="cb265-19"><a href="cp3sim.html#cb265-19" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb265-20"><a href="cp3sim.html#cb265-20" tabindex="-1"></a>  power.est</span>
+<span id="cb265-21"><a href="cp3sim.html#cb265-21" tabindex="-1"></a>}</span></code></pre></div>
+<p>For a sanity check, we can put in the number we got from the equation in Section <a href="rct-plan.html#rct-plan">2</a>. To generate the data we need to specify a mean <span class="math inline">\(\mu\)</span>, but it doesn’t matter what it is (in this formulation at least!), so the number below is arbitrary.</p>
+<div class="sourceCode" id="cb266"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb266-1"><a href="cp3sim.html#cb266-1" tabindex="-1"></a><span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.79</code></pre>
+<p>and this is close to what we expect from the formula approach.
+To see how consistent this result is, we can see what happens over many sets of simulations</p>
+<div class="sourceCode" id="cb268"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb268-1"><a href="cp3sim.html#cb268-1" tabindex="-1"></a>sim_vec1 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb268-2"><a href="cp3sim.html#cb268-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb268-3"><a href="cp3sim.html#cb268-3" tabindex="-1"></a>  sim_vec1[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
+<span id="cb268-4"><a href="cp3sim.html#cb268-4" tabindex="-1"></a>}</span>
+<span id="cb268-5"><a href="cp3sim.html#cb268-5" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb268-6"><a href="cp3sim.html#cb268-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:histsim1"></span>
+<img src="CT4H_notes_files/figure-html/histsim1-1.png" alt="Histogram of estimated powers from 100 lots of 100 simulations with N=113." width="672" />
+<p class="caption">
+Figure C.1: Histogram of estimated powers from 100 lots of 100 simulations with N=113.
+</p>
+</div>
+<p>So although the mean power is around 0.8, as we expect, there is some variation.</p>
+<p>To achieve <span class="math inline">\(1-\beta=0.9\)</span> we need to increase <span class="math inline">\(N\)</span>. It turns out that around 155 participants in each arm gives a mean power of around 0.9.</p>
+<div class="sourceCode" id="cb269"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb269-1"><a href="cp3sim.html#cb269-1" tabindex="-1"></a>sim_vec2 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb269-2"><a href="cp3sim.html#cb269-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb269-3"><a href="cp3sim.html#cb269-3" tabindex="-1"></a>  sim_vec2[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
+<span id="cb269-4"><a href="cp3sim.html#cb269-4" tabindex="-1"></a>}</span>
+<span id="cb269-5"><a href="cp3sim.html#cb269-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:histsim2"></span>
+<img src="CT4H_notes_files/figure-html/histsim2-1.png" alt="Histogram of estimated powers from 100 lots of 100 simulations with N=155." width="672" />
+<p class="caption">
+Figure C.2: Histogram of estimated powers from 100 lots of 100 simulations with N=155.
+</p>
+</div>
+<p>It is sensible to choose a number such that we are sufficiently confident of our study having the power we require. We may for example choose <span class="math inline">\(N\)</span> so that the estimated power is at least 0.9 in some high proportion (say 90%) of the simulations.</p>
+</div>
+</details>
+<p>A useful feature of the simulation approach is that it’s much easier to investigate what happens if the real data deviate in some way from the assumptions we’ve made.</p>
+<div class="exercise">
+<p><span id="exr:sim-uneqsd" class="exercise"><strong>Exercise C.2  </strong></span>Adapt your code (or my code) from Exercise <a href="cp3sim.html#exr:ex1sim">C.1</a> to take into account the possibility of the outcome variance being different in the two groups. What is the effect on the estimated power if the outcome standard deviation in group <span class="math inline">\(T\)</span> is 25% larger than the standard deviation in group <span class="math inline">\(C\)</span>? What about if the outcome standard deviation is <span class="math inline">\(25\%\)</span> smaller in group <span class="math inline">\(T\)</span> than in group <span class="math inline">\(C\)</span>?</p>
+</div>
+<details>
+<summary>
+Click to reveal solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-108" class="solution"><em>Solution</em>. </span>The change we need to make is to include a variance parameter for each group, rather than a common one. Note that we aren’t changing the <code>t.test</code> function to use unequal variances, as it is common practice to keep assuming equal variances, and actually these variances still aren’t <em>that</em> different.</p>
+<div class="sourceCode" id="cb270"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb270-1"><a href="cp3sim.html#cb270-1" tabindex="-1"></a>ttest_sim2 <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb270-2"><a href="cp3sim.html#cb270-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb270-3"><a href="cp3sim.html#cb270-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb270-4"><a href="cp3sim.html#cb270-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb270-5"><a href="cp3sim.html#cb270-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb270-6"><a href="cp3sim.html#cb270-6" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb270-7"><a href="cp3sim.html#cb270-7" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb270-8"><a href="cp3sim.html#cb270-8" tabindex="-1"></a>){</span>
+<span id="cb270-9"><a href="cp3sim.html#cb270-9" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb270-10"><a href="cp3sim.html#cb270-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb270-11"><a href="cp3sim.html#cb270-11" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
+<span id="cb270-12"><a href="cp3sim.html#cb270-12" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sdT)</span>
+<span id="cb270-13"><a href="cp3sim.html#cb270-13" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
+<span id="cb270-14"><a href="cp3sim.html#cb270-14" tabindex="-1"></a>      out_groupC, out_groupT, </span>
+<span id="cb270-15"><a href="cp3sim.html#cb270-15" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
+<span id="cb270-16"><a href="cp3sim.html#cb270-16" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb270-17"><a href="cp3sim.html#cb270-17" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb270-18"><a href="cp3sim.html#cb270-18" tabindex="-1"></a>  }</span>
+<span id="cb270-19"><a href="cp3sim.html#cb270-19" tabindex="-1"></a>  </span>
+<span id="cb270-20"><a href="cp3sim.html#cb270-20" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb270-21"><a href="cp3sim.html#cb270-21" tabindex="-1"></a>  power.est</span>
+<span id="cb270-22"><a href="cp3sim.html#cb270-22" tabindex="-1"></a>}</span></code></pre></div>
+<p>If the variances are equal, this gives the same as before (approximately)</p>
+<div class="sourceCode" id="cb271"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb271-1"><a href="cp3sim.html#cb271-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.89</code></pre>
+<p>However, if we increase the outcome variance in group <span class="math inline">\(T\)</span> by 25%, things change:</p>
+<div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="cp3sim.html#cb273-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.8</code></pre>
+<div class="sourceCode" id="cb275"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb275-1"><a href="cp3sim.html#cb275-1" tabindex="-1"></a>sim_vec3 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb275-2"><a href="cp3sim.html#cb275-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb275-3"><a href="cp3sim.html#cb275-3" tabindex="-1"></a>  sim_vec3[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
+<span id="cb275-4"><a href="cp3sim.html#cb275-4" tabindex="-1"></a>}</span>
+<span id="cb275-5"><a href="cp3sim.html#cb275-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec3)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:sim2n"></span>
+<img src="CT4H_notes_files/figure-html/sim2n-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD in group T." width="672" />
+<p class="caption">
+Figure C.3: Power estimates for 100 sets of 100 simulations with larger outcome SD in group T.
+</p>
+</div>
+<p>By contrast, if the outcome variance is lower (this is much less likely) then the power will be higher than calculated:</p>
+<div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="cp3sim.html#cb276-1" tabindex="-1"></a>sim_vec4 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb276-2"><a href="cp3sim.html#cb276-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb276-3"><a href="cp3sim.html#cb276-3" tabindex="-1"></a>  sim_vec4[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">6</span>)</span>
+<span id="cb276-4"><a href="cp3sim.html#cb276-4" tabindex="-1"></a>}</span>
+<span id="cb276-5"><a href="cp3sim.html#cb276-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec4)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-183"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-183-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
+<p class="caption">
+Figure C.4: Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T
+</p>
+</div>
+</div>
+</details>
+<p>When using simulation in earnest, it is best to recreate as many features of the trial as we can, and this includes the allocation. If we were using a method that guaranteed [close to] exactly equal groups, then the above method is OK. However, this is not always the case. We will explore this in a fairly simple way.</p>
+<div class="exercise">
+<p><span id="exr:srsttest" class="exercise"><strong>Exercise C.3  </strong></span>Recreate the function from Exercise <a href="cp3sim.html#exr:sim-uneqsd">C.2</a>, where the two groups have different variances. This time, simulate the data sequentially, using simple random sampling as the allocation method.</p>
+<ul>
+<li>What happens to the power distribution for the scenario we considered in that question?</li>
+<li>What happens for a much smaller <span class="math inline">\(N\)</span>, say <span class="math inline">\(N=25\)</span>?</li>
+</ul>
+</div>
+<details>
+<summary>
+Click for solutions
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-109" class="solution"><em>Solution</em>. </span>For this method, we work through all <span class="math inline">\(2N\)</span> participants sequentially, allocating them with equal probability to group <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>. For readability, in these solutions the simulation of one trial is written as its own function, which is then implemented <code>nsim</code> times.</p>
+<div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="cp3sim.html#cb277-1" tabindex="-1"></a>one_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb277-2"><a href="cp3sim.html#cb277-2" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb277-3"><a href="cp3sim.html#cb277-3" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb277-4"><a href="cp3sim.html#cb277-4" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb277-5"><a href="cp3sim.html#cb277-5" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb277-6"><a href="cp3sim.html#cb277-6" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb277-7"><a href="cp3sim.html#cb277-7" tabindex="-1"></a>){</span>
+<span id="cb277-8"><a href="cp3sim.html#cb277-8" tabindex="-1"></a>  <span class="do">## Create empty vectors to contain output for groups C and T</span></span>
+<span id="cb277-9"><a href="cp3sim.html#cb277-9" tabindex="-1"></a>  outC <span class="ot">=</span> <span class="fu">integer</span>()</span>
+<span id="cb277-10"><a href="cp3sim.html#cb277-10" tabindex="-1"></a>  outT <span class="ot">=</span> <span class="fu">integer</span>()</span>
+<span id="cb277-11"><a href="cp3sim.html#cb277-11" tabindex="-1"></a>  </span>
+<span id="cb277-12"><a href="cp3sim.html#cb277-12" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
+<span id="cb277-13"><a href="cp3sim.html#cb277-13" tabindex="-1"></a>    <span class="co"># allocate using SRS</span></span>
+<span id="cb277-14"><a href="cp3sim.html#cb277-14" tabindex="-1"></a>    arm <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb277-15"><a href="cp3sim.html#cb277-15" tabindex="-1"></a>    <span class="co"># generate outcome according to groups&#39; distributions</span></span>
+<span id="cb277-16"><a href="cp3sim.html#cb277-16" tabindex="-1"></a>    <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
+<span id="cb277-17"><a href="cp3sim.html#cb277-17" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
+<span id="cb277-18"><a href="cp3sim.html#cb277-18" tabindex="-1"></a>      outC <span class="ot">=</span> <span class="fu">c</span>(outC, outi)</span>
+<span id="cb277-19"><a href="cp3sim.html#cb277-19" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
+<span id="cb277-20"><a href="cp3sim.html#cb277-20" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu<span class="sc">+</span>tm, <span class="at">sd=</span>sdT)</span>
+<span id="cb277-21"><a href="cp3sim.html#cb277-21" tabindex="-1"></a>      outT <span class="ot">=</span> <span class="fu">c</span>(outT, outi)</span>
+<span id="cb277-22"><a href="cp3sim.html#cb277-22" tabindex="-1"></a>    }</span>
+<span id="cb277-23"><a href="cp3sim.html#cb277-23" tabindex="-1"></a>  }</span>
+<span id="cb277-24"><a href="cp3sim.html#cb277-24" tabindex="-1"></a>  <span class="co"># conduct t-test for this trial</span></span>
+<span id="cb277-25"><a href="cp3sim.html#cb277-25" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">x=</span>outC, <span class="at">y=</span>outT, </span>
+<span id="cb277-26"><a href="cp3sim.html#cb277-26" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">paired=</span>F, </span>
+<span id="cb277-27"><a href="cp3sim.html#cb277-27" tabindex="-1"></a>         <span class="at">var.equal=</span>T, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span>
+<span id="cb277-28"><a href="cp3sim.html#cb277-28" tabindex="-1"></a>}</span>
+<span id="cb277-29"><a href="cp3sim.html#cb277-29" tabindex="-1"></a></span>
+<span id="cb277-30"><a href="cp3sim.html#cb277-30" tabindex="-1"></a>ttest_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb277-31"><a href="cp3sim.html#cb277-31" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb277-32"><a href="cp3sim.html#cb277-32" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb277-33"><a href="cp3sim.html#cb277-33" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb277-34"><a href="cp3sim.html#cb277-34" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb277-35"><a href="cp3sim.html#cb277-35" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb277-36"><a href="cp3sim.html#cb277-36" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb277-37"><a href="cp3sim.html#cb277-37" tabindex="-1"></a>){</span>
+<span id="cb277-38"><a href="cp3sim.html#cb277-38" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb277-39"><a href="cp3sim.html#cb277-39" tabindex="-1"></a>  </span>
+<span id="cb277-40"><a href="cp3sim.html#cb277-40" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb277-41"><a href="cp3sim.html#cb277-41" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">one_trial_srs</span>(N, mu, tm, sdC, sdT)</span>
+<span id="cb277-42"><a href="cp3sim.html#cb277-42" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb277-43"><a href="cp3sim.html#cb277-43" tabindex="-1"></a>  }</span>
+<span id="cb277-44"><a href="cp3sim.html#cb277-44" tabindex="-1"></a>  </span>
+<span id="cb277-45"><a href="cp3sim.html#cb277-45" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb277-46"><a href="cp3sim.html#cb277-46" tabindex="-1"></a>  power.est</span>
+<span id="cb277-47"><a href="cp3sim.html#cb277-47" tabindex="-1"></a>}</span>
+<span id="cb277-48"><a href="cp3sim.html#cb277-48" tabindex="-1"></a></span>
+<span id="cb277-49"><a href="cp3sim.html#cb277-49" tabindex="-1"></a><span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.76</code></pre>
+<p>To see the distribution for many simulations, we can do</p>
+<div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="cp3sim.html#cb279-1" tabindex="-1"></a>sim_vec5 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb279-2"><a href="cp3sim.html#cb279-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb279-3"><a href="cp3sim.html#cb279-3" tabindex="-1"></a>  sim_vec5[i] <span class="ot">=</span> <span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
+<span id="cb279-4"><a href="cp3sim.html#cb279-4" tabindex="-1"></a>}</span>
+<span id="cb279-5"><a href="cp3sim.html#cb279-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec5)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-185"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-185-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
+<p class="caption">
+Figure C.5: Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation.
+</p>
+</div>
+<p>and we see that the spread is much higher than when we had two exactly equal groups, as in Figure <a href="cp3sim.html#fig:sim2n">C.3</a>.</p>
+<p>If <span class="math inline">\(N\)</span> is smaller, the variance in the power estimates will be higher, because the potential for imbalance will be greater.</p>
+</div>
+</details>
+</div>
+<div id="power-simulation-for-ancova" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">C.2</span> Power simulation for ANCOVA<a href="cp3sim.html#power-simulation-for-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In our analysis section we learned that the ANCOVA model is much more efficient and flexible than a t-test, so now we’ll simulate our data with that analysis method in mind.</p>
+<p>We’ll write our data-generating model for the outcome <span class="math inline">\(X_i\)</span> as</p>
+<p><span class="math display">\[
+\begin{aligned}
+x_i &amp; = \mu + \rho \left(b_i - \mu_B\right) + \epsilon_i &amp; \text{ in group C}\\
+x_i &amp; = \mu + \tau + \rho \left(b_i - \mu_B\right) + \epsilon_i &amp; \text{ in group T}&amp;.
+\end{aligned}
+\]</span>
+where <span class="math inline">\(\epsilon_i\sim N\left(0,\,\sigma^2_{\epsilon}\right)\)</span>. Now, we need to generate a value of the baseline measurement <span class="math inline">\(b_i\)</span> for each patient, and specify values for <span class="math inline">\(\mu\)</span> (the mean outcome in group C / under <span class="math inline">\(H_0\)</span>), <span class="math inline">\(\mu_B\)</span> (the mean baseline measurement), <span class="math inline">\(\tau_M\)</span> (the minimum detectable effect size, taking the place of <span class="math inline">\(\tau\)</span> in the above equation), <span class="math inline">\(\rho\)</span> (the correlation between baseline and outcome measurement) and <span class="math inline">\(\sigma^2_{\epsilon}\)</span>. Some of these are quantities that might be well-understood from the literature, but others are more speculative.</p>
+<div class="exercise">
+<p><span id="exr:srsancova" class="exercise"><strong>Exercise C.4  </strong></span>Conduct a power simulation by simulating 100 participants in each group with the distributions above, where</p>
+<ul>
+<li><span class="math inline">\(b_i\sim N\left(\mu_B,\,8^2\right)\)</span> for all <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\epsilon_i\sim N\left(0,\,6^2\right)\)</span> for all <span class="math inline">\(i\)</span></li>
+<li><span class="math inline">\(\mu = 60\)</span></li>
+<li><span class="math inline">\(\rho = 0.65\)</span></li>
+<li><span class="math inline">\(\mu_B = 50\)</span></li>
+<li><span class="math inline">\(\tau_M = 3\)</span></li>
+</ul>
+<p>For now, assume that the participants are allocated by simple random sampling. How do your results compare with the results from Exercise <a href="cp3sim.html#exr:srsttest">C.3</a>, and why?</p>
+</div>
+<details>
+<summary>
+Click for solutions
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-110" class="solution"><em>Solution</em>. </span>Now that we have a baseline variable to keep track of, we should create a data frame of participants as we generate them.</p>
+<div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="cp3sim.html#cb280-1" tabindex="-1"></a><span class="do">## Function to simulate one trial (with ANCOVA analysis)</span></span>
+<span id="cb280-2"><a href="cp3sim.html#cb280-2" tabindex="-1"></a>ancova_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb280-3"><a href="cp3sim.html#cb280-3" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
+<span id="cb280-4"><a href="cp3sim.html#cb280-4" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
+<span id="cb280-5"><a href="cp3sim.html#cb280-5" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
+<span id="cb280-6"><a href="cp3sim.html#cb280-6" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
+<span id="cb280-7"><a href="cp3sim.html#cb280-7" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
+<span id="cb280-8"><a href="cp3sim.html#cb280-8" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
+<span id="cb280-9"><a href="cp3sim.html#cb280-9" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
+<span id="cb280-10"><a href="cp3sim.html#cb280-10" tabindex="-1"></a>){</span>
+<span id="cb280-11"><a href="cp3sim.html#cb280-11" tabindex="-1"></a>  <span class="do">## Empty data frame for trial data</span></span>
+<span id="cb280-12"><a href="cp3sim.html#cb280-12" tabindex="-1"></a>  trial_mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow=</span><span class="dv">2</span><span class="sc">*</span>N)</span>
+<span id="cb280-13"><a href="cp3sim.html#cb280-13" tabindex="-1"></a>  trial_df <span class="ot">=</span> <span class="fu">data.frame</span>(trial_mat)</span>
+<span id="cb280-14"><a href="cp3sim.html#cb280-14" tabindex="-1"></a>  <span class="fu">names</span>(trial_df) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;arm&quot;</span>, <span class="st">&quot;outcome&quot;</span>)</span>
+<span id="cb280-15"><a href="cp3sim.html#cb280-15" tabindex="-1"></a>  </span>
+<span id="cb280-16"><a href="cp3sim.html#cb280-16" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
+<span id="cb280-17"><a href="cp3sim.html#cb280-17" tabindex="-1"></a>    bas_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu_B, <span class="at">sd=</span>sd_B)</span>
+<span id="cb280-18"><a href="cp3sim.html#cb280-18" tabindex="-1"></a>    trial_df<span class="sc">$</span>baseline[i] <span class="ot">=</span> bas_i</span>
+<span id="cb280-19"><a href="cp3sim.html#cb280-19" tabindex="-1"></a>    alloc_i <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="dv">1</span>) <span class="co"># Using SRS in this function</span></span>
+<span id="cb280-20"><a href="cp3sim.html#cb280-20" tabindex="-1"></a>    trial_df<span class="sc">$</span>arm[i] <span class="ot">=</span> alloc_i</span>
+<span id="cb280-21"><a href="cp3sim.html#cb280-21" tabindex="-1"></a>    eps_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span>sd_eps)</span>
+<span id="cb280-22"><a href="cp3sim.html#cb280-22" tabindex="-1"></a>    <span class="cf">if</span>(alloc_i <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
+<span id="cb280-23"><a href="cp3sim.html#cb280-23" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
+<span id="cb280-24"><a href="cp3sim.html#cb280-24" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (alloc_i <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
+<span id="cb280-25"><a href="cp3sim.html#cb280-25" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> tm <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
+<span id="cb280-26"><a href="cp3sim.html#cb280-26" tabindex="-1"></a>    }</span>
+<span id="cb280-27"><a href="cp3sim.html#cb280-27" tabindex="-1"></a>    trial_df<span class="sc">$</span>outcome[i] <span class="ot">=</span> out_i</span>
+<span id="cb280-28"><a href="cp3sim.html#cb280-28" tabindex="-1"></a>  }</span>
+<span id="cb280-29"><a href="cp3sim.html#cb280-29" tabindex="-1"></a>  model.fit <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> baseline <span class="sc">+</span> arm, <span class="at">data=</span>trial_df)</span>
+<span id="cb280-30"><a href="cp3sim.html#cb280-30" tabindex="-1"></a>  <span class="fu">summary</span>(model.fit)</span>
+<span id="cb280-31"><a href="cp3sim.html#cb280-31" tabindex="-1"></a>}</span>
+<span id="cb280-32"><a href="cp3sim.html#cb280-32" tabindex="-1"></a></span>
+<span id="cb280-33"><a href="cp3sim.html#cb280-33" tabindex="-1"></a><span class="do">## Function to simulate many trials (with ANCOVA analysis)</span></span>
+<span id="cb280-34"><a href="cp3sim.html#cb280-34" tabindex="-1"></a></span>
+<span id="cb280-35"><a href="cp3sim.html#cb280-35" tabindex="-1"></a>ancova_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb280-36"><a href="cp3sim.html#cb280-36" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb280-37"><a href="cp3sim.html#cb280-37" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
+<span id="cb280-38"><a href="cp3sim.html#cb280-38" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
+<span id="cb280-39"><a href="cp3sim.html#cb280-39" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
+<span id="cb280-40"><a href="cp3sim.html#cb280-40" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
+<span id="cb280-41"><a href="cp3sim.html#cb280-41" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
+<span id="cb280-42"><a href="cp3sim.html#cb280-42" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
+<span id="cb280-43"><a href="cp3sim.html#cb280-43" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
+<span id="cb280-44"><a href="cp3sim.html#cb280-44" tabindex="-1"></a>){</span>
+<span id="cb280-45"><a href="cp3sim.html#cb280-45" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb280-46"><a href="cp3sim.html#cb280-46" tabindex="-1"></a>  </span>
+<span id="cb280-47"><a href="cp3sim.html#cb280-47" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb280-48"><a href="cp3sim.html#cb280-48" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">ancova_trial_srs</span>(N, mu_B, mu, rho, tm, sd_eps, sd_B)</span>
+<span id="cb280-49"><a href="cp3sim.html#cb280-49" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb280-50"><a href="cp3sim.html#cb280-50" tabindex="-1"></a>  }</span>
+<span id="cb280-51"><a href="cp3sim.html#cb280-51" tabindex="-1"></a>  </span>
+<span id="cb280-52"><a href="cp3sim.html#cb280-52" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb280-53"><a href="cp3sim.html#cb280-53" tabindex="-1"></a>  power.est</span>
+<span id="cb280-54"><a href="cp3sim.html#cb280-54" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb281-1"><a href="cp3sim.html#cb281-1" tabindex="-1"></a>sim_vec6 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb281-2"><a href="cp3sim.html#cb281-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb281-3"><a href="cp3sim.html#cb281-3" tabindex="-1"></a>  sim_vec6[i] <span class="ot">=</span> <span class="fu">ancova_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">90</span>, <span class="at">mu_B=</span><span class="dv">50</span>, <span class="at">mu=</span><span class="dv">60</span>, </span>
+<span id="cb281-4"><a href="cp3sim.html#cb281-4" tabindex="-1"></a>                                  <span class="at">rho=</span><span class="fl">0.65</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd_eps=</span><span class="dv">6</span>, <span class="at">sd_B =</span> <span class="dv">8</span>)</span>
+<span id="cb281-5"><a href="cp3sim.html#cb281-5" tabindex="-1"></a>}</span>
+<span id="cb281-6"><a href="cp3sim.html#cb281-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec6)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-187"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-187-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
+<p class="caption">
+Figure C.6: Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with <span class="math inline">\(N=75\)</span>, assuming an ANCOVA analysis.
+</p>
+</div>
+<p>The power is much higher than for our t-test simulation with <span class="math inline">\(N=100\)</span>. This is because the variance of the treatment effect estimate is lower for ANCOVA for the t-test (by a factor of <span class="math inline">\(1-\rho^2\)</span>), as we saw in Section <a href="rct-analysis.html#ancova-var">4.3.1.2</a>.</p>
+</div>
+</details>
+</div>
+<div id="conclusion" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">C.3</span> Conclusion<a href="cp3sim.html#conclusion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We could extend this in many ways to better understand the uncertainty around the power for a given sample size. For example:</p>
+<ul>
+<li>Trying different allocation methods</li>
+<li>Incorporating uncertainty around quantities like <span class="math inline">\(\mu,\,\mu_B,\,\rho\)</span> etc.</li>
+</ul>
+<p>If you still have time you might like to look into these as an extension problem.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-arnold2011simulation" class="csl-entry">
+Arnold, Benjamin F, Daniel R Hogan, John M Colford, and Alan E Hubbard. 2011. <span>“Simulation Methods to Estimate Design Power: An Overview for Applied Research.”</span> <em>BMC Medical Research Methodology</em> 11 (1): 1–10.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="computer-practical-2---allocation-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": false,
+"twitter": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["CT4H_notes.pdf"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+},
+"bookdown": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-16" />
+<meta name="date" content="2025-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -361,6 +361,26 @@ div.csl-indent {
 <li class="chapter" data-level="B.3.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="C" data-path="cp3sim.html"><a href="cp3sim.html"><i class="fa fa-check"></i><b>C</b> Computer Practical 3 - Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="cp3sim.html"><a href="cp3sim.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>C.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="C.2" data-path="cp3sim.html"><a href="cp3sim.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>C.2</b> Power simulation for ANCOVA</a></li>
+<li class="chapter" data-level="C.3" data-path="cp3sim.html"><a href="cp3sim.html#conclusion"><i class="fa fa-check"></i><b>C.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html"><i class="fa fa-check"></i><b>D</b> Computer practical 4 - Analysis for Binary and Survival data</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#binary-outcome-data"><i class="fa fa-check"></i><b>D.1</b> Binary outcome data</a>
+<ul>
+<li class="chapter" data-level="D.1.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#confidence-intervals"><i class="fa fa-check"></i><b>D.1.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="D.1.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2logreg"><i class="fa fa-check"></i><b>D.1.2</b> Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2-surv"><i class="fa fa-check"></i><b>D.2</b> Analysis for Survival data</a>
+<ul>
+<li class="chapter" data-level="D.2.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>D.2.1</b> Fitting a survival curve</a></li>
+<li class="chapter" data-level="D.2.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>D.2.2</b> Comparing survival curves</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>D.3</b> Extension problem: Sample size by simulation (part II)</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -437,42 +457,43 @@ where <span class="math inline">\(n,\,m\)</span> are the corresponding totals ov
 </ul>
 <p>Note that <span class="math inline">\(m=m_C + m_T\)</span> and <span class="math inline">\(t^+ = t^+_C + t^+_T\)</span>.</p>
 <p>For the <code>ovarian</code> data we have</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="comparing-survival-curves.html#cb59-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
-<span id="cb59-2"><a href="comparing-survival-curves.html#cb59-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
-<span id="cb59-3"><a href="comparing-survival-curves.html#cb59-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
-<span id="cb59-4"><a href="comparing-survival-curves.html#cb59-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
-<span id="cb59-5"><a href="comparing-survival-curves.html#cb59-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
-<span id="cb59-6"><a href="comparing-survival-curves.html#cb59-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
-<span id="cb59-7"><a href="comparing-survival-curves.html#cb59-7" tabindex="-1"></a></span>
-<span id="cb59-8"><a href="comparing-survival-curves.html#cb59-8" tabindex="-1"></a><span class="do">## Can now plug these into LR test stat</span></span>
-<span id="cb59-9"><a href="comparing-survival-curves.html#cb59-9" tabindex="-1"></a>LRstat_ov <span class="ot">=</span>  <span class="dv">2</span><span class="sc">*</span>(mC_ov<span class="sc">*</span><span class="fu">log</span>(mC_ov<span class="sc">/</span>tsum_ov_C) <span class="sc">+</span> mT_ov<span class="sc">*</span><span class="fu">log</span>(mT_ov<span class="sc">/</span>tsum_ov_T) <span class="sc">-</span> m_ov<span class="sc">*</span><span class="fu">log</span>(m_ov<span class="sc">/</span>tsum_ov))</span>
-<span id="cb59-10"><a href="comparing-survival-curves.html#cb59-10" tabindex="-1"></a>LRstat_ov</span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="comparing-survival-curves.html#cb55-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb55-2"><a href="comparing-survival-curves.html#cb55-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
+<span id="cb55-3"><a href="comparing-survival-curves.html#cb55-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb55-4"><a href="comparing-survival-curves.html#cb55-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
+<span id="cb55-5"><a href="comparing-survival-curves.html#cb55-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
+<span id="cb55-6"><a href="comparing-survival-curves.html#cb55-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
+<span id="cb55-7"><a href="comparing-survival-curves.html#cb55-7" tabindex="-1"></a></span>
+<span id="cb55-8"><a href="comparing-survival-curves.html#cb55-8" tabindex="-1"></a><span class="do">## Can now plug these into LR test stat</span></span>
+<span id="cb55-9"><a href="comparing-survival-curves.html#cb55-9" tabindex="-1"></a>LRstat_ov <span class="ot">=</span>  <span class="dv">2</span><span class="sc">*</span>(mC_ov<span class="sc">*</span><span class="fu">log</span>(mC_ov<span class="sc">/</span>tsum_ov_C) <span class="sc">+</span> mT_ov<span class="sc">*</span><span class="fu">log</span>(mT_ov<span class="sc">/</span>tsum_ov_T) <span class="sc">-</span> m_ov<span class="sc">*</span><span class="fu">log</span>(m_ov<span class="sc">/</span>tsum_ov))</span>
+<span id="cb55-10"><a href="comparing-survival-curves.html#cb55-10" tabindex="-1"></a>LRstat_ov</span></code></pre></div>
 <pre><code>## [1] 1.114895</code></pre>
 <p>We can find the p-value of this test by</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="comparing-survival-curves.html#cb61-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(LRstat_ov, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="comparing-survival-curves.html#cb57-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(LRstat_ov, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.2910204</code></pre>
 <p>and we find that it isn’t significant. A 95% confidence interval for the difference is given by</p>
 <pre><code>## [1] -0.0013927697  0.0004392714</code></pre>
 <p>Figure <a href="working-with-time-to-event-data.html#fig:ovplotlr">7.6</a> shows the fitted curves, using <span class="math inline">\(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\)</span> for group <span class="math inline">\(X\)</span>, along with the Kaplan Meier estimate of the survival curve. Although there isn’t much data, the exponential distribution looks to be an OK fit.</p>
 <p>For the Myeloid data we can do the same thing</p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="comparing-survival-curves.html#cb64-1" tabindex="-1"></a>mC_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;A&quot;</span>))</span>
-<span id="cb64-2"><a href="comparing-survival-curves.html#cb64-2" tabindex="-1"></a>mT_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;B&quot;</span>))</span>
-<span id="cb64-3"><a href="comparing-survival-curves.html#cb64-3" tabindex="-1"></a>tsum_my_C <span class="ot">=</span> <span class="fu">sum</span>(myeloid<span class="sc">$</span>futime[myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;A&quot;</span>])</span>
-<span id="cb64-4"><a href="comparing-survival-curves.html#cb64-4" tabindex="-1"></a>tsum_my_T <span class="ot">=</span> <span class="fu">sum</span>(myeloid<span class="sc">$</span>futime[myeloid<span class="sc">$</span>trt <span class="sc">==</span> <span class="st">&quot;B&quot;</span>])</span>
-<span id="cb64-5"><a href="comparing-survival-curves.html#cb64-5" tabindex="-1"></a>m_my <span class="ot">=</span> mT_my <span class="sc">+</span> mC_my</span>
-<span id="cb64-6"><a href="comparing-survival-curves.html#cb64-6" tabindex="-1"></a>tsum_my <span class="ot">=</span> tsum_my_C <span class="sc">+</span> tsum_my_T</span>
-<span id="cb64-7"><a href="comparing-survival-curves.html#cb64-7" tabindex="-1"></a></span>
-<span id="cb64-8"><a href="comparing-survival-curves.html#cb64-8" tabindex="-1"></a><span class="do">## Can now plug these into LR test stat</span></span>
-<span id="cb64-9"><a href="comparing-survival-curves.html#cb64-9" tabindex="-1"></a>LRstat_my <span class="ot">=</span>  <span class="dv">2</span><span class="sc">*</span>(mC_my<span class="sc">*</span><span class="fu">log</span>(mC_my<span class="sc">/</span>tsum_my_C) <span class="sc">+</span> mT_my<span class="sc">*</span><span class="fu">log</span>(mT_my<span class="sc">/</span>tsum_my_T) <span class="sc">-</span> m_my<span class="sc">*</span><span class="fu">log</span>(m_my<span class="sc">/</span>tsum_my))</span>
-<span id="cb64-10"><a href="comparing-survival-curves.html#cb64-10" tabindex="-1"></a>LRstat_my</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="comparing-survival-curves.html#cb60-1" tabindex="-1"></a>mC_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;A&quot;</span>))</span>
+<span id="cb60-2"><a href="comparing-survival-curves.html#cb60-2" tabindex="-1"></a>mT_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;B&quot;</span>))</span>
+<span id="cb60-3"><a href="comparing-survival-curves.html#cb60-3" tabindex="-1"></a>tsum_my_C <span class="ot">=</span> <span class="fu">sum</span>(myeloid<span class="sc">$</span>futime[myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;A&quot;</span>])</span>
+<span id="cb60-4"><a href="comparing-survival-curves.html#cb60-4" tabindex="-1"></a>tsum_my_T <span class="ot">=</span> <span class="fu">sum</span>(myeloid<span class="sc">$</span>futime[myeloid<span class="sc">$</span>trt <span class="sc">==</span> <span class="st">&quot;B&quot;</span>])</span>
+<span id="cb60-5"><a href="comparing-survival-curves.html#cb60-5" tabindex="-1"></a>m_my <span class="ot">=</span> mT_my <span class="sc">+</span> mC_my</span>
+<span id="cb60-6"><a href="comparing-survival-curves.html#cb60-6" tabindex="-1"></a>tsum_my <span class="ot">=</span> tsum_my_C <span class="sc">+</span> tsum_my_T</span>
+<span id="cb60-7"><a href="comparing-survival-curves.html#cb60-7" tabindex="-1"></a></span>
+<span id="cb60-8"><a href="comparing-survival-curves.html#cb60-8" tabindex="-1"></a><span class="do">## Can now plug these into LR test stat</span></span>
+<span id="cb60-9"><a href="comparing-survival-curves.html#cb60-9" tabindex="-1"></a>LRstat_my <span class="ot">=</span>  <span class="dv">2</span><span class="sc">*</span>(mC_my<span class="sc">*</span><span class="fu">log</span>(mC_my<span class="sc">/</span>tsum_my_C) <span class="sc">+</span> mT_my<span class="sc">*</span><span class="fu">log</span>(mT_my<span class="sc">/</span>tsum_my_T) <span class="sc">-</span> m_my<span class="sc">*</span><span class="fu">log</span>(m_my<span class="sc">/</span>tsum_my))</span>
+<span id="cb60-10"><a href="comparing-survival-curves.html#cb60-10" tabindex="-1"></a>LRstat_my</span></code></pre></div>
 <pre><code>## [1] 11.95293</code></pre>
 <p>Again, we refer this to <span class="math inline">\(\chi^2_1\)</span>:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="comparing-survival-curves.html#cb66-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(LRstat_my, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="comparing-survival-curves.html#cb62-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(LRstat_my, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.0005456153</code></pre>
 <p>This time we find that the difference is significant at even a very low level, and the 95% CI is given by</p>
 <pre><code>## [1] -3.028814e-04 -8.108237e-05</code></pre>
 <p>Although the confidence around <span class="math inline">\(\hat\lambda_X\)</span> is high (ie. small standard error of the estimate), because of the large amount of data, the fit appears to actually be rather poor (recall Figure <a href="working-with-time-to-event-data.html#fig:myplotlr">7.7</a>), mainly because of the inflexibility of the exponential distribution.</p>
 </div>
+<p>One feature of the exponential model that is convenient is that the hazard function is constant. Comparisons between treatment groups in survival trials are often summarised by the <strong>hazard ratio</strong>: the ratio of the hazard functions for the two groups. In general this is a function of <span class="math inline">\(t\)</span>, but for two exponential hazard functions it is simply the ratio of the <span class="math inline">\(\lambda\)</span> values.</p>
 <p>We could also perform LR tests with the fitted Weibull distributions, but instead we will continue on through some more commonly used methods.</p>
 </div>
 <div id="non-parametric-the-log-rank-test" class="section level2 hasAnchor" number="8.2">
@@ -560,39 +581,39 @@ We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in th
 ## 11  563    5    0 0.4166667    7    1 0.5833333  12   1
 ## 12  638    5    1 0.4545455    6    0 0.5454545  11   1</code></pre>
 <p>From this, we can find the <span class="math inline">\(v_{j}\)</span> and the test statistic <span class="math inline">\(\frac{U^2}{V}\)</span>:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="comparing-survival-curves.html#cb70-1" tabindex="-1"></a><span class="co"># Add up the differences</span></span>
-<span id="cb70-2"><a href="comparing-survival-curves.html#cb70-2" tabindex="-1"></a>UC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Cj <span class="sc">-</span> logrank_df<span class="sc">$</span>e_Cj)</span>
-<span id="cb70-3"><a href="comparing-survival-curves.html#cb70-3" tabindex="-1"></a>vCj_vec <span class="ot">=</span> <span class="fu">sapply</span>(</span>
-<span id="cb70-4"><a href="comparing-survival-curves.html#cb70-4" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span>n_event, </span>
-<span id="cb70-5"><a href="comparing-survival-curves.html#cb70-5" tabindex="-1"></a>  <span class="cf">function</span>(j){</span>
-<span id="cb70-6"><a href="comparing-survival-curves.html#cb70-6" tabindex="-1"></a>    nCj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_Cj[j]</span>
-<span id="cb70-7"><a href="comparing-survival-curves.html#cb70-7" tabindex="-1"></a>    nTj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_Tj[j]</span>
-<span id="cb70-8"><a href="comparing-survival-curves.html#cb70-8" tabindex="-1"></a>    dj <span class="ot">=</span> logrank_df<span class="sc">$</span>d_j[j]</span>
-<span id="cb70-9"><a href="comparing-survival-curves.html#cb70-9" tabindex="-1"></a>    nj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_j[j]</span>
-<span id="cb70-10"><a href="comparing-survival-curves.html#cb70-10" tabindex="-1"></a>    </span>
-<span id="cb70-11"><a href="comparing-survival-curves.html#cb70-11" tabindex="-1"></a>    (nCj<span class="sc">*</span>nTj<span class="sc">*</span>dj<span class="sc">*</span>(nj<span class="dv">-1</span>))<span class="sc">/</span>((nj<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(nj<span class="dv">-1</span>))</span>
-<span id="cb70-12"><a href="comparing-survival-curves.html#cb70-12" tabindex="-1"></a>})</span>
-<span id="cb70-13"><a href="comparing-survival-curves.html#cb70-13" tabindex="-1"></a>VC <span class="ot">=</span> <span class="fu">sum</span>(vCj_vec)</span>
-<span id="cb70-14"><a href="comparing-survival-curves.html#cb70-14" tabindex="-1"></a>cs_ov_stat <span class="ot">=</span> (UC<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>VC</span>
-<span id="cb70-15"><a href="comparing-survival-curves.html#cb70-15" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(cs_ov_stat, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="comparing-survival-curves.html#cb66-1" tabindex="-1"></a><span class="co"># Add up the differences</span></span>
+<span id="cb66-2"><a href="comparing-survival-curves.html#cb66-2" tabindex="-1"></a>UC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Cj <span class="sc">-</span> logrank_df<span class="sc">$</span>e_Cj)</span>
+<span id="cb66-3"><a href="comparing-survival-curves.html#cb66-3" tabindex="-1"></a>vCj_vec <span class="ot">=</span> <span class="fu">sapply</span>(</span>
+<span id="cb66-4"><a href="comparing-survival-curves.html#cb66-4" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span>n_event, </span>
+<span id="cb66-5"><a href="comparing-survival-curves.html#cb66-5" tabindex="-1"></a>  <span class="cf">function</span>(j){</span>
+<span id="cb66-6"><a href="comparing-survival-curves.html#cb66-6" tabindex="-1"></a>    nCj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_Cj[j]</span>
+<span id="cb66-7"><a href="comparing-survival-curves.html#cb66-7" tabindex="-1"></a>    nTj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_Tj[j]</span>
+<span id="cb66-8"><a href="comparing-survival-curves.html#cb66-8" tabindex="-1"></a>    dj <span class="ot">=</span> logrank_df<span class="sc">$</span>d_j[j]</span>
+<span id="cb66-9"><a href="comparing-survival-curves.html#cb66-9" tabindex="-1"></a>    nj <span class="ot">=</span> logrank_df<span class="sc">$</span>n_j[j]</span>
+<span id="cb66-10"><a href="comparing-survival-curves.html#cb66-10" tabindex="-1"></a>    </span>
+<span id="cb66-11"><a href="comparing-survival-curves.html#cb66-11" tabindex="-1"></a>    (nCj<span class="sc">*</span>nTj<span class="sc">*</span>dj<span class="sc">*</span>(nj<span class="dv">-1</span>))<span class="sc">/</span>((nj<span class="sc">^</span><span class="dv">2</span>)<span class="sc">*</span>(nj<span class="dv">-1</span>))</span>
+<span id="cb66-12"><a href="comparing-survival-curves.html#cb66-12" tabindex="-1"></a>})</span>
+<span id="cb66-13"><a href="comparing-survival-curves.html#cb66-13" tabindex="-1"></a>VC <span class="ot">=</span> <span class="fu">sum</span>(vCj_vec)</span>
+<span id="cb66-14"><a href="comparing-survival-curves.html#cb66-14" tabindex="-1"></a>cs_ov_stat <span class="ot">=</span> (UC<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>VC</span>
+<span id="cb66-15"><a href="comparing-survival-curves.html#cb66-15" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(cs_ov_stat, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3025911</code></pre>
 <p>For the simpler, more conservative, version of the log-rank test, we have</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="comparing-survival-curves.html#cb72-1" tabindex="-1"></a>EC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>e_Cj)</span>
-<span id="cb72-2"><a href="comparing-survival-curves.html#cb72-2" tabindex="-1"></a>ET <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>e_Tj)</span>
-<span id="cb72-3"><a href="comparing-survival-curves.html#cb72-3" tabindex="-1"></a>OC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Cj)</span>
-<span id="cb72-4"><a href="comparing-survival-curves.html#cb72-4" tabindex="-1"></a>OT <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Tj)</span>
-<span id="cb72-5"><a href="comparing-survival-curves.html#cb72-5" tabindex="-1"></a></span>
-<span id="cb72-6"><a href="comparing-survival-curves.html#cb72-6" tabindex="-1"></a>test_stat <span class="ot">=</span> ((EC<span class="sc">-</span>OC)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>EC <span class="sc">+</span> ((ET<span class="sc">-</span>OT)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>ET</span>
-<span id="cb72-7"><a href="comparing-survival-curves.html#cb72-7" tabindex="-1"></a></span>
-<span id="cb72-8"><a href="comparing-survival-curves.html#cb72-8" tabindex="-1"></a>test_stat</span></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="comparing-survival-curves.html#cb68-1" tabindex="-1"></a>EC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>e_Cj)</span>
+<span id="cb68-2"><a href="comparing-survival-curves.html#cb68-2" tabindex="-1"></a>ET <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>e_Tj)</span>
+<span id="cb68-3"><a href="comparing-survival-curves.html#cb68-3" tabindex="-1"></a>OC <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Cj)</span>
+<span id="cb68-4"><a href="comparing-survival-curves.html#cb68-4" tabindex="-1"></a>OT <span class="ot">=</span> <span class="fu">sum</span>(logrank_df<span class="sc">$</span>d_Tj)</span>
+<span id="cb68-5"><a href="comparing-survival-curves.html#cb68-5" tabindex="-1"></a></span>
+<span id="cb68-6"><a href="comparing-survival-curves.html#cb68-6" tabindex="-1"></a>test_stat <span class="ot">=</span> ((EC<span class="sc">-</span>OC)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>EC <span class="sc">+</span> ((ET<span class="sc">-</span>OT)<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>ET</span>
+<span id="cb68-7"><a href="comparing-survival-curves.html#cb68-7" tabindex="-1"></a></span>
+<span id="cb68-8"><a href="comparing-survival-curves.html#cb68-8" tabindex="-1"></a>test_stat</span></code></pre></div>
 <pre><code>## [1] 1.057393</code></pre>
 <p>and we can find the p-value by</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="comparing-survival-curves.html#cb74-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(test_stat, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="comparing-survival-curves.html#cb70-1" tabindex="-1"></a><span class="dv">1</span><span class="sc">-</span><span class="fu">pchisq</span>(test_stat, <span class="at">df=</span><span class="dv">1</span>)</span></code></pre></div>
 <pre><code>## [1] 0.3038106</code></pre>
 <p>As we expected, slightly larger, but not much different from the first version. These values are also pretty close to the results of our LR test in Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>, where we had <span class="math inline">\(p=0.291\)</span>.</p>
 <p>Since the Myeloid dataset is much bigger, we won’t go through the rigmarole of making the table, but will instead use an inbuilt R function from the <code>survival</code> package (more on this in practicals).</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="comparing-survival-curves.html#cb76-1" tabindex="-1"></a>myeloid<span class="sc">$</span>trt <span class="ot">=</span> <span class="fu">as.factor</span>(myeloid<span class="sc">$</span>trt)</span>
-<span id="cb76-2"><a href="comparing-survival-curves.html#cb76-2" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(futime, death) <span class="sc">~</span> trt, <span class="at">data =</span> myeloid, <span class="at">rho=</span><span class="dv">0</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="comparing-survival-curves.html#cb72-1" tabindex="-1"></a>myeloid<span class="sc">$</span>trt <span class="ot">=</span> <span class="fu">as.factor</span>(myeloid<span class="sc">$</span>trt)</span>
+<span id="cb72-2"><a href="comparing-survival-curves.html#cb72-2" tabindex="-1"></a><span class="fu">survdiff</span>(<span class="fu">Surv</span>(futime, death) <span class="sc">~</span> trt, <span class="at">data =</span> myeloid, <span class="at">rho=</span><span class="dv">0</span>)</span></code></pre></div>
 <pre><code>## Call:
 ## survdiff(formula = Surv(futime, death) ~ trt, data = myeloid, 
 ##     rho = 0)
@@ -703,7 +724,7 @@ Since the survival function is always between 0 and 1, we can see that the value
 <div class="example">
 <p><span id="exm:unlabeled-div-47" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
 <p>For the <code>ovarian</code> dataset</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="comparing-survival-curves.html#cb78-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx, <span class="at">data=</span>ovarian)</span></code></pre></div>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="comparing-survival-curves.html#cb74-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx, <span class="at">data=</span>ovarian)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(futime, fustat) ~ rx, data = ovarian)
 ## 
@@ -713,7 +734,7 @@ Since the survival function is always between 0 and 1, we can see that the value
 ## Likelihood ratio test=1.05  on 1 df, p=0.3052
 ## n= 26, number of events= 12</code></pre>
 <p>and for the <code>myeloid1</code> dataset</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="comparing-survival-curves.html#cb80-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, death)<span class="sc">~</span>trt, <span class="at">data=</span>myeloid)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="comparing-survival-curves.html#cb76-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, death)<span class="sc">~</span>trt, <span class="at">data=</span>myeloid)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(futime, death) ~ trt, data = myeloid)
 ## 
@@ -724,7 +745,7 @@ Since the survival function is always between 0 and 1, we can see that the value
 ## n= 646, number of events= 320</code></pre>
 <p>We see that for both results, our p-values are close to what we have found with the log rank test.</p>
 <p>We can now account for more baseline covariates. For the <code>ovarian</code> data we can include <code>age</code> and <code>resid.ds</code> (whether residual disease is present):</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="comparing-survival-curves.html#cb82-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx<span class="sc">+</span>age<span class="sc">+</span>resid.ds, <span class="at">data=</span>ovarian)</span></code></pre></div>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="comparing-survival-curves.html#cb78-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx<span class="sc">+</span>age<span class="sc">+</span>resid.ds, <span class="at">data=</span>ovarian)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(futime, fustat) ~ rx + age + resid.ds, data = ovarian)
 ## 
@@ -737,7 +758,7 @@ Since the survival function is always between 0 and 1, we can see that the value
 ## n= 26, number of events= 12</code></pre>
 <p>What this shows is that the most significant factor by far is the particpant’s age, with the hazard function increasing as age increases. The coefficient for treatment group (<code>rx</code>) has increased in magnitude and the p-value has decreased now that age is being adjusted for (although it is still not significant).</p>
 <p>We can do the same for the <code>myeloid</code> data:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="comparing-survival-curves.html#cb84-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, death)<span class="sc">~</span>trt<span class="sc">+</span>sex, <span class="at">data=</span>myeloid)</span></code></pre></div>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="comparing-survival-curves.html#cb80-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, death)<span class="sc">~</span>trt<span class="sc">+</span>sex, <span class="at">data=</span>myeloid)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(futime, death) ~ trt + sex, data = myeloid)
 ## 

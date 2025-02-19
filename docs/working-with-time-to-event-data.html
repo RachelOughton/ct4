@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-16" />
+<meta name="date" content="2025-02-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -361,6 +361,26 @@ div.csl-indent {
 <li class="chapter" data-level="B.3.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
+<li class="chapter" data-level="C" data-path="cp3sim.html"><a href="cp3sim.html"><i class="fa fa-check"></i><b>C</b> Computer Practical 3 - Sample size by simulation</a>
+<ul>
+<li class="chapter" data-level="C.1" data-path="cp3sim.html"><a href="cp3sim.html#power-simulation-for-a-t-test"><i class="fa fa-check"></i><b>C.1</b> Power simulation for a t-test</a></li>
+<li class="chapter" data-level="C.2" data-path="cp3sim.html"><a href="cp3sim.html#power-simulation-for-ancova"><i class="fa fa-check"></i><b>C.2</b> Power simulation for ANCOVA</a></li>
+<li class="chapter" data-level="C.3" data-path="cp3sim.html"><a href="cp3sim.html#conclusion"><i class="fa fa-check"></i><b>C.3</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="D" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html"><i class="fa fa-check"></i><b>D</b> Computer practical 4 - Analysis for Binary and Survival data</a>
+<ul>
+<li class="chapter" data-level="D.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#binary-outcome-data"><i class="fa fa-check"></i><b>D.1</b> Binary outcome data</a>
+<ul>
+<li class="chapter" data-level="D.1.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#confidence-intervals"><i class="fa fa-check"></i><b>D.1.1</b> Confidence Intervals</a></li>
+<li class="chapter" data-level="D.1.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2logreg"><i class="fa fa-check"></i><b>D.1.2</b> Logistic regression</a></li>
+</ul></li>
+<li class="chapter" data-level="D.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2-surv"><i class="fa fa-check"></i><b>D.2</b> Analysis for Survival data</a>
+<ul>
+<li class="chapter" data-level="D.2.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>D.2.1</b> Fitting a survival curve</a></li>
+<li class="chapter" data-level="D.2.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>D.2.2</b> Comparing survival curves</a></li>
+</ul></li>
+<li class="chapter" data-level="D.3" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>D.3</b> Extension problem: Sample size by simulation (part II)</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -381,20 +401,20 @@ div.csl-indent {
             <section class="normal" id="section-">
 <div id="working-with-time-to-event-data" class="section level1 hasAnchor" number="7">
 <h1><span class="header-section-number">7</span> Working with time-to-event data<a href="working-with-time-to-event-data.html#working-with-time-to-event-data" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>A data type that is commonly found in clinical trials is <strong>time to event data</strong>. This type of data deals with the amount of time that elapses before a particular event happens. As a sub-field of statistics, survival analysis has been around for a long time, as people have thought about and worked data like mortality records (<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/1740-9713.01421">most notably John Graunt, who used the ‘Bills of Mortality’ during the 1600s to better understand the plague and other causes of death</a>). However, it developed rapidly during the many cancer related clinical trials of the 1960s and 1970s. In these cases, the event in question was very often death, and which is why this branch of statistics came to be known as <strong>survival analysis</strong>. However, the event can be many other things, and indeed can be a positive outcome (for example being cured of some condition). Time-to-event data also appears in other applications, such as engineering (eg. monitoring the reliability of a machine) and marketing (eg. thinking of the time-to-purchase). As well as the books already mentioned, this chapter makes use of <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>.</p>
+<p>A data type that is commonly found in clinical trials is <strong>time to event data</strong>. This type of data captures the amount of time that elapses before a particular event happens. As a sub-field of statistics, survival analysis has been around for a long time, as people have thought about and worked with data like mortality records (<a href="https://rss.onlinelibrary.wiley.com/doi/full/10.1111/1740-9713.01421">most notably John Graunt, who used the ‘Bills of Mortality’ during the 1600s to better understand the plague and other causes of death</a>). However, it developed rapidly during the many cancer related clinical trials of the 1960s and 1970s. In these cases, the event in question was very often death, and which is why this branch of statistics came to be known as <strong>survival analysis</strong>. However, the event can be many other things, and indeed can be a positive outcome (for example being cured of some condition). Time-to-event data also appears in other applications, such as engineering (eg. monitoring the reliability of a machine) and marketing (eg. thinking of the time-to-purchase). As well as the books already mentioned, this chapter makes use of <span class="citation">Collett (<a href="#ref-collett_surv">2003b</a>)</span>.</p>
 <p>Usually, survival data is given in terms of time, but it can also be the number of times something happens (for example, the number of clinic appointments attended) before the event in question occurs.</p>
 <p>Survival data is trickier to handle than the data types we have seen so far, for two main reasons. Firstly (and simply) survival data is very often skewed, so even though it is (usually) continuous, we can’t just treat it as normally distributed. Secondly (and more complicatedly, if that’s a word) with time-to-event data we don’t usually observe the full dataset.</p>
 <div id="censored-times" class="section level2 hasAnchor" number="7.1">
 <h2><span class="header-section-number">7.1</span> Censored times<a href="working-with-time-to-event-data.html#censored-times" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won’t observe the event. This could be because it doesn’t happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal), or simply stops attending follow-up appointments after a certain times. For these participants, we do know that they had not experienced the event up to some time <span class="math inline">\(t\)</span>, but we don’t know what happened next. All we know is that their time-to-event or <strong>survival time</strong> is greater than that time <span class="math inline">\(t\)</span>. These partial observations are known as <strong>censored</strong> times, and in particular as <strong>right-censored</strong> times, because the event happens <em>after</em> the censored time. It is possible (but less common) to have <em>left-censored</em> or <em>interval-censored</em> data, but in this course we will deal only with right-censoring.</p>
 <div class="figure"><span style="display:block;" id="fig:censor"></span>
-<img src="CT4H_notes_files/figure-html/censor-1.png" alt="An example of some censored data." width="672" />
+<img src="CT4H_notes_files/figure-html/censor-1.png" alt="An example of some censored data. The dashed line at time 10 indicates the end of the trial period." width="672" />
 <p class="caption">
-Figure 7.1: An example of some censored data.
+Figure 7.1: An example of some censored data. The dashed line at time 10 indicates the end of the trial period.
 </p>
 </div>
 <p>If we were to treat censored times as observations, ie. as though the event had happened at time <span class="math inline">\(t\)</span>, we would bias the results of the trial very seriously. The survival times reported would be systematically shorter than the true ones. For example, in the dataset shown in Figure <a href="working-with-time-to-event-data.html#fig:censor">7.1</a>, we would estimate the survival probability at time 10 as 0.2, since only two of the 10 participants were still in the trial after time 10. But it may well be that some of the participants whose observations were censored before <span class="math inline">\(t=10\)</span> were still alive at <span class="math inline">\(t=10\)</span>.</p>
-<p>If we were to remove the censored times, and only analyse the data in which the event was observed during the linespan of the trial, we would be losing data and therefore valuable information. This approach may well also lead to bias, for example if some subset of patients died quite soon into the trial, but the remainder lived a long time (past the end of the trial). If our analysis ignores the survivors, we are likely to underestimate the general survival time. In the dataset in Figure <a href="working-with-time-to-event-data.html#fig:censor">7.1</a> there are five participants (3,6,7,8,10) whom we are no longer able to observe at time 10, but of whom none had experienced the event by the point at which they were censored.</p>
+<p>If we were to remove the censored times, and only analyse the data in which the event was observed during the lifespan of the trial, we would be losing data and therefore valuable information. This approach may well also lead to bias, for example if some subset of patients died quite soon into the trial, but the remainder lived a long time (past the end of the trial). If our analysis ignores the survivors, we are likely to underestimate the general survival time. In the dataset in Figure <a href="working-with-time-to-event-data.html#fig:censor">7.1</a> there are five participants (3,6,7,8,10) whom we are no longer able to observe at time 10, but of whom none had experienced the event by the point at which they were censored.</p>
 <p>So we know that we need to somehow include these censored times in our analysis. How we do so will depend on our approach.</p>
 </div>
 <div id="survhaz" class="section level2 hasAnchor" number="7.2">
@@ -450,156 +470,324 @@ where <span class="math inline">\(s_k&lt;s_{k+1}\;\forall{k}\)</span>, <span cla
 <p><span class="math display">\[Q = \frac{\text{Number who die in that interval}}{\text{Number at risk of death in that interval}}.\]</span>
 More precisely, let’s say that deaths are observed at times <span class="math inline">\(t_1&lt;t_2&lt;\ldots &lt; t_n\)</span>, and that the number of deaths at time <span class="math inline">\(t_i\)</span> is <span class="math inline">\(d_i\)</span> out of a possible <span class="math inline">\(n_i\)</span>. Then for some time <span class="math inline">\(t\in\left[t_J,\,t_{J+1}\right)\)</span>, the Kaplan-Meier estimate of <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> is</p>
 <p><span class="math display">\[\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - d_j\right)}{n_j}.\]</span></p>
-<p>Notice that the number of people at risk at time <span class="math inline">\(t_{j+1}\)</span>, <span class="math inline">\(n_{j+1}\)</span>, will be the number of people at risk at time <span class="math inline">\(t_j\)</span> (which was <span class="math inline">\(n_j\)</span>), minus any who died at time <span class="math inline">\(t_j\)</span> (which we write as <span class="math inline">\(d_j\)</span>) and any who were censored in the interval <span class="math inline">\(\left[t_j,\,t_{j+1}\right)\)</span>. In this way, the Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.</p>
+<p>Notice that the number of people at risk at time <span class="math inline">\(t_{j+1}\)</span>, denoted <span class="math inline">\(n_{j+1}\)</span>, will be the number of people at risk at time <span class="math inline">\(t_j\)</span> (which was <span class="math inline">\(n_j\)</span>), minus any who died at time <span class="math inline">\(t_j\)</span> (which we write as <span class="math inline">\(d_j\)</span>) and any who were censored in the interval <span class="math inline">\(\left[t_j,\,t_{j+1}\right)\)</span>. In this way, the Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.</p>
+<p><span class="citation">Greenwood (<a href="#ref-greenwood1926natural">1926</a>)</span> derived an approximation to the variance of the Kaplan-Meier estimate of survival curve, given by</p>
+<p><span class="math display">\[\hat{V}\left(t\right) = \left(\hat{\operatorname{S}}\left(t\right)\right)^2\sum\limits_{t_{i}\leq{t}} \frac{d_i}{n_i\left(n_i-d_i\right)} \]</span></p>
+<p>This uses the Delta method (which we’ve seen before in the binary outcome chapters) and makes the assumption that events at time <span class="math inline">\(t_i\)</span> are independent binomial draws from a population of size <span class="math inline">\(n_i\)</span>. We can use this to form confidence intervals for the survival curve, and indeed <code>ggsurvfit</code> can add these automatically to plots.</p>
 <div class="example">
 <p><span id="exm:surveg1" class="example"><strong>Example 7.1  </strong></span><span class="citation">Edmonson et al. (<a href="#ref-edmonson1979prognosis">1979</a>)</span> conducted a trial on patients with advanced ovarian cancer, comparing cyclophosphamide (group <span class="math inline">\(C\)</span>) with a mixture of cyclophosphamide and adriamycin (group <span class="math inline">\(T\)</span>). Patients were monitored, and their time of death was recorded, or a censoring time if they were alive at their last observation. The data are shown in Table <a href="working-with-time-to-event-data.html#tab:ovdata">7.1</a>.</p>
-<table>
-<caption><span id="tab:ovdata">Table 7.1: </span>Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.</caption>
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:600px; ">
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:ovdata">Table 7.1: </span><span id="tab:ovdata">Table 7.2: </span>Ovarian cancer data. FU time gives the survival or censoring time, and FU status the type: 0 for a censored observation, 1 for death.
+</caption>
 <thead>
-<tr class="header">
-<th align="left"></th>
-<th align="right">FU_time</th>
-<th align="right">FU_status</th>
+<tr>
+<th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;">
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+FU_time
+</th>
+<th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;">
+FU_status
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">1</td>
-<td align="right">59</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+1
+</td>
+<td style="text-align:right;">
+59
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">2</td>
-<td align="right">115</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+2
+</td>
+<td style="text-align:right;">
+115
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">3</td>
-<td align="right">156</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+3
+</td>
+<td style="text-align:right;">
+156
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">22</td>
-<td align="right">268</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:right;">
+268
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">23</td>
-<td align="right">329</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+23
+</td>
+<td style="text-align:right;">
+329
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">24</td>
-<td align="right">353</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:right;">
+353
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">25</td>
-<td align="right">365</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+25
+</td>
+<td style="text-align:right;">
+365
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">26</td>
-<td align="right">377</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+26
+</td>
+<td style="text-align:right;">
+377
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">4</td>
-<td align="right">421</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+4
+</td>
+<td style="text-align:right;">
+421
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">5</td>
-<td align="right">431</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+5
+</td>
+<td style="text-align:right;">
+431
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">6</td>
-<td align="right">448</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+6
+</td>
+<td style="text-align:right;">
+448
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">7</td>
-<td align="right">464</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+7
+</td>
+<td style="text-align:right;">
+464
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">8</td>
-<td align="right">475</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+8
+</td>
+<td style="text-align:right;">
+475
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">9</td>
-<td align="right">477</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+9
+</td>
+<td style="text-align:right;">
+477
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">10</td>
-<td align="right">563</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+10
+</td>
+<td style="text-align:right;">
+563
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="even">
-<td align="left">11</td>
-<td align="right">638</td>
-<td align="right">1</td>
+<tr>
+<td style="text-align:left;">
+11
+</td>
+<td style="text-align:right;">
+638
+</td>
+<td style="text-align:right;">
+1
+</td>
 </tr>
-<tr class="odd">
-<td align="left">12</td>
-<td align="right">744</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+12
+</td>
+<td style="text-align:right;">
+744
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">13</td>
-<td align="right">769</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+13
+</td>
+<td style="text-align:right;">
+769
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">14</td>
-<td align="right">770</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+14
+</td>
+<td style="text-align:right;">
+770
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">15</td>
-<td align="right">803</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+15
+</td>
+<td style="text-align:right;">
+803
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">16</td>
-<td align="right">855</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+16
+</td>
+<td style="text-align:right;">
+855
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">17</td>
-<td align="right">1040</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+17
+</td>
+<td style="text-align:right;">
+1040
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">18</td>
-<td align="right">1106</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+18
+</td>
+<td style="text-align:right;">
+1106
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">19</td>
-<td align="right">1129</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+19
+</td>
+<td style="text-align:right;">
+1129
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">20</td>
-<td align="right">1206</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:right;">
+1206
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
-<tr class="even">
-<td align="left">21</td>
-<td align="right">1227</td>
-<td align="right">0</td>
+<tr>
+<td style="text-align:left;">
+21
+</td>
+<td style="text-align:right;">
+1227
+</td>
+<td style="text-align:right;">
+0
+</td>
 </tr>
 </tbody>
 </table>
+</div>
 <p>We see that there are 26 individuals, and we have the time of death for 12 of them. The remaining 14 observations are censored.
-We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in Table <a href="working-with-time-to-event-data.html#tab:ovkm">7.2</a>. The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve.</p>
+We can use this data to calculate the Kaplan-Meier estimator of the survival curve, as shown in Table <a href="working-with-time-to-event-data.html#tab:ovkm">7.3</a>. The columns are (from left to right): time <span class="math inline">\(t_j\)</span>; number at risk <span class="math inline">\(n_j\)</span>; number of events/deaths <span class="math inline">\(d_j\)</span>; number of censorings in <span class="math inline">\(\left[t_{j-1},\,t_j\right)\)</span>; estimate of survival curve and standard error of the estimate (using Greenwood’s formula).</p>
 <table>
 <caption>
-<span id="tab:ovkm">Table 7.2: </span><span id="tab:ovkm">Table 7.3: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.
+<span id="tab:ovkm">Table 7.3: </span><span id="tab:ovkm">Table 7.4: </span>Kaplan-Meier estimator calculations for ovarian cancer dataset.
 </caption>
 <thead>
 <tr>
@@ -617,6 +805,9 @@ n_cens
 </th>
 <th style="text-align:right;">
 survival
+</th>
+<th style="text-align:right;">
+SE_surv
 </th>
 </tr>
 </thead>
@@ -637,6 +828,9 @@ survival
 <td style="text-align:right;font-weight: bold;">
 0.9615385
 </td>
+<td style="text-align:right;">
+0.0377146
+</td>
 </tr>
 <tr>
 <td style="text-align:right;font-weight: bold;">
@@ -653,6 +847,9 @@ survival
 </td>
 <td style="text-align:right;font-weight: bold;">
 0.9230769
+</td>
+<td style="text-align:right;">
+0.0522589
 </td>
 </tr>
 <tr>
@@ -671,6 +868,9 @@ survival
 <td style="text-align:right;font-weight: bold;">
 0.8846154
 </td>
+<td style="text-align:right;">
+0.0626563
+</td>
 </tr>
 <tr>
 <td style="text-align:right;font-weight: bold;">
@@ -687,6 +887,9 @@ survival
 </td>
 <td style="text-align:right;font-weight: bold;">
 0.8461538
+</td>
+<td style="text-align:right;">
+0.0707589
 </td>
 </tr>
 <tr>
@@ -705,6 +908,9 @@ survival
 <td style="text-align:right;font-weight: bold;">
 0.8076923
 </td>
+<td style="text-align:right;">
+0.0772920
+</td>
 </tr>
 <tr>
 <td style="text-align:right;font-weight: bold;">
@@ -721,6 +927,9 @@ survival
 </td>
 <td style="text-align:right;font-weight: bold;">
 0.7692308
+</td>
+<td style="text-align:right;">
+0.0826286
 </td>
 </tr>
 <tr>
@@ -739,6 +948,9 @@ survival
 <td style="text-align:right;font-weight: bold;">
 0.7307692
 </td>
+<td style="text-align:right;">
+0.0869893
+</td>
 </tr>
 <tr>
 <td style="text-align:right;font-weight: bold;">
@@ -755,6 +967,9 @@ survival
 </td>
 <td style="text-align:right;font-weight: bold;">
 0.6877828
+</td>
+<td style="text-align:right;">
+0.0918815
 </td>
 </tr>
 <tr>
@@ -773,6 +988,9 @@ survival
 <td style="text-align:right;font-weight: bold;">
 0.6419306
 </td>
+<td style="text-align:right;">
+0.0965213
+</td>
 </tr>
 <tr>
 <td style="text-align:right;font-weight: bold;">
@@ -789,6 +1007,9 @@ survival
 </td>
 <td style="text-align:right;font-weight: bold;">
 0.5960784
+</td>
+<td style="text-align:right;">
+0.0999261
 </td>
 </tr>
 <tr>
@@ -807,6 +1028,9 @@ survival
 <td style="text-align:right;font-weight: bold;">
 0.5464052
 </td>
+<td style="text-align:right;">
+0.1032094
+</td>
 </tr>
 <tr>
 <td style="text-align:right;font-weight: bold;">
@@ -824,33 +1048,35 @@ survival
 <td style="text-align:right;font-weight: bold;">
 0.4967320
 </td>
+<td style="text-align:right;">
+0.1051027
+</td>
 </tr>
 </tbody>
 </table>
-<p>To demonstrate the effect of including (and correctly treating) the censored data, we can do the same thing, but this time (1) leaving out all censored data and (2) treating all censored data times as deaths. Figure <a href="working-with-time-to-event-data.html#fig:kmov">7.3</a> shows the resulting survival curve estimates.</p>
-<div class="figure"><span style="display:block;" id="fig:kmov"></span>
-<img src="CT4H_notes_files/figure-html/kmov-1.png" alt="Kaplan-Meier estimate of survival curve for ovarian cancer data, with two incorrect estiamtes also shown." width="672" />
+<p>Figure <a href="working-with-time-to-event-data.html#fig:kmov2">7.3</a> shows the Kaplan-Meier survival curve estimate for the <code>ovarian</code> data. Using the package <code>ggsurvfit</code> we can add in a table below the <span class="math inline">\(x\)</span> axis showing the number at risk and the number of events at some times points.</p>
+<div class="figure"><span style="display:block;" id="fig:kmov2"></span>
+<img src="CT4H_notes_files/figure-html/kmov2-1.png" alt="Kaplan-Meier estimate of survival curve for ovarian cancer data with a 95% confidence level." width="672" />
 <p class="caption">
-Figure 7.3: Kaplan-Meier estimate of survival curve for ovarian cancer data, with two incorrect estiamtes also shown.
+Figure 7.3: Kaplan-Meier estimate of survival curve for ovarian cancer data with a 95% confidence level.
 </p>
 </div>
-<p>Leaving out the censored observations entirely is the most problematic approach, since it causes a serious underestimate, and in this case behaves as though there are no survivors after <span class="math inline">\(t=638\)</span>, which is untrue. Treating the censored data as deaths also leads to an underestimate of the survival probability, and notably creates a rather spurious curve past the last real death observation.</p>
-<p>The ‘correct’ Kaplan-Meier estimate may seem a bit disatisfying, since it stops at <span class="math inline">\(t=638\)</span> with a probabiilty of <span class="math inline">\(0.497\)</span>. However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at <span class="math inline">\(t=638\)</span>, and some of the other censored participants may also have been.</p>
+<p>The Kaplan-Meier estimate may seem a bit disatisfying, since it stops changing at <span class="math inline">\(t=638\)</span> with a probabiilty of <span class="math inline">\(0.497\)</span>. However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at <span class="math inline">\(t=638\)</span>, and some of the other censored participants may also have been.</p>
 </div>
 <p>For a clinical trial, we want to plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we’ll talk about this later).</p>
 <div class="example">
-<p><span id="exm:veteranmyeloid" class="example"><strong>Example 7.2  </strong></span>Figure <a href="working-with-time-to-event-data.html#fig:ovarian">7.4</a> shows the Kaplan Meier plots for the ovarian cancer data from Figure <a href="working-with-time-to-event-data.html#fig:kmov">7.3</a>, this time split by treatment group.</p>
+<p><span id="exm:veteranmyeloid" class="example"><strong>Example 7.2  </strong></span>Figure <a href="working-with-time-to-event-data.html#fig:ovarian">7.4</a> shows the Kaplan Meier plots for the ovarian cancer data from Figure <a href="working-with-time-to-event-data.html#fig:kmov2">7.3</a>, this time split by treatment group.</p>
 <div class="figure"><span style="display:block;" id="fig:ovarian"></span>
-<img src="CT4H_notes_files/figure-html/ovarian-1.png" alt="Kaplan Meier curves for the ovarian cancer data, split by treatment. Red is for group T (mixture of cyclophosphamide and adriamycin), black for group C (cyclophosphamide only)." width="672" />
+<img src="CT4H_notes_files/figure-html/ovarian-1.png" alt="Kaplan-Meier curves for the ovarian cancer data, split by treatment group." width="672" />
 <p class="caption">
-Figure 7.4: Kaplan Meier curves for the ovarian cancer data, split by treatment. Red is for group T (mixture of cyclophosphamide and adriamycin), black for group C (cyclophosphamide only).
+Figure 7.4: Kaplan-Meier curves for the ovarian cancer data, split by treatment group.
 </p>
 </div>
 <p>The second dataset we will use throughout this chapter has been simulated based on a trial of acute myeloid leukemia (<span class="citation">Le-Rademacher et al. (<a href="#ref-le2018application">2018</a>)</span>) and is from the <code>survival</code> package <span class="citation">Therneau (<a href="#ref-survival-package">2024</a>)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:myeloid"></span>
-<img src="CT4H_notes_files/figure-html/myeloid-1.png" alt="Kaplan Meier curves for the Myeloid data, split by treatment. Red is for group T, black for group C (placebo)." width="672" />
+<img src="CT4H_notes_files/figure-html/myeloid-1.png" alt="Kaplan Meier curves for the Myeloid data, split by treatment. " width="672" />
 <p class="caption">
-Figure 7.5: Kaplan Meier curves for the Myeloid data, split by treatment. Red is for group T, black for group C (placebo).
+Figure 7.5: Kaplan Meier curves for the Myeloid data, split by treatment.
 </p>
 </div>
 </div>
@@ -871,13 +1097,13 @@ that is, the hazard is constant.</p>
 <p>Usually, the likelihood function is computed by multiplying the density function evaluated at each data point, <span class="math inline">\(f\left(t_i\mid{\text{params}}\right)\)</span>. However, this won’t work for survival data, because for our censored times (those for which <span class="math inline">\(\delta_i=0\)</span>) we only know that the time-to-event is greater than <span class="math inline">\(t_i\)</span>. For these observations, it is the survival function (remember that this is <span class="math inline">\(p\left(T&gt;t\right)\)</span>) that contributes what we need to the likelihood function.</p>
 <p>Therefore (for any probability distribution) we have</p>
 <p><span class="math display" id="eq:lfunsurv">\[\begin{equation}
-L = \prod\limits_{i=1}^n f\left(t_i\right)^\delta_i S\left(t_i\right)^{1-\delta_i}.
+L = \prod\limits_{i=1}^n f\left(t_i\right)^{\delta_i} S\left(t_i\right)^{1-\delta_i}.
 \tag{7.1}
 \end{equation}\]</span></p>
 <p>If we have <span class="math inline">\(T\sim Exp\left(\lambda\right)\)</span> then the log-likelihood is</p>
 <p><span class="math display">\[
 \begin{aligned}
-\ell &amp;= \sum\limits_{i=1}^n \delta_i\left(\log\lambda - \lambda t_i\right) - \sum\limits_{i=1}^n\left(1-\delta_i\right)\lambda t_i \\
+\ell\left(\lambda \mid \text{data}\right) &amp;= \sum\limits_{i=1}^n \delta_i\left(\log\lambda - \lambda t_i\right) - \sum\limits_{i=1}^n\left(1-\delta_i\right)\lambda t_i \\
 &amp; =  m\log\lambda - \lambda\sum\limits_{i=1}^n t_i.
 \end{aligned}
 \]</span></p>
@@ -908,25 +1134,25 @@ and</p>
 &amp; = 0.00056
 \end{aligned}
 \]</span></p>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="working-with-time-to-event-data.html#cb58-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
-<span id="cb58-2"><a href="working-with-time-to-event-data.html#cb58-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
-<span id="cb58-3"><a href="working-with-time-to-event-data.html#cb58-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
-<span id="cb58-4"><a href="working-with-time-to-event-data.html#cb58-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
-<span id="cb58-5"><a href="working-with-time-to-event-data.html#cb58-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
-<span id="cb58-6"><a href="working-with-time-to-event-data.html#cb58-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
-<span id="cb58-7"><a href="working-with-time-to-event-data.html#cb58-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
-<span id="cb58-8"><a href="working-with-time-to-event-data.html#cb58-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="working-with-time-to-event-data.html#cb54-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb54-2"><a href="working-with-time-to-event-data.html#cb54-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
+<span id="cb54-3"><a href="working-with-time-to-event-data.html#cb54-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb54-4"><a href="working-with-time-to-event-data.html#cb54-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
+<span id="cb54-5"><a href="working-with-time-to-event-data.html#cb54-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
+<span id="cb54-6"><a href="working-with-time-to-event-data.html#cb54-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
+<span id="cb54-7"><a href="working-with-time-to-event-data.html#cb54-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
+<span id="cb54-8"><a href="working-with-time-to-event-data.html#cb54-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ovplotlr"></span>
-<img src="CT4H_notes_files/figure-html/ovplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<img src="CT4H_notes_files/figure-html/ovplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group C, blue = group T)." width="672" />
 <p class="caption">
-Figure 7.6: Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
+Figure 7.6: Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group C, blue = group T).
 </p>
 </div>
 <p>We can do the same for the <code>myeloid</code> data. Figure <a href="working-with-time-to-event-data.html#fig:myplotlr">7.7</a> shows the fitted curves, using <span class="math inline">\(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\)</span> for group <span class="math inline">\(X\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:myplotlr"></span>
-<img src="CT4H_notes_files/figure-html/myplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C)." width="672" />
+<img src="CT4H_notes_files/figure-html/myplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group C, blue = group T)." width="672" />
 <p class="caption">
-Figure 7.7: Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group T, black = group C).
+Figure 7.7: Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group C, blue = group T).
 </p>
 </div>
 </div>
@@ -978,7 +1204,7 @@ This second equation is analytically intractable, so numerical methods are used 
 Figure 7.8: Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C.
 </p>
 </div>
-<p>We see that there is some improvement compared to the exponential fit in Figure <a href="working-with-time-to-event-data.html#fig:myplotlr">7.7</a></p>
+<p>We see that there is some improvement compared to the exponential fit in Figure <a href="working-with-time-to-event-data.html#fig:myplotlr">7.7</a>, but it still seems not to capture the fundamental shape.</p>
 </div>
 </div>
 <div id="aside-sample-size-calculations-for-time-to-event-data" class="section level3 unnumbered hasAnchor">
@@ -990,7 +1216,6 @@ Figure 7.8: Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan 
 </ol>
 <p>Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).</p>
 <p>We will think more about how this can be used in the next section, when we come to compare treatment effects.</p>
-
 </div>
 </div>
 </div>
@@ -1001,6 +1226,9 @@ Figure 7.8: Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan 
 </div>
 <div id="ref-edmonson1979prognosis" class="csl-entry">
 Edmonson, John H, Thomas R Fleming, David G Decker, George D Malkasian, Edward O Jorgensen, John A Jefferies, Maurice J Webb, and Larry K Kvols. 1979. <span>“Prognosis in Advanced Ovarian Carcinoma Versus Minimal Residual.”</span> <em>Cancer Treatment Reports</em> 63 (2): 241–47.
+</div>
+<div id="ref-greenwood1926natural" class="csl-entry">
+Greenwood, Major. 1926. <span>“The Natural Duration of Cancer.”</span> <em>Reports on Public Health and Medical Subjects</em> 33: 1–26.
 </div>
 <div id="ref-kaplan1958nonparametric" class="csl-entry">
 Kaplan, Edward L, and Paul Meier. 1958. <span>“Nonparametric Estimation from Incomplete Observations.”</span> <em>Journal of the American Statistical Association</em> 53 (282): 457–81.

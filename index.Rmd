@@ -80,6 +80,7 @@ library(gtsummary)
 library(RColorBrewer)
 library(jtools)
 library(car)
+library(ggsurvfit)
 ```
 
 # Welcome to Clinical Trials 4H! {-}
