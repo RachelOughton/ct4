@@ -977,6 +977,7 @@ We see that for both variables, zero is not in the central 95% of the distributi
 
 </details>
 
+
 We will now use this second model to impute values for `pdl1_num`. 
 
 
@@ -989,7 +990,9 @@ smdi_pdl1_miss = smdi_nab[is.na(smdi_nab$pdl1_num),]
 
 ## Use the GLM to fit values to egfr_cat
 
-pdl1_imp_lm = predict(pdl1_lm2, newdata = smdi_pdl1_miss)
+pdl1_imp_lm = predict(object = pdl1_lm2, 
+                      newdata = smdi_pdl1_miss)
+                
 smdi_pdl1_miss$pdl1_num = pdl1_imp_lm
 
 ## Join the data back together again (in a different order, but it doesn't matter)
@@ -1049,3 +1052,4 @@ Use regression imputation to impute values for `BMI` in `opt_tmp`.
 
 
 Having reached the point of acknowledging the randomness needed in imputation, a natural next step would be to draw multiple values from the posterior distribution, rather than just one. This leads to a method called *multiple imputation*, which is (arguably) the most widely used approach to imputing missing data, though sadly we don't have time to go into it in this practical. 
+

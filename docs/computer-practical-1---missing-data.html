@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-19" />
+<meta name="date" content="2025-02-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,8 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -489,26 +491,26 @@ Click for solution
 <p>The function <code>md.pattern</code> shows us how many participants have each combination of missing data:</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="computer-practical-1---missing-data.html#cb69-1" tabindex="-1"></a><span class="fu">md.pattern</span>(smdi_data, <span class="at">rotate.names =</span> T)</span></code></pre></div>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
-<pre><code>##     exposure age_num female_cat smoking_cat physical_cat alk_cat histology_cat ses_cat copd_cat
-## 795        1       1          1           1            1       1             1       1        1
-## 479        1       1          1           1            1       1             1       1        1
-## 446        1       1          1           1            1       1             1       1        1
-## 263        1       1          1           1            1       1             1       1        1
-## 151        1       1          1           1            1       1             1       1        1
-## 176        1       1          1           1            1       1             1       1        1
-## 93         1       1          1           1            1       1             1       1        1
-## 97         1       1          1           1            1       1             1       1        1
-##            0       0          0           0            0       0             0       0        0
-##     eventtime status pdl1_num ecog_cat egfr_cat     
-## 795         1      1        1        1        1    0
-## 479         1      1        1        1        0    1
-## 446         1      1        1        0        1    1
-## 263         1      1        1        0        0    2
-## 151         1      1        0        1        1    1
-## 176         1      1        0        1        0    2
-## 93          1      1        0        0        1    2
-## 97          1      1        0        0        0    3
-##             0      0      517      899     1015 2431</code></pre>
+<pre><code>##     exposure age_num female_cat smoking_cat physical_cat alk_cat histology_cat
+## 795        1       1          1           1            1       1             1
+## 479        1       1          1           1            1       1             1
+## 446        1       1          1           1            1       1             1
+## 263        1       1          1           1            1       1             1
+## 151        1       1          1           1            1       1             1
+## 176        1       1          1           1            1       1             1
+## 93         1       1          1           1            1       1             1
+## 97         1       1          1           1            1       1             1
+##            0       0          0           0            0       0             0
+##     ses_cat copd_cat eventtime status pdl1_num ecog_cat egfr_cat     
+## 795       1        1         1      1        1        1        1    0
+## 479       1        1         1      1        1        1        0    1
+## 446       1        1         1      1        1        0        1    1
+## 263       1        1         1      1        1        0        0    2
+## 151       1        1         1      1        0        1        1    1
+## 176       1        1         1      1        0        1        0    2
+## 93        1        1         1      1        0        0        1    2
+## 97        1        1         1      1        0        0        0    3
+##           0        0         0      0      517      899     1015 2431</code></pre>
 <p><strong>Obstetrics and Periodontal Therapy</strong>
 Using <code>vis_dat</code> we see that there is a lot of missing data in the <code>opt</code> dataset, and that some variables are particularly badly affected.</p>
 <div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="computer-practical-1---missing-data.html#cb71-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df)</span></code></pre></div>
@@ -7128,8 +7130,8 @@ Click for solution
 <pre><code>## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 1).
 ## Chain 1: 
-## Chain 1: Gradient evaluation took 1.5e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.15 seconds.
+## Chain 1: Gradient evaluation took 2.1e-05 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.21 seconds.
 ## Chain 1: Adjust your expectations accordingly!
 ## Chain 1: 
 ## Chain 1: 
@@ -7146,15 +7148,15 @@ Click for solution
 ## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 1: 
-## Chain 1:  Elapsed Time: 0.063 seconds (Warm-up)
-## Chain 1:                0.097 seconds (Sampling)
-## Chain 1:                0.16 seconds (Total)
+## Chain 1:  Elapsed Time: 0.061 seconds (Warm-up)
+## Chain 1:                0.096 seconds (Sampling)
+## Chain 1:                0.157 seconds (Total)
 ## Chain 1: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 2).
 ## Chain 2: 
-## Chain 2: Gradient evaluation took 7e-06 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
+## Chain 2: Gradient evaluation took 6e-06 seconds
+## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Chain 2: Adjust your expectations accordingly!
 ## Chain 2: 
 ## Chain 2: 
@@ -7171,15 +7173,15 @@ Click for solution
 ## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 2: 
-## Chain 2:  Elapsed Time: 0.053 seconds (Warm-up)
-## Chain 2:                0.136 seconds (Sampling)
-## Chain 2:                0.189 seconds (Total)
+## Chain 2:  Elapsed Time: 0.05 seconds (Warm-up)
+## Chain 2:                0.096 seconds (Sampling)
+## Chain 2:                0.146 seconds (Total)
 ## Chain 2: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 3).
 ## Chain 3: 
-## Chain 3: Gradient evaluation took 8e-06 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+## Chain 3: Gradient evaluation took 6e-06 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Chain 3: Adjust your expectations accordingly!
 ## Chain 3: 
 ## Chain 3: 
@@ -7196,15 +7198,15 @@ Click for solution
 ## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 3: 
-## Chain 3:  Elapsed Time: 0.057 seconds (Warm-up)
-## Chain 3:                0.093 seconds (Sampling)
-## Chain 3:                0.15 seconds (Total)
+## Chain 3:  Elapsed Time: 0.058 seconds (Warm-up)
+## Chain 3:                0.095 seconds (Sampling)
+## Chain 3:                0.153 seconds (Total)
 ## Chain 3: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 4).
 ## Chain 4: 
-## Chain 4: Gradient evaluation took 6e-06 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
+## Chain 4: Gradient evaluation took 5e-06 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
 ## Chain 4: Adjust your expectations accordingly!
 ## Chain 4: 
 ## Chain 4: 
@@ -7221,8 +7223,8 @@ Click for solution
 ## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 4: 
-## Chain 4:  Elapsed Time: 0.055 seconds (Warm-up)
-## Chain 4:                0.097 seconds (Sampling)
+## Chain 4:  Elapsed Time: 0.057 seconds (Warm-up)
+## Chain 4:                0.095 seconds (Sampling)
 ## Chain 4:                0.152 seconds (Total)
 ## Chain 4:</code></pre>
 <div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="computer-practical-1---missing-data.html#cb162-1" tabindex="-1"></a><span class="fu">summary</span>(pdl1_lm)</span></code></pre></div>
@@ -7330,15 +7332,15 @@ Click for solution
 ## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 1: 
-## Chain 1:  Elapsed Time: 0.046 seconds (Warm-up)
-## Chain 1:                0.157 seconds (Sampling)
-## Chain 1:                0.203 seconds (Total)
+## Chain 1:  Elapsed Time: 0.047 seconds (Warm-up)
+## Chain 1:                0.158 seconds (Sampling)
+## Chain 1:                0.205 seconds (Total)
 ## Chain 1: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 2).
 ## Chain 2: 
-## Chain 2: Gradient evaluation took 5e-06 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
+## Chain 2: Gradient evaluation took 4e-06 seconds
+## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
 ## Chain 2: Adjust your expectations accordingly!
 ## Chain 2: 
 ## Chain 2: 
@@ -7356,14 +7358,14 @@ Click for solution
 ## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 2: 
 ## Chain 2:  Elapsed Time: 0.048 seconds (Warm-up)
-## Chain 2:                0.159 seconds (Sampling)
-## Chain 2:                0.207 seconds (Total)
+## Chain 2:                0.16 seconds (Sampling)
+## Chain 2:                0.208 seconds (Total)
 ## Chain 2: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 3).
 ## Chain 3: 
-## Chain 3: Gradient evaluation took 1e-05 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+## Chain 3: Gradient evaluation took 6e-06 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Chain 3: Adjust your expectations accordingly!
 ## Chain 3: 
 ## Chain 3: 
@@ -7380,15 +7382,15 @@ Click for solution
 ## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 3: 
-## Chain 3:  Elapsed Time: 0.052 seconds (Warm-up)
-## Chain 3:                0.16 seconds (Sampling)
-## Chain 3:                0.212 seconds (Total)
+## Chain 3:  Elapsed Time: 0.051 seconds (Warm-up)
+## Chain 3:                0.162 seconds (Sampling)
+## Chain 3:                0.213 seconds (Total)
 ## Chain 3: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 4).
 ## Chain 4: 
-## Chain 4: Gradient evaluation took 6e-06 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
+## Chain 4: Gradient evaluation took 7e-06 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.07 seconds.
 ## Chain 4: Adjust your expectations accordingly!
 ## Chain 4: 
 ## Chain 4: 
@@ -7405,9 +7407,9 @@ Click for solution
 ## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 4: 
-## Chain 4:  Elapsed Time: 0.061 seconds (Warm-up)
-## Chain 4:                0.156 seconds (Sampling)
-## Chain 4:                0.217 seconds (Total)
+## Chain 4:  Elapsed Time: 0.067 seconds (Warm-up)
+## Chain 4:                0.157 seconds (Sampling)
+## Chain 4:                0.224 seconds (Total)
 ## Chain 4:</code></pre>
 <div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="computer-practical-1---missing-data.html#cb166-1" tabindex="-1"></a><span class="fu">summary</span>(pdl1_lm2)</span></code></pre></div>
 <pre><code>## 
@@ -7484,12 +7486,14 @@ Click for solution
 <span id="cb170-5"><a href="computer-practical-1---missing-data.html#cb170-5" tabindex="-1"></a></span>
 <span id="cb170-6"><a href="computer-practical-1---missing-data.html#cb170-6" tabindex="-1"></a><span class="do">## Use the GLM to fit values to egfr_cat</span></span>
 <span id="cb170-7"><a href="computer-practical-1---missing-data.html#cb170-7" tabindex="-1"></a></span>
-<span id="cb170-8"><a href="computer-practical-1---missing-data.html#cb170-8" tabindex="-1"></a>pdl1_imp_lm <span class="ot">=</span> <span class="fu">predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_miss)</span>
-<span id="cb170-9"><a href="computer-practical-1---missing-data.html#cb170-9" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_num <span class="ot">=</span> pdl1_imp_lm</span>
-<span id="cb170-10"><a href="computer-practical-1---missing-data.html#cb170-10" tabindex="-1"></a></span>
-<span id="cb170-11"><a href="computer-practical-1---missing-data.html#cb170-11" tabindex="-1"></a><span class="do">## Join the data back together again (in a different order, but it doesn&#39;t matter)</span></span>
+<span id="cb170-8"><a href="computer-practical-1---missing-data.html#cb170-8" tabindex="-1"></a>pdl1_imp_lm <span class="ot">=</span> <span class="fu">predict</span>(<span class="at">object =</span> pdl1_lm2, </span>
+<span id="cb170-9"><a href="computer-practical-1---missing-data.html#cb170-9" tabindex="-1"></a>                      <span class="at">newdata =</span> smdi_pdl1_miss)</span>
+<span id="cb170-10"><a href="computer-practical-1---missing-data.html#cb170-10" tabindex="-1"></a>                </span>
+<span id="cb170-11"><a href="computer-practical-1---missing-data.html#cb170-11" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_num <span class="ot">=</span> pdl1_imp_lm</span>
 <span id="cb170-12"><a href="computer-practical-1---missing-data.html#cb170-12" tabindex="-1"></a></span>
-<span id="cb170-13"><a href="computer-practical-1---missing-data.html#cb170-13" tabindex="-1"></a>smdi_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_miss, smdi_pdl1_comp)</span></code></pre></div>
+<span id="cb170-13"><a href="computer-practical-1---missing-data.html#cb170-13" tabindex="-1"></a><span class="do">## Join the data back together again (in a different order, but it doesn&#39;t matter)</span></span>
+<span id="cb170-14"><a href="computer-practical-1---missing-data.html#cb170-14" tabindex="-1"></a></span>
+<span id="cb170-15"><a href="computer-practical-1---missing-data.html#cb170-15" tabindex="-1"></a>smdi_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_miss, smdi_pdl1_comp)</span></code></pre></div>
 <p>This might seem sensible, but actually it isn’t a very realistic use of a regression model.</p>
 <p>Compared to the observed values, the imputed values have a strong central tendency. This is because we have imputed the mean fitted value for each point, ignoring the measure of spread / uncertainty in the model. We can see this by comparing the observed values of <code>pdl1_num</code> to their fitted values (which we would have imputed had they been missing).</p>
 <div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="computer-practical-1---missing-data.html#cb171-1" tabindex="-1"></a>smdi_pdl1_comp<span class="sc">$</span>pdl1_imp <span class="ot">=</span> <span class="fu">predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_comp)</span>

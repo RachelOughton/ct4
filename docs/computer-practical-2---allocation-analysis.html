@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-02-19" />
+<meta name="date" content="2025-02-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,6 +56,8 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -413,8 +415,8 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-62" class="solution"><em>Solution</em>. </span>In this dataset the baseline characteristics are helpfully prefixed by <code>preOp</code>, so there are seven baseline characteristics.</p>
-<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;        &quot;preOp_mallampati&quot;
-## [6] &quot;preOp_smoking&quot;    &quot;preOp_pain&quot;</code></pre>
+<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;       
+## [5] &quot;preOp_mallampati&quot; &quot;preOp_smoking&quot;    &quot;preOp_pain&quot;</code></pre>
 </div>
 </details>
 <p>In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure <code>str(licorice_gargle)</code> that all columns are numeric to begin with), so run the following code to convert the necessary columns to factors, and to restrict the dataset to only the columns we’re interested in.</p>
@@ -1758,11 +1760,13 @@ Click for solution
 <span id="cb207-3"><a href="computer-practical-2---allocation-analysis.html#cb207-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
 <p>The allocation vector is stored as a row in the matrix <code>M</code> which is a slot in the <code>genSeq</code> object (part of the object). You can access it by</p>
 <div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="computer-practical-2---allocation-analysis.html#cb208-1" tabindex="-1"></a>seq_ud31<span class="sc">$</span>M[<span class="dv">1</span>,]</span></code></pre></div>
-<pre><code>##   [1] 1 0 1 0 0 0 1 1 0 0 0 1 0 1 1 1 1 1 0 0 1 0 0 1 1 0 1 0 0 1 0 0 1 0 1 1 0 1 0 1 1 0 0 0 1 0 1
-##  [48] 0 1 1 1 1 1 1 0 0 0 1 0 0 1 1 0 0 0 1 1 0 0 1 1 0 1 1 1 1 1 0 1 1 0 1 0 1 0 1 1 0 1 0 0 0 0 1
-##  [95] 0 1 1 0 1 0 0 1 0 1 1 1 0 1 1 0 0 1 1 1 1 0 0 0 1 0 0 1 0 0 0 0 1 1 0 0 0 1 1 0 0 1 0 1 0 0 1
-## [142] 1 1 0 1 0 0 0 1 0 1 0 1 1 0 1 1 0 0 1 1 1 1 0 1 1 1 0 0 1 1 0 1 1 0 1 0 1 0 0 1 0 1 0 0 0 1 0
-## [189] 0 0 0 1 1 0 0 1 0 0 0 0 1 1 1 1 0 1 1 0 0 1 1 0 0 0 1 1 0 0 1 0 1 1 1 1 0 0 1 0 0 1 0 0 0 1 1</code></pre>
+<pre><code>##   [1] 1 0 1 0 0 0 1 1 0 0 0 1 0 1 1 1 1 1 0 0 1 0 0 1 1 0 1 0 0 1 0 0 1 0 1 1 0
+##  [38] 1 0 1 1 0 0 0 1 0 1 0 1 1 1 1 1 1 0 0 0 1 0 0 1 1 0 0 0 1 1 0 0 1 1 0 1 1
+##  [75] 1 1 1 0 1 1 0 1 0 1 0 1 1 0 1 0 0 0 0 1 0 1 1 0 1 0 0 1 0 1 1 1 0 1 1 0 0
+## [112] 1 1 1 1 0 0 0 1 0 0 1 0 0 0 0 1 1 0 0 0 1 1 0 0 1 0 1 0 0 1 1 1 0 1 0 0 0
+## [149] 1 0 1 0 1 1 0 1 1 0 0 1 1 1 1 0 1 1 1 0 0 1 1 0 1 1 0 1 0 1 0 0 1 0 1 0 0
+## [186] 0 1 0 0 0 0 1 1 0 0 1 0 0 0 0 1 1 1 1 0 1 1 0 0 1 1 0 0 0 1 1 0 0 1 0 1 1
+## [223] 1 1 0 0 1 0 0 1 0 0 0 1 1</code></pre>
 <p>The argument <code>r</code> allows you to generate <code>r</code> sequences, in which case the matrix <code>M</code> has <code>r</code> rows.</p>
 </div>
 </details>
@@ -1857,19 +1861,20 @@ Click for solution
 <span id="cb216-10"><a href="computer-practical-2---allocation-analysis.html#cb216-10" tabindex="-1"></a><span class="co"># re-order according to ID variable</span></span>
 <span id="cb216-11"><a href="computer-practical-2---allocation-analysis.html#cb216-11" tabindex="-1"></a>alloc_full[<span class="fu">order</span>(alloc_full<span class="sc">$</span>ID),]</span></code></pre></div>
 <pre><code>## # A tibble: 235 × 9
-##    preOp_gender preOp_asa preOp_mallampati preOp_smoking preOp_pain age      BMI        treat    ID
-##    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;            &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt;      &lt;fct&gt; &lt;int&gt;
-##  1 0            3         2                1             0          50 to 70 high       0         1
-##  2 0            2         2                2             0          70 plus  medium_or… 0         2
-##  3 0            2         2                1             0          50 to 70 high       1         3
-##  4 0            2         2                1             0          50 to 70 high       1         4
-##  5 0            1         1                2             0          70 plus  high       1         5
-##  6 0            2         3                1             0          50 to 70 high       0         6
-##  7 0            3         1                1             0          50 to 70 high       0         7
-##  8 0            2         2                1             0          50 to 70 high       0         8
-##  9 0            3         1                1             0          70 plus  medium_or… 0         9
-## 10 0            3         2                3             0          50 to 70 high       1        10
-## # ℹ 225 more rows</code></pre>
+##    preOp_gender preOp_asa preOp_mallampati preOp_smoking preOp_pain age    BMI  
+##    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;            &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;  &lt;fct&gt;
+##  1 0            3         2                1             0          50 to… high 
+##  2 0            2         2                2             0          70 pl… medi…
+##  3 0            2         2                1             0          50 to… high 
+##  4 0            2         2                1             0          50 to… high 
+##  5 0            1         1                2             0          70 pl… high 
+##  6 0            2         3                1             0          50 to… high 
+##  7 0            3         1                1             0          50 to… high 
+##  8 0            2         2                1             0          50 to… high 
+##  9 0            3         1                1             0          70 pl… medi…
+## 10 0            3         2                3             0          50 to… high 
+## # ℹ 225 more rows
+## # ℹ 2 more variables: treat &lt;fct&gt;, ID &lt;int&gt;</code></pre>
 <p>It would be silly though to do this with SRS - why?</p>
 <p>Once you’ve performed the allocation, you can find the demographic tables, imbalance and marginal imbalance as before (with <code>alloc_full</code>, or whatever your is called, as the data frame)</p>
 </div>

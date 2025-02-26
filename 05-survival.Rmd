@@ -57,6 +57,8 @@ We can immediately say two things about survival curves:
   1. Since all participants must be alive (or equivalent) at the start of the trial, $\operatorname{S}\left(0\right)=1$.
   2. Since it's impossible to survive past $t_2>t_1$ but not past time $t_1$, we must have  $\frac{d\operatorname{S}\left(t\right)}{dt}\leq{0}$, ie. $\operatorname{S}\left(t\right)$ is non-increasing.
   
+One summary that is often used is the **median survival time**, the time at which half of the participants have already experienced the event, and half haven't.
+  
 Figure \@ref(fig:egsurvival) shows two survival curves, comparing different therapies. We see that the hormonal therapy reduces the survival time slightly compared to no hormonal therapy.  
   
 ```{r egsurvival, fig.cap = "An example of two survival curves, taken from @syriopoulou2022standardised."}
@@ -167,7 +169,7 @@ Figure \@ref(fig:kmov2) shows the Kaplan-Meier survival curve estimate for the `
 
 
 ```{r kmov2, fig.cap = "Kaplan-Meier estimate of survival curve for ovarian cancer data with a 95% confidence level."}
-survfit(Surv(time = ovarian$futime, event = ovarian$fustat) ~ 1, data=ov_err2) %>%
+survfit(Surv(time = ovarian$futime, event = ovarian$fustat) ~ 1, data=ovarian) %>%
   ggsurvfit() +
   labs(x="Time", y="Estimated survival curve")+
   ylim(0,1)+
@@ -175,7 +177,7 @@ survfit(Surv(time = ovarian$futime, event = ovarian$fustat) ~ 1, data=ov_err2) %
   add_confidence_interval()
 ```
 
-The Kaplan-Meier estimate may seem a bit disatisfying, since it stops changing at $t=638$ with a probabiilty of $0.497$. However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at $t=638$, and some of the other censored participants may also have been.
+The Kaplan-Meier estimate may seem a bit dissatisfying, since it stops changing at $t=638$ with a probability of $0.497$. However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at $t=638$, and some of the other censored participants may also have been.
 
 :::
 
@@ -462,8 +464,6 @@ There are implications here for sample size calculations, which must take into a
   2. A separate calculation is needed to estimate the number of participants needing to be recruited, and length of trial, to be sufficiently likely to achieve that value of $m$.
   
 Both of these calculations rely on a number of modelling assumptions, and on previous scientific/clinical data (if available).
-
-
 
 We will think more about how this can be used in the next section, when we come to compare treatment effects.
 
@@ -957,7 +957,7 @@ coxph(formula = Surv(futime, death)~trt+sex, data=myeloid)
 We see that the only covariate we have, `sex` has very little effect.
 :::
 
-This concludes our section on survival data, but we will revisit the topic in the next computer practical.
+This concludes our section on survival data. In the next section we'll look at some advanced topics in clinical trials.
 
 
 
