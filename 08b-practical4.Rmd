@@ -27,7 +27,7 @@ In this practical we'll focus on the analysis of binary and survival data. We'll
 **Notice that where there are code snippets that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
 
 ```{r, eval=F, echo=T}
-install.packages(c("HSAUR", "HSAUR3", "pROC", "survival", "ggsurvfit", "car"))
+install.packages(c("HSAUR", "HSAUR3", "pROC", "survival", "ggsurvfit", "survminer", "car"))
 ```
 
 ## Binary outcome data
@@ -53,7 +53,7 @@ For each patient, we have the following baseline covariates:
   * treatment centre (centre 1 or centre 2)
   * symptom status (poor or good).
   
-The outcome variable is whether the status of the patient's symptoms are poor or good after four months of the trial. We will build up through some of the models we studied in Chapter \@ref(binary-analysis).
+The outcome variable is whether the status of the patient's symptoms are poor or good after four months of the trial. Note that unusually we do have the baseline observation of this quantity. We will build up through some of the models we studied in Chapter \@ref(binary-analysis).
 
 ### Confidence Intervals
 
@@ -193,7 +193,7 @@ This seems like a relatively narrow CI, but the fact that it comes so close to c
 
 We next looked at logistic regression as way to account for the baseline covariates. To fit a logistic regression in R we use the function `glm`. This fits all kinds of generalised linear models, and so we specify that we want a logistic regression by choosing `family = binomial(link='logit')`. 
 
-The code is included in all examples in Sections \@ref(logreg) and \@ref(diaglogreg), so if you aren't sure how to do something they woulg be a good place to look.
+The code is included in all examples in Sections \@ref(logreg) and \@ref(diaglogreg), so if you aren't sure how to do something they would be a good place to look.
 
 :::{.exercise #lrresp1}
 
@@ -268,6 +268,7 @@ We can also plot the ROC curve
 ```{r, echo = T}
 ggroc(roc_resp, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)
 ```
+
 Next we'll assess the model in terms of calibration. 
 
 ```{r, echo=T,  fig.cap = "Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)"}
@@ -346,7 +347,7 @@ This is further away from the null value (1 for the OR) than any of our previous
 
 ## Analysis for Survival data {#cp2-surv}
 
-The packages we need for this section are `survival`, `ggsurvfit` and `ggfortify`, so load those now.
+The packages we need for this section are `survival`, `ggsurvfit` and `survminer`, so load those now.
 
 The first dataset we will use is `aml` - this dataset is from a trial investigating whether the standard course of chemotheraphy should be extended for some additional cycles ('maintenance') for patients with Acute Myelogenous Leukemia. 
 
@@ -609,7 +610,17 @@ We've already seen that the survival curves don't cross, so we can be reasonably
 summary(cox_aml)
 ```
 
+To check this more carefully we can use the log-log plot
+
+```{r}
+ggsurvplot(survfit(Surv(time, status)~x, data=aml), fun = "cloglog")
+```
+
+and we see that the curves are close to parallel.
+
 Although the coefficient of `x` isn't quite significant at the 0.05 level, it appears there is reasonable evidence that the treatment has an effect (though probably not enough to make a clinical decision).
+
+
 
 :::
 
@@ -646,7 +657,9 @@ We can therefore fit (and plot) the Kaplan-Meier estimator split by treatment gr
 
 ```{r, echo=T}
 km_colon = survfit(Surv(time, status) ~ rx, data=colondf)
-km_colon %>% ggsurvfit + ylim(0,1)
+km_colon %>% ggsurvfit + ylim(0,1) +
+  add_censor_mark() +
+  add_confidence_interval()
 ```
 
 Next we can find the MLE for each treatment group
@@ -730,13 +743,30 @@ km_colon_bl %>% ggsurvfit() +
 
 ```
 
-`nodes` is a numeric output, so in order to get a visual impression of its effect on the survival curve we can bin it. For example, we can choose $\texttt{nodes}\leq 4$ and $\texttt{nodes}>4$.
+`nodes` is a numeric output, so one way to get a visual impression of its effect on the survival curve we can bin it. For example, we can choose $\texttt{nodes}\leq 4$ and $\texttt{nodes}>4$.
 
 ```{r, echo=T}
 colondf$nodes4 = sapply(1:nrow(colondf), function(i){ifelse(colondf$nodes[i]>4, 1, 0)})
 km_colon_bl = survfit(Surv(time, status) ~ rx + nodes4, data=colondf)
 km_colon_bl %>% ggsurvfit()
 ```
+
+To check our model more carefully we can use the log-log plot for the categorical variables:
+
+```{r, echo=T}
+km_colon = survfit(Surv(time, status) ~ rx + sex, data=colondf)
+ggsurvplot(km_colon, fun = "cloglog")
+```
+
+and the Schoenfeld residuals for the continuous residuals (after removing the insignificant variables):
+
+```{r, echo=T}
+cox_colon = coxph(formula = Surv(time, status)~rx + sex + nodes, data=colondf)
+
+ggcoxzph(cox.zph(cox_colon), var = "nodes")
+```
+
+and we see that there is insufficient evidence to reject the null hypothesis (of proportional hazards).
 
 :::
 

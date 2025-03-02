@@ -985,7 +985,7 @@ $$\frac{0.0268}{1+0.0268} = 0.0261.$$
 Being more methodical we can collect these into a table, and use `predict.glm`. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.
 
 
-```{r}
+```{r, echo=T}
 ## Create data frame with every combination of factors (only showing sites 1 and 2)
 df_indo = data.frame(
   site = rep(c(rep("2_IU", 5), rep("1_UM", 5)),2),
