@@ -203,7 +203,7 @@ survfit(Surv(time = ovarian$futime, event = ovarian$fustat) ~ rx, data=ovarian) 
 
 
 
-The second dataset we will use throughout this chapter has been simulated based on a trial of acute myeloid leukemia (@le2018application) and is from the `survival` package @survival-package.
+The second dataset we will use throughout this chapter has been simulated based on a trial of acute myeloid leukemia (@le2018application) and is from the `survival` package @survival-package. The Kaplan-Meier estimate for the myeloid data is shown in Figure \@ref(fig:myeloid).
 
 ```{r myeloid, fig.cap = "Kaplan Meier curves for the Myeloid data, split by treatment. "}
 survfit(Surv(time = myeloid$futime, event = myeloid$death) ~ trt, data=myeloid) %>%

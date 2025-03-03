@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-03-02" />
+<meta name="date" content="2025-03-03" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -815,7 +815,7 @@ If we plot the Schoenfeld residuals against time, we should see a random scatter
 ## GLOBAL   1.958  3 0.58</code></pre>
 <p>We see from the <code>age</code> line that the data are consistent with the proportional hazards assumption.</p>
 <p>The object created by <code>cox.zph</code> also contains the Schoenfeld residuals themselves, and so we can plot them:</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-289-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-101-1.png" width="672" /></p>
 <p>Because there is so little data it’s hard to conclude anything, and indeed our lack of significance in the test may be due to small sample size rather than excellent model fit.</p>
 </div>
 </div>
@@ -837,15 +837,15 @@ We can combine these two equations to find</p>
 <p>Under the Cox Regression model, <span class="math inline">\(\log\left(H\left(t\right)\right)\)</span> is linear in the covariates, and so we will have [roughly] parallel lines. We can plot this in R using <code>ggsurvplot</code> and setting <code>fun="cloglog"</code>.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-49" class="example"><strong>Example 8.5  </strong></span>First we’ll check the <code>ovarian</code> dataset, split by treatment group.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-290-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
 <p>As before, there isn’t really enough data to tell whether the assumption is violated.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-291-1.png" width="672" /></p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-292-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
 <p>To explore these diagnostic checks further we will introduce the <code>veteran</code> dataset, which focuses on a trial for lung cancer patients. The treatment variable is <code>trt</code> and there are a mixture of continuous and categorical covariates. We will include <code>celltype</code>, a categorical variable with four levels and <code>karno</code>, a score from 0 to 100 (which we will treat as continuous).</p>
 <p>Firstly we can check the proportional hazards assumption for the categorical covariates:</p>
 <div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="comparing-survival-curves.html#cb84-1" tabindex="-1"></a>sf_vet <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> trt<span class="sc">+</span>celltype, <span class="at">data=</span>veteran)</span>
 <span id="cb84-2"><a href="comparing-survival-curves.html#cb84-2" tabindex="-1"></a><span class="fu">ggsurvplot</span>(sf_vet, <span class="at">fun =</span> <span class="st">&quot;cloglog&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-293-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
 <p>Next we can fit a Cox proportional hazards model</p>
 <div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="comparing-survival-curves.html#cb85-1" tabindex="-1"></a>cox_vet <span class="ot">=</span> <span class="fu">coxph</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> trt <span class="sc">+</span> celltype <span class="sc">+</span> karno, <span class="at">data =</span> veteran)</span>
 <span id="cb85-2"><a href="comparing-survival-curves.html#cb85-2" tabindex="-1"></a><span class="fu">summary</span>(cox_vet)</span></code></pre></div>
@@ -877,7 +877,7 @@ We can combine these two equations to find</p>
 ## Score (logrank) test = 66.55  on 5 df,   p=5e-13</code></pre>
 <p>and check the Schoenfeld residuals for <code>karno</code></p>
 <div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="comparing-survival-curves.html#cb87-1" tabindex="-1"></a><span class="fu">ggcoxzph</span>(<span class="fu">cox.zph</span>(cox_vet), <span class="at">var =</span> <span class="st">&quot;karno&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-295-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-107-1.png" width="672" /></p>
 <p>Although these don’t look terrible, it appears there is a slight trend with time, and indeed the p-value shows a significant deviation from proportional hazards.</p>
 </div>
 
