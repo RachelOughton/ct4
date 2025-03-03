@@ -1070,44 +1070,46 @@ We can combine these two equations to find
 Under the Cox Regression model, $\log\left(H\left(t\right)\right)$ is linear in the covariates, and so we will have [roughly] parallel lines. We can plot this in R using `ggsurvplot` and setting `fun="cloglog"`. 
 
 ::: {.example}
-First we'll check the `ovarian` dataset, split by treatment group.
+First we'll check the `ovarian` dataset, split by treatment group (Figure \@ref(fig:loglogov)).
 
-```{r}
+```{r loglogov, fig.cap = "Log-log plot for ovarian data by treatment group."}
 sf_ov_rx = survfit(formula = Surv(futime, fustat)~rx, data=ovarian)
 ggsurvplot(sf_ov_rx, data = ovarian, fun = "cloglog")
 ```
 
-As before, there isn't really enough data to tell whether the assumption is violated.
+As before, there isn't really enough data to tell whether the assumption is violated. 
 
-```{r}
+We can do the same for the `myeloid` data, as in Figures \@ref(fig:loglogmy) and \@ref(fig:loglogmy2).
+
+```{r loglogmy, fig.cap = "Log-log plot for myeloid data by treatment group."}
 sf_my_trt = survfit(Surv(time = futime, event = death) ~ trt, data = myeloid)
 ggsurvplot(sf_my_trt, fun = "cloglog")
 ```
 
-```{r}
+```{r loglogmy2, fig.cap = "Log-log plot for myeloid data by treatment group."}
 sf_my_trtsex = survfit(Surv(time = futime, event = death) ~ trt+flt3, data = myeloid)
 ggsurvplot(sf_my_trtsex, fun = "cloglog")
 ```
 
 To explore these diagnostic checks further we will introduce the `veteran` dataset, which focuses on a trial for lung cancer patients. The treatment variable is `trt` and there are a mixture of continuous and categorical covariates. We will include `celltype`, a categorical variable with four levels and `karno`, a score from 0 to 100 (which we will treat as continuous).
 
-Firstly we can check the proportional hazards assumption for the categorical covariates:
+Firstly we can check the proportional hazards assumption for the categorical covariates, in Figure \@ref(fig:loglogvet1).
 
-```{r, echo=T}
+```{r loglogvet1, echo=T, fig.cap = "Log-log plot for veteran data split by treatment group and cell type"}
 sf_vet = survfit(Surv(time, status) ~ trt+celltype, data=veteran)
 ggsurvplot(sf_vet, fun = "cloglog")
 ```
 
 Next we can fit a Cox proportional hazards model
 
-```{r, echo=T}
+```{r, echo=T,}
 cox_vet = coxph(Surv(time, status) ~ trt + celltype + karno, data = veteran)
 summary(cox_vet)
 ```
 
-and check the Schoenfeld residuals for `karno`
+and check the Schoenfeld residuals for `karno`, as in Figure \@ref(fig:vetschoen).
 
-```{r, echo=T}
+```{r vetschoen, echo=T, fig.cap = "Schoenfeld residuals for Cox regression model fit to veteran data, for covariate 'karno'"}
 ggcoxzph(cox.zph(cox_vet), var = "karno")
 ```
 

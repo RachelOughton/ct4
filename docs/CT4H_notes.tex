@@ -4948,19 +4948,33 @@ We can combine these two equations to find
 Under the Cox Regression model, \(\log\left(H\left(t\right)\right)\) is linear in the covariates, and so we will have {[}roughly{]} parallel lines. We can plot this in R using \texttt{ggsurvplot} and setting \texttt{fun="cloglog"}.
 
 \begin{example}
-First we'll check the \texttt{ovarian} dataset, split by treatment group.
+First we'll check the \texttt{ovarian} dataset, split by treatment group (Figure \ref{fig:loglogov}).
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-64-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/loglogov-1.pdf}
+\caption{\label{fig:loglogov}Log-log plot for ovarian data by treatment group.}
+\end{figure}
 
 As before, there isn't really enough data to tell whether the assumption is violated.
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-65-1.pdf}
+We can do the same for the \texttt{myeloid} data, as in Figures \ref{fig:loglogmy} and \ref{fig:loglogmy2}.
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-66-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/loglogmy-1.pdf}
+\caption{\label{fig:loglogmy}Log-log plot for myeloid data by treatment group.}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/loglogmy2-1.pdf}
+\caption{\label{fig:loglogmy2}Log-log plot for myeloid data by treatment group.}
+\end{figure}
 
 To explore these diagnostic checks further we will introduce the \texttt{veteran} dataset, which focuses on a trial for lung cancer patients. The treatment variable is \texttt{trt} and there are a mixture of continuous and categorical covariates. We will include \texttt{celltype}, a categorical variable with four levels and \texttt{karno}, a score from 0 to 100 (which we will treat as continuous).
 
-Firstly we can check the proportional hazards assumption for the categorical covariates:
+Firstly we can check the proportional hazards assumption for the categorical covariates, in Figure \ref{fig:loglogvet1}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -4969,7 +4983,11 @@ Firstly we can check the proportional hazards assumption for the categorical cov
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-67-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/loglogvet1-1.pdf}
+\caption{\label{fig:loglogvet1}Log-log plot for veteran data split by treatment group and cell type}
+\end{figure}
 
 Next we can fit a Cox proportional hazards model
 
@@ -5009,7 +5027,7 @@ Next we can fit a Cox proportional hazards model
 ## Score (logrank) test = 66.55  on 5 df,   p=5e-13
 \end{verbatim}
 
-and check the Schoenfeld residuals for \texttt{karno}
+and check the Schoenfeld residuals for \texttt{karno}, as in Figure \ref{fig:vetschoen}.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5017,7 +5035,11 @@ and check the Schoenfeld residuals for \texttt{karno}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-69-1.pdf}
+\begin{figure}
+\centering
+\includegraphics{CT4H_notes_files/figure-latex/vetschoen-1.pdf}
+\caption{\label{fig:vetschoen}Schoenfeld residuals for Cox regression model fit to veteran data, for covariate `karno'}
+\end{figure}
 
 Although these don't look terrible, it appears there is a slight trend with time, and indeed the p-value shows a significant deviation from proportional hazards.
 \end{example}

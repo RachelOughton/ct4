@@ -595,7 +595,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{0.187}\right) = \left(1.85,\; 5.33 \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-125-1.png" width="672" /></p>
 </div>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
@@ -646,8 +646,8 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-66"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-66-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-127"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-127-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
 <p class="caption">
 Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
 </p>
@@ -697,8 +697,8 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.57 0.81</code></pre>
 <p>We can see this graphically</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-70"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-70-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-131"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-131-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.3: As before, dashed for Wilson, dotted for standard
 </p>
@@ -709,8 +709,8 @@ Figure 6.3: As before, dashed for Wilson, dotted for standard
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.20 0.45</code></pre>
 <p>Again, we can see this graphically.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-73"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-73-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-134"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-134-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.4: As before, dashed for Wilson, dotted for standard
 </p>
@@ -1211,8 +1211,8 @@ Figure 6.7: ROC curve for our logistic regression model of the indo RCT data (so
 <span id="cb54-16"><a href="binary-analysis.html#cb54-16" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>risk, <span class="at">xend=</span>risk, <span class="at">y=</span>fit<span class="fl">-1.96</span><span class="sc">*</span>fit_se, <span class="at">yend=</span>fit<span class="fl">+1.96</span><span class="sc">*</span>fit_se))<span class="sc">+</span></span>
 <span id="cb54-17"><a href="binary-analysis.html#cb54-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb54-18"><a href="binary-analysis.html#cb54-18" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">&quot;site&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-82"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-82-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-143"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-143-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
 <p class="caption">
 Figure 6.8: Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).
 </p>
