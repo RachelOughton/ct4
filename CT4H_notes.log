@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.28)  3 MAR 2025 15:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.28)  7 MAR 2025 09:59
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1186,10 +1186,6 @@ Chapter 8.
 
 [127]
 
-LaTeX Warning: Reference `fig:ovplotlr' on page 128 undefined on input line 4374.
-
-
-
 [128]
 
 [129]
@@ -1209,30 +1205,30 @@ LaTeX Warning: Reference `fig:ovplotlr' on page 128 undefined on input line 4374
 [136]
 
 [137]
-
-[138]
-<CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf, id=1493, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf, id=1485, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf  used on input line 4920.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf  used on input line 4918.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
+
+[138]
 
 [139 <./CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf>]
 <CT4H_notes_files/figure-latex/loglogov-1.pdf, id=1508, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/loglogov-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/loglogov-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogov-1.pdf  used on input line 4955.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogov-1.pdf  used on input line 4953.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 <CT4H_notes_files/figure-latex/loglogmy-1.pdf, id=1511, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/loglogmy-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/loglogmy-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogmy-1.pdf  used on input line 4965.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogmy-1.pdf  used on input line 4963.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 <CT4H_notes_files/figure-latex/loglogmy2-1.pdf, id=1512, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/loglogmy2-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/loglogmy2-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogmy2-1.pdf  used on input line 4971.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogmy2-1.pdf  used on input line 4969.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 
@@ -1241,10 +1237,10 @@ Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogmy2-1.pdf  used on 
 [141 <./CT4H_notes_files/figure-latex/loglogmy-1.pdf>]
 
 [142 <./CT4H_notes_files/figure-latex/loglogmy2-1.pdf>]
-<CT4H_notes_files/figure-latex/loglogvet1-1.pdf, id=1546, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/loglogvet1-1.pdf, id=1547, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/loglogvet1-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/loglogvet1-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogvet1-1.pdf  used on input line 4988.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogvet1-1.pdf  used on input line 4986.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 
@@ -1252,46 +1248,41 @@ Package pdftex.def Info: CT4H_notes_files/figure-latex/loglogvet1-1.pdf  used on
 <CT4H_notes_files/figure-latex/vetschoen-1.pdf, id=1558, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/vetschoen-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/vetschoen-1.pdf>
-Package pdftex.def Info: CT4H_notes_files/figure-latex/vetschoen-1.pdf  used on input line 5040.
+Package pdftex.def Info: CT4H_notes_files/figure-latex/vetschoen-1.pdf  used on input line 5038.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 
-[144 <./CT4H_notes_files/figure-latex/vetschoen-1.pdf>]
+[144 <./CT4H_notes_files/figure-latex/vetschoen-1.pdf>] (./CT4H_notes.bbl
 
-[145] (./CT4H_notes.bbl
+[145
+
+]
 
 [146
 
 ]
 
-[147
+[147])
 
-]
-
-[148])
-
-[149] (./CT4H_notes.aux)
+[148] (./CT4H_notes.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
-
-LaTeX Warning: There were undefined references.
-
  ) 
 Here is how much of TeX's memory you used:
- 15349 strings out of 475172
- 255470 string characters out of 5765093
+ 15347 strings out of 475172
+ 255448 string characters out of 5765093
  660078 words of memory out of 5000000
- 37614 multiletter control sequences out of 15000+600000
+ 37613 multiletter control sequences out of 15000+600000
  663652 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,19n,79p,1235b,723s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on CT4H_notes.pdf (149 pages, 1339144 bytes).
+Output written on CT4H_notes.pdf (148 pages, 1338312 bytes).
 PDF statistics:
- 1952 PDF objects out of 2073 (max. 8388607)
- 1635 compressed objects within 17 object streams
- 478 named destinations out of 1000 (max. 500000)
+ 1948 PDF objects out of 2073 (max. 8388607)
+ 1632 compressed objects within 17 object streams
+ 477 named destinations out of 1000 (max. 500000)
  588 words of extra memory for PDF output out of 10000 (max. 10000000)
 

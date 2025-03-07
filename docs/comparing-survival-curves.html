@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-03-03" />
+<meta name="date" content="2025-03-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -472,7 +472,6 @@ where <span class="math inline">\(n,\,m\)</span> are the corresponding totals ov
 <pre><code>## [1] 0.2910204</code></pre>
 <p>and we find that it isn’t significant. A 95% confidence interval for the difference is given by</p>
 <pre><code>## [1] -0.0013927697  0.0004392714</code></pre>
-<p>Figure <a href="working-with-time-to-event-data.html#fig:ovplotlr">7.6</a> shows the fitted curves, using <span class="math inline">\(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\)</span> for group <span class="math inline">\(X\)</span>, along with the Kaplan Meier estimate of the survival curve. Although there isn’t much data, the exponential distribution looks to be an OK fit.</p>
 <p>For the Myeloid data we can do the same thing</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="comparing-survival-curves.html#cb61-1" tabindex="-1"></a>mC_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;A&quot;</span>))</span>
 <span id="cb61-2"><a href="comparing-survival-curves.html#cb61-2" tabindex="-1"></a>mT_my <span class="ot">=</span> <span class="fu">sum</span>((myeloid<span class="sc">$</span>death<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(myeloid<span class="sc">$</span>trt<span class="sc">==</span><span class="st">&quot;B&quot;</span>))</span>
@@ -815,7 +814,7 @@ If we plot the Schoenfeld residuals against time, we should see a random scatter
 ## GLOBAL   1.958  3 0.58</code></pre>
 <p>We see from the <code>age</code> line that the data are consistent with the proportional hazards assumption.</p>
 <p>The object created by <code>cox.zph</code> also contains the Schoenfeld residuals themselves, and so we can plot them:</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-215-1.png" width="672" /></p>
 <p>Because there is so little data it’s hard to conclude anything, and indeed our lack of significance in the test may be due to small sample size rather than excellent model fit.</p>
 </div>
 </div>
