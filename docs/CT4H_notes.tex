@@ -4174,7 +4174,7 @@ Having only one parameter, the exponential distribution is not very flexible, an
 The probability density function of a \textbf{Weibull} random variable is
 
 \[
-f\left(x\mid \lambda,\,\gamma\right) = 
+f\left(t\mid \lambda,\,\gamma\right) = 
 \begin{cases}
 \lambda\gamma t^{\gamma-1}\exp\left[{-\lambda t^{\gamma}}\right] & \text{for }t\geq{0}\\
 0 & \text{otherwise}.
@@ -4199,7 +4199,7 @@ and therefore
 
 \begin{align*}
 \ell\left(\lambda,\gamma\mid{\text{data}}\right) & = \sum\limits_{i=1}^n \delta_i \log\left(\lambda\gamma\right) + \left(\gamma-1\right)\sum\limits_{i=1}^n\delta_i \log{t_i} - \lambda \sum\limits_{i=1}^n t_i^{\gamma}\\
-& = r\log\left(\lambda\gamma\right) + \left(\gamma-1\right)\sum\limits_{i=1}^n \delta_i\log t_i - \lambda\sum\limits_{i=1}^n t_i^{\gamma}.
+& = m\log\left(\lambda\gamma\right) + \left(\gamma-1\right)\sum\limits_{i=1}^n \delta_i\log t_i - \lambda\sum\limits_{i=1}^n t_i^{\gamma}.
 \end{align*}
 
 For the maximum likelihood estimators, we differentiate (separately) with respect to \(\lambda\) and \(\gamma\) and equate to zero, to solve for the estimators \(\hat\lambda\) and \(\hat\gamma\).
@@ -4207,16 +4207,16 @@ For the maximum likelihood estimators, we differentiate (separately) with respec
 The equations we end up with are
 
 \begin{align}
-\frac{r}{\hat{\lambda}} - \sum\limits_{i=1}^n t_i^{\hat\gamma} & = 0 \label{eq:ll1}\\
-\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \hat{\lambda}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i &=0 \label{eq:ll2}.
+\frac{m}{\hat{\lambda}} - \sum\limits_{i=1}^n t_i^{\hat\gamma} & = 0 \label{eq:ll1}\\
+\frac{m}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \hat{\lambda}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i &=0 \label{eq:ll2}.
 \end{align}
 
 We can rearrange Equation \eqref{eq:ll1} to
 
-\[\hat{\lambda} = \frac{r}{\sum\limits_{i=1}^n t_i^{\hat\gamma}},\]
+\[\hat{\lambda} = \frac{m}{\sum\limits_{i=1}^n t_i^{\hat\gamma}},\]
 and substitute this into Equation \eqref{eq:ll2} to find
 
-\[\frac{r}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \frac{r}{\sum\limits_{i=1}^n t_i^{\gamma}}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i=0. \]
+\[\frac{m}{\hat{\gamma}} + \sum\limits_{i=1}^n \delta_i\log t_i - \frac{m}{\sum\limits_{i=1}^n t_i^{\gamma}}\sum\limits_{i=1}^n t_i^{\hat\gamma} \log t_i=0. \]
 This second equation is analytically intractable, so numerical methods are used to find \(\hat\gamma\), and then this value can be used to find \(\hat\lambda\).
 
 \begin{example}
