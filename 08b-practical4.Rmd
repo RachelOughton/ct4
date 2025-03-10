@@ -30,6 +30,7 @@ In this practical we'll focus on the analysis of binary and survival data. We'll
 install.packages(c("HSAUR", "HSAUR3", "pROC", "survival", "ggsurvfit", "survminer", "car"))
 ```
 
+
 ## Binary outcome data
 
 The dataset we'll use to explore Binary outcome data is the `respiratory` dataset, from the package `HSAUR`. In this trial, patients across two centres were randomly assigned to receive treatment or placebo, and their respiratory status was recorded as either 'poor' or 'good'. Measurements were recorded at months 0, 1, 2, 3, 4, but we will keep only month 0 (as a baseline) and month 4 (as a final outcome). We process the data below:
@@ -551,6 +552,8 @@ We find that we have just enough evidence to reject $H_0$ at the 95% level.
 
 #### Log-rank test {#cp2logrank}
 
+**Because our computer practicals are early in the week we haven't covered this material yet in lectures. So, it might be sensible to return to it at a later date, and instead to continue to the extension question if you still have time in the session.**
+
 The log-rank test is most easily found using the function `survdiff`. This function has an argument `rho` that controls the type of test. If we set `rho=0` then it performs a log-rank test.
 
 The general form is similar to `survfit`:
@@ -581,8 +584,6 @@ This is not that close to the result of the likelihood ratio test, probably refl
 
 
 #### Cox regression
-
-**Because our computer practicals are early in the week we haven't covered this material yet in lectures. So, it might be sensible to return to it at a later date, and instead to continue to the extension question if you still have time in the session.**
 
 Finally, we will fit the Cox regression model. This is done using the function `coxph` in the package `survival`. Look at the help file and the examples in Section \@ref(coxreg) to understand how to use this function. 
 
