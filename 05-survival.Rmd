@@ -974,7 +974,7 @@ and therefore for the hazard ratio itself of
 $$\left(0.568,\, 0.881\right). $$
 We see that there is strong evidence that the intervention reduces the hazard.
 
-We can now account for more baseline covariates. For the `ovarian` data we can include `age` and `resid.ds` (whether residual disease is present):
+We can also account for more baseline covariates. For the `ovarian` data we can include `age` and `resid.ds` (whether residual disease is present):
 
 ```{r, echo=T}
 coxph(formula = Surv(futime, fustat)~rx+age+resid.ds, data=ovarian)
@@ -1110,7 +1110,7 @@ and check the Schoenfeld residuals for `karno`, as in Figure \@ref(fig:vetschoen
 ggcoxzph(cox.zph(cox_vet), var = "karno")
 ```
 
-Although these don't look terrible, it appears there is a slight trend with time, and indeed the p-value shows a significant deviation from proportional hazards.
+Although these look quite evenly spread, they are mostly negative, and it appears there is a slight trend with time. Indeed the p-value shows a significant deviation from proportional hazards.
 
 :::
 

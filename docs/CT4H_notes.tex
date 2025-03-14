@@ -128,7 +128,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2025-03-10}
+\date{2025-03-14}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -4825,7 +4825,7 @@ and therefore for the hazard ratio itself of
 \[\left(0.568,\, 0.881\right). \]
 We see that there is strong evidence that the intervention reduces the hazard.
 
-We can now account for more baseline covariates. For the \texttt{ovarian} data we can include \texttt{age} and \texttt{resid.ds} (whether residual disease is present):
+We can also account for more baseline covariates. For the \texttt{ovarian} data we can include \texttt{age} and \texttt{resid.ds} (whether residual disease is present):
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -5039,7 +5039,7 @@ and check the Schoenfeld residuals for \texttt{karno}, as in Figure \ref{fig:vet
 \caption{\label{fig:vetschoen}Schoenfeld residuals for Cox regression model fit to veteran data, for covariate `karno'}
 \end{figure}
 
-Although these don't look terrible, it appears there is a slight trend with time, and indeed the p-value shows a significant deviation from proportional hazards.
+Although these look quite evenly spread, they are mostly negative, and it appears there is a slight trend with time. Indeed the p-value shows a significant deviation from proportional hazards.
 \end{example}
 
 \chapter*{References}\label{references}

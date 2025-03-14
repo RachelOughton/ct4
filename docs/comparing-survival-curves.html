@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-03-10" />
+<meta name="date" content="2025-03-14" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -760,7 +760,7 @@ Since the survival function is always between 0 and 1, we can see that the value
 <p>and therefore for the hazard ratio itself of</p>
 <p><span class="math display">\[\left(0.568,\, 0.881\right). \]</span>
 We see that there is strong evidence that the intervention reduces the hazard.</p>
-<p>We can now account for more baseline covariates. For the <code>ovarian</code> data we can include <code>age</code> and <code>resid.ds</code> (whether residual disease is present):</p>
+<p>We can also account for more baseline covariates. For the <code>ovarian</code> data we can include <code>age</code> and <code>resid.ds</code> (whether residual disease is present):</p>
 <div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="comparing-survival-curves.html#cb79-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx<span class="sc">+</span>age<span class="sc">+</span>resid.ds, <span class="at">data=</span>ovarian)</span></code></pre></div>
 <pre><code>## Call:
 ## coxph(formula = Surv(futime, fustat) ~ rx + age + resid.ds, data = ovarian)
@@ -814,7 +814,7 @@ If we plot the Schoenfeld residuals against time, we should see a random scatter
 ## GLOBAL   1.958  3 0.58</code></pre>
 <p>We see from the <code>age</code> line that the data are consistent with the proportional hazards assumption.</p>
 <p>The object created by <code>cox.zph</code> also contains the Schoenfeld residuals themselves, and so we can plot them:</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-216-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-124-1.png" width="672" /></p>
 <p>Because there is so little data it’s hard to conclude anything, and indeed our lack of significance in the test may be due to small sample size rather than excellent model fit.</p>
 </div>
 </div>
@@ -903,7 +903,7 @@ Figure 8.4: Log-log plot for veteran data split by treatment group and cell type
 Figure 8.5: Schoenfeld residuals for Cox regression model fit to veteran data, for covariate ‘karno’
 </p>
 </div>
-<p>Although these don’t look terrible, it appears there is a slight trend with time, and indeed the p-value shows a significant deviation from proportional hazards.</p>
+<p>Although these look quite evenly spread, they are mostly negative, and it appears there is a slight trend with time. Indeed the p-value shows a significant deviation from proportional hazards.</p>
 </div>
 
 </div>
