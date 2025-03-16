@@ -6,8 +6,8 @@ rmd_files:
      "02-samplesize.Rmd", 
      "03-allocation.Rmd",  "04-rctanalysis.Rmd",
      "04a-binary.Rmd",  "05-survival.Rmd", 
-    # "06-furtherdesigns.Rmd", "06b-crossover.Rmd", #"06c-missing.Rmd",
-    #  "06d-bayesian.Rmd",
+     "06-furtherdesigns.Rmd",  "06b-crossover.Rmd", #"06c-missing.Rmd",
+      "06d-bayesian.Rmd",
      "07-practical_missingdata.Rmd", 
      "07a-practical2.Rmd" ,
       "08a-practical3.Rmd",  "08b-practical4.Rmd",
@@ -17,8 +17,8 @@ rmd_files:
     "02-samplesize.Rmd", 
      "03-allocation.Rmd",  "04-rctanalysis.Rmd", 
      "04a-binary.Rmd",  "05-survival.Rmd",
-    #     "06-furtherdesigns.Rmd",  "06b-crossover.Rmd", #"06c-missing.Rmd",
-    #     "06d-bayesian.Rmd",
+         "06-furtherdesigns.Rmd",  "06b-crossover.Rmd", #"06c-missing.Rmd",
+         "06d-bayesian.Rmd",
  
     "99-references.Rmd"]
 #,  "06-furtherdesigns.Rmd", "08-practical2.Rmd"]

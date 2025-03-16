@@ -174,13 +174,13 @@ ggplot(data=epi_means, aes(x = as.numeric(period), y = smean, col = treatment)) 
   geom_line() + theme_minimal() + xlab("Period") + ylab("Mean seizure rate")
 ```
 
-To make visualisation somewhat clearer, can do a standardised spaghetti plot. In this plot, the observations are standardised within each time point. So, if $x_{it}$ is the outcome for participant $i$ and time $t$, the standardised spaghetti plot would show
+To make visualisation somewhat clearer, we can do a standardised spaghetti plot. In this plot, the observations are standardised within each time point. So, if $x_{it}$ is the outcome for participant $i$ and time $t$, the standardised spaghetti plot would show
 
 $$\frac{x_{it} - \bar{x}_t}{s_t} $$
 
-where $\bar{x}_t,\,s_t$ are the sample mean and SD at time $t$.
+where $\bar{x}_t,\,s_t$ are the sample mean and SD at time $t$. The standardised spaghetti plot for the `epilepsy` data is shown in Figure \@ref(fig:standepi)
 
-```{r}
+```{r standepi, fig.cap = "Standardised spaghetti plot for the epilepsy data."}
 epi_stand = epilepsy
 sr_stand = rep(NA, nrow(epilepsy))
 for (t in 1:4){
