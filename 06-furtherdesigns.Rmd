@@ -10,11 +10,11 @@ The solution to this is to work at the group level, rather than the individual l
 
 In a cluster RCT, participants within the same natural group (e.g.. doctor's surgery, hospital, school, classroom,...) are all allocated to the same group together. This means that, in the cleaning example above, the staff at a hospital in the treatment group can be trained in the new practice, all patients at that hospital will 'receive the new treatment', and contamination between groups is minimised.
 
-The main issue that makes cluster RCTs different is that participants within the same group are often likely to be more similar than those in a different group. We expect that each group has its own 'true' mean $\mu_k$ , which is different from the underlying population mean $\mu$, and that the cluster means are distributed with mean $\mu$ and variance $\sigma^2_b$ (more on $\sigma^2_b$ soon). This violates one of the key assumptions we've held so far, that the data are independent, and leads us to a very important quantity called the **intracluster correlation** (ICC).
+The main issue that makes cluster RCTs different is that participants within the same group are often likely to be more similar to one another than to participants from a different group. We expect that each group has its own 'true' mean $\mu_k$ , which is different from the underlying population mean $\mu$, and that the cluster means are distributed with mean $\mu$ and variance $\sigma^2_b$ (more on $\sigma^2_b$ soon). This violates one of the key assumptions we've held so far, that the data are independent, and leads us to a very important quantity called the **intracluster correlation** (ICC).
 
 ### Intracluster correlation
 
-The ICC quantifies the relatedness of data that are clustered in groups by comparing the variance within groups by the variance between groups. The ICC is given by
+The ICC quantifies the relatedness of data that are clustered in groups by comparing the variance within groups to the variance between groups. The ICC is given by
 
 $$ICC = \frac{\sigma^2_b}{\sigma^2_b + \sigma^2_w}, $$
 where $\sigma^2_b$ is the variance **between** groups and $\sigma^2_w$ is the variance **within** groups. At one extreme, where $\sigma_w^2=0$, we have $ICC=1$ and all measurements within each group are the same. At the other extreme, where $\sigma^2_b=0$, $ICC=0$ and in fact all groups are independent and identically distributed.
@@ -93,30 +93,25 @@ within.var = function(
   sum(g_sums)
 }
 
-## Now we can calculate them
-
-bvar = between.var(iris$Sepal.Length, iris$Species)
-bvar
-wvar = within.var(iris$Sepal.Length, iris$Species)
-wvar
-
-## And find the ICC:
-
-icc = bvar/(bvar+wvar)
-icc
 ```
 
 </details>
 
 ```{r icccheese, echo=T}
 wv_price = within.var(cheese$price, cheese$city)
+wv_price
 bv_price = between.var(cheese$price, cheese$city)
+bv_price
 icc = bv_price / (bv_price + wv_price)
 icc
 ```
 
 
 If we had to predict the price of cheese in a new city, all we can say is we expect the mean $\mu_{g+1}$ to come from $N\left(\mu,\;\sigma^2_b\right)$, where $\mu$ is the mean price of cheese in the overall population and $\sigma^2_b$ is the between group variance, and the individual cheese prices to come from $N\left(\mu_{g+1},\,\sigma^2_w\right)$.
+
+```{r, echo=T}
+mean(cheese$price)
+```
 
 :::
 
@@ -155,7 +150,7 @@ We will assume from now on that this is the case.
 
 ### A formula for sample size {#ss-crt}
 
-Now that we know $\operatorname{E}\left(\hat{\sigma}^2\right)$ we can adapt our sample size formula from Section \@ref(sec-ssformulacont). For an individual-level RCT with a continuous outcome, we had
+Now that we know $\operatorname{E}\left(\hat{\sigma}^2\right)$ we can adapt our sample size formula from Section \@ref(sec-ssformulacont). For an individual-level RCT with a continuous outcome, and assuming an unpaired, two-sided t-test comparing the outcomes, we had
 
 \begin{equation}
 n = \frac{2\sigma^2\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M}, 
@@ -163,7 +158,7 @@ n = \frac{2\sigma^2\left(z_{\beta} + z_{\alpha/2}\right)^2}{\tau^2_M},
 \end{equation}
 
 and the reason we were able to do this was because the variance of the treatment effect estimate was $\sigma^2/n$. 
-For a cluster RCT, the variance of the treatment effect is 
+For a cluster RCT, the variance of the treatment effect under the same model assumptions is 
 
 \begin{equation}
 \frac{\sigma^2}{n} \left[1 + \rho_{ICC}\left(\frac{\sum\limits_{j=1}^g n_j}{n}-1\right)\right]
@@ -320,7 +315,7 @@ This is fairly easy to implement, but it seems rather unsatisfactory. It's also 
 
 Perhaps the prevalent way of analysing the data from cluster randomized trials is the **mixed effects model** or **random effects model**, or **multilevel model**. In basic terms, mixed effects models are used whenever it cannot be assumed that the outputs are all independent of one another. In the cluster randomized trial setting, this is because outcomes for participants within the same cluster can be expected to be more highly correlated than outcomes for patients from different clusters, but we will see examples of other designs in the next chapter.
 
-To understand mixed effects models, we need to think about the difference between **fixed effects** and **random effects**. These are two different types of factor variables.
+To understand mixed effects models, we need to think about the difference between **fixed effects** and **random effects**, in particular for categorical/factor variables. 
 
 #### Fixed effects {-}
 

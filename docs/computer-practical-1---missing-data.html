@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-03-16" />
+<meta name="date" content="2025-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -466,9 +466,9 @@ div.csl-indent {
 <div id="r-practicalities" class="section level3 unnumbered hasAnchor">
 <h3>R practicalities<a href="computer-practical-1---missing-data.html#r-practicalities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do</p>
-<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="computer-practical-1---missing-data.html#cb119-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="computer-practical-1---missing-data.html#cb120-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
 <p>and to then load the package (it doesn’t load automatically on install) enter</p>
-<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="computer-practical-1---missing-data.html#cb120-1" tabindex="-1"></a><span class="fu">library</span>(<span class="sc">&lt;</span>packagename<span class="sc">&gt;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="computer-practical-1---missing-data.html#cb121-1" tabindex="-1"></a><span class="fu">library</span>(<span class="sc">&lt;</span>packagename<span class="sc">&gt;</span>)</span></code></pre></div>
 <p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III.</p>
 <p>An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
 <p>Codespace requires you to have a github account (you can sign up for free <a href="https://github.com/">here</a>) and there is a short guide to creating a github account <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&amp;reserved=0">here</a>.</p>
@@ -488,12 +488,12 @@ div.csl-indent {
 <div id="datasets" class="section level3 hasAnchor" number="12.1.1">
 <h3><span class="header-section-number">A.1.1</span> Datasets<a href="computer-practical-1---missing-data.html#datasets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The datasets we’ll work with come from the packages <code>medicaldata</code> and <code>smdi</code>, so you’ll need to install those if you don’t have them. We’ll also be using the packages <code>naniar</code> and <code>visdat</code>, which contain lots of methods for handling missing data, and <code>rstanarm</code>, which will enable us to easily sample from regression models. Other packages are available, as you can see from <a href="https://cran.r-project.org/web/views/MissingData.html">the CRAN task view on Missing Data</a>. We’ll also use <code>tidyverse</code> for various plotting and data handling tasks.</p>
-<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="computer-practical-1---missing-data.html#cb121-1" tabindex="-1"></a><span class="fu">require</span>(medicaldata)</span>
-<span id="cb121-2"><a href="computer-practical-1---missing-data.html#cb121-2" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
-<span id="cb121-3"><a href="computer-practical-1---missing-data.html#cb121-3" tabindex="-1"></a><span class="fu">library</span>(smdi)</span>
-<span id="cb121-4"><a href="computer-practical-1---missing-data.html#cb121-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb121-5"><a href="computer-practical-1---missing-data.html#cb121-5" tabindex="-1"></a><span class="fu">library</span>(visdat)</span>
-<span id="cb121-6"><a href="computer-practical-1---missing-data.html#cb121-6" tabindex="-1"></a><span class="fu">library</span>(rstanarm)</span></code></pre></div>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="computer-practical-1---missing-data.html#cb122-1" tabindex="-1"></a><span class="fu">require</span>(medicaldata)</span>
+<span id="cb122-2"><a href="computer-practical-1---missing-data.html#cb122-2" tabindex="-1"></a><span class="fu">library</span>(naniar)</span>
+<span id="cb122-3"><a href="computer-practical-1---missing-data.html#cb122-3" tabindex="-1"></a><span class="fu">library</span>(smdi)</span>
+<span id="cb122-4"><a href="computer-practical-1---missing-data.html#cb122-4" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb122-5"><a href="computer-practical-1---missing-data.html#cb122-5" tabindex="-1"></a><span class="fu">library</span>(visdat)</span>
+<span id="cb122-6"><a href="computer-practical-1---missing-data.html#cb122-6" tabindex="-1"></a><span class="fu">library</span>(rstanarm)</span></code></pre></div>
 <p>Throughout this practical we’ll work with three datasets.</p>
 <div id="supraclavicular" class="section level4 hasAnchor" number="12.1.1.1">
 <h4><span class="header-section-number">A.1.1.1</span> Supraclavicular<a href="computer-practical-1---missing-data.html#supraclavicular" class="anchor-section" aria-label="Anchor link to header"></a></h4>
@@ -513,8 +513,8 @@ Click for solution
 <p><span id="unlabeled-div-58" class="solution"><em>Solution</em>. </span>The details of the study can be found using <code>?supraclavicular</code>.</p>
 <p>The primary outcome variable is time to 4-nerve sensory block, which has the column name <code>onset_sensory</code>.</p>
 <p>The baseline covariates are gender, BMI and age. To create our data frame, we need</p>
-<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="computer-practical-1---missing-data.html#cb122-1" tabindex="-1"></a>sup_df <span class="ot">=</span> supraclavicular[ ,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">9</span>)]</span>
-<span id="cb122-2"><a href="computer-practical-1---missing-data.html#cb122-2" tabindex="-1"></a>sup_df <span class="ot">=</span> sup_df<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(group, gender), factor))</span></code></pre></div>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="computer-practical-1---missing-data.html#cb123-1" tabindex="-1"></a>sup_df <span class="ot">=</span> supraclavicular[ ,<span class="fu">c</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">9</span>)]</span>
+<span id="cb123-2"><a href="computer-practical-1---missing-data.html#cb123-2" tabindex="-1"></a>sup_df <span class="ot">=</span> sup_df<span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(group, gender), factor))</span></code></pre></div>
 </div>
 </details>
 </div>
@@ -522,7 +522,7 @@ Click for solution
 <h4><span class="header-section-number">A.1.1.2</span> Lung cancer dataset<a href="computer-practical-1---missing-data.html#lung-cancer-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>This is the <code>smdi_data</code> dataset from the package <code>smdi</code>. The intervention group variable is <code>exposure</code>. The outcome data are survival (or ‘time-to-event’) data: in this study, the ‘event’ is death and the follow-up period is five (probably years, but it doesn’t say!). Some participants are still alive at the end of the follow-up period (so they have <code>status=0</code>) and the data are therefore <em>right censored</em>. We will learn more about this type of data later in the course.</p>
 <p>For now, the only preparation to do is to convert <code>status</code> to a factor variable:</p>
-<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="computer-practical-1---missing-data.html#cb123-1" tabindex="-1"></a>smdi_data<span class="sc">$</span>status <span class="ot">=</span> <span class="fu">factor</span>(smdi_data<span class="sc">$</span>status)</span></code></pre></div>
+<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="computer-practical-1---missing-data.html#cb124-1" tabindex="-1"></a>smdi_data<span class="sc">$</span>status <span class="ot">=</span> <span class="fu">factor</span>(smdi_data<span class="sc">$</span>status)</span></code></pre></div>
 <p>This is a synthetic (or possibly synthetically altered) dataset designed for use with missing data exploration, so we have the advantage that the help file tells about the missingness mechanisms (more on that soon).</p>
 </div>
 <div id="obstetrics-and-periodontal-therapy" class="section level4 hasAnchor" number="12.1.1.3">
@@ -532,12 +532,12 @@ Click for solution
 <p><span id="exr:unlabeled-div-59" class="exercise"><strong>Exercise A.2  </strong></span>Use <code>?opt</code> to find out about this trial.</p>
 </div>
 <p>There are a lot of columns here, but we won’t keep all of them. Our dataset (for now) will be</p>
-<div class="sourceCode" id="cb124"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb124-1"><a href="computer-practical-1---missing-data.html#cb124-1" tabindex="-1"></a>opt_df <span class="ot">=</span> opt[ ,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">10</span><span class="sc">:</span><span class="dv">22</span>, <span class="dv">72</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="computer-practical-1---missing-data.html#cb125-1" tabindex="-1"></a>opt_df <span class="ot">=</span> opt[ ,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>, <span class="dv">10</span><span class="sc">:</span><span class="dv">22</span>, <span class="dv">72</span>)]</span></code></pre></div>
 <p>which retains most of the baseline covariates, intervention group and outcome variable (birthweight). There is some ‘messiness’ in the data, for example for some variables missing values are recorded as <code>""</code>, rather than <code>NA</code>. We’ll sort that now by running the following command</p>
-<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="computer-practical-1---missing-data.html#cb125-1" tabindex="-1"></a>opt_df <span class="ot">=</span> opt_df <span class="sc">%&gt;%</span> </span>
-<span id="cb125-2"><a href="computer-practical-1---missing-data.html#cb125-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Use.Tob, Use.Alc, Drug.Add), </span>
-<span id="cb125-3"><a href="computer-practical-1---missing-data.html#cb125-3" tabindex="-1"></a>                gsub, <span class="at">pattern =</span> <span class="st">&quot;^ +$&quot;</span>, <span class="at">replacement =</span> <span class="cn">NA</span>))<span class="sc">%&gt;%</span></span>
-<span id="cb125-4"><a href="computer-practical-1---missing-data.html#cb125-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Use.Tob, Use.Alc, Drug.Add), factor))</span></code></pre></div>
+<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="computer-practical-1---missing-data.html#cb126-1" tabindex="-1"></a>opt_df <span class="ot">=</span> opt_df <span class="sc">%&gt;%</span> </span>
+<span id="cb126-2"><a href="computer-practical-1---missing-data.html#cb126-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Use.Tob, Use.Alc, Drug.Add), </span>
+<span id="cb126-3"><a href="computer-practical-1---missing-data.html#cb126-3" tabindex="-1"></a>                gsub, <span class="at">pattern =</span> <span class="st">&quot;^ +$&quot;</span>, <span class="at">replacement =</span> <span class="cn">NA</span>))<span class="sc">%&gt;%</span></span>
+<span id="cb126-4"><a href="computer-practical-1---missing-data.html#cb126-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(Use.Tob, Use.Alc, Drug.Add), factor))</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -548,17 +548,17 @@ Click for solution
 <h3><span class="header-section-number">A.2.1</span> Visualising missingness<a href="computer-practical-1---missing-data.html#visualising-missingness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <div class="technique">
 <p>The function <code>vis_dat</code> (from <code>visdat</code>) gives an excellent first look at a dataset, colouring data by type (and missing data in grey). The default is to sort the columns by type, but you can see below that I’ve made it keep to the origianl order.</p>
-<div class="sourceCode" id="cb126"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb126-1"><a href="computer-practical-1---missing-data.html#cb126-1" tabindex="-1"></a><span class="fu">vis_dat</span>(sup_df, <span class="at">sort_type=</span>F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-82-1.png" width="672" /></p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="computer-practical-1---missing-data.html#cb127-1" tabindex="-1"></a><span class="fu">vis_dat</span>(sup_df, <span class="at">sort_type=</span>F)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-321-1.png" width="672" /></p>
 <p>The functions <code>gg_miss_var</code>, <code>gg_miss_case</code> and <code>gg_miss_upset</code> (all from <code>naniar</code>) allow us to quickly see how much missing data there is, either by variable, by case or by intersection. Look at the help files to find out what the arguments do.
 We see that in <code>supraclavicular</code> there are three missing entries for BMI, and all other variables are complete.</p>
-<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="computer-practical-1---missing-data.html#cb127-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(sup_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-83-1.png" width="672" /></p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="computer-practical-1---missing-data.html#cb128-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(sup_df)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-322-1.png" width="672" /></p>
 <p>Plotting by cases shows that each of these missing data are associated with a different participant, so there are three participants with one missing item each.</p>
-<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="computer-practical-1---missing-data.html#cb128-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(sup_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-84-1.png" width="672" /></p>
-<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="computer-practical-1---missing-data.html#cb129-1" tabindex="-1"></a><span class="fu">md.pattern</span>(sup_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-84-2.png" width="672" /></p>
+<div class="sourceCode" id="cb129"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb129-1"><a href="computer-practical-1---missing-data.html#cb129-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(sup_df)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-323-1.png" width="672" /></p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="computer-practical-1---missing-data.html#cb130-1" tabindex="-1"></a><span class="fu">md.pattern</span>(sup_df)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-323-2.png" width="672" /></p>
 <pre><code>##     group gender age onset_sensory bmi  
 ## 100     1      1   1             1   1 0
 ## 3       1      1   1             1   0 1
@@ -574,16 +574,16 @@ Click for solution
 <div class="solution">
 <p><span id="unlabeled-div-61" class="solution"><em>Solution</em>. </span><strong>Lung cancer</strong></p>
 <p>We see there is missingness for three variables:</p>
-<div class="sourceCode" id="cb131"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb131-1"><a href="computer-practical-1---missing-data.html#cb131-1" tabindex="-1"></a><span class="fu">vis_dat</span>(smdi_data)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-85-1.png" width="672" /></p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="computer-practical-1---missing-data.html#cb132-1" tabindex="-1"></a><span class="fu">vis_dat</span>(smdi_data)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-324-1.png" width="672" /></p>
 <p>The <code>naniar</code> functions can show us how this is spread across the variables and participants.</p>
-<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="computer-practical-1---missing-data.html#cb132-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(smdi_data, <span class="at">show_pct=</span>T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-86-1.png" width="672" /></p>
-<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="computer-practical-1---missing-data.html#cb133-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(smdi_data, <span class="at">order_cases =</span> T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-86-2.png" width="672" /></p>
+<div class="sourceCode" id="cb133"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb133-1"><a href="computer-practical-1---missing-data.html#cb133-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(smdi_data, <span class="at">show_pct=</span>T)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-325-1.png" width="672" /></p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="computer-practical-1---missing-data.html#cb134-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(smdi_data, <span class="at">order_cases =</span> T)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-325-2.png" width="672" /></p>
 <p>The function <code>md.pattern</code> shows us how many participants have each combination of missing data:</p>
-<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="computer-practical-1---missing-data.html#cb134-1" tabindex="-1"></a><span class="fu">md.pattern</span>(smdi_data, <span class="at">rotate.names =</span> T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-87-1.png" width="672" /></p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="computer-practical-1---missing-data.html#cb135-1" tabindex="-1"></a><span class="fu">md.pattern</span>(smdi_data, <span class="at">rotate.names =</span> T)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-326-1.png" width="672" /></p>
 <pre><code>##     exposure age_num female_cat smoking_cat physical_cat alk_cat histology_cat ses_cat
 ## 795        1       1          1           1            1       1             1       1
 ## 479        1       1          1           1            1       1             1       1
@@ -606,13 +606,13 @@ Click for solution
 ##            0         0      0      517      899     1015 2431</code></pre>
 <p><strong>Obstetrics and Periodontal Therapy</strong>
 Using <code>vis_dat</code> we see that there is a lot of missing data in the <code>opt</code> dataset, and that some variables are particularly badly affected.</p>
-<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="computer-practical-1---missing-data.html#cb136-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-88-1.png" width="672" /></p>
+<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="computer-practical-1---missing-data.html#cb137-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-327-1.png" width="672" /></p>
 <p>Now the <code>naniar</code> functions really do help us to understand what we’re dealing with!</p>
-<div class="sourceCode" id="cb137"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb137-1"><a href="computer-practical-1---missing-data.html#cb137-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(opt_df, <span class="at">show_pct=</span>T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-89-1.png" width="672" /></p>
-<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="computer-practical-1---missing-data.html#cb138-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(opt_df, <span class="at">order_cases =</span> T, <span class="at">show_pct=</span>T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-89-2.png" width="672" /></p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="computer-practical-1---missing-data.html#cb138-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(opt_df, <span class="at">show_pct=</span>T)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-328-1.png" width="672" /></p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="computer-practical-1---missing-data.html#cb139-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(opt_df, <span class="at">order_cases =</span> T, <span class="at">show_pct=</span>T)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-328-2.png" width="672" /></p>
 <p>Not many individual participants have more than about 25% of their data missing, but there are some variables that are missing for nearly all participants (more on this later).</p>
 </div>
 </details>
@@ -629,7 +629,7 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-63" class="solution"><em>Solution</em>. </span>Working through the list of functions (just for <code>opt_df</code>), we have:</p>
-<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="computer-practical-1---missing-data.html#cb139-1" tabindex="-1"></a><span class="fu">miss_case_summary</span>(opt_df)</span></code></pre></div>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="computer-practical-1---missing-data.html#cb140-1" tabindex="-1"></a><span class="fu">miss_case_summary</span>(opt_df)</span></code></pre></div>
 <pre><code>## # A tibble: 823 × 3
 ##     case n_miss pct_miss
 ##    &lt;int&gt;  &lt;int&gt;    &lt;dbl&gt;
@@ -645,7 +645,7 @@ Click for solution
 ## 10   150      7     38.9
 ## # ℹ 813 more rows</code></pre>
 <p>This shows how many variables (both in number and as a percentage of the total number of variables) are missing, for each case (in decreasing order of missingness).</p>
-<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="computer-practical-1---missing-data.html#cb141-1" tabindex="-1"></a><span class="fu">miss_case_table</span>(opt_df)</span></code></pre></div>
+<div class="sourceCode" id="cb142"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb142-1"><a href="computer-practical-1---missing-data.html#cb142-1" tabindex="-1"></a><span class="fu">miss_case_table</span>(opt_df)</span></code></pre></div>
 <pre><code>## # A tibble: 9 × 3
 ##   n_miss_in_case n_cases pct_cases
 ##            &lt;int&gt;   &lt;int&gt;     &lt;dbl&gt;
@@ -660,7 +660,7 @@ Click for solution
 ## 9              9       1     0.122</code></pre>
 <p><code>miss_case_table</code> tabulates the number of cases with <span class="math inline">\(n\)</span> missing variables, for <span class="math inline">\(n=1,\ldots\)</span>.</p>
 <p>The remaining functions look at things from the point of view of variables:</p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="computer-practical-1---missing-data.html#cb143-1" tabindex="-1"></a><span class="fu">miss_var_summary</span>(opt_df)</span></code></pre></div>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="computer-practical-1---missing-data.html#cb144-1" tabindex="-1"></a><span class="fu">miss_var_summary</span>(opt_df)</span></code></pre></div>
 <pre><code>## # A tibble: 18 × 3
 ##    variable      n_miss pct_miss
 ##    &lt;chr&gt;          &lt;int&gt;    &lt;num&gt;
@@ -718,7 +718,7 @@ Click for solution
 <p>Again, we will explore things visually before using some more rigorous methods. Now, instead of simply understanding how much missing data there is, and which variables and/or cases are involved, we want to look at the relationships between missingness and the values of the other variables.</p>
 <div class="technique">
 <p>In the package <code>naniar</code> you can create a copy of the data frame containing just <code>NA</code> and <code>!NA</code>, indexing exactly where the missing values are.</p>
-<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="computer-practical-1---missing-data.html#cb145-1" tabindex="-1"></a><span class="fu">as_shadow</span>(sup_df)</span></code></pre></div>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="computer-practical-1---missing-data.html#cb146-1" tabindex="-1"></a><span class="fu">as_shadow</span>(sup_df)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
@@ -2496,7 +2496,7 @@ NA
 </table>
 </div>
 <p>To avoid duplication of the original names, the column names are suffixed by ’_NA’. This means it can be appended to the original data frame to create what the authors of <code>naniar</code> call a <code>nabular</code> object.</p>
-<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="computer-practical-1---missing-data.html#cb146-1" tabindex="-1"></a><span class="fu">nabular</span>(sup_df)</span></code></pre></div>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="computer-practical-1---missing-data.html#cb147-1" tabindex="-1"></a><span class="fu">nabular</span>(sup_df)</span></code></pre></div>
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:200px; overflow-x: scroll; width:100%; ">
 <table class=" lightable-paper" style="font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;">
 <thead>
@@ -5834,28 +5834,28 @@ NA
 </table>
 </div>
 <p>This is useful because we can investigate the values of the actual data while conditioning on the missingness. We can summarize the outcome distribution according to whether a variable is missing or observed:</p>
-<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="computer-practical-1---missing-data.html#cb147-1" tabindex="-1"></a>sup_nab <span class="sc">%&gt;%</span></span>
-<span id="cb147-2"><a href="computer-practical-1---missing-data.html#cb147-2" tabindex="-1"></a>  <span class="fu">group_by</span>(bmi_NA) <span class="sc">%&gt;%</span></span>
-<span id="cb147-3"><a href="computer-practical-1---missing-data.html#cb147-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;onset_sensory&quot;</span>,</span>
-<span id="cb147-4"><a href="computer-practical-1---missing-data.html#cb147-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
-<span id="cb147-5"><a href="computer-practical-1---missing-data.html#cb147-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb148"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb148-1"><a href="computer-practical-1---missing-data.html#cb148-1" tabindex="-1"></a>sup_nab <span class="sc">%&gt;%</span></span>
+<span id="cb148-2"><a href="computer-practical-1---missing-data.html#cb148-2" tabindex="-1"></a>  <span class="fu">group_by</span>(bmi_NA) <span class="sc">%&gt;%</span></span>
+<span id="cb148-3"><a href="computer-practical-1---missing-data.html#cb148-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;onset_sensory&quot;</span>,</span>
+<span id="cb148-4"><a href="computer-practical-1---missing-data.html#cb148-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
+<span id="cb148-5"><a href="computer-practical-1---missing-data.html#cb148-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 2 × 6
 ##   bmi_NA  mean    sd   var   min   max
 ##   &lt;fct&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1 !NA       13  11.4  131.     0    50
 ## 2 NA        24  23.1  532      6    50</code></pre>
 <p>and visualise the outcome distribution for missing and non-missing values of a covariate:</p>
-<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="computer-practical-1---missing-data.html#cb149-1" tabindex="-1"></a><span class="fu">ggplot</span>(sup_nab,</span>
-<span id="cb149-2"><a href="computer-practical-1---missing-data.html#cb149-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> onset_sensory,</span>
-<span id="cb149-3"><a href="computer-practical-1---missing-data.html#cb149-3" tabindex="-1"></a>           <span class="at">fill =</span> bmi_NA)) <span class="sc">+</span> </span>
-<span id="cb149-4"><a href="computer-practical-1---missing-data.html#cb149-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-98-1.png" width="672" /></p>
-<p>We could also explore whether the missingness is related to the values of the other covariates, for example gender (in this data 0=female, 1=male)</p>
 <div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="computer-practical-1---missing-data.html#cb150-1" tabindex="-1"></a><span class="fu">ggplot</span>(sup_nab,</span>
-<span id="cb150-2"><a href="computer-practical-1---missing-data.html#cb150-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> gender,</span>
+<span id="cb150-2"><a href="computer-practical-1---missing-data.html#cb150-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> onset_sensory,</span>
 <span id="cb150-3"><a href="computer-practical-1---missing-data.html#cb150-3" tabindex="-1"></a>           <span class="at">fill =</span> bmi_NA)) <span class="sc">+</span> </span>
-<span id="cb150-4"><a href="computer-practical-1---missing-data.html#cb150-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
+<span id="cb150-4"><a href="computer-practical-1---missing-data.html#cb150-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-337-1.png" width="672" /></p>
+<p>We could also explore whether the missingness is related to the values of the other covariates, for example gender (in this data 0=female, 1=male)</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="computer-practical-1---missing-data.html#cb151-1" tabindex="-1"></a><span class="fu">ggplot</span>(sup_nab,</span>
+<span id="cb151-2"><a href="computer-practical-1---missing-data.html#cb151-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> gender,</span>
+<span id="cb151-3"><a href="computer-practical-1---missing-data.html#cb151-3" tabindex="-1"></a>           <span class="at">fill =</span> bmi_NA)) <span class="sc">+</span> </span>
+<span id="cb151-4"><a href="computer-practical-1---missing-data.html#cb151-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-338-1.png" width="672" /></p>
 <p>This isn’t a great example because there are only three missing BMI values, but you can probably guess what you’ll be doing next…</p>
 </div>
 <div class="exercise">
@@ -5864,7 +5864,7 @@ NA
 <li>For the <code>smdi_data</code> dataset, remember that the outcome variable is the combination of <code>eventtime</code> and <code>status</code>. Can you think of a way to visualise the data that combines these pieces of information?</li>
 <li>For <code>opt</code>, ignore the variables <code>BL.Diab.Type</code>, <code>BL.Cig.Day</code>, <code>BL.Cig.Day</code> and <code>N.prev.preg</code>. You can create a temporary <code>opt</code> data frame to work with</li>
 </ul>
-<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="computer-practical-1---missing-data.html#cb151-1" tabindex="-1"></a>opt_tmp <span class="ot">=</span> opt_df[ ,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">17</span>)]</span></code></pre></div>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="computer-practical-1---missing-data.html#cb152-1" tabindex="-1"></a>opt_tmp <span class="ot">=</span> opt_df[ ,<span class="sc">-</span><span class="fu">c</span>(<span class="dv">9</span>,<span class="dv">12</span>,<span class="dv">14</span>,<span class="dv">17</span>)]</span></code></pre></div>
 <p><strong>There are many, many plots you could make here, but try not to spend too long on this - why not divide up tasks between you and your neighbours?</strong></p>
 </div>
 <details>
@@ -5873,47 +5873,47 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-65" class="solution"><em>Solution</em>. </span>We’ll look here in some detail about the <strong>lung cancer</strong> dataset (<code>smdi_data</code>) - these aren’t really <em>solutions</em> as such, just some more detail of things you could do.</p>
-<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="computer-practical-1---missing-data.html#cb152-1" tabindex="-1"></a>smdi_nab <span class="ot">=</span> <span class="fu">nabular</span>(smdi_data)</span></code></pre></div>
+<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="computer-practical-1---missing-data.html#cb153-1" tabindex="-1"></a>smdi_nab <span class="ot">=</span> <span class="fu">nabular</span>(smdi_data)</span></code></pre></div>
 <p>First by <code>ecog_cat</code>. Since there is a lot more missing data here, I’ve chosen to compare the distributions side-by-side using <code>facet_wrap</code>. This also allows me to colour by <code>status</code> (although it is sort of obvious from the large peak at <code>eventtime</code>=5 that those people are still alive). Setting <code>scales = "free_y"</code> makes it easier to compare the overall shape of the distribution. You may have found a different way to display the data that may be equally (or more!) informative - if so that’s fine!</p>
-<div class="sourceCode" id="cb153"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb153-1"><a href="computer-practical-1---missing-data.html#cb153-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
-<span id="cb153-2"><a href="computer-practical-1---missing-data.html#cb153-2" tabindex="-1"></a>  <span class="fu">group_by</span>(ecog_cat) <span class="sc">%&gt;%</span></span>
-<span id="cb153-3"><a href="computer-practical-1---missing-data.html#cb153-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;eventtime&quot;</span>,</span>
-<span id="cb153-4"><a href="computer-practical-1---missing-data.html#cb153-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
-<span id="cb153-5"><a href="computer-practical-1---missing-data.html#cb153-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="computer-practical-1---missing-data.html#cb154-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
+<span id="cb154-2"><a href="computer-practical-1---missing-data.html#cb154-2" tabindex="-1"></a>  <span class="fu">group_by</span>(ecog_cat) <span class="sc">%&gt;%</span></span>
+<span id="cb154-3"><a href="computer-practical-1---missing-data.html#cb154-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;eventtime&quot;</span>,</span>
+<span id="cb154-4"><a href="computer-practical-1---missing-data.html#cb154-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
+<span id="cb154-5"><a href="computer-practical-1---missing-data.html#cb154-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 6
 ##   ecog_cat  mean    sd   var       min   max
 ##   &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
 ## 1 0         2.21  1.80  3.25 0.0000215     5
 ## 2 1         2.07  1.79  3.22 0.000754      5
 ## 3 &lt;NA&gt;      2.22  1.86  3.46 0.00248       5</code></pre>
-<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="computer-practical-1---missing-data.html#cb155-1" tabindex="-1"></a><span class="fu">ggplot</span>(smdi_nab,</span>
-<span id="cb155-2"><a href="computer-practical-1---missing-data.html#cb155-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
-<span id="cb155-3"><a href="computer-practical-1---missing-data.html#cb155-3" tabindex="-1"></a>           <span class="at">fill =</span> status)) <span class="sc">+</span> </span>
-<span id="cb155-4"><a href="computer-practical-1---missing-data.html#cb155-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>ecog_cat_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-102-1.png" width="672" /></p>
+<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="computer-practical-1---missing-data.html#cb156-1" tabindex="-1"></a><span class="fu">ggplot</span>(smdi_nab,</span>
+<span id="cb156-2"><a href="computer-practical-1---missing-data.html#cb156-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
+<span id="cb156-3"><a href="computer-practical-1---missing-data.html#cb156-3" tabindex="-1"></a>           <span class="at">fill =</span> status)) <span class="sc">+</span> </span>
+<span id="cb156-4"><a href="computer-practical-1---missing-data.html#cb156-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>ecog_cat_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-341-1.png" width="672" /></p>
 <p>Next by <code>egfr_cat</code>:</p>
-<div class="sourceCode" id="cb156"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb156-1"><a href="computer-practical-1---missing-data.html#cb156-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
-<span id="cb156-2"><a href="computer-practical-1---missing-data.html#cb156-2" tabindex="-1"></a>  <span class="fu">group_by</span>(egfr_cat) <span class="sc">%&gt;%</span></span>
-<span id="cb156-3"><a href="computer-practical-1---missing-data.html#cb156-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;eventtime&quot;</span>,</span>
-<span id="cb156-4"><a href="computer-practical-1---missing-data.html#cb156-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
-<span id="cb156-5"><a href="computer-practical-1---missing-data.html#cb156-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="computer-practical-1---missing-data.html#cb157-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
+<span id="cb157-2"><a href="computer-practical-1---missing-data.html#cb157-2" tabindex="-1"></a>  <span class="fu">group_by</span>(egfr_cat) <span class="sc">%&gt;%</span></span>
+<span id="cb157-3"><a href="computer-practical-1---missing-data.html#cb157-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;eventtime&quot;</span>,</span>
+<span id="cb157-4"><a href="computer-practical-1---missing-data.html#cb157-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
+<span id="cb157-5"><a href="computer-practical-1---missing-data.html#cb157-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 3 × 6
 ##   egfr_cat  mean    sd   var       min   max
 ##   &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
 ## 1 0         1.96  1.79  3.22 0.000754      5
 ## 2 1         2.94  1.91  3.66 0.0115        5
 ## 3 &lt;NA&gt;      2.15  1.76  3.10 0.0000215     5</code></pre>
-<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="computer-practical-1---missing-data.html#cb158-1" tabindex="-1"></a><span class="fu">ggplot</span>(smdi_nab,</span>
-<span id="cb158-2"><a href="computer-practical-1---missing-data.html#cb158-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
-<span id="cb158-3"><a href="computer-practical-1---missing-data.html#cb158-3" tabindex="-1"></a>           <span class="at">fill =</span> status)) <span class="sc">+</span> </span>
-<span id="cb158-4"><a href="computer-practical-1---missing-data.html#cb158-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>egfr_cat_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-103-1.png" width="672" /></p>
+<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="computer-practical-1---missing-data.html#cb159-1" tabindex="-1"></a><span class="fu">ggplot</span>(smdi_nab,</span>
+<span id="cb159-2"><a href="computer-practical-1---missing-data.html#cb159-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
+<span id="cb159-3"><a href="computer-practical-1---missing-data.html#cb159-3" tabindex="-1"></a>           <span class="at">fill =</span> status)) <span class="sc">+</span> </span>
+<span id="cb159-4"><a href="computer-practical-1---missing-data.html#cb159-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>egfr_cat_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-342-1.png" width="672" /></p>
 <p>and finally by <code>pdl1_num</code>:</p>
-<div class="sourceCode" id="cb159"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb159-1"><a href="computer-practical-1---missing-data.html#cb159-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
-<span id="cb159-2"><a href="computer-practical-1---missing-data.html#cb159-2" tabindex="-1"></a>  <span class="fu">group_by</span>(pdl1_num) <span class="sc">%&gt;%</span></span>
-<span id="cb159-3"><a href="computer-practical-1---missing-data.html#cb159-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;eventtime&quot;</span>,</span>
-<span id="cb159-4"><a href="computer-practical-1---missing-data.html#cb159-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
-<span id="cb159-5"><a href="computer-practical-1---missing-data.html#cb159-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="computer-practical-1---missing-data.html#cb160-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
+<span id="cb160-2"><a href="computer-practical-1---missing-data.html#cb160-2" tabindex="-1"></a>  <span class="fu">group_by</span>(pdl1_num) <span class="sc">%&gt;%</span></span>
+<span id="cb160-3"><a href="computer-practical-1---missing-data.html#cb160-3" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&quot;eventtime&quot;</span>,</span>
+<span id="cb160-4"><a href="computer-practical-1---missing-data.html#cb160-4" tabindex="-1"></a>               <span class="at">.funs =</span> <span class="fu">c</span>(<span class="st">&quot;mean&quot;</span>, <span class="st">&quot;sd&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;min&quot;</span>, <span class="st">&quot;max&quot;</span>),</span>
+<span id="cb160-5"><a href="computer-practical-1---missing-data.html#cb160-5" tabindex="-1"></a>               <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
 <pre><code>## # A tibble: 1,540 × 6
 ##    pdl1_num  mean    sd   var   min   max
 ##       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -5928,33 +5928,33 @@ Click for solution
 ##  9    18.7  4.91     NA    NA 4.91  4.91 
 ## 10    19.0  2.03     NA    NA 2.03  2.03 
 ## # ℹ 1,530 more rows</code></pre>
-<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="computer-practical-1---missing-data.html#cb161-1" tabindex="-1"></a><span class="fu">ggplot</span>(smdi_nab,</span>
-<span id="cb161-2"><a href="computer-practical-1---missing-data.html#cb161-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
-<span id="cb161-3"><a href="computer-practical-1---missing-data.html#cb161-3" tabindex="-1"></a>           <span class="at">fill =</span> status))<span class="sc">+</span></span>
-<span id="cb161-4"><a href="computer-practical-1---missing-data.html#cb161-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>pdl1_num_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
+<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="computer-practical-1---missing-data.html#cb162-1" tabindex="-1"></a><span class="fu">ggplot</span>(smdi_nab,</span>
+<span id="cb162-2"><a href="computer-practical-1---missing-data.html#cb162-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
+<span id="cb162-3"><a href="computer-practical-1---missing-data.html#cb162-3" tabindex="-1"></a>           <span class="at">fill =</span> status))<span class="sc">+</span></span>
+<span id="cb162-4"><a href="computer-practical-1---missing-data.html#cb162-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>pdl1_num_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-343-1.png" width="672" /></p>
 <p>It appears that <code>pdl1_num</code> values are likely to be MNAR, since the outcome distribution looks different (proportionally more early deaths) for the missing values.</p>
 <p>We could make many more plots of this type: for example, by plotting the distributions of other variables rather than the outcome.</p>
 <p>For example, we could look at how the missingness of each variable relates to smoking category:</p>
-<div class="sourceCode" id="cb162"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb162-1"><a href="computer-practical-1---missing-data.html#cb162-1" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb162-2"><a href="computer-practical-1---missing-data.html#cb162-2" tabindex="-1"></a>ecog_sm <span class="ot">=</span> <span class="fu">ggplot</span>(smdi_nab,</span>
-<span id="cb162-3"><a href="computer-practical-1---missing-data.html#cb162-3" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> smoking_cat,</span>
-<span id="cb162-4"><a href="computer-practical-1---missing-data.html#cb162-4" tabindex="-1"></a>           <span class="at">fill =</span> ecog_cat_NA))<span class="sc">+</span></span>
-<span id="cb162-5"><a href="computer-practical-1---missing-data.html#cb162-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>() </span>
-<span id="cb162-6"><a href="computer-practical-1---missing-data.html#cb162-6" tabindex="-1"></a></span>
-<span id="cb162-7"><a href="computer-practical-1---missing-data.html#cb162-7" tabindex="-1"></a></span>
-<span id="cb162-8"><a href="computer-practical-1---missing-data.html#cb162-8" tabindex="-1"></a>egfr_sm <span class="ot">=</span> <span class="fu">ggplot</span>(smdi_nab,</span>
-<span id="cb162-9"><a href="computer-practical-1---missing-data.html#cb162-9" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> smoking_cat,</span>
-<span id="cb162-10"><a href="computer-practical-1---missing-data.html#cb162-10" tabindex="-1"></a>           <span class="at">fill =</span> egfr_cat_NA))<span class="sc">+</span></span>
-<span id="cb162-11"><a href="computer-practical-1---missing-data.html#cb162-11" tabindex="-1"></a>  <span class="fu">geom_bar</span>() </span>
-<span id="cb162-12"><a href="computer-practical-1---missing-data.html#cb162-12" tabindex="-1"></a></span>
-<span id="cb162-13"><a href="computer-practical-1---missing-data.html#cb162-13" tabindex="-1"></a>pdl1_sm <span class="ot">=</span> <span class="fu">ggplot</span>(smdi_nab,</span>
-<span id="cb162-14"><a href="computer-practical-1---missing-data.html#cb162-14" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> smoking_cat,</span>
-<span id="cb162-15"><a href="computer-practical-1---missing-data.html#cb162-15" tabindex="-1"></a>           <span class="at">fill =</span> pdl1_num_NA))<span class="sc">+</span></span>
-<span id="cb162-16"><a href="computer-practical-1---missing-data.html#cb162-16" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span>
-<span id="cb162-17"><a href="computer-practical-1---missing-data.html#cb162-17" tabindex="-1"></a></span>
-<span id="cb162-18"><a href="computer-practical-1---missing-data.html#cb162-18" tabindex="-1"></a><span class="fu">grid.arrange</span>(ecog_sm, egfr_sm, pdl1_sm, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-105-1.png" width="672" /></p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="computer-practical-1---missing-data.html#cb163-1" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb163-2"><a href="computer-practical-1---missing-data.html#cb163-2" tabindex="-1"></a>ecog_sm <span class="ot">=</span> <span class="fu">ggplot</span>(smdi_nab,</span>
+<span id="cb163-3"><a href="computer-practical-1---missing-data.html#cb163-3" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> smoking_cat,</span>
+<span id="cb163-4"><a href="computer-practical-1---missing-data.html#cb163-4" tabindex="-1"></a>           <span class="at">fill =</span> ecog_cat_NA))<span class="sc">+</span></span>
+<span id="cb163-5"><a href="computer-practical-1---missing-data.html#cb163-5" tabindex="-1"></a>  <span class="fu">geom_bar</span>() </span>
+<span id="cb163-6"><a href="computer-practical-1---missing-data.html#cb163-6" tabindex="-1"></a></span>
+<span id="cb163-7"><a href="computer-practical-1---missing-data.html#cb163-7" tabindex="-1"></a></span>
+<span id="cb163-8"><a href="computer-practical-1---missing-data.html#cb163-8" tabindex="-1"></a>egfr_sm <span class="ot">=</span> <span class="fu">ggplot</span>(smdi_nab,</span>
+<span id="cb163-9"><a href="computer-practical-1---missing-data.html#cb163-9" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> smoking_cat,</span>
+<span id="cb163-10"><a href="computer-practical-1---missing-data.html#cb163-10" tabindex="-1"></a>           <span class="at">fill =</span> egfr_cat_NA))<span class="sc">+</span></span>
+<span id="cb163-11"><a href="computer-practical-1---missing-data.html#cb163-11" tabindex="-1"></a>  <span class="fu">geom_bar</span>() </span>
+<span id="cb163-12"><a href="computer-practical-1---missing-data.html#cb163-12" tabindex="-1"></a></span>
+<span id="cb163-13"><a href="computer-practical-1---missing-data.html#cb163-13" tabindex="-1"></a>pdl1_sm <span class="ot">=</span> <span class="fu">ggplot</span>(smdi_nab,</span>
+<span id="cb163-14"><a href="computer-practical-1---missing-data.html#cb163-14" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> smoking_cat,</span>
+<span id="cb163-15"><a href="computer-practical-1---missing-data.html#cb163-15" tabindex="-1"></a>           <span class="at">fill =</span> pdl1_num_NA))<span class="sc">+</span></span>
+<span id="cb163-16"><a href="computer-practical-1---missing-data.html#cb163-16" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span>
+<span id="cb163-17"><a href="computer-practical-1---missing-data.html#cb163-17" tabindex="-1"></a></span>
+<span id="cb163-18"><a href="computer-practical-1---missing-data.html#cb163-18" tabindex="-1"></a><span class="fu">grid.arrange</span>(ecog_sm, egfr_sm, pdl1_sm, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-344-1.png" width="672" /></p>
 <p>So, it looks likely that the missingness of <code>egfr_cat</code> depends on smoking status, but less likely that the missingness of the other two variables does.</p>
 </div>
 </details>
@@ -5967,7 +5967,7 @@ Click for solution
 <p>This test examines the differences between those observations with an observation (of some partially observed variable) and those without. The test statistic is derived by assuming both groups are drawn from the same multivariate normal distribution, and so a high value of the test statistic (conversely a low p-value) suggests that there are significant differences between the groups. This test is from a generalisation of Student’s <span class="math inline">\(t\)</span>-test made by <span class="citation">Hotelling et al. (<a href="#ref-hotelling1931generalization">1931</a>)</span>.</p>
 <div class="technique">
 <p>To perform Hotelling’s multivariate <span class="math inline">\(t\)</span>-test on the <code>sup_df</code> data we enter</p>
-<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="computer-practical-1---missing-data.html#cb163-1" tabindex="-1"></a><span class="fu">smdi_hotelling</span>(sup_df)</span></code></pre></div>
+<div class="sourceCode" id="cb164"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb164-1"><a href="computer-practical-1---missing-data.html#cb164-1" tabindex="-1"></a><span class="fu">smdi_hotelling</span>(sup_df)</span></code></pre></div>
 <pre><code>##   covariate hotteling_p
 ## 1       bmi       0.340</code></pre>
 <p>For this data, we find that there is insufficient evidence to reject the hypothesis that the BMI data are MCAR.</p>
@@ -5980,14 +5980,14 @@ Click for solution
 Click for solution
 </summary>
 <p>First we’ll look at <code>smdi_data</code>.</p>
-<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="computer-practical-1---missing-data.html#cb165-1" tabindex="-1"></a><span class="fu">smdi_hotelling</span>(smdi_data)</span></code></pre></div>
+<div class="sourceCode" id="cb166"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb166-1"><a href="computer-practical-1---missing-data.html#cb166-1" tabindex="-1"></a><span class="fu">smdi_hotelling</span>(smdi_data)</span></code></pre></div>
 <pre><code>##   covariate hotteling_p
 ## 1  ecog_cat       0.783
 ## 2  egfr_cat       &lt;.001
 ## 3  pdl1_num       &lt;.001</code></pre>
 <p>It appears that <code>ecog_cat</code> may be MCAR, but for <code>egfr_cat</code> and <code>pdl1_num</code> there is sufficient evidence to suggest MAR or MNAR.</p>
 <p>Now for <code>opt_tmp</code></p>
-<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="computer-practical-1---missing-data.html#cb167-1" tabindex="-1"></a><span class="fu">smdi_hotelling</span>(opt_tmp)</span></code></pre></div>
+<div class="sourceCode" id="cb168"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb168-1"><a href="computer-practical-1---missing-data.html#cb168-1" tabindex="-1"></a><span class="fu">smdi_hotelling</span>(opt_tmp)</span></code></pre></div>
 <pre><code>##     covariate hotteling_p
 ## 1         BMI       &lt;.001
 ## 2     Use.Tob       &lt;.001
@@ -6005,15 +6005,15 @@ Click for solution
 <p>A general rule of thumb is that ASMD values over 0.1 are cause for concern, though again this can be vulnerable to small sample sizes.</p>
 <div class="technique">
 <p>The function <code>smdi_asmd</code> from <code>smdi</code> creates an <code>asmd</code> object, which has several parts to it. Note that we set <code>includeNA=T</code> so that we can see the effect of missingness, as well as observed values, of other variables. This won’t make a difference for <code>sup_df</code>, but it will in the exercise.</p>
-<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="computer-practical-1---missing-data.html#cb169-1" tabindex="-1"></a>asmd_sup <span class="ot">=</span> <span class="fu">smdi_asmd</span>(sup_df, <span class="at">includeNA=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="computer-practical-1---missing-data.html#cb170-1" tabindex="-1"></a>asmd_sup <span class="ot">=</span> <span class="fu">smdi_asmd</span>(sup_df, <span class="at">includeNA=</span>T)</span></code></pre></div>
 <p>Firstly there is a summary table, which shows the median, min and max of ASMD for each partially observed covariate.</p>
-<div class="sourceCode" id="cb170"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb170-1"><a href="computer-practical-1---missing-data.html#cb170-1" tabindex="-1"></a>asmd_sup</span></code></pre></div>
+<div class="sourceCode" id="cb171"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb171-1"><a href="computer-practical-1---missing-data.html#cb171-1" tabindex="-1"></a>asmd_sup</span></code></pre></div>
 <pre><code>## # A tibble: 1 × 4
 ##   covariate asmd_median asmd_min asmd_max
 ## * &lt;chr&gt;     &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;   
 ## 1 bmi       0.471       0.343    0.604</code></pre>
 <p>There is also a <code>Table 1</code>, so called because a summary table of this nature should always be included when summarising a dataset in terms of the difference between two groups. This is formatted a little strangely, as it is designed for use in printed works. This table includes the result of a statistical test (by default a chi-squared test) showing whether the differences are statistically significant. (The function <code>kable</code> here is to do with formatting the table for HTML, not to do with missing data).</p>
-<div class="sourceCode" id="cb172"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb172-1"><a href="computer-practical-1---missing-data.html#cb172-1" tabindex="-1"></a><span class="fu">kable</span>(asmd_sup<span class="sc">$</span>bmi<span class="sc">$</span>asmd_table1)</span></code></pre></div>
+<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="computer-practical-1---missing-data.html#cb173-1" tabindex="-1"></a><span class="fu">kable</span>(asmd_sup<span class="sc">$</span>bmi<span class="sc">$</span>asmd_table1)</span></code></pre></div>
 <table>
 <colgroup>
 <col width="36%" />
@@ -6077,8 +6077,8 @@ Click for solution
 </tbody>
 </table>
 <p>Finally there is a plot showing each ASMD</p>
-<div class="sourceCode" id="cb173"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb173-1"><a href="computer-practical-1---missing-data.html#cb173-1" tabindex="-1"></a>asmd_sup<span class="sc">$</span>bmi<span class="sc">$</span>asmd_plot</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-112-1.png" width="672" /></p>
+<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="computer-practical-1---missing-data.html#cb174-1" tabindex="-1"></a>asmd_sup<span class="sc">$</span>bmi<span class="sc">$</span>asmd_plot</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-351-1.png" width="672" /></p>
 <p>We see that although the ASMD values are quite large (much bigger than the advised 0.1), because there are a very small number of them they are not statistically significant.</p>
 </div>
 <div class="exercise">
@@ -6092,8 +6092,8 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-68" class="solution"><em>Solution</em>. </span>We will do this just for the <code>opt_tmp</code> data in the solutions.</p>
-<div class="sourceCode" id="cb174"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb174-1"><a href="computer-practical-1---missing-data.html#cb174-1" tabindex="-1"></a>asmd_opt <span class="ot">=</span> <span class="fu">smdi_asmd</span>(opt_tmp[ ,<span class="sc">-</span><span class="dv">1</span>], <span class="at">includeNA=</span>T)</span>
-<span id="cb174-2"><a href="computer-practical-1---missing-data.html#cb174-2" tabindex="-1"></a>asmd_opt</span></code></pre></div>
+<div class="sourceCode" id="cb175"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb175-1"><a href="computer-practical-1---missing-data.html#cb175-1" tabindex="-1"></a>asmd_opt <span class="ot">=</span> <span class="fu">smdi_asmd</span>(opt_tmp[ ,<span class="sc">-</span><span class="dv">1</span>], <span class="at">includeNA=</span>T)</span>
+<span id="cb175-2"><a href="computer-practical-1---missing-data.html#cb175-2" tabindex="-1"></a>asmd_opt</span></code></pre></div>
 <pre><code>## # A tibble: 5 × 4
 ##   covariate   asmd_median asmd_min asmd_max
 ## * &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;    &lt;chr&gt;   
@@ -6104,9 +6104,9 @@ Click for solution
 ## 5 Birthweight 0.340       0.004    2.556</code></pre>
 <p>These values are all well above 0.1, so it seems unlikely that the data are MCAR.</p>
 <p>We can look in a little more detail, first at BMI:</p>
-<div class="sourceCode" id="cb176"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb176-1"><a href="computer-practical-1---missing-data.html#cb176-1" tabindex="-1"></a>asmd_opt<span class="sc">$</span>BMI<span class="sc">$</span>asmd_plot</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-114-1.png" width="672" /></p>
-<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="computer-practical-1---missing-data.html#cb177-1" tabindex="-1"></a><span class="fu">kable</span>(asmd_opt<span class="sc">$</span>BMI<span class="sc">$</span>asmd_table1)</span></code></pre></div>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="computer-practical-1---missing-data.html#cb177-1" tabindex="-1"></a>asmd_opt<span class="sc">$</span>BMI<span class="sc">$</span>asmd_plot</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-353-1.png" width="672" /></p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="computer-practical-1---missing-data.html#cb178-1" tabindex="-1"></a><span class="fu">kable</span>(asmd_opt<span class="sc">$</span>BMI<span class="sc">$</span>asmd_table1)</span></code></pre></div>
 <table>
 <colgroup>
 <col width="31%" />
@@ -6363,7 +6363,7 @@ Click for solution
 </table>
 <p>We see that there appears to be a strong relationship between <code>clinic</code> and missingness of BMI. In particular, a disproportionately high number of missing BMI values seem to be from the New York (NY) clinic. There also appears to be less missingness for those with <code>public.asstce=1</code> (those for whom the government paid for the delivery).</p>
 <p>Next we look at <code>Use.Alc</code></p>
-<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="computer-practical-1---missing-data.html#cb178-1" tabindex="-1"></a><span class="fu">kable</span>(asmd_opt<span class="sc">$</span>Use.Alc<span class="sc">$</span>asmd_table1)</span></code></pre></div>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="computer-practical-1---missing-data.html#cb179-1" tabindex="-1"></a><span class="fu">kable</span>(asmd_opt<span class="sc">$</span>Use.Alc<span class="sc">$</span>asmd_table1)</span></code></pre></div>
 <table>
 <colgroup>
 <col width="31%" />
@@ -6594,8 +6594,8 @@ Click for solution
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="computer-practical-1---missing-data.html#cb179-1" tabindex="-1"></a>asmd_opt<span class="sc">$</span>Use.Alc<span class="sc">$</span>asmd_plot</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-116-1.png" width="672" /></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="computer-practical-1---missing-data.html#cb180-1" tabindex="-1"></a>asmd_opt<span class="sc">$</span>Use.Alc<span class="sc">$</span>asmd_plot</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-355-1.png" width="672" /></p>
 <p>This time the two most strongly related covariates are <code>Use.Tob</code> and <code>Drug.Add</code>. This is perhaps not surprising because they are quite similar variables. Notice that <code>clinic</code> still has a strong effect (the <span class="math inline">\(x\)</span>-axis goes a lot higher on this plot than the one for BMI). From the table, we see that again a disproportionately high number of missing values come from the NY clinic, and that missingness in <code>Use.Alc</code> is much more likely if <code>Use.Tob</code> and/or <code>Drug.Add</code> are missing.</p>
 </div>
 </details>
@@ -6613,11 +6613,11 @@ where <span class="math inline">\(p = p\left(Y=1\right)\)</span> the <span class
 <p>Fitting a logistic regression model in R is very similar to fitting a linear regression. We use the function <code>glm</code>, which is a general function for generalised linear models. To specify that we want logistic regression, we must include the argument <code>family = binoial(link = "logit")</code>.</p>
 </div>
 <p>We’ll use our <code>nabular</code> objects for this, since we already have variables denoting missingness. For example, we can see whether missingness of BMI in the <code>supraclavicular</code> dataset relates to any of the other variables.</p>
-<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="computer-practical-1---missing-data.html#cb180-1" tabindex="-1"></a>sup_nab <span class="ot">=</span> <span class="fu">nabular</span>(sup_df)</span>
-<span id="cb180-2"><a href="computer-practical-1---missing-data.html#cb180-2" tabindex="-1"></a>sup_glm <span class="ot">=</span> <span class="fu">glm</span>(bmi_NA <span class="sc">~</span> group <span class="sc">+</span> gender <span class="sc">+</span> age <span class="sc">+</span> onset_sensory, </span>
-<span id="cb180-3"><a href="computer-practical-1---missing-data.html#cb180-3" tabindex="-1"></a>              <span class="at">data =</span> sup_nab, </span>
-<span id="cb180-4"><a href="computer-practical-1---missing-data.html#cb180-4" tabindex="-1"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb180-5"><a href="computer-practical-1---missing-data.html#cb180-5" tabindex="-1"></a><span class="fu">summary</span>(sup_glm)</span></code></pre></div>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="computer-practical-1---missing-data.html#cb181-1" tabindex="-1"></a>sup_nab <span class="ot">=</span> <span class="fu">nabular</span>(sup_df)</span>
+<span id="cb181-2"><a href="computer-practical-1---missing-data.html#cb181-2" tabindex="-1"></a>sup_glm <span class="ot">=</span> <span class="fu">glm</span>(bmi_NA <span class="sc">~</span> group <span class="sc">+</span> gender <span class="sc">+</span> age <span class="sc">+</span> onset_sensory, </span>
+<span id="cb181-3"><a href="computer-practical-1---missing-data.html#cb181-3" tabindex="-1"></a>              <span class="at">data =</span> sup_nab, </span>
+<span id="cb181-4"><a href="computer-practical-1---missing-data.html#cb181-4" tabindex="-1"></a>              <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb181-5"><a href="computer-practical-1---missing-data.html#cb181-5" tabindex="-1"></a><span class="fu">summary</span>(sup_glm)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = bmi_NA ~ group + gender + age + onset_sensory, 
@@ -6645,7 +6645,7 @@ where <span class="math inline">\(p = p\left(Y=1\right)\)</span> the <span class
 </div>
 <div class="technique">
 <p>To avoid typing out all the column names for the formula, you can copy and paste the output from</p>
-<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="computer-practical-1---missing-data.html#cb182-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="fu">names</span>(smdi_data), <span class="at">collapse =</span> <span class="st">&quot; + &quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="computer-practical-1---missing-data.html#cb183-1" tabindex="-1"></a><span class="fu">paste</span>(<span class="fu">names</span>(smdi_data), <span class="at">collapse =</span> <span class="st">&quot; + &quot;</span>)</span></code></pre></div>
 <p>and delete the terms you don’t want.</p>
 </div>
 <details>
@@ -6656,9 +6656,9 @@ Click for solution
 <p><span id="unlabeled-div-70" class="solution"><em>Solution</em>. </span><strong>Lung cancer data</strong></p>
 <p>We can fit a few models, to see what we find. First we’ll tackle <code>ecog_cat_NA</code>.</p>
 <p>Missingness in <code>ecog_cat</code> doesn’t appear to be associated with any other baseline covariates:</p>
-<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="computer-practical-1---missing-data.html#cb183-1" tabindex="-1"></a>ecog_NA_glm1 <span class="ot">=</span> <span class="fu">glm</span>(ecog_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat, </span>
-<span id="cb183-2"><a href="computer-practical-1---missing-data.html#cb183-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb183-3"><a href="computer-practical-1---missing-data.html#cb183-3" tabindex="-1"></a><span class="fu">summary</span>(ecog_NA_glm1)</span></code></pre></div>
+<div class="sourceCode" id="cb184"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb184-1"><a href="computer-practical-1---missing-data.html#cb184-1" tabindex="-1"></a>ecog_NA_glm1 <span class="ot">=</span> <span class="fu">glm</span>(ecog_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat, </span>
+<span id="cb184-2"><a href="computer-practical-1---missing-data.html#cb184-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb184-3"><a href="computer-practical-1---missing-data.html#cb184-3" tabindex="-1"></a><span class="fu">summary</span>(ecog_NA_glm1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = ecog_cat_NA ~ exposure + age_num + female_cat + 
@@ -6689,9 +6689,9 @@ Click for solution
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>Now including the other variables with missing values:</p>
-<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="computer-practical-1---missing-data.html#cb185-1" tabindex="-1"></a>ecog_NA_glm2 <span class="ot">=</span> <span class="fu">glm</span>(ecog_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> egfr_cat <span class="sc">+</span> pdl1_num, </span>
-<span id="cb185-2"><a href="computer-practical-1---missing-data.html#cb185-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb185-3"><a href="computer-practical-1---missing-data.html#cb185-3" tabindex="-1"></a><span class="fu">summary</span>(ecog_NA_glm2)</span></code></pre></div>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="computer-practical-1---missing-data.html#cb186-1" tabindex="-1"></a>ecog_NA_glm2 <span class="ot">=</span> <span class="fu">glm</span>(ecog_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> egfr_cat <span class="sc">+</span> pdl1_num, </span>
+<span id="cb186-2"><a href="computer-practical-1---missing-data.html#cb186-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb186-3"><a href="computer-practical-1---missing-data.html#cb186-3" tabindex="-1"></a><span class="fu">summary</span>(ecog_NA_glm2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = ecog_cat_NA ~ exposure + age_num + female_cat + 
@@ -6725,9 +6725,9 @@ Click for solution
 ## Number of Fisher Scoring iterations: 4</code></pre>
 <p>None of the variables are significant, so it is probably reasonable to suppose that <code>ecog_cat</code> is MCAR (indeed the help file tells us it is).</p>
 <p>Now for <code>egfr_cat</code>:</p>
-<div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb187-1"><a href="computer-practical-1---missing-data.html#cb187-1" tabindex="-1"></a>egfr_NA_glm1 <span class="ot">=</span> <span class="fu">glm</span>(egfr_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat, </span>
-<span id="cb187-2"><a href="computer-practical-1---missing-data.html#cb187-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb187-3"><a href="computer-practical-1---missing-data.html#cb187-3" tabindex="-1"></a><span class="fu">summary</span>(egfr_NA_glm1)</span></code></pre></div>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="computer-practical-1---missing-data.html#cb188-1" tabindex="-1"></a>egfr_NA_glm1 <span class="ot">=</span> <span class="fu">glm</span>(egfr_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat, </span>
+<span id="cb188-2"><a href="computer-practical-1---missing-data.html#cb188-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb188-3"><a href="computer-practical-1---missing-data.html#cb188-3" tabindex="-1"></a><span class="fu">summary</span>(egfr_NA_glm1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = egfr_cat_NA ~ exposure + age_num + female_cat + 
@@ -6757,9 +6757,9 @@ Click for solution
 ## AIC: 2971.9
 ## 
 ## Number of Fisher Scoring iterations: 3</code></pre>
-<div class="sourceCode" id="cb189"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb189-1"><a href="computer-practical-1---missing-data.html#cb189-1" tabindex="-1"></a>egfr_NA_glm2 <span class="ot">=</span> <span class="fu">glm</span>(egfr_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> ecog_cat <span class="sc">+</span> pdl1_num, </span>
-<span id="cb189-2"><a href="computer-practical-1---missing-data.html#cb189-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb189-3"><a href="computer-practical-1---missing-data.html#cb189-3" tabindex="-1"></a><span class="fu">summary</span>(egfr_NA_glm2)</span></code></pre></div>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="computer-practical-1---missing-data.html#cb190-1" tabindex="-1"></a>egfr_NA_glm2 <span class="ot">=</span> <span class="fu">glm</span>(egfr_cat_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> ecog_cat <span class="sc">+</span> pdl1_num, </span>
+<span id="cb190-2"><a href="computer-practical-1---missing-data.html#cb190-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb190-3"><a href="computer-practical-1---missing-data.html#cb190-3" tabindex="-1"></a><span class="fu">summary</span>(egfr_NA_glm2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = egfr_cat_NA ~ exposure + age_num + female_cat + 
@@ -6795,11 +6795,11 @@ Click for solution
 ## Number of Fisher Scoring iterations: 5</code></pre>
 <p>This time there is a definite relationship between missingness and the values of the other covariates, suggesting an MAR or MNAR mechanism.</p>
 <p>Finally, let’s model missingness in <code>pdl1_num</code>:</p>
-<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="computer-practical-1---missing-data.html#cb191-1" tabindex="-1"></a>pdl1_NA_glm1 <span class="ot">=</span> <span class="fu">glm</span>(</span>
-<span id="cb191-2"><a href="computer-practical-1---missing-data.html#cb191-2" tabindex="-1"></a>  pdl1_num_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> </span>
-<span id="cb191-3"><a href="computer-practical-1---missing-data.html#cb191-3" tabindex="-1"></a>    alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat, </span>
-<span id="cb191-4"><a href="computer-practical-1---missing-data.html#cb191-4" tabindex="-1"></a>  <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb191-5"><a href="computer-practical-1---missing-data.html#cb191-5" tabindex="-1"></a><span class="fu">summary</span>(pdl1_NA_glm1)</span></code></pre></div>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="computer-practical-1---missing-data.html#cb192-1" tabindex="-1"></a>pdl1_NA_glm1 <span class="ot">=</span> <span class="fu">glm</span>(</span>
+<span id="cb192-2"><a href="computer-practical-1---missing-data.html#cb192-2" tabindex="-1"></a>  pdl1_num_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> </span>
+<span id="cb192-3"><a href="computer-practical-1---missing-data.html#cb192-3" tabindex="-1"></a>    alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat, </span>
+<span id="cb192-4"><a href="computer-practical-1---missing-data.html#cb192-4" tabindex="-1"></a>  <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb192-5"><a href="computer-practical-1---missing-data.html#cb192-5" tabindex="-1"></a><span class="fu">summary</span>(pdl1_NA_glm1)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = pdl1_num_NA ~ exposure + age_num + female_cat + 
@@ -6829,9 +6829,9 @@ Click for solution
 ## AIC: 2510.3
 ## 
 ## Number of Fisher Scoring iterations: 4</code></pre>
-<div class="sourceCode" id="cb193"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb193-1"><a href="computer-practical-1---missing-data.html#cb193-1" tabindex="-1"></a>pdl1_NA_glm2 <span class="ot">=</span> <span class="fu">glm</span>(pdl1_num_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> ecog_cat <span class="sc">+</span> egfr_cat, </span>
-<span id="cb193-2"><a href="computer-practical-1---missing-data.html#cb193-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
-<span id="cb193-3"><a href="computer-practical-1---missing-data.html#cb193-3" tabindex="-1"></a><span class="fu">summary</span>(pdl1_NA_glm2)</span></code></pre></div>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="computer-practical-1---missing-data.html#cb194-1" tabindex="-1"></a>pdl1_NA_glm2 <span class="ot">=</span> <span class="fu">glm</span>(pdl1_num_NA <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> ecog_cat <span class="sc">+</span> egfr_cat, </span>
+<span id="cb194-2"><a href="computer-practical-1---missing-data.html#cb194-2" tabindex="-1"></a>                <span class="at">data=</span>smdi_nab, <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link=</span><span class="st">&quot;logit&quot;</span>))</span>
+<span id="cb194-3"><a href="computer-practical-1---missing-data.html#cb194-3" tabindex="-1"></a><span class="fu">summary</span>(pdl1_NA_glm2)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = pdl1_num_NA ~ exposure + age_num + female_cat + 
@@ -6869,12 +6869,12 @@ Click for solution
 <p>Frustratingly, the only way we could determine whether the mechanisms for <code>egfr_cat</code> and <code>pdl1_num</code> was MAR or MNAR would be to measure (or otherwise procure) some of the missing data. We simply do not have the necessary information to work out which is the case. If this were a real trial, we would now talk at length with the experts/clinicians, who will have a much better understanding of the probable causes of missingness.</p>
 <p><strong>opt</strong></p>
 <p>Now we’ll do the same with <code>opt_tmp</code>. We have missingness in several variables: <code>BMI</code>, <code>Use.Tob</code>, <code>Use.Alc</code>, <code>Drug.Add</code>, <code>Birthweight</code>. A model fit to the data in R will remove cases with any of these missing (which for this dataset might mean a lot are removed!). So, as well as building models with all variables, we can build models using only the fully observed data, and use the <code>_NA</code> variables from <code>nabular</code> as covariates:</p>
-<div class="sourceCode" id="cb195"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb195-1"><a href="computer-practical-1---missing-data.html#cb195-1" tabindex="-1"></a>glm_opt_BMI_allvar <span class="ot">=</span> <span class="fu">glm</span>(</span>
-<span id="cb195-2"><a href="computer-practical-1---missing-data.html#cb195-2" tabindex="-1"></a>  BMI_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
-<span id="cb195-3"><a href="computer-practical-1---missing-data.html#cb195-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Use.Tob <span class="sc">+</span> Use.Alc <span class="sc">+</span> Drug.Add <span class="sc">+</span> Prev.preg, </span>
-<span id="cb195-4"><a href="computer-practical-1---missing-data.html#cb195-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
-<span id="cb195-5"><a href="computer-practical-1---missing-data.html#cb195-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
-<span id="cb195-6"><a href="computer-practical-1---missing-data.html#cb195-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BMI_allvar)</span></code></pre></div>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="computer-practical-1---missing-data.html#cb196-1" tabindex="-1"></a>glm_opt_BMI_allvar <span class="ot">=</span> <span class="fu">glm</span>(</span>
+<span id="cb196-2"><a href="computer-practical-1---missing-data.html#cb196-2" tabindex="-1"></a>  BMI_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
+<span id="cb196-3"><a href="computer-practical-1---missing-data.html#cb196-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Use.Tob <span class="sc">+</span> Use.Alc <span class="sc">+</span> Drug.Add <span class="sc">+</span> Prev.preg, </span>
+<span id="cb196-4"><a href="computer-practical-1---missing-data.html#cb196-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
+<span id="cb196-5"><a href="computer-practical-1---missing-data.html#cb196-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
+<span id="cb196-6"><a href="computer-practical-1---missing-data.html#cb196-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BMI_allvar)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = BMI_NA ~ Clinic + Group + Age + Education + Public.Asstce + 
@@ -6910,12 +6910,12 @@ Click for solution
 ## 
 ## Number of Fisher Scoring iterations: 18</code></pre>
 <p>Complete cases only:</p>
-<div class="sourceCode" id="cb197"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb197-1"><a href="computer-practical-1---missing-data.html#cb197-1" tabindex="-1"></a>glm_opt_BMI_comp <span class="ot">=</span> <span class="fu">glm</span>(</span>
-<span id="cb197-2"><a href="computer-practical-1---missing-data.html#cb197-2" tabindex="-1"></a>  BMI_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
-<span id="cb197-3"><a href="computer-practical-1---missing-data.html#cb197-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Prev.preg, </span>
-<span id="cb197-4"><a href="computer-practical-1---missing-data.html#cb197-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
-<span id="cb197-5"><a href="computer-practical-1---missing-data.html#cb197-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
-<span id="cb197-6"><a href="computer-practical-1---missing-data.html#cb197-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BMI_comp)</span></code></pre></div>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="computer-practical-1---missing-data.html#cb198-1" tabindex="-1"></a>glm_opt_BMI_comp <span class="ot">=</span> <span class="fu">glm</span>(</span>
+<span id="cb198-2"><a href="computer-practical-1---missing-data.html#cb198-2" tabindex="-1"></a>  BMI_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
+<span id="cb198-3"><a href="computer-practical-1---missing-data.html#cb198-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Prev.preg, </span>
+<span id="cb198-4"><a href="computer-practical-1---missing-data.html#cb198-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
+<span id="cb198-5"><a href="computer-practical-1---missing-data.html#cb198-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
+<span id="cb198-6"><a href="computer-practical-1---missing-data.html#cb198-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BMI_comp)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = BMI_NA ~ Clinic + Group + Age + Education + Public.Asstce + 
@@ -6947,12 +6947,12 @@ Click for solution
 ## 
 ## Number of Fisher Scoring iterations: 18</code></pre>
 <p>Using missingness of incomplete variables in model:</p>
-<div class="sourceCode" id="cb199"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb199-1"><a href="computer-practical-1---missing-data.html#cb199-1" tabindex="-1"></a>glm_opt_BMI_NA <span class="ot">=</span> <span class="fu">glm</span>(</span>
-<span id="cb199-2"><a href="computer-practical-1---missing-data.html#cb199-2" tabindex="-1"></a>  BMI_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
-<span id="cb199-3"><a href="computer-practical-1---missing-data.html#cb199-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Use.Tob_NA <span class="sc">+</span> Use.Alc_NA <span class="sc">+</span> Drug.Add_NA <span class="sc">+</span> Prev.preg, </span>
-<span id="cb199-4"><a href="computer-practical-1---missing-data.html#cb199-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
-<span id="cb199-5"><a href="computer-practical-1---missing-data.html#cb199-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
-<span id="cb199-6"><a href="computer-practical-1---missing-data.html#cb199-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BMI_NA)</span></code></pre></div>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="computer-practical-1---missing-data.html#cb200-1" tabindex="-1"></a>glm_opt_BMI_NA <span class="ot">=</span> <span class="fu">glm</span>(</span>
+<span id="cb200-2"><a href="computer-practical-1---missing-data.html#cb200-2" tabindex="-1"></a>  BMI_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
+<span id="cb200-3"><a href="computer-practical-1---missing-data.html#cb200-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Use.Tob_NA <span class="sc">+</span> Use.Alc_NA <span class="sc">+</span> Drug.Add_NA <span class="sc">+</span> Prev.preg, </span>
+<span id="cb200-4"><a href="computer-practical-1---missing-data.html#cb200-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
+<span id="cb200-5"><a href="computer-practical-1---missing-data.html#cb200-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
+<span id="cb200-6"><a href="computer-practical-1---missing-data.html#cb200-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BMI_NA)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = BMI_NA ~ Clinic + Group + Age + Education + Public.Asstce + 
@@ -6987,16 +6987,16 @@ Click for solution
 ## 
 ## Number of Fisher Scoring iterations: 18</code></pre>
 <p>From these three models it appears that BMI is much more likely to be missing for those from the NY clinic (we already knew this from our previous investigations!):</p>
-<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="computer-practical-1---missing-data.html#cb201-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">nabular</span>(opt_tmp), <span class="fu">aes</span>(<span class="at">x=</span>Clinic, <span class="at">fill =</span> BMI_NA)) <span class="sc">+</span></span>
-<span id="cb201-2"><a href="computer-practical-1---missing-data.html#cb201-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="computer-practical-1---missing-data.html#cb202-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">nabular</span>(opt_tmp), <span class="fu">aes</span>(<span class="at">x=</span>Clinic, <span class="at">fill =</span> BMI_NA)) <span class="sc">+</span></span>
+<span id="cb202-2"><a href="computer-practical-1---missing-data.html#cb202-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-367-1.png" width="672" /></p>
 <p>Perhaps the most concerning missing data in the <code>opt</code> dataset is in the outcome <code>Birthweight</code>.</p>
-<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="computer-practical-1---missing-data.html#cb202-1" tabindex="-1"></a>glm_opt_BW_allvar <span class="ot">=</span> <span class="fu">glm</span>(</span>
-<span id="cb202-2"><a href="computer-practical-1---missing-data.html#cb202-2" tabindex="-1"></a>  Birthweight_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
-<span id="cb202-3"><a href="computer-practical-1---missing-data.html#cb202-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> BMI <span class="sc">+</span> Use.Tob <span class="sc">+</span> Use.Alc <span class="sc">+</span> Drug.Add <span class="sc">+</span> Prev.preg, </span>
-<span id="cb202-4"><a href="computer-practical-1---missing-data.html#cb202-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
-<span id="cb202-5"><a href="computer-practical-1---missing-data.html#cb202-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
-<span id="cb202-6"><a href="computer-practical-1---missing-data.html#cb202-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BW_allvar)</span></code></pre></div>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="computer-practical-1---missing-data.html#cb203-1" tabindex="-1"></a>glm_opt_BW_allvar <span class="ot">=</span> <span class="fu">glm</span>(</span>
+<span id="cb203-2"><a href="computer-practical-1---missing-data.html#cb203-2" tabindex="-1"></a>  Birthweight_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
+<span id="cb203-3"><a href="computer-practical-1---missing-data.html#cb203-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> BMI <span class="sc">+</span> Use.Tob <span class="sc">+</span> Use.Alc <span class="sc">+</span> Drug.Add <span class="sc">+</span> Prev.preg, </span>
+<span id="cb203-4"><a href="computer-practical-1---missing-data.html#cb203-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
+<span id="cb203-5"><a href="computer-practical-1---missing-data.html#cb203-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
+<span id="cb203-6"><a href="computer-practical-1---missing-data.html#cb203-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BW_allvar)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Birthweight_NA ~ Clinic + Group + Age + Education + 
@@ -7031,12 +7031,12 @@ Click for solution
 ## AIC: 32
 ## 
 ## Number of Fisher Scoring iterations: 25</code></pre>
-<div class="sourceCode" id="cb204"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb204-1"><a href="computer-practical-1---missing-data.html#cb204-1" tabindex="-1"></a>glm_opt_BW_comp <span class="ot">=</span> <span class="fu">glm</span>(</span>
-<span id="cb204-2"><a href="computer-practical-1---missing-data.html#cb204-2" tabindex="-1"></a>  Birthweight_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
-<span id="cb204-3"><a href="computer-practical-1---missing-data.html#cb204-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Prev.preg, </span>
-<span id="cb204-4"><a href="computer-practical-1---missing-data.html#cb204-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
-<span id="cb204-5"><a href="computer-practical-1---missing-data.html#cb204-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
-<span id="cb204-6"><a href="computer-practical-1---missing-data.html#cb204-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BW_comp)</span></code></pre></div>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="computer-practical-1---missing-data.html#cb205-1" tabindex="-1"></a>glm_opt_BW_comp <span class="ot">=</span> <span class="fu">glm</span>(</span>
+<span id="cb205-2"><a href="computer-practical-1---missing-data.html#cb205-2" tabindex="-1"></a>  Birthweight_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
+<span id="cb205-3"><a href="computer-practical-1---missing-data.html#cb205-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> Prev.preg, </span>
+<span id="cb205-4"><a href="computer-practical-1---missing-data.html#cb205-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
+<span id="cb205-5"><a href="computer-practical-1---missing-data.html#cb205-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
+<span id="cb205-6"><a href="computer-practical-1---missing-data.html#cb205-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BW_comp)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Birthweight_NA ~ Clinic + Group + Age + Education + 
@@ -7067,12 +7067,12 @@ Click for solution
 ## AIC: 140.01
 ## 
 ## Number of Fisher Scoring iterations: 20</code></pre>
-<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="computer-practical-1---missing-data.html#cb206-1" tabindex="-1"></a>glm_opt_BW_NA <span class="ot">=</span> <span class="fu">glm</span>(</span>
-<span id="cb206-2"><a href="computer-practical-1---missing-data.html#cb206-2" tabindex="-1"></a>  Birthweight_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
-<span id="cb206-3"><a href="computer-practical-1---missing-data.html#cb206-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> BMI_NA <span class="sc">+</span> Use.Tob_NA <span class="sc">+</span> Use.Alc_NA <span class="sc">+</span> Drug.Add_NA <span class="sc">+</span> Prev.preg, </span>
-<span id="cb206-4"><a href="computer-practical-1---missing-data.html#cb206-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
-<span id="cb206-5"><a href="computer-practical-1---missing-data.html#cb206-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
-<span id="cb206-6"><a href="computer-practical-1---missing-data.html#cb206-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BW_NA)</span></code></pre></div>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="computer-practical-1---missing-data.html#cb207-1" tabindex="-1"></a>glm_opt_BW_NA <span class="ot">=</span> <span class="fu">glm</span>(</span>
+<span id="cb207-2"><a href="computer-practical-1---missing-data.html#cb207-2" tabindex="-1"></a>  Birthweight_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
+<span id="cb207-3"><a href="computer-practical-1---missing-data.html#cb207-3" tabindex="-1"></a>    Education <span class="sc">+</span> Public.Asstce <span class="sc">+</span> Hypertension <span class="sc">+</span> Diabetes <span class="sc">+</span> BMI_NA <span class="sc">+</span> Use.Tob_NA <span class="sc">+</span> Use.Alc_NA <span class="sc">+</span> Drug.Add_NA <span class="sc">+</span> Prev.preg, </span>
+<span id="cb207-4"><a href="computer-practical-1---missing-data.html#cb207-4" tabindex="-1"></a>  <span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp),</span>
+<span id="cb207-5"><a href="computer-practical-1---missing-data.html#cb207-5" tabindex="-1"></a>  <span class="at">family =</span> <span class="fu">binomial</span>(<span class="at">link =</span> <span class="st">&quot;logit&quot;</span>)) </span>
+<span id="cb207-6"><a href="computer-practical-1---missing-data.html#cb207-6" tabindex="-1"></a><span class="fu">summary</span>(glm_opt_BW_NA)</span></code></pre></div>
 <pre><code>## 
 ## Call:
 ## glm(formula = Birthweight_NA ~ Clinic + Group + Age + Education + 
@@ -7109,9 +7109,9 @@ Click for solution
 ## 
 ## Number of Fisher Scoring iterations: 21</code></pre>
 <p>It appears from this that missing valuse of Birthweight aren’t associated with missingness in the other variables. Birthweight is more likely to be missing for patients with diabetes.</p>
-<div class="sourceCode" id="cb208"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb208-1"><a href="computer-practical-1---missing-data.html#cb208-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp), <span class="fu">aes</span>(<span class="at">x=</span>Diabetes, <span class="at">fill =</span> Birthweight_NA)) <span class="sc">+</span></span>
-<span id="cb208-2"><a href="computer-practical-1---missing-data.html#cb208-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-132-1.png" width="672" /></p>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="computer-practical-1---missing-data.html#cb209-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp), <span class="fu">aes</span>(<span class="at">x=</span>Diabetes, <span class="at">fill =</span> Birthweight_NA)) <span class="sc">+</span></span>
+<span id="cb209-2"><a href="computer-practical-1---missing-data.html#cb209-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-371-1.png" width="672" /></p>
 </div>
 </details>
 </div>
@@ -7144,19 +7144,19 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-72" class="solution"><em>Solution</em>. </span>All we need to do is find the number of complete rows in each dataset, and compare it to the number of participants.</p>
-<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="computer-practical-1---missing-data.html#cb209-1" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(sup_df))</span></code></pre></div>
+<div class="sourceCode" id="cb210"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb210-1"><a href="computer-practical-1---missing-data.html#cb210-1" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(sup_df))</span></code></pre></div>
 <pre><code>## [1] 100</code></pre>
-<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="computer-practical-1---missing-data.html#cb211-1" tabindex="-1"></a><span class="fu">nrow</span>(sup_df)</span></code></pre></div>
+<div class="sourceCode" id="cb212"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb212-1"><a href="computer-practical-1---missing-data.html#cb212-1" tabindex="-1"></a><span class="fu">nrow</span>(sup_df)</span></code></pre></div>
 <pre><code>## [1] 103</code></pre>
 <p>If we perform a complete case analysis on the <code>sup_df</code> data, we lose data from three participants.</p>
-<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="computer-practical-1---missing-data.html#cb213-1" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(smdi_data))</span></code></pre></div>
+<div class="sourceCode" id="cb214"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb214-1"><a href="computer-practical-1---missing-data.html#cb214-1" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(smdi_data))</span></code></pre></div>
 <pre><code>## [1] 795</code></pre>
-<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="computer-practical-1---missing-data.html#cb215-1" tabindex="-1"></a><span class="fu">nrow</span>(smdi_data)</span></code></pre></div>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="computer-practical-1---missing-data.html#cb216-1" tabindex="-1"></a><span class="fu">nrow</span>(smdi_data)</span></code></pre></div>
 <pre><code>## [1] 2500</code></pre>
 <p>A complete case analysis of the <code>smdi_data</code> would leave us with only 795 (about 32%!) of the participants.</p>
-<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="computer-practical-1---missing-data.html#cb217-1" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(opt_tmp))</span></code></pre></div>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="computer-practical-1---missing-data.html#cb218-1" tabindex="-1"></a><span class="fu">nrow</span>(<span class="fu">na.omit</span>(opt_tmp))</span></code></pre></div>
 <pre><code>## [1] 720</code></pre>
-<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="computer-practical-1---missing-data.html#cb219-1" tabindex="-1"></a><span class="fu">nrow</span>(opt_tmp)</span></code></pre></div>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="computer-practical-1---missing-data.html#cb220-1" tabindex="-1"></a><span class="fu">nrow</span>(opt_tmp)</span></code></pre></div>
 <pre><code>## [1] 823</code></pre>
 <p>If we use a complete case analysis on <code>opt_tmp</code> (remember we’re ignoring some of the most missing variables for now!) we’d lose 113 cases (out of 823).</p>
 </div>
@@ -7194,17 +7194,17 @@ Click for solution
 </summary>
 <div class="solution">
 <p><span id="unlabeled-div-74" class="solution"><em>Solution</em>. </span>One important thing to remember is that if the associated categorical variable is missing, then the value for the variable we’re imputing will also be missing. We therefore need to condition on the ‘parent’ variable, rather than replace all missing values of the ‘child’ variable. For example:</p>
-<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="computer-practical-1---missing-data.html#cb221-1" tabindex="-1"></a>opt_df_imp <span class="ot">=</span> opt_df</span>
-<span id="cb221-2"><a href="computer-practical-1---missing-data.html#cb221-2" tabindex="-1"></a>opt_df_imp<span class="sc">$</span>BL.Cig.Day[opt_df_imp<span class="sc">$</span>Use.Tob<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="computer-practical-1---missing-data.html#cb222-1" tabindex="-1"></a>opt_df_imp <span class="ot">=</span> opt_df</span>
+<span id="cb222-2"><a href="computer-practical-1---missing-data.html#cb222-2" tabindex="-1"></a>opt_df_imp<span class="sc">$</span>BL.Cig.Day[opt_df_imp<span class="sc">$</span>Use.Tob<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
 <p>By doing this we have ‘fixed’ 704 missing values.</p>
 <p>Similarly we cand fix those for <code>BL.Drks.Day</code> and <code>N.prev.preg</code>:</p>
-<div class="sourceCode" id="cb222"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb222-1"><a href="computer-practical-1---missing-data.html#cb222-1" tabindex="-1"></a>opt_df_imp<span class="sc">$</span>BL.Drks.Day[opt_df_imp<span class="sc">$</span>Use.Alc<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span>
-<span id="cb222-2"><a href="computer-practical-1---missing-data.html#cb222-2" tabindex="-1"></a>opt_df_imp<span class="sc">$</span>N.prev.preg[opt_df_imp<span class="sc">$</span>Prev.preg<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="computer-practical-1---missing-data.html#cb223-1" tabindex="-1"></a>opt_df_imp<span class="sc">$</span>BL.Drks.Day[opt_df_imp<span class="sc">$</span>Use.Alc<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb223-2"><a href="computer-practical-1---missing-data.html#cb223-2" tabindex="-1"></a>opt_df_imp<span class="sc">$</span>N.prev.preg[opt_df_imp<span class="sc">$</span>Prev.preg<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
 <p>We can see that this has very much improved our situation! We could do something similar for <code>BL.Diab.Type</code> too since this is linked to <code>Diabetes</code>.</p>
-<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="computer-practical-1---missing-data.html#cb223-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df, <span class="at">sort_type =</span> F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-138-1.png" width="672" /></p>
-<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="computer-practical-1---missing-data.html#cb224-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df_imp, <span class="at">sort_type =</span> F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-138-2.png" width="672" /></p>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="computer-practical-1---missing-data.html#cb224-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df, <span class="at">sort_type =</span> F)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-377-1.png" width="672" /></p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="computer-practical-1---missing-data.html#cb225-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df_imp, <span class="at">sort_type =</span> F)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-377-2.png" width="672" /></p>
 </div>
 </details>
 </div>
@@ -7215,16 +7215,16 @@ Click for solution
 </div>
 <p>We’ve already looked at using logistic regression to understand patterns of missingness, and so it may not come as a surprise that we can use regression models to choose appropriate values for imputation. This won’t be the same model, since we’re now interested in the <em>value</em>, rather than the missingness. Which type of regression model we use depends on the type of the variable we’re imputing values for. If the variable is continuous, linear regression is likely to work well. If the variable is binary, we should try logistic regression. There are plenty of other types of model we could use (as well as a whole host of machine learning type models!) but in this practical we’ll stick to those two.</p>
 <p>Let’s suppose we want to use regression to impute values for <code>pdl1_num</code></p>
-<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="computer-practical-1---missing-data.html#cb225-1" tabindex="-1"></a>pdl1_lm <span class="ot">=</span> <span class="fu">stan_glm</span>(</span>
-<span id="cb225-2"><a href="computer-practical-1---missing-data.html#cb225-2" tabindex="-1"></a>  pdl1_num <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> </span>
-<span id="cb225-3"><a href="computer-practical-1---missing-data.html#cb225-3" tabindex="-1"></a>    histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> eventtime <span class="sc">+</span> status <span class="sc">+</span> ecog_cat <span class="sc">+</span> egfr_cat, </span>
-<span id="cb225-4"><a href="computer-practical-1---missing-data.html#cb225-4" tabindex="-1"></a>  <span class="at">data =</span> smdi_data</span>
-<span id="cb225-5"><a href="computer-practical-1---missing-data.html#cb225-5" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="computer-practical-1---missing-data.html#cb226-1" tabindex="-1"></a>pdl1_lm <span class="ot">=</span> <span class="fu">stan_glm</span>(</span>
+<span id="cb226-2"><a href="computer-practical-1---missing-data.html#cb226-2" tabindex="-1"></a>  pdl1_num <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> </span>
+<span id="cb226-3"><a href="computer-practical-1---missing-data.html#cb226-3" tabindex="-1"></a>    histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> eventtime <span class="sc">+</span> status <span class="sc">+</span> ecog_cat <span class="sc">+</span> egfr_cat, </span>
+<span id="cb226-4"><a href="computer-practical-1---missing-data.html#cb226-4" tabindex="-1"></a>  <span class="at">data =</span> smdi_data</span>
+<span id="cb226-5"><a href="computer-practical-1---missing-data.html#cb226-5" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 1).
 ## Chain 1: 
-## Chain 1: Gradient evaluation took 1.7e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.17 seconds.
+## Chain 1: Gradient evaluation took 0.001392 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 13.92 seconds.
 ## Chain 1: Adjust your expectations accordingly!
 ## Chain 1: 
 ## Chain 1: 
@@ -7241,9 +7241,9 @@ Click for solution
 ## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 1: 
-## Chain 1:  Elapsed Time: 0.059 seconds (Warm-up)
+## Chain 1:  Elapsed Time: 0.066 seconds (Warm-up)
 ## Chain 1:                0.095 seconds (Sampling)
-## Chain 1:                0.154 seconds (Total)
+## Chain 1:                0.161 seconds (Total)
 ## Chain 1: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 2).
@@ -7266,15 +7266,15 @@ Click for solution
 ## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 2: 
-## Chain 2:  Elapsed Time: 0.054 seconds (Warm-up)
-## Chain 2:                0.097 seconds (Sampling)
-## Chain 2:                0.151 seconds (Total)
+## Chain 2:  Elapsed Time: 0.049 seconds (Warm-up)
+## Chain 2:                0.094 seconds (Sampling)
+## Chain 2:                0.143 seconds (Total)
 ## Chain 2: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 3).
 ## Chain 3: 
-## Chain 3: Gradient evaluation took 8e-06 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.08 seconds.
+## Chain 3: Gradient evaluation took 4e-06 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
 ## Chain 3: Adjust your expectations accordingly!
 ## Chain 3: 
 ## Chain 3: 
@@ -7298,8 +7298,8 @@ Click for solution
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 4).
 ## Chain 4: 
-## Chain 4: Gradient evaluation took 1e-05 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.1 seconds.
+## Chain 4: Gradient evaluation took 4e-06 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
 ## Chain 4: Adjust your expectations accordingly!
 ## Chain 4: 
 ## Chain 4: 
@@ -7317,10 +7317,10 @@ Click for solution
 ## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 4: 
 ## Chain 4:  Elapsed Time: 0.054 seconds (Warm-up)
-## Chain 4:                0.093 seconds (Sampling)
-## Chain 4:                0.147 seconds (Total)
+## Chain 4:                0.094 seconds (Sampling)
+## Chain 4:                0.148 seconds (Total)
 ## Chain 4:</code></pre>
-<div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="computer-practical-1---missing-data.html#cb227-1" tabindex="-1"></a><span class="fu">summary</span>(pdl1_lm)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="computer-practical-1---missing-data.html#cb228-1" tabindex="-1"></a><span class="fu">summary</span>(pdl1_lm)</span></code></pre></div>
 <pre><code>## 
 ## Model Info:
 ##  function:     stan_glm
@@ -7397,18 +7397,18 @@ Click for solution
 <li>Work iteratively, generating temporary imputed values and cycling round the variables with missingness</li>
 </ul>
 <p>Because all our investigations suggest that <code>ecog_cat1</code> is more-or-less unrelated to anything, we will remove it from the model. However, because <code>egfr_cat</code> is quite close to being significant in the model, we will keep it in but use missingness in the model.</p>
-<div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="computer-practical-1---missing-data.html#cb229-1" tabindex="-1"></a>smdi_nab <span class="ot">=</span> <span class="fu">nabular</span>(smdi_data)</span>
-<span id="cb229-2"><a href="computer-practical-1---missing-data.html#cb229-2" tabindex="-1"></a></span>
-<span id="cb229-3"><a href="computer-practical-1---missing-data.html#cb229-3" tabindex="-1"></a>pdl1_lm2 <span class="ot">=</span> <span class="fu">stan_glm</span>(</span>
-<span id="cb229-4"><a href="computer-practical-1---missing-data.html#cb229-4" tabindex="-1"></a>  pdl1_num <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> </span>
-<span id="cb229-5"><a href="computer-practical-1---missing-data.html#cb229-5" tabindex="-1"></a>    histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> eventtime <span class="sc">+</span> status <span class="sc">+</span> egfr_cat_NA, </span>
-<span id="cb229-6"><a href="computer-practical-1---missing-data.html#cb229-6" tabindex="-1"></a>  <span class="at">data =</span> smdi_nab</span>
-<span id="cb229-7"><a href="computer-practical-1---missing-data.html#cb229-7" tabindex="-1"></a>  )</span></code></pre></div>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="computer-practical-1---missing-data.html#cb230-1" tabindex="-1"></a>smdi_nab <span class="ot">=</span> <span class="fu">nabular</span>(smdi_data)</span>
+<span id="cb230-2"><a href="computer-practical-1---missing-data.html#cb230-2" tabindex="-1"></a></span>
+<span id="cb230-3"><a href="computer-practical-1---missing-data.html#cb230-3" tabindex="-1"></a>pdl1_lm2 <span class="ot">=</span> <span class="fu">stan_glm</span>(</span>
+<span id="cb230-4"><a href="computer-practical-1---missing-data.html#cb230-4" tabindex="-1"></a>  pdl1_num <span class="sc">~</span> exposure <span class="sc">+</span> age_num <span class="sc">+</span> female_cat <span class="sc">+</span> smoking_cat <span class="sc">+</span> physical_cat <span class="sc">+</span> alk_cat <span class="sc">+</span> </span>
+<span id="cb230-5"><a href="computer-practical-1---missing-data.html#cb230-5" tabindex="-1"></a>    histology_cat <span class="sc">+</span> ses_cat <span class="sc">+</span> copd_cat <span class="sc">+</span> eventtime <span class="sc">+</span> status <span class="sc">+</span> egfr_cat_NA, </span>
+<span id="cb230-6"><a href="computer-practical-1---missing-data.html#cb230-6" tabindex="-1"></a>  <span class="at">data =</span> smdi_nab</span>
+<span id="cb230-7"><a href="computer-practical-1---missing-data.html#cb230-7" tabindex="-1"></a>  )</span></code></pre></div>
 <pre><code>## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 1).
 ## Chain 1: 
-## Chain 1: Gradient evaluation took 1.1e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.11 seconds.
+## Chain 1: Gradient evaluation took 1.3e-05 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.13 seconds.
 ## Chain 1: Adjust your expectations accordingly!
 ## Chain 1: 
 ## Chain 1: 
@@ -7426,8 +7426,8 @@ Click for solution
 ## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 1: 
 ## Chain 1:  Elapsed Time: 0.046 seconds (Warm-up)
-## Chain 1:                0.156 seconds (Sampling)
-## Chain 1:                0.202 seconds (Total)
+## Chain 1:                0.157 seconds (Sampling)
+## Chain 1:                0.203 seconds (Total)
 ## Chain 1: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 2).
@@ -7450,15 +7450,15 @@ Click for solution
 ## Chain 2: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 2: 
-## Chain 2:  Elapsed Time: 0.049 seconds (Warm-up)
-## Chain 2:                0.16 seconds (Sampling)
-## Chain 2:                0.209 seconds (Total)
+## Chain 2:  Elapsed Time: 0.047 seconds (Warm-up)
+## Chain 2:                0.159 seconds (Sampling)
+## Chain 2:                0.206 seconds (Total)
 ## Chain 2: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 3).
 ## Chain 3: 
-## Chain 3: Gradient evaluation took 4e-06 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
+## Chain 3: Gradient evaluation took 6e-06 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Chain 3: Adjust your expectations accordingly!
 ## Chain 3: 
 ## Chain 3: 
@@ -7476,14 +7476,14 @@ Click for solution
 ## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 3: 
 ## Chain 3:  Elapsed Time: 0.051 seconds (Warm-up)
-## Chain 3:                0.163 seconds (Sampling)
-## Chain 3:                0.214 seconds (Total)
+## Chain 3:                0.159 seconds (Sampling)
+## Chain 3:                0.21 seconds (Total)
 ## Chain 3: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 4).
 ## Chain 4: 
-## Chain 4: Gradient evaluation took 6e-06 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
+## Chain 4: Gradient evaluation took 1.9e-05 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.19 seconds.
 ## Chain 4: Adjust your expectations accordingly!
 ## Chain 4: 
 ## Chain 4: 
@@ -7500,11 +7500,11 @@ Click for solution
 ## Chain 4: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 4: 
-## Chain 4:  Elapsed Time: 0.063 seconds (Warm-up)
-## Chain 4:                0.157 seconds (Sampling)
-## Chain 4:                0.22 seconds (Total)
+## Chain 4:  Elapsed Time: 0.061 seconds (Warm-up)
+## Chain 4:                0.156 seconds (Sampling)
+## Chain 4:                0.217 seconds (Total)
 ## Chain 4:</code></pre>
-<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="computer-practical-1---missing-data.html#cb231-1" tabindex="-1"></a><span class="fu">summary</span>(pdl1_lm2)</span></code></pre></div>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="computer-practical-1---missing-data.html#cb232-1" tabindex="-1"></a><span class="fu">summary</span>(pdl1_lm2)</span></code></pre></div>
 <pre><code>## 
 ## Model Info:
 ##  function:     stan_glm
@@ -7564,62 +7564,62 @@ Click for solution
 ## 
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 <p>We can see from the means and standard deviations that most of the coefficients are not even close to ‘significant’, but if we want to investigate some more closely we can visualise them using the <code>plot</code> function (separately in this case because they are quite far apart numerically)</p>
-<div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="computer-practical-1---missing-data.html#cb233-1" tabindex="-1"></a><span class="fu">plot</span>(pdl1_lm2, <span class="at">plotfun=</span><span class="st">&quot;areas&quot;</span>, <span class="at">prob =</span> <span class="fl">0.95</span>, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;exposure&quot;</span>))</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-141-1.png" width="672" /></p>
-<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="computer-practical-1---missing-data.html#cb234-1" tabindex="-1"></a><span class="fu">plot</span>(pdl1_lm2, <span class="at">plotfun=</span><span class="st">&quot;areas&quot;</span>, <span class="at">prob =</span> <span class="fl">0.95</span>, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;age_num&quot;</span>))</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-141-2.png" width="672" /></p>
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="computer-practical-1---missing-data.html#cb234-1" tabindex="-1"></a><span class="fu">plot</span>(pdl1_lm2, <span class="at">plotfun=</span><span class="st">&quot;areas&quot;</span>, <span class="at">prob =</span> <span class="fl">0.95</span>, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;exposure&quot;</span>))</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-380-1.png" width="672" /></p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="computer-practical-1---missing-data.html#cb235-1" tabindex="-1"></a><span class="fu">plot</span>(pdl1_lm2, <span class="at">plotfun=</span><span class="st">&quot;areas&quot;</span>, <span class="at">prob =</span> <span class="fl">0.95</span>, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;age_num&quot;</span>))</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-380-2.png" width="672" /></p>
 <p>We see that for both variables, zero is not in the central 95% of the distribution. This isn’t directly relevant here but it’s nice to know about!</p>
 </div>
 </details>
 <p>We will now use this second model to impute values for <code>pdl1_num</code>.</p>
-<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="computer-practical-1---missing-data.html#cb235-1" tabindex="-1"></a><span class="do">## Split the data according to whether egfr_cat is missing</span></span>
-<span id="cb235-2"><a href="computer-practical-1---missing-data.html#cb235-2" tabindex="-1"></a></span>
-<span id="cb235-3"><a href="computer-practical-1---missing-data.html#cb235-3" tabindex="-1"></a>smdi_pdl1_comp <span class="ot">=</span> smdi_nab[<span class="sc">!</span><span class="fu">is.na</span>(smdi_nab<span class="sc">$</span>pdl1_num),]</span>
-<span id="cb235-4"><a href="computer-practical-1---missing-data.html#cb235-4" tabindex="-1"></a>smdi_pdl1_miss <span class="ot">=</span> smdi_nab[<span class="fu">is.na</span>(smdi_nab<span class="sc">$</span>pdl1_num),]</span>
-<span id="cb235-5"><a href="computer-practical-1---missing-data.html#cb235-5" tabindex="-1"></a></span>
-<span id="cb235-6"><a href="computer-practical-1---missing-data.html#cb235-6" tabindex="-1"></a><span class="do">## Use the GLM to fit values to egfr_cat</span></span>
-<span id="cb235-7"><a href="computer-practical-1---missing-data.html#cb235-7" tabindex="-1"></a></span>
-<span id="cb235-8"><a href="computer-practical-1---missing-data.html#cb235-8" tabindex="-1"></a>pdl1_imp_lm <span class="ot">=</span> <span class="fu">predict</span>(<span class="at">object =</span> pdl1_lm2, </span>
-<span id="cb235-9"><a href="computer-practical-1---missing-data.html#cb235-9" tabindex="-1"></a>                      <span class="at">newdata =</span> smdi_pdl1_miss)</span>
-<span id="cb235-10"><a href="computer-practical-1---missing-data.html#cb235-10" tabindex="-1"></a>                </span>
-<span id="cb235-11"><a href="computer-practical-1---missing-data.html#cb235-11" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_num <span class="ot">=</span> pdl1_imp_lm</span>
-<span id="cb235-12"><a href="computer-practical-1---missing-data.html#cb235-12" tabindex="-1"></a></span>
-<span id="cb235-13"><a href="computer-practical-1---missing-data.html#cb235-13" tabindex="-1"></a><span class="do">## Join the data back together again (in a different order, but it doesn&#39;t matter)</span></span>
-<span id="cb235-14"><a href="computer-practical-1---missing-data.html#cb235-14" tabindex="-1"></a></span>
-<span id="cb235-15"><a href="computer-practical-1---missing-data.html#cb235-15" tabindex="-1"></a>smdi_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_miss, smdi_pdl1_comp)</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="computer-practical-1---missing-data.html#cb236-1" tabindex="-1"></a><span class="do">## Split the data according to whether egfr_cat is missing</span></span>
+<span id="cb236-2"><a href="computer-practical-1---missing-data.html#cb236-2" tabindex="-1"></a></span>
+<span id="cb236-3"><a href="computer-practical-1---missing-data.html#cb236-3" tabindex="-1"></a>smdi_pdl1_comp <span class="ot">=</span> smdi_nab[<span class="sc">!</span><span class="fu">is.na</span>(smdi_nab<span class="sc">$</span>pdl1_num),]</span>
+<span id="cb236-4"><a href="computer-practical-1---missing-data.html#cb236-4" tabindex="-1"></a>smdi_pdl1_miss <span class="ot">=</span> smdi_nab[<span class="fu">is.na</span>(smdi_nab<span class="sc">$</span>pdl1_num),]</span>
+<span id="cb236-5"><a href="computer-practical-1---missing-data.html#cb236-5" tabindex="-1"></a></span>
+<span id="cb236-6"><a href="computer-practical-1---missing-data.html#cb236-6" tabindex="-1"></a><span class="do">## Use the GLM to fit values to egfr_cat</span></span>
+<span id="cb236-7"><a href="computer-practical-1---missing-data.html#cb236-7" tabindex="-1"></a></span>
+<span id="cb236-8"><a href="computer-practical-1---missing-data.html#cb236-8" tabindex="-1"></a>pdl1_imp_lm <span class="ot">=</span> <span class="fu">predict</span>(<span class="at">object =</span> pdl1_lm2, </span>
+<span id="cb236-9"><a href="computer-practical-1---missing-data.html#cb236-9" tabindex="-1"></a>                      <span class="at">newdata =</span> smdi_pdl1_miss)</span>
+<span id="cb236-10"><a href="computer-practical-1---missing-data.html#cb236-10" tabindex="-1"></a>                </span>
+<span id="cb236-11"><a href="computer-practical-1---missing-data.html#cb236-11" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_num <span class="ot">=</span> pdl1_imp_lm</span>
+<span id="cb236-12"><a href="computer-practical-1---missing-data.html#cb236-12" tabindex="-1"></a></span>
+<span id="cb236-13"><a href="computer-practical-1---missing-data.html#cb236-13" tabindex="-1"></a><span class="do">## Join the data back together again (in a different order, but it doesn&#39;t matter)</span></span>
+<span id="cb236-14"><a href="computer-practical-1---missing-data.html#cb236-14" tabindex="-1"></a></span>
+<span id="cb236-15"><a href="computer-practical-1---missing-data.html#cb236-15" tabindex="-1"></a>smdi_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_miss, smdi_pdl1_comp)</span></code></pre></div>
 <p>This might seem sensible, but actually it isn’t a very realistic use of a regression model.</p>
 <p>Compared to the observed values, the imputed values have a strong central tendency. This is because we have imputed the mean fitted value for each point, ignoring the measure of spread / uncertainty in the model. We can see this by comparing the observed values of <code>pdl1_num</code> to their fitted values (which we would have imputed had they been missing).</p>
-<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="computer-practical-1---missing-data.html#cb236-1" tabindex="-1"></a>smdi_pdl1_comp<span class="sc">$</span>pdl1_imp <span class="ot">=</span> <span class="fu">predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_comp)</span>
-<span id="cb236-2"><a href="computer-practical-1---missing-data.html#cb236-2" tabindex="-1"></a><span class="co"># The next line just recreates the imputataion so that we can bind the datasets together</span></span>
-<span id="cb236-3"><a href="computer-practical-1---missing-data.html#cb236-3" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_imp <span class="ot">=</span> <span class="fu">predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_miss)</span>
-<span id="cb236-4"><a href="computer-practical-1---missing-data.html#cb236-4" tabindex="-1"></a></span>
-<span id="cb236-5"><a href="computer-practical-1---missing-data.html#cb236-5" tabindex="-1"></a>smdi_pdl1_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_comp, smdi_pdl1_miss)</span>
-<span id="cb236-6"><a href="computer-practical-1---missing-data.html#cb236-6" tabindex="-1"></a></span>
-<span id="cb236-7"><a href="computer-practical-1---missing-data.html#cb236-7" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> smdi_pdl1_imp, <span class="fu">aes</span>(<span class="at">x=</span>pdl1_imp, <span class="at">y=</span>pdl1_num, <span class="at">col =</span> pdl1_num_NA)) <span class="sc">+</span> </span>
-<span id="cb236-8"><a href="computer-practical-1---missing-data.html#cb236-8" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb236-9"><a href="computer-practical-1---missing-data.html#cb236-9" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Regression fit&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb236-10"><a href="computer-practical-1---missing-data.html#cb236-10" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Observed value / imputed value&quot;</span>) <span class="sc">+</span></span>
-<span id="cb236-11"><a href="computer-practical-1---missing-data.html#cb236-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="computer-practical-1---missing-data.html#cb237-1" tabindex="-1"></a>smdi_pdl1_comp<span class="sc">$</span>pdl1_imp <span class="ot">=</span> <span class="fu">predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_comp)</span>
+<span id="cb237-2"><a href="computer-practical-1---missing-data.html#cb237-2" tabindex="-1"></a><span class="co"># The next line just recreates the imputataion so that we can bind the datasets together</span></span>
+<span id="cb237-3"><a href="computer-practical-1---missing-data.html#cb237-3" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_imp <span class="ot">=</span> <span class="fu">predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_miss)</span>
+<span id="cb237-4"><a href="computer-practical-1---missing-data.html#cb237-4" tabindex="-1"></a></span>
+<span id="cb237-5"><a href="computer-practical-1---missing-data.html#cb237-5" tabindex="-1"></a>smdi_pdl1_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_comp, smdi_pdl1_miss)</span>
+<span id="cb237-6"><a href="computer-practical-1---missing-data.html#cb237-6" tabindex="-1"></a></span>
+<span id="cb237-7"><a href="computer-practical-1---missing-data.html#cb237-7" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> smdi_pdl1_imp, <span class="fu">aes</span>(<span class="at">x=</span>pdl1_imp, <span class="at">y=</span>pdl1_num, <span class="at">col =</span> pdl1_num_NA)) <span class="sc">+</span> </span>
+<span id="cb237-8"><a href="computer-practical-1---missing-data.html#cb237-8" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb237-9"><a href="computer-practical-1---missing-data.html#cb237-9" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Regression fit&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb237-10"><a href="computer-practical-1---missing-data.html#cb237-10" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Observed value / imputed value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb237-11"><a href="computer-practical-1---missing-data.html#cb237-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-382-1.png" width="672" /></p>
 <p>A more realistic approach would be to sample one value from the posterior distribution for each point (this is why we are using <code>rstanarm</code>!)</p>
-<div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="computer-practical-1---missing-data.html#cb237-1" tabindex="-1"></a>smdi_pdl1_comp<span class="sc">$</span>pdl1_imp_rand <span class="ot">=</span> smdi_pdl1_comp<span class="sc">$</span>pdl1_num</span>
-<span id="cb237-2"><a href="computer-practical-1---missing-data.html#cb237-2" tabindex="-1"></a></span>
-<span id="cb237-3"><a href="computer-practical-1---missing-data.html#cb237-3" tabindex="-1"></a><span class="do">## This time draw one point at random from the posterior distribution for each participant</span></span>
-<span id="cb237-4"><a href="computer-practical-1---missing-data.html#cb237-4" tabindex="-1"></a><span class="do">## The output is a 1xdraws matrix, which we&#39;ll convert to a vector</span></span>
-<span id="cb237-5"><a href="computer-practical-1---missing-data.html#cb237-5" tabindex="-1"></a>pdl1_rand_draw <span class="ot">=</span> <span class="fu">posterior_predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_miss, <span class="at">draws=</span><span class="dv">1</span>)</span>
-<span id="cb237-6"><a href="computer-practical-1---missing-data.html#cb237-6" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_imp_rand <span class="ot">=</span> <span class="fu">as.numeric</span>(pdl1_rand_draw)</span>
-<span id="cb237-7"><a href="computer-practical-1---missing-data.html#cb237-7" tabindex="-1"></a></span>
-<span id="cb237-8"><a href="computer-practical-1---missing-data.html#cb237-8" tabindex="-1"></a><span class="do">## Now we can bind the two dataframes together and plot the randomly imputed / observed</span></span>
-<span id="cb237-9"><a href="computer-practical-1---missing-data.html#cb237-9" tabindex="-1"></a><span class="do">## data against the deterministically fitted data</span></span>
-<span id="cb237-10"><a href="computer-practical-1---missing-data.html#cb237-10" tabindex="-1"></a></span>
-<span id="cb237-11"><a href="computer-practical-1---missing-data.html#cb237-11" tabindex="-1"></a>smdi_pdl1_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_comp, smdi_pdl1_miss)</span>
-<span id="cb237-12"><a href="computer-practical-1---missing-data.html#cb237-12" tabindex="-1"></a></span>
-<span id="cb237-13"><a href="computer-practical-1---missing-data.html#cb237-13" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> smdi_pdl1_imp, <span class="fu">aes</span>(<span class="at">x=</span>pdl1_imp, <span class="at">y=</span>pdl1_imp_rand, <span class="at">col =</span> pdl1_num_NA)) <span class="sc">+</span> </span>
-<span id="cb237-14"><a href="computer-practical-1---missing-data.html#cb237-14" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb237-15"><a href="computer-practical-1---missing-data.html#cb237-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Regression fit&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb237-16"><a href="computer-practical-1---missing-data.html#cb237-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Observed value / randomly imputed value&quot;</span>) <span class="sc">+</span></span>
-<span id="cb237-17"><a href="computer-practical-1---missing-data.html#cb237-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-144-1.png" width="672" /></p>
+<div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="computer-practical-1---missing-data.html#cb238-1" tabindex="-1"></a>smdi_pdl1_comp<span class="sc">$</span>pdl1_imp_rand <span class="ot">=</span> smdi_pdl1_comp<span class="sc">$</span>pdl1_num</span>
+<span id="cb238-2"><a href="computer-practical-1---missing-data.html#cb238-2" tabindex="-1"></a></span>
+<span id="cb238-3"><a href="computer-practical-1---missing-data.html#cb238-3" tabindex="-1"></a><span class="do">## This time draw one point at random from the posterior distribution for each participant</span></span>
+<span id="cb238-4"><a href="computer-practical-1---missing-data.html#cb238-4" tabindex="-1"></a><span class="do">## The output is a 1xdraws matrix, which we&#39;ll convert to a vector</span></span>
+<span id="cb238-5"><a href="computer-practical-1---missing-data.html#cb238-5" tabindex="-1"></a>pdl1_rand_draw <span class="ot">=</span> <span class="fu">posterior_predict</span>(pdl1_lm2, <span class="at">newdata =</span> smdi_pdl1_miss, <span class="at">draws=</span><span class="dv">1</span>)</span>
+<span id="cb238-6"><a href="computer-practical-1---missing-data.html#cb238-6" tabindex="-1"></a>smdi_pdl1_miss<span class="sc">$</span>pdl1_imp_rand <span class="ot">=</span> <span class="fu">as.numeric</span>(pdl1_rand_draw)</span>
+<span id="cb238-7"><a href="computer-practical-1---missing-data.html#cb238-7" tabindex="-1"></a></span>
+<span id="cb238-8"><a href="computer-practical-1---missing-data.html#cb238-8" tabindex="-1"></a><span class="do">## Now we can bind the two dataframes together and plot the randomly imputed / observed</span></span>
+<span id="cb238-9"><a href="computer-practical-1---missing-data.html#cb238-9" tabindex="-1"></a><span class="do">## data against the deterministically fitted data</span></span>
+<span id="cb238-10"><a href="computer-practical-1---missing-data.html#cb238-10" tabindex="-1"></a></span>
+<span id="cb238-11"><a href="computer-practical-1---missing-data.html#cb238-11" tabindex="-1"></a>smdi_pdl1_imp <span class="ot">=</span> <span class="fu">rbind</span>(smdi_pdl1_comp, smdi_pdl1_miss)</span>
+<span id="cb238-12"><a href="computer-practical-1---missing-data.html#cb238-12" tabindex="-1"></a></span>
+<span id="cb238-13"><a href="computer-practical-1---missing-data.html#cb238-13" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> smdi_pdl1_imp, <span class="fu">aes</span>(<span class="at">x=</span>pdl1_imp, <span class="at">y=</span>pdl1_imp_rand, <span class="at">col =</span> pdl1_num_NA)) <span class="sc">+</span> </span>
+<span id="cb238-14"><a href="computer-practical-1---missing-data.html#cb238-14" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb238-15"><a href="computer-practical-1---missing-data.html#cb238-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Regression fit&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb238-16"><a href="computer-practical-1---missing-data.html#cb238-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Observed value / randomly imputed value&quot;</span>) <span class="sc">+</span></span>
+<span id="cb238-17"><a href="computer-practical-1---missing-data.html#cb238-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-383-1.png" width="672" /></p>
 <p>This imputed data looks much more representative of the actual dataset.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-77" class="exercise"><strong>Exercise A.12  </strong></span>Use regression imputation to impute values for <code>BMI</code> in <code>opt_tmp</code>.</p>

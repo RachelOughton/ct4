@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-03-16" />
+<meta name="date" content="2025-03-18" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -729,13 +729,13 @@ where <span class="math inline">\(\bar{d}_k\)</span> is the mean difference in g
 </tbody>
 </table>
 <p>We can use this information to find the mean difference for each group</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="random-effects-for-individuals.html#cb105-1" tabindex="-1"></a><span class="fu">mean</span>(dfA<span class="sc">$</span>Diff)</span></code></pre></div>
+<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="random-effects-for-individuals.html#cb106-1" tabindex="-1"></a><span class="fu">mean</span>(dfA<span class="sc">$</span>Diff)</span></code></pre></div>
 <pre><code>## [1] 2.823529</code></pre>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="random-effects-for-individuals.html#cb107-1" tabindex="-1"></a><span class="fu">mean</span>(dfB<span class="sc">$</span>Diff)</span></code></pre></div>
+<div class="sourceCode" id="cb108"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb108-1"><a href="random-effects-for-individuals.html#cb108-1" tabindex="-1"></a><span class="fu">mean</span>(dfB<span class="sc">$</span>Diff)</span></code></pre></div>
 <pre><code>## [1] -1.25</code></pre>
 <p>Immediately we can see that these back up the notion that the drug is effective (remember the difference for group A is drug minus placebo, the difference for group B is placebo minus drug), and that the number of dry nights tends to be more while taking the drug.</p>
 <p>To test the hypothesis more carefully we use a t-test.</p>
-<div class="sourceCode" id="cb109"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb109-1"><a href="random-effects-for-individuals.html#cb109-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x=</span>dfA<span class="sc">$</span>Diff, <span class="at">y=</span>dfB<span class="sc">$</span>Diff, <span class="at">paired=</span>F, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">var.equal=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb110"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb110-1"><a href="random-effects-for-individuals.html#cb110-1" tabindex="-1"></a><span class="fu">t.test</span>(<span class="at">x=</span>dfA<span class="sc">$</span>Diff, <span class="at">y=</span>dfB<span class="sc">$</span>Diff, <span class="at">paired=</span>F, <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">var.equal=</span>T)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -749,11 +749,11 @@ where <span class="math inline">\(\bar{d}_k\)</span> is the mean difference in g
 ##  2.823529 -1.250000</code></pre>
 <p>We see that this backs up the hypothesis that the drug reduces nocturnal enuresis.</p>
 <p>We could analyse the same dataset without taking into account the crossover design of the trial, simply by performing a t-test of all measurements on the drug against all measurement on the placebo</p>
-<div class="sourceCode" id="cb111"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb111-1"><a href="random-effects-for-individuals.html#cb111-1" tabindex="-1"></a>drug_meas <span class="ot">=</span> <span class="fu">c</span>(dfA<span class="sc">$</span>Period1,dfB<span class="sc">$</span>Period2)      <span class="co"># Measurements taken while on drug</span></span>
-<span id="cb111-2"><a href="random-effects-for-individuals.html#cb111-2" tabindex="-1"></a>placebo_meas <span class="ot">=</span> <span class="fu">c</span>(dfA<span class="sc">$</span>Period2, dfB<span class="sc">$</span>Period1)  <span class="co"># Measurements taken while on placebo</span></span>
-<span id="cb111-3"><a href="random-effects-for-individuals.html#cb111-3" tabindex="-1"></a><span class="fu">t.test</span>(</span>
-<span id="cb111-4"><a href="random-effects-for-individuals.html#cb111-4" tabindex="-1"></a>  <span class="at">x=</span>drug_meas, <span class="at">y=</span>placebo_meas, </span>
-<span id="cb111-5"><a href="random-effects-for-individuals.html#cb111-5" tabindex="-1"></a>  <span class="at">paired=</span>F, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">var.equal=</span>T)</span></code></pre></div>
+<div class="sourceCode" id="cb112"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb112-1"><a href="random-effects-for-individuals.html#cb112-1" tabindex="-1"></a>drug_meas <span class="ot">=</span> <span class="fu">c</span>(dfA<span class="sc">$</span>Period1,dfB<span class="sc">$</span>Period2)      <span class="co"># Measurements taken while on drug</span></span>
+<span id="cb112-2"><a href="random-effects-for-individuals.html#cb112-2" tabindex="-1"></a>placebo_meas <span class="ot">=</span> <span class="fu">c</span>(dfA<span class="sc">$</span>Period2, dfB<span class="sc">$</span>Period1)  <span class="co"># Measurements taken while on placebo</span></span>
+<span id="cb112-3"><a href="random-effects-for-individuals.html#cb112-3" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb112-4"><a href="random-effects-for-individuals.html#cb112-4" tabindex="-1"></a>  <span class="at">x=</span>drug_meas, <span class="at">y=</span>placebo_meas, </span>
+<span id="cb112-5"><a href="random-effects-for-individuals.html#cb112-5" tabindex="-1"></a>  <span class="at">paired=</span>F, <span class="at">alternative=</span><span class="st">&quot;two.sided&quot;</span>, <span class="at">var.equal=</span>T)</span></code></pre></div>
 <pre><code>## 
 ##  Two Sample t-test
 ## 
@@ -827,8 +827,8 @@ u_i&amp;\perp \epsilon_{ij}.
 <p>This model is actually a one-way analysis of variance (ANOVA) model.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-55" class="example"><strong>Example 10.3  </strong></span>We can fit the empty model for the <code>epilepsy</code> data via</p>
-<div class="sourceCode" id="cb113"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb113-1"><a href="random-effects-for-individuals.html#cb113-1" tabindex="-1"></a>epi_0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject), <span class="at">data =</span> epilepsy)</span>
-<span id="cb113-2"><a href="random-effects-for-individuals.html#cb113-2" tabindex="-1"></a><span class="fu">summary</span>(epi_0)</span></code></pre></div>
+<div class="sourceCode" id="cb114"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb114-1"><a href="random-effects-for-individuals.html#cb114-1" tabindex="-1"></a>epi_0 <span class="ot">&lt;-</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> subject), <span class="at">data =</span> epilepsy)</span>
+<span id="cb114-2"><a href="random-effects-for-individuals.html#cb114-2" tabindex="-1"></a><span class="fu">summary</span>(epi_0)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: seizure.rate ~ 1 + (1 | subject)
 ##    Data: epilepsy
@@ -865,18 +865,18 @@ Y_{ij} = \beta_0 + \gamma t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilo
 \end{equation}\]</span></p>
 <p>In Equation <a href="random-effects-for-individuals.html#eq:lmer2">(10.3)</a>, the <span class="math inline">\(\mathbf{b}_i\)</span> are being included as fixed effects, in much the same way we’re used to with linear models, and the corresponding vector of coefficients is <span class="math inline">\(\boldsymbol\beta\)</span>.</p>
 <p>We will explore these models by fitting them to our <code>epilepsy</code> data.</p>
-<div class="sourceCode" id="cb115"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb115-1"><a href="random-effects-for-individuals.html#cb115-1" tabindex="-1"></a><span class="do">## Including just time</span></span>
-<span id="cb115-2"><a href="random-effects-for-individuals.html#cb115-2" tabindex="-1"></a>epilepsy<span class="sc">$</span>period <span class="ot">=</span> <span class="fu">as.numeric</span>(epilepsy<span class="sc">$</span>period)</span>
-<span id="cb115-3"><a href="random-effects-for-individuals.html#cb115-3" tabindex="-1"></a>epi_1 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> period <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
-<span id="cb115-4"><a href="random-effects-for-individuals.html#cb115-4" tabindex="-1"></a></span>
-<span id="cb115-5"><a href="random-effects-for-individuals.html#cb115-5" tabindex="-1"></a><span class="do">## Including more baseline covariates</span></span>
-<span id="cb115-6"><a href="random-effects-for-individuals.html#cb115-6" tabindex="-1"></a>epi_2 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> base <span class="sc">+</span> age <span class="sc">+</span> treatment <span class="sc">+</span> period <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
-<span id="cb115-7"><a href="random-effects-for-individuals.html#cb115-7" tabindex="-1"></a></span>
-<span id="cb115-8"><a href="random-effects-for-individuals.html#cb115-8" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_1)</span>
-<span id="cb115-9"><a href="random-effects-for-individuals.html#cb115-9" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
-<span id="cb115-10"><a href="random-effects-for-individuals.html#cb115-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-72"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-72-1.png" alt="Confidence intervals for fixed effects for the two fitted models." width="672" />
+<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="random-effects-for-individuals.html#cb116-1" tabindex="-1"></a><span class="do">## Including just time</span></span>
+<span id="cb116-2"><a href="random-effects-for-individuals.html#cb116-2" tabindex="-1"></a>epilepsy<span class="sc">$</span>period <span class="ot">=</span> <span class="fu">as.numeric</span>(epilepsy<span class="sc">$</span>period)</span>
+<span id="cb116-3"><a href="random-effects-for-individuals.html#cb116-3" tabindex="-1"></a>epi_1 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> period <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
+<span id="cb116-4"><a href="random-effects-for-individuals.html#cb116-4" tabindex="-1"></a></span>
+<span id="cb116-5"><a href="random-effects-for-individuals.html#cb116-5" tabindex="-1"></a><span class="do">## Including more baseline covariates</span></span>
+<span id="cb116-6"><a href="random-effects-for-individuals.html#cb116-6" tabindex="-1"></a>epi_2 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> base <span class="sc">+</span> age <span class="sc">+</span> treatment <span class="sc">+</span> period <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
+<span id="cb116-7"><a href="random-effects-for-individuals.html#cb116-7" tabindex="-1"></a></span>
+<span id="cb116-8"><a href="random-effects-for-individuals.html#cb116-8" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_1)</span>
+<span id="cb116-9"><a href="random-effects-for-individuals.html#cb116-9" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
+<span id="cb116-10"><a href="random-effects-for-individuals.html#cb116-10" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-311"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-311-1.png" alt="Confidence intervals for fixed effects for the two fitted models." width="672" />
 <p class="caption">
 Figure 10.4: Confidence intervals for fixed effects for the two fitted models.
 </p>
@@ -887,10 +887,10 @@ Figure 10.4: Confidence intervals for fixed effects for the two fitted models.
 Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
 \tag{10.4}.
 \end{equation}\]</span></p>
-<div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="random-effects-for-individuals.html#cb116-1" tabindex="-1"></a><span class="do">## Including just time</span></span>
-<span id="cb116-2"><a href="random-effects-for-individuals.html#cb116-2" tabindex="-1"></a><span class="do">## Including more baseline covariates</span></span>
-<span id="cb116-3"><a href="random-effects-for-individuals.html#cb116-3" tabindex="-1"></a>epi_3 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> base <span class="sc">+</span> age <span class="sc">+</span> treatment <span class="sc">+</span> period <span class="sc">+</span> (period<span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
-<span id="cb116-4"><a href="random-effects-for-individuals.html#cb116-4" tabindex="-1"></a><span class="fu">summary</span>(epi_3)</span></code></pre></div>
+<div class="sourceCode" id="cb117"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb117-1"><a href="random-effects-for-individuals.html#cb117-1" tabindex="-1"></a><span class="do">## Including just time</span></span>
+<span id="cb117-2"><a href="random-effects-for-individuals.html#cb117-2" tabindex="-1"></a><span class="do">## Including more baseline covariates</span></span>
+<span id="cb117-3"><a href="random-effects-for-individuals.html#cb117-3" tabindex="-1"></a>epi_3 <span class="ot">=</span> <span class="fu">lmer</span>(seizure.rate <span class="sc">~</span> base <span class="sc">+</span> age <span class="sc">+</span> treatment <span class="sc">+</span> period <span class="sc">+</span> (period<span class="sc">|</span>subject), <span class="at">data=</span>epilepsy)</span>
+<span id="cb117-4"><a href="random-effects-for-individuals.html#cb117-4" tabindex="-1"></a><span class="fu">summary</span>(epi_3)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: seizure.rate ~ base + age + treatment + period + (period | subject)
 ##    Data: epilepsy
@@ -924,11 +924,11 @@ Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\
 ## period      -0.221  0.000  0.000  0.000
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="random-effects-for-individuals.html#cb118-1" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
-<span id="cb118-2"><a href="random-effects-for-individuals.html#cb118-2" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_3)</span>
-<span id="cb118-3"><a href="random-effects-for-individuals.html#cb118-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-73"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-73-1.png" alt="Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)." width="672" />
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="random-effects-for-individuals.html#cb119-1" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
+<span id="cb119-2"><a href="random-effects-for-individuals.html#cb119-2" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_3)</span>
+<span id="cb119-3"><a href="random-effects-for-individuals.html#cb119-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-312"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-312-1.png" alt="Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)." width="672" />
 <p class="caption">
 Figure 10.5: Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).
 </p>
