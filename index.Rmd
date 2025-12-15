@@ -86,7 +86,7 @@ library(survminer)
 
 # Welcome to Clinical Trials 4H! {-}
 
-This page contains the notes for Clinical Trials IV 2024-25. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
+This page contains the notes for Clinical Trials IV 2025-26. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
 
 In case you're reading the PDF, the notes are best viewed in HTML (the link is [https://racheloughton.github.io/ct4/](https://racheloughton.github.io/ct4/)). The PDF will be up-to-date, but the formatting is designed for HTML.
 
@@ -94,19 +94,19 @@ In case you're reading the PDF, the notes are best viewed in HTML (the link is [
 
 ### Lectures {-}
 
-Our lectures are 9am on Wednesdays in W007 (this is the Appleby Building, between Pysics and the main library), and 3pm on Fridays in PCL 048 (this is in the ground floor of the Palatine Centre). 
+Our lectures are 3 pm on Mondays and 10 am on Wednesdays, both in W414 (this is the Appleby Building, between Pysics and the main library).
 
 ### Computer classes {-}
 
-We have four computer practicals for this module. They are 1-2pm on the Mondays of weeks 13, 15, 17 and 19. These classes are in MCS 3098.
+We have four computer practicals for this module. They are 12-1 pm on the Fridays of weeks 13, 15, 17 and 19. These classes are in MCS 3097.
 
 ### Office Hour {-}
 
-The office hour will be every Wednesday, 10-11am, in the Calman Learning Centre cafe. 
+The office hour will be every Monday, 10-11am, in my office (MCS 3016).  
 
 ### Assessment {-}
 
-This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February (due 3rd March), the second on Wednesday 19th March (due 5th May).
+This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 11th February (due 2nd March), the second on Wednesday 18th March (due 4th May). I have given you more time than you need, so that you can plan ahead. If you will need an extension please contact the maths teaching and learning team (maths.teaching@durham.ac.uk) as soon as possible. [This page](https://durhamuniversity.sharepoint.com/teams/extensionsselfcertification/extensions) explains the university policy on extensions for coursework.
 
 There will also be two formative assignments during the course. More details on these to follow.
 
@@ -114,7 +114,7 @@ There will also be two formative assignments during the course. More details on 
 
 The main reference for the first half of the course is @matthews2006introduction. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are @hulley2013designing, @hayes2017cluster. You shouldn't need to use any of these books, but of course you're welcome to if you want to read further.
 
-I will share links along the way for relevant resources like podcast episodes and articles, which I hope will help you to get a feel for the topic more generally.
+I will share links along the way for relevant resources like articles and podcast episodes, which I hope will help you to get a feel for the topic more generally.
 
 ## What to expect from this module {-}
 

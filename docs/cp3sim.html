@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-03-18" />
+<meta name="date" content="2025-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,13 +56,16 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -72,7 +75,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -629,8 +632,8 @@ Figure C.3: Power estimates for 100 sets of 100 simulations with larger outcome 
 <span id="cb342-3"><a href="cp3sim.html#cb342-3" tabindex="-1"></a>  sim_vec4[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">6</span>)</span>
 <span id="cb342-4"><a href="cp3sim.html#cb342-4" tabindex="-1"></a>}</span>
 <span id="cb342-5"><a href="cp3sim.html#cb342-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec4)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-452"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-452-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-214"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-214-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
 <p class="caption">
 Figure C.4: Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T
 </p>
@@ -707,8 +710,8 @@ Click for solutions
 <span id="cb345-3"><a href="cp3sim.html#cb345-3" tabindex="-1"></a>  sim_vec5[i] <span class="ot">=</span> <span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
 <span id="cb345-4"><a href="cp3sim.html#cb345-4" tabindex="-1"></a>}</span>
 <span id="cb345-5"><a href="cp3sim.html#cb345-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec5)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-454"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-454-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-216"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-216-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
 <p class="caption">
 Figure C.5: Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation.
 </p>
@@ -807,8 +810,8 @@ Click for solutions
 <span id="cb347-4"><a href="cp3sim.html#cb347-4" tabindex="-1"></a>                                  <span class="at">rho=</span><span class="fl">0.65</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd_eps=</span><span class="dv">6</span>, <span class="at">sd_B =</span> <span class="dv">8</span>)</span>
 <span id="cb347-5"><a href="cp3sim.html#cb347-5" tabindex="-1"></a>}</span>
 <span id="cb347-6"><a href="cp3sim.html#cb347-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec6)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-456"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-456-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-218"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-218-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
 <p class="caption">
 Figure C.6: Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with <span class="math inline">\(N=75\)</span>, assuming an ANCOVA analysis.
 </p>
@@ -854,43 +857,43 @@ Arnold, Benjamin F, Daniel R Hogan, John M Colford, and Alan E Hubbard. 2011. <s
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["CT4H_notes.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"bookdown": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CT4H_notes.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "bookdown": null
 });
 });
 </script>

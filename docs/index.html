@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-03-18" />
+<meta name="date" content="2025-12-15" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -56,13 +56,16 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
 
 <style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -72,7 +75,7 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -460,35 +463,35 @@ div.csl-indent {
 <div id="header">
 <h1 class="title">Clinical Trials 4H</h1>
 <p class="author"><em>Rachel Oughton</em></p>
-<p class="date"><em>2025-03-18</em></p>
+<p class="date"><em>2025-12-15</em></p>
 </div>
 <div id="welcome-to-clinical-trials-4h" class="section level1 unnumbered hasAnchor">
 <h1>Welcome to Clinical Trials 4H!<a href="index.html#welcome-to-clinical-trials-4h" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>This page contains the notes for Clinical Trials IV 2024-25. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!</p>
+<p>This page contains the notes for Clinical Trials IV 2025-26. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!</p>
 <p>In case you’re reading the PDF, the notes are best viewed in HTML (the link is <a href="https://racheloughton.github.io/ct4/">https://racheloughton.github.io/ct4/</a>). The PDF will be up-to-date, but the formatting is designed for HTML.</p>
 <div id="practical-details" class="section level2 unnumbered hasAnchor">
 <h2>Practical details<a href="index.html#practical-details" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div id="lectures" class="section level3 unnumbered hasAnchor">
 <h3>Lectures<a href="index.html#lectures" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Our lectures are 9am on Wednesdays in W007 (this is the Appleby Building, between Pysics and the main library), and 3pm on Fridays in PCL 048 (this is in the ground floor of the Palatine Centre).</p>
+<p>Our lectures are 3 pm on Mondays and 10 am on Wednesdays, both in W414 (this is the Appleby Building, between Pysics and the main library).</p>
 </div>
 <div id="computer-classes" class="section level3 unnumbered hasAnchor">
 <h3>Computer classes<a href="index.html#computer-classes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>We have four computer practicals for this module. They are 1-2pm on the Mondays of weeks 13, 15, 17 and 19. These classes are in MCS 3098.</p>
+<p>We have four computer practicals for this module. They are 12-1 pm on the Fridays of weeks 13, 15, 17 and 19. These classes are in MCS 3097.</p>
 </div>
 <div id="office-hour" class="section level3 unnumbered hasAnchor">
 <h3>Office Hour<a href="index.html#office-hour" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>The office hour will be every Wednesday, 10-11am, in the Calman Learning Centre cafe.</p>
+<p>The office hour will be every Monday, 10-11am, in my office (MCS 3016).</p>
 </div>
 <div id="assessment" class="section level3 unnumbered hasAnchor">
 <h3>Assessment<a href="index.html#assessment" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February (due 3rd March), the second on Wednesday 19th March (due 5th May).</p>
+<p>This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 11th February (due 2nd March), the second on Wednesday 18th March (due 4th May). I have given you more time than you need, so that you can plan ahead. If you will need an extension please contact the maths teaching and learning team (<a href="mailto:maths.teaching@durham.ac.uk" class="email">maths.teaching@durham.ac.uk</a>) as soon as possible. <a href="https://durhamuniversity.sharepoint.com/teams/extensionsselfcertification/extensions">This page</a> explains the university policy on extensions for coursework.</p>
 <p>There will also be two formative assignments during the course. More details on these to follow.</p>
 </div>
 <div id="books-and-resources" class="section level3 unnumbered hasAnchor">
 <h3>Books and resources<a href="index.html#books-and-resources" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The main reference for the first half of the course is <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are <span class="citation">Hulley et al. (<a href="#ref-hulley2013designing">2013</a>)</span>, <span class="citation">Hayes and Moulton (<a href="#ref-hayes2017cluster">2017</a>)</span>. You shouldn’t need to use any of these books, but of course you’re welcome to if you want to read further.</p>
-<p>I will share links along the way for relevant resources like podcast episodes and articles, which I hope will help you to get a feel for the topic more generally.</p>
+<p>I will share links along the way for relevant resources like articles and podcast episodes, which I hope will help you to get a feel for the topic more generally.</p>
 </div>
 </div>
 <div id="what-to-expect-from-this-module" class="section level2 unnumbered hasAnchor">
@@ -544,43 +547,43 @@ Matthews, John NS. 2006. <em>Introduction to Randomized Controlled Clinical Tria
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-"sharing": {
-"github": true,
-"facebook": false,
-"twitter": false,
-"linkedin": false,
-"weibo": false,
-"instapaper": false,
-"vk": false,
-"whatsapp": false,
-"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-},
-"fontsettings": {
-"theme": "white",
-"family": "sans",
-"size": 2
-},
-"edit": {
-"link": null,
-"text": null
-},
-"history": {
-"link": null,
-"text": null
-},
-"view": {
-"link": null,
-"text": null
-},
-"download": ["CT4H_notes.pdf"],
-"search": {
-"engine": "fuse",
-"options": null
-},
-"toc": {
-"collapse": "section"
-},
-"bookdown": null
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CT4H_notes.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "bookdown": null
 });
 });
 </script>
