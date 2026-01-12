@@ -1,10 +1,11 @@
 % Options for packages loaded elsewhere
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
-%
 \documentclass[
   openany]{book}
+\usepackage{xcolor}
 \usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{5}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[T1]{fontenc}
@@ -35,7 +36,6 @@
 }{% if KOMA class
   \KOMAoptions{parskip=half}}
 \makeatother
-\usepackage{xcolor}
 \usepackage{color}
 \usepackage{fancyvrb}
 \newcommand{\VerbBar}{|}
@@ -88,21 +88,24 @@
 \makesavenoteenv{longtable}
 \usepackage{graphicx}
 \makeatletter
-\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
-\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
-\makeatother
-% Scale images if necessary, so that they will not overflow the page
-% margins by default, and it is still possible to overwrite the defaults
-% using explicit options in \includegraphics[width, height, ...]{}
-\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\newsavebox\pandoc@box
+\newcommand*\pandocbounded[1]{% scales image to fit in text height/width
+  \sbox\pandoc@box{#1}%
+  \Gscale@div\@tempa{\textheight}{\dimexpr\ht\pandoc@box+\dp\pandoc@box\relax}%
+  \Gscale@div\@tempb{\linewidth}{\wd\pandoc@box}%
+  \ifdim\@tempb\p@<\@tempa\p@\let\@tempa\@tempb\fi% select the smaller of both
+  \ifdim\@tempa\p@<\p@\scalebox{\@tempa}{\usebox\pandoc@box}%
+  \else\usebox{\pandoc@box}%
+  \fi%
+}
 % Set default figure placement to htbp
-\makeatletter
 \def\fps@figure{htbp}
 \makeatother
 \setlength{\emergencystretch}{3em} % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
-\setcounter{secnumdepth}{5}
+\usepackage[]{natbib}
+\bibliographystyle{apalike}
 \usepackage[margin = 1in]{geometry}
 \usepackage[breaklinks=true]{hyperref}
 \usepackage{booktabs}
@@ -112,11 +115,6 @@
 \usepackage{array}
 \usepackage{anyfontsize}
 \usepackage{multirow}
-\ifLuaTeX
-  \usepackage{selnolig}  % disable illegal ligatures
-\fi
-\usepackage[]{natbib}
-\bibliographystyle{apalike}
 \usepackage{bookmark}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same}
@@ -128,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2025-03-18}
+\date{2026-01-12}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -157,7 +155,7 @@
 \chapter*{Welcome to Clinical Trials 4H!}\label{welcome-to-clinical-trials-4h}
 \addcontentsline{toc}{chapter}{Welcome to Clinical Trials 4H!}
 
-This page contains the notes for Clinical Trials IV 2024-25. As we progress through the course, more will appear. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
+This page contains the notes for Clinical Trials IV 2025-26. You can also download the PDF version (see the icon at the top left). If you notice any typos, mistakes or places that are unclear, please do let me know!
 
 In case you're reading the PDF, the notes are best viewed in HTML (the link is \url{https://racheloughton.github.io/ct4/}). The PDF will be up-to-date, but the formatting is designed for HTML.
 
@@ -167,22 +165,22 @@ In case you're reading the PDF, the notes are best viewed in HTML (the link is \
 \subsection*{Lectures}\label{lectures}
 \addcontentsline{toc}{subsection}{Lectures}
 
-Our lectures are 9am on Wednesdays in W007 (this is the Appleby Building, between Pysics and the main library), and 3pm on Fridays in PCL 048 (this is in the ground floor of the Palatine Centre).
+Our lectures are 3 pm on Mondays and 10 am on Wednesdays, both in W414 (this is the Appleby Building, between Pysics and the main library).
 
 \subsection*{Computer classes}\label{computer-classes}
 \addcontentsline{toc}{subsection}{Computer classes}
 
-We have four computer practicals for this module. They are 1-2pm on the Mondays of weeks 13, 15, 17 and 19. These classes are in MCS 3098.
+We have four computer practicals for this module. They are 12-1 pm on the Fridays of weeks 13, 15, 17 and 19. These classes are in MCS 3097.
 
 \subsection*{Office Hour}\label{office-hour}
 \addcontentsline{toc}{subsection}{Office Hour}
 
-The office hour will be every Wednesday, 10-11am, in the Calman Learning Centre cafe.
+The office hour will be every Monday, 10-11am, in my office (MCS 3016).
 
 \subsection*{Assessment}\label{assessment}
 \addcontentsline{toc}{subsection}{Assessment}
 
-This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 7th February (due 3rd March), the second on Wednesday 19th March (due 5th May).
+This module is assessed through two equally weighted pieces of coursework. The first will be assigned on Wednesday 11th February (due 2nd March), the second on Wednesday 18th March (due 4th May). I have given you more time than you need, so that you can plan ahead. If you will need an extension please contact the maths teaching and learning team (\href{mailto:maths.teaching@durham.ac.uk}{\nolinkurl{maths.teaching@durham.ac.uk}}) as soon as possible. \href{https://durhamuniversity.sharepoint.com/teams/extensionsselfcertification/extensions}{This page} explains the university policy on extensions for coursework.
 
 There will also be two formative assignments during the course. More details on these to follow.
 
@@ -191,7 +189,7 @@ There will also be two formative assignments during the course. More details on 
 
 The main reference for the first half of the course is \citet{matthews2006introduction}. There are a couple of copies in the Bill Bryson Library. Some other books we will make use of are \citet{hulley2013designing}, \citet{hayes2017cluster}. You shouldn't need to use any of these books, but of course you're welcome to if you want to read further.
 
-I will share links along the way for relevant resources like podcast episodes and articles, which I hope will help you to get a feel for the topic more generally.
+I will share links along the way for relevant resources like articles and podcast episodes, which I hope will help you to get a feel for the topic more generally.
 
 \section*{What to expect from this module}\label{what-to-expect-from-this-module}
 \addcontentsline{toc}{section}{What to expect from this module}
@@ -270,7 +268,7 @@ Scurvy was a serious disease, particularly affecting seamen on long voyages. Sym
 
 Lind chose twelve seamen with similar severity of symptoms, and subjected them to their assigned treatment for 6 days. They were kept in the same quarters, and fed the same diet apart from their treatment. Unsurprisingly (to us!) ``The most sudden and visible good effects were perceived from the use of oranges and lemons,''
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-2-1.pdf}}
 \end{example}
 
 A key thing to notice about the Scurvy example is that Lind went to great lengths to ensure that the treatment was the only thing affecting these 12 sailors: they all started with a similar severity of symptoms, they were kept in the same place and their diet was identical apart from their treatment. This links to one of the foundational principles of clinical trials: causal inference.
@@ -281,6 +279,8 @@ You're probably familiar with the mantra that \textbf{``correlation does not imp
 
 This is important for us, because we really want to be able to conclude that a treatment works (or doesn't) - that it \emph{causes} recovery, or a reduction in symptoms, or helps the patient in some way.
 If we were experimental scientists in some laboratory, we could conduct some controlled experiment in which everything was kept under very specific conditions, and could fairly easily make conclusions about the treatment we were testing, and how it behaved in a range of conditions. However, testing treatments on real people is different: we don't have several identical versions of the same person to test the treatment on, and even if we did, as Gwyneth Paltrow shows us it doesn't take very much to completely alter the conditions of someone's existence!
+
+\includegraphics[width=0.83in]{images/sliding_doors}
 
 Neither can we just base our conclusion of whether a treatment works on lab-based tests or theory (although undoubtedly these will both play a part in developing the treatment in the first place). The treatment needs to be tested on actual people.
 
@@ -320,6 +320,17 @@ These patients are then allocated to receive either the treatment, or to be part
 \addcontentsline{toc}{subsection}{Comparing results}
 
 Now that the trial has been run, we have two sets of measurements: one for the treatment group and one for the control group. But guess what?! Comparing these and coming to a conclusion about the effect of the treatment is a statistical question.
+
+\subsection*{Trial timeline}\label{trial-timeline}
+\addcontentsline{toc}{subsection}{Trial timeline}
+
+Now that we've thought (very briefly) about the main stages in a clinical trial, we can look at how they fit together.
+
+\includegraphics[width=5.93in]{images/timeline}
+
+As we see above, the recruitment, allocation and trial phases overlap. Once a participant is recruited into the trial, they are (usually) allocated to the control or treatment group very soon after, and then their course of treatment (whichever it is) begins. The recruitment phase will continue until enough participants have been recruited (or sometimes until some deadline). Depending on how long this takes, and how long the actual trial phase lasts, some participants may have finished their course of treatment before others have even been allocated. This has implications for the allocation in particular, since we can't just allocate all the participants at once.
+
+Results are collected during the trial, and once everyone has finished their course of treatment the analysis phase can begin.
 
 \subsection*{Why bother with a control group?}\label{why-bother-with-a-control-group}
 \addcontentsline{toc}{subsection}{Why bother with a control group?}
@@ -482,7 +493,7 @@ In this case our P-value is \(1 - F_t\left(2, df=31\right)= 0.0272\) (where \(F_
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/t31-onesided-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/t31-onesided-1.pdf}}
 \caption{\label{fig:t31-onesided}The distribution \(t_{31}\), with the area corresponding to \(t > 2\) shaded.}
 \end{figure}
 
@@ -499,7 +510,7 @@ In this scenario, Figure \ref{fig:t31-onesided} is replaced by the plot shown in
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/t31-twosided-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/t31-twosided-1.pdf}}
 \caption{\label{fig:t31-twosided}The distribution \(t_{31}\), with the area corresponding to \(|t| > 2\) shaded.}
 \end{figure}
 
@@ -613,7 +624,7 @@ This is equivalent to \(\bar{x}_T - \bar{x}_C\) falling outside the interval
 
 We'll see a lot of the notation \(z_{\alpha/2}\) and similar, so to clarify:
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-4-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf}}
 
 In R, we have \(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\) and \(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\). \texttt{qnorm} is the quantile and \texttt{pnorm} is the cumulative distribution function. So, for example
 \[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)\]
@@ -649,7 +660,7 @@ Figure \ref{fig:accepth0} shows the distribution of \(D\) under \(H_0\) and \(H_
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/accepth0-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/accepth0-1.pdf}}
 \caption{\label{fig:accepth0}The distribution of \(D\) under both \(H_0\) and \(H_1\) for some arbitrary values of effect size, population variance, \(n\) and \(m\), with the region in which we fail to reject \(H_0\) shown by the turquoise bar and the red shading.}
 \end{figure}
 
@@ -659,7 +670,7 @@ We can see that if the distributions have better separation, as in Figure \ref{f
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/accepth0-1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/accepth0-1-1.pdf}}
 \caption{\label{fig:accepth0-1}The distribution of D under both \(H_0\) and \(H_1\) for some arbitrary values of effect size, population variance, \(n\) and \(m\), with the region in which we fail to reject \(H_0\) shown by the turquoise bar and the red shading.}
 \end{figure}
 
@@ -685,7 +696,7 @@ Notice also that all the curves pass through the point \(\tau=0,\,\beta=0.05\). 
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/powercurve-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/powercurve-1.pdf}}
 \caption{\label{fig:powercurve}Power curves for various values of \(n\) and \(m\), with effect size in units of standard deviation, given a type I error rate of 0.05.}
 \end{figure}
 
@@ -986,7 +997,7 @@ These probabilities are shown in Figure \ref{fig:srs-alloc}. We can see that thi
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/srs-alloc-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/srs-alloc-1.pdf}}
 \caption{\label{fig:srs-alloc}The probability distribution of largest group size for n=15.}
 \end{figure}
 
@@ -998,7 +1009,7 @@ For larger trials, this imbalance will be less pronounced, for example Figure \r
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/srsalloc200-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/srsalloc200-1.pdf}}
 \caption{\label{fig:srsalloc200}The probability distribution of largest group size for n=200.}
 \end{figure}
 
@@ -1126,7 +1137,7 @@ Figure \ref{fig:biasedcoin-p2thirds} shows four realisations of this random walk
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/biasedcoin-p2thirds-1.pdf}}
 \caption{\label{fig:biasedcoin-p2thirds}Absolute imbalance for a biased-coin scheme with \(P=0.667\).}
 \end{figure}
 
@@ -1134,7 +1145,7 @@ Figure \ref{fig:p-nearlyhalf} shows four realisations of the random walk with \(
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/p-nearlyhalf-1.pdf}}
 \caption{\label{fig:p-nearlyhalf}Absolute imbalance for a biased-coin scheme with \(P = 0.55\).}
 \end{figure}
 
@@ -1142,7 +1153,7 @@ By contrast, with \(P=0.9\) as in Figure \ref{fig:p-nearlyone}, there is much le
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/p-nearlyone-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/p-nearlyone-1.pdf}}
 \caption{\label{fig:p-nearlyone}Absolute imbalance for a biased-coin scheme with \(P = 0.9\).}
 \end{figure}
 
@@ -1212,19 +1223,19 @@ P\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right)=j\big)& 
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/urn11-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/urn11-1.pdf}}
 \caption{\label{fig:urn11}Four realisations of absolute imbalance for r=1, s=1, N=50.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/urn18-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/urn18-1.pdf}}
 \caption{\label{fig:urn18}Four realisations of absolute imbalance for r=1, s=8, N=50.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/urn81-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/urn81-1.pdf}}
 \caption{\label{fig:urn81}Four realisations of absolute imbalance for r=8, s=1, N=50.}
 \end{figure}
 
@@ -1422,7 +1433,7 @@ The problem here is that only the marginal distributions are compared for simila
 
 This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-10-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-11-1.pdf}}
 
 If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.
 
@@ -1534,7 +1545,7 @@ Under the null hypothesis that the mean systolic blood pressure at the end of th
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/ttestcapt-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/ttestcapt-1.pdf}}
 \caption{\label{fig:ttestcapt}The distribution \(t_{14}\), with \(t=1.65\) shown by the dashed line and the `more extreme' areas shaded.}
 \end{figure}
 
@@ -1800,7 +1811,7 @@ However, although this is theoretically true, in real life trials there will be 
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/hommel-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/hommel-1.pdf}}
 \caption{\label{fig:hommel}Baseline measurements from the Captopril trial.}
 \end{figure}
 
@@ -1862,7 +1873,7 @@ Y
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/bvnplot-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/bvnplot-1.pdf}}
 \caption{\label{fig:bvnplot}A bivariate normal density.}
 \end{figure}
 
@@ -2137,7 +2148,7 @@ The variable `arm' here is being included as a factor variable, so it behaves li
 \]
 Therefore, for a patient assigned Placebo, a value of 7.18 is added, as well as the intercept and baseline term. This results in a model with two parallel fitted lines.
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-16-1.pdf}}
 
 For our previous methods we have calculated a confidence interval for the treatment effect \(\tau\), and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of \(\hat{\tau}\) is 2.96. Therefore, to construct a 95/\% confidence interval for \(\hat{\tau}\), we use (to 2 decimal places)
 
@@ -2163,7 +2174,7 @@ As with any fitted model, we should check the residuals.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-16-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-17-1.pdf}}
 
 These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it's difficult really to assess the fit of the model.
 \end{example}
@@ -2450,7 +2461,7 @@ We can plot the residuals (Figure \ref{fig:lmstressresid1}) to check that the mo
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/lmstressresid1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/lmstressresid1-1.pdf}}
 \caption{\label{fig:lmstressresid1}Residuals from the stress data model with only linear terms.}
 \end{figure}
 
@@ -2491,7 +2502,7 @@ This has somewhat improved the homogeneity of our residuals, as shown in Figure 
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/lmstressresid2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/lmstressresid2-1.pdf}}
 \caption{\label{fig:lmstressresid2}Residuals from the stress data model with the interaction between intervention and exercise included.}
 \end{figure}
 
@@ -2919,7 +2930,7 @@ That is, we would expect to treat nearly three patients before one is improved (
 \[\left(\frac{1}{0.541},\; \frac{1}{0.187}\right) = \left(1.85,\; 5.33 \right).\]
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-26-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-27-1.pdf}}
 \end{example}
 
 \subsubsection{What if the difference is not significant?}\label{what-if-the-difference-is-not-significant}
@@ -2965,8 +2976,8 @@ The plot below shows relationship between ARD and NNT, with the intervals for ou
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf}
-\caption{\label{fig:unnamed-chunk-28}The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-29-1.pdf}}
+\caption{\label{fig:unnamed-chunk-29}The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.}
 \end{figure}
 
 \citet{altman1998confidence} (\href{https://www.bmj.com/content/bmj/317/7168/1309.full.pdf}{available here}) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether you agree!
@@ -3018,7 +3029,7 @@ Visually, we can represent this as in Figure \ref{fig:newc1} by plotting the LHS
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/newc1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/newc1-1.pdf}}
 \caption{\label{fig:newc1}LHS of Equation 6.1 (solid black) with RHS of (black dashed) and RHS with estimate \(p\) subbed in (black dotted). The limits of the confidence intervals are where the curves cross, shown by red lines: dashed for Wilson, dotted for standard.}
 \end{figure}
 
@@ -3045,8 +3056,8 @@ We can see this graphically
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-32-1.pdf}
-\caption{\label{fig:unnamed-chunk-32}As before, dashed for Wilson, dotted for standard}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-33-1.pdf}}
+\caption{\label{fig:unnamed-chunk-33}As before, dashed for Wilson, dotted for standard}
 \end{figure}
 
 Notice that the Wilson interval is asymmetric, which is more realistic.
@@ -3067,8 +3078,8 @@ Again, we can see this graphically.
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-35-1.pdf}
-\caption{\label{fig:unnamed-chunk-35}As before, dashed for Wilson, dotted for standard}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-36-1.pdf}}
+\caption{\label{fig:unnamed-chunk-36}As before, dashed for Wilson, dotted for standard}
 \end{figure}
 
 \end{example}
@@ -3720,13 +3731,13 @@ The plots below shows the distributions of fitted values for patients with \(X=0
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/rocgood-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/rocgood-1.pdf}}
 \caption{\label{fig:rocgood}ROC example with good separation.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/rocpoor-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/rocpoor-1.pdf}}
 \caption{\label{fig:rocpoor}ROC example with poor separation.}
 \end{figure}
 
@@ -3761,7 +3772,7 @@ With that object we can do various things, such as plot the ROC curve:
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/indoroc1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/indoroc1-1.pdf}}
 \caption{\label{fig:indoroc1}ROC curve for our logistic regression model of the indo RCT data (solid line). The line y=x shows the ROC curve we'd expect with random guessing.}
 \end{figure}
 
@@ -3816,8 +3827,8 @@ The trial has 602 participants and there are many fewer than 602 combinations of
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-44-1.pdf}
-\caption{\label{fig:unnamed-chunk-44}Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-45-1.pdf}}
+\caption{\label{fig:unnamed-chunk-45}Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).}
 \end{figure}
 
 These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model.
@@ -3843,7 +3854,7 @@ If a trial monitors a sample of participants for some length of time, many will 
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/censor-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/censor-1.pdf}}
 \caption{\label{fig:censor}An example of some censored data. The dashed line at time 10 indicates the end of the trial period.}
 \end{figure}
 
@@ -4042,7 +4053,7 @@ Figure \ref{fig:kmov2} shows the Kaplan-Meier survival curve estimate for the \t
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/kmov2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/kmov2-1.pdf}}
 \caption{\label{fig:kmov2}Kaplan-Meier estimate of survival curve for ovarian cancer data with a 95\% confidence level.}
 \end{figure}
 
@@ -4058,7 +4069,7 @@ Figure \ref{fig:ovarian} shows the Kaplan Meier plots for the ovarian cancer dat
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/ovarian-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/ovarian-1.pdf}}
 \caption{\label{fig:ovarian}Kaplan-Meier curves for the ovarian cancer data, split by treatment group.}
 \end{figure}
 
@@ -4066,7 +4077,7 @@ The second dataset we will use throughout this chapter has been simulated based 
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/myeloid-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/myeloid-1.pdf}}
 \caption{\label{fig:myeloid}Kaplan Meier curves for the Myeloid data, split by treatment.}
 \end{figure}
 
@@ -4155,12 +4166,12 @@ and
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{CT4H_notes_files/figure-latex/ovplotlr-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/ovplotlr-1.pdf}}
 We can do the same for the \texttt{myeloid} data. Figure \ref{fig:myplotlr} shows the fitted curves, using \(S\left(t\right)=\exp\left[-\hat{\lambda}_Xt\right]\) for group \(X\).
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/myplotlr-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/myplotlr-1.pdf}}
 \caption{\label{fig:myplotlr}Kaplan Meier estimates of survival curves for the Myeloid data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group C, blue = group T).}
 \end{figure}
 
@@ -4226,7 +4237,7 @@ We can fit Weibull distributions to our \texttt{myeloid} dataset, as shown in Fi
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/weibmy-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/weibmy-1.pdf}}
 \caption{\label{fig:weibmy}Weibull fit to survival curve of Myeloid data, dashed lines (Kaplan Meier estimate also shown in solid lines). Red for group T, black for group C.}
 \end{figure}
 
@@ -4915,7 +4926,7 @@ We see from the \texttt{age} line that the data are consistent with the proporti
 
 The object created by \texttt{cox.zph} also contains the Schoenfeld residuals themselves, and so we can plot them:
 
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-64-1.pdf}}
 
 Because there is so little data it's hard to conclude anything, and indeed our lack of significance in the test may be due to small sample size rather than excellent model fit.
 \end{example}
@@ -4950,7 +4961,7 @@ First we'll check the \texttt{ovarian} dataset, split by treatment group (Figure
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/loglogov-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/loglogov-1.pdf}}
 \caption{\label{fig:loglogov}Log-log plot for ovarian data by treatment group.}
 \end{figure}
 
@@ -4960,13 +4971,13 @@ We can do the same for the \texttt{myeloid} data, as in Figures \ref{fig:loglogm
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/loglogmy-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/loglogmy-1.pdf}}
 \caption{\label{fig:loglogmy}Log-log plot for myeloid data by treatment group.}
 \end{figure}
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/loglogmy2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/loglogmy2-1.pdf}}
 \caption{\label{fig:loglogmy2}Log-log plot for myeloid data by treatment group.}
 \end{figure}
 
@@ -4983,7 +4994,7 @@ Firstly we can check the proportional hazards assumption for the categorical cov
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/loglogvet1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/loglogvet1-1.pdf}}
 \caption{\label{fig:loglogvet1}Log-log plot for veteran data split by treatment group and cell type}
 \end{figure}
 
@@ -5035,7 +5046,7 @@ and check the Schoenfeld residuals for \texttt{karno}, as in Figure \ref{fig:vet
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/vetschoen-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/vetschoen-1.pdf}}
 \caption{\label{fig:vetschoen}Schoenfeld residuals for Cox regression model fit to veteran data, for covariate `karno'}
 \end{figure}
 
@@ -5094,7 +5105,7 @@ We will demonstrate the ICC using a dataset that has nothing to do with clinical
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/cheesedata-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/cheesedata-1.pdf}}
 \caption{\label{fig:cheesedata}Price per unit and volume of sales of cheese for 706 Kroger stores.}
 \end{figure}
 
@@ -5329,7 +5340,7 @@ The data we use will be from an educational trial, contained in \texttt{crtData}
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/crtboxplots-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/crtboxplots-1.pdf}}
 \caption{\label{fig:crtboxplots}Box plots of the outcome Posttest for each school, coloured by Intervention.}
 \end{figure}
 
@@ -5387,7 +5398,7 @@ We can also visualise the mean differences by group
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/crt1bp-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/crt1bp-1.pdf}}
 \caption{\label{fig:crt1bp}Boxplots of the mean differences for each trial arm}
 \end{figure}
 
@@ -5490,7 +5501,7 @@ We'll now fit a random effects model to the \texttt{crtData} dataset from \textt
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/eefplot2-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/eefplot2-1.pdf}}
 \caption{\label{fig:eefplot2}Posttest against Prettest, coloured by Intervention}
 \end{figure}
 
@@ -5546,7 +5557,7 @@ The package \texttt{sjPlot} contains functions to work with mixed effect model o
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/lmerplot1-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/lmerplot1-1.pdf}}
 \caption{\label{fig:lmerplot1}CIs for the model coefficients}
 \end{figure}
 
@@ -5840,7 +5851,7 @@ To visualise the data, we plot a \textbf{spaghetti plot}, as shown in Figure \re
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/epispag-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/epispag-1.pdf}}
 \caption{\label{fig:epispag}A spaghetti plot of the epilepsy data.}
 \end{figure}
 
@@ -5848,7 +5859,7 @@ We can also plot the mean seizure rate at each time within each group as in Figu
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/epimeans-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/epimeans-1.pdf}}
 \caption{\label{fig:epimeans}Mean seizure rate for each treatment group over time.}
 \end{figure}
 
@@ -5860,7 +5871,7 @@ where \(\bar{x}_t,\,s_t\) are the sample mean and SD at time \(t\). The standard
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/standepi-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/standepi-1.pdf}}
 \caption{\label{fig:standepi}Standardised spaghetti plot for the epilepsy data.}
 \end{figure}
 
@@ -5979,8 +5990,8 @@ We will explore these models by fitting them to our \texttt{epilepsy} data.
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf}
-\caption{\label{fig:unnamed-chunk-73}Confidence intervals for fixed effects for the two fitted models.}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf}}
+\caption{\label{fig:unnamed-chunk-74}Confidence intervals for fixed effects for the two fitted models.}
 \end{figure}
 
 In this example it appears that neither time nor the treatment have a significant effect on the seizure rate.
@@ -6047,8 +6058,8 @@ Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf}
-\caption{\label{fig:unnamed-chunk-74}Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf}}
+\caption{\label{fig:unnamed-chunk-75}Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).}
 \end{figure}
 
 We see from the small variance for the random effect \texttt{period} that the gradients don't vary very much at all, and indeed the coefficients of the fixed effects are very similar to those for a fixed gradient.
@@ -6323,7 +6334,7 @@ So, we can say that after our observations 0,0,1,0,0,1,0,0,0,1 we have \(n=10,\,
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/betafinal-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/betafinal-1.pdf}}
 \caption{\label{fig:betafinal}The posterior distribution after all 10 observations}
 \end{figure}
 
@@ -6331,7 +6342,7 @@ However we aren't limited to this: we can update the posterior after any number 
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/betaplots-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/betaplots-1.pdf}}
 \caption{\label{fig:betaplots}Posterior distribution after each observation in sequence, starting with a uniform prior for pi}
 \end{figure}
 
@@ -6339,7 +6350,7 @@ If we were to carry on to 100, 500 and 1000 observations, still with a proportio
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/betaplotmega-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/betaplotmega-1.pdf}}
 \caption{\label{fig:betaplotmega}Posterior distribution after 100, 500 and 1000 observations (mainting the sample estimate p=0.3)}
 \end{figure}
 
@@ -6431,7 +6442,7 @@ This means we have three posteriors, one for each prior, given by Equation \eqre
 
 \begin{figure}
 \centering
-\includegraphics{CT4H_notes_files/figure-latex/simplebayes-1.pdf}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/simplebayes-1.pdf}}
 \caption{\label{fig:simplebayes}Priors (dashed lines) and posteriors (solid lines) for the Captopril data, for three different prior distributions (shown by legend).}
 \end{figure}
 
@@ -6587,6 +6598,6 @@ Conclusion:
 
 This sections lists the references used in the course - it will be updated as the notes are updated. Some of the more accessible (dare I say `interesting') resources are linked from the notes. If you want to read any of these articles, the easiest way is to copy the title into \href{https://scholar.google.co.uk/}{Google scholar}.
 
-  \bibliography{ct4h.bib}
+\bibliography{ct4h.bib}
 
 \end{document}

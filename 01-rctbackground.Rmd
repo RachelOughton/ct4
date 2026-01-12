@@ -51,8 +51,9 @@ If we were experimental scientists in some laboratory, we could conduct some con
 ```{r}
 if(knitr::is_html_output()){
   knitr::include_graphics("images/sliding_doors.jpeg")  
+} else {
+  knitr::include_graphics("images/sliding_doors.jpeg", dpi=400) 
 }
-
 ```
 
 Neither can we just base our conclusion of whether a treatment works on lab-based tests or theory (although undoubtedly these will both play a part in developing the treatment in the first place). The treatment needs to be tested on actual people. 
@@ -89,6 +90,22 @@ These patients are then allocated to receive either the treatment, or to be part
 ### Comparing results {-}
 
 Now that the trial has been run, we have two sets of measurements: one for the treatment group and one for the control group. But guess what?! Comparing these and coming to a conclusion about the effect of the treatment is a statistical question.
+
+### Trial timeline {-}
+
+Now that we've thought (very briefly) about the main stages in a clinical trial, we can look at how they fit together.
+
+```{r}
+if(knitr::is_html_output()){
+  knitr::include_graphics("images/timeline.png")  
+} else {
+  knitr::include_graphics("images/timeline.png", dpi=600) 
+}
+```
+
+As we see above, the recruitment, allocation and trial phases overlap. Once a participant is recruited into the trial, they are (usually) allocated to the control or treatment group very soon after, and then their course of treatment (whichever it is) begins. The recruitment phase will continue until enough participants have been recruited (or sometimes until some deadline). Depending on how long this takes, and how long the actual trial phase lasts, some participants may have finished their course of treatment before others have even been allocated. This has implications for the allocation in particular, since we can't just allocate all the participants at once. 
+
+Results are collected during the trial, and once everyone has finished their course of treatment the analysis phase can begin. 
 
 ### Why bother with a control group? {-}
 
