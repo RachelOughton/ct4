@@ -94,7 +94,7 @@ In case you're reading the PDF, the notes are best viewed in HTML (the link is [
 
 ### Lectures {-}
 
-Our lectures are 3 pm on Mondays and 10 am on Wednesdays, both in W414 (this is the Appleby Building, between Pysics and the main library).
+Our lectures are 3 pm on Mondays and 10 am on Wednesdays, both in W414 (this is the Appleby Building, between Physics and the main library).
 
 ### Computer classes {-}
 
