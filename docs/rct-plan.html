@@ -189,13 +189,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-primary-outcome"><i class="fa fa-check"></i>The primary outcome</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-timeline"><i class="fa fa-check"></i>Trial timeline</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-protocol-and-analysis-plan"><i class="fa fa-check"></i>Trial protocol and analysis plan</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
-<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
-<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.3</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.4</b> Phases of clinical trials</a>
 <ul>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
@@ -403,9 +404,9 @@ div.csl-indent {
 <p>It is therefore important to think about this issue carefully. We’ve framed the question in quite a woolly way so far, but now we’ll start to think more carefully.</p>
 <div id="the-treatment-effect" class="section level2 hasAnchor" number="2.1">
 <h2><span class="header-section-number">2.1</span> The treatment effect<a href="rct-plan.html#the-treatment-effect" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In Section <a href="rct-intro.html#primout">1.3</a> we discussed the need to settle on a <strong>primary outcome variable</strong>. One reason this is important is that we base our sample size calculations on the primary outcome variable.</p>
+<p>In Section <a href="#primout"><strong>??</strong></a> we discussed the need to settle on a <strong>primary outcome variable</strong>. One reason this is important is that we base our sample size calculations on the primary outcome variable.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-4" class="definition"><strong>Definition 2.1  </strong></span>Suppose our primary outcome variable is <span class="math inline">\(X\)</span>, which has mean <span class="math inline">\(\mu\)</span> for the control group and mean <span class="math inline">\(\mu + \tau\)</span> for the treatment group. The variable <span class="math inline">\(\tau\)</span> is the <strong>treatment effect</strong>. The goal of our RCT is to learn about <span class="math inline">\(\tau\)</span>. The larger <span class="math inline">\(\tau\)</span> is (in magnitude), the more pronounced the effect of the intervention.</p>
+<p><span id="def:unlabeled-div-5" class="definition"><strong>Definition 2.1  </strong></span>Suppose our primary outcome variable is <span class="math inline">\(X\)</span>, which has mean <span class="math inline">\(\mu\)</span> for the control group and mean <span class="math inline">\(\mu + \tau\)</span> for the treatment group. The variable <span class="math inline">\(\tau\)</span> is the <strong>treatment effect</strong>. The goal of our RCT is to learn about <span class="math inline">\(\tau\)</span>. The larger <span class="math inline">\(\tau\)</span> is (in magnitude), the more pronounced the effect of the intervention.</p>
 </div>
 <p>This problem is usually framed as a <strong>hypothesis test</strong>, where the null hypothesis is that <span class="math inline">\(\tau=0\)</span>.</p>
 </div>
@@ -413,11 +414,11 @@ div.csl-indent {
 <h2><span class="header-section-number">2.2</span> Reminder: hypothesis tests (with a focus on RCTs)<a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>When performing a hypothesis test, what we are aiming to find is the <strong>P-value</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-5" class="definition"><strong>Definition 2.2  </strong></span>The <strong>P-value</strong> is the probability of obtaining a result as extreme as or more extreme (ie. further away from the null hypothesis value) than the one obtained <em>given that the null hypothesis is true</em>.</p>
+<p><span id="def:unlabeled-div-6" class="definition"><strong>Definition 2.2  </strong></span>The <strong>P-value</strong> is the probability of obtaining a result as extreme as or more extreme (ie. further away from the null hypothesis value) than the one obtained <em>given that the null hypothesis is true</em>.</p>
 </div>
 <p>Put simply, the P-value is a measure of the probability of obtaining whatever result (eg. treatment effect) we have have found simply by random chance, when in fact there is no treatment effect (ie. <span class="math inline">\(\tau=0\)</span>). Generally, a P-value of <span class="math inline">\(\alpha = 0.05\)</span> is accepted as sufficient evidence to reject the null hypothesis, although in clinical settings it can often be smaller (eg. <span class="math inline">\(\alpha = 0.01\)</span>). It is conventional to present the P-value by simply saying whether it is smaller than some threshold (often 0.05), rather than giving the exact value.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-6" class="definition"><strong>Definition 2.3  </strong></span>The threshold for the P-value below which the results are considered ‘significant’ is known as the <strong>significance level</strong> of the test, and is generally written <span class="math inline">\(\alpha\)</span> (as above).</p>
+<p><span id="def:unlabeled-div-7" class="definition"><strong>Definition 2.3  </strong></span>The threshold for the P-value below which the results are considered ‘significant’ is known as the <strong>significance level</strong> of the test, and is generally written <span class="math inline">\(\alpha\)</span> (as above).</p>
 </div>
 <p>This use of a significance level is (in part) a legacy from early days when computers were rare and values were looked up in <span class="math inline">\(t\)</span>-tables (or similar). Now that it is very simple to find the exact P-value, it is becoming more and more common to report the actual number. Indeed, there is a big difference between <span class="math inline">\(p=0.049\)</span> and <span class="math inline">\(p=0.000049\)</span>.</p>
 <div id="one-tailed-or-two-tailed" class="section level3 hasAnchor" number="2.2.1">
@@ -486,10 +487,10 @@ s_C = \sqrt{\frac{\sum\limits_{i=1}^n{\left(x_i - \bar{x}_C\right)^2}}{n-1}}.
 <p><span class="math display">\[D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}\]</span>
 as a standardised measure of the effect <span class="math inline">\(\tau\)</span>.</p>
 <div class="theorem">
-<p><span id="thm:unlabeled-div-7" class="theorem"><strong>Theorem 2.1  </strong></span>Under <span class="math inline">\(H_0\)</span>, and the model we’ve specified, <span class="math inline">\(D\)</span> has a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n+m-2\)</span> degrees of freedom.</p>
+<p><span id="thm:unlabeled-div-8" class="theorem"><strong>Theorem 2.1  </strong></span>Under <span class="math inline">\(H_0\)</span>, and the model we’ve specified, <span class="math inline">\(D\)</span> has a <span class="math inline">\(t\)</span>-distribution with <span class="math inline">\(n+m-2\)</span> degrees of freedom.</p>
 </div>
 <div class="proof">
-<p><span id="unlabeled-div-8" class="proof"><em>Proof</em>. </span>Under <span class="math inline">\(H_0\)</span> the <span class="math inline">\(x_i\)</span> are iid <span class="math inline">\(N\left(\mu,\;\sigma^2\right)\)</span>, and so</p>
+<p><span id="unlabeled-div-9" class="proof"><em>Proof</em>. </span>Under <span class="math inline">\(H_0\)</span> the <span class="math inline">\(x_i\)</span> are iid <span class="math inline">\(N\left(\mu,\;\sigma^2\right)\)</span>, and so</p>
 <p><span class="math display">\[\begin{align*}
 \bar{x}_C &amp; \sim{N\left(\mu, \frac{\sigma^2}{n}\right)}\\
 \bar{x}_T &amp; \sim{N\left(\mu, \frac{\sigma^2}{m}\right)}
@@ -533,7 +534,7 @@ where
 <h4>Brief aside on notation<a href="rct-plan.html#brief-aside-on-notation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="aside">
 <p>We’ll see a lot of the notation <span class="math inline">\(z_{\alpha/2}\)</span> and similar, so to clarify:</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-514-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>In R, we have <span class="math inline">\(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\)</span> and <span class="math inline">\(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\)</span>. <code>qnorm</code> is the quantile and <code>pnorm</code> is the cumulative distribution function. So, for example
 <span class="math display">\[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right)\]</span></p>
 </div>
@@ -544,7 +545,7 @@ where
 <h2><span class="header-section-number">2.4</span> Power: If <span class="math inline">\(H_0\)</span> is false<a href="rct-plan.html#sec-power" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>We have constructed things so that if <span class="math inline">\(H_0\)</span> is true, we have a small probability of rejecting <span class="math inline">\(H_0\)</span>. But if <span class="math inline">\(H_0\)</span> is false, and <span class="math inline">\(\tau\neq{0}\)</span>, we want our test to have a high probability of rejecting <span class="math inline">\(H_0\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-9" class="definition"><strong>Definition 2.4  </strong></span>The <strong>power</strong> of a test is the probability that we reject <span class="math inline">\(H_0\)</span>, given that <span class="math inline">\(H_0\)</span> is false. The <strong>power function</strong> depends on the value of <span class="math inline">\(\tau\)</span> and is</p>
+<p><span id="def:unlabeled-div-10" class="definition"><strong>Definition 2.4  </strong></span>The <strong>power</strong> of a test is the probability that we reject <span class="math inline">\(H_0\)</span>, given that <span class="math inline">\(H_0\)</span> is false. The <strong>power function</strong> depends on the value of <span class="math inline">\(\tau\)</span> and is</p>
 <p><span class="math display">\[\Psi\left(\tau\right) = \Pr\left(\text{Reject } H_0\mid{\tau\neq{0}}\right) = 1 - \beta.\]</span>
 We therefore also have</p>
 <p><span class="math display">\[\beta = \Pr\left(\text{Fail to reject } H_0\mid{\tau\neq{0}}\right). \]</span></p>
@@ -601,7 +602,7 @@ Figure 2.6: Power curves for various values of <span class="math inline">\(n\)</
 </ul>
 <p>An important quantity is therefore the <strong>minimum detectable effect size</strong>, which we will denote <span class="math inline">\(\tau_M\)</span>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-10" class="definition"><strong>Definition 2.5  </strong></span>The <strong>minimum detectable effect size</strong> <span class="math inline">\(\tau_M\)</span> for a particular trial is the smallest value of effect size that is able to be detected with power <span class="math inline">\(1-\beta\)</span> and at significance level <span class="math inline">\(\alpha\)</span> (for some specified values of <span class="math inline">\(\alpha,\;\beta\)</span>).</p>
+<p><span id="def:unlabeled-div-11" class="definition"><strong>Definition 2.5  </strong></span>The <strong>minimum detectable effect size</strong> <span class="math inline">\(\tau_M\)</span> for a particular trial is the smallest value of effect size that is able to be detected with power <span class="math inline">\(1-\beta\)</span> and at significance level <span class="math inline">\(\alpha\)</span> (for some specified values of <span class="math inline">\(\alpha,\;\beta\)</span>).</p>
 </div>
 <p>Note that we will not <em>definitely</em> detect an effect of size <span class="math inline">\(\tau_M\)</span>, if it exists; by construction, we will detect it with probability <span class="math inline">\(1-\beta\)</span>. If <span class="math inline">\(|\tau| &gt; |\tau_M|\)</span> (ie. the true effect size is further from zero than <span class="math inline">\(\tau_M\)</span> is) then the probability of detecting it will be greater than <span class="math inline">\(1-\beta\)</span>. If <span class="math inline">\(|\tau| &lt; |\tau_M|\)</span> then the probability of detecting it will be less than <span class="math inline">\(1-\beta\)</span>.</p>
 <p>Although we could solve Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> numerically, in practice we use an approximation. The second term, representing observed values of <span class="math inline">\(D\)</span> that are far enough away from 0 <em>in the opposite direction from the true <span class="math inline">\(\tau\)</span></em> to lead us to reject <span class="math inline">\(H_0\)</span> is so negligible as to be able to be discounted entirely. Indeed, if we were to observe such a value of <span class="math inline">\(D\)</span>, we would come to the wrong conclusion about <span class="math inline">\(\tau\)</span>.</p>

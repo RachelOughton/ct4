@@ -189,13 +189,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-primary-outcome"><i class="fa fa-check"></i>The primary outcome</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-timeline"><i class="fa fa-check"></i>Trial timeline</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-protocol-and-analysis-plan"><i class="fa fa-check"></i>Trial protocol and analysis plan</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
-<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
-<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.3</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.4</b> Phases of clinical trials</a>
 <ul>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
@@ -532,7 +533,7 @@ For a cluster RCT, the variance of the treatment effect under the same model ass
 Since <span class="math inline">\(n=n_gg\)</span>, this can be rearranged to find the number of clusters of a given size needed, or the size of cluster if a given number of clusters is to be used.</p>
 <p>The sample size (and therefore the real power of the study) depends on two additional quantities that are generally beyond our control, and possibly knowledge: <span class="math inline">\(\rho_{ICC}\)</span> and <span class="math inline">\(n_g\)</span>. It is therefore sensible to conduct some sensitivity analysis, with several scenarios of <span class="math inline">\(\rho_{ICC}\)</span> and <span class="math inline">\(n_g\)</span>, to see what the implications are for the power of the study if things don’t quite go to plan.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-50" class="example"><strong>Example 9.2  </strong></span>This is something I wrote for an education study I’m involved in (funded by the EEF) where the treatment is a particular way of engaging 2 year olds in conversation. The outcome variable is each child’s score on the British Picture Vocabulary Scale (BPVS), a test aimed at 3 - 16 year olds designed to assess each child’s vocabulary. We needed to recruit some number of nurseries, but had very little information about the ICC (notice that the age in our study is outside the intended range of the BPVS test!).</p>
+<p><span id="exm:unlabeled-div-51" class="example"><strong>Example 9.2  </strong></span>This is something I wrote for an education study I’m involved in (funded by the EEF) where the treatment is a particular way of engaging 2 year olds in conversation. The outcome variable is each child’s score on the British Picture Vocabulary Scale (BPVS), a test aimed at 3 - 16 year olds designed to assess each child’s vocabulary. We needed to recruit some number of nurseries, but had very little information about the ICC (notice that the age in our study is outside the intended range of the BPVS test!).</p>
 <p>To help the rest of the evaluation team understand the sensitivity of the power of the study to various quantities, I designed <a href="https://racheloughton.shinyapps.io/sample_size/">this dashboard</a>, so that they could play around with the variables and see the effect.</p>
 <p>As well as giving the sample size for a simple t-test (as we’ve done above) it also shows the size for a random effects model (similar to ANCOVA, more on this soon), which is why the baseline-outcome correlation (about which we also know very little) is included.</p>
 <p>The plot shows the minimum detectable effect size (MDES, or <span class="math inline">\(\tau_M\)</span>, in SD units), since the evaluation team wanted to know what size of effect we could find with our desired power.</p>
@@ -568,7 +569,7 @@ There are a couple of proposals for how to deal with allocation in this scenario
 <h2><span class="header-section-number">9.4</span> Analysing a cluster RCT<a href="cluster-rct.html#analysing-a-cluster-rct" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>As with the other stages of a cluster RCT, to conduct an effective and accurate analysis we need to take into account the clustered nature of the data. There are several ways to do this, and we will whizz through the main ones now.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-51" class="example"><strong>Example 9.3  </strong></span>The data we use will be from an educational trial, contained in <code>crtData</code> in the package <code>eefAnalytics</code>, shown in Figure <a href="cluster-rct.html#fig:crtboxplots">9.2</a> . The dataset contains 22 schools and 265 pupils in total. Each school was assigned to either <code>1</code> (group <span class="math inline">\(T\)</span>) or <code>0</code> (group <span class="math inline">\(C\)</span>). Each pupil took a test before the trial, and again at the end of the trial. We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.</p>
+<p><span id="exm:unlabeled-div-52" class="example"><strong>Example 9.3  </strong></span>The data we use will be from an educational trial, contained in <code>crtData</code> in the package <code>eefAnalytics</code>, shown in Figure <a href="cluster-rct.html#fig:crtboxplots">9.2</a> . The dataset contains 22 schools and 265 pupils in total. Each school was assigned to either <code>1</code> (group <span class="math inline">\(T\)</span>) or <code>0</code> (group <span class="math inline">\(C\)</span>). Each pupil took a test before the trial, and again at the end of the trial. We also know the percentage attendance for each pupil. We will use this data to demonstrate each method.</p>
 <pre><code>## &#39;data.frame&#39;:    265 obs. of  4 variables:
 ##  $ School      : Factor w/ 22 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
 ##  $ Posttest    : num  16 13 18 14 25 13 23 26 16 8 ...
@@ -592,7 +593,7 @@ g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{ICC}\right]}{n_g\tau^2_M}\
 \]</span>
 where <span class="math inline">\(n_g\)</span> is the average cluster size and <span class="math inline">\(g\)</span> is the number of clusters per treatment arm. This is the value we worked out in Section <a href="cluster-rct.html#ss-crt">9.2.1</a></p>
 <div class="example">
-<p><span id="exm:unlabeled-div-52" class="example"><strong>Example 9.4  </strong></span>We can perform this analysis on our schools data. The first step is to calculate the difference between <code>posttest</code> and <code>pretest</code> for each pupil.</p>
+<p><span id="exm:unlabeled-div-53" class="example"><strong>Example 9.4  </strong></span>We can perform this analysis on our schools data. The first step is to calculate the difference between <code>posttest</code> and <code>pretest</code> for each pupil.</p>
 <div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="cluster-rct.html#cb100-1" tabindex="-1"></a>crt_df<span class="sc">$</span>diff <span class="ot">=</span> crt_df<span class="sc">$</span>Posttest <span class="sc">-</span> crt_df<span class="sc">$</span>Prettest</span></code></pre></div>
 <p>We can then aggregate this to find the mean of <code>diff</code> for each school, shown in Table <a href="cluster-rct.html#tab:eefsum">9.1</a>:</p>
 <table>
@@ -736,7 +737,7 @@ k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{ICC}\right]\left(1-\rho^2\ri
 <p>This is the ‘Random effects model’ line in <a href="https://racheloughton.shinyapps.io/sample_size/?_ga=2.190583720.2013007057.1679308387-1261352122.1678702192">the shiny dashboard</a>.)</p>
 <p>The random effects model is more suitable when there are more than around 15-20 clusters in each arm.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-53" class="example"><strong>Example 9.5  </strong></span>We’ll now fit a random effects model to the <code>crtData</code> dataset from <code>eefAnalytics</code>. A good starting point is to plot the data with this in mind, to see what we might expect.</p>
+<p><span id="exm:unlabeled-div-54" class="example"><strong>Example 9.5  </strong></span>We’ll now fit a random effects model to the <code>crtData</code> dataset from <code>eefAnalytics</code>. A good starting point is to plot the data with this in mind, to see what we might expect.</p>
 <div class="figure"><span style="display:block;" id="fig:eefplot2"></span>
 <img src="CT4H_notes_files/figure-html/eefplot2-1.png" alt="Posttest against Prettest, coloured by Intervention" width="672" />
 <p class="caption">

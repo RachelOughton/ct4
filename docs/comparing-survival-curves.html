@@ -189,13 +189,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-primary-outcome"><i class="fa fa-check"></i>The primary outcome</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-timeline"><i class="fa fa-check"></i>Trial timeline</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-protocol-and-analysis-plan"><i class="fa fa-check"></i>Trial protocol and analysis plan</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
-<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
-<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.3</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.4</b> Phases of clinical trials</a>
 <ul>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
@@ -528,7 +529,7 @@ where <span class="math inline">\(n,\,m\)</span> are the corresponding totals ov
 This means that <span class="math inline">\(e_{Cj}+e_{Tj} = d_{Cj} + d_{Tj} = d_j\)</span>.</p>
 <p>If we take the margins of the table (by which we mean <span class="math inline">\(n_j, \,d_j,\,n_{Cj}\)</span> and <span class="math inline">\(n_{Tj}\)</span>) as fixed, then <span class="math inline">\(d_{Cj}\)</span> has a <strong>hypergeometric distribution</strong>.</p>
 <div class="definition">
-<p><span id="def:unlabeled-div-45" class="definition"><strong>Definition 8.1  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
+<p><span id="def:unlabeled-div-46" class="definition"><strong>Definition 8.1  </strong></span>The <strong>hypergeometric distribution</strong> is a discrete probability distribution describing the probability of <span class="math inline">\(k\)</span> successes in <span class="math inline">\(n\)</span> draws (without replacement), taken from a finite population of size <span class="math inline">\(N\)</span> that has exactly <span class="math inline">\(K\)</span> objects with the desired feature. The probability mass function for a variable <span class="math inline">\(X\)</span> following a hypergeometric function is</p>
 <p><span class="math display">\[p\left(X=k\mid{K,N,n}\right) = \frac{{\binom{K}{k}}{\binom{N-K}{n-k}}}{{\binom{N}{n}}}. \]</span>
 An example would be an urn containing 50 (<span class="math inline">\(N\)</span>) balls, of which 16 (<span class="math inline">\(K\)</span>) are green and the rest (34, <span class="math inline">\(N-K\)</span>) are red. If we draw 10 (<span class="math inline">\(n\)</span>) balls <strong>without replacement</strong>, <span class="math inline">\(X\)</span> is the random variable whose outcome is <span class="math inline">\(k\)</span>, the number of green balls drawn.</p>
 </div>
@@ -552,7 +553,7 @@ We label <span class="math inline">\(V = \sum\limits_jv_{Cj}\)</span>, and in th
 <p>It turns out that this test statistic is always smaller than <span class="math inline">\(\frac{U^2}{V}\)</span>, so this test is slightly more conservative (ie. it has a larger p-value).</p>
 <p>Notice that for both of these test statistics, the actual difference between observed and expected is used, not the absolute difference. Therefore if the differences change in sign over time, the values are likely to cancel out (at least to some extent) and the log-rank test is not appropriate.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-46" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
+<p><span id="exm:unlabeled-div-47" class="example"><strong>Example 8.2  </strong></span>Let’s now perform a log-rank test on our data from Example <a href="comparing-survival-curves.html#exm:surveglr">8.1</a>.</p>
 <p>First, the ovarian cancer dataset. To do this, we can tabulate the key values at each time step.</p>
 <pre><code>##    Time n_Cj d_Cj      e_Cj n_Tj d_Tj      e_Tj n_j d_j
 ## 1    59   13    1 0.5000000   13    0 0.5000000  26   1
@@ -721,7 +722,7 @@ From Equation <a href="comparing-survival-curves.html#eq:sfun">(8.4)</a> we see 
 <p><span class="math display">\[S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.\]</span>
 Since the survival function is always between 0 and 1, we can see that the value of <span class="math inline">\(\psi\)</span> determines whether <span class="math inline">\(S_C\left(t\right)&lt;S_T\left(t\right)\)</span> (if <span class="math inline">\(\psi&gt;1\)</span>) or <span class="math inline">\(S_C\left(t\right)&gt;S_T\left(t\right)\)</span> (if <span class="math inline">\(0&lt;\psi&lt;1\)</span>). The important thing is that <strong>the survival curves will not cross</strong>. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. It may also be that the survival curves cross when a particular [influential] covariate is factored out, but not when it isn’t.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-47" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
+<p><span id="exm:unlabeled-div-48" class="example"><strong>Example 8.3  </strong></span>First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.</p>
 <p>For the <code>ovarian</code> dataset</p>
 <div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="comparing-survival-curves.html#cb75-1" tabindex="-1"></a><span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(futime, fustat)<span class="sc">~</span>rx, <span class="at">data=</span>ovarian)</span></code></pre></div>
 <pre><code>## Call:
@@ -795,7 +796,7 @@ to denote this quantity with the MLE <span class="math inline">\(\hat\beta\)</sp
 If we plot the Schoenfeld residuals against time, we should see a random scatter around zero (the kind of plot we look for when assessing residuals against fitted values of a linear regression model).</p>
 <p><span class="citation">Grambsch and Therneau (<a href="#ref-grambsch1994proportional">1994</a>)</span> proposed a statistical test using the Schoenfeld residuals, in which the null hypothesis is that the proportional hazards assumption holds. This can be implemented by the function <code>cox.zph</code> in the <code>survival</code> package.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-48" class="example"><strong>Example 8.4  </strong></span>The <code>ovarian</code> data contains the continuous variable <code>age</code>, and so we can test the assumption of proportional hazards in relation to age using Schoenfeld residuals.</p>
+<p><span id="exm:unlabeled-div-49" class="example"><strong>Example 8.4  </strong></span>The <code>ovarian</code> data contains the continuous variable <code>age</code>, and so we can test the assumption of proportional hazards in relation to age using Schoenfeld residuals.</p>
 <pre><code>##          chisq df    p
 ## rx       0.631  1 0.43
 ## age      0.210  1 0.65
@@ -803,7 +804,7 @@ If we plot the Schoenfeld residuals against time, we should see a random scatter
 ## GLOBAL   1.958  3 0.58</code></pre>
 <p>We see from the <code>age</code> line that the data are consistent with the proportional hazards assumption.</p>
 <p>The object created by <code>cox.zph</code> also contains the Schoenfeld residuals themselves, and so we can plot them:</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-573-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
 <p>Because there is so little data it’s hard to conclude anything, and indeed our lack of significance in the test may be due to small sample size rather than excellent model fit.</p>
 </div>
 </div>
@@ -824,7 +825,7 @@ We can combine these two equations to find</p>
 \end{align*}\]</span></p>
 <p>Under the Cox Regression model, <span class="math inline">\(\log\left(H\left(t\right)\right)\)</span> is linear in the covariates, and so we will have [roughly] parallel lines. We can plot this in R using <code>ggsurvplot</code> and setting <code>fun="cloglog"</code>.</p>
 <div class="example">
-<p><span id="exm:unlabeled-div-49" class="example"><strong>Example 8.5  </strong></span>First we’ll check the <code>ovarian</code> dataset, split by treatment group (Figure <a href="comparing-survival-curves.html#fig:loglogov">8.1</a>).</p>
+<p><span id="exm:unlabeled-div-50" class="example"><strong>Example 8.5  </strong></span>First we’ll check the <code>ovarian</code> dataset, split by treatment group (Figure <a href="comparing-survival-curves.html#fig:loglogov">8.1</a>).</p>
 <div class="figure"><span style="display:block;" id="fig:loglogov"></span>
 <img src="CT4H_notes_files/figure-html/loglogov-1.png" alt="Log-log plot for ovarian data by treatment group." width="672" />
 <p class="caption">

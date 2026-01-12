@@ -87,9 +87,17 @@ The group of patients recruited will be some subset of the possible population. 
 
 These patients are then allocated to receive either the treatment, or to be part of the control group (or more, if there are more than two groups). These groups are often referred to as the **trial arms** - the treatment arm and the control arm. Deciding which patients should be allocated to which group is another statistical question. Once the patients have been allocated, they will receive the treatment (or not) and important measurements will be taken during the trial period.
 
+### The primary outcome {-}
+
+In a clinical trial, there are usually many measurements performed on patients, and possibly at various different points throughout the trial. However, for the sake of the analysis, we usually determine one to be the **primary outcome variable**. The research questions should be phrased in terms of this variable, and the goal of our design should be to be able to answer questions about this variable. 
+
+:::{.example}
+In a trial by @villar2020dexamethasone investigating the use of Dexamethasone treatment for acute respiratory distress syndrome , the primary outcome was the 'number of ventilator free days up to 28 days', while other outcomes included 'all-cause mortality after 60 days' and 'incidence of infections in ICU'. 
+:::
+
 ### Comparing results {-}
 
-Now that the trial has been run, we have two sets of measurements: one for the treatment group and one for the control group. But guess what?! Comparing these and coming to a conclusion about the effect of the treatment is a statistical question.
+Now that the trial has been run, we have two sets of measurements (in particular, measurements of the primary outcome): one for the treatment group and one for the control group. But guess what?! Comparing these and coming to a conclusion about the effect of the treatment is a statistical question.
 
 ### Trial timeline {-}
 
@@ -107,6 +115,34 @@ As we see above, the recruitment, allocation and trial phases overlap. Once a pa
 
 Results are collected during the trial, and once everyone has finished their course of treatment the analysis phase can begin. 
 
+### Trial protocol and analysis plan {-}
+
+Before doing any of the above stages, it is important to write a protocol and analysis plan. This is usually a requirement of any clinical body (and indeed some other bodies who run trials, like the Educational Endowment Foundation). 
+
+The protocol and analysis plan will include the rationale for the trial itself, and for the choice of primary outcome variable. It will also include practical details such as eligibility criteria, recruitment plans and methods for keeping participants (and probably clinicians) blind to who is in which group. 
+
+There will also be lots of detail about the statistical plan, for example the sample size will be determined using existing knowledge about the primary outcome and details about the planned analysis. The planned approach to allocation will be detailed, and finally the statistical analysis plan for the primary outcome and any subgroup or secondary analyses. There should be contingencies for possible issues, for example "If 20% or more of the primary outcome values are missing, we will use X missing data approach".
+
+:::{.example}
+*Accelerated Reader (EEF, 2018)*
+Accelerated Reader is a web-based programme that encourages children to read for pleasure. You can find the protocol at [https://educationendowmentfoundation.org.uk/projects-and-evaluation/projects/accelerated-reader-effectiveness-trial](https://educationendowmentfoundation.org.uk/projects-and-evaluation/projects/accelerated-reader-effectiveness-trial).
+
+The protocol for this trial lays out (among other things)
+
+  - the design of the trial: cluster-randomised controlled trial
+  - School eligibility: approximately half to be located in the North East, not used AR in last two years, containing years 3 to 6, no special or independent schools
+  - Pupil eligibility within schools: depends on ability to take a STAR reading test, parental consent
+  - Strategy for recruitment
+  - the mode of random allocation, and which variables will be taken into account and how
+  - Primary outcome measure (different for different year groups)
+  - Sample size calculations (informed by lots of the other points)
+  - Statistical modelling plan: use both multilevel and school-dummy fixed effect models (don't worry if you don't know these!)
+  - How significance of results will be determined based on the model fit.
+
+The evaluation report then follows this plan exactly, unless there is very good reason not to.
+
+:::
+
 ### Why bother with a control group? {-}
 
 Surely if we want to see whether a treatment works, we should just give it to a patient and see if they get better? Why do we need to also have a group of people not receiving the treatment?
@@ -116,14 +152,6 @@ In rare and extreme cases, this is a decent strategy: if a disease has always be
 This was also the case when Edward Jenner tested cowpox as a vaccination for the fatal disease smallpox. After observing that milkmaids, once they had suffered from the mild condition cowpox (which they did often), seemed to be immune to smallpox, Jenner tested his theory by injecting an 8 year old boy called James Phipps with fluid from a milkmaid's cowpox lesions (yum). Once the boy's cowpox infection had run its course, he injected him again, this time with matter from a fresh smallpox lesion. Thankfully, James Phipps did not contract smallpox. After several more successful such tests, and a gradual shift in attitudes to the idea of vaccination  (a word coined by Jenner, from the latin 'vaccinia', meaning cowpox) Jenner's results were published and vaccination became commonplace. Clearly, injecting people with smallpox who had not been given the cowpox innoculation would be very cruel (they would almost certainly die) and would prove nothing; there was already plenty of evidence for the fatality of smallpox.
 
 However, most diseases have a fairly uncertain and variable trajectory. If we give a group of patients the treatment, we can't know what would have happened to them if they hadn't received the treatment, or had received a different treatment. Comparing them to patients the past is dodgy because lots of other things may have changed since even the recent past. This is why we have a *concurrent control group* (usually known as just the *control group*). These patients do not receive the new treatment, but instead carry on as usual. The aim is to make the control and treatment groups as similar as possible in all other respects (especially those we deem important) so that at the end we can attribute the difference between the two groups to the treatment.
-
-## The primary outcome {#primout}
-
-In a clinical trial, there are usually many measurements performed on patients, and possibly at various different points throughout the trial. However, for the sake of the analysis, we usually determine one to be the **primary outcome variable**. The research questions should be phrased in terms of this variable, and the goal of our design should be to be able to answer questions about this variable. 
-
-:::{.example}
-In a trial by @villar2020dexamethasone investigating the use of Dexamethasone treatment for acute respiratory distress syndrome , the primary outcome was the 'number of ventilator free days up to 28 days', while other outcomes included 'all-cause mortality after 60 days' and 'incidence of infections in ICU'. 
-:::
 
 ## Ethical issues
 

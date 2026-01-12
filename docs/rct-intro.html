@@ -189,13 +189,14 @@ div.csl-indent {
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-primary-outcome"><i class="fa fa-check"></i>The primary outcome</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-timeline"><i class="fa fa-check"></i>Trial timeline</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-protocol-and-analysis-plan"><i class="fa fa-check"></i>Trial protocol and analysis plan</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
-<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
-<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.3</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.4</b> Phases of clinical trials</a>
 <ul>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
@@ -413,7 +414,7 @@ Scurvy was a serious disease, particularly affecting seamen on long voyages. Sym
 <li>purgative mixture (a paste of garlic, mustard seed, horseradish, balsam of Peru, and gum myrrh)</li>
 </ul>
 <p>Lind chose twelve seamen with similar severity of symptoms, and subjected them to their assigned treatment for 6 days. They were kept in the same quarters, and fed the same diet apart from their treatment. Unsurprisingly (to us!) “The most sudden and visible good effects were perceived from the use of oranges and lemons,”</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-511-1.png" width="960" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-2-1.png" width="960" /></p>
 </div>
 <p>A key thing to notice about the Scurvy example is that Lind went to great lengths to ensure that the treatment was the only thing affecting these 12 sailors: they all started with a similar severity of symptoms, they were kept in the same place and their diet was identical apart from their treatment. This links to one of the foundational principles of clinical trials: causal inference.</p>
 <div id="causal-inference-and-clinical-trials" class="section level2 hasAnchor" number="1.1">
@@ -447,9 +448,16 @@ metabolic, hepatic, psychiatric, neurological, musculoskeletal, cardiovascular, 
 <h3>Allocation to groups<a href="rct-intro.html#allocation-to-groups" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>These patients are then allocated to receive either the treatment, or to be part of the control group (or more, if there are more than two groups). These groups are often referred to as the <strong>trial arms</strong> - the treatment arm and the control arm. Deciding which patients should be allocated to which group is another statistical question. Once the patients have been allocated, they will receive the treatment (or not) and important measurements will be taken during the trial period.</p>
 </div>
+<div id="the-primary-outcome" class="section level3 unnumbered hasAnchor">
+<h3>The primary outcome<a href="rct-intro.html#the-primary-outcome" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In a clinical trial, there are usually many measurements performed on patients, and possibly at various different points throughout the trial. However, for the sake of the analysis, we usually determine one to be the <strong>primary outcome variable</strong>. The research questions should be phrased in terms of this variable, and the goal of our design should be to be able to answer questions about this variable.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-3" class="example"><strong>Example 1.3  </strong></span>In a trial by <span class="citation">Villar et al. (<a href="#ref-villar2020dexamethasone">2020</a>)</span> investigating the use of Dexamethasone treatment for acute respiratory distress syndrome , the primary outcome was the ‘number of ventilator free days up to 28 days’, while other outcomes included ‘all-cause mortality after 60 days’ and ‘incidence of infections in ICU’.</p>
+</div>
+</div>
 <div id="comparing-results" class="section level3 unnumbered hasAnchor">
 <h3>Comparing results<a href="rct-intro.html#comparing-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Now that the trial has been run, we have two sets of measurements: one for the treatment group and one for the control group. But guess what?! Comparing these and coming to a conclusion about the effect of the treatment is a statistical question.</p>
+<p>Now that the trial has been run, we have two sets of measurements (in particular, measurements of the primary outcome): one for the treatment group and one for the control group. But guess what?! Comparing these and coming to a conclusion about the effect of the treatment is a statistical question.</p>
 </div>
 <div id="trial-timeline" class="section level3 unnumbered hasAnchor">
 <h3>Trial timeline<a href="rct-intro.html#trial-timeline" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -457,6 +465,29 @@ metabolic, hepatic, psychiatric, neurological, musculoskeletal, cardiovascular, 
 <p><img src="images/timeline.png" width="1778" /></p>
 <p>As we see above, the recruitment, allocation and trial phases overlap. Once a participant is recruited into the trial, they are (usually) allocated to the control or treatment group very soon after, and then their course of treatment (whichever it is) begins. The recruitment phase will continue until enough participants have been recruited (or sometimes until some deadline). Depending on how long this takes, and how long the actual trial phase lasts, some participants may have finished their course of treatment before others have even been allocated. This has implications for the allocation in particular, since we can’t just allocate all the participants at once.</p>
 <p>Results are collected during the trial, and once everyone has finished their course of treatment the analysis phase can begin.</p>
+</div>
+<div id="trial-protocol-and-analysis-plan" class="section level3 unnumbered hasAnchor">
+<h3>Trial protocol and analysis plan<a href="rct-intro.html#trial-protocol-and-analysis-plan" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before doing any of the above stages, it is important to write a protocol and analysis plan. This is usually a requirement of any clinical body (and indeed some other bodies who run trials, like the Educational Endowment Foundation).</p>
+<p>The protocol and analysis plan will include the rationale for the trial itself, and for the choice of primary outcome variable. It will also include practical details such as eligibility criteria, recruitment plans and methods for keeping participants (and probably clinicians) blind to who is in which group.</p>
+<p>There will also be lots of detail about the statistical plan, for example the sample size will be determined using existing knowledge about the primary outcome and details about the planned analysis. The planned approach to allocation will be detailed, and finally the statistical analysis plan for the primary outcome and any subgroup or secondary analyses. There should be contingencies for possible issues, for example “If 20% or more of the primary outcome values are missing, we will use X missing data approach”.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-4" class="example"><strong>Example 1.4  </strong></span><em>Accelerated Reader (EEF, 2018)</em>
+Accelerated Reader is a web-based programme that encourages children to read for pleasure. You can find the protocol at <a href="https://educationendowmentfoundation.org.uk/projects-and-evaluation/projects/accelerated-reader-effectiveness-trial">https://educationendowmentfoundation.org.uk/projects-and-evaluation/projects/accelerated-reader-effectiveness-trial</a>.</p>
+<p>The protocol for this trial lays out (among other things)</p>
+<ul>
+<li>the design of the trial: cluster-randomised controlled trial</li>
+<li>School eligibility: approximately half to be located in the North East, not used AR in last two years, containing years 3 to 6, no special or independent schools</li>
+<li>Pupil eligibility within schools: depends on ability to take a STAR reading test, parental consent</li>
+<li>Strategy for recruitment</li>
+<li>the mode of random allocation, and which variables will be taken into account and how</li>
+<li>Primary outcome measure (different for different year groups)</li>
+<li>Sample size calculations (informed by lots of the other points)</li>
+<li>Statistical modelling plan: use both multilevel and school-dummy fixed effect models (don’t worry if you don’t know these!)</li>
+<li>How significance of results will be determined based on the model fit.</li>
+</ul>
+<p>The evaluation report then follows this plan exactly, unless there is very good reason not to.</p>
+</div>
 </div>
 <div id="why-bother-with-a-control-group" class="section level3 unnumbered hasAnchor">
 <h3>Why bother with a control group?<a href="rct-intro.html#why-bother-with-a-control-group" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -466,15 +497,8 @@ metabolic, hepatic, psychiatric, neurological, musculoskeletal, cardiovascular, 
 <p>However, most diseases have a fairly uncertain and variable trajectory. If we give a group of patients the treatment, we can’t know what would have happened to them if they hadn’t received the treatment, or had received a different treatment. Comparing them to patients the past is dodgy because lots of other things may have changed since even the recent past. This is why we have a <em>concurrent control group</em> (usually known as just the <em>control group</em>). These patients do not receive the new treatment, but instead carry on as usual. The aim is to make the control and treatment groups as similar as possible in all other respects (especially those we deem important) so that at the end we can attribute the difference between the two groups to the treatment.</p>
 </div>
 </div>
-<div id="primout" class="section level2 hasAnchor" number="1.3">
-<h2><span class="header-section-number">1.3</span> The primary outcome<a href="rct-intro.html#primout" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In a clinical trial, there are usually many measurements performed on patients, and possibly at various different points throughout the trial. However, for the sake of the analysis, we usually determine one to be the <strong>primary outcome variable</strong>. The research questions should be phrased in terms of this variable, and the goal of our design should be to be able to answer questions about this variable.</p>
-<div class="example">
-<p><span id="exm:unlabeled-div-3" class="example"><strong>Example 1.3  </strong></span>In a trial by <span class="citation">Villar et al. (<a href="#ref-villar2020dexamethasone">2020</a>)</span> investigating the use of Dexamethasone treatment for acute respiratory distress syndrome , the primary outcome was the ‘number of ventilator free days up to 28 days’, while other outcomes included ‘all-cause mortality after 60 days’ and ‘incidence of infections in ICU’.</p>
-</div>
-</div>
-<div id="ethical-issues" class="section level2 hasAnchor" number="1.4">
-<h2><span class="header-section-number">1.4</span> Ethical issues<a href="rct-intro.html#ethical-issues" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="ethical-issues" class="section level2 hasAnchor" number="1.3">
+<h2><span class="header-section-number">1.3</span> Ethical issues<a href="rct-intro.html#ethical-issues" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>Clinical trials differ from most scientific experiments in that they are experimenting on people. This means that the team designing, conducting and analysing the trial have various ethical responsibilities. This is a huge area; we will touch on it from time to time but will not go into anywhere near enough detail! Some key things to note though are….</p>
 <ul>
 <li>A patient must never be given a treatment that is known to be inferior.</li>
@@ -484,8 +508,8 @@ metabolic, hepatic, psychiatric, neurological, musculoskeletal, cardiovascular, 
 <p>The patients’ interests are safeguarded by the <a href="https://www.wma.net/policies-post/wma-declaration-of-helsinki-ethical-principles-for-medical-research-involving-human-subjects/">Declaration of Helsinki</a>. This statement is implemented differently by different countries. In the UK, health authorities each have their own ethics committee, by which proposals for experiments involving human subjects must be approved.</p>
 <p>You might think that these ethical issues largely concern the clinicians, and that we statisticians don’t need to worry too much about the ethics of clinical trials. After all, we are likely never to meet any patients or to get our hands dirty in any way! But as we will see, at each stage the choices made by the statistician can in fact have serious ethical implications.</p>
 </div>
-<div id="phases-of-clinical-trials" class="section level2 hasAnchor" number="1.5">
-<h2><span class="header-section-number">1.5</span> Phases of clinical trials<a href="rct-intro.html#phases-of-clinical-trials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="phases-of-clinical-trials" class="section level2 hasAnchor" number="1.4">
+<h2><span class="header-section-number">1.4</span> Phases of clinical trials<a href="rct-intro.html#phases-of-clinical-trials" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>If you read about clinical trials (or hear about them in the news), you’ll hear talk of a ‘phase 3 trial’ or similar. Broadly speaking, clinical trials follow a progression from phase one (or sometimes zero) to phase four. These phases apply to most countries, and any for any drug to be licensed multinationally it must get through phase III.</p>
 <div id="phase-zero" class="section level3 unnumbered hasAnchor">
 <h3>Phase zero<a href="rct-intro.html#phase-zero" class="anchor-section" aria-label="Anchor link to header"></a></h3>
