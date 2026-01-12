@@ -56,6 +56,8 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -585,7 +587,7 @@ As we should expect from the very low <span class="math inline">\(p\)</span>-val
 That is, we would expect to treat nearly three patients before one is improved (in terms of their tuberculosis symptoms). We can use the limits of the 95% CI for <span class="math inline">\(\tau_{ARD}\)</span> to form a 95% CI for NNT, simply by taking the reciprocals of the limits to get</p>
 <p><span class="math display">\[\left(\frac{1}{0.541},\; \frac{1}{0.187}\right) = \left(1.85,\; 5.33 \right).\]</span>
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 </div>
 <div id="what-if-the-difference-is-not-significant" class="section level4 hasAnchor" number="6.2.1.2">
@@ -636,8 +638,8 @@ which does not pose a problem. However, our 95% confidence interval now contains
 and altogether the confidence interval for the number needed to treat (NNT) is the union of these two intervals
 <span class="math display">\[\left(-\infty,\;-\frac{1}{L}\right) \cup \left(\frac{1}{U},\; \infty\right).\]</span></p>
 <p>The plot below shows relationship between ARD and NNT, with the intervals for our toy example shown in bold on the respective axis (the NNT interval should continue infinitely in both directions so for obvious reasons this is not all shown!).</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-66"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-66-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-29"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-29-1.png" alt="The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero." width="672" />
 <p class="caption">
 Figure 6.1: The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.
 </p>
@@ -687,8 +689,8 @@ Solving this equation in the usual way (using the quadratic formula) we find the
 which is</p>
 <pre><code>## [1] 0.57 0.81</code></pre>
 <p>We can see this graphically</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-70"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-70-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-33"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-33-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.3: As before, dashed for Wilson, dotted for standard
 </p>
@@ -699,8 +701,8 @@ Figure 6.3: As before, dashed for Wilson, dotted for standard
 <p>compared to the standard confidence interval</p>
 <pre><code>## [1] 0.20 0.45</code></pre>
 <p>Again, we can see this graphically.</p>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-73"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-73-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-36"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-36-1.png" alt="As before, dashed for Wilson, dotted for standard" width="672" />
 <p class="caption">
 Figure 6.4: As before, dashed for Wilson, dotted for standard
 </p>
@@ -906,13 +908,20 @@ where <span class="math inline">\(y_i=0\)</span> or 1 is the outcome for partici
 <p>Note: an obvious one to include would be <code>gender</code>, but I tried it and it is not at all significant, so I have pre-whittled it down for [even more] simplicity.</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="binary-analysis.html#cb31-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;indo_rct&quot;</span>)</span>
 <span id="cb31-2"><a href="binary-analysis.html#cb31-2" tabindex="-1"></a><span class="fu">summary</span>(indo_rct[ ,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">32</span>)])</span></code></pre></div>
-<pre><code>##        id           site          age             risk        outcome                 rx     
-##  Min.   :1001   1_UM  :164   Min.   :19.00   Min.   :1.000   0_no :523   0_placebo     :307  
-##  1st Qu.:1152   2_IU  :413   1st Qu.:35.00   1st Qu.:1.500   1_yes: 79   1_indomethacin:295  
-##  Median :2138   3_UK  : 22   Median :45.00   Median :2.500                                   
-##  Mean   :1939   4_Case:  3   Mean   :45.27   Mean   :2.381                                   
-##  3rd Qu.:2289                3rd Qu.:54.00   3rd Qu.:3.000                                   
-##  Max.   :4003                Max.   :90.00   Max.   :5.500</code></pre>
+<pre><code>##        id           site          age             risk        outcome   
+##  Min.   :1001   1_UM  :164   Min.   :19.00   Min.   :1.000   0_no :523  
+##  1st Qu.:1152   2_IU  :413   1st Qu.:35.00   1st Qu.:1.500   1_yes: 79  
+##  Median :2138   3_UK  : 22   Median :45.00   Median :2.500              
+##  Mean   :1939   4_Case:  3   Mean   :45.27   Mean   :2.381              
+##  3rd Qu.:2289                3rd Qu.:54.00   3rd Qu.:3.000              
+##  Max.   :4003                Max.   :90.00   Max.   :5.500              
+##               rx     
+##  0_placebo     :307  
+##  1_indomethacin:295  
+##                      
+##                      
+##                      
+## </code></pre>
 <div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="binary-analysis.html#cb33-1" tabindex="-1"></a><span class="do">## Some things to note:</span></span>
 <span id="cb33-2"><a href="binary-analysis.html#cb33-2" tabindex="-1"></a><span class="co"># There are very few patients from site 4, and not many from site 3</span></span>
 <span id="cb33-3"><a href="binary-analysis.html#cb33-3" tabindex="-1"></a><span class="co"># The age range goes from 19 to 90 </span></span>
@@ -1201,8 +1210,8 @@ Figure 6.7: ROC curve for our logistic regression model of the indo RCT data (so
 <span id="cb54-16"><a href="binary-analysis.html#cb54-16" tabindex="-1"></a>  <span class="fu">geom_segment</span>(<span class="fu">aes</span>(<span class="at">x=</span>risk, <span class="at">xend=</span>risk, <span class="at">y=</span>fit<span class="fl">-1.96</span><span class="sc">*</span>fit_se, <span class="at">yend=</span>fit<span class="fl">+1.96</span><span class="sc">*</span>fit_se))<span class="sc">+</span></span>
 <span id="cb54-17"><a href="binary-analysis.html#cb54-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()<span class="sc">+</span></span>
 <span id="cb54-18"><a href="binary-analysis.html#cb54-18" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="st">&quot;site&quot;</span>) <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;bottom&quot;</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-82"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-82-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-45"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-45-1.png" alt="Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)." width="672" />
 <p class="caption">
 Figure 6.8: Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).
 </p>

@@ -56,6 +56,8 @@
 <link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
 <script src="libs/kePrint-0.0.1/kePrint.js"></script>
 <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
 <link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
 <script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
 
@@ -414,7 +416,7 @@ Scurvy was a serious disease, particularly affecting seamen on long voyages. Sym
 <li>purgative mixture (a paste of garlic, mustard seed, horseradish, balsam of Peru, and gum myrrh)</li>
 </ul>
 <p>Lind chose twelve seamen with similar severity of symptoms, and subjected them to their assigned treatment for 6 days. They were kept in the same quarters, and fed the same diet apart from their treatment. Unsurprisingly (to us!) “The most sudden and visible good effects were perceived from the use of oranges and lemons,”</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-39-1.png" width="960" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-2-1.png" width="960" /></p>
 </div>
 <p>A key thing to notice about the Scurvy example is that Lind went to great lengths to ensure that the treatment was the only thing affecting these 12 sailors: they all started with a similar severity of symptoms, they were kept in the same place and their diet was identical apart from their treatment. This links to one of the foundational principles of clinical trials: causal inference.</p>
 <div id="causal-inference-and-clinical-trials" class="section level2 hasAnchor" number="1.1">
@@ -494,7 +496,7 @@ Accelerated Reader is a web-based programme that encourages children to read for
 <p>Surely if we want to see whether a treatment works, we should just give it to a patient and see if they get better? Why do we need to also have a group of people not receiving the treatment?</p>
 <p>In rare and extreme cases, this is a decent strategy: if a disease has always been fatal, but we start giving patients the treatment and some live, that is pretty solid evidence that the treatment works. This was the case with tuberculous meningitis, until the introduction of Streptomycin in 1944.</p>
 <p>This was also the case when Edward Jenner tested cowpox as a vaccination for the fatal disease smallpox. After observing that milkmaids, once they had suffered from the mild condition cowpox (which they did often), seemed to be immune to smallpox, Jenner tested his theory by injecting an 8 year old boy called James Phipps with fluid from a milkmaid’s cowpox lesions (yum). Once the boy’s cowpox infection had run its course, he injected him again, this time with matter from a fresh smallpox lesion. Thankfully, James Phipps did not contract smallpox. After several more successful such tests, and a gradual shift in attitudes to the idea of vaccination (a word coined by Jenner, from the latin ‘vaccinia’, meaning cowpox) Jenner’s results were published and vaccination became commonplace. Clearly, injecting people with smallpox who had not been given the cowpox innoculation would be very cruel (they would almost certainly die) and would prove nothing; there was already plenty of evidence for the fatality of smallpox.</p>
-<p>However, most diseases have a fairly uncertain and variable trajectory. If we give a group of patients the treatment, we can’t know what would have happened to them if they hadn’t received the treatment, or had received a different treatment. Comparing them to patients the past is dodgy because lots of other things may have changed since even the recent past. This is why we have a <em>concurrent control group</em> (usually known as just the <em>control group</em>). These patients do not receive the new treatment, but instead carry on as usual. The aim is to make the control and treatment groups as similar as possible in all other respects (especially those we deem important) so that at the end we can attribute the difference between the two groups to the treatment.</p>
+<p>However, most diseases have a fairly uncertain and variable trajectory. If we give a group of patients the treatment, we can’t know what would have happened to them if they hadn’t received the treatment, or had received a different treatment. Comparing them to patients from the past is dodgy because lots of other things may have changed since even the recent past. This is why we have a <em>concurrent control group</em> (usually known as just the <em>control group</em>). These patients do not receive the new treatment, but instead carry on as usual. The aim is to make the control and treatment groups as similar as possible in all other respects (especially those we deem important) so that at the end we can attribute the difference between the two groups to the treatment.</p>
 </div>
 </div>
 <div id="ethical-issues" class="section level2 hasAnchor" number="1.3">

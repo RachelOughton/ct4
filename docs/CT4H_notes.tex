@@ -390,7 +390,7 @@ In rare and extreme cases, this is a decent strategy: if a disease has always be
 
 This was also the case when Edward Jenner tested cowpox as a vaccination for the fatal disease smallpox. After observing that milkmaids, once they had suffered from the mild condition cowpox (which they did often), seemed to be immune to smallpox, Jenner tested his theory by injecting an 8 year old boy called James Phipps with fluid from a milkmaid's cowpox lesions (yum). Once the boy's cowpox infection had run its course, he injected him again, this time with matter from a fresh smallpox lesion. Thankfully, James Phipps did not contract smallpox. After several more successful such tests, and a gradual shift in attitudes to the idea of vaccination (a word coined by Jenner, from the latin `vaccinia', meaning cowpox) Jenner's results were published and vaccination became commonplace. Clearly, injecting people with smallpox who had not been given the cowpox innoculation would be very cruel (they would almost certainly die) and would prove nothing; there was already plenty of evidence for the fatality of smallpox.
 
-However, most diseases have a fairly uncertain and variable trajectory. If we give a group of patients the treatment, we can't know what would have happened to them if they hadn't received the treatment, or had received a different treatment. Comparing them to patients the past is dodgy because lots of other things may have changed since even the recent past. This is why we have a \emph{concurrent control group} (usually known as just the \emph{control group}). These patients do not receive the new treatment, but instead carry on as usual. The aim is to make the control and treatment groups as similar as possible in all other respects (especially those we deem important) so that at the end we can attribute the difference between the two groups to the treatment.
+However, most diseases have a fairly uncertain and variable trajectory. If we give a group of patients the treatment, we can't know what would have happened to them if they hadn't received the treatment, or had received a different treatment. Comparing them to patients from the past is dodgy because lots of other things may have changed since even the recent past. This is why we have a \emph{concurrent control group} (usually known as just the \emph{control group}). These patients do not receive the new treatment, but instead carry on as usual. The aim is to make the control and treatment groups as similar as possible in all other respects (especially those we deem important) so that at the end we can attribute the difference between the two groups to the treatment.
 
 \section{Ethical issues}\label{ethical-issues}
 
@@ -3408,13 +3408,20 @@ Note: an obvious one to include would be \texttt{gender}, but I tried it and it 
 \end{Shaded}
 
 \begin{verbatim}
-##        id           site          age             risk        outcome                 rx     
-##  Min.   :1001   1_UM  :164   Min.   :19.00   Min.   :1.000   0_no :523   0_placebo     :307  
-##  1st Qu.:1152   2_IU  :413   1st Qu.:35.00   1st Qu.:1.500   1_yes: 79   1_indomethacin:295  
-##  Median :2138   3_UK  : 22   Median :45.00   Median :2.500                                   
-##  Mean   :1939   4_Case:  3   Mean   :45.27   Mean   :2.381                                   
-##  3rd Qu.:2289                3rd Qu.:54.00   3rd Qu.:3.000                                   
-##  Max.   :4003                Max.   :90.00   Max.   :5.500
+##        id           site          age             risk        outcome   
+##  Min.   :1001   1_UM  :164   Min.   :19.00   Min.   :1.000   0_no :523  
+##  1st Qu.:1152   2_IU  :413   1st Qu.:35.00   1st Qu.:1.500   1_yes: 79  
+##  Median :2138   3_UK  : 22   Median :45.00   Median :2.500              
+##  Mean   :1939   4_Case:  3   Mean   :45.27   Mean   :2.381              
+##  3rd Qu.:2289                3rd Qu.:54.00   3rd Qu.:3.000              
+##  Max.   :4003                Max.   :90.00   Max.   :5.500              
+##               rx     
+##  0_placebo     :307  
+##  1_indomethacin:295  
+##                      
+##                      
+##                      
+## 
 \end{verbatim}
 
 \begin{Shaded}
