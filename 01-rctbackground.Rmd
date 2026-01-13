@@ -62,7 +62,7 @@ Because, as we noted, people are all different, and living different lives (and 
 
 Clinical trials are therefore crucial for modern medicine, and statistics is crucial to clinical trials. But why exactly are clinical trials given this position of importance? Do we really have to do things this way? 
 
-## The structure of a clinical trial
+## The structure of a clinical trial {#primout}
 
 In a clinical trial, people are grouped and subdivided in various ways.
 
