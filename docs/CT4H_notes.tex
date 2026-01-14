@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-01-13}
+\date{2026-01-14}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -485,9 +485,9 @@ Broadly speaking, there are two (opposing) ethical issues around sample size:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  If we don't recruit enough patients, then we may not gather enough evidence to draw any conclusion about the research question (eg. whether there is a treatment effect). As well as being scientifically disappointing, this is unethical. To conduct the trial, some of the patients will have been subject to an inferior treatment (assuming one treatment was actually better), and if there is no conclusion then this was effectively for no purpose.
+  If we don't recruit enough patients, then we may not gather enough evidence to draw any conclusion about the research question (ie. whether there is a treatment effect). As well as being scientifically disappointing, this is unethical. To conduct the trial, some of the patients will have been subject to an inferior treatment (assuming one treatment was actually better), and if there is no conclusion then this was effectively for no purpose.
 \item
-  If we recruit too many patients (ie. we would be sufficiently likely to reach a conclusion with many fewer) then we have subjected more patients than necessary to an inferior treatment, and possibly also taken up more time and resources than was necessary.
+  If we recruit too many patients (ie. we would be sufficiently likely to reach a conclusion with fewer) then we have subjected more patients than necessary to an inferior treatment (assuming one treatment was better), and have probably taken up more time and resources than was necessary.
 \end{enumerate}
 
 It is therefore important to think about this issue carefully. We've framed the question in quite a woolly way so far, but now we'll start to think more carefully.
@@ -510,9 +510,9 @@ When performing a hypothesis test, what we are aiming to find is the \textbf{P-v
 The \textbf{P-value} is the probability of obtaining a result as extreme as or more extreme (ie. further away from the null hypothesis value) than the one obtained \emph{given that the null hypothesis is true}.
 \end{definition}
 
-Put simply, the P-value is a measure of the probability of obtaining whatever result (eg. treatment effect) we have have found simply by random chance, when in fact there is no treatment effect (ie. \(\tau=0\)). We use the data to calculate a \textbf{test statistic}, whose distribution we understand (given some assumptions), and this allows us to find the P-value.
+Put simply, the P-value is a measure of the probability of obtaining whatever result (eg. treatment effect) we have have found simply by random chance, when in fact there is no treatment effect (ie. \(\tau=0\)). We use the data to calculate a \textbf{test statistic}, whose distribution under the null hypothesis we understand (given some assumptions), and this allows us to find the P-value.
 
-Generally, a P-value of \(\alpha = 0.05\) is accepted as sufficient evidence to reject the null hypothesis, although in clinical settings it can often be smaller (eg. \(\alpha = 0.01\)). It is conventional to present the P-value by simply saying whether it is smaller than some threshold (often 0.05), rather than giving the exact value.
+Generally, a P-value below \(\alpha = 0.05\) is accepted as sufficient evidence to reject the null hypothesis, although in clinical settings the threshold can often be smaller (eg. \(\alpha = 0.01\)). It is conventional to present the P-value by simply saying whether it is smaller than some threshold (often 0.05), rather than giving the exact value.
 
 \begin{definition}
 The threshold for the P-value below which the results are considered `significant' is known as the \textbf{significance level} of the test, and is generally written \(\alpha\) (as above).
@@ -522,7 +522,7 @@ This use of a significance level is (in part) a legacy from early days when comp
 
 \subsection{One-tailed or two-tailed?}\label{one-tailed-or-two-tailed}
 
-It is highly likely that the scientists running the trial will have a strong idea of the likely `direction' of the treatment effect. Assuming that a larger value of the primary outcome variable \(X\) is good, they will expect a positive value of the treatment effect \(\tau\) (or be prepared to accept a possible value of zero for no effect).
+It is highly likely that the scientists running the trial will have a strong idea of the likely `direction' of the treatment effect. Assuming that a larger value of the primary outcome variable \(X\) is good, they will expect / hope for a positive value of the treatment effect \(\tau\) (or be prepared to accept that the effect might be minimal).
 
 It would therefore be tempting to perform a one-sided test, with
 
