@@ -9,7 +9,7 @@ rmd_files:
      "06-furtherdesigns.Rmd",  "06b-crossover.Rmd", #"06c-missing.Rmd",
       "06d-bayesian.Rmd",
     # "07-practical_missingdata.Rmd", 
-    # "07a-practical2.Rmd" ,
+     "07-allocation.Rmd", "07a-practical2.Rmd" ,
     #  "08a-practical3.Rmd",  "08b-practical4.Rmd",
      "99-references.Rmd"]
     #

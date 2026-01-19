@@ -1,0 +1,748 @@
+# (APPENDIX) Computer practicals {-} 
+
+# Computer Practical 1 - Allocation {#cp1allocation}
+
+:::{.warning}
+**WARNING**
+
+This practical is designed to help you investigate the behaviour of the various allocation methods we've been looking at. There are lots of things we do here that you couldn't do in a real trial. For example, you wouldn't be able to plot the baseline covariates, since you wouldn't have them all at the start of the allocation process. You also wouldn't be able to re-do the allocation lots of times, because in most cases the participants join the trial (and are allocated) sequentially. 
+:::
+
+
+You will need a lot of the techniques covered in this practical for your summative assignments, so consider it a sort of informal formative assignment to finish it if you don't in class. Or, at the very least, you might need to return to it while working on your summative assignments.
+
+There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you're not sure how to do something, please ask!
+
+**In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the code you use, so that you can easily replicate your work.**
+
+## R practicalities {#cprprac}
+  
+There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
+
+```{r, eval=F, echo=T}
+install.packages("<packagename>")
+```
+
+
+If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III. 
+
+An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
+
+This requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
+
+
+[Direct link to codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&reserved=0)
+
+[Instructions for how to use codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&reserved=0)
+
+
+
+## Allocation {#cp1allocation}
+
+We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We'll load them as we go along.
+
+**Notice that where there are code snippets like this one that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
+
+```{r, eval=F, echo=T}
+install.packages(c("medicaldata", "ggplot2", "gtsummary", "Minirand", 
+                   "blockrand", "dplyr", "randomizeR"))
+```
+
+### Licorice gargle dataset 
+
+To work with allocation, we will use the `licorice_gargle` dataset from the package `medicaldata`, which you can find by 
+
+```{r, echo=T}
+library(medicaldata)
+data("licorice_gargle")
+```
+
+You can find out about the dataset by looking at the help file 
+
+```{r, echo=T}
+?licorice_gargle
+```
+
+and at [this website](https://www.causeweb.org/tshs/licorice-gargle/), and if you're feeling really keen you can even read the original paper: @ruetzler2013randomized (but please don't do any of that now!).
+
+:::{.exercise}
+Of the 19 columns, how many are baseline characteristics that we could use in the allocation?
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+In this dataset the baseline characteristics are helpfully prefixed by `preOp`, so there are seven baseline characteristics. 
+
+```{r}
+grep("preOp_", names(licorice_gargle), value=T)
+```
+
+:::
+
+</details>
+
+In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure `str(licorice_gargle)` that all columns are numeric to begin with), so run the following code to convert the necessary columns to factors, and to restrict the dataset to only the columns we're interested in.
+
+```{r, echo=T}
+lic_garg = licorice_gargle[ ,1:8]
+# vector of names of columns to be coerced to factor
+cols <- c("preOp_gender", "preOp_asa",  
+"preOp_mallampati", "preOp_smoking", "preOp_pain", "treat")
+# convert each of those columns to factors
+lic_garg[cols] <- lapply(lic_garg[cols], factor) 
+
+# Check the result:
+str(lic_garg)
+```
+
+#### Summary tables
+
+For every allocation, we'll want to see a summary table of how the patients are distributed between the groups. In this practical we'll use the function `tbl_summary` from `gtsummary`, but there are plenty of other ways to create nice tables around clinical trials (for example the packages `table1` and `atable`).
+
+Notice that the licorice gargle data contains the allocation used in the trial, so we can create a table summarising the participants in each group.
+
+```{r, echo=T}
+tbl_summary(lic_garg, by = "treat")
+```
+
+Notice that we can also save this as an object and access the individual sub-tables, for example
+
+```{r, echo=T}
+rb_tab = randbalance(
+  trt = lic_garg$treat, 
+  covmat = lic_garg[,-8], 
+  ntrt=2, 
+  trtseq = c("0", "1"))
+rb_tab$preOp_gender
+```
+There are also packages with functions to output these demographic tables formatted for use in latex documents, for example [`atable`](https://journal.r-project.org/archive/2019/RJ-2019-001/RJ-2019-001.pdf).
+
+#### Binning continuous variables
+
+Before we can use any of our allocation methods, we're going to need to bin the two numeric variables `preOp_age` and `preOp_calcBMI`. In a real trial, we'd have to decide on the bins **before seeing the data**. The sort of information we'd be likely to get pre-trial (the point at which we need to decide on the bins) would be
+
+  - The study was open to all adults (aged 18+), but `preOp_age` was likely to centre around aged 60.
+  - `preOp_BMI` was expected to have mean 26 and standard deviation around 4.5.
+
+
+:::{.exercise}
+Using the informationn above, bin the two variables `preOp_age` and `preOp_calcBMI` to convert them into factor variables `BMI` and `age`. 
+
+Investigate how the bins you have chosen split the actual data - are you pleased with your choices?
+
+*In the solutions we'll create a new data frame `lg_df` with the two new factor variables instead of the original two numeric variables. It might be helpful to you if you make sure your objects and columns are named the same (or else you may need to alter code further into the practical)*
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+These solutions show you one way to create such factor variables, but if you choose different bins that's fine!
+
+Based on the information given, one reasonable split for `preOp_age` would be $<50,\;50-70$ and $>70$, in which case we could do
+
+```{r, echo=T}
+lic_garg$age[lic_garg$preOp_age < 50] <- "Under 50"
+lic_garg$age[lic_garg$preOp_age >= 50 & lic_garg$preOp_age < 70] <- "50 to 70"
+lic_garg$age[lic_garg$preOp_age >= 70] <- "70 plus"
+lic_garg$age = factor(lic_garg$age, levels = c("Under 50", "50 to 70", "70 plus"))
+```
+
+We can see how the data fall into these categories:
+
+```{r}
+table(lic_garg$age)
+```
+These aren't equal but we have a decent number in each group.
+
+With the BMI measurement, we know that there are predefined boundaries between categories, so it might be sensible to use those. The boundary between 'medium' and 'high' is usually given as 25, so since that is near our given mean we could use that as the boundary. 
+
+```{r, echo=T}
+lic_garg$BMI[lic_garg$preOp_calcBMI < 25] <- "medium_or_low"
+lic_garg$BMI[lic_garg$preOp_calcBMI >= 25] <- "high"
+lic_garg$BMI = factor(lic_garg$BMI, levels = c("medium_or_low", "high"))
+```
+
+Again, we can see how the participants fall into these bins
+
+```{r}
+table(lic_garg$BMI)
+```
+and the split is fairly even.
+
+Finally, we can select the columns we want from `lic_garg` to create `lg_df`
+
+```{r, echo=T}
+lg_df = lic_garg[,c(1,2,5,6,7,9,10,8)]
+```
+
+If you've chosen different bins, that's fine! But it will help you if the column names and data frame names are the same as on this page.
+
+:::
+
+</details>
+
+### Measures of imbalance
+
+It will be useful to have a simple numerical summary of how imbalanced an allocation is. First, we will use the imbalance measure defined in lectures, 
+
+$$D(n) = \lvert N_T\left(n\right) - N_C\left(n\right) \rvert $$
+
+This is pretty simple to code in R:
+
+```{r, echo=T}
+imbalance = function(
+    df,   # participant data frame with allocation column included
+    alloc # name of allocation column
+    ){
+  alloc_vec = as.factor(df[ ,names(df)==alloc])
+  alloc_lev = levels(alloc_vec) # how the treatment groups are coded
+  n1 = nrow(df[df[alloc]==alloc_lev[1],])
+  n2 = nrow(df[df[alloc]==alloc_lev[2],])
+  abs(n1-n2)
+}
+```
+
+:::{.exercise}
+Use the `imbalance` function above to find the imbalance in the allocation recorded in the `lic_garg` dataset. Do you find this helpful as a summary of the allocation? 
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+```{r, echo=T}
+imbalance(df = lic_garg, alloc = "treat")
+```
+
+All this tells us is the difference in overall numbers. This is a tiny bit useful, but it would be nice to have some information about how the allocation balances participants with respect to their characteristics - this would give a better understanding of how similar the two groups are to one another.
+
+:::
+
+</details>
+
+To see how well balanced our allocations are in terms of each covariate, we will define a function summing the marginal imbalance
+
+```{r, echo=T}
+marg_imbalance = function(
+    df,  # participant data frame, including allocation and all factor variables
+    alloc, # name of allocation column
+    factors # names of prognostic factors to be included
+    ){
+  df = as.data.frame(df) # deals with tibbles
+  n_fact = length(factors) # the numbers of factors
+  imb_sum=0                # a running total of imbalance
+  for (i in 1:n_fact){     # loop through the factors 
+    ind_i = (1:ncol(df))[names(df)==factors[i]]
+    col_i = as.factor(df[ ,ind_i])
+    levels_i = levels(col_i)
+    nlevels_i = length(levels_i)
+    for (j in 1:nlevels_i){ # loop through the levels of factor i
+      # df_ij contains just those entries with level j of factor i
+      df_ij = df[df[ ,ind_i]==levels_i[j] , ] 
+      imb_ij = imbalance(df=df_ij, alloc=alloc) # find the imbalance for the sub-data-frame in which factor i has level j
+      imb_sum = imb_sum + imb_ij
+    }
+  }
+  imb_sum
+}
+```
+
+For example, to find the marginal imbalance over the gender and age factors, use
+
+```{r, echo=T}
+
+marg_imbalance(df=lg_df, alloc="treat", factors = c("preOp_gender", "age"))
+
+```
+
+
+**Note that the larger the total number of factor levels, the larger the marginal imbalance will be, so if you're comparing between methods, make sure you're including all the same factors!** 
+
+
+### Allocation methods {#allocmethods}
+
+To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we'll use packages. Feel free to write your own code for the simpler methods if you want to!
+
+We'll start by performing each method once with the whole dataset, and then go on to include baseline variables, and finally we'll perform a simulation study.
+
+#### Simple random allocation
+
+In simple random allocation, each participant is allocated to one of the two trial arms with equal probability. 
+
+```{r, echo=T}
+srs = function(
+    df, # DF should be the participant data frame. 
+        # A column 'treat' will be added
+    levels = c("0", "1") # Levels of treat factor
+){
+  n = nrow(df) # number of rows / participants
+# Create a new column 'treat'
+  df$treat = rep(NA, n)
+# work through the rows, randomly allocating patients with probably 1/2
+  for (i in 1:n){
+    df$treat[i] = sample(levels, size=1, prob = c(0.5, 0.5))
+  }
+  df$treat = as.factor(df$treat)
+  df
+}
+
+```
+
+:::{.exercise}
+Use the function `srs` above to allocate the patients in the `licorice_gargle` dataset to groups T or C.
+
+Generate the balance table and imbalance and comment on them.
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+To allocate the patients, use
+
+```{r, echo=T}
+lg_srs = srs(
+  df = lg_df[,-8],
+  levels = c("T", "C")
+)
+```
+
+And to display the balance table
+
+```{r, echo=T}
+tbl_summary(lg_srs, by = "treat")
+```
+
+To find the total imbalance, the command is
+
+```{r, echo=T}
+imbalance(lg_srs, alloc = "treat")
+```
+
+and we can find the marginal imbalance using
+
+```{r, echo=T}
+lg_factors_all = c("preOp_gender", "preOp_asa", "preOp_mallampati", "preOp_smoking", 
+"preOp_pain", "age", "BMI")
+marg_imbalance(lg_srs, alloc = "treat", factors = lg_factors_all)
+```
+
+Notice that we've collected the names of the factors into the vector `lg_factors_all`. This saves time, and makes it easier to compare the same factors each time.
+
+Since `srs` uses the `sample` function, and we didn't set a seed, you may well have got a different allocation (and therefore imbalance).
+
+:::
+
+</details>
+
+
+
+
+#### Randomly permuted blocks
+
+We will do this with the package `blockrand`. 
+
+```{r, echo=T}
+library(blockrand)
+```
+
+The function for generating RPB designs is also called `blockrand`. The default for the function `blockrand` is that it will randomly vary block length within $\left\lbrace 2,\,4,\,6,\,8 \right\rbrace$. 
+
+
+:::{.exercise}
+Try playing around with the function `blockrand`, for example starting with
+
+```{r, echo=T, eval=F}
+blockrand(n=100)
+```
+
+Can you generate an allocation for the `licorice_gargle` data (remember our data frame is now `lg_df`) and examine the balance?
+
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+There are 235 rows/participants in `lg_df`, and to keep consistency we would like the levels of our treatment to be `"T"` and `"C"`. Therefore we can do
+
+```{r, echo=T}
+rpb_lg = blockrand(n=235, levels = c("T", "C"))
+```
+
+Notice that this doesn't have 235 rows: the `blockrand` function will always finish after a whole block.
+
+Let's add this to our participant data to create a new data frame `lg_rpb`:
+
+```{r, echo=T}
+# create the new data frame, a copy of lg_df
+lg_rpb = lg_df  
+
+# Replace the original treat column with the RPB treatment column
+# Using only the first 235 allocations
+lg_rpb$treat = rpb_lg$treatment[1:235]
+```
+
+Then we can generate the demographic table as before:
+
+```{r, echo=T, eval=F}
+tbl_summary(lg_rpb, by = "treat")
+```
+
+and calculate the imbalance
+
+```{r}
+imbalance(lg_rpb, alloc = "treat")
+```
+
+and marginal imbalance
+
+```{r}
+marg_imbalance(lg_rpb, alloc = "treat", factors = lg_factors_all)
+```
+
+:::
+
+</details>
+
+The package `blockrand` contains a function `plotblockrand`, which outputs PDFs of randomization cards, ready to be printed and put into envelopes!
+
+#### Biased coin designs
+
+We can write code for a biased coin design by adapting the `srs` function above, setting $p=\frac{2}{3}$ by default as per @efron1971forcing.
+
+```{r, echo=T, eval=T}
+biased_coin = function(
+    data,
+    levels = c("T", "C"),
+    p=2/3
+){
+  Dn = 0 # starting value of imbalance
+  n = nrow(data)
+  alloc = rep(NA, n)
+  
+  for (i in 1:n){
+    if (Dn==0){ # equally balanced
+      alloc[i] = sample(levels, size=1, prob=c(0.5, 0.5) )
+    } else if(Dn<0){ # More allocations to levels[2] up to this point
+      alloc[i] = sample(levels, size=1, prob=c(p, 1-p) )
+    } else if(Dn>0){ # More allocations to levels[1] up to this point
+      alloc[i] = sample(levels, size=1, prob=c(1-p, p) )
+    }
+    # Compute imbalance at this stage
+    alloc_to_n = alloc[1:i]
+    Dn = sum(alloc_to_n==levels[1]) - sum(alloc_to_n == levels[2])
+  }
+  data$treat = as.factor(alloc)
+  data
+}
+```
+
+
+:::{.exercise}
+Use the function `biased_coin` above to allocate patients to the two groups.  Produce the demographic table and calculate the imbalance. Try this for some different values of `p`. 
+
+:::
+
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+To create a biased coin design with $p=0.9$ (for example), we enter
+
+```{r, echo=T}
+lg_bc1 = biased_coin(
+  data=lg_df[,-8],
+  p=0.9
+)
+
+```
+
+and to produce a balance table:
+
+```{r, echo=T, eval=F}
+tbl_summary(lg_bc1, by = "treat")
+```
+
+Finally we can find the imbalance:
+
+```{r, echo=T}
+imbalance(lg_bc1, alloc="treat")
+```
+
+and marginal imbalance
+
+```{r, echo=T}
+marg_imbalance(lg_bc1, alloc="treat", factors = lg_factors_all)
+```
+
+
+:::
+
+</details>
+
+
+
+
+#### Urn designs
+
+For the urn design, we will use the function `udPar` from the package `randomizeR`. We wrote this in lectures as $UD\left(r,s\right)$, where 
+
+  * $r$ is the number of balls for each treatment group in the urn to begin with
+  * $s$ is the number of balls added per treatment after each allocation
+  
+:::{.exercise}
+Look at the help file for `udPar`. Which arguments correspond to $r$ and $s$ (as we called them in Section \@ref(bcurn)?
+:::
+
+The function `udPar` creates a model object, storing the parameters for the particular Urn design. To generate sequences of allocations, we use the function `genSeq`
+
+:::{.exercise}
+Create an urn design object using `udPar` with $r=3,\;s=1$, set to create enough allocations for the licorice gargle data.
+
+Use the function `genSeq` to generate a sequence of allocations.
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+```{r, echo=T}
+library(randomizeR)
+ud_31 = udPar(235, 3, 1, c("0", "1"))
+seq_ud31 = genSeq(ud_31)
+
+```
+The allocation vector is stored as a row in the matrix `M` which is a slot in the `genSeq` object (part of the object). You can access it by 
+
+```{r, echo=T}
+seq_ud31$M[1,]
+```
+
+The argument `r` allows you to generate `r` sequences, in which case the matrix `M` has `r` rows.
+
+:::
+
+</details>
+
+
+
+### Stratifying the dataset
+
+The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataset one stratum might contain only women, aged 50-65, with a history of smoking.
+
+Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate 'mini-trials'.
+
+It's not uncommon for some of the baseline data to be missing, in which case the following algorithms won't work without some adjustment. Two possible approaches in that case would be
+
+  - to impute a 'dummy' value for missing data, chosen using some available information about likely values
+  - to not involve that covariate in the allocation method (especially if it's thought not to be likely to be informative).
+
+An obvious problem with applying stratification to this dataset is the number of strata. We have (if you have the same numbers of levels for `age` and `BMI` as I do)
+
+$$2\times{3}\times{4}\times{3}\times{2}\times{3}\times{2} = 864 $$
+strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will choose just a couple of covariates to stratify by. For example, gender and smoking status:
+
+```{r, echo=T}
+library(dplyr)
+# Add an ID variable so that we can keep track of the order of participants
+lg_df$ID = 1:nrow(lg_df)
+# split the data frame according to levels of factors
+strat_gen_sm <- lg_df %>%
+  group_split(preOp_gender, preOp_smoking) 
+```
+
+will create a list of data frames, one for each combination of `preOp_gender` and `preOp_smoking`. In this case there are six data frames, and for example the first (accessed by `strat_gen_sm[[1]]` contains all participants with `preOp_gender`=0 and `preOp_smoking`=1. You can choose different factors to stratify by if you want to!
+
+
+:::{.exercise}
+Split your group using the code above, choosing two factors to stratify by. How many participants are in each stratum? 
+
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+We'll stick with the group as above. To find the numbers of participants in each group we do 
+
+```{r, echo=T}
+group_sizes = sapply(
+  1:length(strat_gen_sm),
+  function(i){
+    nrow(strat_gen_sm[[i]])
+  }
+)
+group_sizes
+```
+
+or if you prefer `dplyr`
+
+```{r, echo=T}
+lg_df |>
+  group_by(preOp_gender, preOp_smoking) |>
+  summarise(count = n())
+```
+
+:::
+
+</details>
+
+
+
+:::{.exercise}
+Choose a couple of methods from Section \@ref(allocmethods), and use them with your stratified dataset.
+Use the `marg_imbalance` function to find the marginal imbalance. Try this for just the factors you stratified by, and for other collections of factors. What do you expect to see?
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+The code for this will vary, but the basic idea is to work through the individual data sets individually, and apply the functions from Section \@ref(allocmethods). One way to do this is by creating a for loop. The code below shows how this would work for simple random sampling, but you can change the function to use whichever method you prefer.
+
+```{r, echo=T}
+# This command creates an empty list, which we will fill with allocation data frames as we go through
+alloc_list = list()
+# The loop works through the stratified data frames, applies SRS to allocate patients
+# and stores them in alloc_list
+for (i in 1:length(strat_gen_sm)){
+  alloc_list[[i]] = srs(strat_gen_sm[[i]])
+}
+# bind all the data frames back together again
+alloc_full= dplyr::bind_rows(alloc_list)
+# re-order according to ID variable
+alloc_full[order(alloc_full$ID),]
+```
+It would be silly though to do this with SRS - why?
+
+Once you've performed the allocation, you can find the demographic tables, imbalance and marginal imbalance as before (with `alloc_full`, or whatever your is called, as the data frame)
+
+:::
+
+</details>
+
+
+### Minimisation
+
+If we want to try to achieve balance for all prognostic factors, minimisation is a more suitable method. The function `Minirand` in the package `Minirand` implements the minimisation algorithm.
+
+Much like we did in lectures (and like we would in a real trial), the function `Minirand` works from the point of view of having already allocated $j-1$ particpants, and being presented with a $j^{th}$.
+
+This example code is copied from the function's help file, but with some extra comments to help you to follow it. It first creates a participant data frame, then allocates the particpants to treatment groups using Minimisation.
+
+```{r, echo=T}
+
+## Information about the treatment
+ntrt <- 3 # There will three treatment groups
+trtseq <- c(1, 2, 3) # the treatment groups are indexed 1, 2, 3
+ratio <- c(2, 2, 1)  # the treatment groups will be allocated in a 2:2:1 ratio
+
+## The next few rows generate the participant data frame
+nsample <- 120 # we will have 120 participants
+c1 <- sample(seq(1, 0), nsample, replace = TRUE, prob = c(0.4, 0.6)) 
+c2 <- sample(seq(1, 0), nsample, replace = TRUE, prob = c(0.3, 0.7))
+c3 <- sample(c(2, 1, 0), nsample, replace = TRUE, prob = c(0.33, 0.2, 0.5)) 
+c4 <- sample(seq(1, 0), nsample, replace = TRUE, prob = c(0.33, 0.67)) 
+covmat <- cbind(c1, c2, c3, c4) # generate the matrix of covariate factors for the subjects
+# label of the covariates 
+colnames(covmat) = c("Gender", "Age", "Hypertension", "Use of Antibiotics") 
+covwt <- c(1/4, 1/4, 1/4, 1/4) # equal weights/importance applied to each factor
+
+## Applying the algorithm - start here if you already have participant data!
+
+res <- rep(NA, nsample) # Generate a vector to store the results (the allocations)
+# generate treatment assignment for the 1st subject
+res[1] = sample(trtseq, 1, replace = TRUE, prob = ratio/sum(ratio)) 
+# work through the remaining patients sequentially
+for (j in 2:nsample)
+  {
+  # get treatment assignment sequentially for all subjects
+  # The vector res is updated and so all previous allocations are accounted for
+  # covmat is the data frame of participant data
+    res[j] <- Minirand(
+      covmat=covmat, j, covwt=covwt, ratio=ratio, ntrt=ntrt, trtseq=trtseq, method="Range", result=res, p = 0.9
+      )
+}
+## Store the allocation vector 'res' as 'trt1'
+trt1 <- res
+
+# Display the number of randomized subjects at covariate factors
+balance1 <- randbalance(trt1, covmat, ntrt, trtseq) 
+balance1
+# Calculate the total imbalance of the allocation
+totimbal(trt = trt1, covmat = covmat, covwt = covwt, 
+ratio = ratio, ntrt = ntrt, trtseq = trtseq, method = "Range")
+```
+
+:::{.exercise}
+Adapt the code above to apply the minimisation algorithm to the licorice gargle data. Investigate how balanced the data set is.
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+Notice in the code above that we only need to start about half way down if we already have a dataset (which we do).
+
+```{r, echo=T}
+nsample = nrow(lg_df)
+res = rep(NA, nsample)
+res[1] = sample(c(0,1), 1, replace = TRUE, prob = c(0.5,0.5)) 
+# work through the remaining patients sequentially
+for (j in 2:nsample){
+  # get treatment assignment sequentially for all subjects
+  # The vector res is updated and so all previous allocations are accounted for
+  # covmat is the data frame of participant data - including only the covariates
+    res[j] <- Minirand(
+      covmat=lg_df[ ,1:7], j, covwt=rep(1,7)/7, ratio=c(1,1), ntrt=2, trtseq=c(0,1), method="Range", result=res, p = 0.9
+      )
+}
+
+lg_df$treat = res
+
+## You can now investigate the balance of the design as usual
+```
+
+:::
+
+</details>
+
+### Extension: A simulation experiment!
+
+In the allocation section we used each method once and produced summaries like the marginal imbalance. Because they are inherently random, to understand the general behaviour of each method, we'll conduct a simulation experiment.
+
+The general process for this is:
+
+  1. Choose a numerical summary (probably either the imbalance or the marginal imbalance) 
+  2. Choose some large number $n_{sim}$ and create a vector of zeroes or NAs that length
+  3. Run through the following process $n_{sim}$ times: 
+      
+       * Perform the allocation
+       * Find the numerical summary 
+       * Store the numerical summary in the vector you created in step 2.
+
+  4. Plot (or otherwise summarise) the vector of summaries.
+  
+:::{.exercise}
+
+Perform the simulation experiment for some of the methods above. Make sure you store the summary vectors by different (and intelligible!) names.
+
+Based on your results, comment on how plausible it is that @ruetzler2013randomized used each method in their trial.
+
+*Hint: think of the simulated summaries as approximations of probability distributions*
+
+:::
+
+
+
+For the licorice dataset, @ruetzler2013randomized say that "Randomization (1:1) to licorice or placebo was assigned by a Web-based system that was accessed just before treatment by an independent researcher who was not involved in data collection; no stratification was used."
+
+
+
+
+

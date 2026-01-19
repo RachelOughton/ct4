@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>A Computer Practical 1 - Allocation | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="A Computer Practical 1 - Allocation | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="A Computer Practical 1 - Allocation | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2026-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="the-bayesian-approach.html"/>
+<link rel="next" href="computer-practical-2---analysis.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books-and-resources"><i class="fa fa-check"></i>Books and resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-primary-outcome"><i class="fa fa-check"></i>The primary outcome</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-timeline"><i class="fa fa-check"></i>Trial timeline</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-protocol-and-analysis-plan"><i class="fa fa-check"></i>Trial protocol and analysis plan</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.3</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.4</b> Phases of clinical trials</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.1</b> One-tailed or two-tailed?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.2</b> Insignificant results</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3.1</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.3.2" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.3.2</b> Minimization</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.4</b> Problems around allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-variance-of-the-treatment-effect-estimate"><i class="fa fa-check"></i><b>4.2.1</b> The variance of the treatment effect estimate</a></li>
+<li class="chapter" data-level="4.2.2" data-path="rct-analysis.html"><a href="rct-analysis.html#a-dodgy-way-to-use-baseline-variables"><i class="fa fa-check"></i><b>4.2.2</b> A dodgy way to use baseline variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="binary-analysis.html"><a href="binary-analysis.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="binary-analysis.html"><a href="binary-analysis.html#bin-point-est"><i class="fa fa-check"></i><b>6.1</b> Simple hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="binary-analysis.html"><a href="binary-analysis.html#a-simple-method-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> A simple method: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="binary-analysis.html"><a href="binary-analysis.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="binary-analysis.html"><a href="binary-analysis.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#logreg"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diaglogreg"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
+<li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Part III: Survival data</b></span></li>
+<li class="chapter" data-level="7" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html"><i class="fa fa-check"></i><b>7</b> Working with time-to-event data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#censored-times"><i class="fa fa-check"></i><b>7.1</b> Censored times</a></li>
+<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#survhaz"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#weibull"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
+<li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
+<li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#coxreg"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
+<li class="chapter" data-level="8.3.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#diagnostics-for-cox-regression"><i class="fa fa-check"></i><b>8.3.3</b> Diagnostics for Cox regression</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Part III: Further designs</b></span></li>
+<li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised trials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>9.1</b> What is a cluster RCT?</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>9.1.1</b> Intracluster correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>9.2</b> Sample size</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#ss-crt"><i class="fa fa-check"></i><b>9.2.1</b> A formula for sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>9.3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>9.3.1</b> Allocating everyone at once</a></li>
+<li class="chapter" data-level="9.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#covariate-constrained-randomization"><i class="fa fa-check"></i><b>9.3.2</b> Covariate constrained randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>9.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>9.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-mixed-effects-models"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level: mixed effects models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html"><i class="fa fa-check"></i><b>10</b> Random effects for individuals</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#crossover-trials"><i class="fa fa-check"></i><b>10.1</b> Crossover trials</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-abba-design"><i class="fa fa-check"></i><b>10.1.1</b> The AB/BA design</a></li>
+<li class="chapter" data-level="10.1.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#analysis-of-the-abba-design"><i class="fa fa-check"></i><b>10.1.2</b> Analysis of the AB/BA design</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#longitudinal-data-repeated-measurements"><i class="fa fa-check"></i><b>10.2</b> Longitudinal data / repeated measurements</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#fitting-a-model"><i class="fa fa-check"></i><b>10.2.1</b> Fitting a model</a></li>
+<li class="chapter" data-level="10.2.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-empty-model"><i class="fa fa-check"></i><b>10.2.2</b> The empty model</a></li>
+<li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1 - Allocation</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#health-warning"><i class="fa fa-check"></i>Health warning!</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
+<li class="chapter" data-level="" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+<li class="chapter" data-level="A.1" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#cp1allocation"><i class="fa fa-check"></i><b>A.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="A.1.1" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.1.2" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#allocmethods"><i class="fa fa-check"></i><b>A.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.1.3" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.1.4" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#minimisation"><i class="fa fa-check"></i><b>A.1.4</b> Minimisation</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#preliminaries-1"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#r-practicalities-1"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
+<li class="chapter" data-level="B.1" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#cp1allocation"><i class="fa fa-check"></i><b>B.1</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#licorice-gargle-dataset-1"><i class="fa fa-check"></i><b>B.1.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="B.1.2" data-path="computer-practical-1---allocation.html"><a href="computer-practical-1---allocation.html#allocmethods"><i class="fa fa-check"></i><b>B.1.2</b> Allocation methods</a></li>
+<li class="chapter" data-level="B.1.3" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#stratifying-the-dataset-1"><i class="fa fa-check"></i><b>B.1.3</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="B.1.4" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#minimisation-1"><i class="fa fa-check"></i><b>B.1.4</b> Minimisation</a></li>
+</ul></li>
+<li class="chapter" data-level="B.2" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.2</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="B.2.1" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.2.1</b> Polyps data</a></li>
+</ul></li>
+<li class="chapter" data-level="B.3" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#extension-problems"><i class="fa fa-check"></i><b>B.3</b> Extension problems</a>
+<ul>
+<li class="chapter" data-level="B.3.1" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#a-simulation-experiment"><i class="fa fa-check"></i><b>B.3.1</b> A simulation experiment!</a></li>
+<li class="chapter" data-level="B.3.2" data-path="computer-practical-2---analysis.html"><a href="computer-practical-2---analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="computer-practical-1---allocation" class="section level1 hasAnchor" number="12">
+<h1><span class="header-section-number">A</span> Computer Practical 1 - Allocation<a href="computer-practical-1---allocation.html#computer-practical-1---allocation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="health-warning" class="section level3 unnumbered hasAnchor">
+<h3>Health warning!<a href="computer-practical-1---allocation.html#health-warning" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>This practical, particularly the allocation section, is designed to help you investigate the behaviour of the various methods we’ve been looking at. There are lots of things we do here that you couldn’t do in a real trial. For example, you wouldn’t be able to plot the baseline covariates, since you wouldn’t have them all at the start of the allocation process. You also wouldn’t be re-do the allocation lots of times, because in most cases the participants join the trial (and are allocated) sequentially.</p>
+</div>
+<div id="preliminaries" class="section level3 unnumbered hasAnchor">
+<h3>Preliminaries<a href="computer-practical-1---allocation.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You will need a lot of the techniques covered in this practical for your summative assignments, so consider it a sort of informal formative assignment to finish it if you don’t in class. Or, at the very least, you might need to return to it while working on your summative assignments.</p>
+<p>There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you’re not sure how to do something, please ask!</p>
+<p><strong>In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.</strong></p>
+</div>
+<div id="r-practicalities" class="section level3 unnumbered hasAnchor">
+<h3>R practicalities<a href="computer-practical-1---allocation.html#r-practicalities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do</p>
+<div class="sourceCode" id="cb120"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb120-1"><a href="computer-practical-1---allocation.html#cb120-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
+<p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III.</p>
+<p>An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
+<p>This requires you to have a github account (you can sign up for free <a href="https://github.com/">here</a>) and there is a short guide to creating a github account <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&amp;reserved=0">here</a>.</p>
+<p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&amp;reserved=0">Direct link to codespace</a></p>
+<p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&amp;reserved=0">Instructions for how to use codespace</a></p>
+</div>
+<div id="cp1allocation" class="section level2 hasAnchor" number="12.1">
+<h2><span class="header-section-number">A.1</span> Allocation<a href="computer-practical-1---allocation.html#cp1allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>We’ll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We’ll load them as we go along.</p>
+<p><strong>Notice that where there are code snippets like this one that you want to copy directly, you can hover your cursor in the top right of the code box and a ‘copy’ icon will appear.</strong></p>
+<div class="sourceCode" id="cb121"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb121-1"><a href="computer-practical-1---allocation.html#cb121-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="fu">c</span>(<span class="st">&quot;medicaldata&quot;</span>, <span class="st">&quot;ggplot2&quot;</span>, <span class="st">&quot;gtsummary&quot;</span>, <span class="st">&quot;Minirand&quot;</span>, </span>
+<span id="cb121-2"><a href="computer-practical-1---allocation.html#cb121-2" tabindex="-1"></a>                   <span class="st">&quot;blockrand&quot;</span>, <span class="st">&quot;dplyr&quot;</span>, <span class="st">&quot;randomizeR&quot;</span>))</span></code></pre></div>
+<div id="licorice-gargle-dataset" class="section level3 hasAnchor" number="12.1.1">
+<h3><span class="header-section-number">A.1.1</span> Licorice gargle dataset<a href="computer-practical-1---allocation.html#licorice-gargle-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To work with allocation, we will use the <code>licorice_gargle</code> dataset from the package <code>medicaldata</code>, which you can find by</p>
+<div class="sourceCode" id="cb122"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb122-1"><a href="computer-practical-1---allocation.html#cb122-1" tabindex="-1"></a><span class="fu">library</span>(medicaldata)</span>
+<span id="cb122-2"><a href="computer-practical-1---allocation.html#cb122-2" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;licorice_gargle&quot;</span>)</span></code></pre></div>
+<p>You can find out about the dataset by looking at the help file</p>
+<div class="sourceCode" id="cb123"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb123-1"><a href="computer-practical-1---allocation.html#cb123-1" tabindex="-1"></a>?licorice_gargle</span></code></pre></div>
+<p>and at <a href="https://www.causeweb.org/tshs/licorice-gargle/">this website</a>, and if you’re feeling really keen you can even read the original paper: <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span> (but please don’t do any of that now!).</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-58" class="exercise"><strong>Exercise A.1  </strong></span>Of the 19 columns, how many are baseline characteristics that we could use in the allocation?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-59" class="solution"><em>Solution</em>. </span>In this dataset the baseline characteristics are helpfully prefixed by <code>preOp</code>, so there are seven baseline characteristics.</p>
+<pre><code>## [1] &quot;preOp_gender&quot;     &quot;preOp_asa&quot;        &quot;preOp_calcBMI&quot;    &quot;preOp_age&quot;        &quot;preOp_mallampati&quot;
+## [6] &quot;preOp_smoking&quot;    &quot;preOp_pain&quot;</code></pre>
+</div>
+</details>
+<p>In order to be able to work with the dataset, we need to convert several of the columns to factor variables (you can see by looking at the structure <code>str(licorice_gargle)</code> that all columns are numeric to begin with), so run the following code to convert the necessary columns to factors, and to restrict the dataset to only the columns we’re interested in.</p>
+<div class="sourceCode" id="cb125"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb125-1"><a href="computer-practical-1---allocation.html#cb125-1" tabindex="-1"></a>lic_garg <span class="ot">=</span> licorice_gargle[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">8</span>]</span>
+<span id="cb125-2"><a href="computer-practical-1---allocation.html#cb125-2" tabindex="-1"></a><span class="co"># vector of names of columns to be coerced to factor</span></span>
+<span id="cb125-3"><a href="computer-practical-1---allocation.html#cb125-3" tabindex="-1"></a>cols <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;preOp_gender&quot;</span>, <span class="st">&quot;preOp_asa&quot;</span>,  </span>
+<span id="cb125-4"><a href="computer-practical-1---allocation.html#cb125-4" tabindex="-1"></a><span class="st">&quot;preOp_mallampati&quot;</span>, <span class="st">&quot;preOp_smoking&quot;</span>, <span class="st">&quot;preOp_pain&quot;</span>, <span class="st">&quot;treat&quot;</span>)</span>
+<span id="cb125-5"><a href="computer-practical-1---allocation.html#cb125-5" tabindex="-1"></a><span class="co"># convert each of those columns to factors</span></span>
+<span id="cb125-6"><a href="computer-practical-1---allocation.html#cb125-6" tabindex="-1"></a>lic_garg[cols] <span class="ot">&lt;-</span> <span class="fu">lapply</span>(lic_garg[cols], factor) </span>
+<span id="cb125-7"><a href="computer-practical-1---allocation.html#cb125-7" tabindex="-1"></a></span>
+<span id="cb125-8"><a href="computer-practical-1---allocation.html#cb125-8" tabindex="-1"></a><span class="co"># Check the result:</span></span>
+<span id="cb125-9"><a href="computer-practical-1---allocation.html#cb125-9" tabindex="-1"></a><span class="fu">str</span>(lic_garg)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    235 obs. of  8 variables:
+##  $ preOp_gender    : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ preOp_asa       : Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 3 2 2 2 1 2 3 2 3 3 ...
+##  $ preOp_calcBMI   : num  33 23.7 26.8 28.4 30.4 ...
+##  $ preOp_age       : num  67 76 58 59 73 61 66 61 83 69 ...
+##  $ preOp_mallampati: Factor w/ 4 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;,&quot;4&quot;: 2 2 2 2 1 3 1 2 1 2 ...
+##  $ preOp_smoking   : Factor w/ 3 levels &quot;1&quot;,&quot;2&quot;,&quot;3&quot;: 1 2 1 1 2 1 1 1 1 3 ...
+##  $ preOp_pain      : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ treat           : Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 2 2 2 2 2 2 2 2 2 ...</code></pre>
+<div id="demographic-tables" class="section level4 hasAnchor" number="12.1.1.1">
+<h4><span class="header-section-number">A.1.1.1</span> Demographic tables<a href="computer-practical-1---allocation.html#demographic-tables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For every allocation, we’ll want to see a summary table of how the patients are distributed between the groups. In this practical we’ll use the function <code>tbl_summary</code> from <code>gtsummary</code>, but there are plenty of other ways to create nice tables around clinical trials (for example the packages <code>table1</code> and <code>atable</code>).</p>
+<p>Notice that the licorice gargle data contains the allocation used in the trial, so we can create a table summarising the participants in each group.</p>
+<div class="sourceCode" id="cb127"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb127-1"><a href="computer-practical-1---allocation.html#cb127-1" tabindex="-1"></a><span class="fu">tbl_summary</span>(lic_garg, <span class="at">by =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<div id="yoxtghywvn" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#yoxtghywvn table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#yoxtghywvn thead, #yoxtghywvn tbody, #yoxtghywvn tfoot, #yoxtghywvn tr, #yoxtghywvn td, #yoxtghywvn th {
+  border-style: none;
+}
+
+#yoxtghywvn p {
+  margin: 0;
+  padding: 0;
+}
+
+#yoxtghywvn .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#yoxtghywvn .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yoxtghywvn .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yoxtghywvn .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yoxtghywvn .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yoxtghywvn .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yoxtghywvn .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yoxtghywvn .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yoxtghywvn .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#yoxtghywvn .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#yoxtghywvn .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yoxtghywvn .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yoxtghywvn .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yoxtghywvn .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yoxtghywvn .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yoxtghywvn .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#yoxtghywvn .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#yoxtghywvn .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#yoxtghywvn .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yoxtghywvn .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#yoxtghywvn .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yoxtghywvn .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yoxtghywvn .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yoxtghywvn .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yoxtghywvn .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yoxtghywvn .gt_left {
+  text-align: left;
+}
+
+#yoxtghywvn .gt_center {
+  text-align: center;
+}
+
+#yoxtghywvn .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yoxtghywvn .gt_font_normal {
+  font-weight: normal;
+}
+
+#yoxtghywvn .gt_font_bold {
+  font-weight: bold;
+}
+
+#yoxtghywvn .gt_font_italic {
+  font-style: italic;
+}
+
+#yoxtghywvn .gt_super {
+  font-size: 65%;
+}
+
+#yoxtghywvn .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#yoxtghywvn .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#yoxtghywvn .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#yoxtghywvn .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#yoxtghywvn .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#yoxtghywvn .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#yoxtghywvn .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#yoxtghywvn .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#yoxtghywvn div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class='gt_from_md'><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_1"><span class='gt_from_md'><strong>0</strong><br />
+N = 117</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_2"><span class='gt_from_md'><strong>1</strong><br />
+N = 118</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">preOp_gender</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    0</td>
+<td headers="stat_1" class="gt_row gt_center">73 (62%)</td>
+<td headers="stat_2" class="gt_row gt_center">69 (58%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">44 (38%)</td>
+<td headers="stat_2" class="gt_row gt_center">49 (42%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_asa</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">19 (16%)</td>
+<td headers="stat_2" class="gt_row gt_center">22 (19%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2</td>
+<td headers="stat_1" class="gt_row gt_center">67 (57%)</td>
+<td headers="stat_2" class="gt_row gt_center">67 (57%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3</td>
+<td headers="stat_1" class="gt_row gt_center">31 (26%)</td>
+<td headers="stat_2" class="gt_row gt_center">29 (25%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_calcBMI</td>
+<td headers="stat_1" class="gt_row gt_center">26.1 (22.4, 28.1)</td>
+<td headers="stat_2" class="gt_row gt_center">25.7 (22.7, 28.6)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_age</td>
+<td headers="stat_1" class="gt_row gt_center">63 (45, 68)</td>
+<td headers="stat_2" class="gt_row gt_center">61 (48, 68)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_mallampati</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">31 (26%)</td>
+<td headers="stat_2" class="gt_row gt_center">39 (33%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2</td>
+<td headers="stat_1" class="gt_row gt_center">69 (59%)</td>
+<td headers="stat_2" class="gt_row gt_center">66 (56%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3</td>
+<td headers="stat_1" class="gt_row gt_center">16 (14%)</td>
+<td headers="stat_2" class="gt_row gt_center">13 (11%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4</td>
+<td headers="stat_1" class="gt_row gt_center">1 (0.9%)</td>
+<td headers="stat_2" class="gt_row gt_center">0 (0%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_smoking</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">45 (38%)</td>
+<td headers="stat_2" class="gt_row gt_center">45 (38%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2</td>
+<td headers="stat_1" class="gt_row gt_center">36 (31%)</td>
+<td headers="stat_2" class="gt_row gt_center">36 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3</td>
+<td headers="stat_1" class="gt_row gt_center">36 (31%)</td>
+<td headers="stat_2" class="gt_row gt_center">37 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_pain</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    0</td>
+<td headers="stat_1" class="gt_row gt_center">115 (98%)</td>
+<td headers="stat_2" class="gt_row gt_center">118 (100%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">2 (1.7%)</td>
+<td headers="stat_2" class="gt_row gt_center">0 (0%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="3"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class='gt_from_md'>n (%); Median (Q1, Q3)</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<p>Notice that we can also save this as an object and access the individual sub-tables, for example</p>
+<div class="sourceCode" id="cb128"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb128-1"><a href="computer-practical-1---allocation.html#cb128-1" tabindex="-1"></a>rb_tab <span class="ot">=</span> <span class="fu">randbalance</span>(</span>
+<span id="cb128-2"><a href="computer-practical-1---allocation.html#cb128-2" tabindex="-1"></a>  <span class="at">trt =</span> lic_garg<span class="sc">$</span>treat, </span>
+<span id="cb128-3"><a href="computer-practical-1---allocation.html#cb128-3" tabindex="-1"></a>  <span class="at">covmat =</span> lic_garg[,<span class="sc">-</span><span class="dv">8</span>], </span>
+<span id="cb128-4"><a href="computer-practical-1---allocation.html#cb128-4" tabindex="-1"></a>  <span class="at">ntrt=</span><span class="dv">2</span>, </span>
+<span id="cb128-5"><a href="computer-practical-1---allocation.html#cb128-5" tabindex="-1"></a>  <span class="at">trtseq =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb128-6"><a href="computer-practical-1---allocation.html#cb128-6" tabindex="-1"></a>rb_tab<span class="sc">$</span>preOp_gender</span></code></pre></div>
+<pre><code>##    
+## trt  0  1
+##   0 73 44
+##   1 69 49</code></pre>
+<p>There are also packages with functions to output these demographic tables formatted for use in latex documents, for example <a href="https://journal.r-project.org/archive/2019/RJ-2019-001/RJ-2019-001.pdf"><code>atable</code></a>.</p>
+</div>
+<div id="binning-continuous-variables" class="section level4 hasAnchor" number="12.1.1.2">
+<h4><span class="header-section-number">A.1.1.2</span> Binning continuous variables<a href="computer-practical-1---allocation.html#binning-continuous-variables" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Before we can use any of our allocation methods, we’re going to need to bin the two numeric variables <code>preOp_age</code> and <code>preOp_calcBMI</code>. The sort of information we’d be likely to get pre-trial (the point at which we need to decide on the bins) would be</p>
+<ul>
+<li>The study was open to all adults (aged 18+), but <code>preOp_age</code> was likely to centre around aged 60.</li>
+<li><code>preOp_BMI</code> was expected to have mean 26 and standard deviation around 4.5.</li>
+</ul>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-60" class="exercise"><strong>Exercise A.2  </strong></span>Bin the two variables <code>preOp_age</code> and <code>preOp_calcBMI</code> to convert them into factor variables <code>BMI</code> and <code>age</code>.</p>
+<p>Investigate how the bins you have chosen split the actual data - are you pleased with your choices?</p>
+<p><em>In the solutions we’ll create a new data frame <code>lg_df</code> with the two new factor variables instead of the original two numeric variables. It might be helpful to you if you make sure your objects and columns are named the same (or else you may need to alter code further into the practical)</em></p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-61" class="solution"><em>Solution</em>. </span>These solutions show you one way to create such factor variables, but if you choose different bins that’s fine!</p>
+<p>Based on the information given, one reasonable split for <code>preOp_age</code> would be <span class="math inline">\(&lt;50,\;50-70\)</span> and <span class="math inline">\(&gt;70\)</span>, in which case we could do</p>
+<div class="sourceCode" id="cb130"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb130-1"><a href="computer-practical-1---allocation.html#cb130-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">50</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Under 50&quot;</span></span>
+<span id="cb130-2"><a href="computer-practical-1---allocation.html#cb130-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">50</span> <span class="sc">&amp;</span> lic_garg<span class="sc">$</span>preOp_age <span class="sc">&lt;</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;50 to 70&quot;</span></span>
+<span id="cb130-3"><a href="computer-practical-1---allocation.html#cb130-3" tabindex="-1"></a>lic_garg<span class="sc">$</span>age[lic_garg<span class="sc">$</span>preOp_age <span class="sc">&gt;=</span> <span class="dv">70</span>] <span class="ot">&lt;-</span> <span class="st">&quot;70 plus&quot;</span></span>
+<span id="cb130-4"><a href="computer-practical-1---allocation.html#cb130-4" tabindex="-1"></a>lic_garg<span class="sc">$</span>age <span class="ot">=</span> <span class="fu">factor</span>(lic_garg<span class="sc">$</span>age, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;Under 50&quot;</span>, <span class="st">&quot;50 to 70&quot;</span>, <span class="st">&quot;70 plus&quot;</span>))</span></code></pre></div>
+<p>We can see how the data fall into these categories:</p>
+<pre><code>## 
+## Under 50 50 to 70  70 plus 
+##       67      122       46</code></pre>
+<p>These aren’t equal but we have a decent number in each group.</p>
+<p>With the BMI measurement, we know that there are predefined boundaries between categories, so it might be sensible to use those. The boundary between ‘medium’ and ‘high’ is usually given as 25, so since that is near our given mean we could use that as the boundary.</p>
+<div class="sourceCode" id="cb132"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb132-1"><a href="computer-practical-1---allocation.html#cb132-1" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&lt;</span> <span class="dv">25</span>] <span class="ot">&lt;-</span> <span class="st">&quot;medium_or_low&quot;</span></span>
+<span id="cb132-2"><a href="computer-practical-1---allocation.html#cb132-2" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI[lic_garg<span class="sc">$</span>preOp_calcBMI <span class="sc">&gt;=</span> <span class="dv">25</span>] <span class="ot">&lt;-</span> <span class="st">&quot;high&quot;</span></span>
+<span id="cb132-3"><a href="computer-practical-1---allocation.html#cb132-3" tabindex="-1"></a>lic_garg<span class="sc">$</span>BMI <span class="ot">=</span> <span class="fu">factor</span>(lic_garg<span class="sc">$</span>BMI, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;medium_or_low&quot;</span>, <span class="st">&quot;high&quot;</span>))</span></code></pre></div>
+<p>Again, we can see how the participants fall into these bins</p>
+<pre><code>## 
+## medium_or_low          high 
+##            99           136</code></pre>
+<p>and the split is fairly even.</p>
+<p>Finally, we can select the columns we want from <code>lic_garg</code> to create <code>lg_df</code></p>
+<div class="sourceCode" id="cb134"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb134-1"><a href="computer-practical-1---allocation.html#cb134-1" tabindex="-1"></a>lg_df <span class="ot">=</span> lic_garg[,<span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">5</span>,<span class="dv">6</span>,<span class="dv">7</span>,<span class="dv">9</span>,<span class="dv">10</span>,<span class="dv">8</span>)]</span></code></pre></div>
+<p>If you’ve chosen different bins, that’s fine! But it will help you if the column names and data frame names are the same as on this page.</p>
+</div>
+</details>
+</div>
+<div id="a-measure-of-imbalance" class="section level4 hasAnchor" number="12.1.1.3">
+<h4><span class="header-section-number">A.1.1.3</span> A measure of imbalance<a href="computer-practical-1---allocation.html#a-measure-of-imbalance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>It will be useful to have a simple numerical summary of how imbalanced an allocation is. We will define the imbalance as in lectures,</p>
+<p><span class="math display">\[D(n) = \lvert N_T\left(n\right) - N_C\left(n\right) \rvert \]</span>
+This is pretty simple to define in R:</p>
+<div class="sourceCode" id="cb135"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb135-1"><a href="computer-practical-1---allocation.html#cb135-1" tabindex="-1"></a>imbalance <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb135-2"><a href="computer-practical-1---allocation.html#cb135-2" tabindex="-1"></a>    df,   <span class="co"># participant data frame with allocation column included</span></span>
+<span id="cb135-3"><a href="computer-practical-1---allocation.html#cb135-3" tabindex="-1"></a>    alloc <span class="co"># name of allocation column</span></span>
+<span id="cb135-4"><a href="computer-practical-1---allocation.html#cb135-4" tabindex="-1"></a>    ){</span>
+<span id="cb135-5"><a href="computer-practical-1---allocation.html#cb135-5" tabindex="-1"></a>  alloc_vec <span class="ot">=</span> <span class="fu">as.factor</span>(df[ ,<span class="fu">names</span>(df)<span class="sc">==</span>alloc])</span>
+<span id="cb135-6"><a href="computer-practical-1---allocation.html#cb135-6" tabindex="-1"></a>  alloc_lev <span class="ot">=</span> <span class="fu">levels</span>(alloc_vec) <span class="co"># how the treatment groups are coded</span></span>
+<span id="cb135-7"><a href="computer-practical-1---allocation.html#cb135-7" tabindex="-1"></a>  n1 <span class="ot">=</span> <span class="fu">nrow</span>(df[df[alloc]<span class="sc">==</span>alloc_lev[<span class="dv">1</span>],])</span>
+<span id="cb135-8"><a href="computer-practical-1---allocation.html#cb135-8" tabindex="-1"></a>  n2 <span class="ot">=</span> <span class="fu">nrow</span>(df[df[alloc]<span class="sc">==</span>alloc_lev[<span class="dv">2</span>],])</span>
+<span id="cb135-9"><a href="computer-practical-1---allocation.html#cb135-9" tabindex="-1"></a>  <span class="fu">abs</span>(n1<span class="sc">-</span>n2)</span>
+<span id="cb135-10"><a href="computer-practical-1---allocation.html#cb135-10" tabindex="-1"></a>}</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-62" class="exercise"><strong>Exercise A.3  </strong></span>Use the <code>imbalance</code> function above to find the imbalance in the allocation recorded in the <code>lic_garg</code> dataset.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-63" class="solution"><em>Solution</em>. </span></p>
+<div class="sourceCode" id="cb136"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb136-1"><a href="computer-practical-1---allocation.html#cb136-1" tabindex="-1"></a><span class="fu">imbalance</span>(<span class="at">df =</span> lic_garg, <span class="at">alloc =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+</div>
+</details>
+</div>
+</div>
+<div id="allocmethods" class="section level3 hasAnchor" number="12.1.2">
+<h3><span class="header-section-number">A.1.2</span> Allocation methods<a href="computer-practical-1---allocation.html#allocmethods" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>To mimic the way that participants are recruited sequentially in a trial (which is generally the case), the code for each type of allocation will work its way through the participant data frame, even though this might not be the most efficient way to produce the end result. For the more complex methods we’ll use packages. Feel free to write your own code for the simpler methods if you want to!</p>
+<p>We’ll start by performing each method once with the whole dataset, and then go on to include baseline variables, and finally we’ll perform a simulation study.</p>
+<div id="simple-random-allocation-1" class="section level4 hasAnchor" number="12.1.2.1">
+<h4><span class="header-section-number">A.1.2.1</span> Simple random allocation<a href="computer-practical-1---allocation.html#simple-random-allocation-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In simple random allocation, each participant is allocated to one of the two trial arms with equal probability.</p>
+<div class="sourceCode" id="cb138"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb138-1"><a href="computer-practical-1---allocation.html#cb138-1" tabindex="-1"></a>srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb138-2"><a href="computer-practical-1---allocation.html#cb138-2" tabindex="-1"></a>    df, <span class="co"># DF should be the participant data frame. </span></span>
+<span id="cb138-3"><a href="computer-practical-1---allocation.html#cb138-3" tabindex="-1"></a>        <span class="co"># A column &#39;treat&#39; will be added</span></span>
+<span id="cb138-4"><a href="computer-practical-1---allocation.html#cb138-4" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>) <span class="co"># Levels of treat factor</span></span>
+<span id="cb138-5"><a href="computer-practical-1---allocation.html#cb138-5" tabindex="-1"></a>){</span>
+<span id="cb138-6"><a href="computer-practical-1---allocation.html#cb138-6" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(df) <span class="co"># number of rows / participants</span></span>
+<span id="cb138-7"><a href="computer-practical-1---allocation.html#cb138-7" tabindex="-1"></a><span class="co"># Create a new column &#39;treat&#39;</span></span>
+<span id="cb138-8"><a href="computer-practical-1---allocation.html#cb138-8" tabindex="-1"></a>  df<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb138-9"><a href="computer-practical-1---allocation.html#cb138-9" tabindex="-1"></a><span class="co"># work through the rows, randomly allocating patients with probably 1/2</span></span>
+<span id="cb138-10"><a href="computer-practical-1---allocation.html#cb138-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb138-11"><a href="computer-practical-1---allocation.html#cb138-11" tabindex="-1"></a>    df<span class="sc">$</span>treat[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>))</span>
+<span id="cb138-12"><a href="computer-practical-1---allocation.html#cb138-12" tabindex="-1"></a>  }</span>
+<span id="cb138-13"><a href="computer-practical-1---allocation.html#cb138-13" tabindex="-1"></a>  df<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">as.factor</span>(df<span class="sc">$</span>treat)</span>
+<span id="cb138-14"><a href="computer-practical-1---allocation.html#cb138-14" tabindex="-1"></a>  df</span>
+<span id="cb138-15"><a href="computer-practical-1---allocation.html#cb138-15" tabindex="-1"></a>}</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-64" class="exercise"><strong>Exercise A.4  </strong></span>Use the function <code>srs</code> above to allocate the patients in the <code>licorice_gargle</code> dataset to groups T or C.</p>
+<p>Generate the balance table and imbalance and comment on them.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-65" class="solution"><em>Solution</em>. </span>To allocate the patients, use</p>
+<div class="sourceCode" id="cb139"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb139-1"><a href="computer-practical-1---allocation.html#cb139-1" tabindex="-1"></a>lg_srs <span class="ot">=</span> <span class="fu">srs</span>(</span>
+<span id="cb139-2"><a href="computer-practical-1---allocation.html#cb139-2" tabindex="-1"></a>  <span class="at">df =</span> lg_df[,<span class="sc">-</span><span class="dv">8</span>],</span>
+<span id="cb139-3"><a href="computer-practical-1---allocation.html#cb139-3" tabindex="-1"></a>  <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>)</span>
+<span id="cb139-4"><a href="computer-practical-1---allocation.html#cb139-4" tabindex="-1"></a>)</span></code></pre></div>
+<p>And to display the balance table</p>
+<div class="sourceCode" id="cb140"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb140-1"><a href="computer-practical-1---allocation.html#cb140-1" tabindex="-1"></a><span class="fu">tbl_summary</span>(lg_srs, <span class="at">by =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<div id="lpsqmhgtfc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#lpsqmhgtfc table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#lpsqmhgtfc thead, #lpsqmhgtfc tbody, #lpsqmhgtfc tfoot, #lpsqmhgtfc tr, #lpsqmhgtfc td, #lpsqmhgtfc th {
+  border-style: none;
+}
+
+#lpsqmhgtfc p {
+  margin: 0;
+  padding: 0;
+}
+
+#lpsqmhgtfc .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#lpsqmhgtfc .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#lpsqmhgtfc .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#lpsqmhgtfc .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#lpsqmhgtfc .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#lpsqmhgtfc .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#lpsqmhgtfc .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#lpsqmhgtfc .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#lpsqmhgtfc .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#lpsqmhgtfc .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#lpsqmhgtfc .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#lpsqmhgtfc .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#lpsqmhgtfc .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#lpsqmhgtfc .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#lpsqmhgtfc .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpsqmhgtfc .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#lpsqmhgtfc .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#lpsqmhgtfc .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#lpsqmhgtfc .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpsqmhgtfc .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#lpsqmhgtfc .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpsqmhgtfc .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#lpsqmhgtfc .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpsqmhgtfc .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#lpsqmhgtfc .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#lpsqmhgtfc .gt_left {
+  text-align: left;
+}
+
+#lpsqmhgtfc .gt_center {
+  text-align: center;
+}
+
+#lpsqmhgtfc .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#lpsqmhgtfc .gt_font_normal {
+  font-weight: normal;
+}
+
+#lpsqmhgtfc .gt_font_bold {
+  font-weight: bold;
+}
+
+#lpsqmhgtfc .gt_font_italic {
+  font-style: italic;
+}
+
+#lpsqmhgtfc .gt_super {
+  font-size: 65%;
+}
+
+#lpsqmhgtfc .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#lpsqmhgtfc .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#lpsqmhgtfc .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#lpsqmhgtfc .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#lpsqmhgtfc .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#lpsqmhgtfc .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#lpsqmhgtfc .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#lpsqmhgtfc .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#lpsqmhgtfc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class='gt_from_md'><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_1"><span class='gt_from_md'><strong>C</strong><br />
+N = 111</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="stat_2"><span class='gt_from_md'><strong>T</strong><br />
+N = 124</span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">preOp_gender</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    0</td>
+<td headers="stat_1" class="gt_row gt_center">65 (59%)</td>
+<td headers="stat_2" class="gt_row gt_center">77 (62%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">46 (41%)</td>
+<td headers="stat_2" class="gt_row gt_center">47 (38%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_asa</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">19 (17%)</td>
+<td headers="stat_2" class="gt_row gt_center">22 (18%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2</td>
+<td headers="stat_1" class="gt_row gt_center">68 (61%)</td>
+<td headers="stat_2" class="gt_row gt_center">66 (53%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3</td>
+<td headers="stat_1" class="gt_row gt_center">24 (22%)</td>
+<td headers="stat_2" class="gt_row gt_center">36 (29%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_mallampati</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">32 (29%)</td>
+<td headers="stat_2" class="gt_row gt_center">38 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2</td>
+<td headers="stat_1" class="gt_row gt_center">67 (60%)</td>
+<td headers="stat_2" class="gt_row gt_center">68 (55%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3</td>
+<td headers="stat_1" class="gt_row gt_center">11 (9.9%)</td>
+<td headers="stat_2" class="gt_row gt_center">18 (15%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    4</td>
+<td headers="stat_1" class="gt_row gt_center">1 (0.9%)</td>
+<td headers="stat_2" class="gt_row gt_center">0 (0%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_smoking</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">45 (41%)</td>
+<td headers="stat_2" class="gt_row gt_center">45 (36%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    2</td>
+<td headers="stat_1" class="gt_row gt_center">32 (29%)</td>
+<td headers="stat_2" class="gt_row gt_center">40 (32%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    3</td>
+<td headers="stat_1" class="gt_row gt_center">34 (31%)</td>
+<td headers="stat_2" class="gt_row gt_center">39 (31%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">preOp_pain</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    0</td>
+<td headers="stat_1" class="gt_row gt_center">110 (99%)</td>
+<td headers="stat_2" class="gt_row gt_center">123 (99%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    1</td>
+<td headers="stat_1" class="gt_row gt_center">1 (0.9%)</td>
+<td headers="stat_2" class="gt_row gt_center">1 (0.8%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">age</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    Under 50</td>
+<td headers="stat_1" class="gt_row gt_center">23 (21%)</td>
+<td headers="stat_2" class="gt_row gt_center">44 (35%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    50 to 70</td>
+<td headers="stat_1" class="gt_row gt_center">69 (62%)</td>
+<td headers="stat_2" class="gt_row gt_center">53 (43%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    70 plus</td>
+<td headers="stat_1" class="gt_row gt_center">19 (17%)</td>
+<td headers="stat_2" class="gt_row gt_center">27 (22%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">BMI</td>
+<td headers="stat_1" class="gt_row gt_center"><br /></td>
+<td headers="stat_2" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    medium_or_low</td>
+<td headers="stat_1" class="gt_row gt_center">46 (41%)</td>
+<td headers="stat_2" class="gt_row gt_center">53 (43%)</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    high</td>
+<td headers="stat_1" class="gt_row gt_center">65 (59%)</td>
+<td headers="stat_2" class="gt_row gt_center">71 (57%)</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="3"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class='gt_from_md'>n (%)</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<p>To find the imbalance, the command is</p>
+<div class="sourceCode" id="cb141"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb141-1"><a href="computer-practical-1---allocation.html#cb141-1" tabindex="-1"></a><span class="fu">imbalance</span>(lg_srs, <span class="at">alloc =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 13</code></pre>
+<p>Since this uses the <code>sample</code> function, and we didn’t set a seed, you may well have got a different allocation (and therefore imbalance).</p>
+</div>
+</details>
+</div>
+<div id="randomly-permuted-blocks" class="section level4 hasAnchor" number="12.1.2.2">
+<h4><span class="header-section-number">A.1.2.2</span> Randomly permuted blocks<a href="computer-practical-1---allocation.html#randomly-permuted-blocks" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We will do this with the package <code>blockrand</code>.</p>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="computer-practical-1---allocation.html#cb143-1" tabindex="-1"></a><span class="fu">library</span>(blockrand)</span></code></pre></div>
+<p>The function for generating RPB designs is also called <code>blockrand</code>. The default for the function <code>blockrand</code> is that it will randomly vary block length within <span class="math inline">\(\left\lbrace 2,\,4,\,6,\,8 \right\rbrace\)</span>.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-66" class="exercise"><strong>Exercise A.5  </strong></span>Try playing around with the function <code>blockrand</code>, for example starting with</p>
+<div class="sourceCode" id="cb144"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb144-1"><a href="computer-practical-1---allocation.html#cb144-1" tabindex="-1"></a><span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">100</span>)</span></code></pre></div>
+<p>Can you generate an allocation for the <code>licorice_gargle</code> data (remember our data frame is now <code>lg_df</code>) and produce the balance table?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-67" class="solution"><em>Solution</em>. </span>There are 235 rows/participants in <code>lg_df</code>, and to keep consistency we would like the levels of our treatment to be <code>"T"</code> and <code>"C"</code>. Therefore we can do</p>
+<div class="sourceCode" id="cb145"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb145-1"><a href="computer-practical-1---allocation.html#cb145-1" tabindex="-1"></a>rpb_lg <span class="ot">=</span> <span class="fu">blockrand</span>(<span class="at">n=</span><span class="dv">235</span>, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>))</span></code></pre></div>
+<p>Notice that this doesn’t have 235 rows: the <code>blockrand</code> function will always finish after a whole block.</p>
+<p>Let’s add this to our participant data to create a new data frame <code>lg_rpb</code>:</p>
+<div class="sourceCode" id="cb146"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb146-1"><a href="computer-practical-1---allocation.html#cb146-1" tabindex="-1"></a><span class="co"># create the new data frame, a copy of lg_df</span></span>
+<span id="cb146-2"><a href="computer-practical-1---allocation.html#cb146-2" tabindex="-1"></a>lg_rpb <span class="ot">=</span> lg_df  </span>
+<span id="cb146-3"><a href="computer-practical-1---allocation.html#cb146-3" tabindex="-1"></a></span>
+<span id="cb146-4"><a href="computer-practical-1---allocation.html#cb146-4" tabindex="-1"></a><span class="co"># Replace the original treat column with the RPB treatment column</span></span>
+<span id="cb146-5"><a href="computer-practical-1---allocation.html#cb146-5" tabindex="-1"></a><span class="co"># Using only the first 235 allocations</span></span>
+<span id="cb146-6"><a href="computer-practical-1---allocation.html#cb146-6" tabindex="-1"></a>lg_rpb<span class="sc">$</span>treat <span class="ot">=</span> rpb_lg<span class="sc">$</span>treatment[<span class="dv">1</span><span class="sc">:</span><span class="dv">235</span>]</span></code></pre></div>
+<p>Then we can generate the demographic table as before:</p>
+<div class="sourceCode" id="cb147"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb147-1"><a href="computer-practical-1---allocation.html#cb147-1" tabindex="-1"></a><span class="fu">tbl_summary</span>(lg_rpb, <span class="at">by =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<p>and calculate the imbalance</p>
+<pre><code>## [1] 1</code></pre>
+</div>
+</details>
+<p>The package <code>blockrand</code> contains a function <code>plotblockrand</code>, which outputs PDFs of randomization cards, ready to be printed and put into envelopes!</p>
+</div>
+<div id="biased-coin-designs-1" class="section level4 hasAnchor" number="12.1.2.3">
+<h4><span class="header-section-number">A.1.2.3</span> Biased coin designs<a href="computer-practical-1---allocation.html#biased-coin-designs-1" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>We can write code for a biased coin design by adapting the <code>srs</code> function above, setting <span class="math inline">\(p=\frac{2}{3}\)</span> by default as per <span class="citation">Efron (<a href="#ref-efron1971forcing">1971</a>)</span>.</p>
+<div class="sourceCode" id="cb149"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb149-1"><a href="computer-practical-1---allocation.html#cb149-1" tabindex="-1"></a>biased_coin <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb149-2"><a href="computer-practical-1---allocation.html#cb149-2" tabindex="-1"></a>    data,</span>
+<span id="cb149-3"><a href="computer-practical-1---allocation.html#cb149-3" tabindex="-1"></a>    <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">&quot;T&quot;</span>, <span class="st">&quot;C&quot;</span>),</span>
+<span id="cb149-4"><a href="computer-practical-1---allocation.html#cb149-4" tabindex="-1"></a>    <span class="at">p=</span><span class="dv">2</span><span class="sc">/</span><span class="dv">3</span></span>
+<span id="cb149-5"><a href="computer-practical-1---allocation.html#cb149-5" tabindex="-1"></a>){</span>
+<span id="cb149-6"><a href="computer-practical-1---allocation.html#cb149-6" tabindex="-1"></a>  Dn <span class="ot">=</span> <span class="dv">0</span> <span class="co"># starting value of imbalance</span></span>
+<span id="cb149-7"><a href="computer-practical-1---allocation.html#cb149-7" tabindex="-1"></a>  n <span class="ot">=</span> <span class="fu">nrow</span>(data)</span>
+<span id="cb149-8"><a href="computer-practical-1---allocation.html#cb149-8" tabindex="-1"></a>  alloc <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, n)</span>
+<span id="cb149-9"><a href="computer-practical-1---allocation.html#cb149-9" tabindex="-1"></a>  </span>
+<span id="cb149-10"><a href="computer-practical-1---allocation.html#cb149-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n){</span>
+<span id="cb149-11"><a href="computer-practical-1---allocation.html#cb149-11" tabindex="-1"></a>    <span class="cf">if</span> (Dn<span class="sc">==</span><span class="dv">0</span>){ <span class="co"># equally balanced</span></span>
+<span id="cb149-12"><a href="computer-practical-1---allocation.html#cb149-12" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">0.5</span>) )</span>
+<span id="cb149-13"><a href="computer-practical-1---allocation.html#cb149-13" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(Dn<span class="sc">&lt;</span><span class="dv">0</span>){ <span class="co"># More allocations to levels[2] up to this point</span></span>
+<span id="cb149-14"><a href="computer-practical-1---allocation.html#cb149-14" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(p, <span class="dv">1</span><span class="sc">-</span>p) )</span>
+<span id="cb149-15"><a href="computer-practical-1---allocation.html#cb149-15" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span>(Dn<span class="sc">&gt;</span><span class="dv">0</span>){ <span class="co"># More allocations to levels[1] up to this point</span></span>
+<span id="cb149-16"><a href="computer-practical-1---allocation.html#cb149-16" tabindex="-1"></a>      alloc[i] <span class="ot">=</span> <span class="fu">sample</span>(levels, <span class="at">size=</span><span class="dv">1</span>, <span class="at">prob=</span><span class="fu">c</span>(<span class="dv">1</span><span class="sc">-</span>p, p) )</span>
+<span id="cb149-17"><a href="computer-practical-1---allocation.html#cb149-17" tabindex="-1"></a>    }</span>
+<span id="cb149-18"><a href="computer-practical-1---allocation.html#cb149-18" tabindex="-1"></a>    <span class="co"># Compute imbalance at this stage</span></span>
+<span id="cb149-19"><a href="computer-practical-1---allocation.html#cb149-19" tabindex="-1"></a>    alloc_to_n <span class="ot">=</span> alloc[<span class="dv">1</span><span class="sc">:</span>i]</span>
+<span id="cb149-20"><a href="computer-practical-1---allocation.html#cb149-20" tabindex="-1"></a>    Dn <span class="ot">=</span> <span class="fu">sum</span>(alloc_to_n<span class="sc">==</span>levels[<span class="dv">1</span>]) <span class="sc">-</span> <span class="fu">sum</span>(alloc_to_n <span class="sc">==</span> levels[<span class="dv">2</span>])</span>
+<span id="cb149-21"><a href="computer-practical-1---allocation.html#cb149-21" tabindex="-1"></a>  }</span>
+<span id="cb149-22"><a href="computer-practical-1---allocation.html#cb149-22" tabindex="-1"></a>  data<span class="sc">$</span>treat <span class="ot">=</span> <span class="fu">as.factor</span>(alloc)</span>
+<span id="cb149-23"><a href="computer-practical-1---allocation.html#cb149-23" tabindex="-1"></a>  data</span>
+<span id="cb149-24"><a href="computer-practical-1---allocation.html#cb149-24" tabindex="-1"></a>}</span></code></pre></div>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-68" class="exercise"><strong>Exercise A.6  </strong></span>Use the function <code>biased_coin</code> above to allocate patients to the two groups. Produce the demographic table and calculate the imbalance. Try this for some different values of <code>p</code>.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-69" class="solution"><em>Solution</em>. </span>To create a biased coin design with <span class="math inline">\(p=0.9\)</span> (for example), we enter</p>
+<div class="sourceCode" id="cb150"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb150-1"><a href="computer-practical-1---allocation.html#cb150-1" tabindex="-1"></a>lg_bc1 <span class="ot">=</span> <span class="fu">biased_coin</span>(</span>
+<span id="cb150-2"><a href="computer-practical-1---allocation.html#cb150-2" tabindex="-1"></a>  <span class="at">data=</span>lg_df[,<span class="sc">-</span><span class="dv">8</span>],</span>
+<span id="cb150-3"><a href="computer-practical-1---allocation.html#cb150-3" tabindex="-1"></a>  <span class="at">p=</span><span class="fl">0.9</span></span>
+<span id="cb150-4"><a href="computer-practical-1---allocation.html#cb150-4" tabindex="-1"></a>)</span></code></pre></div>
+<p>and to produce a balance table:</p>
+<div class="sourceCode" id="cb151"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb151-1"><a href="computer-practical-1---allocation.html#cb151-1" tabindex="-1"></a><span class="fu">tbl_summary</span>(lg_bc1, <span class="at">by =</span> <span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<p>Finally we can find the imbalance:</p>
+<div class="sourceCode" id="cb152"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb152-1"><a href="computer-practical-1---allocation.html#cb152-1" tabindex="-1"></a><span class="fu">imbalance</span>(lg_bc1, <span class="at">alloc=</span><span class="st">&quot;treat&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 1</code></pre>
+</div>
+</details>
+</div>
+<div id="urn-designs" class="section level4 hasAnchor" number="12.1.2.4">
+<h4><span class="header-section-number">A.1.2.4</span> Urn designs<a href="computer-practical-1---allocation.html#urn-designs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>For the urn design, we will use the function <code>udPar</code> from the package <code>randomizeR</code>. We wrote this in lectures as <span class="math inline">\(UD\left(r,s\right)\)</span>, where</p>
+<ul>
+<li><span class="math inline">\(r\)</span> is the number of balls for each treatment group in the urn to begin with</li>
+<li><span class="math inline">\(s\)</span> is the number of balls added per treatment after each allocation</li>
+</ul>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-70" class="exercise"><strong>Exercise A.7  </strong></span>Look at the help file for <code>udPar</code>. Which arguments correspond to <span class="math inline">\(r\)</span> and <span class="math inline">\(s\)</span> (as we called them in Section <a href="alloc.html#bcurn">3.2.3</a>?</p>
+</div>
+<p>The function <code>udPar</code> creates a model object, storing the parameters for the particular Urn design. To generate sequences of allocations, we use the function <code>genSeq</code></p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-71" class="exercise"><strong>Exercise A.8  </strong></span>Create an urn design object using <code>udPar</code> with <span class="math inline">\(r=3,\;s=1\)</span>, set to create enough allocations for the licorice gargle data.</p>
+<p>Use the function <code>genSeq</code> to generate a sequence of allocations.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-72" class="solution"><em>Solution</em>. </span></p>
+<div class="sourceCode" id="cb154"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb154-1"><a href="computer-practical-1---allocation.html#cb154-1" tabindex="-1"></a><span class="fu">library</span>(randomizeR)</span>
+<span id="cb154-2"><a href="computer-practical-1---allocation.html#cb154-2" tabindex="-1"></a>ud_31 <span class="ot">=</span> <span class="fu">udPar</span>(<span class="dv">235</span>, <span class="dv">3</span>, <span class="dv">1</span>, <span class="fu">c</span>(<span class="st">&quot;0&quot;</span>, <span class="st">&quot;1&quot;</span>))</span>
+<span id="cb154-3"><a href="computer-practical-1---allocation.html#cb154-3" tabindex="-1"></a>seq_ud31 <span class="ot">=</span> <span class="fu">genSeq</span>(ud_31)</span></code></pre></div>
+<p>The allocation vector is stored as a row in the matrix <code>M</code> which is a slot in the <code>genSeq</code> object (part of the object). You can access it by</p>
+<div class="sourceCode" id="cb155"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb155-1"><a href="computer-practical-1---allocation.html#cb155-1" tabindex="-1"></a>seq_ud31<span class="sc">$</span>M[<span class="dv">1</span>,]</span></code></pre></div>
+<pre><code>##   [1] 0 0 0 1 1 1 0 0 1 0 1 1 0 1 0 1 1 1 1 0 0 1 0 1 1 0 0 1 0 1 1 1 0 1 1 1 0 0 0 1 0 0 0 1 0 0 0 1
+##  [49] 0 0 0 1 0 1 0 1 1 0 1 0 0 0 0 1 0 1 0 1 1 0 1 1 1 1 0 0 1 0 1 0 0 0 0 0 0 1 1 1 1 0 1 0 1 0 0 0
+##  [97] 1 1 0 1 1 1 0 0 1 0 0 1 1 1 1 0 1 0 0 0 0 0 1 1 0 0 1 1 1 1 1 1 0 1 0 0 1 1 1 0 1 0 0 1 0 0 0 1
+## [145] 1 1 1 1 1 0 1 0 0 1 1 1 1 1 0 0 1 1 0 1 0 1 0 0 1 1 1 1 0 1 1 0 1 1 0 1 1 0 0 1 0 0 0 1 1 1 0 1
+## [193] 1 1 1 0 0 1 0 1 0 1 1 0 1 0 0 1 0 0 1 0 0 0 0 0 1 1 0 0 0 1 1 1 1 1 0 1 1 0 0 0 1 1 1</code></pre>
+<p>The argument <code>r</code> allows you to generate <code>r</code> sequences, in which case the matrix <code>M</code> has <code>r</code> rows.</p>
+</div>
+</details>
+</div>
+</div>
+<div id="stratifying-the-dataset" class="section level3 hasAnchor" number="12.1.3">
+<h3><span class="header-section-number">A.1.3</span> Stratifying the dataset<a href="computer-practical-1---allocation.html#stratifying-the-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The first way we thought about to account for baseline measurements was to use stratified sampling. For this, we split the dataset into a number of strata, within each of which the participants have the same levels of the stratifying factors. For example, in some hypothetical dataset one stratum might contain only women, aged 50-65, with a history of smoking.</p>
+<p>Once we have stratified the dataset, we can apply any of the methods above by simply treating the different strata as separate ‘mini-trials’.</p>
+<p>It’s not uncommon for some of the baseline data to be missing, in which case the following algorithms won’t work without some adjustment. Two possible approaches in that case would be</p>
+<ul>
+<li>to impute a ‘dummy’ value for missing data, chosen using some available information about likely values</li>
+<li>to not involve that covariate in the allocation method (especially if it’s thought not to be likely to be informative).</li>
+</ul>
+<p>An obvious problem with applying stratification to this dataset is the number of strata. We have (if you have the same numbers of levels for <code>age</code> and <code>BMI</code> as I do)</p>
+<p><span class="math display">\[2\times{3}\times{4}\times{3}\times{2}\times{3}\times{2} = 864 \]</span>
+strata. Even by collecting levels together and so on, we are not going to get down to a sufficiently small number of strata. Therefore we will choose just a couple of covariates to stratify by. For example, gender and smoking status:</p>
+<div class="sourceCode" id="cb157"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb157-1"><a href="computer-practical-1---allocation.html#cb157-1" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb157-2"><a href="computer-practical-1---allocation.html#cb157-2" tabindex="-1"></a><span class="co"># Add an ID variable so that we can keep track of the order of participants</span></span>
+<span id="cb157-3"><a href="computer-practical-1---allocation.html#cb157-3" tabindex="-1"></a>lg_df<span class="sc">$</span>ID <span class="ot">=</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(lg_df)</span>
+<span id="cb157-4"><a href="computer-practical-1---allocation.html#cb157-4" tabindex="-1"></a><span class="co"># split the data frame according to levels of factors</span></span>
+<span id="cb157-5"><a href="computer-practical-1---allocation.html#cb157-5" tabindex="-1"></a>strat_gen_sm <span class="ot">&lt;-</span> lg_df <span class="sc">%&gt;%</span></span>
+<span id="cb157-6"><a href="computer-practical-1---allocation.html#cb157-6" tabindex="-1"></a>  <span class="fu">group_split</span>(preOp_gender, preOp_smoking) </span></code></pre></div>
+<p>will create a list of data frames, one for each combination of <code>preOp_gender</code> and <code>preOp_smoking</code>. In this case there are six data frames, and for example the first (accessed by <code>strat_gen_sm[[1]]</code> contains all participants with <code>preOp_gender</code>=0 and <code>preOp_smoking</code>=1. You can choose different factors to stratify by if you want to!</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-73" class="exercise"><strong>Exercise A.9  </strong></span>Split your group using the code above, choosing two factors to stratify by. How many participants are in each stratum?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-74" class="solution"><em>Solution</em>. </span>We’ll stick with the group as above. To find the numbers of participants in each group we do</p>
+<div class="sourceCode" id="cb158"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb158-1"><a href="computer-practical-1---allocation.html#cb158-1" tabindex="-1"></a>group_sizes <span class="ot">=</span> <span class="fu">sapply</span>(</span>
+<span id="cb158-2"><a href="computer-practical-1---allocation.html#cb158-2" tabindex="-1"></a>  <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strat_gen_sm),</span>
+<span id="cb158-3"><a href="computer-practical-1---allocation.html#cb158-3" tabindex="-1"></a>  <span class="cf">function</span>(i){</span>
+<span id="cb158-4"><a href="computer-practical-1---allocation.html#cb158-4" tabindex="-1"></a>    <span class="fu">nrow</span>(strat_gen_sm[[i]])</span>
+<span id="cb158-5"><a href="computer-practical-1---allocation.html#cb158-5" tabindex="-1"></a>  }</span>
+<span id="cb158-6"><a href="computer-practical-1---allocation.html#cb158-6" tabindex="-1"></a>)</span>
+<span id="cb158-7"><a href="computer-practical-1---allocation.html#cb158-7" tabindex="-1"></a>group_sizes</span></code></pre></div>
+<pre><code>## [1] 63 47 32 27 25 41</code></pre>
+</div>
+</details>
+<div id="margimbalance" class="section level4 hasAnchor" number="12.1.3.1">
+<h4><span class="header-section-number">A.1.3.1</span> Another measure of imbalance<a href="computer-practical-1---allocation.html#margimbalance" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>To see how well balanced our allocations are in terms of each covariate, we will define a function summing the marginal imbalance</p>
+<div class="sourceCode" id="cb160"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb160-1"><a href="computer-practical-1---allocation.html#cb160-1" tabindex="-1"></a>marg_imbalance <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb160-2"><a href="computer-practical-1---allocation.html#cb160-2" tabindex="-1"></a>    df,  <span class="co"># participant data frame, including allocation and all factor variables</span></span>
+<span id="cb160-3"><a href="computer-practical-1---allocation.html#cb160-3" tabindex="-1"></a>    alloc, <span class="co"># name of allocation column</span></span>
+<span id="cb160-4"><a href="computer-practical-1---allocation.html#cb160-4" tabindex="-1"></a>    factors <span class="co"># names of prognostic factors to be included</span></span>
+<span id="cb160-5"><a href="computer-practical-1---allocation.html#cb160-5" tabindex="-1"></a>    ){</span>
+<span id="cb160-6"><a href="computer-practical-1---allocation.html#cb160-6" tabindex="-1"></a>  df <span class="ot">=</span> <span class="fu">as.data.frame</span>(df) <span class="co"># deals with tibbles</span></span>
+<span id="cb160-7"><a href="computer-practical-1---allocation.html#cb160-7" tabindex="-1"></a>  n_fact <span class="ot">=</span> <span class="fu">length</span>(factors) <span class="co"># the numbers of factors</span></span>
+<span id="cb160-8"><a href="computer-practical-1---allocation.html#cb160-8" tabindex="-1"></a>  imb_sum<span class="ot">=</span><span class="dv">0</span>                <span class="co"># a running total of imbalance</span></span>
+<span id="cb160-9"><a href="computer-practical-1---allocation.html#cb160-9" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n_fact){     <span class="co"># loop through the factors </span></span>
+<span id="cb160-10"><a href="computer-practical-1---allocation.html#cb160-10" tabindex="-1"></a>    ind_i <span class="ot">=</span> (<span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(df))[<span class="fu">names</span>(df)<span class="sc">==</span>factors[i]]</span>
+<span id="cb160-11"><a href="computer-practical-1---allocation.html#cb160-11" tabindex="-1"></a>    col_i <span class="ot">=</span> <span class="fu">as.factor</span>(df[ ,ind_i])</span>
+<span id="cb160-12"><a href="computer-practical-1---allocation.html#cb160-12" tabindex="-1"></a>    levels_i <span class="ot">=</span> <span class="fu">levels</span>(col_i)</span>
+<span id="cb160-13"><a href="computer-practical-1---allocation.html#cb160-13" tabindex="-1"></a>    nlevels_i <span class="ot">=</span> <span class="fu">length</span>(levels_i)</span>
+<span id="cb160-14"><a href="computer-practical-1---allocation.html#cb160-14" tabindex="-1"></a>    <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nlevels_i){ <span class="co"># loop through the levels of factor i</span></span>
+<span id="cb160-15"><a href="computer-practical-1---allocation.html#cb160-15" tabindex="-1"></a>      <span class="co"># df_ij contains just those entries with level j of factor i</span></span>
+<span id="cb160-16"><a href="computer-practical-1---allocation.html#cb160-16" tabindex="-1"></a>      df_ij <span class="ot">=</span> df[df[ ,ind_i]<span class="sc">==</span>levels_i[j] , ] </span>
+<span id="cb160-17"><a href="computer-practical-1---allocation.html#cb160-17" tabindex="-1"></a>      imb_ij <span class="ot">=</span> <span class="fu">imbalance</span>(<span class="at">df=</span>df_ij, <span class="at">alloc=</span>alloc) <span class="co"># find the imbalance for the sub-data-frame in which factor i has level j</span></span>
+<span id="cb160-18"><a href="computer-practical-1---allocation.html#cb160-18" tabindex="-1"></a>      imb_sum <span class="ot">=</span> imb_sum <span class="sc">+</span> imb_ij</span>
+<span id="cb160-19"><a href="computer-practical-1---allocation.html#cb160-19" tabindex="-1"></a>    }</span>
+<span id="cb160-20"><a href="computer-practical-1---allocation.html#cb160-20" tabindex="-1"></a>  }</span>
+<span id="cb160-21"><a href="computer-practical-1---allocation.html#cb160-21" tabindex="-1"></a>  imb_sum</span>
+<span id="cb160-22"><a href="computer-practical-1---allocation.html#cb160-22" tabindex="-1"></a>}</span></code></pre></div>
+<p>For example, to find the marginal imbalance over the gender and age factors, use</p>
+<div class="sourceCode" id="cb161"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb161-1"><a href="computer-practical-1---allocation.html#cb161-1" tabindex="-1"></a><span class="fu">marg_imbalance</span>(<span class="at">df=</span>lg_df, <span class="at">alloc=</span><span class="st">&quot;treat&quot;</span>, <span class="at">factors =</span> <span class="fu">c</span>(<span class="st">&quot;preOp_gender&quot;</span>, <span class="st">&quot;age&quot;</span>))</span></code></pre></div>
+<pre><code>## [1] 20</code></pre>
+<p><strong>Note that the larger the total number of factor levels, the larger the marginal imbalance will be, so if you’re comparing between methods, make sure you’re including all the same factors!</strong></p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-75" class="exercise"><strong>Exercise A.10  </strong></span>Choose a couple of methods from Section <a href="computer-practical-1---allocation.html#allocmethods">A.1.2</a>, and use them with your stratified dataset.
+Use the <code>marg_imbalance</code> function to find the marginal imbalance. Try this for just the factors you stratified by, and for other collections of factors. What do you expect to see?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-76" class="solution"><em>Solution</em>. </span>The code for this will vary, but the basic idea is to work through the individual data sets individually, and apply the functions from Section <a href="computer-practical-1---allocation.html#allocmethods">A.1.2</a>. One way to do this is by creating a for loop. The code below shows how this would work for simple random sampling, but you can change the function to use whichever method you prefer.</p>
+<div class="sourceCode" id="cb163"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb163-1"><a href="computer-practical-1---allocation.html#cb163-1" tabindex="-1"></a><span class="co"># This command creates an empty list, which we will fill with allocation data frames as we go through</span></span>
+<span id="cb163-2"><a href="computer-practical-1---allocation.html#cb163-2" tabindex="-1"></a>alloc_list <span class="ot">=</span> <span class="fu">list</span>()</span>
+<span id="cb163-3"><a href="computer-practical-1---allocation.html#cb163-3" tabindex="-1"></a><span class="co"># The loop works through the stratified data frames, applies SRS to allocate patients</span></span>
+<span id="cb163-4"><a href="computer-practical-1---allocation.html#cb163-4" tabindex="-1"></a><span class="co"># and stores them in alloc_list</span></span>
+<span id="cb163-5"><a href="computer-practical-1---allocation.html#cb163-5" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(strat_gen_sm)){</span>
+<span id="cb163-6"><a href="computer-practical-1---allocation.html#cb163-6" tabindex="-1"></a>  alloc_list[[i]] <span class="ot">=</span> <span class="fu">srs</span>(strat_gen_sm[[i]])</span>
+<span id="cb163-7"><a href="computer-practical-1---allocation.html#cb163-7" tabindex="-1"></a>}</span>
+<span id="cb163-8"><a href="computer-practical-1---allocation.html#cb163-8" tabindex="-1"></a><span class="co"># bind all the data frames back together again</span></span>
+<span id="cb163-9"><a href="computer-practical-1---allocation.html#cb163-9" tabindex="-1"></a>alloc_full<span class="ot">=</span> dplyr<span class="sc">::</span><span class="fu">bind_rows</span>(alloc_list)</span>
+<span id="cb163-10"><a href="computer-practical-1---allocation.html#cb163-10" tabindex="-1"></a><span class="co"># re-order according to ID variable</span></span>
+<span id="cb163-11"><a href="computer-practical-1---allocation.html#cb163-11" tabindex="-1"></a>alloc_full[<span class="fu">order</span>(alloc_full<span class="sc">$</span>ID),]</span></code></pre></div>
+<pre><code>## # A tibble: 235 × 9
+##    preOp_gender preOp_asa preOp_mallampati preOp_smoking preOp_pain age      BMI           treat    ID
+##    &lt;fct&gt;        &lt;fct&gt;     &lt;fct&gt;            &lt;fct&gt;         &lt;fct&gt;      &lt;fct&gt;    &lt;fct&gt;         &lt;fct&gt; &lt;int&gt;
+##  1 0            3         2                1             0          50 to 70 high          0         1
+##  2 0            2         2                2             0          70 plus  medium_or_low 0         2
+##  3 0            2         2                1             0          50 to 70 high          0         3
+##  4 0            2         2                1             0          50 to 70 high          1         4
+##  5 0            1         1                2             0          70 plus  high          0         5
+##  6 0            2         3                1             0          50 to 70 high          1         6
+##  7 0            3         1                1             0          50 to 70 high          0         7
+##  8 0            2         2                1             0          50 to 70 high          1         8
+##  9 0            3         1                1             0          70 plus  medium_or_low 0         9
+## 10 0            3         2                3             0          50 to 70 high          1        10
+## # ℹ 225 more rows</code></pre>
+<p>It would be silly though to do this with SRS - why?</p>
+<p>Once you’ve performed the allocation, you can find the demographic tables, imbalance and marginal imbalance as before (with <code>alloc_full</code>, or whatever your is called, as the data frame)</p>
+</div>
+</details>
+</div>
+</div>
+<div id="minimisation" class="section level3 hasAnchor" number="12.1.4">
+<h3><span class="header-section-number">A.1.4</span> Minimisation<a href="computer-practical-1---allocation.html#minimisation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If we want to try to achieve balance for all prognostic factors, minimisation is a more suitable method. The function <code>Minirand</code> in the package <code>Minirand</code> implements the minimisation algorithm.</p>
+<p>Much like we did in lectures (and like we would in a real trial), the function <code>Minirand</code> works from the point of view of having already allocated <span class="math inline">\(j-1\)</span> particpants, and being presented with a <span class="math inline">\(j^{th}\)</span>.</p>
+<p>This example code is copied from the function’s help file, but with some extra comments to help you to follow it. It first creates a participant data frame, then allocates the particpants to treatment groups using Minimisation.</p>
+<div class="sourceCode" id="cb165"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb165-1"><a href="computer-practical-1---allocation.html#cb165-1" tabindex="-1"></a><span class="do">## Information about the treatment</span></span>
+<span id="cb165-2"><a href="computer-practical-1---allocation.html#cb165-2" tabindex="-1"></a>ntrt <span class="ot">&lt;-</span> <span class="dv">3</span> <span class="co"># There will three treatment groups</span></span>
+<span id="cb165-3"><a href="computer-practical-1---allocation.html#cb165-3" tabindex="-1"></a>trtseq <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>) <span class="co"># the treatment groups are indexed 1, 2, 3</span></span>
+<span id="cb165-4"><a href="computer-practical-1---allocation.html#cb165-4" tabindex="-1"></a>ratio <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">1</span>)  <span class="co"># the treatment groups will be allocated in a 2:2:1 ratio</span></span>
+<span id="cb165-5"><a href="computer-practical-1---allocation.html#cb165-5" tabindex="-1"></a></span>
+<span id="cb165-6"><a href="computer-practical-1---allocation.html#cb165-6" tabindex="-1"></a><span class="do">## The next few rows generate the participant data frame</span></span>
+<span id="cb165-7"><a href="computer-practical-1---allocation.html#cb165-7" tabindex="-1"></a>nsample <span class="ot">&lt;-</span> <span class="dv">120</span> <span class="co"># we will have 120 participants</span></span>
+<span id="cb165-8"><a href="computer-practical-1---allocation.html#cb165-8" tabindex="-1"></a>c1 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.4</span>, <span class="fl">0.6</span>)) </span>
+<span id="cb165-9"><a href="computer-practical-1---allocation.html#cb165-9" tabindex="-1"></a>c2 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.3</span>, <span class="fl">0.7</span>))</span>
+<span id="cb165-10"><a href="computer-practical-1---allocation.html#cb165-10" tabindex="-1"></a>c3 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.33</span>, <span class="fl">0.2</span>, <span class="fl">0.5</span>)) </span>
+<span id="cb165-11"><a href="computer-practical-1---allocation.html#cb165-11" tabindex="-1"></a>c4 <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="fu">seq</span>(<span class="dv">1</span>, <span class="dv">0</span>), nsample, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.33</span>, <span class="fl">0.67</span>)) </span>
+<span id="cb165-12"><a href="computer-practical-1---allocation.html#cb165-12" tabindex="-1"></a>covmat <span class="ot">&lt;-</span> <span class="fu">cbind</span>(c1, c2, c3, c4) <span class="co"># generate the matrix of covariate factors for the subjects</span></span>
+<span id="cb165-13"><a href="computer-practical-1---allocation.html#cb165-13" tabindex="-1"></a><span class="co"># label of the covariates </span></span>
+<span id="cb165-14"><a href="computer-practical-1---allocation.html#cb165-14" tabindex="-1"></a><span class="fu">colnames</span>(covmat) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;Gender&quot;</span>, <span class="st">&quot;Age&quot;</span>, <span class="st">&quot;Hypertension&quot;</span>, <span class="st">&quot;Use of Antibiotics&quot;</span>) </span>
+<span id="cb165-15"><a href="computer-practical-1---allocation.html#cb165-15" tabindex="-1"></a>covwt <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>, <span class="dv">1</span><span class="sc">/</span><span class="dv">4</span>) <span class="co"># equal weights/importance applied to each factor</span></span>
+<span id="cb165-16"><a href="computer-practical-1---allocation.html#cb165-16" tabindex="-1"></a></span>
+<span id="cb165-17"><a href="computer-practical-1---allocation.html#cb165-17" tabindex="-1"></a><span class="do">## Applying the algorithm - start here if you already have participant data!</span></span>
+<span id="cb165-18"><a href="computer-practical-1---allocation.html#cb165-18" tabindex="-1"></a></span>
+<span id="cb165-19"><a href="computer-practical-1---allocation.html#cb165-19" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsample) <span class="co"># Generate a vector to store the results (the allocations)</span></span>
+<span id="cb165-20"><a href="computer-practical-1---allocation.html#cb165-20" tabindex="-1"></a><span class="co"># generate treatment assignment for the 1st subject</span></span>
+<span id="cb165-21"><a href="computer-practical-1---allocation.html#cb165-21" tabindex="-1"></a>res[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">sample</span>(trtseq, <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> ratio<span class="sc">/</span><span class="fu">sum</span>(ratio)) </span>
+<span id="cb165-22"><a href="computer-practical-1---allocation.html#cb165-22" tabindex="-1"></a><span class="co"># work through the remaining patients sequentially</span></span>
+<span id="cb165-23"><a href="computer-practical-1---allocation.html#cb165-23" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>nsample)</span>
+<span id="cb165-24"><a href="computer-practical-1---allocation.html#cb165-24" tabindex="-1"></a>  {</span>
+<span id="cb165-25"><a href="computer-practical-1---allocation.html#cb165-25" tabindex="-1"></a>  <span class="co"># get treatment assignment sequentially for all subjects</span></span>
+<span id="cb165-26"><a href="computer-practical-1---allocation.html#cb165-26" tabindex="-1"></a>  <span class="co"># The vector res is updated and so all previous allocations are accounted for</span></span>
+<span id="cb165-27"><a href="computer-practical-1---allocation.html#cb165-27" tabindex="-1"></a>  <span class="co"># covmat is the data frame of participant data</span></span>
+<span id="cb165-28"><a href="computer-practical-1---allocation.html#cb165-28" tabindex="-1"></a>    res[j] <span class="ot">&lt;-</span> <span class="fu">Minirand</span>(</span>
+<span id="cb165-29"><a href="computer-practical-1---allocation.html#cb165-29" tabindex="-1"></a>      <span class="at">covmat=</span>covmat, j, <span class="at">covwt=</span>covwt, <span class="at">ratio=</span>ratio, <span class="at">ntrt=</span>ntrt, <span class="at">trtseq=</span>trtseq, <span class="at">method=</span><span class="st">&quot;Range&quot;</span>, <span class="at">result=</span>res, <span class="at">p =</span> <span class="fl">0.9</span></span>
+<span id="cb165-30"><a href="computer-practical-1---allocation.html#cb165-30" tabindex="-1"></a>      )</span>
+<span id="cb165-31"><a href="computer-practical-1---allocation.html#cb165-31" tabindex="-1"></a>}</span>
+<span id="cb165-32"><a href="computer-practical-1---allocation.html#cb165-32" tabindex="-1"></a><span class="do">## Store the allocation vector &#39;res&#39; as &#39;trt1&#39;</span></span>
+<span id="cb165-33"><a href="computer-practical-1---allocation.html#cb165-33" tabindex="-1"></a>trt1 <span class="ot">&lt;-</span> res</span>
+<span id="cb165-34"><a href="computer-practical-1---allocation.html#cb165-34" tabindex="-1"></a></span>
+<span id="cb165-35"><a href="computer-practical-1---allocation.html#cb165-35" tabindex="-1"></a><span class="co"># Display the number of randomized subjects at covariate factors</span></span>
+<span id="cb165-36"><a href="computer-practical-1---allocation.html#cb165-36" tabindex="-1"></a>balance1 <span class="ot">&lt;-</span> <span class="fu">randbalance</span>(trt1, covmat, ntrt, trtseq) </span>
+<span id="cb165-37"><a href="computer-practical-1---allocation.html#cb165-37" tabindex="-1"></a>balance1</span></code></pre></div>
+<pre><code>## $Gender
+##    
+## trt  0  1
+##   1 31 17
+##   2 32 16
+##   3 16  8
+## 
+## $Age
+##    
+## trt  0  1
+##   1 34 14
+##   2 34 14
+##   3 17  7
+## 
+## $Hypertension
+##    
+## trt  0  1  2
+##   1 22 11 15
+##   2 23 11 14
+##   3 12  4  8
+## 
+## $`Use of Antibiotics`
+##    
+## trt  0  1
+##   1 31 17
+##   2 31 17
+##   3 15  9</code></pre>
+<div class="sourceCode" id="cb167"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb167-1"><a href="computer-practical-1---allocation.html#cb167-1" tabindex="-1"></a><span class="co"># Calculate the total imbalance of the allocation</span></span>
+<span id="cb167-2"><a href="computer-practical-1---allocation.html#cb167-2" tabindex="-1"></a><span class="fu">totimbal</span>(<span class="at">trt =</span> trt1, <span class="at">covmat =</span> covmat, <span class="at">covwt =</span> covwt, </span>
+<span id="cb167-3"><a href="computer-practical-1---allocation.html#cb167-3" tabindex="-1"></a><span class="at">ratio =</span> ratio, <span class="at">ntrt =</span> ntrt, <span class="at">trtseq =</span> trtseq, <span class="at">method =</span> <span class="st">&quot;Range&quot;</span>)</span></code></pre></div>
+<pre><code>## [1] 1.375</code></pre>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-77" class="exercise"><strong>Exercise A.11  </strong></span>Adapt the code above to apply the minimisation algorithm to the licorice gargle data. Investigate how balanced the data set is.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-78" class="solution"><em>Solution</em>. </span>Notice in the code above that we only need to start about half way down if we already have a dataset (which we do).</p>
+<div class="sourceCode" id="cb169"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb169-1"><a href="computer-practical-1---allocation.html#cb169-1" tabindex="-1"></a>nsample <span class="ot">=</span> <span class="fu">nrow</span>(lg_df)</span>
+<span id="cb169-2"><a href="computer-practical-1---allocation.html#cb169-2" tabindex="-1"></a>res <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsample)</span>
+<span id="cb169-3"><a href="computer-practical-1---allocation.html#cb169-3" tabindex="-1"></a>res[<span class="dv">1</span>] <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="dv">1</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>, <span class="at">prob =</span> <span class="fu">c</span>(<span class="fl">0.5</span>,<span class="fl">0.5</span>)) </span>
+<span id="cb169-4"><a href="computer-practical-1---allocation.html#cb169-4" tabindex="-1"></a><span class="co"># work through the remaining patients sequentially</span></span>
+<span id="cb169-5"><a href="computer-practical-1---allocation.html#cb169-5" tabindex="-1"></a><span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span>nsample){</span>
+<span id="cb169-6"><a href="computer-practical-1---allocation.html#cb169-6" tabindex="-1"></a>  <span class="co"># get treatment assignment sequentially for all subjects</span></span>
+<span id="cb169-7"><a href="computer-practical-1---allocation.html#cb169-7" tabindex="-1"></a>  <span class="co"># The vector res is updated and so all previous allocations are accounted for</span></span>
+<span id="cb169-8"><a href="computer-practical-1---allocation.html#cb169-8" tabindex="-1"></a>  <span class="co"># covmat is the data frame of participant data - including only the covariates</span></span>
+<span id="cb169-9"><a href="computer-practical-1---allocation.html#cb169-9" tabindex="-1"></a>    res[j] <span class="ot">&lt;-</span> <span class="fu">Minirand</span>(</span>
+<span id="cb169-10"><a href="computer-practical-1---allocation.html#cb169-10" tabindex="-1"></a>      <span class="at">covmat=</span>lg_df[ ,<span class="dv">1</span><span class="sc">:</span><span class="dv">7</span>], j, <span class="at">covwt=</span><span class="fu">rep</span>(<span class="dv">1</span>,<span class="dv">7</span>)<span class="sc">/</span><span class="dv">7</span>, <span class="at">ratio=</span><span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="at">ntrt=</span><span class="dv">2</span>, <span class="at">trtseq=</span><span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1</span>), <span class="at">method=</span><span class="st">&quot;Range&quot;</span>, <span class="at">result=</span>res, <span class="at">p =</span> <span class="fl">0.9</span></span>
+<span id="cb169-11"><a href="computer-practical-1---allocation.html#cb169-11" tabindex="-1"></a>      )</span>
+<span id="cb169-12"><a href="computer-practical-1---allocation.html#cb169-12" tabindex="-1"></a>}</span>
+<span id="cb169-13"><a href="computer-practical-1---allocation.html#cb169-13" tabindex="-1"></a></span>
+<span id="cb169-14"><a href="computer-practical-1---allocation.html#cb169-14" tabindex="-1"></a>lg_df<span class="sc">$</span>treat <span class="ot">=</span> res</span>
+<span id="cb169-15"><a href="computer-practical-1---allocation.html#cb169-15" tabindex="-1"></a></span>
+<span id="cb169-16"><a href="computer-practical-1---allocation.html#cb169-16" tabindex="-1"></a><span class="do">## You can now investigate the balance of the design as usual</span></span></code></pre></div>
+</div>
+</details>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-efron1971forcing" class="csl-entry">
+Efron, Bradley. 1971. <span>“Forcing a Sequential Experiment to Be Balanced.”</span> <em>Biometrika</em> 58 (3): 403–17.
+</div>
+<div id="ref-ruetzler2013randomized" class="csl-entry">
+Ruetzler, Kurt, Michael Fleck, Sabine Nabecker, Kristina Pinter, Gordian Landskron, Andrea Lassnigg, Jing You, and Daniel I Sessler. 2013. <span>“A Randomized, Double-Blind Comparison of Licorice Versus Sugar-Water Gargle for Prevention of Postoperative Sore Throat and Postextubation Coughing.”</span> <em>Anesthesia &amp; Analgesia</em> 117 (3): 614–21.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="the-bayesian-approach.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="computer-practical-2---analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CT4H_notes.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "bookdown": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

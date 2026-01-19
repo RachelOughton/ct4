@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-01-14" />
+<meta name="date" content="2026-01-19" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -374,6 +374,32 @@ div.csl-indent {
 </ul></li>
 <li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
 </ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="cp1allocation.html"><a href="cp1allocation.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1 - Allocation</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="cp1allocation.html"><a href="cp1allocation.html#cprprac"><i class="fa fa-check"></i><b>A.1</b> R practicalities</a></li>
+<li class="chapter" data-level="A.2" data-path="cp1allocation.html"><a href="cp1allocation.html#cp1allocation"><i class="fa fa-check"></i><b>A.2</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="cp1allocation.html"><a href="cp1allocation.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.2.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.2.2" data-path="cp1allocation.html"><a href="cp1allocation.html#measures-of-imbalance"><i class="fa fa-check"></i><b>A.2.2</b> Measures of imbalance</a></li>
+<li class="chapter" data-level="A.2.3" data-path="cp1allocation.html"><a href="cp1allocation.html#allocmethods"><i class="fa fa-check"></i><b>A.2.3</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.2.4" data-path="cp1allocation.html"><a href="cp1allocation.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.2.4</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.2.5" data-path="cp1allocation.html"><a href="cp1allocation.html#minimisation"><i class="fa fa-check"></i><b>A.2.5</b> Minimisation</a></li>
+<li class="chapter" data-level="A.2.6" data-path="cp1allocation.html"><a href="cp1allocation.html#extension-a-simulation-experiment"><i class="fa fa-check"></i><b>A.2.6</b> Extension: A simulation experiment!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="cp2analysis.html"><a href="cp2analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="cp2analysis.html"><a href="cp2analysis.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="cp2analysis.html"><a href="cp2analysis.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
+<li class="chapter" data-level="B.1" data-path="cp2analysis.html"><a href="cp2analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.1</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="cp2analysis.html"><a href="cp2analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.1.1</b> Polyps data</a></li>
+<li class="chapter" data-level="B.1.2" data-path="cp2analysis.html"><a href="cp2analysis.html#extension-treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.1.2</b> Extension: Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
 
@@ -556,10 +582,11 @@ We therefore also have</p>
 </div>
 <p>If you find the notation confusing (as I do!) then it might be helpful to remember that both <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are <strong>error rates</strong> - probabilities of coming to the wrong conclusion. It is common to talk in terms of <span class="math inline">\(\alpha\)</span>, the significance level, (which will be a low number, often 0.05) and of <span class="math inline">\(1-\beta\)</span>, the power (which will be a high number, often 0.8). I’ve found though that it is not uncommon to find people refer to <span class="math inline">\(\beta\)</span> (rather than <span class="math inline">\(1-\beta\)</span>) as the power. If in doubt, keep in mind that we require <span class="math inline">\(\alpha,\;\beta \ll 0.5\)</span>. It is also common to use percentages: a significance level of <span class="math inline">\(\alpha=0.05\)</span> can also be referred to as “the 95% level”, and <span class="math inline">\(\beta=0.2\)</span> is the same as a “power of 80%”. When using percentages, we talk in terms of the amount of time we expect the test to come to the correct conclusion.</p>
 <p>If you notice any mistakes in these notes along these (or other!) lines, please point them out.</p>
-<p>Under <span class="math inline">\(H_1\)</span>, we have (approximately)</p>
+<p>Under <span class="math inline">\(H_1\)</span>, we have</p>
+<p><span class="math display">\[D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}},\]</span></p>
+<p>and therefore (approximately)</p>
 <p><span class="math display">\[D \sim{N\left(\frac{\tau}{\sigma\lambda\left(n,m\right)}, 1\right)},\]</span>
-where <span class="math inline">\(\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}\)</span> and
-<span class="math display">\[D = \frac{\bar{x}_T - \bar{x}_C}{s\sqrt{\frac{1}{n} + \frac{1}{m}}}.\]</span></p>
+where <span class="math inline">\(\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}\)</span>.</p>
 <p>Figure <a href="rct-plan.html#fig:accepth0">2.4</a> shows the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary (non-zero) effect size <span class="math inline">\(\tau\)</span>. The turquoise bar shows the ‘acceptance region’ of <span class="math inline">\(H_0\)</span>, ie. the range of observed values of <span class="math inline">\(D\)</span> for which we will fail to reject <span class="math inline">\(H_0\)</span>. We see that this contains 95% of the area of the <span class="math inline">\(H_0\)</span> distribution (we have set <span class="math inline">\(\alpha = 0.05\)</span> here), so under <span class="math inline">\(H_0\)</span>, we have a 0.95 probability of observing a value of <span class="math inline">\(D\)</span> that is consistent with <span class="math inline">\(H_0\)</span>. This could easily generalise to another value of <span class="math inline">\(\alpha\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:accepth0"></span>
 <img src="CT4H_notes_files/figure-html/accepth0-1.png" alt="The distribution of $D$ under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading." width="672" />

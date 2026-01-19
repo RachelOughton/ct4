@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>B Computer Practical 2 - Analysis | Clinical Trials 4H</title>
+  <meta name="description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="B Computer Practical 2 - Analysis | Clinical Trials 4H" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="B Computer Practical 2 - Analysis | Clinical Trials 4H" />
+  
+  <meta name="twitter:description" content="These notes mirror what we’ll follow in lectures for Clinical Trials 4H. If you have any questions or notice any errors, please email me (Rachel Oughton)." />
+  
+
+<meta name="author" content="Rachel Oughton" />
+
+
+<meta name="date" content="2026-01-19" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="cp1allocation.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<link href="libs/font-awesome-6.5.2/css/all.min.css" rel="stylesheet" />
+<link href="libs/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet" />
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<link href="libs/pagedtable-1.1/css/pagedtable.css" rel="stylesheet" />
+<script src="libs/pagedtable-1.1/js/pagedtable.js"></script>
+
+
+<style type="text/css">
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Welcome to Clinical Trials 4H!</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#practical-details"><i class="fa fa-check"></i>Practical details</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#lectures"><i class="fa fa-check"></i>Lectures</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#computer-classes"><i class="fa fa-check"></i>Computer classes</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#office-hour"><i class="fa fa-check"></i>Office Hour</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#assessment"><i class="fa fa-check"></i>Assessment</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#books-and-resources"><i class="fa fa-check"></i>Books and resources</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-to-expect-from-this-module"><i class="fa fa-check"></i>What to expect from this module</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#what-i-expect-from-you"><i class="fa fa-check"></i>What I expect from you</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-primary-outcome"><i class="fa fa-check"></i>The primary outcome</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-timeline"><i class="fa fa-check"></i>Trial timeline</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-protocol-and-analysis-plan"><i class="fa fa-check"></i>Trial protocol and analysis plan</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.3</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.4</b> Phases of clinical trials</a>
+<ul>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-two"><i class="fa fa-check"></i>Phase two</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-three"><i class="fa fa-check"></i>Phase three</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-four"><i class="fa fa-check"></i>Phase four</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>I Part I: Continuous outcome variables</b></span></li>
+<li class="chapter" data-level="2" data-path="rct-plan.html"><a href="rct-plan.html"><i class="fa fa-check"></i><b>2</b> Sample size for a normally distributed primary outcome variable</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="rct-plan.html"><a href="rct-plan.html#the-treatment-effect"><i class="fa fa-check"></i><b>2.1</b> The treatment effect</a></li>
+<li class="chapter" data-level="2.2" data-path="rct-plan.html"><a href="rct-plan.html#reminder-hypothesis-tests-with-a-focus-on-rcts"><i class="fa fa-check"></i><b>2.2</b> Reminder: hypothesis tests (with a focus on RCTs)</a>
+<ul>
+<li class="chapter" data-level="2.2.1" data-path="rct-plan.html"><a href="rct-plan.html#one-tailed-or-two-tailed"><i class="fa fa-check"></i><b>2.2.1</b> One-tailed or two-tailed?</a></li>
+<li class="chapter" data-level="2.2.2" data-path="rct-plan.html"><a href="rct-plan.html#insignificant-results"><i class="fa fa-check"></i><b>2.2.2</b> Insignificant results</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="rct-plan.html"><a href="rct-plan.html#sec-measDcont"><i class="fa fa-check"></i><b>2.3</b> Constructing a measure of effect size</a></li>
+<li class="chapter" data-level="2.4" data-path="rct-plan.html"><a href="rct-plan.html#sec-power"><i class="fa fa-check"></i><b>2.4</b> Power: If <span class="math inline">\(H_0\)</span> is false</a></li>
+<li class="chapter" data-level="2.5" data-path="rct-plan.html"><a href="rct-plan.html#sec-ssformulacont"><i class="fa fa-check"></i><b>2.5</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="alloc.html"><a href="alloc.html"><i class="fa fa-check"></i><b>3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="alloc.html"><a href="alloc.html#bias"><i class="fa fa-check"></i><b>3.1</b> Bias</a>
+<ul>
+<li class="chapter" data-level="3.1.1" data-path="alloc.html"><a href="alloc.html#where-does-bias-come-from"><i class="fa fa-check"></i><b>3.1.1</b> Where does bias come from?</a></li>
+<li class="chapter" data-level="3.1.2" data-path="alloc.html"><a href="alloc.html#implications-for-allocation"><i class="fa fa-check"></i><b>3.1.2</b> Implications for allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="alloc.html"><a href="alloc.html#sec-allocation"><i class="fa fa-check"></i><b>3.2</b> Allocation methods</a>
+<ul>
+<li class="chapter" data-level="3.2.1" data-path="alloc.html"><a href="alloc.html#simple-random-allocation"><i class="fa fa-check"></i><b>3.2.1</b> Simple random allocation</a></li>
+<li class="chapter" data-level="3.2.2" data-path="alloc.html"><a href="alloc.html#random-permuted-blocks"><i class="fa fa-check"></i><b>3.2.2</b> Random permuted blocks</a></li>
+<li class="chapter" data-level="3.2.3" data-path="alloc.html"><a href="alloc.html#bcurn"><i class="fa fa-check"></i><b>3.2.3</b> Biased coin designs and urn schemes</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="alloc.html"><a href="alloc.html#incorporating-baseline-measurements"><i class="fa fa-check"></i><b>3.3</b> Incorporating baseline measurements</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="alloc.html"><a href="alloc.html#stratified-sampling"><i class="fa fa-check"></i><b>3.3.1</b> Stratified sampling</a></li>
+<li class="chapter" data-level="3.3.2" data-path="alloc.html"><a href="alloc.html#minimization"><i class="fa fa-check"></i><b>3.3.2</b> Minimization</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="alloc.html"><a href="alloc.html#problems-around-allocation"><i class="fa fa-check"></i><b>3.4</b> Problems around allocation</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="rct-analysis.html"><a href="rct-analysis.html"><i class="fa fa-check"></i><b>4</b> Analyzing RCT data</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ttest"><i class="fa fa-check"></i><b>4.1</b> Confidence intervals and P-values</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="rct-analysis.html"><a href="rct-analysis.html#what-do-we-do-with-this-outcome"><i class="fa fa-check"></i><b>4.1.1</b> What do we do with this outcome?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#baseline"><i class="fa fa-check"></i><b>4.2</b> Using baseline values</a>
+<ul>
+<li class="chapter" data-level="4.2.1" data-path="rct-analysis.html"><a href="rct-analysis.html#the-variance-of-the-treatment-effect-estimate"><i class="fa fa-check"></i><b>4.2.1</b> The variance of the treatment effect estimate</a></li>
+<li class="chapter" data-level="4.2.2" data-path="rct-analysis.html"><a href="rct-analysis.html#a-dodgy-way-to-use-baseline-variables"><i class="fa fa-check"></i><b>4.2.2</b> A dodgy way to use baseline variables</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#analysis-of-covariance-ancova"><i class="fa fa-check"></i><b>4.3</b> Analysis of covariance (ANCOVA)</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="rct-analysis.html"><a href="rct-analysis.html#ancovatheory"><i class="fa fa-check"></i><b>4.3.1</b> The theory</a></li>
+<li class="chapter" data-level="4.3.2" data-path="rct-analysis.html"><a href="rct-analysis.html#ancova-practice"><i class="fa fa-check"></i><b>4.3.2</b> The practice</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="rct-analysis.html"><a href="rct-analysis.html#some-follow-up-questions."><i class="fa fa-check"></i><b>4.4</b> Some follow-up questions….</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="rct-analysis.html"><a href="rct-analysis.html#didnt-we-say-that-x_t---x_c-was-an-unbiased-estimator-of-tau"><i class="fa fa-check"></i><b>4.4.1</b> Didn’t we say that <span class="math inline">\(X_T - X_C\)</span> was an unbiased estimator of <span class="math inline">\(\tau\)</span>?</a></li>
+<li class="chapter" data-level="4.4.2" data-path="rct-analysis.html"><a href="rct-analysis.html#what-if-the-lines-shouldnt-be-parallel-the-unequal-slopes-model"><i class="fa fa-check"></i><b>4.4.2</b> What if the lines shouldn’t be parallel? The unequal slopes model</a></li>
+<li class="chapter" data-level="4.4.3" data-path="rct-analysis.html"><a href="rct-analysis.html#can-we-include-any-other-baseline-covariates"><i class="fa fa-check"></i><b>4.4.3</b> Can we include any other baseline covariates?</a></li>
+<li class="chapter" data-level="" data-path="rct-analysis.html"><a href="rct-analysis.html#an-important-caution"><i class="fa fa-check"></i>An important caution!</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>II Part II: Binary outcome variable</b></span></li>
+<li class="chapter" data-level="5" data-path="ss-bin.html"><a href="ss-bin.html"><i class="fa fa-check"></i><b>5</b> Sample size for a binary variable</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="ss-bin.html"><a href="ss-bin.html#delta-method"><i class="fa fa-check"></i><b>5.1</b> The Delta Method</a></li>
+<li class="chapter" data-level="5.2" data-path="ss-bin.html"><a href="ss-bin.html#a-sample-size-formula"><i class="fa fa-check"></i><b>5.2</b> A sample size formula</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="binary-analysis.html"><a href="binary-analysis.html"><i class="fa fa-check"></i><b>6</b> Analysis for binary outcomes</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="binary-analysis.html"><a href="binary-analysis.html#bin-point-est"><i class="fa fa-check"></i><b>6.1</b> Simple hypothesis tests</a>
+<ul>
+<li class="chapter" data-level="6.1.1" data-path="binary-analysis.html"><a href="binary-analysis.html#a-simple-method-chi-squared"><i class="fa fa-check"></i><b>6.1.1</b> A simple method: chi-squared</a></li>
+<li class="chapter" data-level="6.1.2" data-path="binary-analysis.html"><a href="binary-analysis.html#likelihood-a-more-rigorous-way"><i class="fa fa-check"></i><b>6.1.2</b> Likelihood: A more rigorous way</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="binary-analysis.html"><a href="binary-analysis.html#measures-of-difference-for-binary-data"><i class="fa fa-check"></i><b>6.2</b> Measures of difference for binary data</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="binary-analysis.html"><a href="binary-analysis.html#ard-and-nnt"><i class="fa fa-check"></i><b>6.2.1</b> Absolute risk difference and Number Needed to Treat</a></li>
+<li class="chapter" data-level="6.2.2" data-path="binary-analysis.html"><a href="binary-analysis.html#risk-ratio-rr-and-odds-ratio-or"><i class="fa fa-check"></i><b>6.2.2</b> Risk Ratio (RR) and Odds ratio (OR)</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="binary-analysis.html"><a href="binary-analysis.html#logreg"><i class="fa fa-check"></i><b>6.3</b> Accounting for baseline observations: logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="binary-analysis.html"><a href="binary-analysis.html#what-does-this-model-tell-us"><i class="fa fa-check"></i><b>6.3.1</b> What does this model tell us?</a></li>
+<li class="chapter" data-level="6.3.2" data-path="binary-analysis.html"><a href="binary-analysis.html#fitting-a-logistic-regression-model"><i class="fa fa-check"></i><b>6.3.2</b> Fitting a logistic regression model</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="binary-analysis.html"><a href="binary-analysis.html#diaglogreg"><i class="fa fa-check"></i><b>6.4</b> Diagnostics for logistic regression</a>
+<ul>
+<li class="chapter" data-level="6.4.1" data-path="binary-analysis.html"><a href="binary-analysis.html#discrimination"><i class="fa fa-check"></i><b>6.4.1</b> Discrimination</a></li>
+<li class="chapter" data-level="6.4.2" data-path="binary-analysis.html"><a href="binary-analysis.html#calibration"><i class="fa fa-check"></i><b>6.4.2</b> Calibration</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>III Part III: Survival data</b></span></li>
+<li class="chapter" data-level="7" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html"><i class="fa fa-check"></i><b>7</b> Working with time-to-event data</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#censored-times"><i class="fa fa-check"></i><b>7.1</b> Censored times</a></li>
+<li class="chapter" data-level="7.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#survhaz"><i class="fa fa-check"></i><b>7.2</b> The Survival Curve and the Hazard function</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#the-kaplan-meier-estimator"><i class="fa fa-check"></i><b>7.2.1</b> The Kaplan-Meier estimator</a></li>
+<li class="chapter" data-level="7.2.2" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#a-parametric-approach"><i class="fa fa-check"></i><b>7.2.2</b> A parametric approach</a></li>
+<li class="chapter" data-level="7.2.3" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#weibull"><i class="fa fa-check"></i><b>7.2.3</b> The Weibull distribution</a></li>
+<li class="chapter" data-level="" data-path="working-with-time-to-event-data.html"><a href="working-with-time-to-event-data.html#aside-sample-size-calculations-for-time-to-event-data"><i class="fa fa-check"></i>Aside: Sample size calculations for time-to-event data</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html"><i class="fa fa-check"></i><b>8</b> Comparing survival curves</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#survlrtest"><i class="fa fa-check"></i><b>8.1</b> Parametric: likelihood ratio test</a></li>
+<li class="chapter" data-level="8.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#non-parametric-the-log-rank-test"><i class="fa fa-check"></i><b>8.2</b> Non-parametric: the log-rank test</a></li>
+<li class="chapter" data-level="8.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#semi-parametric-the-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3</b> Semi-parametric: the proportional hazards model</a>
+<ul>
+<li class="chapter" data-level="8.3.1" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#general-proportional-hazards-model"><i class="fa fa-check"></i><b>8.3.1</b> General proportional hazards model</a></li>
+<li class="chapter" data-level="8.3.2" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#coxreg"><i class="fa fa-check"></i><b>8.3.2</b> Cox regression</a></li>
+<li class="chapter" data-level="" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#how-can-we-tell-if-a-proportional-hazards-model-is-appropriate"><i class="fa fa-check"></i>How can we tell if a proportional hazards model is appropriate?</a></li>
+<li class="chapter" data-level="8.3.3" data-path="comparing-survival-curves.html"><a href="comparing-survival-curves.html#diagnostics-for-cox-regression"><i class="fa fa-check"></i><b>8.3.3</b> Diagnostics for Cox regression</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Part III: Further designs</b></span></li>
+<li class="chapter" data-level="9" data-path="cluster-rct.html"><a href="cluster-rct.html"><i class="fa fa-check"></i><b>9</b> Cluster randomised trials</a>
+<ul>
+<li class="chapter" data-level="9.1" data-path="cluster-rct.html"><a href="cluster-rct.html#what-is-a-cluster-rct"><i class="fa fa-check"></i><b>9.1</b> What is a cluster RCT?</a>
+<ul>
+<li class="chapter" data-level="9.1.1" data-path="cluster-rct.html"><a href="cluster-rct.html#intracluster-correlation"><i class="fa fa-check"></i><b>9.1.1</b> Intracluster correlation</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="cluster-rct.html"><a href="cluster-rct.html#sample-size"><i class="fa fa-check"></i><b>9.2</b> Sample size</a>
+<ul>
+<li class="chapter" data-level="9.2.1" data-path="cluster-rct.html"><a href="cluster-rct.html#ss-crt"><i class="fa fa-check"></i><b>9.2.1</b> A formula for sample size</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="cluster-rct.html"><a href="cluster-rct.html#allocation"><i class="fa fa-check"></i><b>9.3</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="9.3.1" data-path="cluster-rct.html"><a href="cluster-rct.html#allocating-everyone-at-once"><i class="fa fa-check"></i><b>9.3.1</b> Allocating everyone at once</a></li>
+<li class="chapter" data-level="9.3.2" data-path="cluster-rct.html"><a href="cluster-rct.html#covariate-constrained-randomization"><i class="fa fa-check"></i><b>9.3.2</b> Covariate constrained randomization</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="cluster-rct.html"><a href="cluster-rct.html#analysing-a-cluster-rct"><i class="fa fa-check"></i><b>9.4</b> Analysing a cluster RCT</a>
+<ul>
+<li class="chapter" data-level="9.4.1" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-cluster-level"><i class="fa fa-check"></i><b>9.4.1</b> At the cluster level</a></li>
+<li class="chapter" data-level="9.4.2" data-path="cluster-rct.html"><a href="cluster-rct.html#at-the-individual-level-mixed-effects-models"><i class="fa fa-check"></i><b>9.4.2</b> At the individual level: mixed effects models</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html"><i class="fa fa-check"></i><b>10</b> Random effects for individuals</a>
+<ul>
+<li class="chapter" data-level="10.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#crossover-trials"><i class="fa fa-check"></i><b>10.1</b> Crossover trials</a>
+<ul>
+<li class="chapter" data-level="10.1.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-abba-design"><i class="fa fa-check"></i><b>10.1.1</b> The AB/BA design</a></li>
+<li class="chapter" data-level="10.1.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#analysis-of-the-abba-design"><i class="fa fa-check"></i><b>10.1.2</b> Analysis of the AB/BA design</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#longitudinal-data-repeated-measurements"><i class="fa fa-check"></i><b>10.2</b> Longitudinal data / repeated measurements</a>
+<ul>
+<li class="chapter" data-level="10.2.1" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#fitting-a-model"><i class="fa fa-check"></i><b>10.2.1</b> Fitting a model</a></li>
+<li class="chapter" data-level="10.2.2" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#the-empty-model"><i class="fa fa-check"></i><b>10.2.2</b> The empty model</a></li>
+<li class="chapter" data-level="" data-path="random-effects-for-individuals.html"><a href="random-effects-for-individuals.html#summary"><i class="fa fa-check"></i>Summary</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html"><i class="fa fa-check"></i><b>11</b> The Bayesian Approach</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-fundamental-difference"><i class="fa fa-check"></i><b>11.1</b> The fundamental difference</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-frequentist-approach"><i class="fa fa-check"></i>The frequentist approach</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#the-bayesian-approach-1"><i class="fa fa-check"></i>The Bayesian approach</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#why-is-this-important"><i class="fa fa-check"></i><b>11.2</b> Why is this important?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#making-probabilistic-statements-about-the-treatment-effect"><i class="fa fa-check"></i>Making probabilistic statements about the treatment effect</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#sequential-analysis"><i class="fa fa-check"></i>Sequential analysis</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#how-do-we-choose-a-prior"><i class="fa fa-check"></i><b>11.3</b> How do we choose a prior?</a>
+<ul>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-reference-prior"><i class="fa fa-check"></i>A reference prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-clinical-prior"><i class="fa fa-check"></i>A clinical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#a-sceptical-prior"><i class="fa fa-check"></i>A sceptical prior</a></li>
+<li class="chapter" data-level="" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#an-optimistic-enthusiastic-prior"><i class="fa fa-check"></i>An optimistic / enthusiastic prior</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
+</ul></li>
+<li class="appendix"><span><b>Computer practicals</b></span></li>
+<li class="chapter" data-level="A" data-path="cp1allocation.html"><a href="cp1allocation.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1 - Allocation</a>
+<ul>
+<li class="chapter" data-level="A.1" data-path="cp1allocation.html"><a href="cp1allocation.html#cprprac"><i class="fa fa-check"></i><b>A.1</b> R practicalities</a></li>
+<li class="chapter" data-level="A.2" data-path="cp1allocation.html"><a href="cp1allocation.html#cp1allocation"><i class="fa fa-check"></i><b>A.2</b> Allocation</a>
+<ul>
+<li class="chapter" data-level="A.2.1" data-path="cp1allocation.html"><a href="cp1allocation.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.2.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.2.2" data-path="cp1allocation.html"><a href="cp1allocation.html#measures-of-imbalance"><i class="fa fa-check"></i><b>A.2.2</b> Measures of imbalance</a></li>
+<li class="chapter" data-level="A.2.3" data-path="cp1allocation.html"><a href="cp1allocation.html#allocmethods"><i class="fa fa-check"></i><b>A.2.3</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.2.4" data-path="cp1allocation.html"><a href="cp1allocation.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.2.4</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.2.5" data-path="cp1allocation.html"><a href="cp1allocation.html#minimisation"><i class="fa fa-check"></i><b>A.2.5</b> Minimisation</a></li>
+<li class="chapter" data-level="A.2.6" data-path="cp1allocation.html"><a href="cp1allocation.html#extension-a-simulation-experiment"><i class="fa fa-check"></i><b>A.2.6</b> Extension: A simulation experiment!</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="B" data-path="cp2analysis.html"><a href="cp2analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Analysis</a>
+<ul>
+<li class="chapter" data-level="" data-path="cp2analysis.html"><a href="cp2analysis.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a>
+<ul>
+<li class="chapter" data-level="" data-path="cp2analysis.html"><a href="cp2analysis.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
+</ul></li>
+<li class="chapter" data-level="B.1" data-path="cp2analysis.html"><a href="cp2analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.1</b> Analysis</a>
+<ul>
+<li class="chapter" data-level="B.1.1" data-path="cp2analysis.html"><a href="cp2analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.1.1</b> Polyps data</a></li>
+<li class="chapter" data-level="B.1.2" data-path="cp2analysis.html"><a href="cp2analysis.html#extension-treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.1.2</b> Extension: Treatment for maternal periodontal disease</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Clinical Trials 4H</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="cp2analysis" class="section level1 hasAnchor" number="13">
+<h1><span class="header-section-number">B</span> Computer Practical 2 - Analysis<a href="cp2analysis.html#cp2analysis" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="preliminaries" class="section level2 unnumbered hasAnchor">
+<h2>Preliminaries<a href="cp2analysis.html#preliminaries" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You will need a lot of the techniques covered in this practical for your summative assignments, so consider it a sort of informal formative assignment to finish it if you don’t in class. Or, at the very least, you might need to return to it while working on your summative assignments.</p>
+<p>There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you’re not sure how to do something, please ask!</p>
+<p><strong>In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.</strong></p>
+<div id="r-practicalities" class="section level3 unnumbered hasAnchor">
+<h3>R practicalities<a href="cp2analysis.html#r-practicalities" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do</p>
+<div class="sourceCode" id="cb177"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb177-1"><a href="cp2analysis.html#cb177-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
+<p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III.</p>
+<p>An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
+<p>This requires you to have a github account (you can sign up for free <a href="https://github.com/">here</a>) and there is a short guide to creating a github account <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&amp;reserved=0">here</a>.</p>
+<p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&amp;reserved=0">Direct link to codespace</a></p>
+<p><a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&amp;reserved=0">Instructions for how to use codespace</a></p>
+</div>
+</div>
+<div id="cp1analysis" class="section level2 hasAnchor" number="13.1">
+<h2><span class="header-section-number">B.1</span> Analysis<a href="cp2analysis.html#cp1analysis" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we’ve covered in lectures.</p>
+<div id="polyps-data" class="section level3 hasAnchor" number="13.1.1">
+<h3><span class="header-section-number">B.1.1</span> Polyps data<a href="cp2analysis.html#polyps-data" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The dataset we’ll use concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in <span class="citation">Giardiello et al. (<a href="#ref-giardiello1993treatment">1993</a>)</span>.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-80" class="exercise"><strong>Exercise B.1  </strong></span>First of all let’s explore the dataset:</p>
+<ul>
+<li>Look at the help file for <code>polyps</code></li>
+<li>Which columns should you use for baseline and outcome variables?</li>
+<li>Plot the data in these columns. Do you see any issues? Can you suggest a way to address them? What effect will this have on our estimator of the treatment effect?</li>
+</ul>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-81" class="solution"><em>Solution</em>. </span>First of all, to access the data, enter</p>
+<div class="sourceCode" id="cb178"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb178-1"><a href="cp2analysis.html#cb178-1" tabindex="-1"></a><span class="fu">data</span>(polyps, <span class="at">package =</span> <span class="st">&quot;medicaldata&quot;</span>)</span></code></pre></div>
+<p>You can then view the help file by entering <code>?polyps</code>.</p>
+<p>To investigate the columns in <code>polyps</code> we can use the structure function <code>str(polyps)</code></p>
+<p>We have the baseline number of polyps for each patient in the column <code>baseline</code>, and a sensible column to use for the outcome would be <code>number12m</code>. Other baseline variables are <code>sex</code> and <code>age</code>.</p>
+<p>To plot the baseline and outcome variables we can do</p>
+<div class="sourceCode" id="cb179"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb179-1"><a href="cp2analysis.html#cb179-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>baseline)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-121-1.png" width="672" /></p>
+<div class="sourceCode" id="cb180"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb180-1"><a href="cp2analysis.html#cb180-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps, <span class="fu">aes</span>(<span class="at">x=</span>number12m)) <span class="sc">+</span> <span class="fu">geom_histogram</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-121-2.png" width="672" /></p>
+<p>These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you’d prefer to use natural logs that’s fine, some of your numbers will be different.</p>
+<div class="sourceCode" id="cb181"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb181-1"><a href="cp2analysis.html#cb181-1" tabindex="-1"></a>polyps<span class="sc">$</span>log_baseline <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>baseline)</span>
+<span id="cb181-2"><a href="cp2analysis.html#cb181-2" tabindex="-1"></a>polyps<span class="sc">$</span>log_number12m <span class="ot">=</span> <span class="fu">log10</span>(polyps<span class="sc">$</span>number12m)</span></code></pre></div>
+<p>Since we used the logarithms of the numbers of polyps, our treatment effect is
+<span class="math display">\[\log\left(X_T\right) - \log\left(X_C\right) = \log\left(\frac{X_T}{X_C}\right).\]</span></p>
+</div>
+</details>
+<p>We will work through the tests as we did in lectures, to see how the results differ.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-82" class="exercise"><strong>Exercise B.2  </strong></span>Using just the outcome variable (which should be <code>log_number12m</code> or something similar, see solution above if you aren’t sure why), test the hypothesis that the Sulindac has had some effect.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-83" class="solution"><em>Solution</em>. </span>We can either do this the long way or the short way! For sanity’s sake, we’ll do it the long way once, then in subsequent questions I’ll only show the short way in the solutions.</p>
+<p><strong>The long way</strong></p>
+<p>The first thing to do is to calculate means for each group:</p>
+<div class="sourceCode" id="cb182"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb182-1"><a href="cp2analysis.html#cb182-1" tabindex="-1"></a>polyps_df <span class="ot">=</span> <span class="fu">na.omit</span>(polyps) <span class="co"># two participants (001 and 018) don&#39;t have data for 12m, so remove these</span></span>
+<span id="cb182-2"><a href="cp2analysis.html#cb182-2" tabindex="-1"></a>mean_T <span class="ot">=</span> <span class="fu">mean</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;sulindac&quot;</span>]) </span>
+<span id="cb182-3"><a href="cp2analysis.html#cb182-3" tabindex="-1"></a>sd_T <span class="ot">=</span> <span class="fu">sd</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;sulindac&quot;</span>])</span>
+<span id="cb182-4"><a href="cp2analysis.html#cb182-4" tabindex="-1"></a>mean_C <span class="ot">=</span> <span class="fu">mean</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;placebo&quot;</span>])</span>
+<span id="cb182-5"><a href="cp2analysis.html#cb182-5" tabindex="-1"></a>sd_C <span class="ot">=</span> <span class="fu">sd</span>(polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment<span class="sc">==</span><span class="st">&quot;placebo&quot;</span>])</span>
+<span id="cb182-6"><a href="cp2analysis.html#cb182-6" tabindex="-1"></a><span class="co"># There are 11 patients on Placebo (group C) and 9 on Sulindac (group T)</span></span>
+<span id="cb182-7"><a href="cp2analysis.html#cb182-7" tabindex="-1"></a><span class="co"># The pooled standard deviation </span></span>
+<span id="cb182-8"><a href="cp2analysis.html#cb182-8" tabindex="-1"></a>pooled_sd_polypsX <span class="ot">=</span> <span class="fu">sqrt</span>((<span class="dv">10</span><span class="sc">*</span>sd_C<span class="sc">^</span><span class="dv">2</span> <span class="sc">+</span> <span class="dv">8</span><span class="sc">*</span>sd_T<span class="sc">^</span><span class="dv">2</span>)<span class="sc">/</span>(<span class="dv">10</span><span class="sc">+</span><span class="dv">8</span>))</span>
+<span id="cb182-9"><a href="cp2analysis.html#cb182-9" tabindex="-1"></a><span class="co"># Finally we find the test statistic</span></span>
+<span id="cb182-10"><a href="cp2analysis.html#cb182-10" tabindex="-1"></a>test_stat <span class="ot">=</span> (mean_T <span class="sc">-</span> mean_C)<span class="sc">/</span>(pooled_sd_polypsX<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">11</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>))</span></code></pre></div>
+<p>Under <span class="math inline">\(H_0\)</span> (that there is no treatment effect) the test statistic follows a <span class="math inline">\(t_{18}\)</span> distribution, and therefore we find our <span class="math inline">\(p\)</span>-value by</p>
+<div class="sourceCode" id="cb183"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb183-1"><a href="cp2analysis.html#cb183-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span><span class="fu">pt</span>(test_stat, <span class="at">df=</span><span class="dv">18</span>)</span></code></pre></div>
+<pre><code>## [1] 0.001046571</code></pre>
+<p>Note that if the test statistic were positive, we’d have to do</p>
+<div class="sourceCode" id="cb185"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb185-1"><a href="cp2analysis.html#cb185-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(test_stat, <span class="at">df=</span><span class="dv">18</span>))</span></code></pre></div>
+<p>Thus <span class="math inline">\(p=0.001\)</span> and we conclude that the treatment effect is significant. Our confidence interval is given by</p>
+<div class="sourceCode" id="cb186"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb186-1"><a href="cp2analysis.html#cb186-1" tabindex="-1"></a>estimate <span class="ot">=</span> mean_T <span class="sc">-</span> mean_C</span>
+<span id="cb186-2"><a href="cp2analysis.html#cb186-2" tabindex="-1"></a>error <span class="ot">=</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">18</span>)<span class="sc">*</span>pooled_sd_polypsX<span class="sc">*</span><span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">/</span><span class="dv">11</span> <span class="sc">+</span> <span class="dv">1</span><span class="sc">/</span><span class="dv">9</span>)</span>
+<span id="cb186-3"><a href="cp2analysis.html#cb186-3" tabindex="-1"></a><span class="fu">c</span>(estimate <span class="sc">-</span> error, estimate <span class="sc">+</span> error)</span></code></pre></div>
+<pre><code>## [1] -1.2264748 -0.3678718</code></pre>
+<p><strong>The short way</strong></p>
+<p>R has a t-test function built in, so we can simply use that. Notice that it gives us everything our heart might desire (on a fairly mundane day), including a confidence interval!</p>
+<div class="sourceCode" id="cb188"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb188-1"><a href="cp2analysis.html#cb188-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb188-2"><a href="cp2analysis.html#cb188-2" tabindex="-1"></a>  <span class="at">x=</span>polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;sulindac&quot;</span>],</span>
+<span id="cb188-3"><a href="cp2analysis.html#cb188-3" tabindex="-1"></a>  <span class="at">y=</span>polyps_df<span class="sc">$</span>log_number12m[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;placebo&quot;</span>],</span>
+<span id="cb188-4"><a href="cp2analysis.html#cb188-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb188-5"><a href="cp2analysis.html#cb188-5" tabindex="-1"></a>  <span class="at">var.equal=</span>T, <span class="co"># this makes the method use pooled variances, as we did in lectures</span></span>
+<span id="cb188-6"><a href="cp2analysis.html#cb188-6" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span> <span class="co"># note that this is 1-alpha</span></span>
+<span id="cb188-7"><a href="cp2analysis.html#cb188-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  polyps_df$log_number12m[polyps_df$treatment == &quot;sulindac&quot;] and polyps_df$log_number12m[polyps_df$treatment == &quot;placebo&quot;]
+## t = -3.9012, df = 18, p-value = 0.001047
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.2264748 -0.3678718
+## sample estimates:
+## mean of x mean of y 
+## 0.6671373 1.4643106</code></pre>
+<p>Either way, our 95% confidence interval is <span class="math inline">\(\left(-1.226,\;-0.368\right)\)</span> (to 3 d.p).
+Therefore, the confidence interval for <span class="math inline">\(\frac{X_T}{X_C}\)</span> is</p>
+<p><span class="math display">\[\left(10^{-1.226},\;10^{-0.368}\right) =  \left(0.0594,\;0.429\right).\]</span>
+That is, the number of polyps at 12 months for someone in group <span class="math inline">\(T\)</span> is likely to be somewhere between <span class="math inline">\(0.0594 X_C\)</span> and <span class="math inline">\(0.429 X_C\)</span>.</p>
+</div>
+</details>
+<p>We’ll now move on to comparing the differences between baseline and outcome</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-84" class="exercise"><strong>Exercise B.3  </strong></span>Perform another <span class="math inline">\(t\)</span>-test, this time using the difference between outcome and baseline. <em>Hint: because we’ve taken logs, you’ll have to think about what variable to use and perhaps experiment with some possibilities</em></p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-85" class="solution"><em>Solution</em>. </span>The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences</p>
+<div class="sourceCode" id="cb190"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb190-1"><a href="cp2analysis.html#cb190-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff <span class="ot">=</span> polyps_df<span class="sc">$</span>number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>baseline</span>
+<span id="cb190-2"><a href="cp2analysis.html#cb190-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-128-1.png" width="672" /></p>
+<p>But the outliers look potentially problematic, and the central bulk of each distribution doesn’t look very normal. We could also try the difference of the logged measurements:</p>
+<div class="sourceCode" id="cb191"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb191-1"><a href="cp2analysis.html#cb191-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>diff_log <span class="ot">=</span> polyps_df<span class="sc">$</span>log_number12m <span class="sc">-</span> polyps_df<span class="sc">$</span>log_baseline</span>
+<span id="cb191-2"><a href="cp2analysis.html#cb191-2" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>diff_log, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>, <span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-129-1.png" width="672" /></p>
+<p>This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won’t have a nice normal curve.</p>
+<p>To do a t-test, we can use R’s in-built function</p>
+<div class="sourceCode" id="cb192"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb192-1"><a href="cp2analysis.html#cb192-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb192-2"><a href="cp2analysis.html#cb192-2" tabindex="-1"></a>  <span class="at">x=</span>polyps_df<span class="sc">$</span>diff_log[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;sulindac&quot;</span>],</span>
+<span id="cb192-3"><a href="cp2analysis.html#cb192-3" tabindex="-1"></a>  <span class="at">y=</span>polyps_df<span class="sc">$</span>diff_log[polyps_df<span class="sc">$</span>treatment <span class="sc">==</span> <span class="st">&quot;placebo&quot;</span>],</span>
+<span id="cb192-4"><a href="cp2analysis.html#cb192-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb192-5"><a href="cp2analysis.html#cb192-5" tabindex="-1"></a>  <span class="at">var.equal=</span>T, <span class="co"># this makes the method use pooled variances, as we did in lectures</span></span>
+<span id="cb192-6"><a href="cp2analysis.html#cb192-6" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span> <span class="co"># note that this is 1-alpha</span></span>
+<span id="cb192-7"><a href="cp2analysis.html#cb192-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  polyps_df$diff_log[polyps_df$treatment == &quot;sulindac&quot;] and polyps_df$diff_log[polyps_df$treatment == &quot;placebo&quot;]
+## t = -3.5142, df = 18, p-value = 0.002477
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -1.0242756 -0.2578053
+## sample estimates:
+##   mean of x   mean of y 
+## -0.58476481  0.05627565</code></pre>
+</div>
+</details>
+<p>Finally we can try fitting an ANCOVA model to the data, using the function <code>lm</code>.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-86" class="exercise"><strong>Exercise B.4  </strong></span>Fit an ANCOVA model to the licorice data, and interpret your results. If you aren’t familiar with the function <code>lm</code>, it might be a good idea to look at the solutions.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-87" class="solution"><em>Solution</em>. </span>In the ANCOVA model we saw in lectures so far, we fit a linear model with the outcome as dependent / target variable, and the trial group and baseline as independent / explanatory variables.</p>
+<div class="sourceCode" id="cb194"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb194-1"><a href="cp2analysis.html#cb194-1" tabindex="-1"></a>lm_polyp1 <span class="ot">=</span> <span class="fu">lm</span>(log_number12m <span class="sc">~</span> treatment <span class="sc">+</span> log_baseline, <span class="at">data=</span>polyps_df)</span>
+<span id="cb194-2"><a href="cp2analysis.html#cb194-2" tabindex="-1"></a><span class="fu">summary</span>(lm_polyp1)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log_number12m ~ treatment + log_baseline, data = polyps_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.69628 -0.15530  0.04155  0.17288  0.68553 
+## 
+## Coefficients:
+##                   Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)         0.6291     0.2798   2.249 0.038084 *  
+## treatmentsulindac  -0.7046     0.1675  -4.205 0.000595 ***
+## log_baseline        0.5932     0.1824   3.251 0.004698 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3673 on 17 degrees of freedom
+## Multiple R-squared:  0.6659, Adjusted R-squared:  0.6266 
+## F-statistic: 16.94 on 2 and 17 DF,  p-value: 8.973e-05</code></pre>
+<p>Based on this, the effect of the drug sulindac is significant (<span class="math inline">\(p=0.00595\)</span>, lower than our previous models). The 95% CI for the treatment effect (which is still <span class="math inline">\(\log\left(\frac{X_T}{X_C}\right)\)</span>) now is</p>
+<div class="sourceCode" id="cb196"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb196-1"><a href="cp2analysis.html#cb196-1" tabindex="-1"></a><span class="fu">c</span>(<span class="sc">-</span><span class="fl">0.7046</span> <span class="sc">-</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">17</span>)<span class="sc">*</span><span class="fl">0.1675</span>, <span class="sc">-</span><span class="fl">0.7046</span> <span class="sc">+</span> <span class="fu">qt</span>(<span class="fl">0.975</span>, <span class="at">df=</span><span class="dv">17</span>)<span class="sc">*</span><span class="fl">0.1675</span> ) </span></code></pre></div>
+<pre><code>## [1] -1.0579941 -0.3512059</code></pre>
+<p>We could create a nicer-looking table of the coefficients using <code>tbl_regression</code> (from <code>gtsummary</code>):</p>
+<div id="pgceiluesy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#pgceiluesy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#pgceiluesy thead, #pgceiluesy tbody, #pgceiluesy tfoot, #pgceiluesy tr, #pgceiluesy td, #pgceiluesy th {
+  border-style: none;
+}
+
+#pgceiluesy p {
+  margin: 0;
+  padding: 0;
+}
+
+#pgceiluesy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#pgceiluesy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pgceiluesy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pgceiluesy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pgceiluesy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pgceiluesy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pgceiluesy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pgceiluesy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pgceiluesy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#pgceiluesy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#pgceiluesy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pgceiluesy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pgceiluesy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pgceiluesy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pgceiluesy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgceiluesy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pgceiluesy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pgceiluesy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#pgceiluesy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgceiluesy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pgceiluesy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgceiluesy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pgceiluesy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgceiluesy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pgceiluesy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pgceiluesy .gt_left {
+  text-align: left;
+}
+
+#pgceiluesy .gt_center {
+  text-align: center;
+}
+
+#pgceiluesy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pgceiluesy .gt_font_normal {
+  font-weight: normal;
+}
+
+#pgceiluesy .gt_font_bold {
+  font-weight: bold;
+}
+
+#pgceiluesy .gt_font_italic {
+  font-style: italic;
+}
+
+#pgceiluesy .gt_super {
+  font-size: 65%;
+}
+
+#pgceiluesy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#pgceiluesy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pgceiluesy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#pgceiluesy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#pgceiluesy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#pgceiluesy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#pgceiluesy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#pgceiluesy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#pgceiluesy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id="label"><span class='gt_from_md'><strong>Characteristic</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="estimate"><span class='gt_from_md'><strong>Beta</strong></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="conf.low"><span class='gt_from_md'><strong>95% CI</strong></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="p.value"><span class='gt_from_md'><strong>p-value</strong></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="label" class="gt_row gt_left">treatment</td>
+<td headers="estimate" class="gt_row gt_center"><br /></td>
+<td headers="conf.low" class="gt_row gt_center"><br /></td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    placebo</td>
+<td headers="estimate" class="gt_row gt_center">—</td>
+<td headers="conf.low" class="gt_row gt_center">—</td>
+<td headers="p.value" class="gt_row gt_center"><br /></td></tr>
+    <tr><td headers="label" class="gt_row gt_left">    sulindac</td>
+<td headers="estimate" class="gt_row gt_center">-0.70</td>
+<td headers="conf.low" class="gt_row gt_center">-1.1, -0.35</td>
+<td headers="p.value" class="gt_row gt_center"><0.001</td></tr>
+    <tr><td headers="label" class="gt_row gt_left">log_baseline</td>
+<td headers="estimate" class="gt_row gt_center">0.59</td>
+<td headers="conf.low" class="gt_row gt_center">0.21, 0.98</td>
+<td headers="p.value" class="gt_row gt_center">0.005</td></tr>
+  </tbody>
+  
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="4"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> <span class='gt_from_md'>CI = Confidence Interval</span></td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+<p>but note that this doesn’t show all the information that <code>summary</code> does.</p>
+</div>
+</details>
+<p>Unlike in the <span class="math inline">\(t\)</span>-test where we can only compare measurements like-for-like, in ANCOVA we fit a coefficient to the baseline covariate. This means we are no longer limited to comparing the outcome variable to variables on the same scale, but can also include other baseline variables.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-88" class="exercise"><strong>Exercise B.5  </strong></span>Fit another linear model, this time including the other baseline variables.</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-89" class="solution"><em>Solution</em>. </span></p>
+<div class="sourceCode" id="cb198"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb198-1"><a href="cp2analysis.html#cb198-1" tabindex="-1"></a>lm_polyp2 <span class="ot">=</span> <span class="fu">lm</span>(log_number12m <span class="sc">~</span> treatment <span class="sc">+</span> log_baseline <span class="sc">+</span> sex <span class="sc">+</span> age, <span class="at">data =</span> polyps_df)</span>
+<span id="cb198-2"><a href="cp2analysis.html#cb198-2" tabindex="-1"></a><span class="fu">summary</span>(lm_polyp2)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = log_number12m ~ treatment + log_baseline + sex + 
+##     age, data = polyps_df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.59539 -0.32008  0.09788  0.17374  0.62089 
+## 
+## Coefficients:
+##                    Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        0.888170   0.503801   1.763 0.098266 .  
+## treatmentsulindac -0.730464   0.177936  -4.105 0.000936 ***
+## log_baseline       0.495560   0.216900   2.285 0.037307 *  
+## sexmale            0.197442   0.201555   0.980 0.342821    
+## age               -0.009412   0.012205  -0.771 0.452620    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.3779 on 15 degrees of freedom
+## Multiple R-squared:  0.688,  Adjusted R-squared:  0.6048 
+## F-statistic:  8.27 on 4 and 15 DF,  p-value: 0.0009895</code></pre>
+<p>In this case it appears that the other two baseline covariates, age and sex, don’t have a significant effect on the outcome.</p>
+</div>
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-90" class="exercise"><strong>Exercise B.6  </strong></span>Inspect some plots of the residuals, to check whether these models have any systematic problems. Does there appear to be any multicollinearity in the data?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-91" class="solution"><em>Solution</em>. </span>These solutions will demonstrate some methods with the first model.
+First of all, we can add columns with the residuals and fitted values from the model.</p>
+<div class="sourceCode" id="cb200"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb200-1"><a href="cp2analysis.html#cb200-1" tabindex="-1"></a>polyps_df<span class="sc">$</span>resid1 <span class="ot">=</span> <span class="fu">resid</span>(lm_polyp1)</span>
+<span id="cb200-2"><a href="cp2analysis.html#cb200-2" tabindex="-1"></a>polyps_df<span class="sc">$</span>fitted1 <span class="ot">=</span> <span class="fu">fitted</span>(lm_polyp1)</span>
+<span id="cb200-3"><a href="cp2analysis.html#cb200-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>fitted1, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-135-1.png" width="672" /></p>
+<div class="sourceCode" id="cb201"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb201-1"><a href="cp2analysis.html#cb201-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>log_baseline, <span class="at">y=</span>resid1, <span class="at">col=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-135-2.png" width="672" /></p>
+<div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="cp2analysis.html#cb202-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>resid1, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-135-3.png" width="672" /></p>
+<p>None of these ring huge alarm bells, but because the dataset is so small it’s quite hard to tell! Arguably the residuals for the <code>sulindac</code> group are more spread out than those for the plaecbo, but there are no obvious systematic trends.</p>
+<p>We can find the variance inflation factor by</p>
+<div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="cp2analysis.html#cb203-1" tabindex="-1"></a><span class="fu">vif</span>(lm_polyp1)</span></code></pre></div>
+<pre><code>##    treatment log_baseline 
+##     1.029768     1.029768</code></pre>
+<p>and it indicates no problems. Another sign that the ANCOVA model is well-fitted is that the standard errors of the coefficients are all reasonably small. If there was a problem, for example multicollinearity, some of these would blow up.</p>
+</div>
+</details>
+</div>
+<div id="extension-treatment-for-maternal-periodontal-disease" class="section level3 hasAnchor" number="13.1.2">
+<h3><span class="header-section-number">B.1.2</span> Extension: Treatment for maternal periodontal disease<a href="cp2analysis.html#extension-treatment-for-maternal-periodontal-disease" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>We looked at the <code>opt</code> dataset in the last practical in the context of missing data, but now we’re going to look at it for analysis. The <code>opt</code> data are in the package <code>medicaldata</code>, which you should already have loaded.</p>
+<p>The aim of the study is to find out whether treating women for periodontal disease during the first 21 weeks of pregnancy resulted in a low birth weight or pre-term birth.</p>
+<p>The groups are stored in the <code>group</code> variable</p>
+<ul>
+<li><code>group</code> T: those who received periodontal treatment, and tooth polishing at their follow-ups</li>
+<li><code>group</code> C: Brief oral exams</li>
+</ul>
+<p>There are 823 participants and 171 variables - many of these are baseline covariates, but there are also quite a few interim measurements.</p>
+<p>The study’s primary outcome variable is gestational age at end of pregnancy, but birth weight was also measured, as well as some clinical measures of periodontal disease and some microbiological and immunological outcomes.</p>
+<p>To make this more managable, we will concentrate on the outcome <code>Birthweight</code>.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-92" class="exercise"><strong>Exercise B.7  </strong></span>Plot the variable <code>Birthweight</code>. Do we need to use any transformations before we model it?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-93" class="solution"><em>Solution</em>. </span></p>
+<div class="sourceCode" id="cb205"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb205-1"><a href="cp2analysis.html#cb205-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt, <span class="fu">aes</span>(<span class="at">x=</span>Birthweight, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-137-1.png" width="672" />
+This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won’t transform it.</p>
+</div>
+</details>
+<p>You’ll remember that there were lots of issues with the <code>opt</code> data.</p>
+<p>We’ll reduce the dataset to a more managable size, by removing all outcomes except <code>Birthweight</code> and reducing the number of covariates. We’ll also impute the variables that we can do logically, eg. <code>BL.Cig.day</code>, as we did in computer practical 1.</p>
+<p>If you still have your version of <code>opt</code> after performing regression imputation on the <code>BMI</code> variable you could use that!</p>
+<div class="sourceCode" id="cb206"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb206-1"><a href="cp2analysis.html#cb206-1" tabindex="-1"></a>opt_red <span class="ot">=</span> opt[ ,<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">22</span>,<span class="dv">72</span>)] </span>
+<span id="cb206-2"><a href="cp2analysis.html#cb206-2" tabindex="-1"></a><span class="co"># Change NAs to &quot;None&quot; for diabetic</span></span>
+<span id="cb206-3"><a href="cp2analysis.html#cb206-3" tabindex="-1"></a><span class="co"># since in opt the non-diabetic people are coded as NA (and therefore excluded from the model)</span></span>
+<span id="cb206-4"><a href="cp2analysis.html#cb206-4" tabindex="-1"></a>diab <span class="ot">=</span> <span class="fu">as.character</span>(opt_red<span class="sc">$</span>BL.Diab.Type)</span>
+<span id="cb206-5"><a href="cp2analysis.html#cb206-5" tabindex="-1"></a>diab[<span class="fu">is.na</span>(diab)] <span class="ot">=</span> <span class="st">&quot;None&quot;</span></span>
+<span id="cb206-6"><a href="cp2analysis.html#cb206-6" tabindex="-1"></a>opt_red<span class="sc">$</span>BL.Diab.Type <span class="ot">=</span> <span class="fu">as.factor</span>(diab)</span>
+<span id="cb206-7"><a href="cp2analysis.html#cb206-7" tabindex="-1"></a><span class="co"># similar problem with smokers and how many cigarettes per day</span></span>
+<span id="cb206-8"><a href="cp2analysis.html#cb206-8" tabindex="-1"></a></span>
+<span id="cb206-9"><a href="cp2analysis.html#cb206-9" tabindex="-1"></a><span class="co"># If people are non-smokers and have missing for number of cigarettes per day</span></span>
+<span id="cb206-10"><a href="cp2analysis.html#cb206-10" tabindex="-1"></a><span class="co"># change their number of cigarettes to zero</span></span>
+<span id="cb206-11"><a href="cp2analysis.html#cb206-11" tabindex="-1"></a>sm <span class="ot">=</span> opt_red<span class="sc">$</span>Use.Tob</span>
+<span id="cb206-12"><a href="cp2analysis.html#cb206-12" tabindex="-1"></a>cigs <span class="ot">=</span> opt_red<span class="sc">$</span>BL.Cig.Day</span>
+<span id="cb206-13"><a href="cp2analysis.html#cb206-13" tabindex="-1"></a>cigs[(<span class="fu">is.na</span>(cigs)<span class="sc">&amp;</span>(sm<span class="sc">==</span><span class="st">&quot;No &quot;</span>))] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb206-14"><a href="cp2analysis.html#cb206-14" tabindex="-1"></a>opt_red<span class="sc">$</span>BL.Cig.Day <span class="ot">=</span> cigs</span>
+<span id="cb206-15"><a href="cp2analysis.html#cb206-15" tabindex="-1"></a></span>
+<span id="cb206-16"><a href="cp2analysis.html#cb206-16" tabindex="-1"></a><span class="co"># Same for alcohol and drinks per day</span></span>
+<span id="cb206-17"><a href="cp2analysis.html#cb206-17" tabindex="-1"></a></span>
+<span id="cb206-18"><a href="cp2analysis.html#cb206-18" tabindex="-1"></a>alc <span class="ot">=</span> opt_red<span class="sc">$</span>Use.Alc</span>
+<span id="cb206-19"><a href="cp2analysis.html#cb206-19" tabindex="-1"></a>dr <span class="ot">=</span> opt_red<span class="sc">$</span>BL.Drks.Day</span>
+<span id="cb206-20"><a href="cp2analysis.html#cb206-20" tabindex="-1"></a>dr[(<span class="fu">is.na</span>(dr)<span class="sc">&amp;</span>(alc<span class="sc">==</span><span class="st">&quot;No &quot;</span>))] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb206-21"><a href="cp2analysis.html#cb206-21" tabindex="-1"></a>opt_red<span class="sc">$</span>BL.Drks.Day <span class="ot">=</span> dr</span>
+<span id="cb206-22"><a href="cp2analysis.html#cb206-22" tabindex="-1"></a></span>
+<span id="cb206-23"><a href="cp2analysis.html#cb206-23" tabindex="-1"></a><span class="co"># If a participant hasn&#39;t had a previous pregnancy, her N.prev.preg should be zero (not NA)</span></span>
+<span id="cb206-24"><a href="cp2analysis.html#cb206-24" tabindex="-1"></a></span>
+<span id="cb206-25"><a href="cp2analysis.html#cb206-25" tabindex="-1"></a>pp <span class="ot">=</span> opt_red<span class="sc">$</span>Prev.preg</span>
+<span id="cb206-26"><a href="cp2analysis.html#cb206-26" tabindex="-1"></a>npp <span class="ot">=</span> opt_red<span class="sc">$</span>N.prev.preg</span>
+<span id="cb206-27"><a href="cp2analysis.html#cb206-27" tabindex="-1"></a>npp[pp<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span>
+<span id="cb206-28"><a href="cp2analysis.html#cb206-28" tabindex="-1"></a>opt_red<span class="sc">$</span>N.prev.preg <span class="ot">=</span> npp</span></code></pre></div>
+<p>When we use <code>lm</code> to fit an ANCOVA model, all rows with an <code>NA</code> in will be ignored. It’s therefore important to try to eradicate any <code>NA</code>s where we actually do know the value!</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-94" class="exercise"><strong>Exercise B.8  </strong></span>Perform a <span class="math inline">\(t\)</span>-test on the outcome <code>Birthweight</code>. What do you find? Can you also perform a <span class="math inline">\(t\)</span>-test using difference from baseline?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-95" class="solution"><em>Solution</em>. </span>To perform the <span class="math inline">\(t\)</span>-test we can use the inbuilt R function</p>
+<div class="sourceCode" id="cb207"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb207-1"><a href="cp2analysis.html#cb207-1" tabindex="-1"></a><span class="co"># Check SDs are fairly close before proceeding</span></span>
+<span id="cb207-2"><a href="cp2analysis.html#cb207-2" tabindex="-1"></a><span class="fu">sd</span>(opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;T&quot;</span>], <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>## [1] 636.82</code></pre>
+<div class="sourceCode" id="cb209"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb209-1"><a href="cp2analysis.html#cb209-1" tabindex="-1"></a><span class="fu">sd</span>(opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;C&quot;</span>], <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>## [1] 727.4854</code></pre>
+<div class="sourceCode" id="cb211"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb211-1"><a href="cp2analysis.html#cb211-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb211-2"><a href="cp2analysis.html#cb211-2" tabindex="-1"></a>  <span class="at">x=</span>opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;T&quot;</span>],</span>
+<span id="cb211-3"><a href="cp2analysis.html#cb211-3" tabindex="-1"></a>  <span class="at">y=</span>opt_red<span class="sc">$</span>Birthweight[opt_red<span class="sc">$</span>Group <span class="sc">==</span> <span class="st">&quot;C&quot;</span>],</span>
+<span id="cb211-4"><a href="cp2analysis.html#cb211-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb211-5"><a href="cp2analysis.html#cb211-5" tabindex="-1"></a>  <span class="at">var.equal=</span>T, <span class="co"># this makes the method use pooled variances, as we did in lectures</span></span>
+<span id="cb211-6"><a href="cp2analysis.html#cb211-6" tabindex="-1"></a>  <span class="at">conf.level =</span> <span class="fl">0.95</span> <span class="co"># note that this is 1-alpha</span></span>
+<span id="cb211-7"><a href="cp2analysis.html#cb211-7" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## 
+##  Two Sample t-test
+## 
+## data:  opt_red$Birthweight[opt_red$Group == &quot;T&quot;] and opt_red$Birthweight[opt_red$Group == &quot;C&quot;]
+## t = 0.74585, df = 807, p-value = 0.456
+## alternative hypothesis: true difference in means is not equal to 0
+## 95 percent confidence interval:
+##  -58.49266 130.18492
+## sample estimates:
+## mean of x mean of y 
+##  3216.670  3180.824</code></pre>
+<p>We find that the difference in Birthweights between the groups is not even close to significant (<span class="math inline">\(p=0.456\)</span>).</p>
+<p>We can’t do a <span class="math inline">\(t\)</span>-test with differences because there is no comparable baseline measurement.</p>
+</div>
+</details>
+<p>Now we will move on to ANCOVA.</p>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-96" class="exercise"><strong>Exercise B.9  </strong></span>Before fitting the model, think about what you expect to find. Bear in mind:</p>
+<ul>
+<li>the result above</li>
+<li>the description of risk factors of preterm birth / low birth weight in the help file for <code>opt</code></li>
+<li>which variables you will include in your model</li>
+</ul>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-97" class="solution"><em>Solution</em>. </span>The <span class="math inline">\(p\)</span>-value from the <span class="math inline">\(t\)</span>-test was very high, so it seems unlikely that we’ll find a significant treatment effect using ANCOVA unless there are some significant interactions going on between covariates.</p>
+<p>The help file says (under ‘Background’):</p>
+<blockquote>
+<p>Many risk factors for preterm birth have already been identified, including maternal age, drug use, and diabetes. However, such factors are exhibited in only about half of preterm birth mothers, highlighting a need to expand our understanding of what contributes to preterm birth risk.</p>
+</blockquote>
+<p>Therefore, if we include related factors in our model (many of which we have in our dataset) we should expect to see significant coefficients. But, it sounds like there is a lot that isn’t well understood, so our model is likely not to explain a huge proportion of the variance.</p>
+</div>
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-98" class="exercise"><strong>Exercise B.10  </strong></span>Fit an ANCOVA model. What do you find?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-99" class="solution"><em>Solution</em>. </span>To fit a linear model including every variable as a covariate (apart from the target variable), we can do</p>
+<div class="sourceCode" id="cb213"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb213-1"><a href="cp2analysis.html#cb213-1" tabindex="-1"></a>lm_full <span class="ot">=</span> <span class="fu">lm</span>(Birthweight <span class="sc">~</span> ., <span class="at">data =</span> opt_red[ ,<span class="sc">-</span><span class="dv">1</span>]) <span class="co"># don&#39;t include the ID column!</span></span>
+<span id="cb213-2"><a href="cp2analysis.html#cb213-2" tabindex="-1"></a><span class="fu">summary</span>(lm_full)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Birthweight ~ ., data = opt_red[, -1])
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -3019.46  -233.35    46.89   382.82  1935.06 
+## 
+## Coefficients: (1 not defined because of singularities)
+##                        Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)            3906.439    702.835   5.558 3.91e-08 ***
+## ClinicMN                -57.521     73.391  -0.784  0.43345    
+## ClinicMS               -173.068     88.189  -1.962  0.05011 .  
+## ClinicNY               -146.548    100.180  -1.463  0.14397    
+## GroupT                   28.780     49.914   0.577  0.56440    
+## Age                      -1.686      5.417  -0.311  0.75572    
+## BlackYes               -158.055    127.807  -1.237  0.21664    
+## WhiteYes                -47.195    100.791  -0.468  0.63976    
+## Nat.AmYes              -224.757    112.946  -1.990  0.04699 *  
+## AsianYes               -142.693    301.298  -0.474  0.63594    
+## HispNo                  133.343     75.097   1.776  0.07624 .  
+## HispYes                 126.498    115.009   1.100  0.27177    
+## EducationLT 8 yrs       -43.324     70.513  -0.614  0.53915    
+## EducationMT 12 yrs       23.011     66.301   0.347  0.72864    
+## Public.AsstceYes       -144.623     62.886  -2.300  0.02176 *  
+## HypertensionY          -372.548    148.033  -2.517  0.01207 *  
+## DiabetesYes             443.811    170.343   2.605  0.00938 ** 
+## BL.Diab.TypeType I     -425.019    318.490  -1.334  0.18249    
+## BL.Diab.TypeType II          NA         NA      NA       NA    
+## BMI                       2.124      3.857   0.551  0.58206    
+## Use.TobYes              -17.794    134.088  -0.133  0.89446    
+## BL.Cig.Day              -23.101     11.560  -1.998  0.04607 *  
+## Use.AlcYes             -159.827    223.653  -0.715  0.47509    
+## BL.Drks.Day              28.460     24.851   1.145  0.25252    
+## Drug.AddNo             -498.971    659.330  -0.757  0.44944    
+## Drug.AddYes            -475.778    806.745  -0.590  0.55555    
+## Prev.pregYes             85.355     70.825   1.205  0.22856    
+## N.prev.preg             -17.281     18.228  -0.948  0.34345    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 653.6 on 686 degrees of freedom
+##   (110 observations deleted due to missingness)
+## Multiple R-squared:  0.06774,    Adjusted R-squared:  0.03241 
+## F-statistic: 1.917 on 26 and 686 DF,  p-value: 0.004183</code></pre>
+<p>We see from the model summary that our model is terrible: <span class="math inline">\(R^2=0.03241\)</span>, which means it is explaining about 3% of the variance in Birthweight.</p>
+<p>If you want to use only certain terms, you can include them in the formula, for example</p>
+<div class="sourceCode" id="cb215"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb215-1"><a href="cp2analysis.html#cb215-1" tabindex="-1"></a>lm_eg <span class="ot">=</span> <span class="fu">lm</span>(Birthweight <span class="sc">~</span> Group <span class="sc">+</span> Age <span class="sc">+</span> Hypertension, <span class="at">data=</span>opt_red)</span></code></pre></div>
+<p>We see that, as we expected, the <code>Group</code> variable is not significant (<span class="math inline">\(p=0.5644\)</span>). However, some terms are significant, for example whether or not the participant has diabetes, and how many cigarettes a mother smokes per day - this isn’t surprising given the contextual information we had.</p>
+</div>
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-100" class="exercise"><strong>Exercise B.11  </strong></span>Perform some diagnostic checks on your model. Do you have any reason to suspect it isn’t adequate?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-101" class="solution"><em>Solution</em>. </span>One thing to notice from the linear model summary is that many coefficients have proportionally quite large standard errors. This could be because of a lack of data (eg. if there are very few participants in some category) or because of multicollinearity (in which case the model cannot know which of the linked variables to attribute the effect to). Combining some categories or carefully removing some covariates could help improve the model.</p>
+<p>We can also study the residuals of our model, to check that they appear to be homoskedastic and approximately normal with mean 0.</p>
+<p>The first step is to extract the residuals and the fitted values (which are also useful). We will create a new data frame called <code>opt_diag</code> with these in, so that we can plot things easily but don’t pollute our original dataset (in case we want to fit any more models)</p>
+<div class="sourceCode" id="cb216"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb216-1"><a href="cp2analysis.html#cb216-1" tabindex="-1"></a>opt_diag <span class="ot">=</span> <span class="fu">na.omit</span>(opt_red) <span class="co"># lm only fits where all variables are present</span></span>
+<span id="cb216-2"><a href="cp2analysis.html#cb216-2" tabindex="-1"></a>opt_diag<span class="sc">$</span>resid <span class="ot">=</span> <span class="fu">resid</span>(lm_full)</span>
+<span id="cb216-3"><a href="cp2analysis.html#cb216-3" tabindex="-1"></a>opt_diag<span class="sc">$</span>fitted <span class="ot">=</span> <span class="fu">fitted</span>(lm_full)</span></code></pre></div>
+<p>Some examples of plots are</p>
+<div class="sourceCode" id="cb217"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb217-1"><a href="cp2analysis.html#cb217-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>resid, <span class="at">fill=</span>Group)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">position=</span><span class="st">&quot;dodge&quot;</span>)</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-143-1.png" width="672" /></p>
+<div class="sourceCode" id="cb218"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb218-1"><a href="cp2analysis.html#cb218-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>opt_diag, <span class="fu">aes</span>(<span class="at">x=</span>fitted, <span class="at">y=</span>resid, <span class="at">col=</span>Group)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-143-2.png" width="672" /></p>
+</div>
+</details>
+<div class="exercise">
+<p><span id="exr:unlabeled-div-102" class="exercise"><strong>Exercise B.12  </strong></span>Given the results of your ANCOVA model, what do you think the risks would be if the study had been much smaller, or if the allocation had not been well-balanced?</p>
+</div>
+<details>
+<summary>
+Click for solution
+</summary>
+<div class="solution">
+<p><span id="unlabeled-div-103" class="solution"><em>Solution</em>. </span>In this case, it would be possible for the baseline factors that did turn out to be significant to make it appear that the treatment had a significant effect. This wouldn’t be possible with ANCOVA, but it would with a <span class="math inline">\(t\)</span>-test in which the other covariates aren’t considered.</p>
+</div>
+</details>
+
+</div>
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="ref-giardiello1993treatment" class="csl-entry">
+Giardiello, Francis M, Stanley R Hamilton, Anne J Krush, Steven Piantadosi, Linda M Hylind, Paul Celano, Susan V Booker, C Rahj Robinson, and G Johan A Offerhaus. 1993. <span>“Treatment of Colonic and Rectal Adenomas with Sulindac in Familial Adenomatous Polyposis.”</span> <em>New England Journal of Medicine</em> 328 (18): 1313–16.
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="cp1allocation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": true,
+    "facebook": false,
+    "twitter": false,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["CT4H_notes.pdf"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "section"
+  },
+  "bookdown": null
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
