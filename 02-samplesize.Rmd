@@ -337,7 +337,7 @@ ggplot() +  stat_function(fun=dnorm) +
 ```
 
 
-For given values of $\alpha$, $\sigma$ and $\lambda\left(n,m\right)$, we can calculate the power function in terms of $\tau$ by finding the area of the distribution of $D$ under $H_1$ for which we accept $H_1$.
+For given values of $\alpha$, $\sigma$ and $\lambda\left(n,m\right)$, we can calculate the power as a function of $\tau$ by finding the area of the distribution of $D$ under $H_1$ for which we accept $H_1$.
 
 \begin{equation}
 \Psi\left(\tau\right) = 1-\beta = \left[1 - \operatorname{\Phi}\left(z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)\right] + \operatorname{\Phi}\left(-z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)
