@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-01-19}
+\date{2026-01-20}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -869,7 +869,7 @@ It may happen that the doctor knows which treatment a patient would be given, fo
 
 Mathematically, allocation bias is similar to selection bias, but instead of coming from human `error', it arises from the random process of allocation.
 
-Suppose a trial investigates a drug that is likely to have a much stronger effect on male patients than on female patients. The cohort of recruited participants are randomised into treatment and control groups, and it happens that there is a much smaller proportion of female patients in the treatment group than in the control group. This will distort the estimated treatment effect.
+Suppose a trial investigates a drug that turns out to have a much stronger effect on male patients than on female patients. The cohort of recruited participants are randomised into treatment and control groups, and it happens that there is a much smaller proportion of female patients in one group than the other. This will distort the estimated treatment effect.
 
 We will investigate various strategies for randomization designed to address this issue for known factors.
 
@@ -961,7 +961,7 @@ E\left(X\mid{A,S}\right) & = E \left(X\mid{S,1}\right)P\left(1\mid{A,S}\right) +
 & = b\mu_1 + \left(1-b\right)\mu_2 + \tau_S.
 \end{align*}
 
-From here, we can calculate the expected value of the treatment effect \(\tau\) as (substituting our equation for \(b\) and rearranging):
+From here, we can calculate the expected value of the estimated treatment effect \(\hat\tau\) as (substituting our equation for \(b\) and rearranging):
 
 \begin{align*}
 E\left(X\mid{A,N}\right) - E\left(X\mid{A,S}\right) & = \tau_N - \tau_S + \left(\lambda - b\right)\left(\mu_1 - \mu_2\right) \\
@@ -974,7 +974,7 @@ Notice that if \(q=1-p = 1\), then there is no bias. There is also no bias if \(
 
 Assuming \(\mu_1 - \mu_2 >0\), then the bias term is positive and
 
-\[E\left(X\mid{A,N}\right)- E\left(X\mid{A,S}\right) < \tau_N - \tau_S.\]
+\[E\left(\hat\tau\right) = E\left(X\mid{A,N}\right)- E\left(X\mid{A,S}\right) < \tau_N - \tau_S.\]
 If \(N\) is the better treatment, then \(\tau_N - \tau_S>0\) and the bias will cause the trial to underplay the treatment effect. Conversely, if \(S\) is better, then \(\tau_N-\tau_S<0\) and the trial will exaggerate the treatment effect. Essentially, this is because more severely ill patients have been assigned to \(N\) than to \(S\), which reduces the average survival time for those in group \(N\).
 \end{example}
 
@@ -988,7 +988,7 @@ Clearly it is ideal for both the patient and the clinician not to know which arm
 \subsubsection*{Slight aside: publication bias}\label{slight-aside-publication-bias}
 \addcontentsline{toc}{subsubsection}{Slight aside: publication bias}
 
-In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a {[}medical{]} journal. These are peer-reviewed, which means that experts from the relevant field are ask to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be published.
+In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a {[}medical{]} journal. These are peer-reviewed, which means that experts from the relevant field are asked to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be published.
 
 There is compelling evidence that papers reporting positive / conclusive results are more likely to be published than papers about {[}viable{]} trials that ultimately fail to reject the null hypothesis. As we know, in most cases if the null hypothesis is rejected this is indicative that there is a true treatment difference. However, sometimes by random chance a trial will detect a difference even when there isn't one (approximately 5\% of the time if \(\alpha=0.05\)). If these papers are disproportionately likely to be published, the body of literature will not reflect the truth, and there may be serious implications for practice. This is a huge issue in the pharmaceutical industry, and one from which we can't escape. If you'd like to learn more about it the book `Bad Pharma' by \citet{goldacre2012bad} is an excellent source.
 

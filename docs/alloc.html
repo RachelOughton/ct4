@@ -479,7 +479,7 @@ their treatment is chosen. If a medical professional is not comfortable with a p
 <div id="allocation-bias" class="section level4 unnumbered hasAnchor">
 <h4>Allocation bias<a href="alloc.html#allocation-bias" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Mathematically, allocation bias is similar to selection bias, but instead of coming from human ‘error’, it arises from the random process of allocation.</p>
-<p>Suppose a trial investigates a drug that is likely to have a much stronger effect on male patients than on female patients. The cohort of recruited participants are randomised into treatment and control groups, and it happens that there is a much smaller proportion of female patients in the treatment group than in the control group. This will distort the estimated treatment effect.</p>
+<p>Suppose a trial investigates a drug that turns out to have a much stronger effect on male patients than on female patients. The cohort of recruited participants are randomised into treatment and control groups, and it happens that there is a much smaller proportion of female patients in one group than the other. This will distort the estimated treatment effect.</p>
 <p>We will investigate various strategies for randomization designed to address this issue for known factors.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-14" class="example"><strong>Example 3.2  </strong></span><em>This example is framed in terms of selection bias, but applies equally to allocation bias</em></p>
@@ -543,7 +543,7 @@ E\left(X\mid{A,S}\right) &amp; = E \left(X\mid{S,1}\right)P\left(1\mid{A,S}\righ
 &amp; = \left(\mu_1 + \tau_S\right)b + \left(\mu_2 + \tau_S\right)\left(1-b\right) \\
 &amp; = b\mu_1 + \left(1-b\right)\mu_2 + \tau_S.
 \end{align*}\]</span></p>
-<p>From here, we can calculate the expected value of the treatment effect <span class="math inline">\(\tau\)</span> as (substituting our equation for <span class="math inline">\(b\)</span> and rearranging):</p>
+<p>From here, we can calculate the expected value of the estimated treatment effect <span class="math inline">\(\hat\tau\)</span> as (substituting our equation for <span class="math inline">\(b\)</span> and rearranging):</p>
 <p><span class="math display">\[\begin{align*}
 E\left(X\mid{A,N}\right) - E\left(X\mid{A,S}\right) &amp; = \tau_N - \tau_S + \left(\lambda - b\right)\left(\mu_1 - \mu_2\right) \\
 &amp; = \tau_N - \tau_S - \frac{p\lambda\left(1-\lambda\right)\left(\mu_1  - \mu_2\right)}{\lambda + q\left(1-\lambda\right)},
@@ -551,7 +551,7 @@ E\left(X\mid{A,N}\right) - E\left(X\mid{A,S}\right) &amp; = \tau_N - \tau_S + \l
 <p>where the third term represents the bias.</p>
 <p>Notice that if <span class="math inline">\(q=1-p = 1\)</span>, then there is no bias. There is also no bias if <span class="math inline">\(\mu_1 = \mu_2\)</span>, ie. if there is no difference between the disease severity groups in terms of survival time.</p>
 <p>Assuming <span class="math inline">\(\mu_1 - \mu_2 &gt;0\)</span>, then the bias term is positive and</p>
-<p><span class="math display">\[E\left(X\mid{A,N}\right)- E\left(X\mid{A,S}\right) &lt; \tau_N - \tau_S.\]</span>
+<p><span class="math display">\[E\left(\hat\tau\right) = E\left(X\mid{A,N}\right)- E\left(X\mid{A,S}\right) &lt; \tau_N - \tau_S.\]</span>
 If <span class="math inline">\(N\)</span> is the better treatment, then <span class="math inline">\(\tau_N - \tau_S&gt;0\)</span> and the bias will cause the trial to underplay the treatment effect. Conversely, if <span class="math inline">\(S\)</span> is better, then <span class="math inline">\(\tau_N-\tau_S&lt;0\)</span> and the trial will exaggerate the treatment effect. Essentially, this is because more severely ill patients have been assigned to <span class="math inline">\(N\)</span> than to <span class="math inline">\(S\)</span>, which reduces the average survival time for those in group <span class="math inline">\(N\)</span>.</p>
 </div>
 </div>
@@ -562,7 +562,7 @@ If <span class="math inline">\(N\)</span> is the better treatment, then <span cl
 </div>
 <div id="slight-aside-publication-bias" class="section level4 unnumbered hasAnchor">
 <h4>Slight aside: publication bias<a href="alloc.html#slight-aside-publication-bias" class="anchor-section" aria-label="Anchor link to header"></a></h4>
-<p>In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a [medical] journal. These are peer-reviewed, which means that experts from the relevant field are ask to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be published.</p>
+<p>In most areas of science, including clinical trials, the ultimate aim is to affect practice. This is usually done by publishing a write-up of the trial, including its design, methods, analysis and results, and publishing that in a [medical] journal. These are peer-reviewed, which means that experts from the relevant field are asked to review submitted papers, and either reject or accept them (usually conditional on some revision). These reviewers advise the editor of the journal, who ultimately decides whether or not the paper will be published.</p>
 <p>There is compelling evidence that papers reporting positive / conclusive results are more likely to be published than papers about [viable] trials that ultimately fail to reject the null hypothesis. As we know, in most cases if the null hypothesis is rejected this is indicative that there is a true treatment difference. However, sometimes by random chance a trial will detect a difference even when there isn’t one (approximately 5% of the time if <span class="math inline">\(\alpha=0.05\)</span>). If these papers are disproportionately likely to be published, the body of literature will not reflect the truth, and there may be serious implications for practice. This is a huge issue in the pharmaceutical industry, and one from which we can’t escape. If you’d like to learn more about it the book ‘Bad Pharma’ by <span class="citation">Goldacre (<a href="#ref-goldacre2012bad">2012</a>)</span> is an excellent source.</p>
 <p>Measures are being taken to prevent this: for example, leading medical journal <em>The Lancet</em> insists that any clinical trial related paper is registered with them before the first participant has been recruited, with details of the design and statistical analysis plan. This is then reviewed before the trial begins.</p>
 </div>
