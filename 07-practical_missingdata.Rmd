@@ -1,6 +1,8 @@
-# (APPENDIX) Computer practicals {-} 
+# Extra Computer Practical - Missing data {#cp-missing}
 
-# Computer Practical 1 - Missing data
+:::{.warning}
+This computer practical is just here because it exists and might as well be used - it isn't going to be covered in any of the sessions, and it isn't going to be assessed. So, if you're not especially interested in missing data, feel free to stop reading now!
+:::
 
 In this computer practical we focus on an important issue in clinical trials (and most real world projects!): **missing data**. There will be a bit more reading than in future practicals, to give you the necessary theory and background. We will only have time to skim the surface of working with missing data, but if you want to find out more, some good references are @little2019statistical and chapter 17 of @gelman2021regression. 
 

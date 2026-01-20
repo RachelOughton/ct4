@@ -37,7 +37,7 @@ This requires you to have a github account (you can sign up for free [here](http
 
 
 
-## Allocation {#cp1allocation}
+## Allocation 
 
 We'll make use of several packages in this section. Installing them all now should hopefully prevent it from disrupting your flow! We'll load them as we go along.
 

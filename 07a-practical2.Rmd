@@ -296,7 +296,7 @@ and it indicates no problems. Another sign that the ANCOVA model is well-fitted 
 
 ### Extension: Treatment for maternal periodontal disease
 
-We looked at the `opt` dataset in the last practical in the context of missing data, but now we're going to look at it for analysis. The `opt` data are in the package `medicaldata`, which you should already have loaded.
+In this section we look at a larger and more complex (therefore more realistic) dataset. The `opt` data are in the package `medicaldata`, which you should already have loaded.
 
 The aim of the study is to find out whether treating women for periodontal disease during the first 21 weeks of pregnancy resulted in a low birth weight or pre-term birth.
 
@@ -325,17 +325,18 @@ Plot the variable `Birthweight`. Do we need to use any transformations before we
 ggplot(data=opt, aes(x=Birthweight, fill=Group)) + geom_histogram(position="dodge")
 
 ```
+
 This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won't transform it.
 
 :::
 
 </details>
 
-You'll remember that there were lots of issues with the `opt` data.
+There are lots of issues with the `opt` data, many of which are common in real datasets.
 
-We'll reduce the dataset to a more managable size, by removing all outcomes except `Birthweight` and reducing the number of covariates. We'll also impute the variables that we can do logically, eg. `BL.Cig.day`, as we did in computer practical 1. 
+We'll reduce the dataset to a more managable size, by removing all outcomes except `Birthweight` and reducing the number of covariates.
 
-If you still have your version of `opt` after performing regression imputation on the `BMI` variable you could use that!
+One issue with the `opt` dataset is missingness. While some of the missing data are genuinely missing, quite a lot of it can be logically filled in. This is explained in the code below.
 
 ```{r, echo=T}
 opt_red = opt[ ,c(1:22,72)] 
@@ -370,6 +371,8 @@ opt_red$N.prev.preg = npp
 ```
 
 When we use `lm` to fit an ANCOVA model, all rows with an `NA` in will be ignored. It's therefore important to try to eradicate any `NA`s where we actually do know the value!
+
+In reality we'd also investigate the patterns of missingness to check whether this might have introduced bias into the trial. There's a whole extra computer practical on this that I've included on the website but that we aren't going to do (and so it won't be assessed!) - \@ref(cp-missing). Feel free to have a look.
 
 :::{.exercise}
 Perform a $t$-test on the outcome `Birthweight`. What do you find? Can you also perform a $t$-test using difference from baseline?
