@@ -474,11 +474,9 @@ $$
 
 We now return to our general bivariate normal variables $Y$ and $Z$ to find the variance of this estimator.
 
-
-::: {.technique}
-
 #### What's the variance of this estimator? {#ancova-var}
 
+::: {.technique}
 To work out the variance of $\hat{\tau}$ in Equation \@ref(eq:ancovaest) we need to go back to our bivariate normal variables.
 
 Recall that $\operatorname{var}\left(Y\right) = \operatorname{E}\left[Y^2\right] - \left[\operatorname{E}\left(Y\right)\right]^2$, and so

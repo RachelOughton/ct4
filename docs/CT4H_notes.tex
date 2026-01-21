@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-01-20}
+\date{2026-01-21}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -278,9 +278,7 @@ A key thing to notice about the Scurvy example is that Lind went to great length
 You're probably familiar with the mantra that \textbf{``correlation does not imply causation''}: just because two things are correlated, it doesn't mean we can conclude that one causes the other. If you're not convinced, \href{https://www.tylervigen.com/spurious-correlations}{here} are some humorous (and slightly macabre) examples. Causal inference is concerned with the design and analysis of data for uncovering causal relationships.
 
 This is important for us, because we really want to be able to conclude that a treatment works (or doesn't) - that it \emph{causes} recovery, or a reduction in symptoms, or helps the patient in some way.
-If we were experimental scientists in some laboratory, we could conduct some controlled experiment in which everything was kept under very specific conditions, and could fairly easily make conclusions about the treatment we were testing, and how it behaved in a range of conditions. However, testing treatments on real people is different: we don't have several identical versions of the same person to test the treatment on, and even if we did, as Gwyneth Paltrow shows us it doesn't take very much to completely alter the conditions of someone's existence!
-
-\includegraphics[width=0.83in]{images/sliding_doors}
+If we were experimental scientists in some laboratory, we could conduct some controlled experiment in which everything was kept under very specific conditions, and could fairly easily make conclusions about the treatment we were testing, and how it behaved in a range of conditions. However, testing treatments on real people is different: we don't have several identical versions of the same person to test the treatment on, and even if we did, it doesn't take very much to completely alter the conditions of someone's existence!
 
 Neither can we just base our conclusion of whether a treatment works on lab-based tests or theory (although undoubtedly these will both play a part in developing the treatment in the first place). The treatment needs to be tested on actual people.
 
@@ -667,7 +665,7 @@ This is equivalent to \(\bar{x}_T - \bar{x}_C\) falling outside the interval
 
 We'll see a lot of the notation \(z_{\alpha/2}\) and similar, so to clarify:
 
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-5-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-4-1.pdf}}
 
 In R, we have \(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\) and \(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\). \texttt{qnorm} is the quantile and \texttt{pnorm} is the cumulative distribution function. So,
 \[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right).\]
@@ -1479,7 +1477,7 @@ The problem here is that only the marginal distributions are compared for simila
 
 This appears to be a reasonably balanced design. However, if we look at the joint distribution, we see that there are problems.
 
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-11-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-10-1.pdf}}
 
 If the intervention is particularly effective in older men, our trial will not notice. Likewise, if older women generally have a more positive outcome than older men, our trial may erroneously find the intervention to be effective.
 
@@ -2194,7 +2192,7 @@ The variable `arm' here is being included as a factor variable, so it behaves li
 \]
 Therefore, for a patient assigned Placebo, a value of 7.18 is added, as well as the intercept and baseline term. This results in a model with two parallel fitted lines.
 
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-16-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-15-1.pdf}}
 
 For our previous methods we have calculated a confidence interval for the treatment effect \(\tau\), and we will do that here too. The second column of the linear model summary (above) gives the standard errors of each estimated parameter, and we see that the standard error of \(\hat{\tau}\) is 2.96. Therefore, to construct a 95/\% confidence interval for \(\hat{\tau}\), we use (to 2 decimal places)
 
@@ -2220,7 +2218,7 @@ As with any fitted model, we should check the residuals.
 \end{Highlighting}
 \end{Shaded}
 
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-17-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-16-1.pdf}}
 
 These look pretty good; there are no clear patterns and the distribution appears to be similar for each treatment group. Though, with such a small sample it's difficult really to assess the fit of the model.
 \end{example}
@@ -2976,7 +2974,7 @@ That is, we would expect to treat nearly three patients before one is improved (
 \[\left(\frac{1}{0.541},\; \frac{1}{0.187}\right) = \left(1.85,\; 5.33 \right).\]
 Because the NNT is the reciprocal of something approximately normally distributed, it has a distribution with a long tail, and we see that the confidence interval is therefore skewed.
 
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-27-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-26-1.pdf}}
 \end{example}
 
 \subsubsection{What if the difference is not significant?}\label{what-if-the-difference-is-not-significant}
@@ -3022,8 +3020,8 @@ The plot below shows relationship between ARD and NNT, with the intervals for ou
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-29-1.pdf}}
-\caption{\label{fig:unnamed-chunk-29}The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-28-1.pdf}}
+\caption{\label{fig:unnamed-chunk-28}The relationship between the confidence interval for the ARD and the NNT, when the ARD interval contains zero.}
 \end{figure}
 
 \citet{altman1998confidence} (\href{https://www.bmj.com/content/bmj/317/7168/1309.full.pdf}{available here}) makes a compelling push for the use of confidence intervals for the number needed to treat. You can decide for yourself whether you agree!
@@ -3102,8 +3100,8 @@ We can see this graphically
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-33-1.pdf}}
-\caption{\label{fig:unnamed-chunk-33}As before, dashed for Wilson, dotted for standard}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-32-1.pdf}}
+\caption{\label{fig:unnamed-chunk-32}As before, dashed for Wilson, dotted for standard}
 \end{figure}
 
 Notice that the Wilson interval is asymmetric, which is more realistic.
@@ -3124,8 +3122,8 @@ Again, we can see this graphically.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-36-1.pdf}}
-\caption{\label{fig:unnamed-chunk-36}As before, dashed for Wilson, dotted for standard}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-35-1.pdf}}
+\caption{\label{fig:unnamed-chunk-35}As before, dashed for Wilson, dotted for standard}
 \end{figure}
 
 \end{example}
@@ -3873,8 +3871,8 @@ The trial has 602 participants and there are many fewer than 602 combinations of
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-45-1.pdf}}
-\caption{\label{fig:unnamed-chunk-45}Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-44-1.pdf}}
+\caption{\label{fig:unnamed-chunk-44}Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right).}
 \end{figure}
 
 These plots are not the easiest to interpret, but there seems to be no evidence of systematic trends away from the model.
@@ -4972,7 +4970,7 @@ We see from the \texttt{age} line that the data are consistent with the proporti
 
 The object created by \texttt{cox.zph} also contains the Schoenfeld residuals themselves, and so we can plot them:
 
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-64-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf}}
 
 Because there is so little data it's hard to conclude anything, and indeed our lack of significance in the test may be due to small sample size rather than excellent model fit.
 \end{example}
@@ -6036,8 +6034,8 @@ We will explore these models by fitting them to our \texttt{epilepsy} data.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf}}
-\caption{\label{fig:unnamed-chunk-74}Confidence intervals for fixed effects for the two fitted models.}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf}}
+\caption{\label{fig:unnamed-chunk-73}Confidence intervals for fixed effects for the two fitted models.}
 \end{figure}
 
 In this example it appears that neither time nor the treatment have a significant effect on the seizure rate.
@@ -6104,8 +6102,8 @@ Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf}}
-\caption{\label{fig:unnamed-chunk-75}Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf}}
+\caption{\label{fig:unnamed-chunk-74}Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).}
 \end{figure}
 
 We see from the small variance for the random effect \texttt{period} that the gradients don't vary very much at all, and indeed the coefficients of the fixed effects are very similar to those for a fixed gradient.

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-01-20" />
+<meta name="date" content="2026-01-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -538,16 +538,16 @@ Click for solution
 <div class="technique">
 <p>The function <code>vis_dat</code> (from <code>visdat</code>) gives an excellent first look at a dataset, colouring data by type (and missing data in grey). The default is to sort the columns by type, but you can see below that I’ve made it keep to the origianl order.</p>
 <div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="cp-missing.html#cb226-1" tabindex="-1"></a><span class="fu">vis_dat</span>(sup_df, <span class="at">sort_type=</span>F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-150-1.png" width="672" /></p>
 <p>The functions <code>gg_miss_var</code>, <code>gg_miss_case</code> and <code>gg_miss_upset</code> (all from <code>naniar</code>) allow us to quickly see how much missing data there is, either by variable, by case or by intersection. Look at the help files to find out what the arguments do.
 We see that in <code>supraclavicular</code> there are three missing entries for BMI, and all other variables are complete.</p>
 <div class="sourceCode" id="cb227"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb227-1"><a href="cp-missing.html#cb227-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(sup_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-151-1.png" width="672" /></p>
 <p>Plotting by cases shows that each of these missing data are associated with a different participant, so there are three participants with one missing item each.</p>
 <div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="cp-missing.html#cb228-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(sup_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-152-1.png" width="672" /></p>
 <div class="sourceCode" id="cb229"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb229-1"><a href="cp-missing.html#cb229-1" tabindex="-1"></a><span class="fu">md.pattern</span>(sup_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-153-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-152-2.png" width="672" /></p>
 <pre><code>##     group gender age onset_sensory bmi  
 ## 100     1      1   1             1   1 0
 ## 3       1      1   1             1   0 1
@@ -564,15 +564,15 @@ Click for solution
 <p><span id="unlabeled-div-108" class="solution"><em>Solution</em>. </span><strong>Lung cancer</strong></p>
 <p>We see there is missingness for three variables:</p>
 <div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="cp-missing.html#cb231-1" tabindex="-1"></a><span class="fu">vis_dat</span>(smdi_data)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-153-1.png" width="672" /></p>
 <p>The <code>naniar</code> functions can show us how this is spread across the variables and participants.</p>
 <div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="cp-missing.html#cb232-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(smdi_data, <span class="at">show_pct=</span>T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-154-1.png" width="672" /></p>
 <div class="sourceCode" id="cb233"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb233-1"><a href="cp-missing.html#cb233-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(smdi_data, <span class="at">order_cases =</span> T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-155-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-154-2.png" width="672" /></p>
 <p>The function <code>md.pattern</code> shows us how many participants have each combination of missing data:</p>
 <div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="cp-missing.html#cb234-1" tabindex="-1"></a><span class="fu">md.pattern</span>(smdi_data, <span class="at">rotate.names =</span> T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-155-1.png" width="672" /></p>
 <pre><code>##     exposure age_num female_cat smoking_cat physical_cat alk_cat histology_cat ses_cat copd_cat
 ## 795        1       1          1           1            1       1             1       1        1
 ## 479        1       1          1           1            1       1             1       1        1
@@ -596,12 +596,12 @@ Click for solution
 <p><strong>Obstetrics and Periodontal Therapy</strong>
 Using <code>vis_dat</code> we see that there is a lot of missing data in the <code>opt</code> dataset, and that some variables are particularly badly affected.</p>
 <div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="cp-missing.html#cb236-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-156-1.png" width="672" /></p>
 <p>Now the <code>naniar</code> functions really do help us to understand what we’re dealing with!</p>
 <div class="sourceCode" id="cb237"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb237-1"><a href="cp-missing.html#cb237-1" tabindex="-1"></a><span class="fu">gg_miss_var</span>(opt_df, <span class="at">show_pct=</span>T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-158-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-157-1.png" width="672" /></p>
 <div class="sourceCode" id="cb238"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb238-1"><a href="cp-missing.html#cb238-1" tabindex="-1"></a><span class="fu">gg_miss_case</span>(opt_df, <span class="at">order_cases =</span> T, <span class="at">show_pct=</span>T)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-158-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-157-2.png" width="672" /></p>
 <p>Not many individual participants have more than about 25% of their data missing, but there are some variables that are missing for nearly all participants (more on this later).</p>
 </div>
 </details>
@@ -5838,13 +5838,13 @@ NA
 <span id="cb249-2"><a href="cp-missing.html#cb249-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> onset_sensory,</span>
 <span id="cb249-3"><a href="cp-missing.html#cb249-3" tabindex="-1"></a>           <span class="at">fill =</span> bmi_NA)) <span class="sc">+</span> </span>
 <span id="cb249-4"><a href="cp-missing.html#cb249-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-166-1.png" width="672" /></p>
 <p>We could also explore whether the missingness is related to the values of the other covariates, for example gender (in this data 0=female, 1=male)</p>
 <div class="sourceCode" id="cb250"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb250-1"><a href="cp-missing.html#cb250-1" tabindex="-1"></a><span class="fu">ggplot</span>(sup_nab,</span>
 <span id="cb250-2"><a href="cp-missing.html#cb250-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> gender,</span>
 <span id="cb250-3"><a href="cp-missing.html#cb250-3" tabindex="-1"></a>           <span class="at">fill =</span> bmi_NA)) <span class="sc">+</span> </span>
 <span id="cb250-4"><a href="cp-missing.html#cb250-4" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-168-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-167-1.png" width="672" /></p>
 <p>This isn’t a great example because there are only three missing BMI values, but you can probably guess what you’ll be doing next…</p>
 </div>
 <div class="exercise">
@@ -5879,7 +5879,7 @@ Click for solution
 <span id="cb255-2"><a href="cp-missing.html#cb255-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
 <span id="cb255-3"><a href="cp-missing.html#cb255-3" tabindex="-1"></a>           <span class="at">fill =</span> status)) <span class="sc">+</span> </span>
 <span id="cb255-4"><a href="cp-missing.html#cb255-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>ecog_cat_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-170-1.png" width="672" /></p>
 <p>Next by <code>egfr_cat</code>:</p>
 <div class="sourceCode" id="cb256"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb256-1"><a href="cp-missing.html#cb256-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
 <span id="cb256-2"><a href="cp-missing.html#cb256-2" tabindex="-1"></a>  <span class="fu">group_by</span>(egfr_cat) <span class="sc">%&gt;%</span></span>
@@ -5896,7 +5896,7 @@ Click for solution
 <span id="cb258-2"><a href="cp-missing.html#cb258-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
 <span id="cb258-3"><a href="cp-missing.html#cb258-3" tabindex="-1"></a>           <span class="at">fill =</span> status)) <span class="sc">+</span> </span>
 <span id="cb258-4"><a href="cp-missing.html#cb258-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>egfr_cat_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
 <p>and finally by <code>pdl1_num</code>:</p>
 <div class="sourceCode" id="cb259"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb259-1"><a href="cp-missing.html#cb259-1" tabindex="-1"></a>smdi_nab <span class="sc">%&gt;%</span></span>
 <span id="cb259-2"><a href="cp-missing.html#cb259-2" tabindex="-1"></a>  <span class="fu">group_by</span>(pdl1_num) <span class="sc">%&gt;%</span></span>
@@ -5921,7 +5921,7 @@ Click for solution
 <span id="cb261-2"><a href="cp-missing.html#cb261-2" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x =</span> eventtime,</span>
 <span id="cb261-3"><a href="cp-missing.html#cb261-3" tabindex="-1"></a>           <span class="at">fill =</span> status))<span class="sc">+</span></span>
 <span id="cb261-4"><a href="cp-missing.html#cb261-4" tabindex="-1"></a>  <span class="fu">geom_histogram</span>() <span class="sc">+</span> <span class="fu">facet_wrap</span>(<span class="sc">~</span>pdl1_num_NA, <span class="at">scales =</span> <span class="st">&quot;free_y&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
 <p>It appears that <code>pdl1_num</code> values are likely to be MNAR, since the outcome distribution looks different (proportionally more early deaths) for the missing values.</p>
 <p>We could make many more plots of this type: for example, by plotting the distributions of other variables rather than the outcome.</p>
 <p>For example, we could look at how the missingness of each variable relates to smoking category:</p>
@@ -5943,7 +5943,7 @@ Click for solution
 <span id="cb262-16"><a href="cp-missing.html#cb262-16" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span>
 <span id="cb262-17"><a href="cp-missing.html#cb262-17" tabindex="-1"></a></span>
 <span id="cb262-18"><a href="cp-missing.html#cb262-18" tabindex="-1"></a><span class="fu">grid.arrange</span>(ecog_sm, egfr_sm, pdl1_sm, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
 <p>So, it looks likely that the missingness of <code>egfr_cat</code> depends on smoking status, but less likely that the missingness of the other two variables does.</p>
 </div>
 </details>
@@ -6067,7 +6067,7 @@ Click for solution
 </table>
 <p>Finally there is a plot showing each ASMD</p>
 <div class="sourceCode" id="cb273"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb273-1"><a href="cp-missing.html#cb273-1" tabindex="-1"></a>asmd_sup<span class="sc">$</span>bmi<span class="sc">$</span>asmd_plot</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-180-1.png" width="672" /></p>
 <p>We see that although the ASMD values are quite large (much bigger than the advised 0.1), because there are a very small number of them they are not statistically significant.</p>
 </div>
 <div class="exercise">
@@ -6094,7 +6094,7 @@ Click for solution
 <p>These values are all well above 0.1, so it seems unlikely that the data are MCAR.</p>
 <p>We can look in a little more detail, first at BMI:</p>
 <div class="sourceCode" id="cb276"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb276-1"><a href="cp-missing.html#cb276-1" tabindex="-1"></a>asmd_opt<span class="sc">$</span>BMI<span class="sc">$</span>asmd_plot</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-183-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb277-1"><a href="cp-missing.html#cb277-1" tabindex="-1"></a><span class="fu">kable</span>(asmd_opt<span class="sc">$</span>BMI<span class="sc">$</span>asmd_table1)</span></code></pre></div>
 <table>
 <colgroup>
@@ -6584,7 +6584,7 @@ Click for solution
 </tbody>
 </table>
 <div class="sourceCode" id="cb279"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb279-1"><a href="cp-missing.html#cb279-1" tabindex="-1"></a>asmd_opt<span class="sc">$</span>Use.Alc<span class="sc">$</span>asmd_plot</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
 <p>This time the two most strongly related covariates are <code>Use.Tob</code> and <code>Drug.Add</code>. This is perhaps not surprising because they are quite similar variables. Notice that <code>clinic</code> still has a strong effect (the <span class="math inline">\(x\)</span>-axis goes a lot higher on this plot than the one for BMI). From the table, we see that again a disproportionately high number of missing values come from the NY clinic, and that missingness in <code>Use.Alc</code> is much more likely if <code>Use.Tob</code> and/or <code>Drug.Add</code> are missing.</p>
 </div>
 </details>
@@ -6978,7 +6978,7 @@ Click for solution
 <p>From these three models it appears that BMI is much more likely to be missing for those from the NY clinic (we already knew this from our previous investigations!):</p>
 <div class="sourceCode" id="cb301"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb301-1"><a href="cp-missing.html#cb301-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span><span class="fu">nabular</span>(opt_tmp), <span class="fu">aes</span>(<span class="at">x=</span>Clinic, <span class="at">fill =</span> BMI_NA)) <span class="sc">+</span></span>
 <span id="cb301-2"><a href="cp-missing.html#cb301-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-197-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
 <p>Perhaps the most concerning missing data in the <code>opt</code> dataset is in the outcome <code>Birthweight</code>.</p>
 <div class="sourceCode" id="cb302"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb302-1"><a href="cp-missing.html#cb302-1" tabindex="-1"></a>glm_opt_BW_allvar <span class="ot">=</span> <span class="fu">glm</span>(</span>
 <span id="cb302-2"><a href="cp-missing.html#cb302-2" tabindex="-1"></a>  Birthweight_NA <span class="sc">~</span> Clinic <span class="sc">+</span> Group <span class="sc">+</span> Age <span class="sc">+</span>  </span>
@@ -7100,7 +7100,7 @@ Click for solution
 <p>It appears from this that missing valuse of Birthweight aren’t associated with missingness in the other variables. Birthweight is more likely to be missing for patients with diabetes.</p>
 <div class="sourceCode" id="cb308"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb308-1"><a href="cp-missing.html#cb308-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> <span class="fu">nabular</span>(opt_tmp), <span class="fu">aes</span>(<span class="at">x=</span>Diabetes, <span class="at">fill =</span> Birthweight_NA)) <span class="sc">+</span></span>
 <span id="cb308-2"><a href="cp-missing.html#cb308-2" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
 </div>
 </details>
 </div>
@@ -7191,9 +7191,9 @@ Click for solution
 <span id="cb322-2"><a href="cp-missing.html#cb322-2" tabindex="-1"></a>opt_df_imp<span class="sc">$</span>N.prev.preg[opt_df_imp<span class="sc">$</span>Prev.preg<span class="sc">==</span><span class="st">&quot;No &quot;</span>] <span class="ot">=</span> <span class="dv">0</span></span></code></pre></div>
 <p>We can see that this has very much improved our situation! We could do something similar for <code>BL.Diab.Type</code> too since this is linked to <code>Diabetes</code>.</p>
 <div class="sourceCode" id="cb323"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb323-1"><a href="cp-missing.html#cb323-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df, <span class="at">sort_type =</span> F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-207-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-206-1.png" width="672" /></p>
 <div class="sourceCode" id="cb324"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb324-1"><a href="cp-missing.html#cb324-1" tabindex="-1"></a><span class="fu">vis_dat</span>(opt_df_imp, <span class="at">sort_type =</span> F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-207-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-206-2.png" width="672" /></p>
 </div>
 </details>
 </div>
@@ -7212,8 +7212,8 @@ Click for solution
 <pre><code>## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 1).
 ## Chain 1: 
-## Chain 1: Gradient evaluation took 0.001071 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 10.71 seconds.
+## Chain 1: Gradient evaluation took 0.001139 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 11.39 seconds.
 ## Chain 1: Adjust your expectations accordingly!
 ## Chain 1: 
 ## Chain 1: 
@@ -7230,9 +7230,9 @@ Click for solution
 ## Chain 1: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 1: 
-## Chain 1:  Elapsed Time: 0.047 seconds (Warm-up)
+## Chain 1:  Elapsed Time: 0.046 seconds (Warm-up)
 ## Chain 1:                0.085 seconds (Sampling)
-## Chain 1:                0.132 seconds (Total)
+## Chain 1:                0.131 seconds (Total)
 ## Chain 1: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 2).
@@ -7256,14 +7256,14 @@ Click for solution
 ## Chain 2: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 2: 
 ## Chain 2:  Elapsed Time: 0.042 seconds (Warm-up)
-## Chain 2:                0.082 seconds (Sampling)
-## Chain 2:                0.124 seconds (Total)
+## Chain 2:                0.083 seconds (Sampling)
+## Chain 2:                0.125 seconds (Total)
 ## Chain 2: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 3).
 ## Chain 3: 
-## Chain 3: Gradient evaluation took 4e-06 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
+## Chain 3: Gradient evaluation took 6e-06 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Chain 3: Adjust your expectations accordingly!
 ## Chain 3: 
 ## Chain 3: 
@@ -7287,8 +7287,8 @@ Click for solution
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 4).
 ## Chain 4: 
-## Chain 4: Gradient evaluation took 4e-06 seconds
-## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
+## Chain 4: Gradient evaluation took 6e-06 seconds
+## Chain 4: 1000 transitions using 10 leapfrog steps per transition would take 0.06 seconds.
 ## Chain 4: Adjust your expectations accordingly!
 ## Chain 4: 
 ## Chain 4: 
@@ -7306,8 +7306,8 @@ Click for solution
 ## Chain 4: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 4: 
 ## Chain 4:  Elapsed Time: 0.049 seconds (Warm-up)
-## Chain 4:                0.085 seconds (Sampling)
-## Chain 4:                0.134 seconds (Total)
+## Chain 4:                0.086 seconds (Sampling)
+## Chain 4:                0.135 seconds (Total)
 ## Chain 4:</code></pre>
 <div class="sourceCode" id="cb327"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb327-1"><a href="cp-missing.html#cb327-1" tabindex="-1"></a><span class="fu">summary</span>(pdl1_lm)</span></code></pre></div>
 <pre><code>## 
@@ -7396,8 +7396,8 @@ Click for solution
 <pre><code>## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 1).
 ## Chain 1: 
-## Chain 1: Gradient evaluation took 1.3e-05 seconds
-## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.13 seconds.
+## Chain 1: Gradient evaluation took 1.8e-05 seconds
+## Chain 1: 1000 transitions using 10 leapfrog steps per transition would take 0.18 seconds.
 ## Chain 1: Adjust your expectations accordingly!
 ## Chain 1: 
 ## Chain 1: 
@@ -7415,14 +7415,14 @@ Click for solution
 ## Chain 1: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 1: 
 ## Chain 1:  Elapsed Time: 0.038 seconds (Warm-up)
-## Chain 1:                0.151 seconds (Sampling)
-## Chain 1:                0.189 seconds (Total)
+## Chain 1:                0.152 seconds (Sampling)
+## Chain 1:                0.19 seconds (Total)
 ## Chain 1: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 2).
 ## Chain 2: 
-## Chain 2: Gradient evaluation took 4e-06 seconds
-## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
+## Chain 2: Gradient evaluation took 9e-06 seconds
+## Chain 2: 1000 transitions using 10 leapfrog steps per transition would take 0.09 seconds.
 ## Chain 2: Adjust your expectations accordingly!
 ## Chain 2: 
 ## Chain 2: 
@@ -7446,8 +7446,8 @@ Click for solution
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 3).
 ## Chain 3: 
-## Chain 3: Gradient evaluation took 5e-06 seconds
-## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.05 seconds.
+## Chain 3: Gradient evaluation took 4e-06 seconds
+## Chain 3: 1000 transitions using 10 leapfrog steps per transition would take 0.04 seconds.
 ## Chain 3: Adjust your expectations accordingly!
 ## Chain 3: 
 ## Chain 3: 
@@ -7464,9 +7464,9 @@ Click for solution
 ## Chain 3: Iteration: 1800 / 2000 [ 90%]  (Sampling)
 ## Chain 3: Iteration: 2000 / 2000 [100%]  (Sampling)
 ## Chain 3: 
-## Chain 3:  Elapsed Time: 0.038 seconds (Warm-up)
+## Chain 3:  Elapsed Time: 0.037 seconds (Warm-up)
 ## Chain 3:                0.152 seconds (Sampling)
-## Chain 3:                0.19 seconds (Total)
+## Chain 3:                0.189 seconds (Total)
 ## Chain 3: 
 ## 
 ## SAMPLING FOR MODEL &#39;continuous&#39; NOW (CHAIN 4).
@@ -7554,9 +7554,9 @@ Click for solution
 ## For each parameter, mcse is Monte Carlo standard error, n_eff is a crude measure of effective sample size, and Rhat is the potential scale reduction factor on split chains (at convergence Rhat=1).</code></pre>
 <p>We can see from the means and standard deviations that most of the coefficients are not even close to ‘significant’, but if we want to investigate some more closely we can visualise them using the <code>plot</code> function (separately in this case because they are quite far apart numerically)</p>
 <div class="sourceCode" id="cb333"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb333-1"><a href="cp-missing.html#cb333-1" tabindex="-1"></a><span class="fu">plot</span>(pdl1_lm2, <span class="at">plotfun=</span><span class="st">&quot;areas&quot;</span>, <span class="at">prob =</span> <span class="fl">0.95</span>, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;exposure&quot;</span>))</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-210-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-209-1.png" width="672" /></p>
 <div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="cp-missing.html#cb334-1" tabindex="-1"></a><span class="fu">plot</span>(pdl1_lm2, <span class="at">plotfun=</span><span class="st">&quot;areas&quot;</span>, <span class="at">prob =</span> <span class="fl">0.95</span>, <span class="at">pars =</span> <span class="fu">c</span>(<span class="st">&quot;age_num&quot;</span>))</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-210-2.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-209-2.png" width="672" /></p>
 <p>We see that for both variables, zero is not in the central 95% of the distribution. This isn’t directly relevant here but it’s nice to know about!</p>
 </div>
 </details>
@@ -7589,7 +7589,7 @@ Click for solution
 <span id="cb336-9"><a href="cp-missing.html#cb336-9" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Regression fit&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb336-10"><a href="cp-missing.html#cb336-10" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Observed value / imputed value&quot;</span>) <span class="sc">+</span></span>
 <span id="cb336-11"><a href="cp-missing.html#cb336-11" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-211-1.png" width="672" /></p>
 <p>A more realistic approach would be to sample one value from the posterior distribution for each point (this is why we are using <code>rstanarm</code>!)</p>
 <div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="cp-missing.html#cb337-1" tabindex="-1"></a>smdi_pdl1_comp<span class="sc">$</span>pdl1_imp_rand <span class="ot">=</span> smdi_pdl1_comp<span class="sc">$</span>pdl1_num</span>
 <span id="cb337-2"><a href="cp-missing.html#cb337-2" tabindex="-1"></a></span>
@@ -7608,7 +7608,7 @@ Click for solution
 <span id="cb337-15"><a href="cp-missing.html#cb337-15" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;Regression fit&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb337-16"><a href="cp-missing.html#cb337-16" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;Observed value / randomly imputed value&quot;</span>) <span class="sc">+</span></span>
 <span id="cb337-17"><a href="cp-missing.html#cb337-17" tabindex="-1"></a>  <span class="fu">theme_bw</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-213-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-212-1.png" width="672" /></p>
 <p>This imputed data looks much more representative of the actual dataset.</p>
 <div class="exercise">
 <p><span id="exr:unlabeled-div-124" class="exercise"><strong>Exercise C.12  </strong></span>Use regression imputation to impute values for <code>BMI</code> in <code>opt_tmp</code>.</p>

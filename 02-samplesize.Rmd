@@ -102,12 +102,6 @@ The P-value for the two-sided test as shown in Figure \@ref(fig:t31-twosided) is
 $$ F\left(-2, df=31\right) + \left[1 - F\left(2, df=31\right)\right] = 2\times{0.0272} = 0.0543$$
 and the result is no longer significant at the 0.05 level. Throughout this course, we will always assume two-tailed tests.
 
-```{r starbucks, fig.cap = "A rather ubiquitous two-tailed mermaid"}
-if(is_html_output()){
-  knitr::include_graphics("images/starbucks.jpg")
-}
-```
-
 ### Insignificant results
 
 If our P-value is relatively large, say 0.3 or 0.5 (or really, greater than $\alpha$), then our result is not at all unlikely (or sufficiently unlikely) under the null hypothesis, and provides insufficient evidence to reject $H_0.$ However, it is not inconsistent with the existence of a treatment effect, so we don't say there is evidence to accept $H_0$. One can imagine that if the true treatment effect $\tau$ were tiny, many trials would fail to find evidence to reject $H_0$. However, if our sample size were sufficiently large, we should be able to detect it. Conversely, if $\tau$ is very large, even a relatively small sample size is likely to provide enough evidence to reject $H_0$. 

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-01-20" />
+<meta name="date" content="2026-01-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -507,12 +507,6 @@ Figure 2.2: The distribution <span class="math inline">\(t_{31}\)</span>, with t
 <p>The P-value for the two-sided test as shown in Figure <a href="rct-plan.html#fig:t31-twosided">2.2</a> is</p>
 <p><span class="math display">\[ F\left(-2, df=31\right) + \left[1 - F\left(2, df=31\right)\right] = 2\times{0.0272} = 0.0543\]</span>
 and the result is no longer significant at the 0.05 level. Throughout this course, we will always assume two-tailed tests.</p>
-<div class="figure"><span style="display:block;" id="fig:starbucks"></span>
-<img src="images/starbucks.jpg" alt="A rather ubiquitous two-tailed mermaid" width="320" />
-<p class="caption">
-Figure 2.3: A rather ubiquitous two-tailed mermaid
-</p>
-</div>
 </div>
 <div id="insignificant-results" class="section level3 hasAnchor" number="2.2.2">
 <h3><span class="header-section-number">2.2.2</span> Insignificant results<a href="rct-plan.html#insignificant-results" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -588,7 +582,7 @@ where
 <h4>Brief aside on notation<a href="rct-plan.html#brief-aside-on-notation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <div class="aside">
 <p>We’ll see a lot of the notation <span class="math inline">\(z_{\alpha/2}\)</span> and similar, so to clarify:</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>In R, we have <span class="math inline">\(\Phi\left(z_{\alpha/2}\right) = \texttt{pnorm}\left(z_{\alpha/2}\right)\)</span> and <span class="math inline">\(z_{\alpha/2} = \texttt{qnorm}\left(\Phi\left(z_{\alpha/2}\right)\right)\)</span>. <code>qnorm</code> is the quantile and <code>pnorm</code> is the cumulative distribution function. So,
 <span class="math display">\[\frac{\alpha}{2} = 1 - \Phi\left(z_{\alpha/2}\right).\]</span></p>
 </div>
@@ -612,19 +606,19 @@ We therefore also have</p>
 <p>and therefore (approximately)</p>
 <p><span class="math display">\[D \sim{N\left(\frac{\tau}{\sigma\lambda\left(n,m\right)}, 1\right)},\]</span>
 where <span class="math inline">\(\lambda\left(n,m\right) = \sqrt{\frac{1}{n}+\frac{1}{m}}\)</span>.</p>
-<p>Figure <a href="rct-plan.html#fig:accepth0">2.4</a> shows the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary (non-zero) effect size <span class="math inline">\(\tau\)</span>. The turquoise bar shows the ‘acceptance region’ of <span class="math inline">\(D\)</span>, ie. the range of observed values of <span class="math inline">\(D\)</span> for which we will fail to reject <span class="math inline">\(H_0\)</span>. We see that this contains 95% of the area of the <span class="math inline">\(H_0\)</span> distribution (we have set <span class="math inline">\(\alpha = 0.05\)</span> here), so under <span class="math inline">\(H_0\)</span>, we have a 0.95 probability of observing a value of <span class="math inline">\(D\)</span> that is consistent with <span class="math inline">\(H_0\)</span>. This could easily generalise to another value of <span class="math inline">\(\alpha\)</span>.</p>
+<p>Figure <a href="rct-plan.html#fig:accepth0">2.3</a> shows the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary (non-zero) effect size <span class="math inline">\(\tau\)</span>. The turquoise bar shows the ‘acceptance region’ of <span class="math inline">\(D\)</span>, ie. the range of observed values of <span class="math inline">\(D\)</span> for which we will fail to reject <span class="math inline">\(H_0\)</span>. We see that this contains 95% of the area of the <span class="math inline">\(H_0\)</span> distribution (we have set <span class="math inline">\(\alpha = 0.05\)</span> here), so under <span class="math inline">\(H_0\)</span>, we have a 0.95 probability of observing a value of <span class="math inline">\(D\)</span> that is consistent with <span class="math inline">\(H_0\)</span>. This could easily generalise to another value of <span class="math inline">\(\alpha\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:accepth0"></span>
 <img src="CT4H_notes_files/figure-html/accepth0-1.png" alt="The distribution of $D$ under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading." width="672" />
 <p class="caption">
-Figure 2.4: The distribution of <span class="math inline">\(D\)</span> under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
+Figure 2.3: The distribution of <span class="math inline">\(D\)</span> under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
 </p>
 </div>
 <p>However, if <span class="math inline">\(H_1\)</span> is true, and <span class="math inline">\(\tau\neq{0}\)</span>, there is a non-zero probability of observing a value of <span class="math inline">\(D\)</span> that would lead us to fail to reject <span class="math inline">\(H_0\)</span>. This is shown by the area shaded in red, and it has area <span class="math inline">\(\beta\)</span>. One minus this area (ie. the area under <span class="math inline">\(H_1\)</span> that leads us to reject <span class="math inline">\(H_0\)</span>) is the power, <span class="math inline">\(1-\beta\)</span>.</p>
-<p>We can see that if the distributions have better separation, as in Figure <a href="rct-plan.html#fig:accepth0-1">2.5</a>, the power becomes greater. This can be as a result of a larger <span class="math inline">\(\tau\)</span>, a smaller <span class="math inline">\(\sigma\)</span> or a smaller <span class="math inline">\(\lambda\)</span> (therefore larger <span class="math inline">\(m\)</span> and/or <span class="math inline">\(n\)</span>).</p>
+<p>We can see that if the distributions have better separation, as in Figure <a href="rct-plan.html#fig:accepth0-1">2.4</a>, the power becomes greater. This can be as a result of a larger <span class="math inline">\(\tau\)</span>, a smaller <span class="math inline">\(\sigma\)</span> or a smaller <span class="math inline">\(\lambda\)</span> (therefore larger <span class="math inline">\(m\)</span> and/or <span class="math inline">\(n\)</span>).</p>
 <div class="figure"><span style="display:block;" id="fig:accepth0-1"></span>
 <img src="CT4H_notes_files/figure-html/accepth0-1-1.png" alt="The distribution of D under both $H_0$ and $H_1$ for some arbitrary values of effect size, population variance, $n$ and $m$, with the region in which we fail to reject $H_0$ shown by the turquoise bar and the red shading." width="672" />
 <p class="caption">
-Figure 2.5: The distribution of D under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
+Figure 2.4: The distribution of D under both <span class="math inline">\(H_0\)</span> and <span class="math inline">\(H_1\)</span> for some arbitrary values of effect size, population variance, <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with the region in which we fail to reject <span class="math inline">\(H_0\)</span> shown by the turquoise bar and the red shading.
 </p>
 </div>
 <p>For given values of <span class="math inline">\(\alpha\)</span>, <span class="math inline">\(\sigma\)</span> and <span class="math inline">\(\lambda\left(n,m\right)\)</span>, we can calculate the power as a function of <span class="math inline">\(\tau\)</span> by finding the area of the distribution of <span class="math inline">\(D\)</span> under <span class="math inline">\(H_1\)</span> for which we accept <span class="math inline">\(H_1\)</span>.</p>
@@ -632,17 +626,17 @@ Figure 2.5: The distribution of D under both <span class="math inline">\(H_0\)</
 \Psi\left(\tau\right) = 1-\beta = \left[1 - \operatorname{\Phi}\left(z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)\right] + \operatorname{\Phi}\left(-z_{\frac{\alpha}{2}} - \frac{\tau}{\sigma\lambda}\right)
 \tag{2.1}
 \end{equation}\]</span></p>
-<p>The first term in Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> is the area in the direction of <span class="math inline">\(\tau\)</span>. In Figures <a href="rct-plan.html#fig:accepth0">2.4</a> and <a href="rct-plan.html#fig:accepth0-1">2.5</a> this is the region to the right of the interval for which we fail to reject <span class="math inline">\(H_0\)</span>, ie. where <span class="math display">\[D &gt; z_{\frac{\alpha}{2}}.\]</span></p>
+<p>The first term in Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> is the area in the direction of <span class="math inline">\(\tau\)</span>. In Figures <a href="rct-plan.html#fig:accepth0">2.3</a> and <a href="rct-plan.html#fig:accepth0-1">2.4</a> this is the region to the right of the interval for which we fail to reject <span class="math inline">\(H_0\)</span>, ie. where <span class="math display">\[D &gt; z_{\frac{\alpha}{2}}.\]</span></p>
 <p>The second term in Equation <a href="rct-plan.html#eq:powerfun">(2.1)</a> represents the area away from the direction of <span class="math inline">\(\tau\)</span>, ie. a value of <span class="math inline">\(D\)</span> such that</p>
 <p><span class="math display">\[ D &lt; - z_{\frac{\alpha}{2}},\]</span>
 assuming without loss of generality that <span class="math inline">\(\tau&gt;0\)</span>.</p>
-<p>Figure <a href="rct-plan.html#fig:powercurve">2.6</a> shows the power function <span class="math inline">\(\Psi\left(\tau\right)\)</span> for <span class="math inline">\(\tau\)</span> in units of <span class="math inline">\(\sigma\)</span> (or you could think of this as for <span class="math inline">\(\sigma=1\)</span>), for three different pairs of values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span> (remember that these enter the power function via <span class="math inline">\(\lambda\)</span>) with <span class="math inline">\(\alpha=0.05\)</span>. We see that in general the power is higher for larger sample sizes, and that of the two designs where <span class="math inline">\(n+m=200\)</span>, the balanced one with <span class="math inline">\(n=m=100\)</span> achieves the greatest power.</p>
+<p>Figure <a href="rct-plan.html#fig:powercurve">2.5</a> shows the power function <span class="math inline">\(\Psi\left(\tau\right)\)</span> for <span class="math inline">\(\tau\)</span> in units of <span class="math inline">\(\sigma\)</span> (or you could think of this as for <span class="math inline">\(\sigma=1\)</span>), for three different pairs of values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span> (remember that these enter the power function via <span class="math inline">\(\lambda\)</span>) with <span class="math inline">\(\alpha=0.05\)</span>. We see that in general the power is higher for larger sample sizes, and that of the two designs where <span class="math inline">\(n+m=200\)</span>, the balanced one with <span class="math inline">\(n=m=100\)</span> achieves the greatest power.</p>
 <p>In general, the probability of rejecting <span class="math inline">\(H_0\)</span> increases as <span class="math inline">\(\tau\)</span> moves away from zero.</p>
 <p>Notice also that all the curves pass through the point <span class="math inline">\(\tau=0,\,\beta=0.05\)</span>. Since <span class="math inline">\(\tau=0\)</span> corresponds to <span class="math inline">\(H_0\)</span> being true, it makes sense that the probability of rejecting the <span class="math inline">\(H_0\)</span> is the significance level <span class="math inline">\(\alpha\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:powercurve"></span>
 <img src="CT4H_notes_files/figure-html/powercurve-1.png" alt="Power curves for various values of $n$ and $m$, with effect size in units of standard deviation, given a type I error rate of 0.05." width="768" />
 <p class="caption">
-Figure 2.6: Power curves for various values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with effect size in units of standard deviation, given a type I error rate of 0.05.
+Figure 2.5: Power curves for various values of <span class="math inline">\(n\)</span> and <span class="math inline">\(m\)</span>, with effect size in units of standard deviation, given a type I error rate of 0.05.
 </p>
 </div>
 <p>It is common to think of the effect size in units of <span class="math inline">\(\sigma\)</span>, as we have done here. This makes results more intuitive, since we don’t need to have a good knowledge of the actual outcome variable to know what is a small or large effect size. It is also helpful in situations where the population standard deviation is not well understood, since the trial can be planned with this sort of effect size in mind. To denote the effect size in units of <span class="math inline">\(\sigma\)</span>, we will write <span class="math inline">\(\tau_\sigma\)</span>, although in practice it is more usual to give both the same notation. In a medical setting we will often have an estimate for <span class="math inline">\(\sigma\)</span> (for example from previous studies).</p>

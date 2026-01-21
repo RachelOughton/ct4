@@ -46,15 +46,7 @@ A key thing to notice about the Scurvy example is that Lind went to great length
 You're probably familiar with the mantra that **"correlation does not imply causation"**: just because two things are correlated, it doesn't mean we can conclude that one causes the other. If you're not convinced, [here](https://www.tylervigen.com/spurious-correlations) are some humorous (and slightly macabre) examples. Causal inference is concerned with the design and analysis of data for uncovering causal relationships.
 
 This is important for us, because we really want to be able to conclude that a treatment works (or doesn't) - that it *causes* recovery, or a reduction in symptoms, or helps the patient in some way. 
-If we were experimental scientists in some laboratory, we could conduct some controlled experiment in which everything was kept under very specific conditions, and could fairly easily make conclusions about the treatment we were testing, and how it behaved in a range of conditions. However, testing treatments on real people is different: we don't have several identical versions of the same person to test the treatment on, and even if we did, as Gwyneth Paltrow shows us it doesn't take very much to completely alter the conditions of someone's existence!
-
-```{r}
-if(knitr::is_html_output()){
-  knitr::include_graphics("images/sliding_doors.jpeg")  
-} else {
-  knitr::include_graphics("images/sliding_doors.jpeg", dpi=400) 
-}
-```
+If we were experimental scientists in some laboratory, we could conduct some controlled experiment in which everything was kept under very specific conditions, and could fairly easily make conclusions about the treatment we were testing, and how it behaved in a range of conditions. However, testing treatments on real people is different: we don't have several identical versions of the same person to test the treatment on, and even if we did, it doesn't take very much to completely alter the conditions of someone's existence!
 
 Neither can we just base our conclusion of whether a treatment works on lab-based tests or theory (although undoubtedly these will both play a part in developing the treatment in the first place). The treatment needs to be tested on actual people. 
 
