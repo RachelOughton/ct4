@@ -1019,7 +1019,7 @@ We will now explore some commonly used methods of allocation. We will usually as
 
 \section{Allocation methods}\label{sec-allocation}
 
-In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation. It is therefore important to minise the probability of it being a poor one!
+In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation. It is therefore important to minimise the probability of it being a poor one!
 
 \subsection{Simple random allocation}\label{simple-random-allocation}
 
@@ -1136,7 +1136,7 @@ The biased coin design was introduced by \citet{efron1971forcing}, with the aim 
 
 Suppose we are using a biased coin design for a trial to compare two treatments, \(T\) and \(C\). At the point where some number \(n\) (not the total trial cohort) have been allocated, we can use the notation \(N_T\left(n\right)\) for the number of participants allocated to treatment \(T\), and \(N_C\left(n\right)\) for the number of participants allocated to treatment \(C\). Using these, we can denote the \emph{imbalance} in treatment numbers by
 
-\[ D\left(n\right) = N_C\left(n\right) - N_T\left(n\right) = 2N_C\left(n\right) - n.\]
+\[ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right).\]
 We use the imbalance \(D\left(n\right)\) to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:
 
 \begin{itemize}
@@ -1219,7 +1219,7 @@ Once again, we can find the transition probabilities by considering the absolute
 
 Suppose that after participant \(n\), \(N_T\left(n\right)\) participants have been allocated to group \(T\), and \(N_C\left(n\right) = n - N_T\left(n\right)\) to group \(C\). The imbalance is therefore
 
-\[D\left(n\right) = N_C\left(n\right) - N_T\left(n\right) = 2N_T\left(n\right) - n.\]
+\[D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n = n - 2N_C\left(n\right).\]
 
 After \(n\) allocations there will be \(2r + ns\) balls in the urn: \(r\) for each treatment at the start, and \(s\) added after each allocation. Of these, \(r + N_C\left(n\right)s\) will be labelled by treatment \(T\) and \(r + N_T\left(n\right)s\) by treatment \(C\).
 
@@ -1227,7 +1227,7 @@ To think about the probabilities for the absolute imbalance \(\lvert D\left(n\ri
 
 \[
   \begin{aligned}
-p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j>0\right) & = \frac{r + N_C\left(n\right)s}{2r + ns} \\
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid \underbrace{D\left(n\right)=j>0}_{\text{More in T}}\right) & = \frac{r + N_C\left(n\right)s}{2r + ns} \\
 & = \frac{r + \frac{1}{2}\left(n + D\left(n\right)\right)s}{2r + ns} \\
 & = \frac{1}{2} + \frac{D\left(n\right)s}{2\left(2r + ns\right)} \\
 & = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
@@ -1237,7 +1237,7 @@ Similarly, if there is currently an excess of patients allocated to treatment \(
 
 \[
   \begin{aligned}
-p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j<0\right) & = \frac{r + N_T\left(n\right)s}{2r + ns} \\
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid \underbrace{D\left(n\right)=j<0}_{\text{More in C}}\right) & = \frac{r + N_T\left(n\right)s}{2r + ns} \\
 & = \frac{r + \frac{1}{2}\left(n - D\left(n\right)\right)s}{2r + ns} \\
 & = \frac{1}{2} - \frac{D\left(n\right)s}{2\left(2r + ns\right)}\\
 & = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.

@@ -585,7 +585,7 @@ If <span class="math inline">\(N\)</span> is the better treatment, then <span cl
 <div id="sec-allocation" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Allocation methods<a href="alloc.html#sec-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <div class="warning">
-<p>In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation. It is therefore important to minise the probability of it being a poor one!</p>
+<p>In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation. It is therefore important to minimise the probability of it being a poor one!</p>
 </div>
 <div id="simple-random-allocation" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Simple random allocation<a href="alloc.html#simple-random-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -671,7 +671,7 @@ possible blocks of size 6. Instead of always selecting from the six possible 4-b
 <h4><span class="header-section-number">3.2.3.1</span> Biased coin designs<a href="alloc.html#biased-coin-designs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The biased coin design was introduced by <span class="citation">Efron (<a href="#ref-efron1971forcing">1971</a>)</span>, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias. <span class="citation">Efron (<a href="#ref-efron1971forcing">1971</a>)</span> suggested the biased coin design be used to achieve balance in terms of patient characteristics (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same).</p>
 <p>Suppose we are using a biased coin design for a trial to compare two treatments, <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>. At the point where some number <span class="math inline">\(n\)</span> (not the total trial cohort) have been allocated, we can use the notation <span class="math inline">\(N_T\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(T\)</span>, and <span class="math inline">\(N_C\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(C\)</span>. Using these, we can denote the <em>imbalance</em> in treatment numbers by</p>
-<p><span class="math display">\[ D\left(n\right) = N_C\left(n\right) - N_T\left(n\right) = 2N_C\left(n\right) - n.\]</span>
+<p><span class="math display">\[ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right).\]</span>
 We use the imbalance <span class="math inline">\(D\left(n\right)\)</span> to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:</p>
 <ul>
 <li>If <span class="math inline">\(D\left(n\right)=0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(T\)</span> with probability <span class="math inline">\(\frac{1}{2}\)</span>.</li>
@@ -731,12 +731,12 @@ Figure 3.5: Absolute imbalance for a biased-coin scheme with <span class="math i
 <p>Near the start of the allocation, the probabilities are likely to change a lot to address imbalance, but once a ‘reasonable number’ of allocations have been made it is likely to settle into simple random sampling (or very close).</p>
 <p>Once again, we can find the transition probabilities by considering the absolute imbalance <span class="math inline">\(\lvert D\left(n\right) \rvert\)</span>.</p>
 <p>Suppose that after participant <span class="math inline">\(n\)</span>, <span class="math inline">\(N_T\left(n\right)\)</span> participants have been allocated to group <span class="math inline">\(T\)</span>, and <span class="math inline">\(N_C\left(n\right) = n - N_T\left(n\right)\)</span> to group <span class="math inline">\(C\)</span>. The imbalance is therefore</p>
-<p><span class="math display">\[D\left(n\right) = N_C\left(n\right) - N_T\left(n\right) = 2N_T\left(n\right) - n.\]</span></p>
+<p><span class="math display">\[D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n = n - 2N_C\left(n\right).\]</span></p>
 <p>After <span class="math inline">\(n\)</span> allocations there will be <span class="math inline">\(2r + ns\)</span> balls in the urn: <span class="math inline">\(r\)</span> for each treatment at the start, and <span class="math inline">\(s\)</span> added after each allocation. Of these, <span class="math inline">\(r + N_C\left(n\right)s\)</span> will be labelled by treatment <span class="math inline">\(T\)</span> and <span class="math inline">\(r + N_T\left(n\right)s\)</span> by treatment <span class="math inline">\(C\)</span>.</p>
 <p>To think about the probabilities for the absolute imbalance <span class="math inline">\(\lvert D\left(n\right)\rvert\)</span>, we have to be careful now about which direction it is in. If the trial currently (after allocation <span class="math inline">\(n\)</span>) has an imbalance of participants in favour of treatment <span class="math inline">\(C\)</span>, then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment <span class="math inline">\(T\)</span>, which is</p>
 <p><span class="math display">\[
   \begin{aligned}
-p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j&gt;0\right) &amp; = \frac{r + N_C\left(n\right)s}{2r + ns} \\
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid \underbrace{D\left(n\right)=j&gt;0}_{\text{More in T}}\right) &amp; = \frac{r + N_C\left(n\right)s}{2r + ns} \\
 &amp; = \frac{r + \frac{1}{2}\left(n + D\left(n\right)\right)s}{2r + ns} \\
 &amp; = \frac{1}{2} + \frac{D\left(n\right)s}{2\left(2r + ns\right)} \\
 &amp; = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
@@ -745,7 +745,7 @@ p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j&gt;0\right
 Similarly, if there is currently an excess of patients allocated to treatment <span class="math inline">\(T\)</span>, then the imbalance will be reduced if the next allocation is to treatment <span class="math inline">\(C\)</span>, and so the conditional probability is</p>
 <p><span class="math display">\[
   \begin{aligned}
-p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid D\left(n\right)=j, j&lt;0\right) &amp; = \frac{r + N_T\left(n\right)s}{2r + ns} \\
+p\left(\lvert D\left(n+1\right)\rvert = j-1 \mid \underbrace{D\left(n\right)=j&lt;0}_{\text{More in C}}\right) &amp; = \frac{r + N_T\left(n\right)s}{2r + ns} \\
 &amp; = \frac{r + \frac{1}{2}\left(n - D\left(n\right)\right)s}{2r + ns} \\
 &amp; = \frac{1}{2} - \frac{D\left(n\right)s}{2\left(2r + ns\right)}\\
 &amp; = \frac{1}{2} + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}.
