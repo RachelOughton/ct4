@@ -671,12 +671,12 @@ possible blocks of size 6. Instead of always selecting from the six possible 4-b
 <h4><span class="header-section-number">3.2.3.1</span> Biased coin designs<a href="alloc.html#biased-coin-designs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>The biased coin design was introduced by <span class="citation">Efron (<a href="#ref-efron1971forcing">1971</a>)</span>, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias. <span class="citation">Efron (<a href="#ref-efron1971forcing">1971</a>)</span> suggested the biased coin design be used to achieve balance in terms of patient characteristics (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same).</p>
 <p>Suppose we are using a biased coin design for a trial to compare two treatments, <span class="math inline">\(T\)</span> and <span class="math inline">\(C\)</span>. At the point where some number <span class="math inline">\(n\)</span> (not the total trial cohort) have been allocated, we can use the notation <span class="math inline">\(N_T\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(T\)</span>, and <span class="math inline">\(N_C\left(n\right)\)</span> for the number of participants allocated to treatment <span class="math inline">\(C\)</span>. Using these, we can denote the <em>imbalance</em> in treatment numbers by</p>
-<p><span class="math display">\[ D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.\]</span>
+<p><span class="math display">\[ D\left(n\right) = N_C\left(n\right) - N_T\left(n\right) = 2N_C\left(n\right) - n.\]</span>
 We use the imbalance <span class="math inline">\(D\left(n\right)\)</span> to alter the probability of allocation to each treatment in order to restore (or maintain) balance in the following way:</p>
 <ul>
 <li>If <span class="math inline">\(D\left(n\right)=0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(T\)</span> with probability <span class="math inline">\(\frac{1}{2}\)</span>.</li>
-<li>If <span class="math inline">\(D\left(n\right)&lt;0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(T\)</span> with probability <span class="math inline">\(P\)</span>.</li>
-<li>If <span class="math inline">\(D\left(n\right)&gt;0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(T\)</span> with probability <span class="math inline">\(1-P\)</span>.</li>
+<li>If <span class="math inline">\(D\left(n\right)&gt;0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(T\)</span> with probability <span class="math inline">\(P\)</span>.</li>
+<li>If <span class="math inline">\(D\left(n\right)&lt;0\)</span>, allocate patient <span class="math inline">\(n+1\)</span> to treatment <span class="math inline">\(T\)</span> with probability <span class="math inline">\(1-P\)</span>.</li>
 </ul>
 <p>where <span class="math inline">\(P\in\left(\frac{1}{2}, 1\right)\)</span>.</p>
 <blockquote>
@@ -731,8 +731,8 @@ Figure 3.5: Absolute imbalance for a biased-coin scheme with <span class="math i
 <p>Near the start of the allocation, the probabilities are likely to change a lot to address imbalance, but once a ‘reasonable number’ of allocations have been made it is likely to settle into simple random sampling (or very close).</p>
 <p>Once again, we can find the transition probabilities by considering the absolute imbalance <span class="math inline">\(\lvert D\left(n\right) \rvert\)</span>.</p>
 <p>Suppose that after participant <span class="math inline">\(n\)</span>, <span class="math inline">\(N_T\left(n\right)\)</span> participants have been allocated to group <span class="math inline">\(T\)</span>, and <span class="math inline">\(N_C\left(n\right) = n - N_T\left(n\right)\)</span> to group <span class="math inline">\(C\)</span>. The imbalance is therefore</p>
-<p><span class="math display">\[D\left(n\right) = N_T\left(n\right) - N_C\left(n\right) = 2N_T\left(n\right) - n.\]</span>
-After <span class="math inline">\(n\)</span> allocations there will be <span class="math inline">\(2r + ns\)</span> balls in the urn: <span class="math inline">\(r\)</span> for each treatment at the start, and <span class="math inline">\(s\)</span> added after each allocation. Of these, <span class="math inline">\(r + N_C\left(n\right)s\)</span> will be labelled by treatment <span class="math inline">\(T\)</span> and <span class="math inline">\(r + N_T\left(n\right)s\)</span> by treatment <span class="math inline">\(C\)</span>.</p>
+<p><span class="math display">\[D\left(n\right) = N_C\left(n\right) - N_T\left(n\right) = 2N_T\left(n\right) - n.\]</span></p>
+<p>After <span class="math inline">\(n\)</span> allocations there will be <span class="math inline">\(2r + ns\)</span> balls in the urn: <span class="math inline">\(r\)</span> for each treatment at the start, and <span class="math inline">\(s\)</span> added after each allocation. Of these, <span class="math inline">\(r + N_C\left(n\right)s\)</span> will be labelled by treatment <span class="math inline">\(T\)</span> and <span class="math inline">\(r + N_T\left(n\right)s\)</span> by treatment <span class="math inline">\(C\)</span>.</p>
 <p>To think about the probabilities for the absolute imbalance <span class="math inline">\(\lvert D\left(n\right)\rvert\)</span>, we have to be careful now about which direction it is in. If the trial currently (after allocation <span class="math inline">\(n\)</span>) has an imbalance of participants in favour of treatment <span class="math inline">\(C\)</span>, then the probability that it becomes less imbalanced at the next allocation is the probability of the next allocation being to treatment <span class="math inline">\(T\)</span>, which is</p>
 <p><span class="math display">\[
   \begin{aligned}
@@ -762,9 +762,9 @@ Since the two probabilities are equal this is trivial. Since the only other poss
 As with the biased coin design, we also have the possibility that the imbalance after <span class="math inline">\(n\)</span> allocations is zero, in which case the absolute imbalance after the next allocation will definitely be one. This gives us another simple random walk, with</p>
 <p><span class="math display">\[
   \begin{aligned}
-P\big(\lvert D\left(n+1\right) \rvert = 1 \mid \lvert D\left(n\right)=0\big)&amp; = 1\\
-P\big(\lvert D\left(n+1\right) \rvert = j+ 1 \mid \lvert D\left(n\right)=j\big)&amp; = \frac{1}{2}  - \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}\\
-P\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right)=j\big)&amp; = \frac{1}{2}  + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}
+P\big(\lvert D\left(n+1\right) \rvert = 1 \mid \lvert D\left(n\right)\rvert=0\big)&amp; = 1\\
+P\big(\lvert D\left(n+1\right) \rvert = j+ 1 \mid \lvert D\left(n\right)\rvert=j&gt;0\big)&amp; = \frac{1}{2}  - \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}\\
+P\big(\lvert D\left(n+1\right) \rvert = j-1 \mid \lvert D\left(n\right)\rvert=j&gt;0\big)&amp; = \frac{1}{2}  + \frac{\lvert D\left(n\right)\rvert s}{2\left(2r + ns\right)}
 \end{aligned}
 \]</span></p>
 <div class="figure"><span style="display:block;" id="fig:urn11"></span>
