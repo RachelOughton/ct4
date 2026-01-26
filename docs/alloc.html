@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-01-21" />
+<meta name="date" content="2026-01-26" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -584,6 +584,9 @@ If <span class="math inline">\(N\)</span> is the better treatment, then <span cl
 </div>
 <div id="sec-allocation" class="section level2 hasAnchor" number="3.2">
 <h2><span class="header-section-number">3.2</span> Allocation methods<a href="alloc.html#sec-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div class="warning">
+<p>In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation. It is therefore important to minise the probability of it being a poor one!</p>
+</div>
 <div id="simple-random-allocation" class="section level3 hasAnchor" number="3.2.1">
 <h3><span class="header-section-number">3.2.1</span> Simple random allocation<a href="alloc.html#simple-random-allocation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Perhaps intuitively the most simple method is a ‘toin coss’, where each participant has a probability 0.5 of being placed in each group. As participants arrive, assignment <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span> is generated (with equal probability). Statistically, this scheme is ideal, since it generates the random sample we need, and the assignment of each participant is statistically independent of that of all other participants. It also doesn’t require a ‘master’ randomisation; several clinicians can individually assign participants to treatment groups in parallel and the statistical properties are maintained.</p>
@@ -605,9 +608,6 @@ Figure 3.1: The probability distribution of largest group size for n=15.
 </p>
 </div>
 <p>As we have seen when thinking about sample sizes in Section <a href="rct-plan.html#sec-power">2.4</a>, this will reduce the power <span class="math inline">\(\Psi\)</span> of the trial, since it depends on <span class="math inline">\(\lambda\left(N_C,\,N_T\right) = \sqrt{\frac{1}{N_C} + \frac{1}{N_T}}\)</span>.</p>
-<div class="aside">
-<p>In this chapter, and in the computer practical on allocation, we will study the behaviour of various allocation methods by implementing them many times. This gives us an idea of how variable the results are, especially in terms of being likely to introduce bias or reduce power. In almost all real trials, patients are allocated and begin treatment as they arrive, and this may happen over the course of weeks or months. The allocation that is generated is the final allocation.</p>
-</div>
 <p>For larger trials, this imbalance will be less pronounced, for example Figure <a href="alloc.html#fig:srsalloc200">3.2</a> shows the same for <span class="math inline">\(n=200\)</span>.</p>
 <div class="figure"><span style="display:block;" id="fig:srsalloc200"></span>
 <img src="CT4H_notes_files/figure-html/srsalloc200-1.png" alt="The probability distribution of largest group size for n=200." width="672" />
