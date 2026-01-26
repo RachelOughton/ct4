@@ -1128,11 +1128,11 @@ As well as ensuring that patients are equally likely to receive treatments \(A\)
 
 It may be that we prefer a method that achieves balance while retaining the pure stochasticity of simple random sampling. An advantage of RPBs was that once the sequence was generated, no computing power was needed. However, it is safe now to assume that any hospital pharmacy, nurse's station, GP office or other medical facility will have a computer with access to the internet (or some internal database), and therefore more sophisticated methods are available. It is also very likely that all trial data may be stored on some central database, and so methods that rely on knowing the allocation so far (albeit in some encrypted form) should be possible even if there are multiple clinicians and sites involved.
 
-Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.
+Biased coin designs and urn schemes both work by adjusting the probabilities of allocation according to the balance of the design so far, such that a participant is less likely to be assigned to an over-represented group.
 
 \subsubsection{Biased coin designs}\label{biased-coin-designs}
 
-The biased coin design was introduced by \citet{efron1971forcing}, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias. \citet{efron1971forcing} suggested the biased coin design be used within categories (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same).
+The biased coin design was introduced by \citet{efron1971forcing}, with the aim of ensuring balance whilst not becoming vulnerable to various forms of experimental bias. \citet{efron1971forcing} suggested the biased coin design be used to achieve balance in terms of patient characteristics (eg. age group, sex, disease state etc.), but in this section we will think about the whole cohort (the maths for a subgroup would be the same).
 
 Suppose we are using a biased coin design for a trial to compare two treatments, \(T\) and \(C\). At the point where some number \(n\) (not the total trial cohort) have been allocated, we can use the notation \(N_T\left(n\right)\) for the number of participants allocated to treatment \(T\), and \(N_C\left(n\right)\) for the number of participants allocated to treatment \(C\). Using these, we can denote the \emph{imbalance} in treatment numbers by
 
@@ -1166,7 +1166,7 @@ Because of the way we have set up the scheme,
 and
 
 \[ p\big(\lvert D\left(n+1\right)\rvert = j-1\big) = P.\]
-If \(\lvert D\left(n\right) \rvert = 0\), ie. the scheme is in exact balance after \(n\) allocations, then we must have \(\lvert D\left(n\right)\rvert = 1\).
+If \(\lvert D\left(n\right) \rvert = 0\), ie. the scheme is in exact balance after \(n\) allocations, then we must have \(\lvert D\left(n+1\right)\rvert = 1\).
 
 The absolute imbalances therefore form a simple random walk on the non-negative integers, with transition probabilities
 
