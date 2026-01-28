@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-01-26}
+\date{2026-01-28}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1297,6 +1297,7 @@ Such baseline measurements can be used in allocation.
 The usual method of achieving balance with respect to prognostic factors is to divide each factor into several levels and to consider treatment assignment separately for patients having each particular combination of such factor levels. Such groups of patients are commonly referred to as randomization groups or strata. Treatment assignment is performed entirely separately for each stratum, a permuted block design of the type mentioned above often being used. In fact, using purely random treatment assignment for each stratum is equivalent to simple random assignment, so that some equalization of treatment numbers within each stratum is essential. Both the biased coin design and the urn design were intended for use in this way, adjusting in relation to imbalance within each stratum independently. This whole procedure is analogous to performing a factorial experiment, without being able to control the factor levels of the experimental units.
 
 \begin{example}
+
 Suppose we are planning a trial involving people over the age of 50, and we anticipate that age and sex might both play an important role in how participants respond to the treatment.
 
 For sex, we use the levels `male' and `female', and for age we split the range into 50-65, 66-80 and 81 or over. We therefore have six strata, and we use an allocation strategy independently in each stratum. For example, below we have used randomly permuted blocks of length four.
@@ -1313,21 +1314,22 @@ For sex, we use the levels `male' and `female', and for age we split the range i
 \hline
 \end{tabular}
 
+\end{example}
+
 Each time a new participant arrives, we follow the randomization pattern for their stratum. We could use another allocation scheme within each stratum, for example an urn model or a biased coin. It is important that we use one that aims to conserve balance, or else the benefits of stratification are lost.
+
+\begin{example}
+The study by \citet{kallis1994pre} compares the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
+For their prognostic factors, \citet{kallis1994pre} chose age (\(\leq{50}\) or \(>50\)), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.
 \end{example}
 
 A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are \(3^4=81\) strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic).
 
 \subsection{Minimization}\label{minimization}
 
-Minimization was first proposed by \citet{taves1974minimization}, then shortly after by \citet{pocock1975sequential} and \citet{freedman1976use}. The aim of minimization is to minimize the difference between the two groups. It was developed for use with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
+Minimization was first proposed by \citet{taves1974minimization}, then shortly after by \citet{pocock1975sequential} and \citet{freedman1976use}. The aim of minimization is to minimize the difference between the two groups. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.
 
-To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome.
-
-\begin{example}
-The study by \citet{kallis1994pre} compares the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
-For their prognostic factors, \citet{kallis1994pre} chose age (\(\leq{50}\) or \(>50\)), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.
-\end{example}
+The people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome.
 
 When a patient enters the trial, their level of each factor is listed. The patient is then allocated in such a way as to minimise any difference in these factors between the two groups. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are
 
@@ -1345,7 +1347,7 @@ It is generally agreed that if the risk of selection bias cannot be avoided, the
 
 Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). \citet{pocock1975sequential} give an algorithm in the general case of \(N\) treatment arms, but we will not do that here.
 
-Suppose there are several prognostic factors over which we require balance, and that these factors have \(I, J, K, ...\) levels. In our example above, there would be \(I=2,\; J=2,\; K=3,\; L=2\). Note that this equates to 24 strata.
+Suppose there are several prognostic factors over which we require balance, and that these factors have \(I, J, K, ...\) levels. In the example above, there would be \(I=2,\; J=2,\; K=3,\; L=2\). Note that this equates to 24 strata.
 
 At some point in the trial, suppose we have recruited \(n_{ijkl}\) patients with levels \(i,\,j,\,k,\,l\) of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, \(n^A_{ijkl}\) have been assigned to treatment arm \(A\), and \(n^B_{ijkl}\) to arm \(B\). So we have
 
@@ -1464,7 +1466,7 @@ In clinical trials papers, the allocation groups are usually summarised in table
 \includegraphics[width=0.6\linewidth]{images/licorice} \caption{Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From @ruetzler2013randomized}\label{fig:licorice-participants}
 \end{figure}
 
-The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.
+An issue here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.
 
 \begin{tabular}{>{}l|l|l}
 \hline

@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-01-26" />
+<meta name="date" content="2026-01-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -848,18 +848,18 @@ ABBA BAAB …
 </tr>
 </tbody>
 </table>
+</div>
 <p>Each time a new participant arrives, we follow the randomization pattern for their stratum. We could use another allocation scheme within each stratum, for example an urn model or a biased coin. It is important that we use one that aims to conserve balance, or else the benefits of stratification are lost.</p>
+<div class="example">
+<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 3.6  </strong></span>The study by <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> compares the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
+For their prognostic factors, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.</p>
 </div>
 <p>A difficulty with stratified sampling is that the number of strata can quickly become large as the number of factors (or the number of levels within some factors) increases. For example, if we have four prognostic factors each with three levels, there are <span class="math inline">\(3^4=81\)</span> strata. This creates a situation that is at best unwieldy, and at worst completely unworkable; in a small trial (with say 100 patients in each arm) there may be some strata with no patients in (this is actually not a problem), and probably many more with only one (this is much more problematic).</p>
 </div>
 <div id="minimization" class="section level3 hasAnchor" number="3.3.2">
 <h3><span class="header-section-number">3.3.2</span> Minimization<a href="alloc.html#minimization" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. It was developed for use with strata, as an alternative to randomly permuted blocks. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
-<p>To form the strata, the people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome.</p>
-<div class="example">
-<p><span id="exm:unlabeled-div-18" class="example"><strong>Example 3.6  </strong></span>The study by <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> compares the effect of giving aspirin to patients before coronary artery surgery with giving them a placebo. Interestingly, the effects of aspirin were found to be both positive (decreases platelet aggregation to arachidonic acid and to collagen) and negative (increased likelihood of post-operative excessive blood loss).
-For their prognostic factors, <span class="citation">Kallis et al. (<a href="#ref-kallis1994pre">1994</a>)</span> chose age (<span class="math inline">\(\leq{50}\)</span> or <span class="math inline">\(&gt;50\)</span>), sex (M or F), operating surgeon (3 possibilities) and number of coronary arteries affected (1 or 2). This creates 24 strata. The trial had 100 participants, meaning an average of 4.17 in each stratum.</p>
-</div>
+<p>Minimization was first proposed by <span class="citation">Taves (<a href="#ref-taves1974minimization">1974</a>)</span>, then shortly after by <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> and <span class="citation">Freedman and White (<a href="#ref-freedman1976use">1976</a>)</span>. The aim of minimization is to minimize the difference between the two groups. Although the method was developed in the seventies, it has only gained popularity relatively recently, mainly as computers have become widely available.</p>
+<p>The people running the trial must first specify all of the factors they would like to be balanced between the two groups. These should be any variables that are thought to possibly affect the outcome.</p>
 <p>When a patient enters the trial, their level of each factor is listed. The patient is then allocated in such a way as to minimise any difference in these factors between the two groups. The minimization method has evolved since its conception, and exists in several forms. Two areas in which methods vary are</p>
 <ul>
 <li>Whether continuous variables have to be binned</li>
@@ -869,7 +869,7 @@ For their prognostic factors, <span class="citation">Kallis et al. (<a href="#re
 <div id="minimization-algorithm" class="section level4 hasAnchor" number="3.3.2.1">
 <h4><span class="header-section-number">3.3.2.1</span> Minimization algorithm<a href="alloc.html#minimization-algorithm" class="anchor-section" aria-label="Anchor link to header"></a></h4>
 <p>Suppose we have a trial in which patients are recruited sequentially and need to be allocated to a trial arm (of which there are two). <span class="citation">Pocock and Simon (<a href="#ref-pocock1975sequential">1975</a>)</span> give an algorithm in the general case of <span class="math inline">\(N\)</span> treatment arms, but we will not do that here.</p>
-<p>Suppose there are several prognostic factors over which we require balance, and that these factors have <span class="math inline">\(I, J, K, ...\)</span> levels. In our example above, there would be <span class="math inline">\(I=2,\; J=2,\; K=3,\; L=2\)</span>. Note that this equates to 24 strata.</p>
+<p>Suppose there are several prognostic factors over which we require balance, and that these factors have <span class="math inline">\(I, J, K, ...\)</span> levels. In the example above, there would be <span class="math inline">\(I=2,\; J=2,\; K=3,\; L=2\)</span>. Note that this equates to 24 strata.</p>
 <p>At some point in the trial, suppose we have recruited <span class="math inline">\(n_{ijkl}\)</span> patients with levels <span class="math inline">\(i,\,j,\,k,\,l\)</span> of the factors. For example, this may be males, aged over 50, assigned to the second surgeon, with both coronary arteries affected. Within these, <span class="math inline">\(n^A_{ijkl}\)</span> have been assigned to treatment arm <span class="math inline">\(A\)</span>, and <span class="math inline">\(n^B_{ijkl}\)</span> to arm <span class="math inline">\(B\)</span>. So we have</p>
 <p><span class="math display">\[ n^A_{ijkl} + n^B_{ijkl} = n_{ijkl} .\]</span></p>
 <p>If we were to use random permuted blocks within each stratum, then we would be assured that</p>
@@ -996,7 +996,7 @@ Since our sum is greater than zero, we allocate the new patient to arm B (talc) 
 Figure 3.9: Summary statistics for an RCT comparing a licorice gargle (the intervention) to a sugar-water gargle (the standard). From <span class="citation">Ruetzler et al. (<a href="#ref-ruetzler2013randomized">2013</a>)</span>
 </p>
 </div>
-<p>The problem here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.</p>
+<p>An issue here is that only the marginal distributions are compared for similarity. Consider the following (somewhat extreme and minimalistic) scenario. A study aims to investigate the effect of some treatment, and to balance for gender and age in their allocation, resulting in the following summary table.</p>
 <table>
 <thead>
 <tr>
