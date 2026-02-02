@@ -251,19 +251,20 @@ $$
 where $\rho$ is the true correlation between $X$ and $B$, and is assumed to be the same in either group. Similarly, 
 
 $$\operatorname{var}\left(X_C-B_C\right) = 2\sigma^2\left(1-\rho\right).$$
-Using this to work out the variance of the estimator $\hat{\tau}$ we find that for comparing means, assuming two equally sized groups of size $N$, we have
 
-$$\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left(\bar{x}_T - \bar{x}_C\right) = \frac{2\sigma^2}{N}.$$
+Using this to work out the variance of the estimators we find that for comparing means, assuming two equally sized groups of size $N$, we have
+
+$$\operatorname{var}\left(\hat{\tau}_{\text{out}}\right) = \operatorname{var}\left(\bar{x}_T - \bar{x}_C\right) = \frac{2\sigma^2}{N}.$$
 
 whereas for comparing differences from baseline
 
-$$\operatorname{var}\left(\hat{\tau}\right) = \operatorname{var}\left[\left(\overline{X_T-B_T}\right) - \left(\overline{X_C - B_C}\right)\right] = 2\left(1-\rho\right)\left(\frac{2\sigma^2}{N}\right).$$
+$$\operatorname{var}\left(\hat{\tau}_{\text{diff}}\right) = \operatorname{var}\left[\left(\overline{X_T-B_T}\right) - \left(\overline{X_C - B_C}\right)\right] = 2\left(1-\rho\right)\left(\frac{2\sigma^2}{N}\right).$$
 
 
 
 Therefore, if $\frac{1}{2}<\rho\leq 1$ there will be a smaller variance when comparing differences than when using just the outcome variable. However, if $\rho<\frac{1}{2}$, the variance will be smaller when comparing outcome variables.
 
-Intuitively, this seems reasonable: if the correlation between baseline and outcome measurements is very strong, then we can remove some of the variability between participants by taking into account their baseline measurement. However, if the correlation is weak, then by including the baseline in the analysis we are essentially just introducing noise. If the correlation is negative (very unusual in practice) then the $\operatorname{var}\left(\hat\tau\right)$ is much larger - this also makes sense intuitively because we aren't allowing the coefficient of the baseline measurement to reflect the relationship between baseline and outcome.
+Intuitively, this seems reasonable: if the correlation between baseline and outcome measurements is very strong, then we can remove some of the variability between participants by taking into account their baseline measurement. However, if the correlation is weak, then by including the baseline in the analysis we are essentially just introducing noise. If the correlation is negative (very unusual in practice) then $\operatorname{var}\left(\hat{\tau}_{\text{diff}}\right)$ is much larger than $\operatorname{var}\left(\hat{\tau}_{\text{out}}\right)$ - this also makes sense intuitively because we aren't allowing the coefficient of the baseline measurement to reflect the relationship between baseline and outcome.
 
 
 ::: {.example}
@@ -273,7 +274,7 @@ For our Captopril example, the sample correlation between baseline and outcome i
 
 ### A dodgy way to use baseline variables 
 
-Sometimes the analysis performed on a dataset is rather spurious, but it isn't always immediately obvious why. We'll look at one example now, because it is done sometimes.
+Sometimes the analysis performed on a dataset is rather spurious, but it isn't always immediately obvious why. We'll look at one example now, because it is sometimes done.
 
 This approach involves looking at each group separately, and determining whether there has been a significant change in the outcome variable (note that this only 'works' if $\mu_B = \mu$, ie. if you wouldn't expect a change in $X$ over time anyway). One thing that makes this analysis attractive is that it lends itself to a paired $t$-test, which is more poweful (in general).
 
@@ -326,9 +327,9 @@ This issue arises in many trials, particularly where there is a strong correlati
 
 ### The theory {#ancovatheory}
 
-Suppose the outcome for a clinical trial is $X$, which has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the test group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
+Suppose the outcome for a clinical trial is $X$, which has mean $\mu$ in the control group (C) and mean $\mu+\tau$ in the treatment group (T), and as usual our aim is to determine the extent of $\tau$, the treatment effect. We suppose also that $X$ has variance $\sigma^2$ in both groups.
 
-The same quantity is measured at the start of the trial, and this is the baseline $B$, which we can assume to have true mean $\mu_B$ in both groups (because of randomisation) and variance $\sigma^2$. We also assume that the true correlation between $B$ and $X$ is $\rho$ in each group. Finally, we assume that both treatment groups are of size $N$. We therefore have $2N$ patients, and so we observe baseline measurements $b_1,\,b_2,\ldots,b_{2N}$.
+The same quantity is measured at the start of the trial, and this is the baseline $B$, which we can assume to have true mean $\mu_B$ in both groups (because of randomisation) and variance $\sigma^2$. We also assume that the true correlation between $B$ and $X$ is $\rho$ in each group. Finally, we assume that both trial arms are of size $N$. We therefore have $2N$ patients, and so we observe baseline measurements $b_1,\,b_2,\ldots,b_{2N}$.
 
 Our first step is to find an estimator for $\tau$ that uses this information.
 
