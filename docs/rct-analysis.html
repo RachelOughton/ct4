@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-01-28" />
+<meta name="date" content="2026-02-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -448,7 +448,7 @@ div.csl-indent {
 <p>We’re now in the post-trial stage. The trial has been run, and we have lots of data to analyze to try to assess what effect the treatment or intervention has had. In general we will use the notation <span class="math inline">\(\tau\)</span> to denote the treatment effect.</p>
 <p>In this chapter we’ll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we’ll go on to look at other types of data.</p>
 <div class="example">
-<p><span id="exm:captopril1" class="example"><strong>Example 4.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
+<p><span id="exm:captopril1" class="example"><strong>Example 4.1  </strong></span>To illustrate the theory and methods, we’ll use an example dataset from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> (this example is also used by <span class="citation">Matthews (<a href="#ref-matthews2006introduction">2006</a>)</span>). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure (the primary outcome) was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.</p>
 <p>The baseline and outcome blood pressure measurements (in mmHg) are shown in Table <a href="rct-analysis.html#tab:captoprildata">4.1</a>. We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span> say that the patients were ‘randomly allocated’ to their group.</p>
 <table>
 <caption><span id="tab:captoprildata">Table 4.1: </span>Data for the Captopril trial from <span class="citation">Hommel et al. (<a href="#ref-hommel1986effect">1986</a>)</span>.</caption>
@@ -607,10 +607,10 @@ s_p&amp;= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
 &amp; = 7.82\text{ mmHg.}
 \end{aligned}
 \]</span>
-This enables us to do an independent two-sample <span class="math inline">\(t\)</span>-test, by computing the standardized measure of effect size we found in Section <a href="rct-plan.html#sec-measDcont">2.3</a>. We find the <span class="math inline">\(t\)</span> statistic</p>
+This enables us to do an independent two-sample <span class="math inline">\(t\)</span>-test, by computing the standardized measure of effect size we found in Section <a href="rct-plan.html#sec-measDcont">2.3</a>. We find the test statistic</p>
 <p><span class="math display">\[
   \begin{aligned}
-t &amp; = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
+D &amp; = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
 &amp; = \frac{6.53}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \\
 &amp; = 1.65.
 \end{aligned}
@@ -618,12 +618,12 @@ t &amp; = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\
 Note that here the placebo group is group <span class="math inline">\(C\)</span>, and the Captopril group is group <span class="math inline">\(T\)</span>.</p>
 <p>Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a <span class="math inline">\(t\)</span> distribution with 14 degrees of freedom (<span class="math inline">\(n_i-1\)</span> for each group).</p>
 <div class="figure"><span style="display:block;" id="fig:ttestcapt"></span>
-<img src="CT4H_notes_files/figure-html/ttestcapt-1.png" alt="The distribution $t_{14}$, with $t=1.65$ shown by the dashed line and the 'more extreme' areas shaded. " width="672" />
+<img src="CT4H_notes_files/figure-html/ttestcapt-1.png" alt="The distribution $t_{14}$, with $D=1.65$ shown by the dashed line and the 'more extreme' areas shaded. " width="672" />
 <p class="caption">
-Figure 4.1: The distribution <span class="math inline">\(t_{14}\)</span>, with <span class="math inline">\(t=1.65\)</span> shown by the dashed line and the ‘more extreme’ areas shaded.
+Figure 4.1: The distribution <span class="math inline">\(t_{14}\)</span>, with <span class="math inline">\(D=1.65\)</span> shown by the dashed line and the ‘more extreme’ areas shaded.
 </p>
 </div>
-<p>The dashed line in Figure <a href="rct-analysis.html#fig:ttestcapt">4.1</a> is at <span class="math inline">\(t=1.65\)</span>, and the red shaded areas show anywhere ‘at least as extreme’. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by</p>
+<p>The dashed line in Figure <a href="rct-analysis.html#fig:ttestcapt">4.1</a> is at <span class="math inline">\(D=1.65\)</span>, and the red shaded areas show anywhere ‘at least as extreme’. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="rct-analysis.html#cb1-1" tabindex="-1"></a><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pt</span>(<span class="fl">1.65</span>, <span class="at">df=</span><span class="dv">14</span>))</span></code></pre></div>
 <pre><code>## [1] 0.1211902</code></pre>
 <p>This is the value we know as ‘the P value’. We see that in this case our results are not statistically significant (even at the 0.10 level), under this model.</p>

@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-01-28}
+\date{2026-02-02}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -1499,7 +1499,7 @@ We're now in the post-trial stage. The trial has been run, and we have lots of d
 In this chapter we'll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we'll go on to look at other types of data.
 
 \begin{example}
-\protect\hypertarget{exm:captopril1}{}\label{exm:captopril1}To illustrate the theory and methods, we'll use an example dataset from \citet{hommel1986effect} (this example is also used by \citet{matthews2006introduction}). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
+\protect\hypertarget{exm:captopril1}{}\label{exm:captopril1}To illustrate the theory and methods, we'll use an example dataset from \citet{hommel1986effect} (this example is also used by \citet{matthews2006introduction}). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure (the primary outcome) was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
 
 The baseline and outcome blood pressure measurements (in mmHg) are shown in Table \ref{tab:captoprildata}. We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. \citet{hommel1986effect} say that the patients were `randomly allocated' to their group.
 
@@ -1577,11 +1577,11 @@ s_p&= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
 & = 7.82\text{ mmHg.}
 \end{aligned}
 \]
-This enables us to do an independent two-sample \(t\)-test, by computing the standardized measure of effect size we found in Section \ref{sec-measDcont}. We find the \(t\) statistic
+This enables us to do an independent two-sample \(t\)-test, by computing the standardized measure of effect size we found in Section \ref{sec-measDcont}. We find the test statistic
 
 \[
   \begin{aligned}
-t & = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
+D & = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
 & = \frac{6.53}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \\
 & = 1.65.
 \end{aligned}
@@ -1593,10 +1593,10 @@ Under the null hypothesis that the mean systolic blood pressure at the end of th
 \begin{figure}
 \centering
 \pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/ttestcapt-1.pdf}}
-\caption{\label{fig:ttestcapt}The distribution \(t_{14}\), with \(t=1.65\) shown by the dashed line and the `more extreme' areas shaded.}
+\caption{\label{fig:ttestcapt}The distribution \(t_{14}\), with \(D=1.65\) shown by the dashed line and the `more extreme' areas shaded.}
 \end{figure}
 
-The dashed line in Figure \ref{fig:ttestcapt} is at \(t=1.65\), and the red shaded areas show anywhere `at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by
+The dashed line in Figure \ref{fig:ttestcapt} is at \(D=1.65\), and the red shaded areas show anywhere `at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by
 
 \begin{Shaded}
 \begin{Highlighting}[]

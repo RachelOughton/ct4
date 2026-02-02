@@ -10,7 +10,7 @@ We're now in the post-trial stage. The trial has been run, and we have lots of d
 In this chapter we'll keep our focus on the scenario where the trial outcome is measured on a continuous scale, but in later weeks we'll go on to look at other types of data.
 
 ::: {.example #captopril1} 
-To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
+To illustrate the theory and methods, we'll use an example dataset from @hommel1986effect (this example is also used by @matthews2006introduction). The data involves a trial of 16 diabetes patients, and focusses on a drug (Captopril) that may reduce blood pressure. This is important, since for those with diabetes, high blood pressure can exacerbate kidney disease (specifically diabetic nephropathy, a complication of diabetes). To participate in the trial, people had to be insulin-dependent and already affected by diabetic nephropathy. In the trial, systolic blood pressure (the primary outcome) was measured before participants were allocated to each trial arm, and then measured again after one week on treatment. A placebo was given to the control group, so that all participants were blinded.
 
 The baseline and outcome blood pressure measurements (in mmHg) are shown in Table \@ref(tab:captoprildata). We see that nine participants were assigned to the treatment arm (Captopril) and the remaining seven to the placebo group. @hommel1986effect say that the patients were 'randomly allocated' to their group.
 
@@ -81,11 +81,11 @@ s_p&= \sqrt{\frac{8\times{8.43^2} + 6 \times{6.94^2}}{8+6}}\\
 & = 7.82\text{ mmHg.}
 \end{aligned}
 $$
-  This enables us to do an independent two-sample $t$-test, by computing the standardized measure of effect size we found in Section \@ref(sec-measDcont). We find the $t$ statistic
+  This enables us to do an independent two-sample $t$-test, by computing the standardized measure of effect size we found in Section \@ref(sec-measDcont). We find the test statistic
 
 $$
   \begin{aligned}
-t & = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
+D & = \frac{\bar{X_C} - \bar{X_T}}{s_p\sqrt{\frac{1}{n_C} + \frac{1}{n_T}}}\\
 & = \frac{6.53}{7.82\sqrt{\frac{1}{7} + \frac{1}{9}}} \\
 & = 1.65.
 \end{aligned}
@@ -94,7 +94,7 @@ Note that here the placebo group is group $C$, and the Captopril group is group 
 
   Under the null hypothesis that the mean systolic blood pressure at the end of the week of treatment/placebo is the same in both groups, this value should have a $t$ distribution with 14 degrees of freedom ($n_i-1$ for each group). 
 
-```{r ttestcapt, fig.cap = "The distribution $t_{14}$, with $t=1.65$ shown by the dashed line and the 'more extreme' areas shaded. "}
+```{r ttestcapt, fig.cap = "The distribution $t_{14}$, with $D=1.65$ shown by the dashed line and the 'more extreme' areas shaded. "}
 x1 = seq(-4, -1.65, by=0.01)
 px1 = dt(x1, df=14)
 x2 = seq(1.65,4, by=0.01)
@@ -103,11 +103,11 @@ px2 = dt(x2, df=14)
 ggplot(data=data.frame(x=c(-4,4)), aes(x)) +
   stat_function(fun=dt, args=list(df=14))+
   geom_ribbon(data=data.frame(x=x1, y=px1), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) + 
-  geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) +xlab("Test statistic (t)") + ylab("Density") +
+  geom_ribbon(data=data.frame(x=x2, y=px2), aes(x=x, ymin=0, ymax=y), fill="red", alpha=0.4) +xlab("Test statistic (D)") + ylab("Density") +
   geom_vline(xintercept = 1.65, lty=2) + theme_bw()
 ```
 
-The dashed line in Figure \@ref(fig:ttestcapt) is at $t=1.65$, and the red shaded areas show anywhere 'at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by 
+The dashed line in Figure \@ref(fig:ttestcapt) is at $D=1.65$, and the red shaded areas show anywhere 'at least as extreme'. We can find the area (ie. the probability of anything at least as extreme as our found value) in R by 
 ```{r echo=T}
 2*(1-pt(1.65, df=14))
 ```
