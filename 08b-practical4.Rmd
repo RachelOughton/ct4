@@ -773,97 +773,349 @@ and we see that there is insufficient evidence to reject the null hypothesis (of
 
 </details>
 
-## Extension problem: Sample size by simulation (part II) {#cp2sim2}
+## Extension problem: sample size by simulation (part II) {#cp4sim2}
 
-If you have time, you could now combine the work we've done in this practical and the previous one to implement power simulation for a binary outcome trial.
+We now combine the work we've done, to implement power simulation for a survival outcome trial.
 
-If you've found the above fairly simple, this will be a good exercise to stretch your muscles. If not, then please still give it some thought, but feel free to look at the solution to see how the method applied to another approach.
+To simulate survival / time-to-event data as though from a clinical trial, we need to consider two things:
 
-Before starting, look back at Practical 3 and the steps to the simulation method and consider what you've to do to complete the exercise.
+  1. The distribution of the observation/event times (if everyone were observed perfectly)
+  2. The censoring mechanism
+  
+For the first, we are likely to use a probability distribution like the exponential (which we saw in lectures) or the Weibull (which we looked at very briefly). 
 
-:::{.exercise}
-Use simulation to find the appropriate size for a trial with a binary primary outcome variable. You can assume that the proportion of 'successes' in the control group is 0.65, and that the least clinically significant proportion we'd like to be able to detect is a treatment group proportion of 0.8. The trial should have a significance level of $\alpha=0.05$ and a power of $1-\beta = 0.8$.
+For the second, there are two aspects:
+  
+  1. Anyone who is still alive (or hasn't experienced the event) by the end of the trial will be censored at that point
+  2. There will be some censoring during the lifetime of the trial, and this should also be randomly generated.
+  
+In this practical we'll use a Weibull distribution. You can read about the Weibull distribution in Section \@ref(weibull). The main thing you need to know is that the distribution is defined by its **shape** and **scale**. In this practical we'll implement a simplified version of that used by @jiang2012practical, so if you want to think more about the topic that would be a good place to start
+
+### Minimum detectable effect size
+
+One of the first practical issues we need to tackle is the concept of the difference between the treatment and control group outcomes, and the idea of the minimum difference we want to be able to detect. Ideally this should be something clinically meaningful. We also need to work out how to factor this into the simulation. 
+
+@jiang2012practical do this in the following way:
+
+  1. Specify the shape parameter $\gamma$ of the Weibull distribution (there is detail on how to do this, but we'll treat it as someone else's problem)
+  2. Specify the median survival time for the control and treatment groups, $M_C$ and $M_T$. We're assuming that 'the event' is bad, and so we'll assume $M_T>M_C$. This is how the MDES concept enters the simulation, so $M_T$ should be the smallest value of $M_T$ we want to be able to detect (ie. creating the smallest clinically worthwhile improvement from $M_C$).
+  3. Specifying $\gamma$ and $M_C,\,M_T$ gives us the scale parameters $\lambda_C,\,\lambda_T$, and so we have our observation time distribution function for each group.
+  
+### Censoring  
+  
+For the censoring, this is achieved in two ways:
+
+  1. An endpoint $T_{max}$ is specified as part of the trial design, and any observation after $T_{max}$ is censored at $T_{max}$
+  2. Every simulation is censored with a specified drop-out probability $\pi$, using a Bernoulli distribution. The value of the censored observation is kept at the value simulated from the Weibull distribution.
+  
+There are other ways to model drop-out, but this relatively simple method works nicely.  
+  
+:::{.exercise #survsim1}
+Write code to simulate a survival trial dataset as described above. Using this function, simulate data for a trial where $\gamma=0.5,\, M_T=7,\,M_C=6,\,\pi=0.1, t_{max}=10$, with approximately 100 participants in each group.
+
+  * Plot the Kaplan-Meier estimated survival curve of your data
+  * What are some of the modelling assumptions/simplifications that have been made?
+  
+Some technical things to note:
+
+  * For the `rweibull` function (and all the other Weibull functions) in R, the scale is $\sigma = \lambda^{-\frac{1}{\gamma}}$.
+  * For the `Surv` function to interpret the time and status as right censored, it seems that the status variable has to be numeric (not factor, which would seem more logical)
+
+<details><summary> *Click for hint 1 (about finding $\lambda_C,\,\lambda_T$)* </summary>
+You can use the fact that the CDF of the Weibull distribution is 
+
+$$F\left(x\mid \lambda,\,\gamma\right) = 
+\begin{cases}
+1 - \exp\left[-\lambda t^{\gamma}\right]&\text{for }t>0\\
+0 & \text{otherwise}.
+\end{cases}
+$$
+
+</details>
+
+<details><summary> *Click for hint 2 (about setting up the simulated data)* </summary>
+Your simulated participant data frame should have three columns (they don't need to have these exact names):
+
+  * Time
+  * Status (censored = 0, complete = 1)
+  * Group (Control or Treatment)
+
+</details>
+
 :::
 
 <details> <summary> Click for solution </summary>
 
 :::{.solution}
 
-The steps within each simulation are:
+As we did in Section \@ref(cp2sim) we'll write functions so that we can do all of this lots of times. 
+Firstly, given a median survival time $M_X$ and a shape parameter $\gamma$ we use the CDF (or you could use the Survival function, which will give the same answer) to find the scale $\lambda_X$ using
 
-  - Simulate data using `rbinom`
-  - Run some analysis method on that simulated data
-  - Record whether $H_0$ was rejected
-  
-In the code below I've used the simplest type of analysis, a $t$-test on the absolute risk difference, but you could use any of the methods we've covered.
+$$ \frac{1}{2} = 1 - \exp\left(-\lambda_X M_X^\gamma\right), $$
+which gives
+
+$$\lambda_X = \frac{\ln2}{M_X^{\gamma}}.$$
 
 ```{r, echo=T}
-binom_sim = function(
-  nsim,    # Number of simulations
-  N,       # Number of participants in each arm
-  piC,     # Assumed proportion in control group
-  piT      # minimum detectably different proportion in treatment group
+## THIS IS DEFNITELY NOT GIVING THE RIGHT DATA!
+surv_data = function(
+    npart, # number of participants per group (roughly)
+    shape, # shape parameter for Weibull, assumed same for both groups
+    MC,    # median survival time - group C
+    MT,    # median survival time.- group T
+    p_cens, # probability of censoring for each observation
+    t_max   # end point of trial
 ){
-  H0_reject_vec = rep(NA, nsim) # to store 1 if H0 rejected, 0 if fail to reject H0
-  for (i in 1:nsim){
-    rC = rbinom(n=1, size=N, prob=piC) # generate numbers of successes
-    rT = rbinom(n=1, size=N, prob=piT)
-    
-    pC = rC/N # Find estimates of proportions
-    pT = rT/N
-    p_pooled = (rC+rT)/(2*N)
-    
-    z_stat = (pT - pC) / (sqrt(p_pooled*(1-p_pooled)*(1/N + 1/N)))
-    
-    p_val = 2*(1-pnorm(z_stat, mean=0, sd=1))
-    
-    H0_reject_vec[i] = ifelse(p_val<0.05, 1, 0)
-  }
+  scaleC = log(2)/(MC^shape)
+  scaleT = log(2)/(MT^shape)
+  # transform for R
+  RscaleC = scaleC^(-1/shape)
+  RscaleT = scaleT^(-1/shape)
   
-  power.est = mean(H0_reject_vec)
-  power.est
+  dat_mat = matrix(NA, nrow=2*npart, ncol=3)
+  dat_df = as.data.frame(dat_mat)
+  names(dat_df) = c("time", "status", "group")
+  
+  for (i in 1:(2*npart)){
+    # Using SRS here, but could use something else
+    group_i = sample(c("C", "T"), size=1)
+    # Generate time accordingly
+    if (group_i == "C"){
+      time_i = round(rweibull(1, shape=shape, scale=RscaleC))
+    } else if (group_i == "T"){
+      time_i = round(rweibull(1, shape=shape, scale=RscaleT))
+    }
+    # Determine whether observation i is censored
+    status_i = sample(c(0,1), size=1, prob = c(p_cens, 1-p_cens))
+    if(time_i>t_max){
+      time_i = t_max
+      status_i = 0
+    }
+    # Having a zero time observation messes things up so we fudge it slightly
+    if(time_i == 0){
+      time_i = 1
+      status_i = 1
+    }
+    
+    dat_df[i,] = c(time_i, status_i, group_i)
+  }
+  # Round to 0 dp for a hint of reality
+  dat_df$time = as.numeric(dat_df$time)
+  dat_df$status = as.numeric(dat_df$status)
+  dat_df$group = as.factor(dat_df$group)
+  
+  return(dat_df)
 }
 ```
 
-Let's now try this for $N=100$, as a base point
+We can use the function to simulate the data described above
+
+```{r}
+surv_df1 = surv_data(npart=100, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+with(data = surv_df1, Surv(time, status, type = "right"))
+```
+
+and plot the estimated survival curve
 
 ```{r, echo=T}
-sim_vec7 = rep(NA, 100)
-for (i in 1:100){
-  sim_vec7[i] = binom_sim(nsim=100, N=100, piC=0.65, piT=0.8)
-}
-ggplot(mapping = aes(sim_vec7)) + geom_histogram(bins=10)
+km_df1 = survfit(Surv(time, status) ~ group, data=surv_df1)
+autoplot(km_df1, conf.int = F)
 
 ```
 
-This is clearly too low so we can try a higher number - let's say $N=150$
+In this sampling scheme it seems it's common to get some very low values, which is probably quite unrealistic.
 
+Some other assumptions / simplifications we're making are:
 
-
-```{r, echo=T}
-sim_vec8 = rep(NA, 100)
-for (i in 1:100){
-  sim_vec8[i] = binom_sim(nsim=100, N=150, piC=0.65, piT=0.8)
-}
-ggplot(mapping = aes(sim_vec8)) + geom_histogram(bins=10)
-```
-
-This appears to be much closer - one could now finesse $N$ to fit some criteria on the proportion of simulations achieving the desired power.
-
-
-
+  * Both groups have the same shape parameter $\gamma$. This ensures the proportional hazards assumption is met, but probably isn't realistic
+  * Censorings during the trial are completely at random (simulated via a Bernoulli distribution). In reality this is very unlikely; it's far more likely that people become lost to follow-up for a reason, and that within the dataset the instances of this are not independent.
+  * Censored data keep the same time as was generated by the Weibull distribution. This will slightly skew our results.
+  
 :::
 
 </details>
 
+Having set up a function to simulate data for one trial, we can run it many times to estimate the power of this trial set up. 
+The extra pieces of information we need for this are:
 
+  * The significance level $\alpha$ - we will assume $\alpha = 0.05$
+  * The test to be used - we will use the log rank test (as in Section \@ref(cp2logrank)).
+  
+:::{.exercise}
+Using the function you wrote in Exercise \@ref(exr:survsim1) and the log-rank test, write a function to estimate the power of a trial set-up.
+
+Assuming the same parameters as in Exercise \@ref(exr:survsim1) and a significance level of $\alpha=0.05$:
+
+  * Estimate the number of participants you need per trial group to achieve a power of 80%.
+  * Suppose the clinicians decided to extend the trial so that $t_{max}=20$. How many participants do you now need (approxiamtely) to achieve a power of 80%?
+
+:::
+
+<details><summary> Click for solution </summary>
+
+:::{.solution}
+
+```{r, echo=T}
+surv_sim = function(
+    nsim,  # number of simulations to run
+    alpha, # the significance level of the test
+    npart, # number of participants per group (roughly)
+    shape, # shape paramer for Weibull, assumed same for both groups
+    MC,    # median survival time - group C
+    MT,    # median survival time.- group T
+    p_cens, # probability of censoring for each observation
+    t_max   # end point of trial
+){
+  H0_reject_vec = rep(NA, nsim)
+  
+  for (i in 1:nsim){
+    df_i = surv_data(npart=npart, shape=shape,MC=MC, MT=MT, p_cens=p_cens, t_max=t_max)
+    log_rank_i = survdiff(Surv(time, status) ~ group, data=df_i, rho=0)
+    p_val = log_rank_i$pvalue
+    H0_reject_vec[i]= ifelse(p_val < alpha, 1, 0)
+  }
+  power.est = mean(H0_reject_vec)
+  power.est
+}
+
+```
+
+We can now use this to find the sample size we need. By experimenting with some values, we find that around 245 participants per trial group gives the appropriate power (assuming we want the mean power a little higher than 0.8).
+
+```{r, echo=T, cache=T}
+surv_sim(nsim=100, alpha=0.05, npart=250, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+
+survsim_vec1 = rep(NA, 100)
+for (i in 1:100){
+  survsim_vec1[i] = surv_sim(nsim=100, alpha=0.05, npart=245, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+}
+ggplot(mapping = aes(survsim_vec1)) + geom_histogram(bins=10)
+
+```
+
+If we extend the trial duration to $t_{max}=20$, the power given by 245 participants is now larger, because there are fewer censored observations:
+
+```{r, echo=T, cache=T}
+surv_sim(nsim=100, alpha=0.05, npart=245, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
+```
+
+Experimenting with some different values for `npart` we find that 
+
+```{r, echo=T, cache=T}
+surv_sim(nsim=100, alpha=0.05, npart=215, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
+survsim_vec2 = rep(NA, 100)
+for (i in 1:100){
+  survsim_vec2[i] = surv_sim(nsim=100, alpha=0.05, npart=215, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
+}
+ggplot(mapping = aes(survsim_vec2)) + geom_histogram(bins=10)
+
+```
+
+:::
+
+</details>
 
 There are of course lots of ways we could refine and extend this, many of them similar to what we discussed in Section \@ref(cp3sim), for example:
 
   * Running more simulations (100 is really not enough, but was chosen so that the file would compile - feel free to increase it)
   * Incorporating a better sampling scheme than SRS
   * Improving the drop-out / censoring modelling
-  * Allowing the probability to vary in the data generation (this would be known as a *sensitivity analysis*).
+  * Allowing the shape parameter to vary (though being careful of the implications on analysis)
   
+This concludes our second (and final) practical.
+
+
+<!-- ## Extension problem: Sample size by simulation (part II) {#cp2sim2} -->
+
+<!-- If you have time, you could now combine the work we've done in this practical and the previous one to implement power simulation for a binary outcome trial. -->
+
+<!-- If you've found the above fairly simple, this will be a good exercise to stretch your muscles. If not, then please still give it some thought, but feel free to look at the solution to see how the method applied to another approach. -->
+
+<!-- Before starting, look back at Practical 3 and the steps to the simulation method and consider what you've to do to complete the exercise. -->
+
+<!-- :::{.exercise} -->
+<!-- Use simulation to find the appropriate size for a trial with a binary primary outcome variable. You can assume that the proportion of 'successes' in the control group is 0.65, and that the least clinically significant proportion we'd like to be able to detect is a treatment group proportion of 0.8. The trial should have a significance level of $\alpha=0.05$ and a power of $1-\beta = 0.8$. -->
+<!-- ::: -->
+
+<!-- <details> <summary> Click for solution </summary> -->
+
+<!-- :::{.solution} -->
+
+<!-- The steps within each simulation are: -->
+
+<!--   - Simulate data using `rbinom` -->
+<!--   - Run some analysis method on that simulated data -->
+<!--   - Record whether $H_0$ was rejected -->
+
+<!-- In the code below I've used the simplest type of analysis, a $t$-test on the absolute risk difference, but you could use any of the methods we've covered. -->
+
+<!-- ```{r, echo=T} -->
+<!-- binom_sim = function( -->
+<!--   nsim,    # Number of simulations -->
+<!--   N,       # Number of participants in each arm -->
+<!--   piC,     # Assumed proportion in control group -->
+<!--   piT      # minimum detectably different proportion in treatment group -->
+<!-- ){ -->
+<!--   H0_reject_vec = rep(NA, nsim) # to store 1 if H0 rejected, 0 if fail to reject H0 -->
+<!--   for (i in 1:nsim){ -->
+<!--     rC = rbinom(n=1, size=N, prob=piC) # generate numbers of successes -->
+<!--     rT = rbinom(n=1, size=N, prob=piT) -->
+
+<!--     pC = rC/N # Find estimates of proportions -->
+<!--     pT = rT/N -->
+<!--     p_pooled = (rC+rT)/(2*N) -->
+
+<!--     z_stat = (pT - pC) / (sqrt(p_pooled*(1-p_pooled)*(1/N + 1/N))) -->
+
+<!--     p_val = 2*(1-pnorm(z_stat, mean=0, sd=1)) -->
+
+<!--     H0_reject_vec[i] = ifelse(p_val<0.05, 1, 0) -->
+<!--   } -->
+
+<!--   power.est = mean(H0_reject_vec) -->
+<!--   power.est -->
+<!-- } -->
+<!-- ``` -->
+
+<!-- Let's now try this for $N=100$, as a base point -->
+
+<!-- ```{r, echo=T} -->
+<!-- sim_vec7 = rep(NA, 100) -->
+<!-- for (i in 1:100){ -->
+<!--   sim_vec7[i] = binom_sim(nsim=100, N=100, piC=0.65, piT=0.8) -->
+<!-- } -->
+<!-- ggplot(mapping = aes(sim_vec7)) + geom_histogram(bins=10) -->
+
+<!-- ``` -->
+
+<!-- This is clearly too low so we can try a higher number - let's say $N=150$ -->
+
+
+
+<!-- ```{r, echo=T} -->
+<!-- sim_vec8 = rep(NA, 100) -->
+<!-- for (i in 1:100){ -->
+<!--   sim_vec8[i] = binom_sim(nsim=100, N=150, piC=0.65, piT=0.8) -->
+<!-- } -->
+<!-- ggplot(mapping = aes(sim_vec8)) + geom_histogram(bins=10) -->
+<!-- ``` -->
+
+<!-- This appears to be much closer - one could now finesse $N$ to fit some criteria on the proportion of simulations achieving the desired power. -->
+
+
+
+<!-- ::: -->
+
+<!-- </details> -->
+
+
+
+<!-- There are of course lots of ways we could refine and extend this, many of them similar to what we discussed in Section \@ref(cp3sim), for example: -->
+
+<!--   * Running more simulations (100 is really not enough, but was chosen so that the file would compile - feel free to increase it) -->
+<!--   * Incorporating a better sampling scheme than SRS -->
+<!--   * Improving the drop-out / censoring modelling -->
+<!--   * Allowing the probability to vary in the data generation (this would be known as a *sensitivity analysis*). -->
+
 
 

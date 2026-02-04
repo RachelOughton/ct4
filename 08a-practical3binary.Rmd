@@ -1,0 +1,523 @@
+# Computer Practical 2 - Analysis {#cp2analysis}
+
+## Preliminaries {-}
+  
+You will need a lot of the techniques covered in this practical for your summative assignments, so consider it a sort of informal formative assignment to finish it if you don't in class. Or, at the very least, you might need to return to it while working on your summative assignments.
+
+There will be a mixture of full solutions, examples of possible solutions and example code to adapt. If you're not sure how to do something, please ask!
+
+**In the example code, I have used the same names for most objects. In order to store your results and avoid confusion, it will be sensible to name things intelligently! For example, suffix each allocation data frame so that you know which allocation method you used. Create an R file with the commands in that you use, so that you can easily replicate your work.**
+
+### R practicalities {-}
+  
+There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at [CRAN task view](https://cran.r-project.org/web/views/ClinicalTrials.html)). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do 
+
+```{r, eval=F, echo=T}
+install.packages("<packagename>")
+```
+
+
+If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III. 
+
+An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
+
+This requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
+
+
+[Direct link to codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&reserved=0)
+
+[Instructions for how to use codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&reserved=0)
+
+
+
+
+## Analysis {#cp1analysis}
+
+For our analysis section, we will work with real datasets, and use them to explore and compare some of the different analysis methods we've covered in lectures. 
+
+### Polyps data
+
+The dataset we'll use concerns a small trial in which patients with familial adenomatous polyposis (FAP) were treated either with Sulindac (group T) or a placebo (group C). People with FAP tend to have polyps (small growths) grow in their colon. Although the polyps themselves are not dangerous or harmful, they can turn into colon cancer. You can read about the study in @giardiello1993treatment.
+
+:::{.exercise}
+First of all let's explore the dataset:
+
+  * Look at the help file for `polyps`
+  * Which columns should you use for baseline and outcome variables?
+  * Plot the data in these columns. Do you see any issues? Can you suggest a way to address them? What effect will this have on our estimator of the treatment effect?
+  
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+First of all, to access the data, enter
+
+```{r, echo=T}
+data(polyps, package = "medicaldata")
+```
+
+You can then view the help file by entering `?polyps`.
+
+To investigate the columns in `polyps` we can use the structure function `str(polyps)`
+
+We have the baseline number of polyps for each patient in the column `baseline`, and a sensible column to use for the outcome would be `number12m`. Other baseline variables are `sex` and `age`.
+
+To plot the baseline and outcome variables we can do 
+
+```{r, echo=T}
+ggplot(data=polyps, aes(x=baseline)) + geom_histogram()
+ggplot(data=polyps, aes(x=number12m)) + geom_histogram()
+```
+
+These are both very right skewed, and exclusively positive (which makes sense given they are counts). A sensible thing to do therefore would be to take the log of these two variables. Since they are counts we will use the log to base 10, so that our results are easier to interpret. If you'd prefer to use natural logs that's fine, some of your numbers will be different.
+
+```{r, echo=T}
+polyps$log_baseline = log10(polyps$baseline)
+polyps$log_number12m = log10(polyps$number12m)
+```
+
+Since we used the logarithms of the numbers of polyps, our treatment effect is
+$$\log\left(X_T\right) - \log\left(X_C\right) = \log\left(\frac{X_T}{X_C}\right).$$
+:::
+
+</details>
+
+We will work through the tests as we did in lectures, to see how the results differ.
+
+:::{.warning}
+Remember that working through the analysis methods like this in a real trial scenario would be terrible practice: it would lead to several different results (eg. p-values) with no obvious way to choose between them. It would therefore be tempting to choose the 'best' (ie. the one with the smallest p-value). This is known as 'p-fishing' or 'p-hacking', and is rather disingenuous! As we said in the first few lectures, best practice is to plan **everything**, including the analysis, before the trial has started.
+:::
+
+:::{.exercise}
+Using just the outcome variable (which should be `log_number12m` or something similar, see solution above if you aren't sure why), test the hypothesis that the Sulindac has had some effect.
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+We can either do this the long way or the short way! For sanity's sake, we'll do it the long way once, then in subsequent questions I'll only show the short way in the solutions.
+
+**The long way**
+
+The first thing to do is to calculate means for each group:
+
+```{r, echo=T}
+polyps_df = na.omit(polyps) # two participants (001 and 018) don't have data for 12m, so remove these
+mean_T = mean(polyps_df$log_number12m[polyps_df$treatment=="sulindac"]) 
+sd_T = sd(polyps_df$log_number12m[polyps_df$treatment=="sulindac"])
+mean_C = mean(polyps_df$log_number12m[polyps_df$treatment=="placebo"])
+sd_C = sd(polyps_df$log_number12m[polyps_df$treatment=="placebo"])
+# There are 11 patients on Placebo (group C) and 9 on Sulindac (group T)
+# The pooled standard deviation 
+pooled_sd_polypsX = sqrt((10*sd_C^2 + 8*sd_T^2)/(10+8))
+# Finally we find the test statistic
+test_stat = (mean_T - mean_C)/(pooled_sd_polypsX*sqrt(1/11 + 1/9))
+```
+
+Under $H_0$ (that there is no treatment effect) the test statistic follows a $t_{18}$ distribution, and therefore we find our $p$-value by
+
+```{r, echo=T}
+2*pt(test_stat, df=18)
+```
+Note that if the test statistic were positive, we'd have to do
+
+```{r, echo=T, eval=F}
+2*(1-pt(test_stat, df=18))
+```
+
+Thus $p=0.001$ and we conclude that the treatment effect is significant. Our confidence interval is given by
+
+```{r, echo=T}
+estimate = mean_T - mean_C
+error = qt(0.975, df=18)*pooled_sd_polypsX*sqrt(1/11 + 1/9)
+c(estimate - error, estimate + error)
+```
+
+**The short way**
+
+R has a t-test function built in, so we can simply use that. Notice that it gives us everything our heart might desire (on a fairly mundane day), including a confidence interval!
+
+```{r, echo=T}
+t.test(
+  x=polyps_df$log_number12m[polyps_df$treatment == "sulindac"],
+  y=polyps_df$log_number12m[polyps_df$treatment == "placebo"],
+  alternative = "two.sided",
+  var.equal=T, # this makes the method use pooled variances, as we did in lectures
+  conf.level = 0.95 # note that this is 1-alpha
+)
+```
+
+Either way, our 95% confidence interval is $\left(-1.226,\;-0.368\right)$ (to 3 d.p). 
+Therefore, the confidence interval for $\frac{X_T}{X_C}$ is
+
+$$\left(10^{-1.226},\;10^{-0.368}\right) =  \left(0.0594,\;0.429\right).$$
+That is, the number of polyps at 12 months for someone in group $T$ is likely to be somewhere between $0.0594 X_C$ and $0.429 X_C$.
+
+:::
+
+</details>
+
+We'll now move on to comparing the differences between baseline and outcome
+
+:::{.exercise}
+Perform another $t$-test, this time using the difference between outcome and baseline.  *Hint: because we've taken logs, you'll have to think about what variable to use and perhaps experiment with some possibilities*
+  
+:::
+
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+The first step is to calculate a difference column. This is somewhat complicated by that fact that we have taken logs of the measurements. Taking logs of the difference would not work, since some are negative. Potentially it might work to just work with the (unlogged) differences
+
+```{r, echo=T}
+polyps_df$diff = polyps_df$number12m - polyps_df$baseline
+ggplot(data=polyps_df, aes(x=diff, fill=treatment)) + geom_histogram(position="dodge", bins=10)
+```
+
+But the outliers look potentially problematic, and the central bulk of each distribution doesn't look very normal. We could also try the difference of the logged measurements:
+
+```{r, echo=T}
+polyps_df$diff_log = polyps_df$log_number12m - polyps_df$log_baseline
+ggplot(data=polyps_df, aes(x=diff_log, fill=treatment)) + geom_histogram(position="dodge", bins=10)
+```
+
+This looks a lot better - no more outliers and closer to normal-looking. Obviously with so few observations we won't have a nice normal curve.
+
+To do a t-test, we can use R's in-built function
+
+```{r, echo=T}
+t.test(
+  x=polyps_df$diff_log[polyps_df$treatment == "sulindac"],
+  y=polyps_df$diff_log[polyps_df$treatment == "placebo"],
+  alternative = "two.sided",
+  var.equal=T, # this makes the method use pooled variances, as we did in lectures
+  conf.level = 0.95 # note that this is 1-alpha
+)
+
+```
+
+:::
+
+</details>
+
+Finally we can try fitting an ANCOVA model to the data, using the function `lm`. 
+
+:::{.exercise}
+Fit an ANCOVA model to the licorice data, and interpret your results. If you aren't familiar with the function `lm`, it might be a good idea to look at the solutions.
+
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+In the ANCOVA model we saw in lectures so far, we fit a linear model with the outcome as dependent / target variable, and the trial group and baseline as independent / explanatory variables. 
+
+```{r, echo=T}
+lm_polyp1 = lm(log_number12m ~ treatment + log_baseline, data=polyps_df)
+summary(lm_polyp1)
+```
+
+Based on this, the effect of the drug sulindac is significant ($p=0.00595$, lower than our previous models).  The 95% CI for the treatment effect (which is still $\log\left(\frac{X_T}{X_C}\right)$) now is
+
+```{r, echo=T}
+c(-0.7046 - qt(0.975, df=17)*0.1675, -0.7046 + qt(0.975, df=17)*0.1675 ) 
+```
+
+
+We could create a nicer-looking table of the coefficients using `tbl_regression` (from `gtsummary`):
+
+```{r}
+tbl_regression(lm_polyp1)
+```
+
+but note that this doesn't show all the information that `summary` does.
+
+:::
+
+</details>
+
+Unlike in the $t$-test where we can only compare measurements like-for-like, in ANCOVA we fit a coefficient to the baseline covariate. This means we are no longer limited to comparing the outcome variable to variables on the same scale, but can also include other baseline variables. 
+
+:::{.exercise}
+Fit another linear model, this time including the other baseline variables.
+
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+```{r, echo=T}
+lm_polyp2 = lm(log_number12m ~ treatment + log_baseline + sex + age, data = polyps_df)
+summary(lm_polyp2)
+```
+In this case it appears that the other two baseline covariates, age and sex, don't have a significant effect on the outcome.
+
+:::
+
+</details>
+
+
+:::{.exercise}
+Inspect some plots of the residuals, to check whether these models have any systematic problems. Does there appear to be any multicollinearity in the data?
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+These solutions will demonstrate some methods with the first model.
+First of all, we can add columns with the residuals and fitted values from the model.
+
+```{r, echo=T}
+polyps_df$resid1 = resid(lm_polyp1)
+polyps_df$fitted1 = fitted(lm_polyp1)
+ggplot(data=polyps_df, aes(x=fitted1, y=resid1, col=treatment)) + geom_point()
+ggplot(data=polyps_df, aes(x=log_baseline, y=resid1, col=treatment)) + geom_point()
+ggplot(data=polyps_df, aes(x=resid1, fill=treatment)) + geom_histogram(bins=20)
+```
+
+None of these ring huge alarm bells, but because the dataset is so small it's quite hard to tell! Arguably the residuals for the `sulindac` group are more spread out than those for the plaecbo, but there are no obvious systematic trends.
+
+We can find the variance inflation factor by 
+
+```{r, echo=T}
+vif(lm_polyp1)
+```
+
+and it indicates no problems. Another sign that the ANCOVA model is well-fitted is that the standard errors of the coefficients are all reasonably small. If there was a problem, for example multicollinearity, some of these would blow up.
+
+:::
+
+</details>
+
+
+### Extension: Treatment for maternal periodontal disease
+
+In this section we look at a larger and more complex (therefore more realistic) dataset. The `opt` data are in the package `medicaldata`, which you should already have loaded.
+
+The aim of the study is to find out whether treating women for periodontal disease during the first 21 weeks of pregnancy resulted in a low birth weight or pre-term birth.
+
+The groups are stored in the `group` variable
+  
+  * `group` T: those who received periodontal treatment, and tooth polishing at their follow-ups
+  * `group` C: Brief oral exams
+  
+There are 823 participants and 171 variables - many of these are baseline covariates, but there are also quite a few interim measurements.
+
+The study's primary outcome variable is gestational age at end of pregnancy, but birth weight was also measured, as well as some clinical measures of periodontal disease and some microbiological and immunological outcomes.
+
+To make this more managable, we will concentrate on the outcome `Birthweight`.
+
+:::{.exercise}
+Plot the variable `Birthweight`. Do we need to use any transformations before we model it? 
+
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+```{r, echo=T}
+
+ggplot(data=opt, aes(x=Birthweight, fill=Group)) + geom_histogram(position="dodge")
+
+```
+
+This data looks very nice and normal (although there is a bit of a fat tail to the left), so we won't transform it.
+
+:::
+
+</details>
+
+There are lots of issues with the `opt` data, many of which are common in real datasets.
+
+We'll reduce the dataset to a more managable size, by removing all outcomes except `Birthweight` and reducing the number of covariates.
+
+One issue with the `opt` dataset is missingness. While some of the missing data are genuinely missing, quite a lot of it can be logically filled in. This is explained in the code below.
+
+```{r, echo=T}
+opt_red = opt[ ,c(1:22,72)] 
+# Change NAs to "None" for diabetic
+# since in opt the non-diabetic people are coded as NA (and therefore excluded from the model)
+diab = as.character(opt_red$BL.Diab.Type)
+diab[is.na(diab)] = "None"
+opt_red$BL.Diab.Type = as.factor(diab)
+# similar problem with smokers and how many cigarettes per day
+
+# If people are non-smokers and have missing for number of cigarettes per day
+# change their number of cigarettes to zero
+sm = opt_red$Use.Tob
+cigs = opt_red$BL.Cig.Day
+cigs[(is.na(cigs)&(sm=="No "))] = 0
+opt_red$BL.Cig.Day = cigs
+
+# Same for alcohol and drinks per day
+
+alc = opt_red$Use.Alc
+dr = opt_red$BL.Drks.Day
+dr[(is.na(dr)&(alc=="No "))] = 0
+opt_red$BL.Drks.Day = dr
+
+# If a participant hasn't had a previous pregnancy, her N.prev.preg should be zero (not NA)
+
+pp = opt_red$Prev.preg
+npp = opt_red$N.prev.preg
+npp[pp=="No "] = 0
+opt_red$N.prev.preg = npp
+
+```
+
+When we use `lm` to fit an ANCOVA model, all rows with an `NA` in will be ignored. It's therefore important to try to eradicate any `NA`s where we actually do know the value!
+
+In reality we'd also investigate the patterns of missingness to check whether this might have introduced bias into the trial. There's a whole extra computer practical on this that I've included on the website but that we aren't going to do (and so it won't be assessed!) - \@ref(cp-missing). Feel free to have a look.
+
+:::{.exercise}
+Perform a $t$-test on the outcome `Birthweight`. What do you find? Can you also perform a $t$-test using difference from baseline?
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+To perform the $t$-test we can use the inbuilt R function
+
+```{r, echo=T}
+# Check SDs are fairly close before proceeding
+sd(opt_red$Birthweight[opt_red$Group == "T"], na.rm=T)
+sd(opt_red$Birthweight[opt_red$Group == "C"], na.rm=T)
+
+t.test(
+  x=opt_red$Birthweight[opt_red$Group == "T"],
+  y=opt_red$Birthweight[opt_red$Group == "C"],
+  alternative = "two.sided",
+  var.equal=T, # this makes the method use pooled variances, as we did in lectures
+  conf.level = 0.95 # note that this is 1-alpha
+)
+```
+We find that the difference in Birthweights between the groups is not even close to significant ($p=0.456$).
+
+We can't do a $t$-test with differences because there is no comparable baseline measurement.
+
+:::
+
+</details>
+
+Now we will move on to ANCOVA.
+
+:::{.exercise}
+Before fitting the model, think about what you expect to find. Bear in mind:
+
+  * the result above
+  * the description of risk factors of preterm birth / low birth weight in the help file for `opt`
+  * which variables you will include in your model
+
+:::
+
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+The $p$-value from the $t$-test was very high, so it seems unlikely that we'll find a significant treatment effect using ANCOVA unless there are some significant interactions going on between covariates.
+
+The help file says (under 'Background'):
+
+> Many risk factors for preterm birth have already been identified, including maternal age, drug use, and diabetes. However, such factors are exhibited in only about half of preterm birth mothers, highlighting a need to expand our understanding of what contributes to preterm birth risk.
+
+Therefore, if we include related factors in our model (many of which we have in our dataset) we should expect to see significant coefficients. But, it sounds like there is a lot that isn't well understood, so our model is likely not to explain a huge proportion of the variance.
+
+:::
+
+</details>
+
+:::{.exercise}
+Fit an ANCOVA model. What do you find?
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+To fit a linear model including every variable as a covariate (apart from the target variable), we can do
+
+```{r, echo=T}
+
+lm_full = lm(Birthweight ~ ., data = opt_red[ ,-1]) # don't include the ID column!
+summary(lm_full)
+```
+
+We see from the model summary that our model is terrible: $R^2=0.03241$, which means it is explaining about 3% of the variance in Birthweight.
+
+If you want to use only certain terms, you can include them in the formula, for example
+
+```{r, echo=T, eval=F}
+lm_eg = lm(Birthweight ~ Group + Age + Hypertension, data=opt_red)
+
+```
+
+
+We see that, as we expected, the `Group` variable is not significant ($p=0.5644$). However, some terms are significant, for example whether or not the participant has diabetes, and how many cigarettes a mother smokes per day - this isn't surprising given the contextual information we had.
+
+:::
+
+</details>
+
+:::{.exercise}
+Perform some diagnostic checks on your model. Do you have any reason to suspect it isn't adequate?
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+
+One thing to notice from the linear model summary is that many coefficients have proportionally quite large standard errors. This could be because of a lack of data (eg. if there are very few participants in some category) or because of multicollinearity (in which case the model cannot know which of the linked variables to attribute the effect to). Combining some categories or carefully removing some covariates could help improve the model.
+
+We can also study the residuals of our model, to check that they appear to be homoskedastic and approximately normal with mean 0.
+
+The first step is to extract the residuals and the fitted values (which are also useful). We will create a new data frame called `opt_diag` with these in, so that we can plot things easily but don't pollute our original dataset (in case we want to fit any more models)
+
+```{r, echo=T}
+opt_diag = na.omit(opt_red) # lm only fits where all variables are present
+opt_diag$resid = resid(lm_full)
+opt_diag$fitted = fitted(lm_full)
+```
+
+Some examples of plots are
+
+```{r, echo=T}
+ggplot(data=opt_diag, aes(x=resid, fill=Group)) + geom_histogram(position="dodge")
+
+
+ggplot(data=opt_diag, aes(x=fitted, y=resid, col=Group)) + geom_point()
+
+
+```
+
+
+
+:::
+
+</details>
+
+:::{.exercise}
+Given the results of your ANCOVA model, what do you think the risks would be if the study had been much smaller, or if the allocation had not been well-balanced?
+:::
+
+<details><summary>Click for solution</summary>
+
+:::{.solution}
+
+In this case, it would be possible for the baseline factors that did turn out to be significant to make it appear that the treatment had a significant effect. This wouldn't be possible with ANCOVA, but it would with a $t$-test in which the other covariates aren't considered.
+
+:::
+
+</details>
+

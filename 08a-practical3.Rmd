@@ -418,4 +418,4 @@ We could extend this in many ways to better understand the uncertainty around th
   * Trying different allocation methods
   * Incorporating uncertainty around quantities like $\mu,\,\mu_B,\,\rho$ etc.
   
-If you still have time you might like to look into these as an extension problem.
+If you still have time you might like to make a start on Practical 4, as there's a lot to cover!

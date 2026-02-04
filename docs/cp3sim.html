@@ -23,14 +23,14 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2025-12-15" />
+<meta name="date" content="2026-02-04" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="computer-practical-2---allocation-analysis.html"/>
+<link rel="prev" href="cp2analysis.html"/>
 <link rel="next" href="computer-practical-4---analysis-for-binary-and-survival-data.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -186,17 +186,19 @@ div.csl-indent {
 <li class="chapter" data-level="1" data-path="rct-intro.html"><a href="rct-intro.html"><i class="fa fa-check"></i><b>1</b> Introduction to Clinical Trials</a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="rct-intro.html"><a href="rct-intro.html#causal-inference-and-clinical-trials"><i class="fa fa-check"></i><b>1.1</b> Causal inference and clinical trials</a></li>
-<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#the-structure-of-a-clinical-trial"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
+<li class="chapter" data-level="1.2" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.2</b> The structure of a clinical trial</a>
 <ul>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-population-of-eligible-patients"><i class="fa fa-check"></i>The population of eligible patients</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#entry-to-the-trial"><i class="fa fa-check"></i>Entry to the trial</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#allocation-to-groups"><i class="fa fa-check"></i>Allocation to groups</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#the-primary-outcome"><i class="fa fa-check"></i>The primary outcome</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#comparing-results"><i class="fa fa-check"></i>Comparing results</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-timeline"><i class="fa fa-check"></i>Trial timeline</a></li>
+<li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#trial-protocol-and-analysis-plan"><i class="fa fa-check"></i>Trial protocol and analysis plan</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#why-bother-with-a-control-group"><i class="fa fa-check"></i>Why bother with a control group?</a></li>
 </ul></li>
-<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#primout"><i class="fa fa-check"></i><b>1.3</b> The primary outcome</a></li>
-<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.4</b> Ethical issues</a></li>
-<li class="chapter" data-level="1.5" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.5</b> Phases of clinical trials</a>
+<li class="chapter" data-level="1.3" data-path="rct-intro.html"><a href="rct-intro.html#ethical-issues"><i class="fa fa-check"></i><b>1.3</b> Ethical issues</a></li>
+<li class="chapter" data-level="1.4" data-path="rct-intro.html"><a href="rct-intro.html#phases-of-clinical-trials"><i class="fa fa-check"></i><b>1.4</b> Phases of clinical trials</a>
 <ul>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-zero"><i class="fa fa-check"></i>Phase zero</a></li>
 <li class="chapter" data-level="" data-path="rct-intro.html"><a href="rct-intro.html#phase-one"><i class="fa fa-check"></i>Phase one</a></li>
@@ -373,53 +375,29 @@ div.csl-indent {
 <li class="chapter" data-level="11.4" data-path="the-bayesian-approach.html"><a href="the-bayesian-approach.html#more-complex-trials"><i class="fa fa-check"></i><b>11.4</b> More complex trials</a></li>
 </ul></li>
 <li class="appendix"><span><b>Computer practicals</b></span></li>
-<li class="chapter" data-level="A" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1 - Missing data</a>
+<li class="chapter" data-level="A" data-path="cp1allocation.html"><a href="cp1allocation.html"><i class="fa fa-check"></i><b>A</b> Computer Practical 1 - Allocation</a>
 <ul>
-<li class="chapter" data-level="" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
-<li class="chapter" data-level="A.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#missing-data"><i class="fa fa-check"></i><b>A.1</b> Missing data</a>
+<li class="chapter" data-level="A.1" data-path="cp1allocation.html"><a href="cp1allocation.html#cprprac"><i class="fa fa-check"></i><b>A.1</b> R practicalities</a></li>
+<li class="chapter" data-level="A.2" data-path="cp1allocation.html"><a href="cp1allocation.html#allocation-1"><i class="fa fa-check"></i><b>A.2</b> Allocation</a>
 <ul>
-<li class="chapter" data-level="A.1.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#datasets"><i class="fa fa-check"></i><b>A.1.1</b> Datasets</a></li>
-</ul></li>
-<li class="chapter" data-level="A.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#understanding-the-patterns-of-missingness"><i class="fa fa-check"></i><b>A.2</b> Understanding the patterns of missingness</a>
-<ul>
-<li class="chapter" data-level="A.2.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#visualising-missingness"><i class="fa fa-check"></i><b>A.2.1</b> Visualising missingness</a></li>
-<li class="chapter" data-level="A.2.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#summary-tables"><i class="fa fa-check"></i><b>A.2.2</b> Summary tables</a></li>
-<li class="chapter" data-level="A.2.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#mechanisms-of-missingness"><i class="fa fa-check"></i><b>A.2.3</b> Mechanisms of missingness</a></li>
-</ul></li>
-<li class="chapter" data-level="A.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#exploring-the-relationship-between-missingness-and-other-variables"><i class="fa fa-check"></i><b>A.3</b> Exploring the relationship between missingness and other variables</a>
-<ul>
-<li class="chapter" data-level="A.3.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#sec-statsum"><i class="fa fa-check"></i><b>A.3.1</b> Statistical summaries of the effect of missingness</a></li>
-<li class="chapter" data-level="A.3.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#modelling-missingness"><i class="fa fa-check"></i><b>A.3.2</b> Modelling missingness</a></li>
-</ul></li>
-<li class="chapter" data-level="A.4" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#what-to-do-about-missing-data"><i class="fa fa-check"></i><b>A.4</b> What to do about missing data?!</a>
-<ul>
-<li class="chapter" data-level="A.4.1" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#discarding-some-non-missing-data"><i class="fa fa-check"></i><b>A.4.1</b> Discarding some (non-missing) data</a></li>
-<li class="chapter" data-level="A.4.2" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#imputing-data"><i class="fa fa-check"></i><b>A.4.2</b> Imputing data</a></li>
-<li class="chapter" data-level="A.4.3" data-path="computer-practical-1---missing-data.html"><a href="computer-practical-1---missing-data.html#multiple-imputation"><i class="fa fa-check"></i><b>A.4.3</b> Multiple imputation</a></li>
+<li class="chapter" data-level="A.2.1" data-path="cp1allocation.html"><a href="cp1allocation.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>A.2.1</b> Licorice gargle dataset</a></li>
+<li class="chapter" data-level="A.2.2" data-path="cp1allocation.html"><a href="cp1allocation.html#measures-of-imbalance"><i class="fa fa-check"></i><b>A.2.2</b> Measures of imbalance</a></li>
+<li class="chapter" data-level="A.2.3" data-path="cp1allocation.html"><a href="cp1allocation.html#allocmethods"><i class="fa fa-check"></i><b>A.2.3</b> Allocation methods</a></li>
+<li class="chapter" data-level="A.2.4" data-path="cp1allocation.html"><a href="cp1allocation.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>A.2.4</b> Stratifying the dataset</a></li>
+<li class="chapter" data-level="A.2.5" data-path="cp1allocation.html"><a href="cp1allocation.html#minimisation"><i class="fa fa-check"></i><b>A.2.5</b> Minimisation</a></li>
+<li class="chapter" data-level="A.2.6" data-path="cp1allocation.html"><a href="cp1allocation.html#extension-a-simulation-experiment"><i class="fa fa-check"></i><b>A.2.6</b> Extension: A simulation experiment!</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="B" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Allocation &amp; Analysis</a>
+<li class="chapter" data-level="B" data-path="cp2analysis.html"><a href="cp2analysis.html"><i class="fa fa-check"></i><b>B</b> Computer Practical 2 - Analysis</a>
 <ul>
-<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#health-warning"><i class="fa fa-check"></i>Health warning!</a>
+<li class="chapter" data-level="" data-path="cp2analysis.html"><a href="cp2analysis.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a>
 <ul>
-<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#preliminaries"><i class="fa fa-check"></i>Preliminaries</a></li>
-<li class="chapter" data-level="" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#r-practicalities-1"><i class="fa fa-check"></i>R practicalities</a></li>
+<li class="chapter" data-level="" data-path="cp2analysis.html"><a href="cp2analysis.html#r-practicalities"><i class="fa fa-check"></i>R practicalities</a></li>
 </ul></li>
-<li class="chapter" data-level="B.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1allocation"><i class="fa fa-check"></i><b>B.1</b> Allocation</a>
+<li class="chapter" data-level="B.1" data-path="cp2analysis.html"><a href="cp2analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.1</b> Analysis</a>
 <ul>
-<li class="chapter" data-level="B.1.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#licorice-gargle-dataset"><i class="fa fa-check"></i><b>B.1.1</b> Licorice gargle dataset</a></li>
-<li class="chapter" data-level="B.1.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#allocmethods"><i class="fa fa-check"></i><b>B.1.2</b> Allocation methods</a></li>
-<li class="chapter" data-level="B.1.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#stratifying-the-dataset"><i class="fa fa-check"></i><b>B.1.3</b> Stratifying the dataset</a></li>
-<li class="chapter" data-level="B.1.4" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#minimisation"><i class="fa fa-check"></i><b>B.1.4</b> Minimisation</a></li>
-</ul></li>
-<li class="chapter" data-level="B.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#cp1analysis"><i class="fa fa-check"></i><b>B.2</b> Analysis</a>
-<ul>
-<li class="chapter" data-level="B.2.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.2.1</b> Polyps data</a></li>
-</ul></li>
-<li class="chapter" data-level="B.3" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#extension-problems"><i class="fa fa-check"></i><b>B.3</b> Extension problems</a>
-<ul>
-<li class="chapter" data-level="B.3.1" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#a-simulation-experiment"><i class="fa fa-check"></i><b>B.3.1</b> A simulation experiment!</a></li>
-<li class="chapter" data-level="B.3.2" data-path="computer-practical-2---allocation-analysis.html"><a href="computer-practical-2---allocation-analysis.html#treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.3.2</b> Treatment for maternal periodontal disease</a></li>
+<li class="chapter" data-level="B.1.1" data-path="cp2analysis.html"><a href="cp2analysis.html#polyps-data"><i class="fa fa-check"></i><b>B.1.1</b> Polyps data</a></li>
+<li class="chapter" data-level="B.1.2" data-path="cp2analysis.html"><a href="cp2analysis.html#extension-treatment-for-maternal-periodontal-disease"><i class="fa fa-check"></i><b>B.1.2</b> Extension: Treatment for maternal periodontal disease</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="C" data-path="cp3sim.html"><a href="cp3sim.html"><i class="fa fa-check"></i><b>C</b> Computer Practical 3 - Sample size by simulation</a>
@@ -440,7 +418,37 @@ div.csl-indent {
 <li class="chapter" data-level="D.2.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#fitting-a-survival-curve"><i class="fa fa-check"></i><b>D.2.1</b> Fitting a survival curve</a></li>
 <li class="chapter" data-level="D.2.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#comparing-survival-curves-1"><i class="fa fa-check"></i><b>D.2.2</b> Comparing survival curves</a></li>
 </ul></li>
-<li class="chapter" data-level="D.3" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>D.3</b> Extension problem: Sample size by simulation (part II)</a></li>
+<li class="chapter" data-level="D.3" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>D.3</b> Extension problem: sample size by simulation (part II)</a></li>
+<li class="chapter" data-level="D.4" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cp2sim2"><i class="fa fa-check"></i><b>D.4</b> Sample size by simulation (part II)</a>
+<ul>
+<li class="chapter" data-level="D.4.1" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#minimum-detectable-effect-size"><i class="fa fa-check"></i><b>D.4.1</b> Minimum detectable effect size</a></li>
+<li class="chapter" data-level="D.4.2" data-path="computer-practical-4---analysis-for-binary-and-survival-data.html"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#censoring"><i class="fa fa-check"></i><b>D.4.2</b> Censoring</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="E" data-path="cp-missing.html"><a href="cp-missing.html"><i class="fa fa-check"></i><b>E</b> Extra Computer Practical - Missing data</a>
+<ul>
+<li class="chapter" data-level="" data-path="cp-missing.html"><a href="cp-missing.html#r-practicalities-1"><i class="fa fa-check"></i>R practicalities</a></li>
+<li class="chapter" data-level="E.1" data-path="cp-missing.html"><a href="cp-missing.html#missing-data"><i class="fa fa-check"></i><b>E.1</b> Missing data</a>
+<ul>
+<li class="chapter" data-level="E.1.1" data-path="cp-missing.html"><a href="cp-missing.html#datasets"><i class="fa fa-check"></i><b>E.1.1</b> Datasets</a></li>
+</ul></li>
+<li class="chapter" data-level="E.2" data-path="cp-missing.html"><a href="cp-missing.html#understanding-the-patterns-of-missingness"><i class="fa fa-check"></i><b>E.2</b> Understanding the patterns of missingness</a>
+<ul>
+<li class="chapter" data-level="E.2.1" data-path="cp-missing.html"><a href="cp-missing.html#visualising-missingness"><i class="fa fa-check"></i><b>E.2.1</b> Visualising missingness</a></li>
+<li class="chapter" data-level="E.2.2" data-path="cp-missing.html"><a href="cp-missing.html#summary-tables-1"><i class="fa fa-check"></i><b>E.2.2</b> Summary tables</a></li>
+<li class="chapter" data-level="E.2.3" data-path="cp-missing.html"><a href="cp-missing.html#mechanisms-of-missingness"><i class="fa fa-check"></i><b>E.2.3</b> Mechanisms of missingness</a></li>
+</ul></li>
+<li class="chapter" data-level="E.3" data-path="cp-missing.html"><a href="cp-missing.html#exploring-the-relationship-between-missingness-and-other-variables"><i class="fa fa-check"></i><b>E.3</b> Exploring the relationship between missingness and other variables</a>
+<ul>
+<li class="chapter" data-level="E.3.1" data-path="cp-missing.html"><a href="cp-missing.html#sec-statsum"><i class="fa fa-check"></i><b>E.3.1</b> Statistical summaries of the effect of missingness</a></li>
+<li class="chapter" data-level="E.3.2" data-path="cp-missing.html"><a href="cp-missing.html#modelling-missingness"><i class="fa fa-check"></i><b>E.3.2</b> Modelling missingness</a></li>
+</ul></li>
+<li class="chapter" data-level="E.4" data-path="cp-missing.html"><a href="cp-missing.html#what-to-do-about-missing-data"><i class="fa fa-check"></i><b>E.4</b> What to do about missing data?!</a>
+<ul>
+<li class="chapter" data-level="E.4.1" data-path="cp-missing.html"><a href="cp-missing.html#discarding-some-non-missing-data"><i class="fa fa-check"></i><b>E.4.1</b> Discarding some (non-missing) data</a></li>
+<li class="chapter" data-level="E.4.2" data-path="cp-missing.html"><a href="cp-missing.html#imputing-data"><i class="fa fa-check"></i><b>E.4.2</b> Imputing data</a></li>
+<li class="chapter" data-level="E.4.3" data-path="cp-missing.html"><a href="cp-missing.html#multiple-imputation"><i class="fa fa-check"></i><b>E.4.3</b> Multiple imputation</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 </ul>
@@ -467,7 +475,7 @@ div.csl-indent {
 <strong>R practicalities - click here</strong>
 </summary>
 <p>There are many, many packages in R that implement methods for designing and analysing clinical trials (see a list at <a href="https://cran.r-project.org/web/views/ClinicalTrials.html">CRAN task view</a>). We will look at some of these, and will also write our own code for some tasks. Remember that to install a package, you can do</p>
-<div class="sourceCode" id="cb330"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb330-1"><a href="cp3sim.html#cb330-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb219"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb219-1"><a href="cp3sim.html#cb219-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">&quot;&lt;packagename&gt;&quot;</span>)</span></code></pre></div>
 <p>If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III.</p>
 <p>An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.</p>
 <p>This requires you to have a github account (you can sign up for free <a href="https://github.com/">here</a>) and there is a short guide to creating a github account <a href="https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&amp;data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&amp;sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&amp;reserved=0">here</a>.</p>
@@ -522,39 +530,39 @@ N\left(\mu + \tau_M,\;\sigma^2\right)&amp;\;\text{ if participant }i\text{ is in
 Click to reveal solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-124" class="solution"><em>Solution</em>. </span>The sensible first thing to do is to write a function that does this for general <span class="math inline">\(n_{sim},\,N,\,\mu,\,\sigma^2\)</span> and <span class="math inline">\(\tau_M\)</span>. The very simplest way would be the following, where we generate <span class="math inline">\(N\)</span> participants per arm, and their data.</p>
-<div class="sourceCode" id="cb331"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb331-1"><a href="cp3sim.html#cb331-1" tabindex="-1"></a>ttest_sim <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb331-2"><a href="cp3sim.html#cb331-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb331-3"><a href="cp3sim.html#cb331-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb331-4"><a href="cp3sim.html#cb331-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb331-5"><a href="cp3sim.html#cb331-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb331-6"><a href="cp3sim.html#cb331-6" tabindex="-1"></a>    sd     <span class="co"># sd of outcome</span></span>
-<span id="cb331-7"><a href="cp3sim.html#cb331-7" tabindex="-1"></a>){</span>
-<span id="cb331-8"><a href="cp3sim.html#cb331-8" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb331-9"><a href="cp3sim.html#cb331-9" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb331-10"><a href="cp3sim.html#cb331-10" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sd)</span>
-<span id="cb331-11"><a href="cp3sim.html#cb331-11" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sd)</span>
-<span id="cb331-12"><a href="cp3sim.html#cb331-12" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
-<span id="cb331-13"><a href="cp3sim.html#cb331-13" tabindex="-1"></a>      out_groupC, out_groupT, </span>
-<span id="cb331-14"><a href="cp3sim.html#cb331-14" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
-<span id="cb331-15"><a href="cp3sim.html#cb331-15" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb331-16"><a href="cp3sim.html#cb331-16" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb331-17"><a href="cp3sim.html#cb331-17" tabindex="-1"></a>  }</span>
-<span id="cb331-18"><a href="cp3sim.html#cb331-18" tabindex="-1"></a>  </span>
-<span id="cb331-19"><a href="cp3sim.html#cb331-19" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb331-20"><a href="cp3sim.html#cb331-20" tabindex="-1"></a>  power.est</span>
-<span id="cb331-21"><a href="cp3sim.html#cb331-21" tabindex="-1"></a>}</span></code></pre></div>
+<p><span id="unlabeled-div-104" class="solution"><em>Solution</em>. </span>The sensible first thing to do is to write a function that does this for general <span class="math inline">\(n_{sim},\,N,\,\mu,\,\sigma^2\)</span> and <span class="math inline">\(\tau_M\)</span>. The very simplest way would be the following, where we generate <span class="math inline">\(N\)</span> participants per arm, and their data.</p>
+<div class="sourceCode" id="cb220"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb220-1"><a href="cp3sim.html#cb220-1" tabindex="-1"></a>ttest_sim <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb220-2"><a href="cp3sim.html#cb220-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb220-3"><a href="cp3sim.html#cb220-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb220-4"><a href="cp3sim.html#cb220-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb220-5"><a href="cp3sim.html#cb220-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb220-6"><a href="cp3sim.html#cb220-6" tabindex="-1"></a>    sd     <span class="co"># sd of outcome</span></span>
+<span id="cb220-7"><a href="cp3sim.html#cb220-7" tabindex="-1"></a>){</span>
+<span id="cb220-8"><a href="cp3sim.html#cb220-8" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb220-9"><a href="cp3sim.html#cb220-9" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb220-10"><a href="cp3sim.html#cb220-10" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sd)</span>
+<span id="cb220-11"><a href="cp3sim.html#cb220-11" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sd)</span>
+<span id="cb220-12"><a href="cp3sim.html#cb220-12" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
+<span id="cb220-13"><a href="cp3sim.html#cb220-13" tabindex="-1"></a>      out_groupC, out_groupT, </span>
+<span id="cb220-14"><a href="cp3sim.html#cb220-14" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
+<span id="cb220-15"><a href="cp3sim.html#cb220-15" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb220-16"><a href="cp3sim.html#cb220-16" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb220-17"><a href="cp3sim.html#cb220-17" tabindex="-1"></a>  }</span>
+<span id="cb220-18"><a href="cp3sim.html#cb220-18" tabindex="-1"></a>  </span>
+<span id="cb220-19"><a href="cp3sim.html#cb220-19" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb220-20"><a href="cp3sim.html#cb220-20" tabindex="-1"></a>  power.est</span>
+<span id="cb220-21"><a href="cp3sim.html#cb220-21" tabindex="-1"></a>}</span></code></pre></div>
 <p>For a sanity check, we can put in the number we got from the equation in Section <a href="rct-plan.html#rct-plan">2</a>. To generate the data we need to specify a mean <span class="math inline">\(\mu\)</span>, but it doesn’t matter what it is (in this formulation at least!), so the number below is arbitrary.</p>
-<div class="sourceCode" id="cb332"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb332-1"><a href="cp3sim.html#cb332-1" tabindex="-1"></a><span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span></code></pre></div>
-<pre><code>## [1] 0.79</code></pre>
+<div class="sourceCode" id="cb221"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb221-1"><a href="cp3sim.html#cb221-1" tabindex="-1"></a><span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.81</code></pre>
 <p>and this is close to what we expect from the formula approach.
 To see how consistent this result is, we can see what happens over many sets of simulations</p>
-<div class="sourceCode" id="cb334"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb334-1"><a href="cp3sim.html#cb334-1" tabindex="-1"></a>sim_vec1 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb334-2"><a href="cp3sim.html#cb334-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb334-3"><a href="cp3sim.html#cb334-3" tabindex="-1"></a>  sim_vec1[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
-<span id="cb334-4"><a href="cp3sim.html#cb334-4" tabindex="-1"></a>}</span>
-<span id="cb334-5"><a href="cp3sim.html#cb334-5" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
-<span id="cb334-6"><a href="cp3sim.html#cb334-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb223"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb223-1"><a href="cp3sim.html#cb223-1" tabindex="-1"></a>sim_vec1 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb223-2"><a href="cp3sim.html#cb223-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb223-3"><a href="cp3sim.html#cb223-3" tabindex="-1"></a>  sim_vec1[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">113</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
+<span id="cb223-4"><a href="cp3sim.html#cb223-4" tabindex="-1"></a>}</span>
+<span id="cb223-5"><a href="cp3sim.html#cb223-5" tabindex="-1"></a><span class="fu">require</span>(ggplot2)</span>
+<span id="cb223-6"><a href="cp3sim.html#cb223-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:histsim1"></span>
 <img src="CT4H_notes_files/figure-html/histsim1-1.png" alt="Histogram of estimated powers from 100 lots of 100 simulations with N=113." width="672" />
 <p class="caption">
@@ -563,11 +571,11 @@ Figure C.1: Histogram of estimated powers from 100 lots of 100 simulations with 
 </div>
 <p>So although the mean power is around 0.8, as we expect, there is some variation.</p>
 <p>To achieve <span class="math inline">\(1-\beta=0.9\)</span> we need to increase <span class="math inline">\(N\)</span>. It turns out that around 155 participants in each arm gives a mean power of around 0.9.</p>
-<div class="sourceCode" id="cb335"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb335-1"><a href="cp3sim.html#cb335-1" tabindex="-1"></a>sim_vec2 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb335-2"><a href="cp3sim.html#cb335-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb335-3"><a href="cp3sim.html#cb335-3" tabindex="-1"></a>  sim_vec2[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
-<span id="cb335-4"><a href="cp3sim.html#cb335-4" tabindex="-1"></a>}</span>
-<span id="cb335-5"><a href="cp3sim.html#cb335-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb224"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb224-1"><a href="cp3sim.html#cb224-1" tabindex="-1"></a>sim_vec2 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb224-2"><a href="cp3sim.html#cb224-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb224-3"><a href="cp3sim.html#cb224-3" tabindex="-1"></a>  sim_vec2[i] <span class="ot">=</span> <span class="fu">ttest_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd=</span><span class="dv">8</span>)</span>
+<span id="cb224-4"><a href="cp3sim.html#cb224-4" tabindex="-1"></a>}</span>
+<span id="cb224-5"><a href="cp3sim.html#cb224-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec2)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:histsim2"></span>
 <img src="CT4H_notes_files/figure-html/histsim2-1.png" alt="Histogram of estimated powers from 100 lots of 100 simulations with N=155." width="672" />
 <p class="caption">
@@ -586,40 +594,40 @@ Figure C.2: Histogram of estimated powers from 100 lots of 100 simulations with 
 Click to reveal solution
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-125" class="solution"><em>Solution</em>. </span>The change we need to make is to include a variance parameter for each group, rather than a common one. Note that we aren’t changing the <code>t.test</code> function to use unequal variances, as it is common practice to keep assuming equal variances, and actually these variances still aren’t <em>that</em> different.</p>
-<div class="sourceCode" id="cb336"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb336-1"><a href="cp3sim.html#cb336-1" tabindex="-1"></a>ttest_sim2 <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb336-2"><a href="cp3sim.html#cb336-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb336-3"><a href="cp3sim.html#cb336-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb336-4"><a href="cp3sim.html#cb336-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb336-5"><a href="cp3sim.html#cb336-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb336-6"><a href="cp3sim.html#cb336-6" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
-<span id="cb336-7"><a href="cp3sim.html#cb336-7" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
-<span id="cb336-8"><a href="cp3sim.html#cb336-8" tabindex="-1"></a>){</span>
-<span id="cb336-9"><a href="cp3sim.html#cb336-9" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb336-10"><a href="cp3sim.html#cb336-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb336-11"><a href="cp3sim.html#cb336-11" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
-<span id="cb336-12"><a href="cp3sim.html#cb336-12" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sdT)</span>
-<span id="cb336-13"><a href="cp3sim.html#cb336-13" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
-<span id="cb336-14"><a href="cp3sim.html#cb336-14" tabindex="-1"></a>      out_groupC, out_groupT, </span>
-<span id="cb336-15"><a href="cp3sim.html#cb336-15" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
-<span id="cb336-16"><a href="cp3sim.html#cb336-16" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
-<span id="cb336-17"><a href="cp3sim.html#cb336-17" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb336-18"><a href="cp3sim.html#cb336-18" tabindex="-1"></a>  }</span>
-<span id="cb336-19"><a href="cp3sim.html#cb336-19" tabindex="-1"></a>  </span>
-<span id="cb336-20"><a href="cp3sim.html#cb336-20" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb336-21"><a href="cp3sim.html#cb336-21" tabindex="-1"></a>  power.est</span>
-<span id="cb336-22"><a href="cp3sim.html#cb336-22" tabindex="-1"></a>}</span></code></pre></div>
+<p><span id="unlabeled-div-105" class="solution"><em>Solution</em>. </span>The change we need to make is to include a variance parameter for each group, rather than a common one. Note that we aren’t changing the <code>t.test</code> function to use unequal variances, as it is common practice to keep assuming equal variances, and actually these variances still aren’t <em>that</em> different.</p>
+<div class="sourceCode" id="cb225"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb225-1"><a href="cp3sim.html#cb225-1" tabindex="-1"></a>ttest_sim2 <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb225-2"><a href="cp3sim.html#cb225-2" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb225-3"><a href="cp3sim.html#cb225-3" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb225-4"><a href="cp3sim.html#cb225-4" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb225-5"><a href="cp3sim.html#cb225-5" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb225-6"><a href="cp3sim.html#cb225-6" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb225-7"><a href="cp3sim.html#cb225-7" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb225-8"><a href="cp3sim.html#cb225-8" tabindex="-1"></a>){</span>
+<span id="cb225-9"><a href="cp3sim.html#cb225-9" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb225-10"><a href="cp3sim.html#cb225-10" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb225-11"><a href="cp3sim.html#cb225-11" tabindex="-1"></a>    out_groupC <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
+<span id="cb225-12"><a href="cp3sim.html#cb225-12" tabindex="-1"></a>    out_groupT <span class="ot">=</span> <span class="fu">rnorm</span>(N, <span class="at">mean=</span>mu <span class="sc">+</span> tm, <span class="at">sd=</span>sdT)</span>
+<span id="cb225-13"><a href="cp3sim.html#cb225-13" tabindex="-1"></a>    ttest <span class="ot">=</span> <span class="fu">t.test</span>(</span>
+<span id="cb225-14"><a href="cp3sim.html#cb225-14" tabindex="-1"></a>      out_groupC, out_groupT, </span>
+<span id="cb225-15"><a href="cp3sim.html#cb225-15" tabindex="-1"></a>      <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, </span>
+<span id="cb225-16"><a href="cp3sim.html#cb225-16" tabindex="-1"></a>      <span class="at">var.equal =</span> T, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span>
+<span id="cb225-17"><a href="cp3sim.html#cb225-17" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(ttest<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb225-18"><a href="cp3sim.html#cb225-18" tabindex="-1"></a>  }</span>
+<span id="cb225-19"><a href="cp3sim.html#cb225-19" tabindex="-1"></a>  </span>
+<span id="cb225-20"><a href="cp3sim.html#cb225-20" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb225-21"><a href="cp3sim.html#cb225-21" tabindex="-1"></a>  power.est</span>
+<span id="cb225-22"><a href="cp3sim.html#cb225-22" tabindex="-1"></a>}</span></code></pre></div>
 <p>If the variances are equal, this gives the same as before (approximately)</p>
-<div class="sourceCode" id="cb337"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb337-1"><a href="cp3sim.html#cb337-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">8</span>)</span></code></pre></div>
-<pre><code>## [1] 0.89</code></pre>
+<div class="sourceCode" id="cb226"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb226-1"><a href="cp3sim.html#cb226-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">8</span>)</span></code></pre></div>
+<pre><code>## [1] 0.87</code></pre>
 <p>However, if we increase the outcome variance in group <span class="math inline">\(T\)</span> by 25%, things change:</p>
-<div class="sourceCode" id="cb339"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb339-1"><a href="cp3sim.html#cb339-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## [1] 0.8</code></pre>
-<div class="sourceCode" id="cb341"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb341-1"><a href="cp3sim.html#cb341-1" tabindex="-1"></a>sim_vec3 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb341-2"><a href="cp3sim.html#cb341-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb341-3"><a href="cp3sim.html#cb341-3" tabindex="-1"></a>  sim_vec3[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
-<span id="cb341-4"><a href="cp3sim.html#cb341-4" tabindex="-1"></a>}</span>
-<span id="cb341-5"><a href="cp3sim.html#cb341-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec3)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb228"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb228-1"><a href="cp3sim.html#cb228-1" tabindex="-1"></a><span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.87</code></pre>
+<div class="sourceCode" id="cb230"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb230-1"><a href="cp3sim.html#cb230-1" tabindex="-1"></a>sim_vec3 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb230-2"><a href="cp3sim.html#cb230-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb230-3"><a href="cp3sim.html#cb230-3" tabindex="-1"></a>  sim_vec3[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
+<span id="cb230-4"><a href="cp3sim.html#cb230-4" tabindex="-1"></a>}</span>
+<span id="cb230-5"><a href="cp3sim.html#cb230-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec3)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:sim2n"></span>
 <img src="CT4H_notes_files/figure-html/sim2n-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD in group T." width="672" />
 <p class="caption">
@@ -627,13 +635,13 @@ Figure C.3: Power estimates for 100 sets of 100 simulations with larger outcome 
 </p>
 </div>
 <p>By contrast, if the outcome variance is lower (this is much less likely) then the power will be higher than calculated:</p>
-<div class="sourceCode" id="cb342"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb342-1"><a href="cp3sim.html#cb342-1" tabindex="-1"></a>sim_vec4 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb342-2"><a href="cp3sim.html#cb342-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb342-3"><a href="cp3sim.html#cb342-3" tabindex="-1"></a>  sim_vec4[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">6</span>)</span>
-<span id="cb342-4"><a href="cp3sim.html#cb342-4" tabindex="-1"></a>}</span>
-<span id="cb342-5"><a href="cp3sim.html#cb342-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec4)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-214"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-214-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
+<div class="sourceCode" id="cb231"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb231-1"><a href="cp3sim.html#cb231-1" tabindex="-1"></a>sim_vec4 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb231-2"><a href="cp3sim.html#cb231-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb231-3"><a href="cp3sim.html#cb231-3" tabindex="-1"></a>  sim_vec4[i] <span class="ot">=</span> <span class="fu">ttest_sim2</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">6</span>)</span>
+<span id="cb231-4"><a href="cp3sim.html#cb231-4" tabindex="-1"></a>}</span>
+<span id="cb231-5"><a href="cp3sim.html#cb231-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec4)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-149"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-149-1.png" alt="Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T" width="672" />
 <p class="caption">
 Figure C.4: Power estimates for 100 sets of 100 simulations with smaller outcome SD in group T
 </p>
@@ -653,65 +661,65 @@ Figure C.4: Power estimates for 100 sets of 100 simulations with smaller outcome
 Click for solutions
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-126" class="solution"><em>Solution</em>. </span>For this method, we work through all <span class="math inline">\(2N\)</span> participants sequentially, allocating them with equal probability to group <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>. For readability, in these solutions the simulation of one trial is written as its own function, which is then implemented <code>nsim</code> times.</p>
-<div class="sourceCode" id="cb343"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb343-1"><a href="cp3sim.html#cb343-1" tabindex="-1"></a>one_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb343-2"><a href="cp3sim.html#cb343-2" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb343-3"><a href="cp3sim.html#cb343-3" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb343-4"><a href="cp3sim.html#cb343-4" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb343-5"><a href="cp3sim.html#cb343-5" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
-<span id="cb343-6"><a href="cp3sim.html#cb343-6" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
-<span id="cb343-7"><a href="cp3sim.html#cb343-7" tabindex="-1"></a>){</span>
-<span id="cb343-8"><a href="cp3sim.html#cb343-8" tabindex="-1"></a>  <span class="do">## Create empty vectors to contain output for groups C and T</span></span>
-<span id="cb343-9"><a href="cp3sim.html#cb343-9" tabindex="-1"></a>  outC <span class="ot">=</span> <span class="fu">integer</span>()</span>
-<span id="cb343-10"><a href="cp3sim.html#cb343-10" tabindex="-1"></a>  outT <span class="ot">=</span> <span class="fu">integer</span>()</span>
-<span id="cb343-11"><a href="cp3sim.html#cb343-11" tabindex="-1"></a>  </span>
-<span id="cb343-12"><a href="cp3sim.html#cb343-12" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
-<span id="cb343-13"><a href="cp3sim.html#cb343-13" tabindex="-1"></a>    <span class="co"># allocate using SRS</span></span>
-<span id="cb343-14"><a href="cp3sim.html#cb343-14" tabindex="-1"></a>    arm <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="at">size=</span><span class="dv">1</span>)</span>
-<span id="cb343-15"><a href="cp3sim.html#cb343-15" tabindex="-1"></a>    <span class="co"># generate outcome according to groups&#39; distributions</span></span>
-<span id="cb343-16"><a href="cp3sim.html#cb343-16" tabindex="-1"></a>    <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
-<span id="cb343-17"><a href="cp3sim.html#cb343-17" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
-<span id="cb343-18"><a href="cp3sim.html#cb343-18" tabindex="-1"></a>      outC <span class="ot">=</span> <span class="fu">c</span>(outC, outi)</span>
-<span id="cb343-19"><a href="cp3sim.html#cb343-19" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
-<span id="cb343-20"><a href="cp3sim.html#cb343-20" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu<span class="sc">+</span>tm, <span class="at">sd=</span>sdT)</span>
-<span id="cb343-21"><a href="cp3sim.html#cb343-21" tabindex="-1"></a>      outT <span class="ot">=</span> <span class="fu">c</span>(outT, outi)</span>
-<span id="cb343-22"><a href="cp3sim.html#cb343-22" tabindex="-1"></a>    }</span>
-<span id="cb343-23"><a href="cp3sim.html#cb343-23" tabindex="-1"></a>  }</span>
-<span id="cb343-24"><a href="cp3sim.html#cb343-24" tabindex="-1"></a>  <span class="co"># conduct t-test for this trial</span></span>
-<span id="cb343-25"><a href="cp3sim.html#cb343-25" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">x=</span>outC, <span class="at">y=</span>outT, </span>
-<span id="cb343-26"><a href="cp3sim.html#cb343-26" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">paired=</span>F, </span>
-<span id="cb343-27"><a href="cp3sim.html#cb343-27" tabindex="-1"></a>         <span class="at">var.equal=</span>T, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span>
-<span id="cb343-28"><a href="cp3sim.html#cb343-28" tabindex="-1"></a>}</span>
-<span id="cb343-29"><a href="cp3sim.html#cb343-29" tabindex="-1"></a></span>
-<span id="cb343-30"><a href="cp3sim.html#cb343-30" tabindex="-1"></a>ttest_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb343-31"><a href="cp3sim.html#cb343-31" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb343-32"><a href="cp3sim.html#cb343-32" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
-<span id="cb343-33"><a href="cp3sim.html#cb343-33" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
-<span id="cb343-34"><a href="cp3sim.html#cb343-34" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
-<span id="cb343-35"><a href="cp3sim.html#cb343-35" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
-<span id="cb343-36"><a href="cp3sim.html#cb343-36" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
-<span id="cb343-37"><a href="cp3sim.html#cb343-37" tabindex="-1"></a>){</span>
-<span id="cb343-38"><a href="cp3sim.html#cb343-38" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb343-39"><a href="cp3sim.html#cb343-39" tabindex="-1"></a>  </span>
-<span id="cb343-40"><a href="cp3sim.html#cb343-40" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb343-41"><a href="cp3sim.html#cb343-41" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">one_trial_srs</span>(N, mu, tm, sdC, sdT)</span>
-<span id="cb343-42"><a href="cp3sim.html#cb343-42" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb343-43"><a href="cp3sim.html#cb343-43" tabindex="-1"></a>  }</span>
-<span id="cb343-44"><a href="cp3sim.html#cb343-44" tabindex="-1"></a>  </span>
-<span id="cb343-45"><a href="cp3sim.html#cb343-45" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb343-46"><a href="cp3sim.html#cb343-46" tabindex="-1"></a>  power.est</span>
-<span id="cb343-47"><a href="cp3sim.html#cb343-47" tabindex="-1"></a>}</span>
-<span id="cb343-48"><a href="cp3sim.html#cb343-48" tabindex="-1"></a></span>
-<span id="cb343-49"><a href="cp3sim.html#cb343-49" tabindex="-1"></a><span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
-<pre><code>## [1] 0.76</code></pre>
+<p><span id="unlabeled-div-106" class="solution"><em>Solution</em>. </span>For this method, we work through all <span class="math inline">\(2N\)</span> participants sequentially, allocating them with equal probability to group <span class="math inline">\(C\)</span> or <span class="math inline">\(T\)</span>. For readability, in these solutions the simulation of one trial is written as its own function, which is then implemented <code>nsim</code> times.</p>
+<div class="sourceCode" id="cb232"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb232-1"><a href="cp3sim.html#cb232-1" tabindex="-1"></a>one_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb232-2"><a href="cp3sim.html#cb232-2" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb232-3"><a href="cp3sim.html#cb232-3" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb232-4"><a href="cp3sim.html#cb232-4" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb232-5"><a href="cp3sim.html#cb232-5" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb232-6"><a href="cp3sim.html#cb232-6" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb232-7"><a href="cp3sim.html#cb232-7" tabindex="-1"></a>){</span>
+<span id="cb232-8"><a href="cp3sim.html#cb232-8" tabindex="-1"></a>  <span class="do">## Create empty vectors to contain output for groups C and T</span></span>
+<span id="cb232-9"><a href="cp3sim.html#cb232-9" tabindex="-1"></a>  outC <span class="ot">=</span> <span class="fu">integer</span>()</span>
+<span id="cb232-10"><a href="cp3sim.html#cb232-10" tabindex="-1"></a>  outT <span class="ot">=</span> <span class="fu">integer</span>()</span>
+<span id="cb232-11"><a href="cp3sim.html#cb232-11" tabindex="-1"></a>  </span>
+<span id="cb232-12"><a href="cp3sim.html#cb232-12" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
+<span id="cb232-13"><a href="cp3sim.html#cb232-13" tabindex="-1"></a>    <span class="co"># allocate using SRS</span></span>
+<span id="cb232-14"><a href="cp3sim.html#cb232-14" tabindex="-1"></a>    arm <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="at">size=</span><span class="dv">1</span>)</span>
+<span id="cb232-15"><a href="cp3sim.html#cb232-15" tabindex="-1"></a>    <span class="co"># generate outcome according to groups&#39; distributions</span></span>
+<span id="cb232-16"><a href="cp3sim.html#cb232-16" tabindex="-1"></a>    <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
+<span id="cb232-17"><a href="cp3sim.html#cb232-17" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu, <span class="at">sd=</span>sdC)</span>
+<span id="cb232-18"><a href="cp3sim.html#cb232-18" tabindex="-1"></a>      outC <span class="ot">=</span> <span class="fu">c</span>(outC, outi)</span>
+<span id="cb232-19"><a href="cp3sim.html#cb232-19" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (arm <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
+<span id="cb232-20"><a href="cp3sim.html#cb232-20" tabindex="-1"></a>      outi <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu<span class="sc">+</span>tm, <span class="at">sd=</span>sdT)</span>
+<span id="cb232-21"><a href="cp3sim.html#cb232-21" tabindex="-1"></a>      outT <span class="ot">=</span> <span class="fu">c</span>(outT, outi)</span>
+<span id="cb232-22"><a href="cp3sim.html#cb232-22" tabindex="-1"></a>    }</span>
+<span id="cb232-23"><a href="cp3sim.html#cb232-23" tabindex="-1"></a>  }</span>
+<span id="cb232-24"><a href="cp3sim.html#cb232-24" tabindex="-1"></a>  <span class="co"># conduct t-test for this trial</span></span>
+<span id="cb232-25"><a href="cp3sim.html#cb232-25" tabindex="-1"></a>  <span class="fu">t.test</span>(<span class="at">x=</span>outC, <span class="at">y=</span>outT, </span>
+<span id="cb232-26"><a href="cp3sim.html#cb232-26" tabindex="-1"></a>         <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>, <span class="at">paired=</span>F, </span>
+<span id="cb232-27"><a href="cp3sim.html#cb232-27" tabindex="-1"></a>         <span class="at">var.equal=</span>T, <span class="at">conf.level=</span><span class="fl">0.95</span>)</span>
+<span id="cb232-28"><a href="cp3sim.html#cb232-28" tabindex="-1"></a>}</span>
+<span id="cb232-29"><a href="cp3sim.html#cb232-29" tabindex="-1"></a></span>
+<span id="cb232-30"><a href="cp3sim.html#cb232-30" tabindex="-1"></a>ttest_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb232-31"><a href="cp3sim.html#cb232-31" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb232-32"><a href="cp3sim.html#cb232-32" tabindex="-1"></a>    N,     <span class="co"># number of participants per trial arm</span></span>
+<span id="cb232-33"><a href="cp3sim.html#cb232-33" tabindex="-1"></a>    mu,    <span class="co"># mean outcome (for group C / under H0)</span></span>
+<span id="cb232-34"><a href="cp3sim.html#cb232-34" tabindex="-1"></a>    tm,    <span class="co"># minimum detectable effect size</span></span>
+<span id="cb232-35"><a href="cp3sim.html#cb232-35" tabindex="-1"></a>    sdC,   <span class="co"># sd of outcome in group C</span></span>
+<span id="cb232-36"><a href="cp3sim.html#cb232-36" tabindex="-1"></a>    sdT    <span class="co"># sd of outcome in group T</span></span>
+<span id="cb232-37"><a href="cp3sim.html#cb232-37" tabindex="-1"></a>){</span>
+<span id="cb232-38"><a href="cp3sim.html#cb232-38" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb232-39"><a href="cp3sim.html#cb232-39" tabindex="-1"></a>  </span>
+<span id="cb232-40"><a href="cp3sim.html#cb232-40" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb232-41"><a href="cp3sim.html#cb232-41" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">one_trial_srs</span>(N, mu, tm, sdC, sdT)</span>
+<span id="cb232-42"><a href="cp3sim.html#cb232-42" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>p.value<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb232-43"><a href="cp3sim.html#cb232-43" tabindex="-1"></a>  }</span>
+<span id="cb232-44"><a href="cp3sim.html#cb232-44" tabindex="-1"></a>  </span>
+<span id="cb232-45"><a href="cp3sim.html#cb232-45" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb232-46"><a href="cp3sim.html#cb232-46" tabindex="-1"></a>  power.est</span>
+<span id="cb232-47"><a href="cp3sim.html#cb232-47" tabindex="-1"></a>}</span>
+<span id="cb232-48"><a href="cp3sim.html#cb232-48" tabindex="-1"></a></span>
+<span id="cb232-49"><a href="cp3sim.html#cb232-49" tabindex="-1"></a><span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span></code></pre></div>
+<pre><code>## [1] 0.89</code></pre>
 <p>To see the distribution for many simulations, we can do</p>
-<div class="sourceCode" id="cb345"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb345-1"><a href="cp3sim.html#cb345-1" tabindex="-1"></a>sim_vec5 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb345-2"><a href="cp3sim.html#cb345-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb345-3"><a href="cp3sim.html#cb345-3" tabindex="-1"></a>  sim_vec5[i] <span class="ot">=</span> <span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
-<span id="cb345-4"><a href="cp3sim.html#cb345-4" tabindex="-1"></a>}</span>
-<span id="cb345-5"><a href="cp3sim.html#cb345-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec5)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-216"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-216-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
+<div class="sourceCode" id="cb234"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb234-1"><a href="cp3sim.html#cb234-1" tabindex="-1"></a>sim_vec5 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb234-2"><a href="cp3sim.html#cb234-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb234-3"><a href="cp3sim.html#cb234-3" tabindex="-1"></a>  sim_vec5[i] <span class="ot">=</span> <span class="fu">ttest_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">155</span>, <span class="at">mu=</span><span class="dv">5</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sdC=</span><span class="dv">8</span>, <span class="at">sdT=</span><span class="dv">10</span>)</span>
+<span id="cb234-4"><a href="cp3sim.html#cb234-4" tabindex="-1"></a>}</span>
+<span id="cb234-5"><a href="cp3sim.html#cb234-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec5)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-151"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-151-1.png" alt="Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation." width="672" />
 <p class="caption">
 Figure C.5: Power estimates for 100 sets of 100 simulations with N=155 with larger outcome SD in group T, with SRS allocation.
 </p>
@@ -749,69 +757,69 @@ where <span class="math inline">\(\epsilon_i\sim N\left(0,\,\sigma^2_{\epsilon}\
 Click for solutions
 </summary>
 <div class="solution">
-<p><span id="unlabeled-div-127" class="solution"><em>Solution</em>. </span>Now that we have a baseline variable to keep track of, we should create a data frame of participants as we generate them.</p>
-<div class="sourceCode" id="cb346"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb346-1"><a href="cp3sim.html#cb346-1" tabindex="-1"></a><span class="do">## Function to simulate one trial (with ANCOVA analysis)</span></span>
-<span id="cb346-2"><a href="cp3sim.html#cb346-2" tabindex="-1"></a>ancova_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb346-3"><a href="cp3sim.html#cb346-3" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
-<span id="cb346-4"><a href="cp3sim.html#cb346-4" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
-<span id="cb346-5"><a href="cp3sim.html#cb346-5" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
-<span id="cb346-6"><a href="cp3sim.html#cb346-6" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
-<span id="cb346-7"><a href="cp3sim.html#cb346-7" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
-<span id="cb346-8"><a href="cp3sim.html#cb346-8" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
-<span id="cb346-9"><a href="cp3sim.html#cb346-9" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
-<span id="cb346-10"><a href="cp3sim.html#cb346-10" tabindex="-1"></a>){</span>
-<span id="cb346-11"><a href="cp3sim.html#cb346-11" tabindex="-1"></a>  <span class="do">## Empty data frame for trial data</span></span>
-<span id="cb346-12"><a href="cp3sim.html#cb346-12" tabindex="-1"></a>  trial_mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow=</span><span class="dv">2</span><span class="sc">*</span>N)</span>
-<span id="cb346-13"><a href="cp3sim.html#cb346-13" tabindex="-1"></a>  trial_df <span class="ot">=</span> <span class="fu">data.frame</span>(trial_mat)</span>
-<span id="cb346-14"><a href="cp3sim.html#cb346-14" tabindex="-1"></a>  <span class="fu">names</span>(trial_df) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;arm&quot;</span>, <span class="st">&quot;outcome&quot;</span>)</span>
-<span id="cb346-15"><a href="cp3sim.html#cb346-15" tabindex="-1"></a>  </span>
-<span id="cb346-16"><a href="cp3sim.html#cb346-16" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
-<span id="cb346-17"><a href="cp3sim.html#cb346-17" tabindex="-1"></a>    bas_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu_B, <span class="at">sd=</span>sd_B)</span>
-<span id="cb346-18"><a href="cp3sim.html#cb346-18" tabindex="-1"></a>    trial_df<span class="sc">$</span>baseline[i] <span class="ot">=</span> bas_i</span>
-<span id="cb346-19"><a href="cp3sim.html#cb346-19" tabindex="-1"></a>    alloc_i <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="dv">1</span>) <span class="co"># Using SRS in this function</span></span>
-<span id="cb346-20"><a href="cp3sim.html#cb346-20" tabindex="-1"></a>    trial_df<span class="sc">$</span>arm[i] <span class="ot">=</span> alloc_i</span>
-<span id="cb346-21"><a href="cp3sim.html#cb346-21" tabindex="-1"></a>    eps_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span>sd_eps)</span>
-<span id="cb346-22"><a href="cp3sim.html#cb346-22" tabindex="-1"></a>    <span class="cf">if</span>(alloc_i <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
-<span id="cb346-23"><a href="cp3sim.html#cb346-23" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
-<span id="cb346-24"><a href="cp3sim.html#cb346-24" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (alloc_i <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
-<span id="cb346-25"><a href="cp3sim.html#cb346-25" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> tm <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
-<span id="cb346-26"><a href="cp3sim.html#cb346-26" tabindex="-1"></a>    }</span>
-<span id="cb346-27"><a href="cp3sim.html#cb346-27" tabindex="-1"></a>    trial_df<span class="sc">$</span>outcome[i] <span class="ot">=</span> out_i</span>
-<span id="cb346-28"><a href="cp3sim.html#cb346-28" tabindex="-1"></a>  }</span>
-<span id="cb346-29"><a href="cp3sim.html#cb346-29" tabindex="-1"></a>  model.fit <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> baseline <span class="sc">+</span> arm, <span class="at">data=</span>trial_df)</span>
-<span id="cb346-30"><a href="cp3sim.html#cb346-30" tabindex="-1"></a>  <span class="fu">summary</span>(model.fit)</span>
-<span id="cb346-31"><a href="cp3sim.html#cb346-31" tabindex="-1"></a>}</span>
-<span id="cb346-32"><a href="cp3sim.html#cb346-32" tabindex="-1"></a></span>
-<span id="cb346-33"><a href="cp3sim.html#cb346-33" tabindex="-1"></a><span class="do">## Function to simulate many trials (with ANCOVA analysis)</span></span>
-<span id="cb346-34"><a href="cp3sim.html#cb346-34" tabindex="-1"></a></span>
-<span id="cb346-35"><a href="cp3sim.html#cb346-35" tabindex="-1"></a>ancova_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb346-36"><a href="cp3sim.html#cb346-36" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
-<span id="cb346-37"><a href="cp3sim.html#cb346-37" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
-<span id="cb346-38"><a href="cp3sim.html#cb346-38" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
-<span id="cb346-39"><a href="cp3sim.html#cb346-39" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
-<span id="cb346-40"><a href="cp3sim.html#cb346-40" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
-<span id="cb346-41"><a href="cp3sim.html#cb346-41" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
-<span id="cb346-42"><a href="cp3sim.html#cb346-42" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
-<span id="cb346-43"><a href="cp3sim.html#cb346-43" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
-<span id="cb346-44"><a href="cp3sim.html#cb346-44" tabindex="-1"></a>){</span>
-<span id="cb346-45"><a href="cp3sim.html#cb346-45" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
-<span id="cb346-46"><a href="cp3sim.html#cb346-46" tabindex="-1"></a>  </span>
-<span id="cb346-47"><a href="cp3sim.html#cb346-47" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
-<span id="cb346-48"><a href="cp3sim.html#cb346-48" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">ancova_trial_srs</span>(N, mu_B, mu, rho, tm, sd_eps, sd_B)</span>
-<span id="cb346-49"><a href="cp3sim.html#cb346-49" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
-<span id="cb346-50"><a href="cp3sim.html#cb346-50" tabindex="-1"></a>  }</span>
-<span id="cb346-51"><a href="cp3sim.html#cb346-51" tabindex="-1"></a>  </span>
-<span id="cb346-52"><a href="cp3sim.html#cb346-52" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
-<span id="cb346-53"><a href="cp3sim.html#cb346-53" tabindex="-1"></a>  power.est</span>
-<span id="cb346-54"><a href="cp3sim.html#cb346-54" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb347"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb347-1"><a href="cp3sim.html#cb347-1" tabindex="-1"></a>sim_vec6 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
-<span id="cb347-2"><a href="cp3sim.html#cb347-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
-<span id="cb347-3"><a href="cp3sim.html#cb347-3" tabindex="-1"></a>  sim_vec6[i] <span class="ot">=</span> <span class="fu">ancova_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">90</span>, <span class="at">mu_B=</span><span class="dv">50</span>, <span class="at">mu=</span><span class="dv">60</span>, </span>
-<span id="cb347-4"><a href="cp3sim.html#cb347-4" tabindex="-1"></a>                                  <span class="at">rho=</span><span class="fl">0.65</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd_eps=</span><span class="dv">6</span>, <span class="at">sd_B =</span> <span class="dv">8</span>)</span>
-<span id="cb347-5"><a href="cp3sim.html#cb347-5" tabindex="-1"></a>}</span>
-<span id="cb347-6"><a href="cp3sim.html#cb347-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec6)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-218"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-218-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
+<p><span id="unlabeled-div-107" class="solution"><em>Solution</em>. </span>Now that we have a baseline variable to keep track of, we should create a data frame of participants as we generate them.</p>
+<div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb235-1"><a href="cp3sim.html#cb235-1" tabindex="-1"></a><span class="do">## Function to simulate one trial (with ANCOVA analysis)</span></span>
+<span id="cb235-2"><a href="cp3sim.html#cb235-2" tabindex="-1"></a>ancova_trial_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb235-3"><a href="cp3sim.html#cb235-3" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
+<span id="cb235-4"><a href="cp3sim.html#cb235-4" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
+<span id="cb235-5"><a href="cp3sim.html#cb235-5" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
+<span id="cb235-6"><a href="cp3sim.html#cb235-6" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
+<span id="cb235-7"><a href="cp3sim.html#cb235-7" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
+<span id="cb235-8"><a href="cp3sim.html#cb235-8" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
+<span id="cb235-9"><a href="cp3sim.html#cb235-9" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
+<span id="cb235-10"><a href="cp3sim.html#cb235-10" tabindex="-1"></a>){</span>
+<span id="cb235-11"><a href="cp3sim.html#cb235-11" tabindex="-1"></a>  <span class="do">## Empty data frame for trial data</span></span>
+<span id="cb235-12"><a href="cp3sim.html#cb235-12" tabindex="-1"></a>  trial_mat <span class="ot">=</span> <span class="fu">matrix</span>(<span class="cn">NA</span>, <span class="at">ncol=</span><span class="dv">3</span>, <span class="at">nrow=</span><span class="dv">2</span><span class="sc">*</span>N)</span>
+<span id="cb235-13"><a href="cp3sim.html#cb235-13" tabindex="-1"></a>  trial_df <span class="ot">=</span> <span class="fu">data.frame</span>(trial_mat)</span>
+<span id="cb235-14"><a href="cp3sim.html#cb235-14" tabindex="-1"></a>  <span class="fu">names</span>(trial_df) <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&quot;baseline&quot;</span>, <span class="st">&quot;arm&quot;</span>, <span class="st">&quot;outcome&quot;</span>)</span>
+<span id="cb235-15"><a href="cp3sim.html#cb235-15" tabindex="-1"></a>  </span>
+<span id="cb235-16"><a href="cp3sim.html#cb235-16" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>(<span class="dv">2</span><span class="sc">*</span>N)){</span>
+<span id="cb235-17"><a href="cp3sim.html#cb235-17" tabindex="-1"></a>    bas_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span>mu_B, <span class="at">sd=</span>sd_B)</span>
+<span id="cb235-18"><a href="cp3sim.html#cb235-18" tabindex="-1"></a>    trial_df<span class="sc">$</span>baseline[i] <span class="ot">=</span> bas_i</span>
+<span id="cb235-19"><a href="cp3sim.html#cb235-19" tabindex="-1"></a>    alloc_i <span class="ot">=</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">&quot;C&quot;</span>, <span class="st">&quot;T&quot;</span>), <span class="dv">1</span>) <span class="co"># Using SRS in this function</span></span>
+<span id="cb235-20"><a href="cp3sim.html#cb235-20" tabindex="-1"></a>    trial_df<span class="sc">$</span>arm[i] <span class="ot">=</span> alloc_i</span>
+<span id="cb235-21"><a href="cp3sim.html#cb235-21" tabindex="-1"></a>    eps_i <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">1</span>, <span class="at">mean=</span><span class="dv">0</span>, <span class="at">sd=</span>sd_eps)</span>
+<span id="cb235-22"><a href="cp3sim.html#cb235-22" tabindex="-1"></a>    <span class="cf">if</span>(alloc_i <span class="sc">==</span> <span class="st">&quot;C&quot;</span>){</span>
+<span id="cb235-23"><a href="cp3sim.html#cb235-23" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
+<span id="cb235-24"><a href="cp3sim.html#cb235-24" tabindex="-1"></a>    } <span class="cf">else</span> <span class="cf">if</span> (alloc_i <span class="sc">==</span> <span class="st">&quot;T&quot;</span>){</span>
+<span id="cb235-25"><a href="cp3sim.html#cb235-25" tabindex="-1"></a>      out_i <span class="ot">=</span> mu <span class="sc">+</span> tm <span class="sc">+</span> rho<span class="sc">*</span>(bas_i <span class="sc">-</span> mu_B) <span class="sc">+</span> eps_i</span>
+<span id="cb235-26"><a href="cp3sim.html#cb235-26" tabindex="-1"></a>    }</span>
+<span id="cb235-27"><a href="cp3sim.html#cb235-27" tabindex="-1"></a>    trial_df<span class="sc">$</span>outcome[i] <span class="ot">=</span> out_i</span>
+<span id="cb235-28"><a href="cp3sim.html#cb235-28" tabindex="-1"></a>  }</span>
+<span id="cb235-29"><a href="cp3sim.html#cb235-29" tabindex="-1"></a>  model.fit <span class="ot">=</span> <span class="fu">lm</span>(outcome <span class="sc">~</span> baseline <span class="sc">+</span> arm, <span class="at">data=</span>trial_df)</span>
+<span id="cb235-30"><a href="cp3sim.html#cb235-30" tabindex="-1"></a>  <span class="fu">summary</span>(model.fit)</span>
+<span id="cb235-31"><a href="cp3sim.html#cb235-31" tabindex="-1"></a>}</span>
+<span id="cb235-32"><a href="cp3sim.html#cb235-32" tabindex="-1"></a></span>
+<span id="cb235-33"><a href="cp3sim.html#cb235-33" tabindex="-1"></a><span class="do">## Function to simulate many trials (with ANCOVA analysis)</span></span>
+<span id="cb235-34"><a href="cp3sim.html#cb235-34" tabindex="-1"></a></span>
+<span id="cb235-35"><a href="cp3sim.html#cb235-35" tabindex="-1"></a>ancova_sim_srs <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb235-36"><a href="cp3sim.html#cb235-36" tabindex="-1"></a>    nsim,  <span class="co"># the number of simulations to use</span></span>
+<span id="cb235-37"><a href="cp3sim.html#cb235-37" tabindex="-1"></a>    N,       <span class="co"># Number of participants per group</span></span>
+<span id="cb235-38"><a href="cp3sim.html#cb235-38" tabindex="-1"></a>    mu_B,    <span class="co"># baseline mean</span></span>
+<span id="cb235-39"><a href="cp3sim.html#cb235-39" tabindex="-1"></a>    mu,      <span class="co"># outcome mean (control group / H_0)</span></span>
+<span id="cb235-40"><a href="cp3sim.html#cb235-40" tabindex="-1"></a>    rho,     <span class="co"># correlation between baseline and outcome</span></span>
+<span id="cb235-41"><a href="cp3sim.html#cb235-41" tabindex="-1"></a>    tm,      <span class="co"># minimum detectable effect size</span></span>
+<span id="cb235-42"><a href="cp3sim.html#cb235-42" tabindex="-1"></a>    sd_eps,  <span class="co"># SD of error</span></span>
+<span id="cb235-43"><a href="cp3sim.html#cb235-43" tabindex="-1"></a>    sd_B     <span class="co"># SD of baseline measurement</span></span>
+<span id="cb235-44"><a href="cp3sim.html#cb235-44" tabindex="-1"></a>){</span>
+<span id="cb235-45"><a href="cp3sim.html#cb235-45" tabindex="-1"></a>  H0_reject_vec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, nsim) <span class="co"># to store 1 if H0 rejected, 0 if fail to reject H0</span></span>
+<span id="cb235-46"><a href="cp3sim.html#cb235-46" tabindex="-1"></a>  </span>
+<span id="cb235-47"><a href="cp3sim.html#cb235-47" tabindex="-1"></a>  <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>nsim){</span>
+<span id="cb235-48"><a href="cp3sim.html#cb235-48" tabindex="-1"></a>    trial_i <span class="ot">=</span> <span class="fu">ancova_trial_srs</span>(N, mu_B, mu, rho, tm, sd_eps, sd_B)</span>
+<span id="cb235-49"><a href="cp3sim.html#cb235-49" tabindex="-1"></a>    H0_reject_vec[i] <span class="ot">=</span> <span class="fu">ifelse</span>(trial_i<span class="sc">$</span>coefficients[<span class="dv">3</span>,<span class="dv">4</span>]<span class="sc">&lt;</span><span class="fl">0.05</span>, <span class="dv">1</span>, <span class="dv">0</span>)</span>
+<span id="cb235-50"><a href="cp3sim.html#cb235-50" tabindex="-1"></a>  }</span>
+<span id="cb235-51"><a href="cp3sim.html#cb235-51" tabindex="-1"></a>  </span>
+<span id="cb235-52"><a href="cp3sim.html#cb235-52" tabindex="-1"></a>  power.est <span class="ot">=</span> <span class="fu">mean</span>(H0_reject_vec)</span>
+<span id="cb235-53"><a href="cp3sim.html#cb235-53" tabindex="-1"></a>  power.est</span>
+<span id="cb235-54"><a href="cp3sim.html#cb235-54" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb236"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb236-1"><a href="cp3sim.html#cb236-1" tabindex="-1"></a>sim_vec6 <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, <span class="dv">100</span>)</span>
+<span id="cb236-2"><a href="cp3sim.html#cb236-2" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">100</span>){</span>
+<span id="cb236-3"><a href="cp3sim.html#cb236-3" tabindex="-1"></a>  sim_vec6[i] <span class="ot">=</span> <span class="fu">ancova_sim_srs</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">N=</span><span class="dv">90</span>, <span class="at">mu_B=</span><span class="dv">50</span>, <span class="at">mu=</span><span class="dv">60</span>, </span>
+<span id="cb236-4"><a href="cp3sim.html#cb236-4" tabindex="-1"></a>                                  <span class="at">rho=</span><span class="fl">0.65</span>, <span class="at">tm=</span><span class="dv">3</span>, <span class="at">sd_eps=</span><span class="dv">6</span>, <span class="at">sd_B =</span> <span class="dv">8</span>)</span>
+<span id="cb236-5"><a href="cp3sim.html#cb236-5" tabindex="-1"></a>}</span>
+<span id="cb236-6"><a href="cp3sim.html#cb236-6" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(sim_vec6)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-153"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-153-1.png" alt="Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with $N=75$, assuming an ANCOVA analysis." width="672" />
 <p class="caption">
 Figure C.6: Power estimates for 100 sets of 100 simulations with larger outcome SD, with SRS allocation, with <span class="math inline">\(N=75\)</span>, assuming an ANCOVA analysis.
 </p>
@@ -827,7 +835,7 @@ Figure C.6: Power estimates for 100 sets of 100 simulations with larger outcome 
 <li>Trying different allocation methods</li>
 <li>Incorporating uncertainty around quantities like <span class="math inline">\(\mu,\,\mu_B,\,\rho\)</span> etc.</li>
 </ul>
-<p>If you still have time you might like to look into these as an extension problem.</p>
+<p>If you still have time you might like to make a start on Practical 4, as there’s a lot to cover!</p>
 
 </div>
 </div>
@@ -842,7 +850,7 @@ Arnold, Benjamin F, Daniel R Hogan, John M Colford, and Alan E Hubbard. 2011. <s
           </div>
         </div>
       </div>
-<a href="computer-practical-2---allocation-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="cp2analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="computer-practical-4---analysis-for-binary-and-survival-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
