@@ -219,7 +219,7 @@ survfit(Surv(time = myeloid$futime, event = myeloid$death) ~ trt, data=myeloid) 
 :::
 
 
-### A parametric approach
+### A parametric approach {#surv-exp}
 
 In a parametric approach, we'll assume that the survival time $T$ follows some probability distribution, up to unknown parameters which we will estimate from the data. The simplest distribution for time-to-event data is the *exponential distribution*, which has density
 

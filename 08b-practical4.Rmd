@@ -9,16 +9,15 @@ install.packages("<packagename>")
 ```
 
 
-If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this for Data Science and Statistical Computing II). You may be familiar with this approach if you did Bayesian Computational Modelling III. 
+
+If you have problems running R on your laptop, or on the university machines, the most foolproof way might be to use Github codespaces (thanks to Louis Aslett, who developed this). You may already be familiar with this from previous modules.
 
 An advantage of this is that you can open the same codespace (the same instance of R) from any computer, so if you plan to work on things (for example your summative assignment, which will involve some R) from more than one computer, this might be ideal.
 
-This requires you to have a github account (you can sign up for free [here](https://github.com/)) and there is a short guide to creating a github account [here](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Fgithub.html&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691502641%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=f5gJFI3CJPOQ1P16l%2FIdhtIAgQul7s5BhIPwi4GAyLk%3D&reserved=0). 
+Here is a [guide to getting set up](https://www.louisaslett.com/Courses/DSSM/notes/installr.html#codespaces). 
 
+[Direct link to codespace](https://codespaces.new/louisaslett/dssm?quickstart=1)
 
-[Direct link to codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fcodespaces.new%2Flouisaslett%2Fdssc%3Fquickstart%3D1&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691485947%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=Lsw6mz0L5G%2FvZoZN29D2FgOyOkPMNboJgXPJt7BMPk8%3D&reserved=0)
-
-[Instructions for how to use codespace](https://eur01.safelinks.protection.outlook.com/?url=https%3A%2F%2Fwww.louisaslett.com%2FCourses%2FDSSC%2Fnotes%2Finstallr.html%23codespaces&data=05%7C02%7Cr.h.oughton%40durham.ac.uk%7Ccd09b90284364f8558ba08dc1ccf06f8%7C7250d88b4b684529be44d59a2d8a6f94%7C0%7C0%7C638416922691495230%7CUnknown%7CTWFpbGZsb3d8eyJWIjoiMC4wLjAwMDAiLCJQIjoiV2luMzIiLCJBTiI6Ik1haWwiLCJXVCI6Mn0%3D%7C3000%7C%7C%7C&sdata=hNtp7fT0qZWiQXRwEOUXbMvPWxy1jMtsCd9J7nXlAug%3D&reserved=0)
 
 </details>
 
@@ -782,54 +781,51 @@ To simulate survival / time-to-event data as though from a clinical trial, we ne
   1. The distribution of the observation/event times (if everyone were observed perfectly)
   2. The censoring mechanism
   
-For the first, we are likely to use a probability distribution like the exponential (which we saw in lectures) or the Weibull (which we looked at very briefly). 
+For the first, we are likely to use a probability distribution like the exponential (which we saw in Section \@ref(surv-exp)) or the Weibull (which we looked at briefly in Section \@ref(weibull)). 
 
 For the second, there are two aspects:
   
   1. Anyone who is still alive (or hasn't experienced the event) by the end of the trial will be censored at that point
   2. There will be some censoring during the lifetime of the trial, and this should also be randomly generated.
   
-In this practical we'll use a Weibull distribution. You can read about the Weibull distribution in Section \@ref(weibull). The main thing you need to know is that the distribution is defined by its **shape** and **scale**. In this practical we'll implement a simplified version of that used by @jiang2012practical, so if you want to think more about the topic that would be a good place to start
+In this practical we'll use an Exponential distribution. If you want to read more about this approach, you can read @jiang2012practical, who use a Weibull distribution.
 
 ### Minimum detectable effect size
 
 One of the first practical issues we need to tackle is the concept of the difference between the treatment and control group outcomes, and the idea of the minimum difference we want to be able to detect. Ideally this should be something clinically meaningful. We also need to work out how to factor this into the simulation. 
 
-@jiang2012practical do this in the following way:
+Adapting the approach followed by @jiang2012practical, our steps will be:
 
-  1. Specify the shape parameter $\gamma$ of the Weibull distribution (there is detail on how to do this, but we'll treat it as someone else's problem)
-  2. Specify the median survival time for the control and treatment groups, $M_C$ and $M_T$. We're assuming that 'the event' is bad, and so we'll assume $M_T>M_C$. This is how the MDES concept enters the simulation, so $M_T$ should be the smallest value of $M_T$ we want to be able to detect (ie. creating the smallest clinically worthwhile improvement from $M_C$).
-  3. Specifying $\gamma$ and $M_C,\,M_T$ gives us the scale parameters $\lambda_C,\,\lambda_T$, and so we have our observation time distribution function for each group.
+  1. Specify the median survival time for the control and treatment groups, $M_C$ and $M_T$. We're assuming that 'the event' is bad, and so we'll assume $M_T>M_C$. This is how the MDES concept enters the simulation, so $M_T$ should be the smallest value of $M_T$ we want to be able to detect (ie. creating the smallest clinically worthwhile improvement from $M_C$, which we assume to be well understood).
+  2. Use $M_C,\,M_T$ to find the parameters $\lambda_C,\,\lambda_T$, which then give us our observation time distribution function for each group.
   
 ### Censoring  
   
-For the censoring, this is achieved in two ways:
+Censoring will happen in two ways:
 
   1. An endpoint $T_{max}$ is specified as part of the trial design, and any observation after $T_{max}$ is censored at $T_{max}$
-  2. Every simulation is censored with a specified drop-out probability $\pi$, using a Bernoulli distribution. The value of the censored observation is kept at the value simulated from the Weibull distribution.
+  2. Every simulation is censored with a specified drop-out probability $\pi$, using a Bernoulli distribution. The value of the censored observation is kept at the value simulated from the exponential distribution.
   
 There are other ways to model drop-out, but this relatively simple method works nicely.  
   
 :::{.exercise #survsim1}
-Write code to simulate a survival trial dataset as described above. Using this function, simulate data for a trial where $\gamma=0.5,\, M_T=7,\,M_C=6,\,\pi=0.1, t_{max}=10$, with approximately 100 participants in each group.
+Write code to simulate a survival trial dataset as described above. Using this function, simulate data for a trial where $M_T=7,\,M_C=5,\,\pi=0.1, t_{max}=10$, with approximately 100 participants in each group.
 
   * Plot the Kaplan-Meier estimated survival curve of your data
   * What are some of the modelling assumptions/simplifications that have been made?
   
 Some technical things to note:
 
-  * For the `rweibull` function (and all the other Weibull functions) in R, the scale is $\sigma = \lambda^{-\frac{1}{\gamma}}$.
   * For the `Surv` function to interpret the time and status as right censored, it seems that the status variable has to be numeric (not factor, which would seem more logical)
 
 <details><summary> *Click for hint 1 (about finding $\lambda_C,\,\lambda_T$)* </summary>
-You can use the fact that the CDF of the Weibull distribution is 
 
-$$F\left(x\mid \lambda,\,\gamma\right) = 
-\begin{cases}
-1 - \exp\left[-\lambda t^{\gamma}\right]&\text{for }t>0\\
-0 & \text{otherwise}.
-\end{cases}
-$$
+The CDF of the exponential distribution is 
+
+$$ P\left(X \leq x\right) = 1 - e^{-\lambda x}.$$
+You can find the median value of $x$ by setting the CDF to 0.5, which gives a median value of 
+
+$$\frac{\ln{2}}{\lambda}.$$
 
 </details>
 
@@ -848,30 +844,26 @@ Your simulated participant data frame should have three columns (they don't need
 
 :::{.solution}
 
-As we did in Section \@ref(cp2sim) we'll write functions so that we can do all of this lots of times. 
-Firstly, given a median survival time $M_X$ and a shape parameter $\gamma$ we use the CDF (or you could use the Survival function, which will give the same answer) to find the scale $\lambda_X$ using
+As we did in Section \@ref(cp3sim) we'll write functions so that we can do all of this lots of times. 
+Firstly, we rearrange the median equation in the hint above to find the $\lambda_T,\,\lambda_C$:
 
-$$ \frac{1}{2} = 1 - \exp\left(-\lambda_X M_X^\gamma\right), $$
-which gives
+$$\lambda_X = \frac{\ln2}{M_X},$$
+where $X$ is $C$ or $T$.
 
-$$\lambda_X = \frac{\ln2}{M_X^{\gamma}}.$$
+Therefore we have $\lambda_C = 0.139,\,\lambda_T = 0.099$.
 
 ```{r, echo=T}
 ## THIS IS DEFNITELY NOT GIVING THE RIGHT DATA!
 surv_data = function(
     npart, # number of participants per group (roughly)
-    shape, # shape parameter for Weibull, assumed same for both groups
     MC,    # median survival time - group C
     MT,    # median survival time.- group T
     p_cens, # probability of censoring for each observation
     t_max   # end point of trial
 ){
-  scaleC = log(2)/(MC^shape)
-  scaleT = log(2)/(MT^shape)
-  # transform for R
-  RscaleC = scaleC^(-1/shape)
-  RscaleT = scaleT^(-1/shape)
-  
+  rateC = log(2)/(MC)
+  rateT = log(2)/(MT)
+
   dat_mat = matrix(NA, nrow=2*npart, ncol=3)
   dat_df = as.data.frame(dat_mat)
   names(dat_df) = c("time", "status", "group")
@@ -881,9 +873,9 @@ surv_data = function(
     group_i = sample(c("C", "T"), size=1)
     # Generate time accordingly
     if (group_i == "C"){
-      time_i = round(rweibull(1, shape=shape, scale=RscaleC))
+      time_i = round(rexp(1, rate = rateC))
     } else if (group_i == "T"){
-      time_i = round(rweibull(1, shape=shape, scale=RscaleT))
+      time_i = round(rexp(1, rate = rateT))
     }
     # Determine whether observation i is censored
     status_i = sample(c(0,1), size=1, prob = c(p_cens, 1-p_cens))
@@ -910,8 +902,8 @@ surv_data = function(
 
 We can use the function to simulate the data described above
 
-```{r}
-surv_df1 = surv_data(npart=100, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+```{r, echo=T}
+surv_df1 = surv_data(npart=100, MC=5, MT=7, p_cens=0.1, t_max=10)
 with(data = surv_df1, Surv(time, status, type = "right"))
 ```
 
@@ -927,9 +919,8 @@ In this sampling scheme it seems it's common to get some very low values, which 
 
 Some other assumptions / simplifications we're making are:
 
-  * Both groups have the same shape parameter $\gamma$. This ensures the proportional hazards assumption is met, but probably isn't realistic
   * Censorings during the trial are completely at random (simulated via a Bernoulli distribution). In reality this is very unlikely; it's far more likely that people become lost to follow-up for a reason, and that within the dataset the instances of this are not independent.
-  * Censored data keep the same time as was generated by the Weibull distribution. This will slightly skew our results.
+  * Censored data keep the same time as was generated by the exponential distribution. This will slightly skew our results.
   
 :::
 
@@ -960,7 +951,6 @@ surv_sim = function(
     nsim,  # number of simulations to run
     alpha, # the significance level of the test
     npart, # number of participants per group (roughly)
-    shape, # shape paramer for Weibull, assumed same for both groups
     MC,    # median survival time - group C
     MT,    # median survival time.- group T
     p_cens, # probability of censoring for each observation
@@ -969,7 +959,7 @@ surv_sim = function(
   H0_reject_vec = rep(NA, nsim)
   
   for (i in 1:nsim){
-    df_i = surv_data(npart=npart, shape=shape,MC=MC, MT=MT, p_cens=p_cens, t_max=t_max)
+    df_i = surv_data(npart=npart, MC=MC, MT=MT, p_cens=p_cens, t_max=t_max)
     log_rank_i = survdiff(Surv(time, status) ~ group, data=df_i, rho=0)
     p_val = log_rank_i$pvalue
     H0_reject_vec[i]= ifelse(p_val < alpha, 1, 0)
@@ -980,37 +970,20 @@ surv_sim = function(
 
 ```
 
-We can now use this to find the sample size we need. By experimenting with some values, we find that around 245 participants per trial group gives the appropriate power (assuming we want the mean power a little higher than 0.8).
+We can now use this to find the sample size we need by experimenting with some values. 
 
 ```{r, echo=T, cache=T}
-surv_sim(nsim=100, alpha=0.05, npart=250, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+surv_sim(nsim=100, alpha=0.05, npart=250,MC=5, MT=7, p_cens=0.1, t_max=10)
 
-survsim_vec1 = rep(NA, 100)
-for (i in 1:100){
-  survsim_vec1[i] = surv_sim(nsim=100, alpha=0.05, npart=245, shape=2,MC=6, MT=7, p_cens=0.1, t_max=10)
+survsim_vec1 = rep(NA, 20)
+for (i in 1:20){
+  survsim_vec1[i] = surv_sim(nsim=100, alpha=0.05, npart=250,MC=5, MT=7, p_cens=0.1, t_max=10)
 }
 ggplot(mapping = aes(survsim_vec1)) + geom_histogram(bins=10)
 
 ```
 
-If we extend the trial duration to $t_{max}=20$, the power given by 245 participants is now larger, because there are fewer censored observations:
-
-```{r, echo=T, cache=T}
-surv_sim(nsim=100, alpha=0.05, npart=245, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
-```
-
-Experimenting with some different values for `npart` we find that 
-
-```{r, echo=T, cache=T}
-surv_sim(nsim=100, alpha=0.05, npart=215, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
-survsim_vec2 = rep(NA, 100)
-for (i in 1:100){
-  survsim_vec2[i] = surv_sim(nsim=100, alpha=0.05, npart=215, shape=2,MC=6, MT=7, p_cens=0.1, t_max=20)
-}
-ggplot(mapping = aes(survsim_vec2)) + geom_histogram(bins=10)
-
-```
-
+If we extend the trial duration to $t_{max}=20$, the power given by a particular number of participants is now larger, because there are fewer censored observations and therefore more information. Some more experimentation with sample size would enable us to find a suitable number for this new scenario.
 :::
 
 </details>
@@ -1022,7 +995,6 @@ There are of course lots of ways we could refine and extend this, many of them s
   * Improving the drop-out / censoring modelling
   * Allowing the shape parameter to vary (though being careful of the implications on analysis)
   
-This concludes our second (and final) practical.
 
 
 <!-- ## Extension problem: Sample size by simulation (part II) {#cp2sim2} -->
