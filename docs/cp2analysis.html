@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-02-11" />
+<meta name="date" content="2026-02-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -599,7 +599,7 @@ Click for solution
 </details>
 <p>Finally we can try fitting an ANCOVA model to the data, using the function <code>lm</code>.</p>
 <div class="exercise">
-<p><span id="exr:unlabeled-div-86" class="exercise"><strong>Exercise B.4  </strong></span>Fit an ANCOVA model to the licorice data, and interpret your results. If you aren’t familiar with the function <code>lm</code>, it might be a good idea to look at the solutions.</p>
+<p><span id="exr:unlabeled-div-86" class="exercise"><strong>Exercise B.4  </strong></span>Fit an ANCOVA model to the polyps data, and interpret your results. If you aren’t familiar with the function <code>lm</code>, it might be a good idea to look at the solutions.</p>
 </div>
 <details>
 <summary>
@@ -1175,7 +1175,7 @@ First of all, we can add columns with the residuals and fitted values from the m
 <div class="sourceCode" id="cb202"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb202-1"><a href="cp2analysis.html#cb202-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>polyps_df, <span class="fu">aes</span>(<span class="at">x=</span>resid1, <span class="at">fill=</span>treatment)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">20</span>)</span></code></pre></div>
 <p><img src="CT4H_notes_files/figure-html/unnamed-chunk-134-3.png" width="672" /></p>
 <p>None of these ring huge alarm bells, but because the dataset is so small it’s quite hard to tell! Arguably the residuals for the <code>sulindac</code> group are more spread out than those for the plaecbo, but there are no obvious systematic trends.</p>
-<p>We can find the variance inflation factor by</p>
+<p>We can find the variance inflation factor using the <code>vif</code> function from the package <code>car</code></p>
 <div class="sourceCode" id="cb203"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb203-1"><a href="cp2analysis.html#cb203-1" tabindex="-1"></a><span class="fu">vif</span>(lm_polyp1)</span></code></pre></div>
 <pre><code>##    treatment log_baseline 
 ##     1.029768     1.029768</code></pre>

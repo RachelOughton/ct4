@@ -205,7 +205,7 @@ t.test(
 Finally we can try fitting an ANCOVA model to the data, using the function `lm`. 
 
 :::{.exercise}
-Fit an ANCOVA model to the licorice data, and interpret your results. If you aren't familiar with the function `lm`, it might be a good idea to look at the solutions.
+Fit an ANCOVA model to the polyps data, and interpret your results. If you aren't familiar with the function `lm`, it might be a good idea to look at the solutions.
 
 :::
 
@@ -282,7 +282,7 @@ ggplot(data=polyps_df, aes(x=resid1, fill=treatment)) + geom_histogram(bins=20)
 
 None of these ring huge alarm bells, but because the dataset is so small it's quite hard to tell! Arguably the residuals for the `sulindac` group are more spread out than those for the plaecbo, but there are no obvious systematic trends.
 
-We can find the variance inflation factor by 
+We can find the variance inflation factor using the `vif` function from the package `car`
 
 ```{r, echo=T}
 vif(lm_polyp1)
