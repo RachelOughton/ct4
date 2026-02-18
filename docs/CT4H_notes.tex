@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-02-11}
+\date{2026-02-18}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -2570,9 +2570,11 @@ Returning to our initial look at the dataset, the fact that age is a factor, and
 \subsection*{An important caution!}\label{an-important-caution}
 \addcontentsline{toc}{subsection}{An important caution!}
 
-As you'll have seen if you read \citet{kendall2003designing} (for formative assignment 1), we should have everything in place, including a statistical analysis plan, \textbf{before} the trial. We should already know which covariates we plan to include in our model, and how. `Trawling' for the best possible model by trying lots of different things (and inevitably settling on the one that leads to the most significant conclusion) is poor practice, and can increase the type I error rate (\(\alpha\)).
+As you'll have seen if you read \citet{kendall2003designing} (for formative assignment 1), we should have everything in place, including a statistical analysis plan, \textbf{before} the trial. We should already know which covariates we plan to include in our model, and how we are going to assess the fit. `Trawling' for the best possible model by trying lots of different things (and inevitably settling on the one that leads to the most significant conclusion) is poor practice, and can increase the type I error rate (\(\alpha\)).
 
-I realise that is sort of what we've done in this Section on Analysis, but that was to demonstrate and compare the different methods. Proceeding in the way we have, trying lots of different models, when analysing and writing up a trial would be very poor practice!
+That said, it is crucial to check the model diagnostics, residual plots and so on, to make sure that the model is an appropriate one for the data. If there are problems (eg. if it appears that a particular covariate isn't having a linear effect, or if there seems to be an interaction between two covariates) then you need to try different things until you get a good fit. This is different from p-fishing (described above), because you aren't doing it to minimise the p-value. Indeed, the p-value might be higher for the model that best fits the data.
+
+The way we've gone through analysis methods in this Section was to demonstrate and compare the different methods. Proceeding in the way we have, trying lots of different models, when analysing and writing up a trial would be very poor practice!
 
 There's another excellent episode of the JAMA Evidence podcast, with a focus on adjusting for covariates, that talks about this issue (you can find it \href{https://edhub.ama-assn.org/jn-learning/audio-player/18836864}{here} and linked from Ultra).
 
