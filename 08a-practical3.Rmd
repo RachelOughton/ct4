@@ -69,7 +69,7 @@ Having done this for some number $n_{sim}$ of simulations, we return the proport
 If the power estimate is smaller than we would like, we increase the number of participants in our simulated trial data and try again. Conversely, we decrease the number of participants if the power estimate is larger than we need.
 
 :::{.exercise #ex1sim}
-By generating data for group $C$ and group $T$ according to the distributions in Equation \@ref(eq:simdist), conduct a power simulation for the trial scenario described in Example \@ref(exm:sseg1), with the aim of finding the number $N$ of participants required in each arm for a power of 0.9 ($\beta=0.1$) and a confidence level of $\alpha=0.05$. 
+By generating data for group $C$ and group $T$ according to the distributions in Equation \@ref(eq:simdist), conduct a power simulation for the trial scenario described in Example \@ref(exm:sseg1), with the aim of finding the number $N$ of participants required in each arm for a power of 0.9 ($\beta=0.1$) and a confidence level of $\alpha=0.05$. Recall that in that example we had minimum clinically important difference $\tau_M = 3$ and pooled standard deviation estimate 8. 
 
   * How consistent are your results with the method we derived in Chapter \@ref(rct-plan)? 
   * What issues does this raise around choosing a sample size?
@@ -92,6 +92,7 @@ ttest_sim = function(
 ){
   H0_reject_vec = rep(NA, nsim) # to store 1 if H0 rejected, 0 if fail to reject H0
   for (i in 1:nsim){
+    # inside the loop we simulate a single trial with N in each group
     out_groupC = rnorm(N, mean=mu, sd=sd)
     out_groupT = rnorm(N, mean=mu + tm, sd=sd)
     ttest = t.test(
@@ -414,4 +415,4 @@ We could extend this in many ways to better understand the uncertainty around th
   * Trying different allocation methods
   * Incorporating uncertainty around quantities like $\mu,\,\mu_B,\,\rho$ etc.
   
-If you still have time you might like to make a start on Practical 4, as there's a lot to cover!
+If you still have time you might like to explore one of these ideas, or make a start on Practical 4, as there's a lot to cover!

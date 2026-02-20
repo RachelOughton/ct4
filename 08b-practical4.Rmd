@@ -26,7 +26,7 @@ In this practical we'll focus on the analysis of binary and survival data. We'll
 **Notice that where there are code snippets that you want to copy directly, you can hover your cursor in the top right of the code box and a 'copy' icon will appear.**
 
 ```{r, eval=F, echo=T}
-install.packages(c("HSAUR", "HSAUR3", "pROC", "survival", "ggsurvfit", "survminer", "car"))
+install.packages(c("tidyverse", "HSAUR", "HSAUR3", "pROC", "survival", "ggsurvfit", "survminer", "car"))
 ```
 
 
@@ -38,12 +38,18 @@ The dataset we'll use to explore Binary outcome data is the `respiratory` datase
 library(HSAUR)
 data("respiratory")
 # Keep only months 0 and 4
-resp_04 = respiratory[respiratory$month %in% c(0,4),]
-# Use month 4 data to form basis of overall dataset
-resp_df = respiratory[respiratory$month %in% c(4),]
-# add month 0 statusses in as baseline, and remove month column
-resp_df$status0 = resp_04$status[resp_04$month==0]
-resp_df = resp_df[ ,-6]
+resp_04 = respiratory |>
+  filter(month %in% c(0,4))
+
+## convert to wider to have one row per participant
+resp_df = pivot_wider(
+  data = resp_04, 
+  id_cols = c("subject", "centre", "treatment", "sex", "age"),
+  names_from = "month",
+  names_prefix = "status",
+  values_from = "status"
+)
+
 ```
 
 For each patient, we have the following baseline covariates:
@@ -53,145 +59,145 @@ For each patient, we have the following baseline covariates:
   * treatment centre (centre 1 or centre 2)
   * symptom status (poor or good).
   
-The outcome variable is whether the status of the patient's symptoms are poor or good after four months of the trial. Note that unusually we do have the baseline observation of this quantity. We will build up through some of the models we studied in Chapter \@ref(binary-analysis).
+The outcome variable is whether the status of the patient's symptoms are poor or good after four months of the trial. Note that unusually we do have the baseline observation of this quantity. Since a lot of the earlier methods we covered in Chapter \@ref(binary-analysis) involve simple calculations with the data (and working with survival data is much less familiar), we will skip straight logistic regression.
 
-### Confidence Intervals
+<!-- ### Confidence Intervals -->
 
-Our first step will be to fit a Wilson confidence interval for the absolute risk difference, as we did in Section \@ref(newcombeci). Recall that the limits of a $100(1-\alpha)\%$ CI for the ARD $\pi_T - \pi_C$ are given by
+<!-- Our first step will be to fit a Wilson confidence interval for the absolute risk difference, as we did in Section \@ref(newcombeci). Recall that the limits of a $100(1-\alpha)\%$ CI for the ARD $\pi_T - \pi_C$ are given by -->
 
-$$
-\left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2},\; p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right),
-$$
-where $p_X$ is the estimate of $\pi_X$ (for group $X$), and $\left(l_X,\,u_X\right)$ is the $100\left(1-\alpha\right)\%$ CI for $\pi_X$. The limits of the $100\left(1-\alpha\right)\%$ Wilson CI for $\pi_X$ are given by the roots of the equation (in $\pi_X$)
+<!-- $$ -->
+<!-- \left(p_T - p_C - \sqrt{\left(p_T-l_T\right)^2 + \left(u_C - p_C\right)^2},\; p_T - p_C + \sqrt{\left(u_T - p_T\right)^2 + \left(p_C - l_C\right)^2}\right), -->
+<!-- $$ -->
+<!-- where $p_X$ is the estimate of $\pi_X$ (for group $X$), and $\left(l_X,\,u_X\right)$ is the $100\left(1-\alpha\right)\%$ CI for $\pi_X$. The limits of the $100\left(1-\alpha\right)\%$ Wilson CI for $\pi_X$ are given by the roots of the equation (in $\pi_X$) -->
 
-$$
-\left(p_X - \pi_X\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi_X\left(1-\pi_X\right)}{n}.
-$$
+<!-- $$ -->
+<!-- \left(p_X - \pi_X\right)^2 = z^2_{\frac{\alpha}{2}}\frac{\pi_X\left(1-\pi_X\right)}{n}. -->
+<!-- $$ -->
 
-:::{.exercise #Wilson}
-Using only the final / month 4 outcomes, find the Wilson 95% CI for the ARD for the `resp_df` dataset we made above, treating a 'good' respiratory status as 1 and a 'poor' respiratory status as 0. Translate this into a confidence interval for the number needed to treat (NNT). Comment on the result.
-:::
+<!-- :::{.exercise #Wilson} -->
+<!-- Using only the final / month 4 outcomes, find the Wilson 95% CI for the ARD for the `resp_df` dataset we made above, treating a 'good' respiratory status as 1 and a 'poor' respiratory status as 0. Translate this into a confidence interval for the number needed to treat (NNT). Comment on the result. -->
+<!-- ::: -->
 
-<details> <summary> Click for solution </summary>
+<!-- <details> <summary> Click for solution </summary> -->
 
-:::{.solution}
+<!-- :::{.solution} -->
 
-The first thing we need to do is to find the limits of the individual CIs for groups C and T. 
-To do this, we need the data estimates of $p_C$ and $p_T$.
+<!-- The first thing we need to do is to find the limits of the individual CIs for groups C and T.  -->
+<!-- To do this, we need the data estimates of $p_C$ and $p_T$. -->
 
-```{r, echo=T}
-rC = sum((resp_df$status == "good")&(resp_df$treatment == "placebo"))
-nC = sum(resp_df$treatment == "placebo")
-pC = rC / nC
-rT = sum((resp_df$status == "good")&(resp_df$treatment == "treatment"))
-nT = sum(resp_df$treatment == "treatment")
-pT = rT / nT
-```
+<!-- ```{r, echo=T} -->
+<!-- rC = sum((resp_df$status == "good")&(resp_df$treatment == "placebo")) -->
+<!-- nC = sum(resp_df$treatment == "placebo") -->
+<!-- pC = rC / nC -->
+<!-- rT = sum((resp_df$status == "good")&(resp_df$treatment == "treatment")) -->
+<!-- nT = sum(resp_df$treatment == "treatment") -->
+<!-- pT = rT / nT -->
+<!-- ``` -->
 
-To find the limits of the individual CIs, we need to rearrange the quadratic equation above into the form we're used to
+<!-- To find the limits of the individual CIs, we need to rearrange the quadratic equation above into the form we're used to -->
 
-$$\left(1 + \frac{z^2}{n}\right)\pi^2  + \left(-2p-\frac{z^2}{n}\right)\pi + p^2 = 0.$$
-It is simple to define a function to solve quadratic equations in this form, for example
+<!-- $$\left(1 + \frac{z^2}{n}\right)\pi^2  + \left(-2p-\frac{z^2}{n}\right)\pi + p^2 = 0.$$ -->
+<!-- It is simple to define a function to solve quadratic equations in this form, for example -->
 
-```{r, echo=T}
-quad_fun = function(a,b,c){
-  disc = b^2 - 4*a*c
-  lower = (-b - sqrt(disc))/(2*a)
-  upper = (-b + sqrt(disc))/(2*a)
-  c(lower, upper)
-}
-```
+<!-- ```{r, echo=T} -->
+<!-- quad_fun = function(a,b,c){ -->
+<!--   disc = b^2 - 4*a*c -->
+<!--   lower = (-b - sqrt(disc))/(2*a) -->
+<!--   upper = (-b + sqrt(disc))/(2*a) -->
+<!--   c(lower, upper) -->
+<!-- } -->
+<!-- ``` -->
 
-and we can now find the limits of each CI:
+<!-- and we can now find the limits of each CI: -->
 
-```{r, echo=T}
-# Control group
-lim_resp_C = quad_fun(
-  a = 1 + qnorm(0.975)^2/nC,
-  b = -2*pC - qnorm(0.975)^2/nC,
-  c = pC^2
-)
-lim_resp_C
+<!-- ```{r, echo=T} -->
+<!-- # Control group -->
+<!-- lim_resp_C = quad_fun( -->
+<!--   a = 1 + qnorm(0.975)^2/nC, -->
+<!--   b = -2*pC - qnorm(0.975)^2/nC, -->
+<!--   c = pC^2 -->
+<!-- ) -->
+<!-- lim_resp_C -->
 
-# Treatment group
-lim_resp_T = quad_fun(
-  a = 1 + qnorm(0.975)^2/nT,
-  b = -2*pT - qnorm(0.975)^2/nT,
-  c = pT^2
-)
-lim_resp_T
-```
-Notice that because $p_C$ is quite close to 0.5, the Newcome interval for $\pi_C$ is close to symmetric. The CI for $\pi_T$ is more skewed.
+<!-- # Treatment group -->
+<!-- lim_resp_T = quad_fun( -->
+<!--   a = 1 + qnorm(0.975)^2/nT, -->
+<!--   b = -2*pT - qnorm(0.975)^2/nT, -->
+<!--   c = pT^2 -->
+<!-- ) -->
+<!-- lim_resp_T -->
+<!-- ``` -->
+<!-- Notice that because $p_C$ is quite close to 0.5, the Newcome interval for $\pi_C$ is close to symmetric. The CI for $\pi_T$ is more skewed. -->
 
-Finally we can use these values to find the Wilson CI for the ARD:
+<!-- Finally we can use these values to find the Wilson CI for the ARD: -->
 
-```{r, echo=T}
-# Make objects match notation
-lC = lim_resp_C[1]
-uC = lim_resp_C[2]
-lT = lim_resp_T[1]
-uT = lim_resp_T[2]
+<!-- ```{r, echo=T} -->
+<!-- # Make objects match notation -->
+<!-- lC = lim_resp_C[1] -->
+<!-- uC = lim_resp_C[2] -->
+<!-- lT = lim_resp_T[1] -->
+<!-- uT = lim_resp_T[2] -->
 
-l_newc = pT - pC - sqrt((pT - lT)^2 + (uC - pC)^2)
-u_newc = pT - pC + sqrt((uT - pT)^2 + (pC - lC)^2)
+<!-- l_newc = pT - pC - sqrt((pT - lT)^2 + (uC - pC)^2) -->
+<!-- u_newc = pT - pC + sqrt((uT - pT)^2 + (pC - lC)^2) -->
 
-c(l_newc, u_newc)
+<!-- c(l_newc, u_newc) -->
 
-```
+<!-- ``` -->
 
-Finally we can use this to find a 95% CI for the NNT by finding the reciprocals of the limits of the CI for ARD:
+<!-- Finally we can use this to find a 95% CI for the NNT by finding the reciprocals of the limits of the CI for ARD: -->
 
-```{r, echo=T}
-c(1/u_newc, 1/l_newc)
-```
+<!-- ```{r, echo=T} -->
+<!-- c(1/u_newc, 1/l_newc) -->
+<!-- ``` -->
 
-This is a huge range and would make it difficult to make a clinical decision.
+<!-- This is a huge range and would make it difficult to make a clinical decision. -->
 
-:::
+<!-- ::: -->
 
-</details>
+<!-- </details> -->
 
-With the quantities we've found in exercise \@ref(exr:Wilson) we can also find an approximate 95% CI for the risk ratio (see Section \@ref(ci-rr)).
+<!-- With the quantities we've found in exercise \@ref(exr:Wilson) we can also find an approximate 95% CI for the risk ratio (see Section \@ref(ci-rr)). -->
 
-:::{.exercise #riskratio}
+<!-- :::{.exercise #riskratio} -->
 
-Find a 95% CI for the risk ratio $\frac{\pi_T}{\pi_C}$ and comment on your result.
+<!-- Find a 95% CI for the risk ratio $\frac{\pi_T}{\pi_C}$ and comment on your result. -->
 
-:::
+<!-- ::: -->
 
-<details> <summary> Click for solution </summary> 
+<!-- <details> <summary> Click for solution </summary>  -->
 
-:::{.solution}
+<!-- :::{.solution} -->
 
-Recall that the limits of the $100\left(1-\alpha\right)\%$ CI for the log of the risk ratio are given by
+<!-- Recall that the limits of the $100\left(1-\alpha\right)\%$ CI for the log of the risk ratio are given by -->
 
-$$ \log\left(\frac{p_T}{p_C}\right) \pm z_{\frac{\alpha}{2}}\sqrt{\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right)}. $$
+<!-- $$ \log\left(\frac{p_T}{p_C}\right) \pm z_{\frac{\alpha}{2}}\sqrt{\left(r_T^{-1} - n_T^{-1}\right) + \left(r_C^{-1} - n_C^{-1}\right)}. $$ -->
 
-Therefore for our respiratory data we have
+<!-- Therefore for our respiratory data we have -->
 
-```{r, echo=T}
-# Find the estimated log OR and the distance to the limits of the CI
-log_or_resp = log(pT/pC)
-ci_diff = qnorm(0.975)*sqrt(1/rT - 1/nT + 1/rC - 1/nC)
-# Calculate CI
-ci_log_rr = c(log_or_resp - ci_diff, log_or_resp + ci_diff)
-ci_log_rr
-```
+<!-- ```{r, echo=T} -->
+<!-- # Find the estimated log OR and the distance to the limits of the CI -->
+<!-- log_or_resp = log(pT/pC) -->
+<!-- ci_diff = qnorm(0.975)*sqrt(1/rT - 1/nT + 1/rC - 1/nC) -->
+<!-- # Calculate CI -->
+<!-- ci_log_rr = c(log_or_resp - ci_diff, log_or_resp + ci_diff) -->
+<!-- ci_log_rr -->
+<!-- ``` -->
 
-To transform this into a CI for the RR itself, we use
+<!-- To transform this into a CI for the RR itself, we use -->
 
-```{r, echo=T}
-exp(ci_log_rr)
-```
-This seems like a relatively narrow CI, but the fact that it comes so close to containing one (the 'null value' for the risk ratio) fits with the very large upper limit on the NNT / small lower limit on the ARD. Although this treatment appears significant, it may be that it has a very minimal effect in practice.
+<!-- ```{r, echo=T} -->
+<!-- exp(ci_log_rr) -->
+<!-- ``` -->
+<!-- This seems like a relatively narrow CI, but the fact that it comes so close to containing one (the 'null value' for the risk ratio) fits with the very large upper limit on the NNT / small lower limit on the ARD. Although this treatment appears significant, it may be that it has a very minimal effect in practice. -->
 
-:::
+<!-- ::: -->
 
-</details>
+<!-- </details> -->
 
 ### Logistic regression {#cp2logreg}
 
-We next looked at logistic regression as way to account for the baseline covariates. To fit a logistic regression in R we use the function `glm`. This fits all kinds of generalised linear models, and so we specify that we want a logistic regression by choosing `family = binomial(link='logit')`. 
+Logistic regression give us a way to account for the baseline covariates. To fit a logistic regression in R we use the function `glm`. This fits all kinds of generalised linear models, and so we specify that we want a logistic regression by choosing `family = binomial(link='logit')`. 
 
 The code is included in all examples in Sections \@ref(logreg) and \@ref(diaglogreg), so if you aren't sure how to do something they would be a good place to look.
 
@@ -208,7 +214,7 @@ Fit a logistic regression model to the `resp_df` data set, being careful to chec
 The first model we fit involves all covariates linearly:
 
 ```{r, echo=T}
-model1 = glm(status ~ centre + treatment + sex + age + status0, 
+model1 = glm(status4 ~ centre + treatment + sex + age + status0, 
              family = binomial(link='logit'), data=resp_df)
 summary(model1)
 ```
@@ -222,23 +228,12 @@ vif(model1)
 We can also try one with age squared, since the effect might not be linear (the age range is 11 to 68 which is quite a wide range). While we're at it we'll remove `sex` from the model since it appears to have no effect
 
 ```{r, echo=T}
-model2 = glm(status ~ centre + treatment + I(age^2) + status0, 
+model2 = glm(status4 ~ centre + treatment + age + I(age^(2)) + status0, 
              family = binomial(link='logit'), data=resp_df)
 summary(model2)
 
 ```
-
-Because the age range actually goes quite low, we could try a model with a log transform
-
-```{r, echo=T}
-model3 = glm(status ~ centre + treatment + I(log(age)) + status0, 
-             family = binomial(link='logit'), data=resp_df)
-summary(model3)
-vif(model3)
-
-```
-This is slightly better, so we'll use it, but the model with age linear is pretty similar.
-
+This is an improvement in terms of AIC and deviance, so we'll use this model (for now).
 :::
 
 </details>
@@ -256,12 +251,14 @@ Firstly we'll use ROC analysis to assess the model in terms of how well it discr
 
 ```{r, echo=T}
 library(pROC)
-fit_resp = fitted(model3)   # Fitted values from model3
-out_resp = resp_df$status   # outcome values (1 or 2)
+fit_resp = fitted(model2)   # Fitted values from model3
+out_resp = resp_df$status4   # outcome values (1 or 2)
 roc_resp_df = data.frame(fit = fit_resp, out = out_resp)
 roc_resp = roc(data=roc_resp_df, response = out, predictor=fit)
 roc_resp
 ```
+
+The area under the curve (AUC) is around 0.8, which is generally considered quite good.
 
 We can also plot the ROC curve
 
@@ -278,7 +275,10 @@ resp_df$age10 = round(resp_df$age, -1)
 # for each combination of factor/age group levels
 resp_sum = resp_df %>% 
   group_by(age10, centre, treatment, status0) %>%
-  summarise(mean = mean(as.numeric(status))-1, n=length(age10), .groups="keep")
+  summarise(
+    mean = mean(as.numeric(status4))-1, 
+    n=length(age10), 
+    .groups="keep")
 
 # Plot the observations, using facet_wrap to deal with two of the factors 
  
@@ -288,15 +288,20 @@ obs_plot = ggplot(data=resp_sum, aes(x=age10, col=treatment)) +
   facet_wrap(c("centre", "status0")) + theme(legend.position = "bottom")
 
 ## To include the estimate and SD from the model, we use the original dataset with continuous age,
-# fit model 3 including an estimate of SE, and use geom_line and geom_ribbon to add the fitted model with 95% intervals
+# fit model 2 including an estimate of SE, and use geom_line and geom_ribbon to add the fitted model with 95% intervals
 
-fit_resp = predict(model3, newdata=resp_df, se.fit=T, type="response")
+fit_resp = predict(model2, newdata=resp_df, se.fit=T, type="response")
 
 resp_df$fit = fit_resp$fit
 resp_df$fit_se = fit_resp$se.fit
 
-obs_plot + geom_line(data=resp_df, aes(x=age, y=fit)) +
-  geom_ribbon(data=resp_df, aes(x=age, ymin = fit - 1.96*fit_se, ymax = fit + 1.96*fit_se, fill = treatment), alpha=0.3)
+obs_plot + 
+  geom_line(data=resp_df, aes(x=age, y=fit)) +
+  geom_ribbon(
+    data=resp_df, 
+    aes(x=age, ymin = fit - 1.96*fit_se, ymax = fit + 1.96*fit_se, fill = treatment), 
+    alpha=0.3
+    )
 
 ```
 Overall, the model does not appear to be a great fit, but there is no systematic cause for concern. 
@@ -320,14 +325,14 @@ Compute a 95% CI for the odd ratio for this trial, using the model you built in 
 We can find the details of the coefficients via
 
 ```{r, echo=T}
-summary(model3)
+summary(model2)
 ```
 
-and find that the estimate of the log OR is 1.0257, with an SE of 0.4605, and therefore a 95% CI for the log OR is
+and find that the estimate of the log OR is 0.996, with an SE of 0.465, and therefore a 95% CI for the log OR is
 
 ```{r, echo=T}
-est_logOR = summary(model3)$coefficients[3,1]
-se_logOR = summary(model3)$coefficients[3,2]
+est_logOR = summary(model2)$coefficients[3,1]
+se_logOR = summary(model2)$coefficients[3,2]
 logOR_CI = c(est_logOR - qnorm(0.975)*se_logOR, est_logOR + qnorm(0.975)*se_logOR)
 ```
 
@@ -337,7 +342,9 @@ Finally we can use this to find a CI for the OR itself
 exp(logOR_CI)
 ```
 
-This is further away from the null value (1 for the OR) than any of our previous confidence intervals, showing that including the baseline covariates has reduced our uncertainty in the treatment effect in a helpful way.
+We call this the **adjusted odds ratio**, since we have adjusted for other covariates. Since this confidence interval does not contain the null value (1 for the OR), we see that the treatment effect is significant.
+
+Note that these values are still quite difficult to interpret - this is an important issue in binary outcome RCTs in particular, as you'll see in Formative 2.
 
 :::
 
@@ -732,7 +739,7 @@ But we can also include other baseline covariates
 coxph(formula = Surv(time, status)~rx + sex + age + obstruct + nodes, data=colondf)
 ```
 
-and we see that as well as the treatment arm, the number of lymph nodes with detectable cancer (given by `nodes`) is highly significant, and `sex` is also fairly significant. 
+and we see that as well as the treatment arm, the number of lymph nodes with detectable cancer (given by `nodes`) is highly significant, and `sex` is also close to significant. 
 
 We can visualise this by further subsetting the Kaplan-Meier estimator
 
@@ -743,13 +750,15 @@ km_colon_bl %>% ggsurvfit() +
 
 ```
 
-`nodes` is a numeric output, so one way to get a visual impression of its effect on the survival curve we can bin it. For example, we can choose $\texttt{nodes}\leq 4$ and $\texttt{nodes}>4$.
+`nodes` is a numeric output, so one way to get a visual impression of its effect on the survival curve is to bin it. For example, we can choose $\texttt{nodes}\leq 4$ and $\texttt{nodes}>4$.
 
 ```{r, echo=T}
 colondf$nodes4 = sapply(1:nrow(colondf), function(i){ifelse(colondf$nodes[i]>4, 1, 0)})
 km_colon_bl = survfit(Surv(time, status) ~ rx + nodes4, data=colondf)
 km_colon_bl %>% ggsurvfit()
 ```
+
+The separation in the lines fits with the strong effect of `nodes` in the model. 
 
 To check our model more carefully we can use the log-log plot for the categorical variables:
 
