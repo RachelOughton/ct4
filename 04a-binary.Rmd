@@ -930,7 +930,7 @@ vif(glm_indo_agesq)
 
 ```
 
-Since neither `age` nor `age^2` appear influential, we'll remove it and keep the other covariates.
+Since neither `age` nor `age^2` appear influential, and the AIC and residual deviance values are almost identical, we'll remove it and keep the other covariates.
 
 ```{r, echo=T}
 glm_indo = glm(outcome ~ site + risk + rx, data=indo_rct, family = binomial(link = "logit"))
@@ -946,6 +946,10 @@ Notice that
 From the summary we see that $\hat\tau = -0.752$, with a standard error of 0.261. A 95% CI for $\tau$ is therefore 
 
 $$-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).$$
+Recall that $\tau$ is the log of the odd ratio, so we can make this (slightly) more intuitive by finding a confidence interval for the odds ratio itself:
+
+$$\left(\exp(-1.26),\;\exp(-0.240)\right) = \left(0.28,\,0.79\right).$$
+
 This model supports the hypothesis that the log of the odds ratio isn't zero, and therefore we can reject $H_0$. 
 :::
 
@@ -982,7 +986,7 @@ which is equivalent to a probability of post-ECRP pancreatitis of
 
 $$\frac{0.0268}{1+0.0268} = 0.0261.$$ 
 
-Being more methodical we can collect these into a table, and use `predict.glm`. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.
+Being more methodical we can collect these into a table, and use `predict.glm`. This also has the advantage that we can find the standard error for the log odds ratio for each category. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.
 
 
 ```{r, echo=T}
@@ -995,15 +999,27 @@ df_indo = data.frame(
 
 ## Find and transform fitted value
 
-df_indo$logodds = predict(glm_indo, newdata=df_indo)
+df_indo$logodds = predict(glm_indo, newdata=df_indo, se.fit = T)$fit
+df_indo$logodds_se = predict(glm_indo, newdata=df_indo, se.fit = T)$se.fit
+df_indo$logor_lower = df_indo$logodds - qnorm(0.975)*df_indo$logodds_se
+df_indo$logor_upper = df_indo$logodds + qnorm(0.975)*df_indo$logodds_se
+
 df_indo$odds = exp(df_indo$logodds)
+df_indo$odds_lower = exp(df_indo$logor_lower)
+df_indo$odds_upper = exp(df_indo$logor_upper)
+
+df_indo$prob_lower = df_indo$odds_lower/(1+df_indo$odds_lower)
 df_indo$prob = df_indo$odds/(1+df_indo$odds)
+df_indo$prob_upper = df_indo$odds_upper/(1+df_indo$odds_upper)
+
 
 df_indo_round2 <- df_indo %>%                   # Using dplyr functions
   mutate_if(is.numeric,
             round,
             digits = 2)
-df_indo_round2 
+df_indo_round2 |>
+  kable() |>
+  kable_styling("striped")
 
 ```
 
@@ -1052,7 +1068,7 @@ These are very commonly used for thinking about diagnostic tests and screening t
 
 The core part of a ROC analysis is to plot **sensitivity** against **1-specificity** for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the $t=0$, the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set $t=1$, we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a **ROC curve**. 
 
-The plots below shows the distributions of fitted values for patients with $X=0$ and $X=1$, for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.5, and so the Sensitivity and Specificity reflec that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
+The plots below shows the distributions of fitted values for patients with $X=0$ and $X=1$, for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.5, and so the Sensitivity and Specificity reflect that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent. 
 
 
 ```{r, echo=F}
@@ -1193,7 +1209,7 @@ out_indo = indo_rct$outcome   # outcome values (0 or 1)
 roc_indo_df = data.frame(fit = fit_indo, out = out_indo)
 ```
 
-The main function in the package `pROC` is `roc`, which creates a `roc` object. and `ggroc` that sort and plot the data for us:
+The main functions in the package `pROC` are `roc`, which creates a `roc` object, and `ggroc` which sorts and plots the data for us:
 
 ```{r, echo=T}
 roc_indo = roc(data=roc_indo_df, response = out, predictor=fit)
@@ -1203,7 +1219,8 @@ roc_indo = roc(data=roc_indo_df, response = out, predictor=fit)
 With that object we can do various things, such as plot the ROC curve:
 
 ```{r indoroc1, echo=T, fig.cap = "ROC curve for our logistic regression model of the indo RCT data (solid line). The line y=x shows the ROC curve we'd expect with random guessing."}
-ggroc(roc_indo, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2)
+ggroc(roc_indo, legacy.axes=T) + geom_abline(slope=1, intercept=0, type=2) +
+  theme_bw() + coord_fixed()
 
 ```
 
@@ -1228,7 +1245,7 @@ If the explanatory variables are factors, and we have repeated observations for 
 
 This example uses the model fitted in Example \@ref(exm:logregeg1).
   
-The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95% CI of the fitted value. 
+The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the $x$ axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate. The dashed lines and ribbons show the mean and 95% CI of the fitted value. 
 
 ```{r, echo=T, fig.cap = "Calibration-based plots for indo RCT data for sites 1 (left) and 2 (right)."}
 ## what columns do I want?
@@ -1237,7 +1254,9 @@ The trial has 602 participants and there are many fewer than 602 combinations of
 indo_sum = indo_rct %>% 
   group_by(site, risk, rx) %>%
   summarise(est = mean(as.numeric(outcome))-1, size=length(id), .groups="keep")
-indo_sum = indo_sum[indo_sum$site %in% c("1_UM", "2_IU"),]
+indo_sum = indo_sum |>
+  filter(site %in% c("1_UM", "2_IU"))
+
 fit_sum = predict(glm_indo, newdata=indo_sum[,1:3], se.fit=T, type="response")
 
 indo_sum$fit = fit_sum$fit
@@ -1245,10 +1264,18 @@ indo_sum$fit_se = fit_sum$se.fit
 
 ggplot(data=indo_sum, aes(x=risk, col=rx)) +
   geom_point(aes(y=est, size=size), pch=16) + 
-  geom_point(aes(y=fit), pch=4) +
-  geom_segment(aes(x=risk, xend=risk, y=fit-1.96*fit_se, yend=fit+1.96*fit_se))+
+  geom_line(aes(x=risk, y=fit, col=rx), linetype=2) +
+  geom_ribbon(
+    aes(
+      x=risk, 
+      ymin=fit-1.96*fit_se, 
+      ymax=fit+1.96*fit_se, 
+      fill = rx
+      ),
+    alpha =0.3)+
   theme_bw()+
   facet_wrap("site") + theme(legend.position = "bottom")
+
 
 ```
 

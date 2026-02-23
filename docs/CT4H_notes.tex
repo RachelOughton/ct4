@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-02-18}
+\date{2026-02-23}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -3532,7 +3532,7 @@ Note: an obvious one to include would be \texttt{gender}, but I tried it and it 
 ## rx       1.007972  1        1.003978
 \end{verbatim}
 
-Since neither \texttt{age} nor \texttt{age\^{}2} appear influential, we'll remove it and keep the other covariates.
+Since neither \texttt{age} nor \texttt{age\^{}2} appear influential, and the AIC and residual deviance values are almost identical, we'll remove it and keep the other covariates.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3593,6 +3593,10 @@ Notice that
 From the summary we see that \(\hat\tau = -0.752\), with a standard error of 0.261. A 95\% CI for \(\tau\) is therefore
 
 \[-0.752 \pm 1.96\times 0.261 = \left(-1.26,\;-0.240\right).\]
+Recall that \(\tau\) is the log of the odd ratio, so we can make this (slightly) more intuitive by finding a confidence interval for the odds ratio itself:
+
+\[\left(\exp(-1.26),\;\exp(-0.240)\right) = \left(0.28,\,0.79\right).\]
+
 This model supports the hypothesis that the log of the odds ratio isn't zero, and therefore we can reject \(H_0\).
 \end{example}
 
@@ -3657,7 +3661,7 @@ which is equivalent to a probability of post-ECRP pancreatitis of
 
 \[\frac{0.0268}{1+0.0268} = 0.0261.\]
 
-Being more methodical we can collect these into a table, and use \texttt{predict.glm}. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.
+Being more methodical we can collect these into a table, and use \texttt{predict.glm}. This also has the advantage that we can find the standard error for the log odds ratio for each category. Since the site 3 and 4 coefficents are not significant (mainly due to a lack of data), we will focus only on the site 1 and 2 participants.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3670,63 +3674,78 @@ Being more methodical we can collect these into a table, and use \texttt{predict
 
 \DocumentationTok{\#\# Find and transform fitted value}
 
-\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{logodds }\OtherTok{=} \FunctionTok{predict}\NormalTok{(glm\_indo, }\AttributeTok{newdata=}\NormalTok{df\_indo)}
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{logodds }\OtherTok{=} \FunctionTok{predict}\NormalTok{(glm\_indo, }\AttributeTok{newdata=}\NormalTok{df\_indo, }\AttributeTok{se.fit =}\NormalTok{ T)}\SpecialCharTok{$}\NormalTok{fit}
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{logodds\_se }\OtherTok{=} \FunctionTok{predict}\NormalTok{(glm\_indo, }\AttributeTok{newdata=}\NormalTok{df\_indo, }\AttributeTok{se.fit =}\NormalTok{ T)}\SpecialCharTok{$}\NormalTok{se.fit}
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{logor\_lower }\OtherTok{=}\NormalTok{ df\_indo}\SpecialCharTok{$}\NormalTok{logodds }\SpecialCharTok{{-}} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{)}\SpecialCharTok{*}\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{logodds\_se}
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{logor\_upper }\OtherTok{=}\NormalTok{ df\_indo}\SpecialCharTok{$}\NormalTok{logodds }\SpecialCharTok{+} \FunctionTok{qnorm}\NormalTok{(}\FloatTok{0.975}\NormalTok{)}\SpecialCharTok{*}\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{logodds\_se}
+
 \NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{odds }\OtherTok{=} \FunctionTok{exp}\NormalTok{(df\_indo}\SpecialCharTok{$}\NormalTok{logodds)}
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{odds\_lower }\OtherTok{=} \FunctionTok{exp}\NormalTok{(df\_indo}\SpecialCharTok{$}\NormalTok{logor\_lower)}
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{odds\_upper }\OtherTok{=} \FunctionTok{exp}\NormalTok{(df\_indo}\SpecialCharTok{$}\NormalTok{logor\_upper)}
+
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{prob\_lower }\OtherTok{=}\NormalTok{ df\_indo}\SpecialCharTok{$}\NormalTok{odds\_lower}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{odds\_lower)}
 \NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{prob }\OtherTok{=}\NormalTok{ df\_indo}\SpecialCharTok{$}\NormalTok{odds}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{odds)}
+\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{prob\_upper }\OtherTok{=}\NormalTok{ df\_indo}\SpecialCharTok{$}\NormalTok{odds\_upper}\SpecialCharTok{/}\NormalTok{(}\DecValTok{1}\SpecialCharTok{+}\NormalTok{df\_indo}\SpecialCharTok{$}\NormalTok{odds\_upper)}
+
 
 \NormalTok{df\_indo\_round2 }\OtherTok{\textless{}{-}}\NormalTok{ df\_indo }\SpecialCharTok{\%\textgreater{}\%}                   \CommentTok{\# Using dplyr functions}
   \FunctionTok{mutate\_if}\NormalTok{(is.numeric,}
 \NormalTok{            round,}
             \AttributeTok{digits =} \DecValTok{2}\NormalTok{)}
-\NormalTok{df\_indo\_round2 }
+\NormalTok{df\_indo\_round2 }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{kable}\NormalTok{() }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{kable\_styling}\NormalTok{(}\StringTok{"striped"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{tabular}{l|r|l|r|r|r}
+\begin{table}
+\centering
+\begin{tabular}{l|r|l|r|r|r|r|r|r|r|r|r|r}
 \hline
-site & risk & rx & logodds & odds & prob\\
+site & risk & rx & logodds & logodds\_se & logor\_lower & logor\_upper & odds & odds\_lower & odds\_upper & prob\_lower & prob & prob\_upper\\
 \hline
-2\_IU & 1 & 0\_placebo & -2.87 & 0.06 & 0.05\\
+2\_IU & 1 & 0\_placebo & -2.87 & 0.32 & -3.48 & -2.25 & 0.06 & 0.03 & 0.11 & 0.03 & 0.05 & 0.10\\
 \hline
-2\_IU & 2 & 0\_placebo & -2.28 & 0.10 & 0.09\\
+2\_IU & 2 & 0\_placebo & -2.28 & 0.22 & -2.72 & -1.85 & 0.10 & 0.07 & 0.16 & 0.06 & 0.09 & 0.14\\
 \hline
-2\_IU & 3 & 0\_placebo & -1.70 & 0.18 & 0.15\\
+2\_IU & 3 & 0\_placebo & -1.70 & 0.19 & -2.08 & -1.32 & 0.18 & 0.13 & 0.27 & 0.11 & 0.15 & 0.21\\
 \hline
-2\_IU & 4 & 0\_placebo & -1.11 & 0.33 & 0.25\\
+2\_IU & 4 & 0\_placebo & -1.11 & 0.26 & -1.61 & -0.61 & 0.33 & 0.20 & 0.54 & 0.17 & 0.25 & 0.35\\
 \hline
-2\_IU & 5 & 0\_placebo & -0.53 & 0.59 & 0.37\\
+2\_IU & 5 & 0\_placebo & -0.53 & 0.36 & -1.24 & 0.18 & 0.59 & 0.29 & 1.20 & 0.22 & 0.37 & 0.55\\
 \hline
-1\_UM & 1 & 0\_placebo & -1.65 & 0.19 & 0.16\\
+1\_UM & 1 & 0\_placebo & -1.65 & 0.28 & -2.19 & -1.10 & 0.19 & 0.11 & 0.33 & 0.10 & 0.16 & 0.25\\
 \hline
-1\_UM & 2 & 0\_placebo & -1.06 & 0.35 & 0.26\\
+1\_UM & 2 & 0\_placebo & -1.06 & 0.22 & -1.49 & -0.63 & 0.35 & 0.22 & 0.53 & 0.18 & 0.26 & 0.35\\
 \hline
-1\_UM & 3 & 0\_placebo & -0.48 & 0.62 & 0.38\\
+1\_UM & 3 & 0\_placebo & -0.48 & 0.24 & -0.95 & 0.00 & 0.62 & 0.39 & 1.00 & 0.28 & 0.38 & 0.50\\
 \hline
-1\_UM & 4 & 0\_placebo & 0.11 & 1.11 & 0.53\\
+1\_UM & 4 & 0\_placebo & 0.11 & 0.33 & -0.54 & 0.75 & 1.11 & 0.59 & 2.12 & 0.37 & 0.53 & 0.68\\
 \hline
-1\_UM & 5 & 0\_placebo & 0.69 & 2.00 & 0.67\\
+1\_UM & 5 & 0\_placebo & 0.69 & 0.44 & -0.17 & 1.56 & 2.00 & 0.84 & 4.76 & 0.46 & 0.67 & 0.83\\
 \hline
-2\_IU & 1 & 1\_indomethacin & -3.62 & 0.03 & 0.03\\
+2\_IU & 1 & 1\_indomethacin & -3.62 & 0.36 & -4.32 & -2.92 & 0.03 & 0.01 & 0.05 & 0.01 & 0.03 & 0.05\\
 \hline
-2\_IU & 2 & 1\_indomethacin & -3.03 & 0.05 & 0.05\\
+2\_IU & 2 & 1\_indomethacin & -3.03 & 0.27 & -3.56 & -2.51 & 0.05 & 0.03 & 0.08 & 0.03 & 0.05 & 0.08\\
 \hline
-2\_IU & 3 & 1\_indomethacin & -2.45 & 0.09 & 0.08\\
+2\_IU & 3 & 1\_indomethacin & -2.45 & 0.24 & -2.91 & -1.99 & 0.09 & 0.05 & 0.14 & 0.05 & 0.08 & 0.12\\
 \hline
-2\_IU & 4 & 1\_indomethacin & -1.86 & 0.15 & 0.13\\
+2\_IU & 4 & 1\_indomethacin & -1.86 & 0.28 & -2.41 & -1.32 & 0.15 & 0.09 & 0.27 & 0.08 & 0.13 & 0.21\\
 \hline
-2\_IU & 5 & 1\_indomethacin & -1.28 & 0.28 & 0.22\\
+2\_IU & 5 & 1\_indomethacin & -1.28 & 0.37 & -2.01 & -0.55 & 0.28 & 0.13 & 0.58 & 0.12 & 0.22 & 0.37\\
 \hline
-1\_UM & 1 & 1\_indomethacin & -2.40 & 0.09 & 0.08\\
+1\_UM & 1 & 1\_indomethacin & -2.40 & 0.32 & -3.02 & -1.77 & 0.09 & 0.05 & 0.17 & 0.05 & 0.08 & 0.15\\
 \hline
-1\_UM & 2 & 1\_indomethacin & -1.81 & 0.16 & 0.14\\
+1\_UM & 2 & 1\_indomethacin & -1.81 & 0.26 & -2.32 & -1.30 & 0.16 & 0.10 & 0.27 & 0.09 & 0.14 & 0.21\\
 \hline
-1\_UM & 3 & 1\_indomethacin & -1.23 & 0.29 & 0.23\\
+1\_UM & 3 & 1\_indomethacin & -1.23 & 0.27 & -1.76 & -0.70 & 0.29 & 0.17 & 0.50 & 0.15 & 0.23 & 0.33\\
 \hline
-1\_UM & 4 & 1\_indomethacin & -0.64 & 0.52 & 0.34\\
+1\_UM & 4 & 1\_indomethacin & -0.64 & 0.34 & -1.31 & 0.02 & 0.52 & 0.27 & 1.02 & 0.21 & 0.34 & 0.51\\
 \hline
-1\_UM & 5 & 1\_indomethacin & -0.06 & 0.94 & 0.49\\
+1\_UM & 5 & 1\_indomethacin & -0.06 & 0.45 & -0.93 & 0.81 & 0.94 & 0.39 & 2.25 & 0.28 & 0.49 & 0.69\\
 \hline
 \end{tabular}
+\end{table}
 
 \end{example}
 
@@ -3777,7 +3796,7 @@ These are very commonly used for thinking about diagnostic tests and screening t
 
 The core part of a ROC analysis is to plot \textbf{sensitivity} against \textbf{1-specificity} for every possible value of the threshold. In a logistic regression context, the lowest the threshold can be is zero. If we set the \(t=0\), the model will predict everyone to have an outcome of 1. The sensitivity will be 1 and the specificity will be 0. At the other extreme, if we set \(t=1\), we will classify everyone as a 0, and have sensitivity 0 and specificity 1. If we vary the threshold from 0 to 1 the number of people classified in each group will change, and so will the sensitivity and specificity. This forms a \textbf{ROC curve}.
 
-The plots below shows the distributions of fitted values for patients with \(X=0\) and \(X=1\), for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.5, and so the Sensitivity and Specificity reflec that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent.
+The plots below shows the distributions of fitted values for patients with \(X=0\) and \(X=1\), for models with good and poor separation, and the corresponding ROC curves. The threshold is (arbitrarily) set to 0.5, and so the Sensitivity and Specificity reflect that. The AUC (area under the curve) is an overall summary of the model's predictive efficacy. If AUC=1, the model is perfect. If AUC is 0.5, the model is no better than random guessing. Generally it is thought that AUC around 0.8 is quite good, and AUC around 0.9 is excellent.
 
 \begin{figure}
 \centering
@@ -3804,7 +3823,7 @@ Let's look at the model we fitted in Example \ref{exm:logregeg1}. To draw the RO
 \end{Highlighting}
 \end{Shaded}
 
-The main function in the package \texttt{pROC} is \texttt{roc}, which creates a \texttt{roc} object. and \texttt{ggroc} that sort and plot the data for us:
+The main functions in the package \texttt{pROC} are \texttt{roc}, which creates a \texttt{roc} object, and \texttt{ggroc} which sorts and plots the data for us:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3816,7 +3835,8 @@ With that object we can do various things, such as plot the ROC curve:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\FunctionTok{ggroc}\NormalTok{(roc\_indo, }\AttributeTok{legacy.axes=}\NormalTok{T) }\SpecialCharTok{+} \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope=}\DecValTok{1}\NormalTok{, }\AttributeTok{intercept=}\DecValTok{0}\NormalTok{, }\AttributeTok{type=}\DecValTok{2}\NormalTok{)}
+\FunctionTok{ggroc}\NormalTok{(roc\_indo, }\AttributeTok{legacy.axes=}\NormalTok{T) }\SpecialCharTok{+} \FunctionTok{geom\_abline}\NormalTok{(}\AttributeTok{slope=}\DecValTok{1}\NormalTok{, }\AttributeTok{intercept=}\DecValTok{0}\NormalTok{, }\AttributeTok{type=}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{theme\_bw}\NormalTok{() }\SpecialCharTok{+} \FunctionTok{coord\_fixed}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -3850,7 +3870,7 @@ If the explanatory variables are factors, and we have repeated observations for 
 \begin{example}
 This example uses the model fitted in Example \ref{exm:logregeg1}.
 
-The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the \(x\) axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate, and the crosses and lines show the mean and 95\% CI of the fitted value.
+The trial has 602 participants and there are many fewer than 602 combinations of the above factor variables, so for many such combinations we will have estimates. Since we are in three dimensions, plotting the data is moderately problematic. We will have a plot for each site (or for the two main ones), use risk score for the \(x\) axis and colour points by treatment group. The circles show the proportions of ones in the data, and are sized by the number of observations used to calculate that estimate. The dashed lines and ribbons show the mean and 95\% CI of the fitted value.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3860,7 +3880,9 @@ The trial has 602 participants and there are many fewer than 602 combinations of
 \NormalTok{indo\_sum }\OtherTok{=}\NormalTok{ indo\_rct }\SpecialCharTok{\%\textgreater{}\%} 
   \FunctionTok{group\_by}\NormalTok{(site, risk, rx) }\SpecialCharTok{\%\textgreater{}\%}
   \FunctionTok{summarise}\NormalTok{(}\AttributeTok{est =} \FunctionTok{mean}\NormalTok{(}\FunctionTok{as.numeric}\NormalTok{(outcome))}\SpecialCharTok{{-}}\DecValTok{1}\NormalTok{, }\AttributeTok{size=}\FunctionTok{length}\NormalTok{(id), }\AttributeTok{.groups=}\StringTok{"keep"}\NormalTok{)}
-\NormalTok{indo\_sum }\OtherTok{=}\NormalTok{ indo\_sum[indo\_sum}\SpecialCharTok{$}\NormalTok{site }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"1\_UM"}\NormalTok{, }\StringTok{"2\_IU"}\NormalTok{),]}
+\NormalTok{indo\_sum }\OtherTok{=}\NormalTok{ indo\_sum }\SpecialCharTok{|\textgreater{}}
+  \FunctionTok{filter}\NormalTok{(site }\SpecialCharTok{\%in\%} \FunctionTok{c}\NormalTok{(}\StringTok{"1\_UM"}\NormalTok{, }\StringTok{"2\_IU"}\NormalTok{))}
+
 \NormalTok{fit\_sum }\OtherTok{=} \FunctionTok{predict}\NormalTok{(glm\_indo, }\AttributeTok{newdata=}\NormalTok{indo\_sum[,}\DecValTok{1}\SpecialCharTok{:}\DecValTok{3}\NormalTok{], }\AttributeTok{se.fit=}\NormalTok{T, }\AttributeTok{type=}\StringTok{"response"}\NormalTok{)}
 
 \NormalTok{indo\_sum}\SpecialCharTok{$}\NormalTok{fit }\OtherTok{=}\NormalTok{ fit\_sum}\SpecialCharTok{$}\NormalTok{fit}
@@ -3868,8 +3890,15 @@ The trial has 602 participants and there are many fewer than 602 combinations of
 
 \FunctionTok{ggplot}\NormalTok{(}\AttributeTok{data=}\NormalTok{indo\_sum, }\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{risk, }\AttributeTok{col=}\NormalTok{rx)) }\SpecialCharTok{+}
   \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{est, }\AttributeTok{size=}\NormalTok{size), }\AttributeTok{pch=}\DecValTok{16}\NormalTok{) }\SpecialCharTok{+} 
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{y=}\NormalTok{fit), }\AttributeTok{pch=}\DecValTok{4}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_segment}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{risk, }\AttributeTok{xend=}\NormalTok{risk, }\AttributeTok{y=}\NormalTok{fit}\FloatTok{{-}1.96}\SpecialCharTok{*}\NormalTok{fit\_se, }\AttributeTok{yend=}\NormalTok{fit}\FloatTok{+1.96}\SpecialCharTok{*}\NormalTok{fit\_se))}\SpecialCharTok{+}
+  \FunctionTok{geom\_line}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x=}\NormalTok{risk, }\AttributeTok{y=}\NormalTok{fit, }\AttributeTok{col=}\NormalTok{rx), }\AttributeTok{linetype=}\DecValTok{2}\NormalTok{) }\SpecialCharTok{+}
+  \FunctionTok{geom\_ribbon}\NormalTok{(}
+    \FunctionTok{aes}\NormalTok{(}
+      \AttributeTok{x=}\NormalTok{risk, }
+      \AttributeTok{ymin=}\NormalTok{fit}\FloatTok{{-}1.96}\SpecialCharTok{*}\NormalTok{fit\_se, }
+      \AttributeTok{ymax=}\NormalTok{fit}\FloatTok{+1.96}\SpecialCharTok{*}\NormalTok{fit\_se, }
+      \AttributeTok{fill =}\NormalTok{ rx}
+\NormalTok{      ),}
+    \AttributeTok{alpha =}\FloatTok{0.3}\NormalTok{)}\SpecialCharTok{+}
   \FunctionTok{theme\_bw}\NormalTok{()}\SpecialCharTok{+}
   \FunctionTok{facet\_wrap}\NormalTok{(}\StringTok{"site"}\NormalTok{) }\SpecialCharTok{+} \FunctionTok{theme}\NormalTok{(}\AttributeTok{legend.position =} \StringTok{"bottom"}\NormalTok{)}
 \end{Highlighting}

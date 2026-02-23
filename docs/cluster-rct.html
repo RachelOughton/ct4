@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-02-20" />
+<meta name="date" content="2026-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -494,9 +494,9 @@ s^2_{Tot} &amp; = \frac{1}{n-g}\sum\limits_{j=1}^g \sum\limits_{i=1}^{n_j}\left(
 \]</span></p>
 <div class="example">
 <p><span id="exm:kroger" class="example"><strong>Example 9.1  </strong></span>We will demonstrate the ICC using a dataset that has nothing to do with clinical trials. The <code>cheese</code> dataset contains the price per unit and volume of sales of cheese (who knows what kind) at many Kroger stores in the US. We also know which city the Krogers are in, and we have data for 706 stores across 11 cities. It might be reasonable to expect that if we have information about the price and volume for several stores within a particular city, this gives us more information about the price and volume for another store in that same city than for a store in another city. Figure <a href="cluster-rct.html#fig:cheesedata">9.1</a> shows the price and volume for all stores, coloured by city.</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="cluster-rct.html#cb88-1" tabindex="-1"></a>cheese <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;kroger.csv&quot;</span>, <span class="at">header=</span>T)</span>
-<span id="cb88-2"><a href="cluster-rct.html#cb88-2" tabindex="-1"></a>cheese<span class="sc">$</span>city <span class="ot">=</span> <span class="fu">as.factor</span>(cheese<span class="sc">$</span>city)</span>
-<span id="cb88-3"><a href="cluster-rct.html#cb88-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cheese, <span class="fu">aes</span>(<span class="at">x=</span>price, <span class="at">y=</span>vol, <span class="at">col=</span>city)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="cluster-rct.html#cb87-1" tabindex="-1"></a>cheese <span class="ot">=</span> <span class="fu">read.csv</span>(<span class="st">&quot;kroger.csv&quot;</span>, <span class="at">header=</span>T)</span>
+<span id="cb87-2"><a href="cluster-rct.html#cb87-2" tabindex="-1"></a>cheese<span class="sc">$</span>city <span class="ot">=</span> <span class="fu">as.factor</span>(cheese<span class="sc">$</span>city)</span>
+<span id="cb87-3"><a href="cluster-rct.html#cb87-3" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>cheese, <span class="fu">aes</span>(<span class="at">x=</span>price, <span class="at">y=</span>vol, <span class="at">col=</span>city)) <span class="sc">+</span> <span class="fu">geom_point</span>()</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:cheesedata"></span>
 <img src="CT4H_notes_files/figure-html/cheesedata-1.png" alt="Price per unit and volume of sales of cheese for 706 Kroger stores." width="672" />
 <p class="caption">
@@ -508,59 +508,59 @@ Figure 9.1: Price per unit and volume of sales of cheese for 706 Kroger stores.
 <summary>
 Click to show R functions
 </summary>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="cluster-rct.html#cb89-1" tabindex="-1"></a><span class="co"># Firstly we define functions for the estimates</span></span>
-<span id="cb89-2"><a href="cluster-rct.html#cb89-2" tabindex="-1"></a>between.var <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb89-3"><a href="cluster-rct.html#cb89-3" tabindex="-1"></a>    data,</span>
-<span id="cb89-4"><a href="cluster-rct.html#cb89-4" tabindex="-1"></a>    groupvec</span>
-<span id="cb89-5"><a href="cluster-rct.html#cb89-5" tabindex="-1"></a>){</span>
-<span id="cb89-6"><a href="cluster-rct.html#cb89-6" tabindex="-1"></a>  groups <span class="ot">=</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(groupvec))</span>
-<span id="cb89-7"><a href="cluster-rct.html#cb89-7" tabindex="-1"></a>  ng <span class="ot">=</span> <span class="fu">length</span>(groups)</span>
-<span id="cb89-8"><a href="cluster-rct.html#cb89-8" tabindex="-1"></a>  ntot <span class="ot">=</span> <span class="fu">length</span>(data)</span>
-<span id="cb89-9"><a href="cluster-rct.html#cb89-9" tabindex="-1"></a>  </span>
-<span id="cb89-10"><a href="cluster-rct.html#cb89-10" tabindex="-1"></a>  </span>
-<span id="cb89-11"><a href="cluster-rct.html#cb89-11" tabindex="-1"></a>  means <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">mean</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
-<span id="cb89-12"><a href="cluster-rct.html#cb89-12" tabindex="-1"></a>  njvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">length</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
-<span id="cb89-13"><a href="cluster-rct.html#cb89-13" tabindex="-1"></a>  mean <span class="ot">=</span> <span class="fu">mean</span>(data)</span>
-<span id="cb89-14"><a href="cluster-rct.html#cb89-14" tabindex="-1"></a>  ssqvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){(njvec[i]<span class="sc">*</span>(means[i]<span class="sc">-</span>mean)<span class="sc">^</span><span class="dv">2</span>)})</span>
-<span id="cb89-15"><a href="cluster-rct.html#cb89-15" tabindex="-1"></a>  <span class="fu">sum</span>(ssqvec)<span class="sc">/</span>(ntot<span class="sc">-</span>ng)</span>
-<span id="cb89-16"><a href="cluster-rct.html#cb89-16" tabindex="-1"></a>}</span>
-<span id="cb89-17"><a href="cluster-rct.html#cb89-17" tabindex="-1"></a></span>
-<span id="cb89-18"><a href="cluster-rct.html#cb89-18" tabindex="-1"></a>within.var <span class="ot">=</span> <span class="cf">function</span>(</span>
-<span id="cb89-19"><a href="cluster-rct.html#cb89-19" tabindex="-1"></a>    data,</span>
-<span id="cb89-20"><a href="cluster-rct.html#cb89-20" tabindex="-1"></a>    groupvec</span>
-<span id="cb89-21"><a href="cluster-rct.html#cb89-21" tabindex="-1"></a>){</span>
-<span id="cb89-22"><a href="cluster-rct.html#cb89-22" tabindex="-1"></a>  groups <span class="ot">=</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(groupvec))</span>
-<span id="cb89-23"><a href="cluster-rct.html#cb89-23" tabindex="-1"></a>  ng <span class="ot">=</span> <span class="fu">length</span>(groups)</span>
-<span id="cb89-24"><a href="cluster-rct.html#cb89-24" tabindex="-1"></a>  ntot <span class="ot">=</span> <span class="fu">length</span>(data)</span>
-<span id="cb89-25"><a href="cluster-rct.html#cb89-25" tabindex="-1"></a>  </span>
-<span id="cb89-26"><a href="cluster-rct.html#cb89-26" tabindex="-1"></a>  means <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">mean</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
-<span id="cb89-27"><a href="cluster-rct.html#cb89-27" tabindex="-1"></a>  njvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">length</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
-<span id="cb89-28"><a href="cluster-rct.html#cb89-28" tabindex="-1"></a></span>
-<span id="cb89-29"><a href="cluster-rct.html#cb89-29" tabindex="-1"></a></span>
-<span id="cb89-30"><a href="cluster-rct.html#cb89-30" tabindex="-1"></a>  g_sums <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, ng)</span>
-<span id="cb89-31"><a href="cluster-rct.html#cb89-31" tabindex="-1"></a>  </span>
-<span id="cb89-32"><a href="cluster-rct.html#cb89-32" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>ng){</span>
-<span id="cb89-33"><a href="cluster-rct.html#cb89-33" tabindex="-1"></a>    data_j <span class="ot">=</span> data[groupvec <span class="sc">==</span> groups[j]]</span>
-<span id="cb89-34"><a href="cluster-rct.html#cb89-34" tabindex="-1"></a>    ssqvec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, njvec[j])</span>
-<span id="cb89-35"><a href="cluster-rct.html#cb89-35" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>njvec[j]){</span>
-<span id="cb89-36"><a href="cluster-rct.html#cb89-36" tabindex="-1"></a>      ssqvec[i] <span class="ot">=</span> (data_j[i] <span class="sc">-</span> means[j])<span class="sc">^</span><span class="dv">2</span></span>
-<span id="cb89-37"><a href="cluster-rct.html#cb89-37" tabindex="-1"></a>    }</span>
-<span id="cb89-38"><a href="cluster-rct.html#cb89-38" tabindex="-1"></a>    g_sums[j] <span class="ot">=</span> <span class="fu">sum</span>(ssqvec)<span class="sc">/</span>(ntot <span class="sc">-</span> ng)</span>
-<span id="cb89-39"><a href="cluster-rct.html#cb89-39" tabindex="-1"></a>  }</span>
-<span id="cb89-40"><a href="cluster-rct.html#cb89-40" tabindex="-1"></a>  <span class="fu">sum</span>(g_sums)</span>
-<span id="cb89-41"><a href="cluster-rct.html#cb89-41" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="cluster-rct.html#cb88-1" tabindex="-1"></a><span class="co"># Firstly we define functions for the estimates</span></span>
+<span id="cb88-2"><a href="cluster-rct.html#cb88-2" tabindex="-1"></a>between.var <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb88-3"><a href="cluster-rct.html#cb88-3" tabindex="-1"></a>    data,</span>
+<span id="cb88-4"><a href="cluster-rct.html#cb88-4" tabindex="-1"></a>    groupvec</span>
+<span id="cb88-5"><a href="cluster-rct.html#cb88-5" tabindex="-1"></a>){</span>
+<span id="cb88-6"><a href="cluster-rct.html#cb88-6" tabindex="-1"></a>  groups <span class="ot">=</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(groupvec))</span>
+<span id="cb88-7"><a href="cluster-rct.html#cb88-7" tabindex="-1"></a>  ng <span class="ot">=</span> <span class="fu">length</span>(groups)</span>
+<span id="cb88-8"><a href="cluster-rct.html#cb88-8" tabindex="-1"></a>  ntot <span class="ot">=</span> <span class="fu">length</span>(data)</span>
+<span id="cb88-9"><a href="cluster-rct.html#cb88-9" tabindex="-1"></a>  </span>
+<span id="cb88-10"><a href="cluster-rct.html#cb88-10" tabindex="-1"></a>  </span>
+<span id="cb88-11"><a href="cluster-rct.html#cb88-11" tabindex="-1"></a>  means <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">mean</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb88-12"><a href="cluster-rct.html#cb88-12" tabindex="-1"></a>  njvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">length</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb88-13"><a href="cluster-rct.html#cb88-13" tabindex="-1"></a>  mean <span class="ot">=</span> <span class="fu">mean</span>(data)</span>
+<span id="cb88-14"><a href="cluster-rct.html#cb88-14" tabindex="-1"></a>  ssqvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){(njvec[i]<span class="sc">*</span>(means[i]<span class="sc">-</span>mean)<span class="sc">^</span><span class="dv">2</span>)})</span>
+<span id="cb88-15"><a href="cluster-rct.html#cb88-15" tabindex="-1"></a>  <span class="fu">sum</span>(ssqvec)<span class="sc">/</span>(ntot<span class="sc">-</span>ng)</span>
+<span id="cb88-16"><a href="cluster-rct.html#cb88-16" tabindex="-1"></a>}</span>
+<span id="cb88-17"><a href="cluster-rct.html#cb88-17" tabindex="-1"></a></span>
+<span id="cb88-18"><a href="cluster-rct.html#cb88-18" tabindex="-1"></a>within.var <span class="ot">=</span> <span class="cf">function</span>(</span>
+<span id="cb88-19"><a href="cluster-rct.html#cb88-19" tabindex="-1"></a>    data,</span>
+<span id="cb88-20"><a href="cluster-rct.html#cb88-20" tabindex="-1"></a>    groupvec</span>
+<span id="cb88-21"><a href="cluster-rct.html#cb88-21" tabindex="-1"></a>){</span>
+<span id="cb88-22"><a href="cluster-rct.html#cb88-22" tabindex="-1"></a>  groups <span class="ot">=</span> <span class="fu">levels</span>(<span class="fu">as.factor</span>(groupvec))</span>
+<span id="cb88-23"><a href="cluster-rct.html#cb88-23" tabindex="-1"></a>  ng <span class="ot">=</span> <span class="fu">length</span>(groups)</span>
+<span id="cb88-24"><a href="cluster-rct.html#cb88-24" tabindex="-1"></a>  ntot <span class="ot">=</span> <span class="fu">length</span>(data)</span>
+<span id="cb88-25"><a href="cluster-rct.html#cb88-25" tabindex="-1"></a>  </span>
+<span id="cb88-26"><a href="cluster-rct.html#cb88-26" tabindex="-1"></a>  means <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">mean</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb88-27"><a href="cluster-rct.html#cb88-27" tabindex="-1"></a>  njvec <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span>ng, <span class="cf">function</span>(i){<span class="fu">length</span>(data[groupvec <span class="sc">==</span> groups[i]])})</span>
+<span id="cb88-28"><a href="cluster-rct.html#cb88-28" tabindex="-1"></a></span>
+<span id="cb88-29"><a href="cluster-rct.html#cb88-29" tabindex="-1"></a></span>
+<span id="cb88-30"><a href="cluster-rct.html#cb88-30" tabindex="-1"></a>  g_sums <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, ng)</span>
+<span id="cb88-31"><a href="cluster-rct.html#cb88-31" tabindex="-1"></a>  </span>
+<span id="cb88-32"><a href="cluster-rct.html#cb88-32" tabindex="-1"></a>  <span class="cf">for</span> (j <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>ng){</span>
+<span id="cb88-33"><a href="cluster-rct.html#cb88-33" tabindex="-1"></a>    data_j <span class="ot">=</span> data[groupvec <span class="sc">==</span> groups[j]]</span>
+<span id="cb88-34"><a href="cluster-rct.html#cb88-34" tabindex="-1"></a>    ssqvec <span class="ot">=</span> <span class="fu">rep</span>(<span class="cn">NA</span>, njvec[j])</span>
+<span id="cb88-35"><a href="cluster-rct.html#cb88-35" tabindex="-1"></a>    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>njvec[j]){</span>
+<span id="cb88-36"><a href="cluster-rct.html#cb88-36" tabindex="-1"></a>      ssqvec[i] <span class="ot">=</span> (data_j[i] <span class="sc">-</span> means[j])<span class="sc">^</span><span class="dv">2</span></span>
+<span id="cb88-37"><a href="cluster-rct.html#cb88-37" tabindex="-1"></a>    }</span>
+<span id="cb88-38"><a href="cluster-rct.html#cb88-38" tabindex="-1"></a>    g_sums[j] <span class="ot">=</span> <span class="fu">sum</span>(ssqvec)<span class="sc">/</span>(ntot <span class="sc">-</span> ng)</span>
+<span id="cb88-39"><a href="cluster-rct.html#cb88-39" tabindex="-1"></a>  }</span>
+<span id="cb88-40"><a href="cluster-rct.html#cb88-40" tabindex="-1"></a>  <span class="fu">sum</span>(g_sums)</span>
+<span id="cb88-41"><a href="cluster-rct.html#cb88-41" tabindex="-1"></a>}</span></code></pre></div>
 </details>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="cluster-rct.html#cb90-1" tabindex="-1"></a>wv_price <span class="ot">=</span> <span class="fu">within.var</span>(cheese<span class="sc">$</span>price, cheese<span class="sc">$</span>city)</span>
-<span id="cb90-2"><a href="cluster-rct.html#cb90-2" tabindex="-1"></a>wv_price</span></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="cluster-rct.html#cb89-1" tabindex="-1"></a>wv_price <span class="ot">=</span> <span class="fu">within.var</span>(cheese<span class="sc">$</span>price, cheese<span class="sc">$</span>city)</span>
+<span id="cb89-2"><a href="cluster-rct.html#cb89-2" tabindex="-1"></a>wv_price</span></code></pre></div>
 <pre><code>## [1] 0.08860193</code></pre>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="cluster-rct.html#cb92-1" tabindex="-1"></a>bv_price <span class="ot">=</span> <span class="fu">between.var</span>(cheese<span class="sc">$</span>price, cheese<span class="sc">$</span>city)</span>
-<span id="cb92-2"><a href="cluster-rct.html#cb92-2" tabindex="-1"></a>bv_price</span></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="cluster-rct.html#cb91-1" tabindex="-1"></a>bv_price <span class="ot">=</span> <span class="fu">between.var</span>(cheese<span class="sc">$</span>price, cheese<span class="sc">$</span>city)</span>
+<span id="cb91-2"><a href="cluster-rct.html#cb91-2" tabindex="-1"></a>bv_price</span></code></pre></div>
 <pre><code>## [1] 0.03002494</code></pre>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="cluster-rct.html#cb94-1" tabindex="-1"></a>icc <span class="ot">=</span> bv_price <span class="sc">/</span> (bv_price <span class="sc">+</span> wv_price)</span>
-<span id="cb94-2"><a href="cluster-rct.html#cb94-2" tabindex="-1"></a>icc</span></code></pre></div>
+<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="cluster-rct.html#cb93-1" tabindex="-1"></a>icc <span class="ot">=</span> bv_price <span class="sc">/</span> (bv_price <span class="sc">+</span> wv_price)</span>
+<span id="cb93-2"><a href="cluster-rct.html#cb93-2" tabindex="-1"></a>icc</span></code></pre></div>
 <pre><code>## [1] 0.253104</code></pre>
 <p>If we had to predict the price of cheese in a new city, all we can say is we expect the mean <span class="math inline">\(\mu_{g+1}\)</span> to come from <span class="math inline">\(N\left(\mu,\;\sigma^2_b\right)\)</span>, where <span class="math inline">\(\mu\)</span> is the mean price of cheese in the overall population and <span class="math inline">\(\sigma^2_b\)</span> is the between group variance, and the individual cheese prices to come from <span class="math inline">\(N\left(\mu_{g+1},\,\sigma^2_w\right)\)</span>.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="cluster-rct.html#cb96-1" tabindex="-1"></a><span class="fu">mean</span>(cheese<span class="sc">$</span>price)</span></code></pre></div>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="cluster-rct.html#cb95-1" tabindex="-1"></a><span class="fu">mean</span>(cheese<span class="sc">$</span>price)</span></code></pre></div>
 <pre><code>## [1] 2.641317</code></pre>
 </div>
 <p>Estimating the ICC when planning a study is an important step, but isn’t always easy. For a well-understood (or at least well-documented) condition, it can often be estimated from existing data, which is likely to cover many sites. In non-medical studies like education or social interventions (where cluster RCTs are very common), it can be much more difficult because there is generally less data. Statistical studies are much newer in these areas, though they are becoming increasingly common, and even mandated by some organisations (for example the <a href="https://educationendowmentfoundation.org.uk">Educational Endowment Foundation</a>).</p>
@@ -651,7 +651,7 @@ There are a couple of proposals for how to deal with allocation in this scenario
 ##  $ Posttest    : num  16 13 18 14 25 13 23 26 16 8 ...
 ##  $ Intervention: Factor w/ 2 levels &quot;0&quot;,&quot;1&quot;: 2 2 2 2 2 2 2 2 2 2 ...
 ##  $ Prettest    : num  1 4 5 4 5 2 5 5 2 2 ...</code></pre>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="cluster-rct.html#cb99-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>crt_df, <span class="fu">aes</span>(<span class="at">y=</span>Posttest, <span class="at">fill=</span>Intervention, <span class="at">group =</span> School)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="cluster-rct.html#cb98-1" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>crt_df, <span class="fu">aes</span>(<span class="at">y=</span>Posttest, <span class="at">fill=</span>Intervention, <span class="at">group =</span> School)) <span class="sc">+</span> <span class="fu">geom_boxplot</span>()</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:crtboxplots"></span>
 <img src="CT4H_notes_files/figure-html/crtboxplots-1.png" alt="Box plots of the outcome Posttest for each school, coloured by Intervention." width="672" />
 <p class="caption">
@@ -670,7 +670,7 @@ g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{ICC}\right]}{n_g\tau^2_M}\
 where <span class="math inline">\(n_g\)</span> is the average cluster size and <span class="math inline">\(g\)</span> is the number of clusters per treatment arm. This is the value we worked out in Section <a href="cluster-rct.html#ss-crt">9.2.1</a></p>
 <div class="example">
 <p><span id="exm:unlabeled-div-53" class="example"><strong>Example 9.4  </strong></span>We can perform this analysis on our schools data. The first step is to calculate the difference between <code>posttest</code> and <code>pretest</code> for each pupil.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="cluster-rct.html#cb100-1" tabindex="-1"></a>crt_df<span class="sc">$</span>diff <span class="ot">=</span> crt_df<span class="sc">$</span>Posttest <span class="sc">-</span> crt_df<span class="sc">$</span>Prettest</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="cluster-rct.html#cb99-1" tabindex="-1"></a>crt_df<span class="sc">$</span>diff <span class="ot">=</span> crt_df<span class="sc">$</span>Posttest <span class="sc">-</span> crt_df<span class="sc">$</span>Prettest</span></code></pre></div>
 <p>We can then aggregate this to find the mean of <code>diff</code> for each school, shown in Table <a href="cluster-rct.html#tab:eefsum">9.1</a>:</p>
 <table>
 <caption><span id="tab:eefsum">Table 9.1: </span>EEF data with difference calculated (first 10 rows).</caption>
@@ -753,13 +753,13 @@ Figure 9.3: Boxplots of the mean differences for each trial arm
 </p>
 </div>
 <p>From Figure <a href="cluster-rct.html#fig:crt1bp">9.3</a> it certainly looks likely that a significant difference will be found.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="cluster-rct.html#cb101-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
-<span id="cb101-2"><a href="cluster-rct.html#cb101-2" tabindex="-1"></a>  <span class="at">x=</span>crt_summ<span class="sc">$</span>MeanDiff[crt_summ<span class="sc">$</span>Group<span class="sc">==</span><span class="dv">0</span>],</span>
-<span id="cb101-3"><a href="cluster-rct.html#cb101-3" tabindex="-1"></a>  <span class="at">y=</span>crt_summ<span class="sc">$</span>MeanDiff[crt_summ<span class="sc">$</span>Group<span class="sc">==</span><span class="dv">1</span>],</span>
-<span id="cb101-4"><a href="cluster-rct.html#cb101-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
-<span id="cb101-5"><a href="cluster-rct.html#cb101-5" tabindex="-1"></a>  <span class="at">paired =</span> F,</span>
-<span id="cb101-6"><a href="cluster-rct.html#cb101-6" tabindex="-1"></a>  <span class="at">var.equal=</span>F</span>
-<span id="cb101-7"><a href="cluster-rct.html#cb101-7" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="cluster-rct.html#cb100-1" tabindex="-1"></a><span class="fu">t.test</span>(</span>
+<span id="cb100-2"><a href="cluster-rct.html#cb100-2" tabindex="-1"></a>  <span class="at">x=</span>crt_summ<span class="sc">$</span>MeanDiff[crt_summ<span class="sc">$</span>Group<span class="sc">==</span><span class="dv">0</span>],</span>
+<span id="cb100-3"><a href="cluster-rct.html#cb100-3" tabindex="-1"></a>  <span class="at">y=</span>crt_summ<span class="sc">$</span>MeanDiff[crt_summ<span class="sc">$</span>Group<span class="sc">==</span><span class="dv">1</span>],</span>
+<span id="cb100-4"><a href="cluster-rct.html#cb100-4" tabindex="-1"></a>  <span class="at">alternative =</span> <span class="st">&quot;two.sided&quot;</span>,</span>
+<span id="cb100-5"><a href="cluster-rct.html#cb100-5" tabindex="-1"></a>  <span class="at">paired =</span> F,</span>
+<span id="cb100-6"><a href="cluster-rct.html#cb100-6" tabindex="-1"></a>  <span class="at">var.equal=</span>F</span>
+<span id="cb100-7"><a href="cluster-rct.html#cb100-7" tabindex="-1"></a>)</span></code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -822,10 +822,10 @@ Figure 9.4: Posttest against Prettest, coloured by Intervention
 </div>
 <p>From Figure <a href="cluster-rct.html#fig:eefplot2">9.4</a> it appears there might be a positive relationship between <code>Prettest</code> and <code>Posttest</code>, and also that the <code>Posttest</code> scores might be higher in the intervention group.</p>
 <p>We’ll do this using the R package <code>lme4</code>. The function to specify a linear mixed effects model is called <code>lmer</code>, and works very similarly to <code>lm</code>. The term <code>(1|School)</code> tells R that the variable <code>School</code> should be treated as a random effect, not a fixed effect.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="cluster-rct.html#cb103-1" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
-<span id="cb103-2"><a href="cluster-rct.html#cb103-2" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
-<span id="cb103-3"><a href="cluster-rct.html#cb103-3" tabindex="-1"></a>lmer_eef1 <span class="ot">=</span> <span class="fu">lmer</span>(Posttest <span class="sc">~</span> Prettest <span class="sc">+</span> Intervention <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>School), <span class="at">data=</span>crt_df )</span>
-<span id="cb103-4"><a href="cluster-rct.html#cb103-4" tabindex="-1"></a><span class="fu">summary</span>(lmer_eef1)</span></code></pre></div>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="cluster-rct.html#cb102-1" tabindex="-1"></a><span class="fu">library</span>(lme4) </span>
+<span id="cb102-2"><a href="cluster-rct.html#cb102-2" tabindex="-1"></a><span class="fu">library</span>(sjPlot)</span>
+<span id="cb102-3"><a href="cluster-rct.html#cb102-3" tabindex="-1"></a>lmer_eef1 <span class="ot">=</span> <span class="fu">lmer</span>(Posttest <span class="sc">~</span> Prettest <span class="sc">+</span> Intervention <span class="sc">+</span> (<span class="dv">1</span><span class="sc">|</span>School), <span class="at">data=</span>crt_df )</span>
+<span id="cb102-4"><a href="cluster-rct.html#cb102-4" tabindex="-1"></a><span class="fu">summary</span>(lmer_eef1)</span></code></pre></div>
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: Posttest ~ Prettest + Intervention + (1 | School)
 ##    Data: crt_df
@@ -853,7 +853,7 @@ Figure 9.4: Posttest against Prettest, coloured by Intervention
 ## Prettest    -0.681       
 ## Interventn1 -0.493 -0.010</code></pre>
 <p>The package <code>sjPlot</code> contains functions to work with mixed effect model objects, for example <code>plot_model</code></p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="cluster-rct.html#cb105-1" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(lmer_eef1)</span></code></pre></div>
+<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="cluster-rct.html#cb104-1" tabindex="-1"></a>sjPlot<span class="sc">::</span><span class="fu">plot_model</span>(lmer_eef1)</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:lmerplot1"></span>
 <img src="CT4H_notes_files/figure-html/lmerplot1-1.png" alt="CIs for the model coefficients" width="672" />
 <p class="caption">

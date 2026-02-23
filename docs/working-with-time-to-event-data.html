@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-02-20" />
+<meta name="date" content="2026-02-23" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -1192,14 +1192,14 @@ The variance of the MLE is</p>
 &amp; =\frac{5}{8863}\\
 &amp; = 0.00056
 \end{align*}\]</span></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="working-with-time-to-event-data.html#cb55-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
-<span id="cb55-2"><a href="working-with-time-to-event-data.html#cb55-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
-<span id="cb55-3"><a href="working-with-time-to-event-data.html#cb55-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
-<span id="cb55-4"><a href="working-with-time-to-event-data.html#cb55-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
-<span id="cb55-5"><a href="working-with-time-to-event-data.html#cb55-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
-<span id="cb55-6"><a href="working-with-time-to-event-data.html#cb55-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
-<span id="cb55-7"><a href="working-with-time-to-event-data.html#cb55-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
-<span id="cb55-8"><a href="working-with-time-to-event-data.html#cb55-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="working-with-time-to-event-data.html#cb54-1" tabindex="-1"></a>mC_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>))</span>
+<span id="cb54-2"><a href="working-with-time-to-event-data.html#cb54-2" tabindex="-1"></a>mT_ov <span class="ot">=</span> <span class="fu">sum</span>((ovarian<span class="sc">$</span>fustat<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>))</span>
+<span id="cb54-3"><a href="working-with-time-to-event-data.html#cb54-3" tabindex="-1"></a>tsum_ov_C <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">1</span>])</span>
+<span id="cb54-4"><a href="working-with-time-to-event-data.html#cb54-4" tabindex="-1"></a>tsum_ov_T <span class="ot">=</span> <span class="fu">sum</span>(ovarian<span class="sc">$</span>futime[ovarian<span class="sc">$</span>rx<span class="sc">==</span><span class="dv">2</span>])</span>
+<span id="cb54-5"><a href="working-with-time-to-event-data.html#cb54-5" tabindex="-1"></a>m_ov <span class="ot">=</span> mT_ov <span class="sc">+</span> mC_ov</span>
+<span id="cb54-6"><a href="working-with-time-to-event-data.html#cb54-6" tabindex="-1"></a>tsum_ov <span class="ot">=</span> tsum_ov_C <span class="sc">+</span> tsum_ov_T</span>
+<span id="cb54-7"><a href="working-with-time-to-event-data.html#cb54-7" tabindex="-1"></a>lamhat_ov_C <span class="ot">=</span> mC_ov <span class="sc">/</span> tsum_ov_C</span>
+<span id="cb54-8"><a href="working-with-time-to-event-data.html#cb54-8" tabindex="-1"></a>lamhat_ov_T <span class="ot">=</span> mT_ov <span class="sc">/</span> tsum_ov_T</span></code></pre></div>
 <div class="figure"><span style="display:block;" id="fig:ovplotlr"></span>
 <img src="CT4H_notes_files/figure-html/ovplotlr-1.png" alt="Kaplan Meier estimates of survival curves for the ovarian data (solid lines), with the fitted exponential S(t) shown in dashed lines (red = group C, blue = group T)." width="672" />
 <p class="caption">
