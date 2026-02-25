@@ -11,7 +11,7 @@ Survival data is trickier to handle than the data types we have seen so far, for
 
 ## Censored times 
 
-If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won't observe the event. This could be because it doesn't happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal), or simply stops attending follow-up appointments after a certain times. For these participants, we do know that they had not experienced the event up to some time $t$, but we don't know what happened next. All we know is that their time-to-event or **survival time** is greater than that time $t$. These partial observations are known as **censored** times, and in particular as **right-censored** times, because the event happens *after* the censored time. It is possible (but less common) to have *left-censored* or *interval-censored* data, but in this course we will deal only with right-censoring.
+If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won't observe the event. This could be because it doesn't happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal), or simply stops attending follow-up appointments after a certain time. For these participants, we do know that they had not experienced the event up to some time $t$, but we don't know what happened next. All we know is that their time-to-event or **survival time** is greater than that time $t$. These partial observations are known as **censored** times, and in particular as **right-censored** times, because the event happens *after* the censored time. It is possible (but less common) to have *left-censored* or *interval-censored* data, but in this course we will deal only with right-censoring.
 
 ```{r censor, fig.cap = "An example of some censored data. The dashed line at time 10 indicates the end of the trial period."}
 df_cens = data.frame(
@@ -62,7 +62,11 @@ One summary that is often used is the **median survival time**, the time at whic
 Figure \@ref(fig:egsurvival) shows two survival curves, comparing different therapies. We see that the hormonal therapy reduces the survival time slightly compared to no hormonal therapy.  
   
 ```{r egsurvival, fig.cap = "An example of two survival curves, taken from @syriopoulou2022standardised."}
-knitr::include_graphics("images/survival_eg.png")
+if(knitr::is_html_output()){
+  knitr::include_graphics("images/survival_eg.png")  
+} else {
+  knitr::include_graphics("images/survival_eg.png", dpi=200) 
+}
 ```
 
 Following on from the survival function, we have another (slightly less intuitive) quantity: the **Hazard function** $h\left(t\right)$.
@@ -96,7 +100,7 @@ As we hinted before, there are fundamentally two ways to deal with survival data
 
 ### The Kaplan-Meier estimator
 
-The **Kaplan-Meier estimator** is a non-parametric estimate of $\operatorname{S}\left(t\right)$, originally presented in @kaplan1958nonparametric. The idea behind it is to divide the interval $\left[0,\;t\right]$ into many short consecutive intervals,
+The **Kaplan-Meier estimator** is a non-parametric estimate of $\operatorname{S}\left(t\right)$, originally presented in @kaplan1958nonparametric. The idea behind it is to divide the interval $\left[0,\;t\right]$ into many short contiguous intervals,
 
 $$\left[0,\,t\right] = \bigcup\limits_{k=0}^K \left[s_k,\,s_{k+1}\right],$$
 where $s_k<s_{k+1}\;\forall{k}$, $s_0=0$ and $s_{K+1}=t$. We then estimate the probability of surviving past some time $t$ by multiplying together the probabilities of surviving the successive intervals up to time $t$. No distributional assumptions are made, and the probability of surviving interval $\left[s_k,\,s_{k+1}\right]$ is estimated by $1-Q$, where 
@@ -184,7 +188,7 @@ The Kaplan-Meier estimate may seem a bit dissatisfying, since it stops changing 
 
 
 
-For a clinical trial, we want to plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we'll talk about this later).
+For a clinical trial, we can plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we'll talk about this later).
 
 :::{.example #veteranmyeloid}
 

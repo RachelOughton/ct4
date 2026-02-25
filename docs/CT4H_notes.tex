@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-02-23}
+\date{2026-02-25}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -3929,7 +3929,7 @@ Survival data is trickier to handle than the data types we have seen so far, for
 
 \section{Censored times}\label{censored-times}
 
-If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won't observe the event. This could be because it doesn't happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal), or simply stops attending follow-up appointments after a certain times. For these participants, we do know that they had not experienced the event up to some time \(t\), but we don't know what happened next. All we know is that their time-to-event or \textbf{survival time} is greater than that time \(t\). These partial observations are known as \textbf{censored} times, and in particular as \textbf{right-censored} times, because the event happens \emph{after} the censored time. It is possible (but less common) to have \emph{left-censored} or \emph{interval-censored} data, but in this course we will deal only with right-censoring.
+If a trial monitors a sample of participants for some length of time, many will experience the event before the trial is finished. However, for some of the sample we likely won't observe the event. This could be because it doesn't happen within the lifetime of the trial, or it could be because the participant exits the trial prematurely for some reason (eg. withdrawal), or simply stops attending follow-up appointments after a certain time. For these participants, we do know that they had not experienced the event up to some time \(t\), but we don't know what happened next. All we know is that their time-to-event or \textbf{survival time} is greater than that time \(t\). These partial observations are known as \textbf{censored} times, and in particular as \textbf{right-censored} times, because the event happens \emph{after} the censored time. It is possible (but less common) to have \emph{left-censored} or \emph{interval-censored} data, but in this course we will deal only with right-censoring.
 
 \begin{figure}
 \centering
@@ -3975,7 +3975,7 @@ One summary that is often used is the \textbf{median survival time}, the time at
 Figure \ref{fig:egsurvival} shows two survival curves, comparing different therapies. We see that the hormonal therapy reduces the survival time slightly compared to no hormonal therapy.
 
 \begin{figure}
-\includegraphics[width=13.93in]{images/survival_eg} \caption{An example of two survival curves, taken from @syriopoulou2022standardised.}\label{fig:egsurvival}
+\includegraphics[width=5.02in]{images/survival_eg} \caption{An example of two survival curves, taken from @syriopoulou2022standardised.}\label{fig:egsurvival}
 \end{figure}
 
 Following on from the survival function, we have another (slightly less intuitive) quantity: the \textbf{Hazard function} \(h\left(t\right)\).
@@ -4006,7 +4006,7 @@ As we hinted before, there are fundamentally two ways to deal with survival data
 
 \subsection{The Kaplan-Meier estimator}\label{the-kaplan-meier-estimator}
 
-The \textbf{Kaplan-Meier estimator} is a non-parametric estimate of \(\operatorname{S}\left(t\right)\), originally presented in \citet{kaplan1958nonparametric}. The idea behind it is to divide the interval \(\left[0,\;t\right]\) into many short consecutive intervals,
+The \textbf{Kaplan-Meier estimator} is a non-parametric estimate of \(\operatorname{S}\left(t\right)\), originally presented in \citet{kaplan1958nonparametric}. The idea behind it is to divide the interval \(\left[0,\;t\right]\) into many short contiguous intervals,
 
 \[\left[0,\,t\right] = \bigcup\limits_{k=0}^K \left[s_k,\,s_{k+1}\right],\]
 where \(s_k<s_{k+1}\;\forall{k}\), \(s_0=0\) and \(s_{K+1}=t\). We then estimate the probability of surviving past some time \(t\) by multiplying together the probabilities of surviving the successive intervals up to time \(t\). No distributional assumptions are made, and the probability of surviving interval \(\left[s_k,\,s_{k+1}\right]\) is estimated by \(1-Q\), where
@@ -4139,7 +4139,7 @@ Figure \ref{fig:kmov2} shows the Kaplan-Meier survival curve estimate for the \t
 The Kaplan-Meier estimate may seem a bit dissatisfying, since it stops changing at \(t=638\) with a probability of \(0.497\). However, this is really (in a non-parametric setting) all we can say with the data available; 10 of the participants were definitely still alive at \(t=638\), and some of the other censored participants may also have been.
 \end{example}
 
-For a clinical trial, we want to plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we'll talk about this later).
+For a clinical trial, we can plot the survival curves separately for the different treatment groups. This will give a first, visual, idea of whether there might be a difference, and also of the suitability of certain models (we'll talk about this later).
 
 \begin{example}
 \protect\hypertarget{exm:veteranmyeloid}{}\label{exm:veteranmyeloid}
