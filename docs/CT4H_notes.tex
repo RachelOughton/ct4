@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-02-25}
+\date{2026-03-02}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -4012,7 +4012,7 @@ The \textbf{Kaplan-Meier estimator} is a non-parametric estimate of \(\operatorn
 where \(s_k<s_{k+1}\;\forall{k}\), \(s_0=0\) and \(s_{K+1}=t\). We then estimate the probability of surviving past some time \(t\) by multiplying together the probabilities of surviving the successive intervals up to time \(t\). No distributional assumptions are made, and the probability of surviving interval \(\left[s_k,\,s_{k+1}\right]\) is estimated by \(1-Q\), where
 
 \[Q = \frac{\text{Number who die in that interval}}{\text{Number at risk of death in that interval}}.\]
-More precisely, let's say that deaths are observed at times \(t_1<t_2<\ldots < t_n\), and that the number of deaths at time \(t_i\) is \(d_i\) out of a possible \(n_i\). Then for some time \(t\in\left[t_J,\,t_{J+1}\right)\), the Kaplan-Meier estimate of \(\operatorname{S}\left(t\right)\) is
+More precisely, let's say that deaths are observed at times \(t_1\leq t_2\leq \ldots \leq t_n\), and that the number of deaths at time \(t_i\) is \(d_i\) out of a possible \(n_i\). Then for some time \(t\in\left[t_J,\,t_{J+1}\right)\), the Kaplan-Meier estimate of \(\operatorname{S}\left(t\right)\) is
 
 \[\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - d_j\right)}{n_j}.\]
 
@@ -4191,7 +4191,11 @@ L = \prod\limits_{i=1}^n f\left(t_i\right)^{\delta_i} S\left(t_i\right)^{1-\delt
 \label{eq:lfunsurv}
 \end{equation}
 
-If we have \(T\sim Exp\left(\lambda\right)\) then the log-likelihood is
+If we have \(T\sim Exp\left(\lambda\right)\) then the likelihood is therefore
+
+\[L = \prod\limits_{i=1}^n \left(\lambda e^{-\lambda t_i}\right)^{\delta_i} \left(e^{-\lambda t_i}\right)^{\left(1-\delta_i\right)} \]
+
+and the log-likelihood is
 
 \begin{align*}
 \ell\left(\lambda \mid \text{data}\right) &= \sum\limits_{i=1}^n \delta_i\left(\log\lambda - \lambda t_i\right) - \sum\limits_{i=1}^n\left(1-\delta_i\right)\lambda t_i \\
@@ -4212,7 +4216,7 @@ which we can approximate by
 
 \[\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.\]
 
-Notice that the numerator in Equation \eqref{eq:lambdavar} is \(m\), the number of complete observations (rather than \(n\) the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.
+Notice that the denominator in Equation \eqref{eq:lambdavar} is \(m\), the number of complete observations (rather than \(n\) the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.
 
 \begin{example}
 
@@ -4405,7 +4409,7 @@ We can therefore perform a maximum likelihood test by finding
 
 and referring this value to a \(\chi^2_1\) distribution.
 
-We can also find a confidence interval for the difference between \(\lambda_T\) and \(\lambda_C\), by using the asymptotic variances of the MLEs, which are \(\frac{\lambda_C^2}{m_C}\) and \(\frac{\lambda_T^2}{m_T}\). Therefore, the limits of a \(100\left(1-\alpha\right)\)\% CI for \(\lambda_T - \lambda_C\) is given by
+We can also find a confidence interval for the difference between \(\lambda_T\) and \(\lambda_C\), by using the asymptotic variances of the MLEs, which are \(\frac{\lambda_C^2}{m_C}\) and \(\frac{\lambda_T^2}{m_T}\). Therefore, the limits of a \(100\left(1-\alpha\right)\)\% CI for \(\lambda_T - \lambda_C\) are given by
 
 \[ \frac{m_T}{t^+_T} - \frac{m_C}{t^+_C} \pm z_{\alpha/2}\sqrt{\frac{m_T}{\left(t^+_T\right)^2} + \frac{m_C}{\left(t^+_C\right)^2}}.\]
 

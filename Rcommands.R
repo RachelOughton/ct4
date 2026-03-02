@@ -7,7 +7,7 @@ bookdown::render_book("index.Rmd", "bookdown::gitbook")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 
 
-# for lecture notes
+ # for lecture notes
 setwd("/Users/rachelo/Documents/GitRepos/ct4/lecture_notes")
 bookdown::render_book("index.Rmd", "bookdown::pdf_book")
 

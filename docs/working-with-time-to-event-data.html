@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-02-25" />
+<meta name="date" content="2026-03-02" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -532,7 +532,7 @@ h\left(t\right) &amp; = \lim\limits_{s\rightarrow{0+}}\frac{\operatorname{Pr}\le
 <p><span class="math display">\[\left[0,\,t\right] = \bigcup\limits_{k=0}^K \left[s_k,\,s_{k+1}\right],\]</span>
 where <span class="math inline">\(s_k&lt;s_{k+1}\;\forall{k}\)</span>, <span class="math inline">\(s_0=0\)</span> and <span class="math inline">\(s_{K+1}=t\)</span>. We then estimate the probability of surviving past some time <span class="math inline">\(t\)</span> by multiplying together the probabilities of surviving the successive intervals up to time <span class="math inline">\(t\)</span>. No distributional assumptions are made, and the probability of surviving interval <span class="math inline">\(\left[s_k,\,s_{k+1}\right]\)</span> is estimated by <span class="math inline">\(1-Q\)</span>, where</p>
 <p><span class="math display">\[Q = \frac{\text{Number who die in that interval}}{\text{Number at risk of death in that interval}}.\]</span>
-More precisely, let’s say that deaths are observed at times <span class="math inline">\(t_1&lt;t_2&lt;\ldots &lt; t_n\)</span>, and that the number of deaths at time <span class="math inline">\(t_i\)</span> is <span class="math inline">\(d_i\)</span> out of a possible <span class="math inline">\(n_i\)</span>. Then for some time <span class="math inline">\(t\in\left[t_J,\,t_{J+1}\right)\)</span>, the Kaplan-Meier estimate of <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> is</p>
+More precisely, let’s say that deaths are observed at times <span class="math inline">\(t_1\leq t_2\leq \ldots \leq t_n\)</span>, and that the number of deaths at time <span class="math inline">\(t_i\)</span> is <span class="math inline">\(d_i\)</span> out of a possible <span class="math inline">\(n_i\)</span>. Then for some time <span class="math inline">\(t\in\left[t_J,\,t_{J+1}\right)\)</span>, the Kaplan-Meier estimate of <span class="math inline">\(\operatorname{S}\left(t\right)\)</span> is</p>
 <p><span class="math display">\[\hat{\operatorname{S}}\left(t\right) = \prod\limits_{j=0}^J \frac{\left(n_j - d_j\right)}{n_j}.\]</span></p>
 <p>Notice that the number of people at risk at time <span class="math inline">\(t_{j+1}\)</span>, denoted <span class="math inline">\(n_{j+1}\)</span>, will be the number of people at risk at time <span class="math inline">\(t_j\)</span> (which was <span class="math inline">\(n_j\)</span>), minus any who died at time <span class="math inline">\(t_j\)</span> (which we write as <span class="math inline">\(d_j\)</span>) and any who were censored in the interval <span class="math inline">\(\left[t_j,\,t_{j+1}\right)\)</span>. In this way, the Kaplan-Meier estimator incorporates information from individuals with censored survival times up to the point they were censored.</p>
 <p><span class="citation">Greenwood (<a href="#ref-greenwood1926natural">1926</a>)</span> derived an approximation to the variance of the Kaplan-Meier estimate of survival curve, given by</p>
@@ -1164,7 +1164,9 @@ that is, the hazard is constant.</p>
 L = \prod\limits_{i=1}^n f\left(t_i\right)^{\delta_i} S\left(t_i\right)^{1-\delta_i}.
 \tag{7.1}
 \end{equation}\]</span></p>
-<p>If we have <span class="math inline">\(T\sim Exp\left(\lambda\right)\)</span> then the log-likelihood is</p>
+<p>If we have <span class="math inline">\(T\sim Exp\left(\lambda\right)\)</span> then the likelihood is therefore</p>
+<p><span class="math display">\[L = \prod\limits_{i=1}^n \left(\lambda e^{-\lambda t_i}\right)^{\delta_i} \left(e^{-\lambda t_i}\right)^{\left(1-\delta_i\right)} \]</span></p>
+<p>and the log-likelihood is</p>
 <p><span class="math display">\[\begin{align*}
 \ell\left(\lambda \mid \text{data}\right) &amp;= \sum\limits_{i=1}^n \delta_i\left(\log\lambda - \lambda t_i\right) - \sum\limits_{i=1}^n\left(1-\delta_i\right)\lambda t_i \\
 &amp; =  m\log\lambda - \lambda\sum\limits_{i=1}^n t_i.
@@ -1178,7 +1180,7 @@ The variance of the MLE is</p>
 \end{equation}\]</span></p>
 <p>which we can approximate by</p>
 <p><span class="math display">\[\operatorname{var}\left(\hat\lambda\right) \approx \frac{m}{\left(\sum\limits_{i=1}^n t_i\right)^2}.\]</span></p>
-<p>Notice that the numerator in Equation <a href="working-with-time-to-event-data.html#eq:lambdavar">(7.2)</a> is <span class="math inline">\(m\)</span>, the number of complete observations (rather than <span class="math inline">\(n\)</span> the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.</p>
+<p>Notice that the denominator in Equation <a href="working-with-time-to-event-data.html#eq:lambdavar">(7.2)</a> is <span class="math inline">\(m\)</span>, the number of complete observations (rather than <span class="math inline">\(n\)</span> the total number including censored observations). This shows that there is a limit to the amount we can learn if a lot of the data is censored.</p>
 <div class="example">
 <p><span id="exm:unlabeled-div-43" class="example"><strong>Example 7.3  </strong></span>Returning to the dataset from Example <a href="working-with-time-to-event-data.html#exm:surveg1">7.1</a>, we can fit an exponential distribution to the data simply by estimating the MLE</p>
 <p><span class="math display">\[\begin{align*}
