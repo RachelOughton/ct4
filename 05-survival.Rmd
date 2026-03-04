@@ -641,8 +641,8 @@ For groups $C$ and $T$ we would therefore have a table representing the state of
 
 Group              No. surviving      No. events    No. at risk     
 -----------------  -----------------  -----------   --------------
-    **Treatment**  $n_{Tj}-d_{Tj}$    $d_{Cj}$       $n_{Cj}$     
-      **Control**  $n_{Cj}-d_{Cj}$    $d_{Tj}$       $n_{Tj}$    
+    **Treatment**  $n_{Tj}-d_{Tj}$    $d_{Tj}$       $n_{Tj}$     
+      **Control**  $n_{Cj}-d_{Cj}$    $d_{Cj}$       $n_{Cj}$    
         **Total**  $n_j-d_j$          $d_j$          $n_j$    
         
 Under $H_0$, we expect the deaths (or events) to be distributed proportionally between groups $C$ and $T$, and so the expected number of events in group $X$ ($C$ or $T$) at time $t_j$ is
