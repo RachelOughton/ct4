@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-03-04" />
+<meta name="date" content="2026-03-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -698,7 +698,7 @@ Click for solution
 <p>The area under the curve (AUC) is around 0.8, which is generally considered quite good.</p>
 <p>We can also plot the ROC curve</p>
 <div class="sourceCode" id="cb246"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb246-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb246-1" tabindex="-1"></a><span class="fu">ggroc</span>(roc_resp, <span class="at">legacy.axes=</span>T) <span class="sc">+</span> <span class="fu">geom_abline</span>(<span class="at">slope=</span><span class="dv">1</span>, <span class="at">intercept=</span><span class="dv">0</span>, <span class="at">type=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-161-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-162-1.png" width="672" /></p>
 <p>Next we’ll assess the model in terms of calibration.</p>
 <div class="sourceCode" id="cb247"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb247-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb247-1" tabindex="-1"></a><span class="do">## Group the observations into age groups (I&#39;ve chosen 10 year bins)</span></span>
 <span id="cb247-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb247-2" tabindex="-1"></a>resp_df<span class="sc">$</span>age10 <span class="ot">=</span> <span class="fu">round</span>(resp_df<span class="sc">$</span>age, <span class="sc">-</span><span class="dv">1</span>)</span>
@@ -733,8 +733,8 @@ Click for solution
 <span id="cb247-31"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb247-31" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">x=</span>age, <span class="at">ymin =</span> fit <span class="sc">-</span> <span class="fl">1.96</span><span class="sc">*</span>fit_se, <span class="at">ymax =</span> fit <span class="sc">+</span> <span class="fl">1.96</span><span class="sc">*</span>fit_se, <span class="at">fill =</span> treatment), </span>
 <span id="cb247-32"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb247-32" tabindex="-1"></a>    <span class="at">alpha=</span><span class="fl">0.3</span></span>
 <span id="cb247-33"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb247-33" tabindex="-1"></a>    )</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-162"></span>
-<img src="CT4H_notes_files/figure-html/unnamed-chunk-162-1.png" alt="Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)" width="672" />
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-163"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-163-1.png" alt="Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)" width="672" />
 <p class="caption">
 Figure D.1: Observations and fitted model for combinations of centre (1: top and 2: bottom) for baseline status (poor: left and good: right)
 </p>
@@ -880,7 +880,7 @@ Click for solution
 <span id="cb261-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb261-2" tabindex="-1"></a>  <span class="fu">add_censor_mark</span>() <span class="sc">+</span></span>
 <span id="cb261-3"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb261-3" tabindex="-1"></a>  <span class="fu">add_risktable</span>() <span class="sc">+</span></span>
 <span id="cb261-4"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb261-4" tabindex="-1"></a>  <span class="fu">add_confidence_interval</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-171-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-172-1.png" width="672" /></p>
 <p>We can see from the table that the lower curve is the non-maintained arm - there is only one survivor of this group, and the data finish at <span class="math inline">\(t=45\)</span>.</p>
 </div>
 </details>
@@ -915,7 +915,7 @@ Click for solution
 <span id="cb263-6"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb263-6" tabindex="-1"></a>  <span class="fu">add_censor_mark</span>() <span class="sc">+</span></span>
 <span id="cb263-7"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb263-7" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun=</span>exp_st, <span class="at">args=</span><span class="fu">list</span>(<span class="at">lambda =</span> lamhat_aml_C), <span class="at">col=</span><span class="st">&quot;darkturquoise&quot;</span>) <span class="sc">+</span></span>
 <span id="cb263-8"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb263-8" tabindex="-1"></a>  <span class="fu">geom_function</span>(<span class="at">fun=</span>exp_st, <span class="at">args=</span><span class="fu">list</span>(<span class="at">lambda =</span> lamhat_aml_T), <span class="at">col=</span><span class="st">&quot;red&quot;</span>) </span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-173-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-174-1.png" width="672" /></p>
 </div>
 </details>
 </div>
@@ -1020,7 +1020,7 @@ Click for solution
 ## Wald test            = 3.2  on 1 df,   p=0.07
 ## Score (logrank) test = 3.42  on 1 df,   p=0.06</code></pre>
 <p>To check this more carefully we can use the log-log plot</p>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-181-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-182-1.png" width="672" /></p>
 <p>and we see that the curves are close to parallel.</p>
 <p>Although the coefficient of <code>x</code> isn’t quite significant at the 0.05 level, it appears there is reasonable evidence that the treatment has an effect (though probably not enough to make a clinical decision).</p>
 </div>
@@ -1065,7 +1065,7 @@ Click for solution
 <span id="cb279-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb279-2" tabindex="-1"></a>km_colon <span class="sc">%&gt;%</span> ggsurvfit <span class="sc">+</span> <span class="fu">ylim</span>(<span class="dv">0</span>,<span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb279-3"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb279-3" tabindex="-1"></a>  <span class="fu">add_censor_mark</span>() <span class="sc">+</span></span>
 <span id="cb279-4"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb279-4" tabindex="-1"></a>  <span class="fu">add_confidence_interval</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-184-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-185-1.png" width="672" /></p>
 <p>Next we can find the MLE for each treatment group</p>
 <div class="sourceCode" id="cb280"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb280-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb280-1" tabindex="-1"></a>mC_colon <span class="ot">=</span> <span class="fu">sum</span>((colondf<span class="sc">$</span>status<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(colondf<span class="sc">$</span>rx<span class="sc">==</span><span class="st">&quot;Obs&quot;</span>))</span>
 <span id="cb280-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb280-2" tabindex="-1"></a>mT_colon <span class="ot">=</span> <span class="fu">sum</span>((colondf<span class="sc">$</span>status<span class="sc">==</span><span class="dv">1</span>)<span class="sc">&amp;</span>(colondf<span class="sc">$</span>rx<span class="sc">==</span><span class="st">&quot;Lev+5FU&quot;</span>))</span>
@@ -1142,22 +1142,22 @@ Figure D.2: Survival curves for groups C and T in colon study, fitted assuming a
 <div class="sourceCode" id="cb293"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb293-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb293-1" tabindex="-1"></a>km_colon_bl <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> rx <span class="sc">+</span> sex, <span class="at">data=</span>colondf)</span>
 <span id="cb293-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb293-2" tabindex="-1"></a>km_colon_bl <span class="sc">%&gt;%</span> <span class="fu">ggsurvfit</span>() <span class="sc">+</span></span>
 <span id="cb293-3"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb293-3" tabindex="-1"></a>  <span class="fu">add_censor_mark</span>() </span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-192-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
 <p><code>nodes</code> is a numeric output, so one way to get a visual impression of its effect on the survival curve is to bin it. For example, we can choose <span class="math inline">\(\texttt{nodes}\leq 4\)</span> and <span class="math inline">\(\texttt{nodes}&gt;4\)</span>.</p>
 <div class="sourceCode" id="cb294"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb294-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb294-1" tabindex="-1"></a>colondf<span class="sc">$</span>nodes4 <span class="ot">=</span> <span class="fu">sapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(colondf), <span class="cf">function</span>(i){<span class="fu">ifelse</span>(colondf<span class="sc">$</span>nodes[i]<span class="sc">&gt;</span><span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">0</span>)})</span>
 <span id="cb294-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb294-2" tabindex="-1"></a>km_colon_bl <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> rx <span class="sc">+</span> nodes4, <span class="at">data=</span>colondf)</span>
 <span id="cb294-3"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb294-3" tabindex="-1"></a>km_colon_bl <span class="sc">%&gt;%</span> <span class="fu">ggsurvfit</span>()</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-193-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
 <p>The separation in the lines fits with the strong effect of <code>nodes</code> in the model.</p>
 <p>To check our model more carefully we can use the log-log plot for the categorical variables:</p>
 <div class="sourceCode" id="cb295"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb295-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb295-1" tabindex="-1"></a>km_colon <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> rx <span class="sc">+</span> sex, <span class="at">data=</span>colondf)</span>
 <span id="cb295-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb295-2" tabindex="-1"></a><span class="fu">ggsurvplot</span>(km_colon, <span class="at">fun =</span> <span class="st">&quot;cloglog&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-194-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
 <p>and the Schoenfeld residuals for the continuous residuals (after removing the insignificant variables):</p>
 <div class="sourceCode" id="cb296"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb296-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb296-1" tabindex="-1"></a>cox_colon <span class="ot">=</span> <span class="fu">coxph</span>(<span class="at">formula =</span> <span class="fu">Surv</span>(time, status)<span class="sc">~</span>rx <span class="sc">+</span> sex <span class="sc">+</span> nodes, <span class="at">data=</span>colondf)</span>
 <span id="cb296-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb296-2" tabindex="-1"></a></span>
 <span id="cb296-3"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb296-3" tabindex="-1"></a><span class="fu">ggcoxzph</span>(<span class="fu">cox.zph</span>(cox_colon), <span class="at">var =</span> <span class="st">&quot;nodes&quot;</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-195-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-196-1.png" width="672" /></p>
 <p>and we see that there is insufficient evidence to reject the null hypothesis (of proportional hazards).</p>
 </div>
 </details>
@@ -1297,7 +1297,7 @@ where <span class="math inline">\(X\)</span> is <span class="math inline">\(C\)<
 <p>and plot the estimated survival curve</p>
 <div class="sourceCode" id="cb300"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb300-1"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb300-1" tabindex="-1"></a>km_df1 <span class="ot">=</span> <span class="fu">survfit</span>(<span class="fu">Surv</span>(time, status) <span class="sc">~</span> group, <span class="at">data=</span>surv_df1)</span>
 <span id="cb300-2"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb300-2" tabindex="-1"></a><span class="fu">autoplot</span>(km_df1, <span class="at">conf.int =</span> F)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-198-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-199-1.png" width="672" /></p>
 <p>In this sampling scheme it seems it’s common to get some very low values, which is probably quite unrealistic.</p>
 <p>Some other assumptions / simplifications we’re making are:</p>
 <ul>
@@ -1354,7 +1354,7 @@ Click for solution
 <span id="cb304-3"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb304-3" tabindex="-1"></a>  survsim_vec1[i] <span class="ot">=</span> <span class="fu">surv_sim</span>(<span class="at">nsim=</span><span class="dv">100</span>, <span class="at">alpha=</span><span class="fl">0.05</span>, <span class="at">npart=</span><span class="dv">250</span>,<span class="at">MC=</span><span class="dv">5</span>, <span class="at">MT=</span><span class="dv">7</span>, <span class="at">p_cens=</span><span class="fl">0.1</span>, <span class="at">t_max=</span><span class="dv">10</span>)</span>
 <span id="cb304-4"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb304-4" tabindex="-1"></a>}</span>
 <span id="cb304-5"><a href="computer-practical-4---analysis-for-binary-and-survival-data.html#cb304-5" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(survsim_vec1)) <span class="sc">+</span> <span class="fu">geom_histogram</span>(<span class="at">bins=</span><span class="dv">10</span>)</span></code></pre></div>
-<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-200-1.png" width="672" /></p>
+<p><img src="CT4H_notes_files/figure-html/unnamed-chunk-201-1.png" width="672" /></p>
 <p>If we extend the trial duration to <span class="math inline">\(t_{max}=20\)</span>, the power given by a particular number of participants is now larger, because there are fewer censored observations and therefore more information. Some more experimentation with sample size would enable us to find a suitable number for this new scenario.</p>
 </div>
 </details>

@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-03-04}
+\date{2026-03-09}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -4592,6 +4592,8 @@ Let's now perform a log-rank test on our data from Example \ref{exm:surveglr}.
 
 First, the ovarian cancer dataset. To do this, we can tabulate the key values at each time step.
 
+\begin{table}
+\centering
 \begin{tabular}{r|r|r|r|r|r|r|r|r}
 \hline
 Time & n\_Cj & d\_Cj & e\_Cj & n\_Tj & d\_Tj & e\_Tj & n\_j & d\_j\\
@@ -4621,6 +4623,7 @@ Time & n\_Cj & d\_Cj & e\_Cj & n\_Tj & d\_Tj & e\_Tj & n\_j & d\_j\\
 638 & 5 & 1 & 0.4545455 & 6 & 0 & 0.5454545 & 11 & 1\\
 \hline
 \end{tabular}
+\end{table}
 
 From this, we can find the \(v_{j}\) and the test statistic \(\frac{U^2}{V}\):
 
@@ -4640,9 +4643,15 @@ From this, we can find the \(v_{j}\) and the test statistic \(\frac{U^2}{V}\):
 \NormalTok{\})}
 \NormalTok{VC }\OtherTok{=} \FunctionTok{sum}\NormalTok{(vCj\_vec)}
 \NormalTok{cs\_ov\_stat }\OtherTok{=}\NormalTok{ (UC}\SpecialCharTok{\^{}}\DecValTok{2}\NormalTok{)}\SpecialCharTok{/}\NormalTok{VC}
-\DecValTok{1}\SpecialCharTok{{-}}\FunctionTok{pchisq}\NormalTok{(cs\_ov\_stat, }\AttributeTok{df=}\DecValTok{1}\NormalTok{)}
+\NormalTok{cs\_ov\_stat}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## [1] 1.06274
+\end{verbatim}
+
+and refer it to \(\chi^2_1\)
 
 \begin{verbatim}
 ## [1] 0.3025911
@@ -4837,9 +4846,9 @@ We can't easily visualise the hazard function for a dataset, and instead would p
 
 It turns out that if two hazard functions are proportional, their survival functions won't cross one another, as we will show now.
 
-Suppose \(h_C\left(t\right)\) is the hazard at time \(t\) for an individual in group \(C\), and \(h_T\left(t\right)\) is the hazard for that same individual in group \(T\). If the two hazards are proportional then we have
+Suppose \(h_C\left(t\right)\) is the hazard at time \(t\) for an individual in group \(C\), and \(h_T\left(t\right)\) is the hazard for that same individual in group \(T\). If the two hazards are proportional then we have (as before)
 
-\[h_C\left(t\right) = \psi h_T\left(t\right) \]
+\[h_T\left(t\right) = \psi h_C\left(t\right) \]
 for some constant \(\psi\).
 
 Recall from Section \ref{survhaz} that
@@ -4859,11 +4868,13 @@ where \[H\left(t\right) = \int\limits_0^t h\left(u\right) du.\]
 
 Therefore for our two hazard functions, we have
 
-\[\exp\left\lbrace - \int\limits_0^t h_C\left(u\right)du \right\rbrace =\exp\left\lbrace -\int\limits_0^t\psi h_T\left(u\right) du \right\rbrace  \]
+\[\exp\left\lbrace - \int\limits_0^t h_T\left(u\right)du \right\rbrace =\exp\left\lbrace -\int\limits_0^t\psi h_C\left(u\right) du \right\rbrace  \]
 From Equation \eqref{eq:sfun} we see that therefore
 
-\[S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.\]
-Since the survival function is always between 0 and 1, we can see that the value of \(\psi\) determines whether \(S_C\left(t\right)<S_T\left(t\right)\) (if \(\psi>1\)) or \(S_C\left(t\right)>S_T\left(t\right)\) (if \(0<\psi<1\)). The important thing is that \textbf{the survival curves will not cross}. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. It may also be that the survival curves cross when a particular {[}influential{]} covariate is factored out, but not when it isn't.
+\[S_T\left(t\right) = \left[S_C\left(t\right)\right]^\psi.\]
+Since the survival function is always between 0 and 1, we can see that the value of \(\psi\) determines whether \(S_C\left(t\right)<S_T\left(t\right)\) (if \(0<\psi<1\)) or \(S_C\left(t\right)>S_T\left(t\right)\) (if \(\psi>1\)). The important thing is that \textbf{the survival curves will not cross}. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one.
+
+This property can be helpful in working out what model to fit. For example, it may sometimes be that the survival curves don't cross when a particular {[}influential{]} covariate is factored out, but do when it isn't.
 
 \begin{example}
 First of all, we can use Cox regression adjusted only for the Group (or treatment arm) of the participants.
@@ -5009,7 +5020,7 @@ We see from the \texttt{age} line that the data are consistent with the proporti
 
 The object created by \texttt{cox.zph} also contains the Schoenfeld residuals themselves, and so we can plot them:
 
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-63-1.pdf}}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-64-1.pdf}}
 
 Because there is so little data it's hard to conclude anything, and indeed our lack of significance in the test may be due to small sample size rather than excellent model fit.
 \end{example}
@@ -6073,8 +6084,8 @@ We will explore these models by fitting them to our \texttt{epilepsy} data.
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-73-1.pdf}}
-\caption{\label{fig:unnamed-chunk-73}Confidence intervals for fixed effects for the two fitted models.}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf}}
+\caption{\label{fig:unnamed-chunk-74}Confidence intervals for fixed effects for the two fitted models.}
 \end{figure}
 
 In this example it appears that neither time nor the treatment have a significant effect on the seizure rate.
@@ -6141,8 +6152,8 @@ Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\
 
 \begin{figure}
 \centering
-\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf}}
-\caption{\label{fig:unnamed-chunk-74}Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).}
+\pandocbounded{\includegraphics[keepaspectratio]{CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf}}
+\caption{\label{fig:unnamed-chunk-75}Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).}
 \end{figure}
 
 We see from the small variance for the random effect \texttt{period} that the gradients don't vary very much at all, and indeed the coefficients of the fixed effects are very similar to those for a fixed gradient.

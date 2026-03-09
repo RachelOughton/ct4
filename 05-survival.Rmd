@@ -727,7 +727,7 @@ for (i in 1:n_event){
   logrank_df$e_Cj[i] = logrank_df$n_Cj[i]*(logrank_df$d_j[i]/logrank_df$n_j[i])
   logrank_df$e_Tj[i] = logrank_df$n_Tj[i]*(logrank_df$d_j[i]/logrank_df$n_j[i])
 }
-logrank_df
+logrank_df |> kable() |> kable_styling("striped")
 ```
 From this, we can find the $v_{j}$ and the test statistic $\frac{U^2}{V}$:
 
@@ -746,6 +746,12 @@ vCj_vec = sapply(
 })
 VC = sum(vCj_vec)
 cs_ov_stat = (UC^2)/VC
+cs_ov_stat
+```
+
+and refer it to $\chi^2_1$
+
+```{r}
 1-pchisq(cs_ov_stat, df=1)
 ```
 
@@ -922,9 +928,9 @@ We can't easily visualise the hazard function for a dataset, and instead would p
 
 It turns out that if two hazard functions are proportional, their survival functions won't cross one another, as we will show now. 
 
-Suppose $h_C\left(t\right)$ is the hazard at time $t$ for an individual in group $C$, and $h_T\left(t\right)$ is the hazard for that same individual in group $T$. If the two hazards are proportional then we have
+Suppose $h_C\left(t\right)$ is the hazard at time $t$ for an individual in group $C$, and $h_T\left(t\right)$ is the hazard for that same individual in group $T$. If the two hazards are proportional then we have (as before)
 
-$$h_C\left(t\right) = \psi h_T\left(t\right) $$
+$$h_T\left(t\right) = \psi h_C\left(t\right) $$
 for some constant $\psi$.
 
 Recall from Section \@ref(survhaz) that 
@@ -945,11 +951,13 @@ where $$H\left(t\right) = \int\limits_0^t h\left(u\right) du.$$
 
 Therefore for our two hazard functions, we have
 
-$$\exp\left\lbrace - \int\limits_0^t h_C\left(u\right)du \right\rbrace =\exp\left\lbrace -\int\limits_0^t\psi h_T\left(u\right) du \right\rbrace  $$
+$$\exp\left\lbrace - \int\limits_0^t h_T\left(u\right)du \right\rbrace =\exp\left\lbrace -\int\limits_0^t\psi h_C\left(u\right) du \right\rbrace  $$
 From Equation \@ref(eq:sfun) we see that therefore
 
-$$S_C\left(t\right) = \left[S_T\left(t\right)\right]^\psi.$$
-Since the survival function is always between 0 and 1, we can see that the value of $\psi$ determines whether $S_C\left(t\right)<S_T\left(t\right)$ (if $\psi>1$) or $S_C\left(t\right)>S_T\left(t\right)$ (if $0<\psi<1$). The important thing is that **the survival curves will not cross**. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. It may also be that the survival curves cross when a particular [influential] covariate is factored out, but not when it isn't.
+$$S_T\left(t\right) = \left[S_C\left(t\right)\right]^\psi.$$
+Since the survival function is always between 0 and 1, we can see that the value of $\psi$ determines whether $S_C\left(t\right)<S_T\left(t\right)$ (if $0<\psi<1$) or $S_C\left(t\right)>S_T\left(t\right)$ (if $\psi>1$). The important thing is that **the survival curves will not cross**. This is an informal conclusion, and lines not crossing is a necessary condition but not a sufficient one. 
+
+This property can be helpful in working out what model to fit. For example, it may sometimes be that the survival curves don't cross when a particular [influential] covariate is factored out, but do when it isn't.
 
 
 :::{.example}
