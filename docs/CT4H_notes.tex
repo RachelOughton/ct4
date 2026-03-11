@@ -126,7 +126,7 @@
 
 \title{Clinical Trials 4H}
 \author{Rachel Oughton}
-\date{2026-03-09}
+\date{2026-03-11}
 
 \usepackage{amsthm}
 \newtheorem{theorem}{Theorem}[chapter]
@@ -5554,7 +5554,7 @@ Mixed effects models allow us to combine fixed effects and random effects. They 
 The mixed effects model takes the form
 
 \begin{equation}
-x_{ijk} = \alpha + \beta G_i + \sum\limits_l \gamma_l z_{ijkl} + u_{ij} + v_{ijk}
+x_{jk} = \alpha + \beta G_j + \sum\limits_l \gamma_l z_{jkl} + u_{j} + v_{jk}
 \label{eq:remodel}
 \end{equation}
 
@@ -5563,25 +5563,25 @@ where
 \begin{itemize}
 \tightlist
 \item
-  \(x_{ijk}\) is the outcome for the \(k\)-th individual in the \(j\)-th cluster in the \(i\)-th treatment arm (usually \(i=0\) is the control arm and \(i=1\) is the intervention arm)
+  \(x_{jk}\) is the outcome for the \(k\)-th individual in the \(j\)-th cluster
 \item
   \(\alpha\) is the intercept of the model
 \item
-  \(\beta\) is the intervention effect, and \(G_i\) the group indicator variable (0 for group \(C\), 1 for group \(T\)). Our null hypothesis is that \(\beta\) is also zero)
+  \(\beta\) is the intervention effect, and \(G_j\) the group indicator variable (0 for group \(C\), 1 for group \(T\)). Our null hypothesis is that \(\beta\) is also zero)
 \item
-  The \(z_{ijkl}\) are \(L\) different individual level covariates that we wish to take into account, and the \(\gamma_l\) are the estimated coefficients.
+  The \(z_{jkl}\) are \(L\) different individual level covariates that we wish to take into account, and the \(\gamma_l\) are the estimated coefficients.
 \item
-  \(u_{ij}\) is a random effect relating to the \(j\)-th cluster in the \(i\)-th treatment arm. This is the term that accounts for the between-cluster variation. We assume \(u_{ij}\) is normally distributed with mean 0 and variance \(\sigma^2_B\) (the between-cluster variance).
+  \(u_{j}\) is a random effect relating to the \(j\)-th cluster. This is the term that accounts for the between-cluster variation. We assume \(u_{j}\) is normally distributed with mean 0 and variance \(\sigma^2_B\) (the between-cluster variance).
 \item
-  \(v_{ijk}\) is a random effect relating to the \(k\)-th individual in the cluster (ie. an individual level random error term), assumed normally distributed with mean 0 and variance \(\sigma^2_W\) (the within-cluster variance).
+  \(v_{jk}\) is a random effect relating to the \(k\)-th individual in the \(j\)-th cluster (ie. an individual level random error term), assumed normally distributed with mean 0 and variance \(\sigma^2_W\) (the within-cluster variance).
 \end{itemize}
 
-The part of the model that makes this particularly suitable to a cluster randomized trial is \(u_{ij}\). Notice that this has no \(k\) index, and is therefore the same for all participants within a particular cluster.
+The part of the model that makes this particularly suitable to a cluster randomized trial is \(u_{j}\). Notice that this has no \(k\) index, and is therefore the same for all participants within a particular cluster.
 
 With a random effects model we can take into account the effects of individual-level covariates and also the clustered design of the data. Approximately, our sample size requirements are
 
 \[
-k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{ICC}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
+g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{ICC}\right]\left(1-\rho^2\right) }{n_g\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
 \]
 
 Broadly this follows on from the logic we used to show the reduction in variance from the ANCOVA model in Section \ref{ancova-var}, and you'll notice that the factor of \(1-\rho^2\) is the same. The details for cluster randomized trials are given in \citet{teerenstra2012simple}.

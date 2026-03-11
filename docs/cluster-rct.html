@@ -23,7 +23,7 @@
 <meta name="author" content="Rachel Oughton" />
 
 
-<meta name="date" content="2026-03-09" />
+<meta name="date" content="2026-03-11" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -792,22 +792,22 @@ Figure 9.3: Boxplots of the mean differences for each trial arm
 <p>Mixed effects models allow us to combine fixed effects and random effects. They are useful for many more situations than cluster RCTs, but this is as good a place as any to start!</p>
 <p>The mixed effects model takes the form</p>
 <p><span class="math display" id="eq:remodel">\[\begin{equation}
-x_{ijk} = \alpha + \beta G_i + \sum\limits_l \gamma_l z_{ijkl} + u_{ij} + v_{ijk}
+x_{jk} = \alpha + \beta G_j + \sum\limits_l \gamma_l z_{jkl} + u_{j} + v_{jk}
 \tag{9.5}
 \end{equation}\]</span></p>
 <p>where</p>
 <ul>
-<li><span class="math inline">\(x_{ijk}\)</span> is the outcome for the <span class="math inline">\(k\)</span>-th individual in the <span class="math inline">\(j\)</span>-th cluster in the <span class="math inline">\(i\)</span>-th treatment arm (usually <span class="math inline">\(i=0\)</span> is the control arm and <span class="math inline">\(i=1\)</span> is the intervention arm)</li>
+<li><span class="math inline">\(x_{jk}\)</span> is the outcome for the <span class="math inline">\(k\)</span>-th individual in the <span class="math inline">\(j\)</span>-th cluster</li>
 <li><span class="math inline">\(\alpha\)</span> is the intercept of the model</li>
-<li><span class="math inline">\(\beta\)</span> is the intervention effect, and <span class="math inline">\(G_i\)</span> the group indicator variable (0 for group <span class="math inline">\(C\)</span>, 1 for group <span class="math inline">\(T\)</span>). Our null hypothesis is that <span class="math inline">\(\beta\)</span> is also zero)</li>
-<li>The <span class="math inline">\(z_{ijkl}\)</span> are <span class="math inline">\(L\)</span> different individual level covariates that we wish to take into account, and the <span class="math inline">\(\gamma_l\)</span> are the estimated coefficients.</li>
-<li><span class="math inline">\(u_{ij}\)</span> is a random effect relating to the <span class="math inline">\(j\)</span>-th cluster in the <span class="math inline">\(i\)</span>-th treatment arm. This is the term that accounts for the between-cluster variation. We assume <span class="math inline">\(u_{ij}\)</span> is normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2_B\)</span> (the between-cluster variance).</li>
-<li><span class="math inline">\(v_{ijk}\)</span> is a random effect relating to the <span class="math inline">\(k\)</span>-th individual in the cluster (ie. an individual level random error term), assumed normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2_W\)</span> (the within-cluster variance).</li>
+<li><span class="math inline">\(\beta\)</span> is the intervention effect, and <span class="math inline">\(G_j\)</span> the group indicator variable (0 for group <span class="math inline">\(C\)</span>, 1 for group <span class="math inline">\(T\)</span>). Our null hypothesis is that <span class="math inline">\(\beta\)</span> is also zero)</li>
+<li>The <span class="math inline">\(z_{jkl}\)</span> are <span class="math inline">\(L\)</span> different individual level covariates that we wish to take into account, and the <span class="math inline">\(\gamma_l\)</span> are the estimated coefficients.</li>
+<li><span class="math inline">\(u_{j}\)</span> is a random effect relating to the <span class="math inline">\(j\)</span>-th cluster. This is the term that accounts for the between-cluster variation. We assume <span class="math inline">\(u_{j}\)</span> is normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2_B\)</span> (the between-cluster variance).</li>
+<li><span class="math inline">\(v_{jk}\)</span> is a random effect relating to the <span class="math inline">\(k\)</span>-th individual in the <span class="math inline">\(j\)</span>-th cluster (ie. an individual level random error term), assumed normally distributed with mean 0 and variance <span class="math inline">\(\sigma^2_W\)</span> (the within-cluster variance).</li>
 </ul>
-<p>The part of the model that makes this particularly suitable to a cluster randomized trial is <span class="math inline">\(u_{ij}\)</span>. Notice that this has no <span class="math inline">\(k\)</span> index, and is therefore the same for all participants within a particular cluster.</p>
+<p>The part of the model that makes this particularly suitable to a cluster randomized trial is <span class="math inline">\(u_{j}\)</span>. Notice that this has no <span class="math inline">\(k\)</span> index, and is therefore the same for all participants within a particular cluster.</p>
 <p>With a random effects model we can take into account the effects of individual-level covariates and also the clustered design of the data. Approximately, our sample size requirements are</p>
 <p><span class="math display">\[
-k = \frac{2 \sigma^2 \left[1+ \left(m-1\right)\rho_{ICC}\right]\left(1-\rho^2\right) }{m\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
+g = \frac{2 \sigma^2 \left[1+ \left(n_g-1\right)\rho_{ICC}\right]\left(1-\rho^2\right) }{n_g\tau^2_M}\left(z_{\beta} + z_{\frac{1}{2}\alpha}\right)^2.
 \]</span></p>
 <p>Broadly this follows on from the logic we used to show the reduction in variance from the ANCOVA model in Section <a href="rct-analysis.html#ancova-var">4.3.1.2</a>, and you’ll notice that the factor of <span class="math inline">\(1-\rho^2\)</span> is the same. The details for cluster randomized trials are given in <span class="citation">Teerenstra et al. (<a href="#ref-teerenstra2012simple">2012</a>)</span>.</p>
 <p>This is the ‘Random effects model’ line in <a href="https://racheloughton.shinyapps.io/sample_size/?_ga=2.190583720.2013007057.1679308387-1261352122.1678702192">the shiny dashboard</a>.)</p>
