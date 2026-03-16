@@ -389,7 +389,7 @@ The package `sjPlot` contains functions to work with mixed effect model objects,
 sjPlot::plot_model(lmer_eef1)
 ```
 
-Perhaps unsurprisingly, the coefficient of the baseline test score is very significant, and the intervention also has a significant effect. This function also estimates the intracluster correlation.
+Perhaps unsurprisingly, the coefficient of the baseline test score is very significant, and the intervention also has a significant effect. 
 
 :::
 

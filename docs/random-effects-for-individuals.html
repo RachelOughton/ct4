@@ -894,7 +894,7 @@ Figure 10.4: Confidence intervals for fixed effects for the two fitted models.
 <p>The final extension we’ll look at is if we think that different participants might change at different rates, all other things being equal. We can introduce a random effect <span class="math inline">\(\eta_i\)</span> to allow the coefficient of time to vary between participants</p>
 <p><span class="math display" id="eq:lmer3">\[\begin{equation}
 Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\beta + u_{i} + \epsilon_{ij}.
-\tag{10.4}.
+\tag{10.4}
 \end{equation}\]</span></p>
 <div class="sourceCode" id="cb116"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb116-1"><a href="random-effects-for-individuals.html#cb116-1" tabindex="-1"></a><span class="do">## Including just time</span></span>
 <span id="cb116-2"><a href="random-effects-for-individuals.html#cb116-2" tabindex="-1"></a><span class="do">## Including more baseline covariates</span></span>
@@ -933,13 +933,18 @@ Y_{ij} = \beta_0 + \left(\gamma + \eta_i\right) t_j + \mathbf{b}_i^T\boldsymbol\
 ## period      -0.221  0.000  0.000  0.000
 ## optimizer (nloptwrap) convergence code: 0 (OK)
 ## boundary (singular) fit: see help(&#39;isSingular&#39;)</code></pre>
-<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="random-effects-for-individuals.html#cb118-1" tabindex="-1"></a>pm1 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_2)</span>
-<span id="cb118-2"><a href="random-effects-for-individuals.html#cb118-2" tabindex="-1"></a>pm2 <span class="ot">=</span> <span class="fu">plot_model</span>(epi_3)</span>
-<span id="cb118-3"><a href="random-effects-for-individuals.html#cb118-3" tabindex="-1"></a><span class="fu">grid.arrange</span>(pm1, pm2, <span class="at">nrow=</span><span class="dv">1</span>)</span></code></pre></div>
-<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-75"></span>
+<div class="sourceCode" id="cb118"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb118-1"><a href="random-effects-for-individuals.html#cb118-1" tabindex="-1"></a><span class="fu">plot_model</span>(epi_2)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-75-1"></span>
 <img src="CT4H_notes_files/figure-html/unnamed-chunk-75-1.png" alt="Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)." width="672" />
 <p class="caption">
 Figure 10.5: Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).
+</p>
+</div>
+<div class="sourceCode" id="cb119"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb119-1"><a href="random-effects-for-individuals.html#cb119-1" tabindex="-1"></a><span class="fu">plot_model</span>(epi_3)</span></code></pre></div>
+<div class="figure"><span style="display:block;" id="fig:unnamed-chunk-75-2"></span>
+<img src="CT4H_notes_files/figure-html/unnamed-chunk-75-2.png" alt="Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right)." width="672" />
+<p class="caption">
+Figure 10.6: Confidence intervals for model with same gradient for all participants (left) and for varying gradient (right).
 </p>
 </div>
 <p>We see from the small variance for the random effect <code>period</code> that the gradients don’t vary very much at all, and indeed the coefficients of the fixed effects are very similar to those for a fixed gradient.</p>
