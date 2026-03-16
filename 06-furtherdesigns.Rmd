@@ -397,7 +397,11 @@ Perhaps unsurprisingly, the coefficient of the baseline test score is very signi
 There are various different ways we can include random effects in the model, as shown in Figure \@ref(fig:raneffmodels). In our EEF data example we have used a fixed slope and random intercept. 
 
 ```{r raneffmodels, fig.cap = "Different ways of including random effects in a mixed effects model."}
-knitr::include_graphics("images/raneffmodels.png")
+if(knitr::is_html_output()){
+  knitr::include_graphics("images/raneffmodels.png")  
+} else {
+  knitr::include_graphics("images/raneffmodels.png", dpi=400) 
+}
 ```
 
 The mixed effects model can be extended to a **generalized mixed effects model**, which is akin to a generalized linear model. For example, with a binary outcome $X_{ijk}$ we can adopt the model

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.28)  11 MAR 2026 09:33
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2025.2.28)  16 MAR 2026 09:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1352,85 +1352,75 @@ Package pdftex.def Info: CT4H_notes_files/figure-latex/lmerplot1-1.pdf  used on 
 File: images/raneffmodels.png Graphic file (type png)
 <use images/raneffmodels.png>
 Package pdftex.def Info: images/raneffmodels.png  used on input line 5664.
-(pdftex.def)             Requested size: 2165.93198pt x 1481.47485pt.
-
-Overfull \hbox (1696.17696pt too wide) in paragraph at lines 5664--5664
-[][] 
- []
-
-
-LaTeX Warning: Float too large for page by 853.04485pt on input line 5665.
-
+(pdftex.def)             Requested size: 389.53525pt x 266.42741pt.
 
 
 [163 <./CT4H_notes_files/figure-latex/lmerplot1-1.pdf>]
 
 [164 <./images/raneffmodels.png>]
-
-[165]
 Chapter 10.
 
 
-[166
+[165
 
 ]
+
+[166]
 
 [167]
 
 [168]
-
-[169]
-<CT4H_notes_files/figure-latex/epispag-1.pdf, id=1816, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/epispag-1.pdf, id=1811, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/epispag-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/epispag-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/epispag-1.pdf  used on input line 5948.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/epimeans-1.pdf, id=1818, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/epimeans-1.pdf, id=1813, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/epimeans-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/epimeans-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/epimeans-1.pdf  used on input line 5956.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/standepi-1.pdf, id=1820, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/standepi-1.pdf, id=1815, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/standepi-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/standepi-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/standepi-1.pdf  used on input line 5968.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 
 
-[170]
+[169]
 
-[171 <./CT4H_notes_files/figure-latex/epispag-1.pdf>]
+[170 <./CT4H_notes_files/figure-latex/epispag-1.pdf>]
 
-[172 <./CT4H_notes_files/figure-latex/epimeans-1.pdf>]
+[171 <./CT4H_notes_files/figure-latex/epimeans-1.pdf>]
 
-[173 <./CT4H_notes_files/figure-latex/standepi-1.pdf>]
+[172 <./CT4H_notes_files/figure-latex/standepi-1.pdf>]
 
-[174]
-<CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf, id=1870, 469.755pt x 115.43124pt>
+[173]
+<CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf, id=1866, 469.755pt x 115.43124pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf  used on input line 6087.
 (pdftex.def)             Requested size: 469.75386pt x 115.43095pt.
 
 
-[175]
+[174]
 
-[176 <./CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf>]
-<CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf, id=1889, 469.755pt x 115.43124pt>
+[175 <./CT4H_notes_files/figure-latex/unnamed-chunk-74-1.pdf>]
+<CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf, id=1885, 469.755pt x 115.43124pt>
 File: CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf  used on input line 6155.
 (pdftex.def)             Requested size: 469.75386pt x 115.43095pt.
 
 
-[177 <./CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf>]
+[176 <./CT4H_notes_files/figure-latex/unnamed-chunk-75-1.pdf>]
 Chapter 11.
 
 
-[178
+[177
 
 ]
-<images/bayesian_ranges.png, id=1917, 616.3025pt x 427.5975pt>
+<images/bayesian_ranges.png, id=1913, 616.3025pt x 427.5975pt>
 File: images/bayesian_ranges.png Graphic file (type png)
 <use images/bayesian_ranges.png>
 Package pdftex.def Info: images/bayesian_ranges.png  used on input line 6245.
@@ -1445,34 +1435,34 @@ LaTeX Warning: Float too large for page by 227.05649pt on input line 6246.
 
 
 
-[179]
+[178]
 
-[180 <./images/bayesian_ranges.png>]
+[179 <./images/bayesian_ranges.png>]
+
+[180]
 
 [181]
-
-[182]
-<CT4H_notes_files/figure-latex/betafinal-1.pdf, id=1948, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/betafinal-1.pdf, id=1944, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/betafinal-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/betafinal-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/betafinal-1.pdf  used on input line 6431.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/betaplots-1.pdf, id=1950, 469.755pt x 325.215pt>
+<CT4H_notes_files/figure-latex/betaplots-1.pdf, id=1946, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/betaplots-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/betaplots-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/betaplots-1.pdf  used on input line 6439.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<CT4H_notes_files/figure-latex/betaplotmega-1.pdf, id=1952, 469.755pt x 144.54pt>
+<CT4H_notes_files/figure-latex/betaplotmega-1.pdf, id=1948, 469.755pt x 144.54pt>
 File: CT4H_notes_files/figure-latex/betaplotmega-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/betaplotmega-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/betaplotmega-1.pdf  used on input line 6447.
 (pdftex.def)             Requested size: 469.75386pt x 144.53963pt.
 
 
-[183 <./CT4H_notes_files/figure-latex/betafinal-1.pdf>]
+[182 <./CT4H_notes_files/figure-latex/betafinal-1.pdf>]
 
-[184 <./CT4H_notes_files/figure-latex/betaplots-1.pdf> <./CT4H_notes_files/figure-latex/betaplotmega-1.pdf>]
-<images/spieg_elicit.png, id=1988, 731.73375pt x 347.2975pt>
+[183 <./CT4H_notes_files/figure-latex/betaplots-1.pdf> <./CT4H_notes_files/figure-latex/betaplotmega-1.pdf>]
+<images/spieg_elicit.png, id=1984, 731.73375pt x 347.2975pt>
 File: images/spieg_elicit.png Graphic file (type png)
 <use images/spieg_elicit.png>
 Package pdftex.def Info: images/spieg_elicit.png  used on input line 6478.
@@ -1487,17 +1477,17 @@ LaTeX Warning: Float too large for page by 66.26396pt on input line 6479.
 
 
 
-[185]
+[184]
 
-[186 <./images/spieg_elicit.png>]
+[185 <./images/spieg_elicit.png>]
 
-[187]
-<CT4H_notes_files/figure-latex/simplebayes-1.pdf, id=2024, 469.755pt x 325.215pt>
+[186]
+<CT4H_notes_files/figure-latex/simplebayes-1.pdf, id=2019, 469.755pt x 325.215pt>
 File: CT4H_notes_files/figure-latex/simplebayes-1.pdf Graphic file (type pdf)
 <use CT4H_notes_files/figure-latex/simplebayes-1.pdf>
 Package pdftex.def Info: CT4H_notes_files/figure-latex/simplebayes-1.pdf  used on input line 6539.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-<images/smartwater.png, id=2025, 637.38126pt x 591.20876pt>
+<images/smartwater.png, id=2020, 637.38126pt x 591.20876pt>
 File: images/smartwater.png Graphic file (type png)
 <use images/smartwater.png>
 Package pdftex.def Info: images/smartwater.png  used on input line 6565.
@@ -1512,25 +1502,25 @@ Underfull \vbox (badness 1728) has occurred while \output is active []
 
 
 
-[188]
+[187]
 
-[189 <./CT4H_notes_files/figure-latex/simplebayes-1.pdf>]
+[188 <./CT4H_notes_files/figure-latex/simplebayes-1.pdf>]
 Overfull \vbox (532.06578pt too high) has occurred while \output is active []
 
 
 
-[190 <./images/smartwater.png>]
-<images/copmodel.png, id=2052, 474.77374pt x 665.48625pt>
+[189 <./images/smartwater.png>]
+<images/copmodel.png, id=2048, 474.77374pt x 665.48625pt>
 File: images/copmodel.png Graphic file (type png)
 <use images/copmodel.png>
 Package pdftex.def Info: images/copmodel.png  used on input line 6614.
 (pdftex.def)             Requested size: 281.85587pt x 395.09087pt.
 
 
-[191]
+[190]
 
-[192 <./images/copmodel.png>]
-<images/stan_np8000.pdf, id=2068, 361.35pt x 289.08pt>
+[191 <./images/copmodel.png>]
+<images/stan_np8000.pdf, id=2064, 361.35pt x 289.08pt>
 File: images/stan_np8000.pdf Graphic file (type pdf)
 <use images/stan_np8000.pdf>
 Package pdftex.def Info: images/stan_np8000.pdf  used on input line 6639.
@@ -1540,7 +1530,7 @@ Overfull \hbox (12.28574pt too wide) in paragraph at lines 6639--6639
 [][] 
  []
 
-<images/ggpostparam800.png, id=2070, 481.8pt x 481.8pt>
+<images/ggpostparam800.png, id=2066, 481.8pt x 481.8pt>
 File: images/ggpostparam800.png Graphic file (type png)
 <use images/ggpostparam800.png>
 Package pdftex.def Info: images/ggpostparam800.png  used on input line 6648.
@@ -1550,12 +1540,12 @@ Overfull \hbox (12.28574pt too wide) in paragraph at lines 6648--6648
 [][] 
  []
 
-<images/ggpost800.pdf, id=2072, 867.24pt x 433.62pt>
+<images/ggpost800.pdf, id=2068, 867.24pt x 433.62pt>
 File: images/ggpost800.pdf Graphic file (type pdf)
 <use images/ggpost800.pdf>
 Package pdftex.def Info: images/ggpost800.pdf  used on input line 6655.
 (pdftex.def)             Requested size: 469.75502pt x 234.87912pt.
-<images/ggpostparam800_55.png, id=2075, 481.8pt x 481.8pt>
+<images/ggpostparam800_55.png, id=2071, 481.8pt x 481.8pt>
 File: images/ggpostparam800_55.png Graphic file (type png)
 <use images/ggpostparam800_55.png>
 Package pdftex.def Info: images/ggpostparam800_55.png  used on input line 6665.
@@ -1565,54 +1555,54 @@ Overfull \hbox (12.28574pt too wide) in paragraph at lines 6665--6665
 [][] 
  []
 
-<images/ggpost800_55.png, id=2076, 963.6pt x 481.8pt>
+<images/ggpost800_55.png, id=2072, 963.6pt x 481.8pt>
 File: images/ggpost800_55.png Graphic file (type png)
 <use images/ggpost800_55.png>
 Package pdftex.def Info: images/ggpost800_55.png  used on input line 6669.
 (pdftex.def)             Requested size: 469.75502pt x 234.87839pt.
 
 
-[193]
+[192]
 
-[194 <./images/stan_np8000.pdf>]
+[193 <./images/stan_np8000.pdf>]
 
-[195 <./images/ggpostparam800.png>]
+[194 <./images/ggpostparam800.png>]
 
-[196 <./images/ggpost800.pdf>]
+[195 <./images/ggpost800.pdf>]
 
-[197 <./images/ggpostparam800_55.png>]
+[196 <./images/ggpostparam800_55.png>]
 
-[198 <./images/ggpost800_55.png>] (./CT4H_notes.bbl
+[197 <./images/ggpost800_55.png>] (./CT4H_notes.bbl
+
+[198
+
+]
 
 [199
 
 ]
 
-[200
+[200])
 
-]
-
-[201])
-
-[202] (./CT4H_notes.aux)
+[201] (./CT4H_notes.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 15855 strings out of 475172
- 269017 string characters out of 5765093
+ 15854 strings out of 475172
+ 269009 string characters out of 5765093
  667962 words of memory out of 5000000
  37962 multiletter control sequences out of 15000+600000
  663652 words of font info for 110 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  75i,19n,79p,1526b,723s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmex10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmib7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr17.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr5.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmro10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtk10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtko10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtt8.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/lm/lmtti10.pfb></Users/rachelo/Library/TinyTeX/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on CT4H_notes.pdf (202 pages, 4153280 bytes).
+Output written on CT4H_notes.pdf (201 pages, 4153010 bytes).
 PDF statistics:
- 2575 PDF objects out of 2984 (max. 8388607)
- 2146 compressed objects within 22 object streams
- 636 named destinations out of 1000 (max. 500000)
+ 2571 PDF objects out of 2984 (max. 8388607)
+ 2143 compressed objects within 22 object streams
+ 635 named destinations out of 1000 (max. 500000)
  822 words of extra memory for PDF output out of 10000 (max. 10000000)
 
